@@ -1,0 +1,57 @@
+openapi: 3.0.0
+info:
+  description: Specifiction for frontend to backend communication
+  version: "1.0.0-oas3"
+  title: AMOS backend API
+  contact:
+    url: 'ß'
+  license:
+    name: MIT
+    url: 'https://opensource.org/licenses/MIT'
+
+paths:
+  /search:
+    get:
+      summary: Get incidents by city
+      parameters:
+        - in: query
+          name: city
+          description: City name
+          required: true
+          schema:
+            type: string
+
+      responses:
+        '200':
+          description: A report with all incidents in the city
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+        '404':
+          description: City not found
+
+
+
+components:
+  schemas:
+    Incident:
+      required:
+        - locationX
+        - locationY
+        - type
+      properties:
+        locationX:
+          type: integer
+        locationY:
+          type: integer
+        type:
+          type: string
+    Report:
+      required:
+        - incidents
+      properties:
+        incidents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Incident'
