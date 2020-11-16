@@ -14,5 +14,6 @@ import java.util.List;
 @Repository
 public interface ComparisonRepository extends CrudRepository<Comparison, Long> {
 
+    List<Comparison> findBySource1(String source1);
 
 }

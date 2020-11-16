@@ -1,5 +1,10 @@
 package com.amos.p1.backend.from_client_to_backend;
 
+/**
+ * Marshalling durch Jackson: https://www.baeldung.com/jackson
+ *
+ * Damit das Marshalling funktioniert muss jede Klasse die get-Methoden fuer die Daten bereitstellen
+ */
 public class Incident {
 
     private final int locationX;

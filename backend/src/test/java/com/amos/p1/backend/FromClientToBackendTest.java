@@ -72,7 +72,7 @@ public class FromClientToBackendTest {
     }
 
     @Test
-    void testGetSpecificIncidentFromBerlinExtract(){
+    void testGetIncidentsFromBerlinExtract(){
         Report report = given()
             .param("city", "berlin")
         .when()
@@ -81,10 +81,5 @@ public class FromClientToBackendTest {
             .extract().as(Report.class);
 
         System.out.println(report);
-    }
-
-    @Test
-    void testSearchOpenApiSchema(){
-
     }
 }
