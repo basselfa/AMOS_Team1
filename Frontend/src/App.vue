@@ -2,7 +2,7 @@
   <div id="app">
     <v-app id="main">
       <div style="margin-left: 0">
-        <!--- loading indicator will be needed when waiting for the data to visualize 
+        <!--- loading indicator will be needed when waiting for the data to visualize
         <v-progress-circular
           indeterminate
           color="primary"
@@ -19,8 +19,13 @@
           src="https://www.openstreetmap.org/export/embed.html?bbox=13.317360877990724%2C52.50269091804005%2C13.372292518615724%2C52.52611754877629&amp;layer=mapnik"
           style="border: 1px solid black; margin-top: 10%"
         ></iframe>
-      </div>
 
+      </div>
+      <div>
+      <v-btn>
+          Button
+        </v-btn>
+      </div>
       <v-navigation-drawer v-model="drawer" app>
         <v-list two-line>
           <v-subheader>NAVIGATION</v-subheader>
