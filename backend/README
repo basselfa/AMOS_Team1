@@ -1,1 +1,19 @@
+# Backend
+The backend use Spring boot as an application Framework. REST-Endpoints will be expoded to communicate with the service.
+
+# Prerequiste
+- JDK 8
+- Maven
+
+# Setup
+1. Download the repo
+2. run ```mvn clean compile```
+
+# Start Application
+Run ```mvn spring-boot:run```
+
+# Developer Information
+Read the test cases /src/test/java/com/amos/p1/backend to understand the application.
+
+# Additonal links
 https://docs.google.com/presentation/d/1xn0D3tKBOOIgonkMIg4ATI6QnPh65W5Go9ZCJoBH6xs/edit?usp=sharing
