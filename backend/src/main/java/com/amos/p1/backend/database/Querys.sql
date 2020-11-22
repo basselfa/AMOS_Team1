@@ -1,0 +1,21 @@
+CREATE TABLE Incident (
+      id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+      type VARCHAR(255) NOT NULL,
+      size VARCHAR(255) NOT NULL,
+      description VARCHAR(255) NOT NULL,
+      city VARCHAR(255) NOT NULL,
+      country VARCHAR(255) NOT NULL,
+      startPositionLatitude VARCHAR(255) NOT NULL,
+      startPositionLongitude VARCHAR(255) NOT NULL,
+      startPositionStreet VARCHAR(255) NOT NULL,
+      endPositionLatitude VARCHAR(255) NOT NULL,
+      endPositionLongitude VARCHAR(255) NOT NULL,
+      endPositionStreet VARCHAR(255) NOT NULL,
+      verified INT NOT NULL,
+      delay INT NOT NULL,
+      provider INT NOT NULL,
+      exitAvailable INT NOT NULL ,
+      edges VARCHAR(255) NOT NULL,
+      entryTime datetime NOT NULL,
+      endTime datetime NOT NULL
+) ;

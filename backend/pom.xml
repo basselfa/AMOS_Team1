@@ -27,17 +27,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -66,8 +65,14 @@
 			<scope>test</scope>
 		</dependency>
 		<!--/ Rest Assured -->
-
-
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+		<artifactId>mysql-connector-java</artifactId>
+		<groupId>mysql</groupId>
+		<version>8.0.22</version>
+		<scope>system</scope>
+		<systemPath>${project.basedir}/src/main/resources/mysql-connector-java-8.0.22.jar</systemPath>
+	</dependency>
 	</dependencies>
 
 	<build>
