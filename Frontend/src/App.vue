@@ -65,9 +65,12 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: "App",
   data: () => ({
+    data: null,
     drawer: null,
     selectedItem: 1,
     items: [
@@ -85,6 +88,23 @@ export default {
       },
     ],
   }),
+    created() {
+  // GET request using axios with error handling
+  // Backend example resuest url: "http://localhost:8082/search?city=berlin"
+  // TOM TOM example request url: https://api.tomtom.com/traffic/services/4/incidentDetails/s3/6841263.950712%2C511972.674418%2C6886056.049288%2C582676.925582/10/-1/json?geometries=original&key=roWIhh9zqoIwMRfhGTc2UvQIshzr2fte
+  const headers = {"Access-Control-Allow-Origin": "*"};
+  axios.get("https://api.tomtom.com/traffic/services/4/incidentDetails/s3/6841263.950712%2C511972.674418%2C6886056.049288%2C582676.925582/10/-1/json?geometries=original&key=roWIhh9zqoIwMRfhGTc2UvQIshzr2fte")
+    .then(response => {
+      this.data = response.data;
+      console.log(this.data);
+      console.log(response.data);
+    })
+    .catch(error => {
+      this.errorMessage = error.message;
+      console.error("There was an error!", error);
+    });
+}
+
 };
 </script>
 
