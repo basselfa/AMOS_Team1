@@ -8,7 +8,7 @@ info:
     url: 'https://opensource.org/licenses/MIT'
 
 paths:
-  /search:
+  /demo/incidents:
     get:
       summary: Get incidents by city
       parameters:
@@ -25,29 +25,74 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Report'
+                $ref: '#/components/schemas/Incidents'
+  /demo/comparisons:
+    get:
+      summary: Get comparison by city
+      parameters:
+        - in: query
+          name: city
+          description: City name
+          required: true
+          schema:
+            type: string
 
+      responses:
+        '200':
+          description: A report with all comparison in the city
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comparisons'
 
 
 components:
   schemas:
-    Incident:
-      required:
-        - locationX
-        - locationY
-        - type
+    Comparisons:
       properties:
-        locationX:
-          type: integer
-        locationY:
-          type: integer
-        type:
-          type: string
-    Report:
-      required:
-        - incidents
+        incidents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Comparison'
+    Comparison:
+      properties:
+        shape:
+          type: array
+          items:
+            $ref: '#/components/schemas/Location'
+        confidence:
+          type: number
+        provider1:
+          $ref: '#/components/schemas/Incident'
+        provider2:
+          $ref: '#/components/schemas/Incident'
+    Incidents:
       properties:
         incidents:
           type: array
           items:
             $ref: '#/components/schemas/Incident'
+    Incident:
+      properties:
+        providerId:
+          type: number
+          description: Id 1 for tomtom and id 2 for here.com
+        shape:
+          description: Index 0 is start. Last index ist end. The location in between are in order
+          type: array
+          items:
+            $ref: '#/components/schemas/Location'
+        description:
+          type: string
+    Location:
+      properties:
+        longitude:
+          type: string
+          example: 8.68561
+        latitude:
+          type: string
+          example: 50.12677
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/qikangchen/Amos/1.0.0-oas3
