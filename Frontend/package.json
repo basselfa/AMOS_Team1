@@ -14,9 +14,12 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.21.0",
     "eslint": "^5.16.0",
+    "leaflet": "^1.7.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
+    "vue2-leaflet": "^2.6.0",
     "vuetify": "^2.3.17"
   },
   "devDependencies": {

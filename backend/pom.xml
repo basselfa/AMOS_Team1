@@ -65,14 +65,23 @@
 			<scope>test</scope>
 		</dependency>
 		<!--/ Rest Assured -->
+
+
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.5.0</version>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
-		<artifactId>mysql-connector-java</artifactId>
-		<groupId>mysql</groupId>
-		<version>8.0.22</version>
-		<scope>system</scope>
-		<systemPath>${project.basedir}/src/main/resources/mysql-connector-java-8.0.22.jar</systemPath>
-	</dependency>
+      <artifactId>mysql-connector-java</artifactId>
+      <groupId>mysql</groupId>
+      <version>8.0.22</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/src/main/resources/mysql-connector-java-8.0.22.jar</systemPath>
+	  </dependency>
+    
 	</dependencies>
 
 	<build>
