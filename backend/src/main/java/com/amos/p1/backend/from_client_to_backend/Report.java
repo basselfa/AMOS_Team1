@@ -12,7 +12,7 @@ public class Report {
     }
 
     public void addIncident(int x, int y, String type){
-        incidents.add(new Incident(x, y, type));
+        incidents.add(new Incident());
     }
 
     @Override
