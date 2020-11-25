@@ -41,11 +41,6 @@ public class DatabaseTest {
 
         System.out.println(arr_comp.get(0));
 
-        //select  all comparisons from table Comparison by id using the query specified in Comparison class
-        arr_comp = em.createNamedQuery("findAllComparisonsWithId")
-                .setParameter("id", (long)15)
-                .getResultList();
-
         System.out.println(arr_comp.get(0));
 
 
@@ -83,7 +78,6 @@ public class DatabaseTest {
         emf.close();
         em.close();
     }
-
 
 
 
