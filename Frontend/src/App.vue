@@ -1,31 +1,9 @@
 <template>
   <div id="app">
     <v-app id="main">
-      <div style="margin-left: 0">
-        <!--- loading indicator will be needed when waiting for the data to visualize
-        <v-progress-circular
-          indeterminate
-          color="primary"
-        ></v-progress-circular>
-        <p>Loading map</p>
-        --->
-        <iframe
-          width="800"
-          height="550"
-          frameborder="0"
-          scrolling="no"
-          marginheight="0"
-          marginwidth="0"
-          src="https://www.openstreetmap.org/export/embed.html?bbox=13.317360877990724%2C52.50269091804005%2C13.372292518615724%2C52.52611754877629&amp;layer=mapnik"
-          style="border: 1px solid black; margin-top: 10%"
-        ></iframe>
-
-      </div>
-      <div>
-      <v-btn>
-          Button
-        </v-btn>
-      </div>
+      <open-street-map
+      :polyline="polyline"
+      ></open-street-map>
       <v-navigation-drawer v-model="drawer" app>
         <v-list two-line>
           <v-subheader>NAVIGATION</v-subheader>
@@ -65,10 +43,21 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
+import { latLng } from "leaflet";
+import { LMap, LTileLayer, LMarker, LPopup, LTooltip } from "vue2-leaflet";
+import OpenStreetMap from "./components/OpenStreetMap.vue";
 
 export default {
   name: "App",
+  components: {
+    LMap,
+    LTileLayer,
+    LMarker,
+    LPopup,
+    LTooltip,
+    OpenStreetMap,
+  },
   data: () => ({
     data: null,
     drawer: null,
@@ -87,24 +76,43 @@ export default {
         icon: "mdi-information",
       },
     ],
+    polyline: {
+        latlngs: [
+          // [47.334852, -1.509485],
+          // [47.342596, -1.328731],
+          // [47.241487, -1.190568],
+          // [47.234787, -1.358337],
+        ],
+        color: "green",
+      },
   }),
-    created() {
-  // GET request using axios with error handling
-  // Backend example resuest url: "http://localhost:8082/search?city=berlin"
-  // TOM TOM example request url: https://api.tomtom.com/traffic/services/4/incidentDetails/s3/6841263.950712%2C511972.674418%2C6886056.049288%2C582676.925582/10/-1/json?geometries=original&key=roWIhh9zqoIwMRfhGTc2UvQIshzr2fte
-  const headers = {"Access-Control-Allow-Origin": "*"};
-  axios.get("http://localhost:8082/demo/incidents?city=berlin",{headers:{"Access-Control-Allow-Origin": "*"}})
-    .then(response => {
-      this.data = response.data;
-      console.log(this.data);
-      console.log(response.data);
-    })
-    .catch(error => {
-      this.errorMessage = error.message;
-      console.error("There was an error!", error);
-    });
-}
-
+  created() {
+    // GET request using axios with error handling
+    // Backend example resuest url: "http://localhost:8082/search?city=berlin"
+    // TOM TOM example request url: https://api.tomtom.com/traffic/services/4/incidentDetails/s3/6841263.950712%2C511972.674418%2C6886056.049288%2C582676.925582/10/-1/json?geometries=original&key=roWIhh9zqoIwMRfhGTc2UvQIshzr2fte
+    axios
+      .get("http://localhost:8082/demo/incidents?city=berlin", {
+        headers: { "Access-Control-Allow-Origin": "*" },
+      })
+      .then((response) => {
+        this.data = response.data;
+        console.log(this.data);
+        console.log(response.data);
+        this.passCoordinates(response.data);
+      })
+      .catch((error) => {
+        this.errorMessage = error.message;
+        console.error("There was an error!", error);
+      });
+  },
+  methods: {
+    passCoordinates: function(data) {
+      for(var i = 0; i< data.incidents[0].shape.length; i++){
+        this.polyline.latlngs.push([data.incidents[0].shape[i].latitude,data.incidents[0].shape[i].longitude]);
+        console.log(this.polyline.latlngs)
+      }
+    }
+  }
 };
 </script>
 
