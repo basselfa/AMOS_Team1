@@ -1,13 +1,12 @@
-package com.amos.p1.backend;
+package com.amos.p1.backend.database;
 
-import com.amos.p1.backend.database.Comparison;
+import com.amos.p1.backend.data.Comparison;
 import com.amos.p1.backend.database.ComparisonRepository;
-import com.amos.p1.backend.from_client_to_backend.Incident;
+import com.amos.p1.backend.data.Incident;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
+
 import javax.persistence.*;
 
 

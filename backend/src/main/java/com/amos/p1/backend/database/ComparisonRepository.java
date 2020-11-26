@@ -1,5 +1,6 @@
 package com.amos.p1.backend.database;
 
+import com.amos.p1.backend.data.Comparison;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

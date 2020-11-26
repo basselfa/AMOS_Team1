@@ -7,7 +7,7 @@
 
 <persistence-unit name="Comparsion">
     <description>Hibernate EntityManager Demo</description>
-    <class>com.amos.p1.backend.database.Comparison</class>
+    <class>com.amos.p1.backend.data.Comparison</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
         <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
@@ -20,7 +20,7 @@
 </persistence-unit>
     <persistence-unit name="Incident">
         <description> 12</description>
-        <class>com.amos.p1.backend.from_client_to_backend.Incident</class>
+        <class>com.amos.p1.backend.data.Incident</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>

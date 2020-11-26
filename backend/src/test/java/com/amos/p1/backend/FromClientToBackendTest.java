@@ -1,6 +1,5 @@
 package com.amos.p1.backend;
 
-import com.amos.p1.backend.from_client_to_backend.Report;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -69,17 +68,5 @@ public class FromClientToBackendTest {
             .body("incidents[0].locationX", is(10))
             .body("incidents[0].locationY", is(20))
             .body("incidents[0].type", is("Traffic jam"));
-    }
-
-    @Test
-    void testGetIncidentsFromBerlinExtract(){
-        Report report = given()
-            .param("city", "berlin")
-        .when()
-            .get(base + "/search")
-        .then()
-            .extract().as(Report.class);
-
-        System.out.println(report);
     }
 }

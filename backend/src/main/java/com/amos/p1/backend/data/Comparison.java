@@ -1,4 +1,4 @@
-package com.amos.p1.backend.database;
+package com.amos.p1.backend.data;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
