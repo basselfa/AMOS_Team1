@@ -1,44 +1,9 @@
 <template>
   <div id="app">
     <v-app id="main">
-      <open-street-map
-      :polyline="polyline"
-      ></open-street-map>
-      <v-navigation-drawer v-model="drawer" app>
-        <v-list two-line>
-          <v-subheader>NAVIGATION</v-subheader>
-          <v-list-item-group v-model="selectedItem" color="primary">
-            <v-list-item
-              v-for="(item, i) in items"
-              :key="i"
-              v-on:click="selectedItem = +1"
-            >
-              <v-list-item-icon>
-                <v-icon v-text="item.icon"></v-icon>
-              </v-list-item-icon>
-              <v-list-item-content>
-                <v-list-item-title v-text="item.text"></v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list-item-group>
-        </v-list>
-      </v-navigation-drawer>
-
-      <v-app-bar app>
-        <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-        <link
-          href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css"
-          rel="stylesheet"
-        />
-
-        <v-toolbar-title>Dashboard</v-toolbar-title>
-      </v-app-bar>
+      <navigation />
+      <open-street-map :polyline="polyline"></open-street-map>
     </v-app>
-
-    <!---
-    <img src="./assets/logo.png">
-    <router-view />
-    -->
   </div>
 </template>
 
@@ -47,35 +12,16 @@ import axios from "axios";
 import { latLng } from "leaflet";
 import { LMap, LTileLayer, LMarker, LPopup, LTooltip } from "vue2-leaflet";
 import OpenStreetMap from "./components/OpenStreetMap.vue";
+import Navigation from "./components/Navigation.vue";
 
 export default {
   name: "App",
   components: {
-    LMap,
-    LTileLayer,
-    LMarker,
-    LPopup,
-    LTooltip,
     OpenStreetMap,
+    Navigation,
   },
   data: () => ({
     data: null,
-    drawer: null,
-    selectedItem: 1,
-    items: [
-      {
-        text: "Home",
-        icon: "mdi-home",
-      },
-      {
-        text: "Map",
-        icon: "mdi-map",
-      },
-      {
-        text: "About",
-        icon: "mdi-information",
-      },
-    ],
     polyline: {
         latlngs: [
           // [47.334852, -1.509485],
