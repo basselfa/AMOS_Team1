@@ -1,20 +1,6 @@
 <template>
   <div style="height: 500px; width: 100%">
-    <l-map
-      :zoom="zoom"
-      :center="center"
-      :options="mapOptions"
-      style="
-        height: 80%;
-        width: 60%;
-        margin: 0;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        -ms-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
-      "
-    >
+    <l-map id="osm-map" :zoom="zoom" :center="center" :options="mapOptions">
       <l-tile-layer :url="url" :attribution="attribution" />
       <l-polyline
         :lat-lngs="polyline.latlngs"
@@ -71,3 +57,16 @@ export default {
   },
 };
 </script>
+
+<style>
+#osm-map {
+  height: 80%;
+  width: 60%;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+</style>
