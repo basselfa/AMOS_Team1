@@ -1,8 +1,13 @@
 <template>
   <div id="app">
     <v-app id="main">
-      <navigation />
-      <open-street-map :polyline="polyline"></open-street-map>
+      <v-row>
+        <v-col>
+          <navigation />
+          <search />
+          <open-street-map :polyline="polyline"></open-street-map>
+        </v-col>
+      </v-row>
     </v-app>
   </div>
 </template>
@@ -13,29 +18,23 @@ import { latLng } from "leaflet";
 import { LMap, LTileLayer, LMarker, LPopup, LTooltip } from "vue2-leaflet";
 import OpenStreetMap from "./components/OpenStreetMap.vue";
 import Navigation from "./components/Navigation.vue";
+import Search from "./components/Search.vue";
 
 export default {
   name: "App",
   components: {
     OpenStreetMap,
     Navigation,
+    Search,
   },
   data: () => ({
     data: null,
     polyline: {
-        latlngs: [
-          // [47.334852, -1.509485],
-          // [47.342596, -1.328731],
-          // [47.241487, -1.190568],
-          // [47.234787, -1.358337],
-        ],
-        color: "green",
-      },
+      latlngs: [],
+      color: "green",
+    },
   }),
   created() {
-    // GET request using axios with error handling
-    // Backend example resuest url: "http://localhost:8082/search?city=berlin"
-    // TOM TOM example request url: https://api.tomtom.com/traffic/services/4/incidentDetails/s3/6841263.950712%2C511972.674418%2C6886056.049288%2C582676.925582/10/-1/json?geometries=original&key=roWIhh9zqoIwMRfhGTc2UvQIshzr2fte
     axios
       .get("http://localhost:8082/demo/incidents?city=berlin", {
         headers: { "Access-Control-Allow-Origin": "*" },
@@ -52,13 +51,16 @@ export default {
       });
   },
   methods: {
-    passCoordinates: function(data) {
-      for(var i = 0; i< data.incidents[0].shape.length; i++){
-        this.polyline.latlngs.push([data.incidents[0].shape[i].latitude,data.incidents[0].shape[i].longitude]);
-        console.log(this.polyline.latlngs)
+    passCoordinates: function (data) {
+      for (var i = 0; i < data.incidents[0].shape.length; i++) {
+        this.polyline.latlngs.push([
+          data.incidents[0].shape[i].latitude,
+          data.incidents[0].shape[i].longitude,
+        ]);
+        console.log(this.polyline.latlngs);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
