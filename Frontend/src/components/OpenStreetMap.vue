@@ -64,9 +64,10 @@ export default {
   width: 60%;
   margin: 0;
   position: absolute;
-  top: 60%;
+  top: 680px;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+  border-radius: 20px;
 }
 </style>
