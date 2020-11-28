@@ -1,7 +1,7 @@
 # Backend
 The backend use Spring boot as an application Framework. REST-Endpoints will be expoded to communicate with the service.
 
-# Prerequiste
+# Prerequisite
 - JDK 8
 - Maven
 
