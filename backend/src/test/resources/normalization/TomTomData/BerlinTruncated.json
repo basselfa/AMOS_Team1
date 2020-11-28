@@ -1,0 +1,119 @@
+{
+  "tm": {
+    "@id": "1606553700",
+    "poi": [
+      {
+        "id": "CLUSTER_48746",
+        "p": {
+          "x": 13.3101266,
+          "y": 52.5012959
+        },
+        "ic": 13,
+        "ty": 0,
+        "cbl": {
+          "x": 13.267276,
+          "y": 52.4842175
+        },
+        "ctr": {
+          "x": 13.3422611,
+          "y": 52.5184733
+        },
+        "cs": 30,
+        "cpoi": [
+          {
+            "id": "0c8ec1255d93f1498479cbe9eb2db037",
+            "p": {
+              "x": 13.2739309,
+              "y": 52.5178734
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-11-28T06:00:00Z",
+            "ed": "2020-11-28T17:00:00Z",
+            "f": "Spandauer Damm - Fürstenbrunner Weg (Königin-Elisabeth-Straße/L1121)",
+            "t": "Knobelsdorffstraße (Königin-Elisabeth-Straße/L1121)",
+            "l": 618,
+            "v": "mnp_Imw`pA|AQXIJEfAk@`@SRGTEdCUjCWnAO\\EpAMpC]ZCfBUZERCXC"
+          }
+        ],
+        "l": 6645
+      },
+      {
+        "id": "CLUSTER_48739",
+        "p": {
+          "x": 13.3035039,
+          "y": 52.550763
+        },
+        "ic": 13,
+        "ty": 0,
+        "cbl": {
+          "x": 13.2972939,
+          "y": 52.5434339
+        },
+        "ctr": {
+          "x": 13.3097139,
+          "y": 52.5580909
+        },
+        "cs": 2,
+        "cpoi": [
+          {
+            "id": "d99eac71f32e4d0c230b72508fff562a",
+            "p": {
+              "x": 13.3014146,
+              "y": 52.540633
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-11-28T04:40:00Z",
+            "f": "Flughafen Tegel [11]",
+            "t": "Saatwinkler Damm",
+            "l": 456,
+            "v": "mku_IacdpASc@eA{@g@a@o@e@c@]]U[Q]K_@G]Cg@@SBUBa@LUJQL[R[RcCzAKFe@X"
+          },
+          {
+            "id": "cbca02ca9c56527932a433798546b442",
+            "p": {
+              "x": 13.315036,
+              "y": 52.5561813
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "left lane closed",
+            "sd": "2020-11-26T16:40:31Z",
+            "f": "Am Festplatz (Autobahnzubringer Hamburg/A111)",
+            "t": "Eichborndamm - Antonienstraße (Autobahnzubringer Hamburg/A111)",
+            "l": 1163,
+            "r": "E26 - A111",
+            "v": "agx_IupfpA[YY[_@[IGMKEEOMQMc@Y_@Sc@QYKe@Oc@M[ICAUEg@EOA[C_@Cu@?U@mAN{@LmAP[D]HiBV{@Jc@Fs@JKAIAKAWE}AAOAOCMAUAOASAMAMASCG?GAS?O@OBMDSHOJKHOTKPKTM`@I^ENERIb@]rBOx@QbAOt@GXIZKZMZSd@QZAB"
+          }
+        ],
+        "l": 1619
+      },
+      {
+        "id": "70b4dcb5bc89ed631215e59bbb3281aa",
+        "p": {
+          "x": 13.54879,
+          "y": 52.5164151
+        },
+        "ic": 7,
+        "ty": 0,
+        "cs": 0,
+        "d": "carriageway reduced to one lane",
+        "c": "roadworks",
+        "sd": "2020-11-24T11:18:55Z",
+        "ed": "2020-12-03T22:59:00Z",
+        "f": "Alt-Biesdorf - Alt- Friedrichsfelde (Märkische Allee/B158)",
+        "t": "Allee der Kosmonauten (Märkische Allee/B158)",
+        "l": 1037,
+        "r": "B158",
+        "v": "gcp_IoqtqAI?C?[?C?I?I@G?C?i@DK@_@D_@Fm@LE@IBi@N_@L]Ng@V]Pq@`@o@d@w@r@c@d@QRm@t@EFi@t@aAxAq@hA_@l@mC`EyApBc@f@YZ_@^a@^m@j@SPYTa@Xa@XWLo@^a@Vw@b@w@\\ID"
+      }
+    ]
+  }
+}
