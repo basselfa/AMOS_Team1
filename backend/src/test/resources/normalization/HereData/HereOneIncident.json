@@ -1,0 +1,165 @@
+{
+  "TRAFFIC_ITEM_ID": 1141075603307709128,
+  "ORIGINAL_TRAFFIC_ITEM_ID": 1141077209175289128,
+  "TRAFFIC_ITEM_STATUS_SHORT_DESC": "ACTIVE",
+  "TRAFFIC_ITEM_TYPE_DESC": "CONSTRUCTION",
+  "START_TIME": "11/18/2020 00:55:51",
+  "END_TIME": "12/23/2020 14:00:00",
+  "ENTRY_TIME": "11/18/2020 00:55:51",
+  "CRITICALITY": {
+    "ID": "0",
+    "DESCRIPTION": "critical"
+  },
+  "VERIFIED": true,
+  "ABBREVIATION": {
+    "SHORT_DESC": "CONST",
+    "DESCRIPTION": "construction"
+  },
+  "LOCATION": {
+    "INTERSECTION": {
+      "ORIGIN": {
+        "ID": "",
+        "STREET1": {
+          "ADDRESS1": "Aschaffenburger Straße"
+        },
+        "STREET2": {
+          "ADDRESS1": "Am Sportplatz"
+        },
+        "COUNTY": "Johannesberg",
+        "STATE": "",
+        "PROXIMITY": {
+          "ID": "MID",
+          "DESCRIPTION": "midway between"
+        }
+      },
+      "TO": {
+        "ID": "",
+        "STREET1": {
+          "ADDRESS1": "Aschaffenburger Straße"
+        },
+        "STREET2": {
+          "ADDRESS1": "Oberafferbacher Straße"
+        },
+        "COUNTY": "Johannesberg",
+        "STATE": "",
+        "PROXIMITY": {
+          "ID": "MID",
+          "DESCRIPTION": "midway between"
+        }
+      }
+    },
+    "GEOLOC": {
+      "ORIGIN": {
+        "LATITUDE": 50.02107,
+        "LONGITUDE": 9.13304
+      },
+      "TO": [
+        {
+          "LATITUDE": 50.026,
+          "LONGITUDE": 9.13453
+        }
+      ],
+      "GEOMETRY": {
+        "SHAPES": {
+          "SHP": [
+            {
+              "value": "50.02107,9.13304 50.02151,9.13304",
+              "FC": 3,
+              "LID": "983060182F",
+              "LE": 0.04894106288375994,
+              "FW": "SD"
+            },
+            {
+              "value": "50.02151,9.13304 50.02221,9.13305",
+              "FC": 3,
+              "LID": "983060183F",
+              "LE": 0.07786398507604093,
+              "FW": "SD"
+            },
+            {
+              "value": "50.02221,9.13305 50.02257,9.13305 50.02295,9.13307 50.02317,9.13309",
+              "FC": 3,
+              "LID": "542031750F",
+              "LE": 0.10684679660261825,
+              "FW": "SD"
+            },
+            {
+              "value": "50.02317,9.13309 50.02346,9.13314 50.02381,9.13321 50.02415,9.13331 50.02442,9.13343 50.02463,9.13354 50.02483,9.13363",
+              "FC": 3,
+              "LID": "1183125461F",
+              "LE": 0.18925142183755775,
+              "FW": "SD"
+            },
+            {
+              "value": "50.02483,9.13363 50.02495,9.13368 50.02521,9.13383 50.02532,9.13391 50.02554,9.13409",
+              "FC": 3,
+              "LID": "1183125462F",
+              "LE": 0.08584689267917939,
+              "FW": "SD"
+            },
+            {
+              "value": "50.02554,9.13409 50.02569,9.13425 50.02577,9.13433 50.02587,9.13442 50.026,9.13453",
+              "FC": 3,
+              "LID": "542027355F",
+              "LE": 0.06015551598186312,
+              "FW": "SD"
+            }
+          ]
+        }
+      }
+    },
+    "TPEGOpenLRBase64": "CCkBEAAlJAZ+nyOSDwAJBQQCAwAACgUEAoQ5AACVAe0ACQUEAgOVADAAAA==",
+    "POLITICAL_BOUNDARY": {
+      "METRO_AREA": {
+        "value": "",
+        "ID": 218
+      },
+      "COUNTY": "Johannesberg"
+    },
+    "NAVTECH": {
+      "EDGE": {
+        "EDGE_ID": [
+          "983060182",
+          "983060183",
+          "542031750",
+          "1183125461",
+          "1183125462",
+          "542027355"
+        ]
+      },
+      "VERSION_ID": "202003"
+    },
+    "LENGTH": 0.35349
+  },
+  "TRAFFIC_ITEM_DETAIL": {
+    "ROAD_CLOSED": true,
+    "EVENT": {
+      "EVENT_ITEM_CANCELLED": false,
+      "SCHEDULED_CONSTRUCTION_EVENT": {
+        "SCHEDULED_CONSTRUCTION_TYPE_DESC": "CONSTRUCTION",
+        "SCHEDULED_CONSTRUCTION_DETAIL": "construction"
+      }
+    },
+    "ALERTC": [
+      {
+        "EVENT_CODE": 735
+      }
+    ]
+  },
+  "TRAFFIC_ITEM_DESCRIPTION": [
+    {
+      "value": "Geschlossen zwischen Am Sportplatz und Oberafferbacher Straße - Wegen Baustelle gesperrt.",
+      "TYPE": "short_desc"
+    },
+    {
+      "value": "Geschlossen zwischen Am Sportplatz und Oberafferbacher Straße - Wegen Baustelle gesperrt.",
+      "TYPE": "desc"
+    },
+    {
+      "value": "Wegen Baustelle gesperrt.",
+      "TYPE": "no_exit_description"
+    }
+  ],
+  "mid": "HERE-Europe-PR/r_HERE-Europe-PR/184728_TIC/NAVTEQ-ORIGINAL-1|1605660935042",
+  "PRODUCT": "basic"
+},

@@ -1,4 +1,5 @@
 package com.amos.p1.backend.normalization;
 
-public class HereNormalizationTest {
+public class HereTruncatedJsonTest {
+
 }
