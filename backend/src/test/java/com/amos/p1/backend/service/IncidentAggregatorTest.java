@@ -21,8 +21,9 @@ public class IncidentAggregatorTest {
     @Test
     void test(){
         List<Incident> incidentList = incidentAggregator.getFromCity("Berlin");
-
+        for (Incident i :incidentList) {
+            System.out.println(i);
+        }
         assertThat(incidentList, hasSize(greaterThan(0)));
     }
-
 }

@@ -49,7 +49,8 @@ public class DatabaseTest {
     @Test
     void testIncidentDatabaseConnection() {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Incident");
+        EntityManagerFactory emf =
+                Persistence.createEntityManagerFactory("Incident");
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
@@ -70,6 +71,11 @@ public class DatabaseTest {
                         2020, 5, 1,
                         12, 30, 0),
                         "670000:690000,681234:691234");
+
+        List<Comparison> arr_comp1 = 
+                (List<Comparison>)em.createNamedQuery("getFromCity")
+                .setParameter("city" ,"Berlin" )
+                .getResultList();
 
         em.persist(incident1);
         em.getTransaction().commit();

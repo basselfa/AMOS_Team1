@@ -3,6 +3,11 @@ package com.amos.p1.backend.data;
 import javax.persistence.*;
 import java.time.LocalDateTime ;
 
+@NamedQuery(
+        name="getFromCity",
+        query="SELECT i FROM Incident i WHERE i.city = :city"
+)
+
 @Entity
 public class Incident {
     @Id
@@ -26,7 +31,7 @@ public class Incident {
     // reference https://vladmihalcea.com/date-timestamp-jpa-hibernate/
     private LocalDateTime entryTime;
     private  LocalDateTime endTime;
-    private String edges; // 12124234:5353453,
+    private String edges; // 12.124234:53.536453,
 
     public Incident() {
         super();

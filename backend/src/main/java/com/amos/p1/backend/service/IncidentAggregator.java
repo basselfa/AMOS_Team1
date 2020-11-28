@@ -7,4 +7,5 @@ import java.util.List;
 public interface IncidentAggregator {
 
     List<Incident> getFromCity(String city);
+    
 }
