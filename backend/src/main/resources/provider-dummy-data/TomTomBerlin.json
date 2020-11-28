@@ -1,0 +1,5433 @@
+{
+  "tm": {
+    "@id": "1606553700",
+    "poi": [
+      {
+        "id": "CLUSTER_48746",
+        "p": {
+          "x": 13.3101266,
+          "y": 52.5012959
+        },
+        "ic": 13,
+        "ty": 0,
+        "cbl": {
+          "x": 13.267276,
+          "y": 52.4842175
+        },
+        "ctr": {
+          "x": 13.3422611,
+          "y": 52.5184733
+        },
+        "cs": 30,
+        "cpoi": [
+          {
+            "id": "0c8ec1255d93f1498479cbe9eb2db037",
+            "p": {
+              "x": 13.2739309,
+              "y": 52.5178734
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-11-28T06:00:00Z",
+            "ed": "2020-11-28T17:00:00Z",
+            "f": "Spandauer Damm - Fürstenbrunner Weg (Königin-Elisabeth-Straße/L1121)",
+            "t": "Knobelsdorffstraße (Königin-Elisabeth-Straße/L1121)",
+            "l": 618,
+            "v": "mnp_Imw`pA|AQXIJEfAk@`@SRGTEdCUjCWnAO\\EpAMpC]ZCfBUZERCXC"
+          },
+          {
+            "id": "4e0ab9d4ec5415dda291c6033dda60e5",
+            "p": {
+              "x": 13.2800569,
+              "y": 52.5222303
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "narrow lanes",
+            "c": "new roadworks layout",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2020-11-30T22:59:00Z",
+            "f": "Spandauer Damm (Spandauer Damm/L1000)",
+            "t": "Königin-Elisabeth-Straße - Fürstenbrunner Weg (Spandauer Damm/L1000)",
+            "l": 18,
+            "v": "mop_I_y`pA@r@"
+          },
+          {
+            "id": "626a13907667c1373bd5c7d1fe7c4c7e",
+            "p": {
+              "x": 13.302022,
+              "y": 52.508974
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-05-25T07:25:00Z",
+            "f": "Kaiser-Friedrich-Straße",
+            "t": "Gierkezeile",
+            "l": 115,
+            "v": "oko_Iw|dpASsI"
+          },
+          {
+            "id": "2a43997bd201bdf10e89684d23697253",
+            "p": {
+              "x": 13.3024725,
+              "y": 52.5165622
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "construction work",
+            "sd": "2020-01-21T06:00:00Z",
+            "ed": "2020-12-30T17:00:00Z",
+            "f": "Gierkezeile",
+            "t": "Kaiser-Friedrich-Straße",
+            "l": 115,
+            "v": "clo_IkgepARrI"
+          },
+          {
+            "id": "e262d90ef5107e7ef0875c5bdb8c8b08",
+            "p": {
+              "x": 13.2629448,
+              "y": 52.4869018
+            },
+            "ic": 6,
+            "ty": 3,
+            "cs": 0,
+            "d": "stationary traffic",
+            "sd": "2020-11-28T08:44:00Z",
+            "ed": "2020-11-28T09:13:35Z",
+            "f": "Hubertusallee (Koenigsallee/L1102)",
+            "t": "Hagenplatz - Hagenstraße (Koenigsallee/L1102)",
+            "l": 136,
+            "dl": 192,
+            "v": "kyi_Iog~oAdC`FTj@HX"
+          },
+          {
+            "id": "bbfa988b170c10c887ce3fd3a98215c1",
+            "p": {
+              "x": 13.2770592,
+              "y": 52.4965041
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "sd": "2020-11-03T06:00:00Z",
+            "ed": "2021-08-31T21:59:00Z",
+            "f": "Jafféstraße - Eichkampstraße (Messedamm/L1082)",
+            "t": "Messe Einfahrt Tor 7 (Messedamm/L1082)",
+            "l": 153,
+            "v": "otl_I_f_pA_ByBQUIKKOo@}@_@e@"
+          },
+          {
+            "id": "eaffe9785bc8fe599e32f4b753f641d4",
+            "p": {
+              "x": 13.2685595,
+              "y": 52.5021187
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "sd": "2020-11-03T06:00:00Z",
+            "ed": "2021-08-31T21:59:00Z",
+            "f": "Halenseestraße (Messedamm/L1082)",
+            "t": "Jafféstraße - Eichkampstraße (Messedamm/L1082)",
+            "l": 153,
+            "v": "i{l_Isn_pA^d@n@|@JNHJPT~AxB"
+          },
+          {
+            "id": "92402055526603798bf33371469b0b3f",
+            "p": {
+              "x": 13.2855543,
+              "y": 52.495854
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-02-21T03:00:00Z",
+            "ed": "2021-05-31T21:59:00Z",
+            "f": "Kurfürstendamm (Westfälische Straße/L1147)",
+            "t": "Paulsborner Straße (Westfälische Straße/L1147)",
+            "l": 193,
+            "v": "ejl_I_~bpA@?PKFGNSHQHWJi@Jm@X}BTkBPqA"
+          },
+          {
+            "id": "ed0cf714b55e87dce42a9a0d2f3497b0",
+            "p": {
+              "x": 13.2959526,
+              "y": 52.4998978
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-02-21T03:00:00Z",
+            "ed": "2021-05-31T21:59:00Z",
+            "f": "Paulsborner Straße (Westfälische Straße/L1147)",
+            "t": "Kurfürstendamm (Westfälische Straße/L1147)",
+            "l": 208,
+            "v": "iel_IemcpAQpAUjBY|BKl@Kh@IVIPORGFQJ[N"
+          },
+          {
+            "id": "29e2b48746e64670a7ddb9be4edfa3ea",
+            "p": {
+              "x": 13.305759,
+              "y": 52.4939073
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2020-04-28T05:00:00Z",
+            "ed": "2022-09-01T21:59:00Z",
+            "f": "Paulsborner Straße",
+            "t": "Westfälische Straße",
+            "l": 104,
+            "v": "qwk_ImqdpAyDU"
+          },
+          {
+            "id": "265ba78a162e35213bbb25b27b682f98",
+            "p": {
+              "x": 13.2935348,
+              "y": 52.4953589
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2020-04-28T05:00:00Z",
+            "ed": "2022-09-01T21:59:00Z",
+            "f": "Westfälische Straße",
+            "t": "Paulsborner Straße",
+            "l": 104,
+            "v": "k}k_IcrdpAxDT"
+          },
+          {
+            "id": "9d4e75d845d7495c48d55727d7d5bfa2",
+            "p": {
+              "x": 13.3104315,
+              "y": 52.5026561
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2021-07-31T21:59:00Z",
+            "f": "Kaiser-Friedrich-Straße (Kantstraße/L1020)",
+            "t": "Leibnizstraße (Kantstraße/L1020)",
+            "l": 191,
+            "v": "_dn_IiyfpADuA@c@?QBqAB{@@[BcAFwD"
+          },
+          {
+            "id": "f3f6cf00998c2a16bddefff93249137e",
+            "p": {
+              "x": 13.3174645,
+              "y": 52.4959522
+            },
+            "ic": 6,
+            "ty": 2,
+            "cs": 0,
+            "d": "queuing traffic",
+            "c": "right lane closed",
+            "sd": "2020-11-28T07:46:00Z",
+            "ed": "2020-11-28T09:13:35Z",
+            "f": "Brandenburgische Straße (Konstanzer Straße/L1114)",
+            "t": "Olivaer Platz (Konstanzer Straße/L1114)",
+            "l": 340,
+            "dl": 123,
+            "v": "oil_Ie|fpAuCiAq@WuAg@}Am@}@_@WMUIQ[e@WGCIEGCGA"
+          },
+          {
+            "id": "17d1cdfe0dec62a9ed152796ae854862",
+            "p": {
+              "x": 13.3100858,
+              "y": 52.4835192
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2019-09-11T12:05:33Z",
+            "ed": "2020-11-30T22:59:59Z",
+            "f": "Konstanzer Straße",
+            "t": "Blissestraße",
+            "l": 548,
+            "v": "ukj_Ic}fpARuBl@kHt@oIB_@@m@AuC?}CCaM"
+          },
+          {
+            "id": "a41fb20840ef98cc421f8606cab98af9",
+            "p": {
+              "x": 13.318446,
+              "y": 52.497966
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "right lane closed",
+            "c": "roadworks",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2021-01-29T22:59:00Z",
+            "f": "Brandenburgische Straße (Konstanzer Straße/L1114)",
+            "t": "Olivaer Platz (Konstanzer Straße/L1114)",
+            "l": 83,
+            "v": "iwl_I_cgpAWMUIQ[e@WGCIEGCGA"
+          },
+          {
+            "id": "00bb390d811b111c1248fd8a9d8abafc",
+            "p": {
+              "x": 13.3192589,
+              "y": 52.4995952
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "right lane closed",
+            "c": "roadworks",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2021-01-29T22:59:00Z",
+            "f": "Württembergische Straße - Schlüterstraße (Olivaer Platz/L1101)",
+            "t": "Adenauerplatz - Brandenburgische Straße (Kurfürstendamm/L1101)",
+            "l": 85,
+            "v": "q{l_I{egpA[C_BG]?"
+          },
+          {
+            "id": "d0d7d580ff206470a269f228ce7b7efa",
+            "p": {
+              "x": 13.315118,
+              "y": 52.5083045
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to three lanes",
+            "c": "roadworks",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2020-12-18T22:59:00Z",
+            "f": "Richard-Wagner-Straße - Sesenheimer Straße (Bismarckstraße/B5)",
+            "t": "Leibnizstraße (Bismarckstraße/B5)",
+            "l": 20,
+            "r": "B2 - B5",
+            "v": "ggo_I_ngpAC{@"
+          },
+          {
+            "id": "50581657ba0455633240985a6207d336",
+            "p": {
+              "x": 13.3116035,
+              "y": 52.5079357
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2019-12-30T11:29:15Z",
+            "f": "Bismarckstraße - Marie-Elisabet-Lüders-Straße (Am Schillertheater/L1147)",
+            "t": "Kantstraße (Schlüterstraße/L1147)",
+            "l": 162,
+            "v": "mkn_I_chpAdDVzBP"
+          },
+          {
+            "id": "2b6443d18aa468d12519c5b09b30c98f",
+            "p": {
+              "x": 13.3195791,
+              "y": 52.4903176
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2019-09-10T17:01:12Z",
+            "ed": "2020-11-30T22:59:59Z",
+            "f": "Brandenburgische Straße / Blissestraße",
+            "t": "Konstanzer Straße",
+            "l": 506,
+            "v": "}gj_I{nhpAB`M?|C@tCAl@C^u@nIm@jH"
+          },
+          {
+            "id": "f6a6694c033304e6b8e9bb169879c59c",
+            "p": {
+              "x": 13.3280176,
+              "y": 52.5016984
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "water main work",
+            "sd": "2020-05-26T12:28:52Z",
+            "ed": "2020-12-11T22:59:00Z",
+            "f": "Kurfürstendamm",
+            "t": "Mommsenstraße",
+            "l": 80,
+            "v": "cim_Iu|hpAmCW"
+          },
+          {
+            "id": "5decca0640589375edbf39ef64c3799c",
+            "p": {
+              "x": 13.3158518,
+              "y": 52.5032079
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "water main work",
+            "sd": "2020-05-27T04:40:15Z",
+            "ed": "2020-12-11T22:59:00Z",
+            "f": "Mommsenstraße",
+            "t": "Kurfürstendamm",
+            "l": 80,
+            "v": "qmm_Io}hpAlCV"
+          },
+          {
+            "id": "9758fc324f33a5e6334f0220a0958572",
+            "p": {
+              "x": 13.3235107,
+              "y": 52.496153
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "new roadworks layout",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2023-12-31T22:59:00Z",
+            "f": "Württembergische Straße - Schlüterstraße (Olivaer Platz/L1101)",
+            "t": "Uhlandstraße (Lietzenburger Straße/L1101)",
+            "l": 126,
+            "v": "k{l_I_dipAAy@CoAA_@?EAUAYDQAe@?QA_@Ae@"
+          },
+          {
+            "id": "fd3a62225039b01051b6b4d2f68ff123",
+            "p": {
+              "x": 13.3242845,
+              "y": 52.5037894
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2023-12-31T22:59:00Z",
+            "f": "Uhlandstraße (Lietzenburger Straße/L1101)",
+            "t": "Württembergische Straße - Schlüterstraße (Olivaer Platz/L1101)",
+            "l": 233,
+            "v": "i|l_IsoipA@j@@j@@h@HR@X@T?D@^BnA@x@BtAFpD@j@"
+          },
+          {
+            "id": "516ad4a9376a8e8ee33543b222d12f28",
+            "p": {
+              "x": 13.32741,
+              "y": 52.4988709
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-03-23T06:00:00Z",
+            "ed": "2020-12-20T22:59:00Z",
+            "f": "Uhlandstraße (Kurfürstendamm/L1108)",
+            "t": "Joachimstaler Straße (Kurfürstendamm/L1108)",
+            "l": 160,
+            "v": "_km_I{qipAIm@I_@Iq@QmAKw@e@qD"
+          },
+          {
+            "id": "ca6e4564ac854950b1fe7b129615a57e",
+            "p": {
+              "x": 13.3252745,
+              "y": 52.5018266
+            },
+            "ic": 9,
+            "ty": 0,
+            "cs": 0,
+            "d": "roadworks",
+            "c": "new roadworks layout",
+            "sd": "2020-10-05T05:00:00Z",
+            "ed": "2021-03-05T22:59:00Z",
+            "f": "Uhlandstraße (Kantstraße/L1020)",
+            "t": "Joachimstaler Straße (Kantstraße/L1020)",
+            "l": 404,
+            "v": "{~m_I}tipA@_APiHB{@BoABaBDqBBsABgA@o@Bk@DwB@Y@g@@k@"
+          },
+          {
+            "id": "65f42e7682aec8a841d48db15c7b2ce0",
+            "p": {
+              "x": 13.3296674,
+              "y": 52.5009978
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-08-28T05:00:00Z",
+            "ed": "2021-01-15T22:59:00Z",
+            "f": "Lietzenburger Straße (Nürnberger Straße/L1008)",
+            "t": "Bundesallee (Spichernstraße/L1008)",
+            "l": 396,
+            "v": "}rl_IwjkpAb@r@h@x@n@bAf@z@n@jAb@v@jCfFP`@Rj@FDBBBBJNZ^TVPP"
+          },
+          {
+            "id": "4f79bfa0906c655c8e9c1b050829e59a",
+            "p": {
+              "x": 13.3407064,
+              "y": 52.4972892
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2021-09-30T21:59:00Z",
+            "f": "Lietzenburger Straße",
+            "t": "Lietzenburger Straße",
+            "l": 17,
+            "v": "iwl_ImqkpAIIOM"
+          },
+          {
+            "id": "8109aec3fc0261d134cb8b9cfc08b149",
+            "p": {
+              "x": 13.3410144,
+              "y": 52.4976207
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2021-09-30T21:59:00Z",
+            "f": "Lietzenburger Straße (Nürnberger Straße/L1133)",
+            "t": "Tauentzienstraße (Nürnberger Straße/L1133)",
+            "l": 481,
+            "v": "cxl_IerkpAOMUSQMOMECQGO@GGkBmBo@q@GGQQUWQSkAqA_BiBiAmAcAiA[]UWGUQS"
+          },
+          {
+            "id": "325cdb108917c77c724d284e21ea18a4",
+            "p": {
+              "x": 13.3336817,
+              "y": 52.5048021
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2021-09-30T21:59:00Z",
+            "f": "Tauentzienstraße (Nürnberger Straße/L1133)",
+            "t": "Lietzenburger Straße (Nürnberger Straße/L1133)",
+            "l": 484,
+            "v": "gom_IyhlpAPNP@TVZ\\bAhAhAlA~AhBjApAPRTVPPFFn@p@jBlBFFBNLNRTNPNNZX"
+          },
+          {
+            "id": "49d8a45c6ac96c6cc4ad0c8831b5ae1b",
+            "p": {
+              "x": 13.3382582,
+              "y": 52.4989198
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "left lane closed",
+            "c": "construction work",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2021-04-03T21:59:00Z",
+            "f": "Nürnberger Straße (Tauentzienstraße/L1108)",
+            "t": "Martin-Luther-Straße - An der Urania (Kleiststraße/L1108)",
+            "l": 332,
+            "v": "egm_Ic|lpAFODKNc@Ja@BQBS@SBU@e@Ak@?W@a@Bo@Fg@X}BVsBFc@VsBX{B"
+          }
+        ],
+        "l": 6645
+      },
+      {
+        "id": "CLUSTER_48739",
+        "p": {
+          "x": 13.3035039,
+          "y": 52.550763
+        },
+        "ic": 13,
+        "ty": 0,
+        "cbl": {
+          "x": 13.2972939,
+          "y": 52.5434339
+        },
+        "ctr": {
+          "x": 13.3097139,
+          "y": 52.5580909
+        },
+        "cs": 2,
+        "cpoi": [
+          {
+            "id": "d99eac71f32e4d0c230b72508fff562a",
+            "p": {
+              "x": 13.3014146,
+              "y": 52.540633
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-11-28T04:40:00Z",
+            "f": "Flughafen Tegel [11]",
+            "t": "Saatwinkler Damm",
+            "l": 456,
+            "v": "mku_IacdpASc@eA{@g@a@o@e@c@]]U[Q]K_@G]Cg@@SBUBa@LUJQL[R[RcCzAKFe@X"
+          },
+          {
+            "id": "cbca02ca9c56527932a433798546b442",
+            "p": {
+              "x": 13.315036,
+              "y": 52.5561813
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "left lane closed",
+            "sd": "2020-11-26T16:40:31Z",
+            "f": "Am Festplatz (Autobahnzubringer Hamburg/A111)",
+            "t": "Eichborndamm - Antonienstraße (Autobahnzubringer Hamburg/A111)",
+            "l": 1163,
+            "r": "E26 - A111",
+            "v": "agx_IupfpA[YY[_@[IGMKEEOMQMc@Y_@Sc@QYKe@Oc@M[ICAUEg@EOA[C_@Cu@?U@mAN{@LmAP[D]HiBV{@Jc@Fs@JKAIAKAWE}AAOAOCMAUAOASAMAMASCG?GAS?O@OBMDSHOJKHOTKPKTM`@I^ENERIb@]rBOx@QbAOt@GXIZKZMZSd@QZAB"
+          }
+        ],
+        "l": 1619
+      },
+      {
+        "id": "CLUSTER_48754",
+        "p": {
+          "x": 13.3316125,
+          "y": 52.5217606
+        },
+        "ic": 13,
+        "ty": 0,
+        "cbl": {
+          "x": 13.3156764,
+          "y": 52.5122036
+        },
+        "ctr": {
+          "x": 13.3571192,
+          "y": 52.5267358
+        },
+        "cs": 11,
+        "cpoi": [
+          {
+            "id": "d91e34ad68df20c6b2926ada55b46b4d",
+            "p": {
+              "x": 13.3096264,
+              "y": 52.5259692
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to two lanes",
+            "c": "roadworks",
+            "sd": "2020-08-25T06:00:00Z",
+            "ed": "2020-12-18T22:59:00Z",
+            "f": "Klarenbachstraße",
+            "t": "Kaiserin-Augusta-Allee",
+            "l": 107,
+            "v": "ccr_I_vgpAzD_A"
+          },
+          {
+            "id": "f7275d84073db65693db1f390545474b",
+            "p": {
+              "x": 13.3220496,
+              "y": 52.5265583
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to two lanes",
+            "c": "roadworks",
+            "sd": "2020-08-25T06:00:00Z",
+            "ed": "2020-12-18T22:59:00Z",
+            "f": "Kaiserin-Augusta-Allee",
+            "t": "Klarenbachstraße",
+            "l": 107,
+            "v": "e}q_I_xgpA{D~@"
+          },
+          {
+            "id": "a3619a73f646fddec1ee4c8543f7aae2",
+            "p": {
+              "x": 13.3181826,
+              "y": 52.5295775
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to two lanes",
+            "c": "roadworks",
+            "sd": "2020-08-25T06:00:00Z",
+            "ed": "2020-12-18T22:59:00Z",
+            "f": "Wiebestraße (Kaiserin-Augusta-Allee/L1158)",
+            "t": "Neues Ufer (Kaiserin-Augusta-Brücke/L1158)",
+            "l": 156,
+            "v": "k}q_IkfhpADjM"
+          },
+          {
+            "id": "91d0a4679e74a5d35db339a0056df18e",
+            "p": {
+              "x": 13.3224088,
+              "y": 52.5218257
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-11-23T07:00:00Z",
+            "ed": "2020-12-20T22:59:00Z",
+            "f": "Helmholtzstraße (Franklinstraße/L1079)",
+            "t": "Marchstraße (Ernst-Reuter-Platz/L1079)",
+            "l": 1121,
+            "v": "mgq_IkfjpA`@GHAF?J?NHRNdBlAz@j@t@h@VPVPr@h@jAz@tB|Aj@`@hAx@~@p@r@h@n@f@p@f@NPHJ`@d@RVV\\FFNP\\VnA`AHHrAdAx@n@p@j@b@\\zAhAd@VHBPB^VHA^CXCTALAP?H@RDTHl@`@"
+          },
+          {
+            "id": "dfecb479017c2f59e24ce191dd38c002",
+            "p": {
+              "x": 13.3360092,
+              "y": 52.5240709
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2021-11-01T22:59:00Z",
+            "f": "Gotzkowskystraße (Alt- Moabit/L1155)",
+            "t": "Kaiserin-Augusta-Allee - Alt-Moabit (Beusselstraße/L1155)",
+            "l": 23,
+            "v": "kpq_IqnjpAS@@N?P"
+          },
+          {
+            "id": "8b569fe19e13ebebcb73aeae9903319e",
+            "p": {
+              "x": 13.3310523,
+              "y": 52.5200524
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2021-11-01T22:59:00Z",
+            "f": "Alt-Moabit (Gotzkowskystraße/L1079)",
+            "t": "Stromstraße (Alt- Moabit/L1079)",
+            "l": 446,
+            "v": "kpq_IqnjpAEi@Iy@C[_@wDI}@CWS{BI}@QsAa@qDSkBIy@CQCUE]AKGc@MaAAEM{@"
+          },
+          {
+            "id": "832a537caa65fcaeb84aade8d39f91f6",
+            "p": {
+              "x": 13.3244284,
+              "y": 52.5119021
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2020-02-24T08:12:00Z",
+            "ed": "2021-02-26T22:59:00Z",
+            "f": "Straße des 17. Juni (B2)",
+            "t": "Hardenbergstraße",
+            "l": 160,
+            "v": "wmo_IkqjpARIHCLE^QPIDELKDEHO@CBGJU@EDKL_@BCB?B@JDDBFBd@V"
+          },
+          {
+            "id": "896de538f159660ef96e2f095c9a4e45",
+            "p": {
+              "x": 13.336477,
+              "y": 52.5141565
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2020-02-24T08:41:30Z",
+            "ed": "2021-02-26T22:59:00Z",
+            "f": "Fasanenstraße",
+            "t": "Straße des 17. Juni (B2) / Einsteinufer",
+            "l": 133,
+            "v": "gho_I_wjpACBM^EJADKTCFABINEDMJEDQH_@PMDIBSHYH"
+          },
+          {
+            "id": "b134416d3dd342d8a9861dc50306d18a",
+            "p": {
+              "x": 13.3339502,
+              "y": 52.5285733
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2021-11-01T22:59:00Z",
+            "f": "Stromstraße (Alt- Moabit/L1079)",
+            "t": "Alt-Moabit (Gotzkowskystraße/L1079)",
+            "l": 458,
+            "v": "yxq_IwvkpAF^PbARpADRP~@N`BLjAh@`F`@nDFh@D^LnAHv@ZpCFt@@^"
+          },
+          {
+            "id": "eb1cd8485b947b903bc8f01be67f15f7",
+            "p": {
+              "x": 13.3605838,
+              "y": 52.516141
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-11-25T06:00:00Z",
+            "ed": "2021-03-20T22:59:00Z",
+            "f": "John-Foster-Dulles-Allee - Paulstraße (Spreeweg/L1008)",
+            "t": "Alt-Moabit (Paulstraße/L1008)",
+            "l": 739,
+            "v": "agp_IkiopAUIKESGg@KGAk@O[Gg@KyCw@MSc@Ii@KWEC?KDICy@SuD{@cDy@kEgASGu@SOYc@Uk@U"
+          },
+          {
+            "id": "5fb4a756d25e547c8f64282336b291ac",
+            "p": {
+              "x": 13.3581378,
+              "y": 52.5274308
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-11-25T06:00:00Z",
+            "ed": "2021-03-20T22:59:00Z",
+            "f": "Alt-Moabit (Paulstraße/L1008)",
+            "t": "John-Foster-Dulles-Allee - Paulstraße (Spreeweg/L1008)",
+            "l": 772,
+            "v": "gpq_I_yopAEp@`@LlAZREt@RRFjEfAbDx@tDz@x@RHBHNHBRDB@b@Hb@HPGxCv@f@JZFj@NF@f@JRFJDTH"
+          }
+        ],
+        "l": 4222
+      },
+      {
+        "id": "CLUSTER_48768",
+        "p": {
+          "x": 13.3680207,
+          "y": 52.4928835
+        },
+        "ic": 13,
+        "ty": 0,
+        "cbl": {
+          "x": 13.3426004,
+          "y": 52.4771512
+        },
+        "ctr": {
+          "x": 13.3909191,
+          "y": 52.5075192
+        },
+        "cs": 26,
+        "cpoi": [
+          {
+            "id": "2cbe0e33e6c0488f2f6454e437b26e36",
+            "p": {
+              "x": 13.3476662,
+              "y": 52.4888243
+            },
+            "ic": 6,
+            "ty": 3,
+            "cs": 0,
+            "d": "stationary traffic",
+            "sd": "2020-11-28T08:35:00Z",
+            "ed": "2020-11-28T09:13:35Z",
+            "f": "Wartburgstraße",
+            "t": "Grunewaldstraße / Bayerischer Platz",
+            "l": 236,
+            "dl": 213,
+            "v": "uhj_Ig~lpAoCbD[\\{BbCo@~@AF"
+          },
+          {
+            "id": "8f93e43f68e5b250b26fb98eea786645",
+            "p": {
+              "x": 13.3483868,
+              "y": 52.5047707
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "left lane closed",
+            "c": "construction work",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2021-04-03T21:59:00Z",
+            "f": "Martin-Luther-Straße - An der Urania (Kleiststraße/L1108)",
+            "t": "Nürnberger Straße (Tauentzienstraße/L1108)",
+            "l": 289,
+            "v": "qcm_I_vmpAY~Be@~DO`AMv@K`@K^Yt@IXETETE\\Ed@GvA"
+          },
+          {
+            "id": "a4f02e06e7d2094acd099d30851e9468",
+            "p": {
+              "x": 13.3583271,
+              "y": 52.5067992
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to two lanes",
+            "c": "roadworks",
+            "sd": "2020-11-24T11:18:55Z",
+            "f": "Von der Heydt Straße - Klingelhöferstraße (Herkulesbrücke/L1008)",
+            "t": "Tiergartenstraße - Stülerstraße (Klingelhöferstraße/L1008)",
+            "l": 20,
+            "v": "ycn_IeznpAc@D"
+          },
+          {
+            "id": "3bb36a098a13c596f3f9f60b5d429ef4",
+            "p": {
+              "x": 13.3544534,
+              "y": 52.4954317
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-09-30T05:00:00Z",
+            "ed": "2020-12-22T22:59:00Z",
+            "f": "Nollendorfplatz - Kleiststraße (Einemstraße/L1000)",
+            "t": "Kulmer Straße (Goebenstraße/L1000)",
+            "l": 783,
+            "v": "}vl_IcgopA?[Be@Bo@Dc@Hs@D]J{@DYj@}Ex@aHl@{EFe@x@iGBOFc@NiAJw@ToBPcB\\_DTwBFa@Ho@Fa@FWHW"
+          },
+          {
+            "id": "c5394b184cc7779c90d8e9d174e3b231",
+            "p": {
+              "x": 13.3613771,
+              "y": 52.4950771
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-11-20T13:08:32Z",
+            "f": "Pallasstraße",
+            "t": "Maaßenstraße / Winterfeldtstraße",
+            "l": 278,
+            "v": "szk_IemopAs@H_@FaBVsCb@YD}@Nc@FUDIBID"
+          },
+          {
+            "id": "c2262f429fdc6ad9e4c8e641c8fdaf51",
+            "p": {
+              "x": 13.359891,
+              "y": 52.490536
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2019-03-11T07:00:00Z",
+            "ed": "2020-12-18T22:59:00Z",
+            "f": "Potsdamer Straße (Goebenstraße/L1200)",
+            "t": "Kulmer Straße (Goebenstraße/L1200)",
+            "l": 308,
+            "v": "}wk_IoqppADo@Di@`@wE\\sDRuBNeBPwBDs@"
+          },
+          {
+            "id": "6d0ac0984fdf0d7b85d2d1db5ea3e6d7",
+            "p": {
+              "x": 13.3539836,
+              "y": 52.4772593
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-08-03T12:45:24Z",
+            "f": "Sachsendamm (B1)",
+            "t": "Sachsendamm / Vorarlberger Damm",
+            "l": 192,
+            "v": "emh_I_lppAxABrDFT@J@JFVV"
+          },
+          {
+            "id": "317b15b850870c220fd891205be3038e",
+            "p": {
+              "x": 13.3560953,
+              "y": 52.4989247
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-09-30T05:00:00Z",
+            "ed": "2020-12-22T22:59:00Z",
+            "f": "Schöneberger Ufer - Potsdamer Brücke (Potsdamer Straße/B1)",
+            "t": "Bülowstraße (Potsdamer Straße/B1)",
+            "l": 29,
+            "r": "B1",
+            "v": "eol_I{wppAZJTH"
+          },
+          {
+            "id": "052e5ccde858c368b2b21efed28b7260",
+            "p": {
+              "x": 13.3680203,
+              "y": 52.4969468
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-11-11T07:00:00Z",
+            "ed": "2020-12-18T22:59:00Z",
+            "f": "Bülowstraße (Potsdamer Straße/B1)",
+            "t": "Eichhornstraße - Ben-Gurion-Straße (Potsdamer Straße/B1)",
+            "l": 1453,
+            "r": "B1",
+            "v": "eol_I{wppAyAi@WIGA[KWIYIUIGAOE}@WWIKCOEOEIEKEKIg@_@o@g@YWo@s@sAiAgA}@qD{Cq@i@WUq@m@q@m@a@]YS_@YWk@}@eAgAmAw@y@USYW_@[KIIGIGKIKGUOc@YWKMG_@SSK_@OWMs@]kAi@UKcAc@c@Sk@YOIMGOIQMIMEGEGGMGMEOKWO_@ISO]KWAGI[Ee@CcACw@?I?E?K"
+          },
+          {
+            "id": "ecd3e605076eefa7bc6d11410da99f5e",
+            "p": {
+              "x": 13.3673234,
+              "y": 52.5008718
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-09-30T05:00:00Z",
+            "ed": "2020-12-22T22:59:00Z",
+            "f": "Kulmer Straße (Goebenstraße/L1000)",
+            "t": "Nollendorfplatz - Kleiststraße (Einemstraße/L1000)",
+            "l": 756,
+            "v": "akl_I{lqpAUjBIt@CTYxBSbBKbAIz@YfCK|@KfAa@`Da@~CIl@gBjNq@jFCRMx@ETId@CHCJQj@"
+          },
+          {
+            "id": "7880144dfe9fca712e34acc2b034c6e9",
+            "p": {
+              "x": 13.3634907,
+              "y": 52.4899835
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2019-03-11T07:00:00Z",
+            "ed": "2020-12-18T22:59:00Z",
+            "f": "Potsdamer Straße (Goebenstraße/L1200)",
+            "t": "Kulmer Straße (Goebenstraße/L1200)",
+            "l": 58,
+            "v": "usk_IamqpALeAN}A"
+          },
+          {
+            "id": "4b0faf660da16aa261ce23006d737b1f",
+            "p": {
+              "x": 13.3656056,
+              "y": 52.5039531
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2020-10-07T22:00:00Z",
+            "ed": "2021-03-31T21:59:59Z",
+            "f": "Matthäikirchplatz",
+            "t": "Potsdamer Straße (B1)",
+            "l": 92,
+            "v": "_kn_IizqpAZiCXuB"
+          },
+          {
+            "id": "0c37968ef9bb96c5ae9e6b24c3c70d76",
+            "p": {
+              "x": 13.362385,
+              "y": 52.4762166
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "construction work",
+            "sd": "2020-11-02T07:00:00Z",
+            "ed": "2020-11-30T22:59:00Z",
+            "f": "Loewenhardtdamm",
+            "t": "Tempelhof",
+            "l": 117,
+            "v": "qsh_I{zqpAVWJGHEJAPBj@NlAf@"
+          },
+          {
+            "id": "1377dcea215cdd2541fc2c89100f4984",
+            "p": {
+              "x": 13.3707833,
+              "y": 52.5109465
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2020-10-07T22:00:00Z",
+            "ed": "2021-03-31T21:59:59Z",
+            "f": "Potsdamer Straße (B1)",
+            "t": "Matthäikirchplatz",
+            "l": 133,
+            "v": "_jn_IubrpAq@bGWrB"
+          },
+          {
+            "id": "8c30084804c779303da3aa85f9cd03a6",
+            "p": {
+              "x": 13.3753381,
+              "y": 52.4775251
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "construction work",
+            "sd": "2020-11-02T07:00:00Z",
+            "ed": "2020-11-30T22:59:00Z",
+            "f": "Tempelhof",
+            "t": "Tempelhof",
+            "l": 117,
+            "v": "cvh_IyerpAEACAE?Q?E?a@?gCA"
+          },
+          {
+            "id": "578b31410e6e3ceb18b368b7c979e639",
+            "p": {
+              "x": 13.369878,
+              "y": 52.4833831
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "construction work",
+            "sd": "2020-11-02T07:00:00Z",
+            "ed": "2020-11-30T22:59:00Z",
+            "f": "Tempelhof",
+            "t": "A100 / Reichartstraße",
+            "l": 59,
+            "v": "u|h_I}erpACrAKtA"
+          },
+          {
+            "id": "ebdb6cd05536aac81272109a660dd055",
+            "p": {
+              "x": 13.3632468,
+              "y": 52.4796477
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "construction work",
+            "sd": "2020-11-02T07:00:00Z",
+            "ed": "2020-11-30T22:59:00Z",
+            "f": "Tempelhof",
+            "t": "Tempelhof",
+            "l": 226,
+            "v": "u|h_I}erpAfC@`@?D?P?D?B@B@@@@B@DDv@HpCFfB"
+          },
+          {
+            "id": "9296391cadab0e019f824414162763ea",
+            "p": {
+              "x": 13.3787677,
+              "y": 52.4858031
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "construction work",
+            "sd": "2020-02-18T04:00:00Z",
+            "ed": "2021-12-31T22:59:00Z",
+            "f": "Monumentenstraße",
+            "t": "Katzbachstraße",
+            "l": 169,
+            "v": "epj_I_`spAMMOOMMSQsB_BSQUSSQWY"
+          },
+          {
+            "id": "33ce2e493a740f3040dcc3443e9430fc",
+            "p": {
+              "x": 13.3748236,
+              "y": 52.4930924
+            },
+            "ic": 6,
+            "ty": 3,
+            "cs": 0,
+            "d": "stationary traffic",
+            "sd": "2020-11-28T08:44:00Z",
+            "ed": "2020-11-28T09:13:35Z",
+            "f": "Katzbachstraße",
+            "t": "Monumentenstraße",
+            "l": 211,
+            "dl": 123,
+            "v": "kyj_I}jspA@h@BXDNBFJPVXRPTRRPrB~ARPLLNNLL"
+          },
+          {
+            "id": "815c50bca2df42d1ab79aa1b40d7d9a5",
+            "p": {
+              "x": 13.3713017,
+              "y": 52.4992787
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2021-03-01T22:59:00Z",
+            "f": "Schöneberger Straße (Reichpietschufer/B96)",
+            "t": "Hallesches Ufer - Wilhelmstraße (Mehringbrücke/B96)",
+            "l": 234,
+            "r": "B96",
+            "v": "_fm_I_pspARWZ_@Z[RO`@YJG`@Up@_@TMRMPKNKRMNKJIZ["
+          },
+          {
+            "id": "4906b70f13914cc5b8ddf0ac3685f1ec",
+            "p": {
+              "x": 13.3705944,
+              "y": 52.5068147
+            },
+            "ic": 6,
+            "ty": 3,
+            "cs": 0,
+            "d": "stationary traffic",
+            "sd": "2020-11-28T08:52:00Z",
+            "ed": "2020-11-28T09:26:35Z",
+            "f": "Stresemannstraße",
+            "t": "Hallesches Ufer (B96) / Reichpietschufer (B96)",
+            "l": 301,
+            "dl": 431,
+            "v": "w~m_IsqspA|At@lE|B\\P`Ad@`Ad@l@T"
+          },
+          {
+            "id": "f1b1d86128a5ccb465a03491f2b4e7b0",
+            "p": {
+              "x": 13.3824628,
+              "y": 52.499805
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "work on buried services",
+            "sd": "2020-09-15T04:04:00Z",
+            "ed": "2020-12-05T22:59:00Z",
+            "f": "Hallesches Ufer (B96)",
+            "t": "Stresemannstraße / Anhalter Straße",
+            "l": 329,
+            "v": "qlm_Ic~spAYq@k@sAs@mBW{@eAuCGOgAuCSo@Ys@Ui@"
+          },
+          {
+            "id": "1fa021667bdcdcf4d958c5af01eb6e1d",
+            "p": {
+              "x": 13.3796994,
+              "y": 52.4874708
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "narrow lanes",
+            "c": "water main work",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2020-12-07T22:59:00Z",
+            "f": "Gneisenaustraße - Yorckstraße (Mehringdamm/B96)",
+            "t": "Platz der Luftbrücke - Dudenstraße (Mehringdamm/B96)",
+            "l": 276,
+            "r": "B96",
+            "v": "emj_IwlupAtA@rCFv@@l@@Z@p@@v@AJ?LA"
+          },
+          {
+            "id": "8b1f071aff94dcb78ea13c171de099c0",
+            "p": {
+              "x": 13.3922322,
+              "y": 52.4851096
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "narrow lanes",
+            "c": "water main work",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2020-12-07T22:59:00Z",
+            "f": "Platz der Luftbrücke - Dudenstraße (Mehringdamm/B96)",
+            "t": "Gneisenaustraße - Yorckstraße (Mehringdamm/B96)",
+            "l": 261,
+            "r": "B96",
+            "v": "o~i_IymupAcA@kABc@?y@AsBAqBE"
+          },
+          {
+            "id": "ec863c92778048dd8d08c54d8cbea202",
+            "p": {
+              "x": 13.3862228,
+              "y": 52.4821665
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2020-09-16T09:24:51Z",
+            "f": "Mehringdamm (B96)",
+            "t": "Friesenstraße",
+            "l": 541,
+            "v": "adj_IipupAJ{O@uA?mC@}B?QBuDCuN"
+          },
+          {
+            "id": "bdd4479447b0562dce337f123bad16bd",
+            "p": {
+              "x": 13.3969876,
+              "y": 52.4917302
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2020-10-16T08:18:10Z",
+            "ed": "2021-06-30T21:59:00Z",
+            "f": "Gneisenaustraße",
+            "t": "Mehringdamm (B96) / Baruther Straße",
+            "l": 38,
+            "v": "wlk_IglvpAcAU"
+          }
+        ],
+        "l": 7506
+      },
+      {
+        "id": "CLUSTER_48769",
+        "p": {
+          "x": 13.3726084,
+          "y": 52.5459628
+        },
+        "ic": 13,
+        "ty": 0,
+        "cbl": {
+          "x": 13.3477382,
+          "y": 52.5237894
+        },
+        "ctr": {
+          "x": 13.387577,
+          "y": 52.5720383
+        },
+        "cs": 29,
+        "cpoi": [
+          {
+            "id": "269e466149635066276cf7762a59a0f7",
+            "p": {
+              "x": 13.3783716,
+              "y": 52.5683568
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2020-11-14T14:48:00Z",
+            "ed": "2021-01-07T22:59:00Z",
+            "f": "Sommerstraße",
+            "t": "Reinickendorf",
+            "l": 117,
+            "v": "g~z_IevspAi@sI"
+          },
+          {
+            "id": "39c44ba7fa8d54d82dc51354bed92067",
+            "p": {
+              "x": 13.3731298,
+              "y": 52.5598943
+            },
+            "ic": 6,
+            "ty": 2,
+            "cs": 0,
+            "d": "queuing traffic",
+            "sd": "2020-11-28T08:27:00Z",
+            "ed": "2020-11-28T09:13:35Z",
+            "f": "Soldiner Straße",
+            "t": "Osloer Straße",
+            "l": 242,
+            "dl": 176,
+            "v": "ejx_IgatpAHDZNnJhF"
+          },
+          {
+            "id": "b29eb7227219f31a1b3da95a06c17c9c",
+            "p": {
+              "x": 13.3883152,
+              "y": 52.5576278
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2020-11-26T01:55:35Z",
+            "ed": "2020-12-03T22:59:00Z",
+            "f": "Soldiner Straße",
+            "t": "Zechliner Straße",
+            "l": 147,
+            "v": "kpx_I}ztpAg@g@{@}@e@g@]_@e@g@SS"
+          },
+          {
+            "id": "17e896784eb5dcda9049afe457e45541",
+            "p": {
+              "x": 13.3879208,
+              "y": 52.5487015
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-08-25T18:26:30Z",
+            "f": "Badstraße",
+            "t": "Osloer Straße",
+            "l": 290,
+            "v": "c}v_Im~tpAMWW_@mGeJw@gAg@u@"
+          },
+          {
+            "id": "6363e13058718baafea0156f0433c0d4",
+            "p": {
+              "x": 13.3649338,
+              "y": 52.531379
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-10-28T06:00:00Z",
+            "ed": "2021-01-31T22:59:00Z",
+            "f": "Minna-Cauer-Straße (Heidestraße/L1060)",
+            "t": "Invalidenstraße - Tunnel-Tiergarten-Spreebogen (Minna-Cauer-Straße/L1060)",
+            "l": 428,
+            "v": "ukr_I{|qpADPBFDHLLRJRHZHXB~@Hh@Db@Bt@FH@Z@F?FAJGLINKJG\\SLIHEHALAX?b@?l@?B?P?T?XAF?FAHAHAB?HCHC"
+          },
+          {
+            "id": "0c85864d2fb36b52e7c7a8b2a215dd51",
+            "p": {
+              "x": 13.3662687,
+              "y": 52.5321585
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-10-28T06:00:00Z",
+            "ed": "2021-01-31T22:59:00Z",
+            "f": "Heidestraße (Minna-Cauer-Straße/B96)",
+            "t": "Invalidenstraße - Minna-Cauer-Straße (Tunnel-Tiergarten-Spreebogen/B96)",
+            "l": 623,
+            "r": "B96",
+            "v": "_qr_IofrpA^pALb@FTFPHRHPJRHNTZ@@LN^^HHB@B@DBXNXLVDTDRBd@BfADfAHlAHR@B?f@KHC`@IVCXARAh@?T?j@AD?JANCDAFAHCZMRORMDEDGDI@I?C"
+          },
+          {
+            "id": "74cc284094a26d7c860ada96003962a9",
+            "p": {
+              "x": 13.3524063,
+              "y": 52.5485944
+            },
+            "ic": 6,
+            "ty": 3,
+            "cs": 0,
+            "d": "stationary traffic",
+            "sd": "2020-11-28T08:40:30Z",
+            "ed": "2020-11-28T09:13:35Z",
+            "f": "Cornelius-Fredericks-Straße",
+            "t": "Müllerstraße",
+            "l": 142,
+            "dl": 225,
+            "v": "c{v_Ik~mpAcDiF]e@"
+          },
+          {
+            "id": "38152d6455fe85c8aa4bf092743b9aaf",
+            "p": {
+              "x": 13.3549764,
+              "y": 52.5368662
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2020-11-26T07:04:51Z",
+            "ed": "2020-12-03T22:59:00Z",
+            "f": "Lynarstraße / Tegeler Straße",
+            "t": "Fennstraße / Tegeler Straße",
+            "l": 43,
+            "v": "irt_IahppAR_@Ve@JO"
+          },
+          {
+            "id": "2beec0a66b0e894035406e5e1dc19a43",
+            "p": {
+              "x": 13.3593451,
+              "y": 52.5582081
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "burst water main. Danger",
+            "sd": "2020-11-23T13:08:19Z",
+            "ed": "2020-11-30T22:59:00Z",
+            "f": "Aroser Allee (Holländerstraße/L1151)",
+            "t": "Markstraße - Franz-Neumann-Platz (Holländerstraße/L1151)",
+            "l": 324,
+            "v": "e_y_IijppAJkFAMCYQkAO}@]wB_AmGYkB"
+          },
+          {
+            "id": "7002188b38750bd3e7d65a378eab248b",
+            "p": {
+              "x": 13.3646275,
+              "y": 52.541586
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2020-11-26T07:04:51Z",
+            "ed": "2020-12-03T22:59:00Z",
+            "f": "Fennstraße / Tegeler Straße",
+            "t": "Lynarstraße / Tegeler Straße",
+            "l": 43,
+            "v": "opt_IwjppAKNWd@S^"
+          },
+          {
+            "id": "b2489768d345f3e7f461d23a4519beed",
+            "p": {
+              "x": 13.3672344,
+              "y": 52.5402694
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2019-10-16T12:26:15Z",
+            "ed": "2020-12-17T23:00:00Z",
+            "f": "Willdenowstraße",
+            "t": "Müllerstraße",
+            "l": 123,
+            "v": "qgu_Iw{ppAaDuF"
+          },
+          {
+            "id": "316ac2c700b96d9ca8b05df92697864a",
+            "p": {
+              "x": 13.3593449,
+              "y": 52.5461598
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2019-10-16T12:26:15Z",
+            "ed": "2020-12-17T23:00:00Z",
+            "f": "Müllerstraße",
+            "t": "Willdenowstraße",
+            "l": 123,
+            "v": "slu_IkcqpA`DtF"
+          },
+          {
+            "id": "8189457a3c54af846f17d02b3b87f28b",
+            "p": {
+              "x": 13.3621837,
+              "y": 52.5661765
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "burst water main. Danger",
+            "sd": "2020-11-23T13:08:19Z",
+            "ed": "2020-11-30T22:59:00Z",
+            "f": "Markstraße - Franz-Neumann-Platz (Holländerstraße/L1151)",
+            "t": "Aroser Allee (Holländerstraße/L1151)",
+            "l": 513,
+            "v": "wcy_IufqpAXjB~@lG\\vBN|@PjABX@LKjFE`BGlCQzH"
+          },
+          {
+            "id": "e85cca658f45d771d84621d7600231ef",
+            "p": {
+              "x": 13.3715347,
+              "y": 52.5486697
+            },
+            "ic": 9,
+            "ty": 0,
+            "cs": 0,
+            "d": "new roadworks layout",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2021-03-31T21:59:00Z",
+            "f": "Leopoldplatz - Müllerstraße (Luxemburger Straße/L1071)",
+            "t": "Reinickendorfer Straße (Schulstraße/L1071)",
+            "l": 36,
+            "v": "_|v_IqvqpAo@gA"
+          },
+          {
+            "id": "e7c7fabac0fd9d02e9b17a692b2b6f80",
+            "p": {
+              "x": 13.3625941,
+              "y": 52.5540512
+            },
+            "ic": 9,
+            "ty": 0,
+            "cs": 0,
+            "d": "new roadworks layout",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2021-03-31T21:59:00Z",
+            "f": "Reinickendorfer Straße (Schulstraße/L1071)",
+            "t": "Leopoldplatz - Müllerstraße (Luxemburger Straße/L1071)",
+            "l": 803,
+            "v": "k~v_IgxqpAXd@R\\|BdEdAlBj@dAbAjB\\n@~AzC|@`BP\\t@vA|@bBh@`ArBtD`@t@r@nAlA|BR`@R^@@"
+          },
+          {
+            "id": "a9b8e01295e51ad4f92e4b0a5f6e5a3d",
+            "p": {
+              "x": 13.3680333,
+              "y": 52.5430669
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-11-27T14:46:45Z",
+            "f": "Reinickendorfer Straße (B96)",
+            "t": "Kösliner Straße",
+            "l": 45,
+            "v": "c`v_ImerpAPcC"
+          },
+          {
+            "id": "fff7344297f158694aeeba3bdb8e9297",
+            "p": {
+              "x": 13.3713281,
+              "y": 52.5503225
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-11-27T10:17:30Z",
+            "f": "Kösliner Straße",
+            "t": "Reinickendorfer Straße (B96)",
+            "l": 45,
+            "v": "q_v_IqirpAQbC"
+          },
+          {
+            "id": "be3615ab838710047a5c94a29c2d383e",
+            "p": {
+              "x": 13.3763737,
+              "y": 52.543865
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-10-21T05:00:00Z",
+            "ed": "2020-12-23T22:59:00Z",
+            "f": "Pankstraße - Reinickendorfer Straße (Reinickendorfer Straße/B96)",
+            "t": "Schulstraße - Nauener Platz (Reinickendorfer Straße/B96)",
+            "l": 800,
+            "r": "B96",
+            "v": "_vu_I}lrpAYOAJCVCRE\\Gf@CPENCHEJEHGLGFKFGDE@G@I@S@a@BY@o@By@DmCLkBHO@O@S@[BK@M@ODSJ}@d@gAh@gAh@cAd@SH{@^w@^yAp@i@V[NKFMF"
+          },
+          {
+            "id": "f7008c696b138f83b9b735facaf8992b",
+            "p": {
+              "x": 13.3742003,
+              "y": 52.5236563
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-06-25T10:00:00Z",
+            "ed": "2020-12-20T22:59:00Z",
+            "f": "Friedrich-List-Ufer (Invalidenstraße/L1008)",
+            "t": "Chausseestraße (Invalidenstraße/L1008)",
+            "l": 956,
+            "v": "_cr_IimrpAWy@Ok@WqAa@oB_@gBCMIa@CMOw@SaAIYGWESGWEQEQCKCKMm@u@eD_@kBEUCKEQWoAS_A_@gBI_@AEG]Ki@I_@I_@EUEWCOQcAGUEOACMIKc@[mAOu@Ow@G[Os@I_@[cB@QIa@EWCYG_@UiAKk@WsAE["
+          },
+          {
+            "id": "474a37da94e300b0c9cadd2115981d2d",
+            "p": {
+              "x": 13.376778,
+              "y": 52.5319299
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-11-09T09:07:23Z",
+            "f": "Scharnhorststraße",
+            "t": "Chausseestraße / Wöhlertstraße",
+            "l": 208,
+            "v": "qws_Is_spAmBgHcA}DCKG]"
+          },
+          {
+            "id": "2864ab2dfe62616ff23c236f60b897bc",
+            "p": {
+              "x": 13.3768796,
+              "y": 52.5237298
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2020-10-28T14:16:19Z",
+            "ed": "2022-12-30T22:59:00Z",
+            "f": "Rahel-Hirsch-Straße",
+            "t": "Invalidenstraße",
+            "l": 46,
+            "v": "upq_I{mrpAqAA"
+          },
+          {
+            "id": "3dfd4f03057ffb5ab08a624d714e5e12",
+            "p": {
+              "x": 13.3737282,
+              "y": 52.5395386
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-11-09T09:07:23Z",
+            "f": "Chausseestraße / Wöhlertstraße",
+            "t": "Scharnhorststraße",
+            "l": 208,
+            "v": "q}s_IcpspAF\\BJbA|DlBfH"
+          },
+          {
+            "id": "985bcbe010b94e12033a9e1743c5a356",
+            "p": {
+              "x": 13.3831801,
+              "y": 52.5569607
+            },
+            "ic": 9,
+            "ty": 0,
+            "cs": 0,
+            "d": "roadworks",
+            "sd": "2020-11-27T20:03:30Z",
+            "f": "Badstraße - Schwedenstraße (Koloniestraße/L1045)",
+            "t": "Osloer Straße - Drontheimer Straße (Koloniestraße/L1045)",
+            "l": 34,
+            "v": "{{w_I{uspAWDc@D"
+          },
+          {
+            "id": "312c0b663a09b9d882f7e037af161139",
+            "p": {
+              "x": 13.3851938,
+              "y": 52.535073
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "construction work",
+            "sd": "2020-11-02T07:00:00Z",
+            "ed": "2021-07-16T21:59:00Z",
+            "f": "Zinnowitzer Straße (Chausseestraße/L1044)",
+            "t": "Sellerstraße - Schulzendorfer Straße (Müllerstraße/L1044)",
+            "l": 627,
+            "v": "gis_ImitpAWZ{@hAoE`GmAbBi@r@sAhBqBhCMPILMRqBpCSZSZYd@QZGJMXOZ"
+          },
+          {
+            "id": "950c19eef4f4a62040182025de7f8551",
+            "p": {
+              "x": 13.3815099,
+              "y": 52.5557767
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-08-26T01:43:00Z",
+            "f": "Osloer Straße",
+            "t": "Badstraße",
+            "l": 290,
+            "v": "wiw_IkoupAf@t@v@fAlGdJV^LV"
+          },
+          {
+            "id": "bcb609c7e39d7c125b2f60c065f328a7",
+            "p": {
+              "x": 13.3908161,
+              "y": 52.5523126
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-08-25T05:00:00Z",
+            "ed": "2021-08-27T21:59:00Z",
+            "f": "Böttgerstraße - Behmstraße (Badstraße/L1071)",
+            "t": "Pankstraße - Prinzenallee (Badstraße/L1071)",
+            "l": 469,
+            "v": "{qv_IaqupAQ\\KTGJINEHOXWh@_@r@a@v@aAhB_AjBgArB[h@[p@O`@Ob@Up@Qj@y@pCMf@"
+          },
+          {
+            "id": "c20446542019a0413352c8d99346940e",
+            "p": {
+              "x": 13.3917743,
+              "y": 52.5500187
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-02-04T10:59:50Z",
+            "ed": "2021-06-30T15:00:00Z",
+            "f": "Badstraße",
+            "t": "Bornholmer Straße / Osloer Straße",
+            "l": 45,
+            "v": "kcw_IqsupA[c@OYM["
+          },
+          {
+            "id": "e28a94b4cada99a2841fdb6519146e13",
+            "p": {
+              "x": 13.3835454,
+              "y": 52.5555972
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-02-04T10:59:50Z",
+            "ed": "2021-06-30T15:00:00Z",
+            "f": "Bornholmer Straße / Osloer Straße",
+            "t": "Badstraße",
+            "l": 45,
+            "v": "eew_ImvupALZNXZb@"
+          },
+          {
+            "id": "cce6869da920912f6191d2a616f58125",
+            "p": {
+              "x": 13.3829483,
+              "y": 52.5309037
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "narrow lanes",
+            "c": "construction work",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2021-02-28T22:59:00Z",
+            "f": "Julie-Wolfthorn-Straße / Bernauer Straße",
+            "t": "Invalidenstraße",
+            "l": 234,
+            "v": "uls_IkwupA\\i@PU`@k@r@cAzCmEd@o@"
+          }
+        ],
+        "l": 8049
+      },
+      {
+        "id": "CLUSTER_48777",
+        "p": {
+          "x": 13.3826069,
+          "y": 52.4656681
+        },
+        "ic": 13,
+        "ty": 0,
+        "cbl": {
+          "x": 13.3745992,
+          "y": 52.459179
+        },
+        "ctr": {
+          "x": 13.389401,
+          "y": 52.4683643
+        },
+        "cs": 6,
+        "cpoi": [
+          {
+            "id": "605b43ab53ff19d7c19d9d720c217761",
+            "p": {
+              "x": 13.370386,
+              "y": 52.46561
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2021-01-20T22:59:00Z",
+            "f": "Alboinstraße (Schöneberger Straße/L1096)",
+            "t": "Berlinickeplatz - Manteuffelstraße (Schöneberger Straße/L1096)",
+            "l": 332,
+            "v": "gvf_IgfspArEsJd@aAn@oAdAyBZm@LY"
+          },
+          {
+            "id": "1156b09726e85504d59a95d3d82014d9",
+            "p": {
+              "x": 13.3823923,
+              "y": 52.4690612
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "lane closed",
+            "c": "carriageway reduced to one lane",
+            "sd": "2020-11-28T05:00:00Z",
+            "ed": "2021-01-20T22:59:00Z",
+            "f": "Berlinickeplatz - Manteuffelstraße (Schöneberger Straße/L1096)",
+            "t": "Reichartstraße (Sachsendamm/L1096)",
+            "l": 1462,
+            "v": "}if_Iw{spA[l@eAxBo@nAe@`AsErJi@fAOXa@v@a@z@O^_@|@_@\\[n@s@tAWh@e@bAWj@]z@Ur@]bAYfAIXSt@GRMXOXo@~@OTMN[l@Uh@w@bB]x@a@`Ai@hAUf@]p@ELM`@Qf@Un@Yz@cApC_AfCWp@ABADIVMb@Qr@Ib@CPKl@Ov@W|AE^ETKl@"
+          },
+          {
+            "id": "b1a38e0a6a1a10bb7b5712694a755ef3",
+            "p": {
+              "x": 13.3720829,
+              "y": 52.4675395
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-11-23T06:00:00Z",
+            "ed": "2021-01-20T22:59:00Z",
+            "f": "Ringbahnstraße (Manteuffelstraße/L1092)",
+            "t": "Attilaplatz - Alarichstraße (Attilastraße/L1092)",
+            "l": 135,
+            "v": "knf_I{|spAr@H~@JXLPLFDRTHFHDXF"
+          },
+          {
+            "id": "fedc0e571a4ac30efc359fe8611d7dc1",
+            "p": {
+              "x": 13.385331,
+              "y": 52.4554355
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2020-09-27T22:00:00Z",
+            "ed": "2021-01-18T22:59:00Z",
+            "f": "Tempelhofer Damm (B96)",
+            "t": "Wenckebachstraße",
+            "l": 73,
+            "v": "{|d_IomupALuE"
+          },
+          {
+            "id": "ad4f8b508689fee017eba4089e9689c8",
+            "p": {
+              "x": 13.3955658,
+              "y": 52.4658909
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "construction work",
+            "sd": "2020-10-18T22:00:00Z",
+            "ed": "2021-01-29T22:59:00Z",
+            "f": "Germaniastraße / Alt-Tempelhof",
+            "t": "Tempelhofer Damm (B96) / Borussiastraße",
+            "l": 126,
+            "v": "_gf_IubvpAaFA"
+          },
+          {
+            "id": "8a53fa1d26c612bede416ce9c897608c",
+            "p": {
+              "x": 13.3832213,
+              "y": 52.4670839
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "construction work",
+            "sd": "2020-10-18T22:00:00Z",
+            "ed": "2021-01-29T22:59:00Z",
+            "f": "Tempelhofer Damm (B96) / Borussiastraße",
+            "t": "Germaniastraße / Alt-Tempelhof",
+            "l": 126,
+            "v": "anf_IwbvpA`F@"
+          }
+        ],
+        "l": 2254
+      },
+      {
+        "id": "CLUSTER_48785",
+        "p": {
+          "x": 13.4051639,
+          "y": 52.5142089
+        },
+        "ic": 13,
+        "ty": 0,
+        "cbl": {
+          "x": 13.3795988,
+          "y": 52.4983192
+        },
+        "ctr": {
+          "x": 13.4367406,
+          "y": 52.5317583
+        },
+        "cs": 65,
+        "cpoi": [
+          {
+            "id": "4dcb76260984cdf671a06923eb1773b7",
+            "p": {
+              "x": 13.3737232,
+              "y": 52.513546
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "both directions closed",
+            "c": "roadworks",
+            "sd": "2019-03-03T23:00:00Z",
+            "ed": "2021-06-12T21:59:00Z",
+            "f": "Behrenstraße (B2)",
+            "t": "Hannah-Arendt-Straße",
+            "l": 130,
+            "v": "}wo_IoetpA|EwB"
+          },
+          {
+            "id": "dee20b9d328a6d2744951a83f1a19125",
+            "p": {
+              "x": 13.3812052,
+              "y": 52.51896
+            },
+            "ic": 9,
+            "ty": 0,
+            "cs": 0,
+            "d": "roadworks",
+            "c": "new road layout",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2020-12-17T22:59:00Z",
+            "f": "Luisenstraße - Karlplatz (Reinhardtstraße/L1044)",
+            "t": "Reinhardtstraße (Friedrichstraße/L1044)",
+            "l": 291,
+            "v": "eiq_IqetpAm@uGO}AOaBWyCEc@[kD"
+          },
+          {
+            "id": "f1a887f54a9a92fd77fae49673ec8bdc",
+            "p": {
+              "x": 13.3860707,
+              "y": 52.5147636
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "both directions closed",
+            "c": "roadworks",
+            "sd": "2019-03-04T07:00:00Z",
+            "ed": "2021-05-31T21:59:00Z",
+            "f": "Hannah-Arendt-Straße",
+            "t": "Behrenstraße (B2)",
+            "l": 122,
+            "v": "_qo_IeitpAoEnB"
+          },
+          {
+            "id": "ce10490b10a8e1891d5741cd72a46b40",
+            "p": {
+              "x": 13.3868202,
+              "y": 52.5173033
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-03-12T07:00:00Z",
+            "ed": "2020-12-01T22:59:00Z",
+            "f": "Wilhelmstraße (Unter den Linden/B2)",
+            "t": "Platz des 18. März - Ebertstraße (Straße des 17.Juni/B2)",
+            "l": 578,
+            "r": "B5",
+            "v": "}cp_IsltpASDk@H]D{@H_AJUBq@H@r@HhCTzHFhBD^BVBNBNl@Qh@Ox@WNCLAL?LBHFLLFFFHJJLLJFFBHB"
+          },
+          {
+            "id": "db6aa71e4ee2d01888664d15aa1245d1",
+            "p": {
+              "x": 13.3815621,
+              "y": 52.5126576
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2020-12-30T22:59:00Z",
+            "f": "Wilhelmstraße (Unter den Linden/B2)",
+            "t": "Friedrichstraße (Unter den Linden/B2)",
+            "l": 546,
+            "r": "B2 - B5",
+            "v": "mbp_IemtpAA]EsAC_ACmAEqBEoBEqACk@ASAQ?I?MG_CG}BAg@A]OgFGgCEcCCoB"
+          },
+          {
+            "id": "93fe480a9bba19410cb25140d88f6b62",
+            "p": {
+              "x": 13.378217,
+              "y": 52.5073378
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "work on buried services",
+            "sd": "2020-09-15T03:47:00Z",
+            "ed": "2020-12-05T22:59:00Z",
+            "f": "Stresemannstraße / Anhalter Straße",
+            "t": "Hallesches Ufer (B96)",
+            "l": 329,
+            "v": "_xm_I_vtpATh@Xr@Rn@fAtCFNdAtCVz@r@lBj@rAXp@"
+          },
+          {
+            "id": "fe3b784991bdd30b87e0743852a4541b",
+            "p": {
+              "x": 13.3822071,
+              "y": 52.5269003
+            },
+            "ic": 9,
+            "ty": 0,
+            "cs": 0,
+            "d": "roadworks",
+            "c": "new road layout",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2020-12-17T22:59:00Z",
+            "f": "Reinhardtstraße (Friedrichstraße/L1044)",
+            "t": "Luisenstraße - Karlplatz (Reinhardtstraße/L1044)",
+            "l": 291,
+            "v": "kmq_Iq_upAZjDDb@VxCN`BN|Al@tG"
+          },
+          {
+            "id": "fca4a383393f8c1a10ba387b2411a5cd",
+            "p": {
+              "x": 13.3784221,
+              "y": 52.5146988
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2018-10-10T12:00:00Z",
+            "ed": "2021-06-30T21:59:59Z",
+            "f": "Behrenstraße (B2)",
+            "t": "Französische Straße / Glinkastraße",
+            "l": 92,
+            "v": "m{o_IidupA@?XGREZIZI@Ar@Q"
+          },
+          {
+            "id": "ae732e8c7b5b3e2befb439fd433adb57",
+            "p": {
+              "x": 13.3908508,
+              "y": 52.5152067
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2018-10-10T12:00:00Z",
+            "ed": "2021-06-01T21:59:59Z",
+            "f": "Französische Straße / Glinkastraße",
+            "t": "Behrenstraße (B2)",
+            "l": 83,
+            "v": "kvo_I_fupAs@PA@[H[HSDKB"
+          },
+          {
+            "id": "71a23447eff657b7c08e699285117b08",
+            "p": {
+              "x": 13.3851869,
+              "y": 52.5191782
+            },
+            "ic": 8,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway closed",
+            "c": "roadworks",
+            "sd": "2018-10-10T12:03:28Z",
+            "ed": "2021-06-30T21:59:00Z",
+            "f": "Behrenstraße (B2)",
+            "t": "Leipziger Straße (B1) / Mauerstraße",
+            "l": 460,
+            "v": "o|o_IslupAPjGPA@?XGREZIZI@Ar@QPEb@KvA]\\IVETG|@]~@a@E{@GmBA_@@?"
+          },
+          {
+            "id": "f55d87b1acc79e344125e8d21d634a69",
+            "p": {
+              "x": 13.3855995,
+              "y": 52.5174172
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "construction work",
+            "sd": "2018-10-10T12:00:00Z",
+            "ed": "2021-06-30T21:59:59Z",
+            "f": "Friedrichstraße",
+            "t": "Mauerstraße",
+            "l": 87,
+            "v": "qqo_IyoupABh@DxAFzB"
+          },
+          {
+            "id": "5edc087ed3cfc2f0656171fbaf0ec238",
+            "p": {
+              "x": 13.388697,
+              "y": 52.5235262
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "lane closed",
+            "c": "carriageway reduced to one lane",
+            "sd": "2020-10-06T05:00:00Z",
+            "ed": "2021-04-30T21:59:00Z",
+            "f": "Friedrichstraße - Chausseestraße (Torstraße/L33)",
+            "t": "Rosa-Luxemburg-Straße - Schönhauser Allee (Torstraße/L33)",
+            "l": 1618,
+            "v": "yer_IwtupAEi@Ee@E_@W}B_@_D_B{LMcAQoAM_Aq@iFIk@SuAGa@Mw@o@oE}@yFYqBE{AAe@CsBOkHCqADYAa@KqAAQ?QAo@AgAAo@AsAAa@AQCm@A[@QFq@LoAPmBVaCD]p@sHZeDDa@Fs@Jw@D_@@MR{AFc@Fi@Fe@@OBO"
+          },
+          {
+            "id": "5be24aae8aa5c4b5caae41ee4724d939",
+            "p": {
+              "x": 13.3830254,
+              "y": 52.5143799
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2020-08-21T03:50:00Z",
+            "ed": "2021-01-31T22:59:00Z",
+            "f": "Französische Straße (Friedrichstraße/L1051)",
+            "t": "Leipziger Straße (Friedrichstraße/L1051)",
+            "l": 497,
+            "v": "gxo_IiavpAl@GXAFF`BQt@GJMlBOnD]bBOLCTAZFNAl@EdAKTAd@E"
+          },
+          {
+            "id": "58c8f1a63f8f9aed73ef1bfa97ea5914",
+            "p": {
+              "x": 13.3946615,
+              "y": 52.534032
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "narrow lanes",
+            "c": "construction work",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2021-02-28T22:59:00Z",
+            "f": "Invalidenstraße",
+            "t": "Julie-Wolfthorn-Straße / Bernauer Straße",
+            "l": 234,
+            "v": "obs_I{dvpAe@n@{ClEs@bAa@j@QT]h@"
+          },
+          {
+            "id": "54b49a1b24e51dade9f9b041054f5386",
+            "p": {
+              "x": 13.3961108,
+              "y": 52.5106573
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2020-08-21T03:50:00Z",
+            "ed": "2021-01-31T22:59:00Z",
+            "f": "Leipziger Straße (Friedrichstraße/L1051)",
+            "t": "Französische Straße (Friedrichstraße/L1051)",
+            "l": 497,
+            "v": "u|n_IefvpAc@BC?q@FsANSBWLU@MBcBNoD\\mBNKGu@JaBPEJY@m@F"
+          },
+          {
+            "id": "27afb9080e814bf90070a991b7a91d54",
+            "p": {
+              "x": 13.3909292,
+              "y": 52.5159691
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2020-11-26T11:50:14Z",
+            "ed": "2020-12-03T22:59:00Z",
+            "f": "Charlottenstraße",
+            "t": "Friedrichstraße",
+            "l": 127,
+            "v": "mho_IgpvpARfI@l@"
+          },
+          {
+            "id": "1c01796cef8be5086ec9571f7fa359b1",
+            "p": {
+              "x": 13.3916061,
+              "y": 52.5198318
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2018-01-04T12:54:00Z",
+            "f": "Tucholskystraße",
+            "t": "Oranienburger Straße / Monbijoustraße",
+            "l": 137,
+            "v": "coq_IwvvpANcDLwCFsA"
+          },
+          {
+            "id": "2eb1bdfb7a2210e57d81b5b295e7a73c",
+            "p": {
+              "x": 13.3955913,
+              "y": 52.5270609
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2018-01-04T12:54:00Z",
+            "f": "Oranienburger Straße / Monbijoustraße",
+            "t": "Tucholskystraße",
+            "l": 137,
+            "v": "}mq_IgcwpAGrAMvCObD"
+          },
+          {
+            "id": "7b9edd643af47f05e4a1994a56c3f751",
+            "p": {
+              "x": 13.4008924,
+              "y": 52.5013839
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2021-03-31T21:59:00Z",
+            "f": "Franz-Klühs-Straße (Lindenstraße/L1115)",
+            "t": "Oranienstraße - Rudi-Dutscke-Straße (Axel-Springer-Straße/L1115)",
+            "l": 255,
+            "v": "epm_I}hwpAMMw@i@sDeCsA}@YSSOc@Y"
+          },
+          {
+            "id": "dee28b7aeb5441110799afdc4ae2e9bf",
+            "p": {
+              "x": 13.3969769,
+              "y": 52.5137041
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "lane closed",
+            "c": "carriageway reduced to one lane",
+            "sd": "2020-06-24T22:00:00Z",
+            "ed": "2020-12-31T22:59:59Z",
+            "f": "Friedrichstraße (Unter den Linden/B2)",
+            "t": "Spandauer Straße (Karl-Liebknecht-Straße/B2)",
+            "l": 231,
+            "r": "B2 - B5",
+            "v": "_ip_I{mwpAGcCG}ACgAA_A?i@GaCCk@AII{@G_@"
+          },
+          {
+            "id": "5f05fbffada9438fbac382ed2c256ebf",
+            "p": {
+              "x": 13.3909151,
+              "y": 52.5085342
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2019-02-26T13:47:48Z",
+            "f": "Schützenstraße",
+            "t": "Zimmerstraße",
+            "l": 70,
+            "v": "etn_IqrwpAjAOn@I"
+          },
+          {
+            "id": "a0fcef589a1b69d9ee4ef0e12058cd27",
+            "p": {
+              "x": 13.4033199,
+              "y": 52.508779
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2019-08-23T12:07:45Z",
+            "f": "Zimmerstraße",
+            "t": "Schützenstraße",
+            "l": 81,
+            "v": "son_IoswpASBo@HkAN"
+          },
+          {
+            "id": "7e69434f31a2cebd0a762db14d5674e1",
+            "p": {
+              "x": 13.398083,
+              "y": 52.5052897
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-01-16T12:32:30Z",
+            "f": "Leipziger Straße (B1) / Mauerstraße",
+            "t": "Axel-Springer-Straße",
+            "l": 168,
+            "v": "ktn_IyswpAEaAEkBEoAI}C?[?Q?K?W"
+          },
+          {
+            "id": "af5b504f364579fc69e68f94b1969fc7",
+            "p": {
+              "x": 13.3962472,
+              "y": 52.5209727
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "narrow lanes",
+            "c": "roadworks",
+            "sd": "2020-06-24T22:00:00Z",
+            "ed": "2020-12-31T22:59:59Z",
+            "f": "Spandauer Straße (Karl-Liebknecht-Straße/B2)",
+            "t": "Friedrichstraße (Unter den Linden/B2)",
+            "l": 232,
+            "r": "B2 - B5",
+            "v": "mkp_IwbxpADPBLDPFj@@PBf@Bx@BdA@\\@VBrBBjA@jABfA"
+          },
+          {
+            "id": "4d98cf7a3dfca94fc0da6de90ccc0195",
+            "p": {
+              "x": 13.3995012,
+              "y": 52.5129113
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-01-16T12:32:30Z",
+            "f": "Axel-Springer-Straße",
+            "t": "Leipziger Straße (B1) / Mauerstraße",
+            "l": 168,
+            "v": "eun_IgcxpA?V?J?P?ZH|CDnADjBD`A"
+          },
+          {
+            "id": "4c39b512711e6e114443da36c7c855dd",
+            "p": {
+              "x": 13.3955638,
+              "y": 52.5122599
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-08-27T05:00:00Z",
+            "ed": "2020-12-31T22:59:00Z",
+            "f": "Krausenstraße (Axel-Springer-Straße/L1115)",
+            "t": "Zimmerstraße (Axel-Springer-Straße/L1115)",
+            "l": 228,
+            "v": "qzn_IghxpAr@~@JJRRbAp@RLTPRCxA`Al@`@PJ"
+          },
+          {
+            "id": "682b96b5495904a656ddaeb645a45f11",
+            "p": {
+              "x": 13.3961006,
+              "y": 52.5277299
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to two lanes",
+            "c": "construction work",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2021-04-30T21:59:00Z",
+            "f": "Invalidenstraße - Veteranenstraße (Brunnenstraße/L1071)",
+            "t": "Rosenthaler Platz - Torstraße (Brunnenstraße/L1071)",
+            "l": 16,
+            "v": "_vr_IcmxpAVY"
+          },
+          {
+            "id": "5817d8372d18681ea237f16bef46590f",
+            "p": {
+              "x": 13.4081846,
+              "y": 52.5222255
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "construction work",
+            "sd": "2020-11-23T06:00:00Z",
+            "ed": "2020-12-16T22:59:00Z",
+            "f": "Hackescher Markt - An der Spandauer Brücke (Rosenthaler Straße/L1192)",
+            "t": "Weinmeisterstraße - Gipsstraße (Rosenthaler Straße/L1192)",
+            "l": 291,
+            "v": "qoq_IgtxpAw@c@u@c@EC]UmAo@q@YoBw@ME]IOAS?]D"
+          },
+          {
+            "id": "0378bb4856e4db5e5e72d0661c6c7b92",
+            "p": {
+              "x": 13.3973856,
+              "y": 52.5260525
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "construction work",
+            "sd": "2020-11-23T06:00:00Z",
+            "ed": "2020-12-16T22:59:00Z",
+            "f": "Weinmeisterstraße - Gipsstraße (Rosenthaler Straße/L1192)",
+            "t": "Hackescher Markt - An der Spandauer Brücke (Rosenthaler Straße/L1192)",
+            "l": 134,
+            "v": "qvq_IyxxpAlAn@\\TDBt@b@v@b@"
+          },
+          {
+            "id": "3c3d63b6d8044843a1fa39f123d5c550",
+            "p": {
+              "x": 13.4091061,
+              "y": 52.501567
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-08-31T09:55:24Z",
+            "f": "Ritterstraße",
+            "t": "Oranienstraße",
+            "l": 224,
+            "v": "aqm_I_|xpAeHgGIGq@m@"
+          },
+          {
+            "id": "bd8f11d90febdb7446711f149075a3a6",
+            "p": {
+              "x": 13.4028417,
+              "y": 52.5016772
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-08-31T05:00:00Z",
+            "ed": "2020-12-14T22:59:00Z",
+            "f": "Lindenstraße - Axel-Springer-Straße (Oranienstraße/L1067)",
+            "t": "Moritzplatz - Prinzenstraße (Oranienstraße/L1067)",
+            "l": 197,
+            "v": "c|m_I}eypAHc@Jk@F]ZoBb@iCHi@N{@TkA"
+          },
+          {
+            "id": "c9e13e6e7636c40689c55c4a7a3770b1",
+            "p": {
+              "x": 13.399844,
+              "y": 52.506942
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-08-31T10:35:20Z",
+            "f": "Oranienstraße",
+            "t": "Ritterstraße",
+            "l": 224,
+            "v": "c|m_I}eypAp@l@HFdHfG"
+          },
+          {
+            "id": "f0e272ce941cacfa9c3c70eb444200e7",
+            "p": {
+              "x": 13.4068672,
+              "y": 52.4945607
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2021-01-29T22:59:00Z",
+            "f": "Prinzenstraße (Gitschiner Straße/L1005)",
+            "t": "Kottbusser Tor - Kottbusser Straße (Skalitzer Straße/L1005)",
+            "l": 359,
+            "v": "oql_IenypAEwD?mDGoDM{FEeCEgC"
+          },
+          {
+            "id": "6c277387fe80972827c75796258695d2",
+            "p": {
+              "x": 13.4025172,
+              "y": 52.5106041
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "carriageway reduced to one lane",
+            "sd": "2019-12-18T11:37:13Z",
+            "ed": "2021-10-15T21:59:59Z",
+            "f": "Gertraudenstraße - Mühlenstraße (Fischerinsel/L1066)",
+            "t": "Wallstraße (Neue Roßstraße/L1066)",
+            "l": 169,
+            "v": "ano_IiqypAd@w@nAwBDIDIJQJQHOLSl@_A"
+          },
+          {
+            "id": "2e0df9716098558f653a558762535982",
+            "p": {
+              "x": 13.4106125,
+              "y": 52.5078096
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-08-31T05:00:00Z",
+            "ed": "2020-12-14T22:59:00Z",
+            "f": "Moritzplatz - Prinzenstraße (Oranienstraße/L1067)",
+            "t": "Lindenstraße - Axel-Springer-Straße (Oranienstraße/L1067)",
+            "l": 197,
+            "v": "swm_IqvypAUjAOz@Ih@c@hC[nBG\\Kj@Ib@"
+          },
+          {
+            "id": "8aff055b0ecf2b1648d49dd79bf1cd11",
+            "p": {
+              "x": 13.413161,
+              "y": 52.5137318
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to two lanes",
+            "c": "construction work",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2023-06-30T21:59:00Z",
+            "f": "Fischerinsel - Breite Straße (Gertraudenstraße/B1)",
+            "t": "Stralauer Straße - Spandauer Straße (Mühlendamm/B1)",
+            "l": 113,
+            "r": "B1",
+            "v": "c`p_IsxypAGIOWk@w@Y[Ya@_@e@IK"
+          },
+          {
+            "id": "37c27678fac7e2682802cdca86b97ddf",
+            "p": {
+              "x": 13.413451,
+              "y": 52.5144548
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2019-12-18T11:37:13Z",
+            "ed": "2021-10-15T21:59:59Z",
+            "f": "Wallstraße (Neue Roßstraße/L1066)",
+            "t": "Gertraudenstraße - Mühlenstraße (Fischerinsel/L1066)",
+            "l": 169,
+            "v": "_go_Iw{ypAm@~@MRINKPKPEHEHoAvBe@v@"
+          },
+          {
+            "id": "fdadc12d9fd70a03c96abf2e3197def5",
+            "p": {
+              "x": 13.4137382,
+              "y": 52.5187869
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2019-05-28T12:31:15Z",
+            "f": "Molkenmarkt (B1)",
+            "t": "Molkenmarkt (B1) / Eiergasse",
+            "l": 26,
+            "v": "acp_Ig|ypAe@n@"
+          },
+          {
+            "id": "bdb71d67ebffbe4996841ee6c29b5994",
+            "p": {
+              "x": 13.4042295,
+              "y": 52.5145462
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2020-12-31T22:59:00Z",
+            "f": "Karl-Liebknecht-Straße (Spandauer Straße/L1065)",
+            "t": "Alexanderstraße - Brückenstraße (Stralauer Straße/L1065)",
+            "l": 662,
+            "v": "cfp_Iy|ypAFKNQNU\\i@Zg@b@s@HQJUF[D]Fs@d@kFDu@Fu@Fm@DiA@g@Be@?_BCmCEmB?k@?eA?G?y@?OBqABo@Fu@@O@Q@MBWX{B"
+          },
+          {
+            "id": "1214ac07786583aa53286841e965aa62",
+            "p": {
+              "x": 13.4038547,
+              "y": 52.5191265
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to two lanes",
+            "c": "roadworks",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2023-06-30T21:59:00Z",
+            "f": "Stralauer Straße - Spandauer Straße (Mühlendamm/B1)",
+            "t": "Axel-Springer-Straße (Leipziger Straße/B1)",
+            "l": 674,
+            "r": "B1",
+            "v": "cfp_Iy|ypAZ^^`@\\\\^`@PP^`@`@d@XZPRl@r@RVNRf@l@^b@`@d@t@`Ah@p@h@r@RZRXRXt@jAFJf@v@l@`ApAtB~@xAFLZh@"
+          },
+          {
+            "id": "b2faef959047d6d8fecda47e3bcc130b",
+            "p": {
+              "x": 13.4120094,
+              "y": 52.5322879
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to two lanes",
+            "c": "roadworks",
+            "sd": "2020-10-13T07:00:00Z",
+            "ed": "2022-09-30T21:59:00Z",
+            "f": "Rosa-Luxemburg-Straße - Schönhauser Allee (Torstraße/L33)",
+            "t": "Rosenthaler Platz - Rosenthaler Straße (Torstraße/L33)",
+            "l": 12,
+            "v": "apr_IgazpAG^"
+          },
+          {
+            "id": "b104c0846101f15544803bed4ed9746d",
+            "p": {
+              "x": 13.411787,
+              "y": 52.5132931
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2019-10-12T03:41:30Z",
+            "f": "Grunerstraße (B1) / Jüdenstraße",
+            "t": "Grunerstraße (B1) / Klosterstraße",
+            "l": 136,
+            "v": "_fp_IifzpA[qES_DAU"
+          },
+          {
+            "id": "df244b00d78e944709e029a419a3cc21",
+            "p": {
+              "x": 13.4064135,
+              "y": 52.5107244
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-07-27T06:00:00Z",
+            "ed": "2021-01-24T22:59:00Z",
+            "f": "Inselstraße (Wallstraße/L1066)",
+            "t": "Heinrich-Heine-Straße - Brückenstraße (Köpenicker Straße/L1066)",
+            "l": 412,
+            "v": "alo_IemzpAl@s@FIRWVa@FKHU\\y@`AwBPg@PIBGFMFODKJWBOBQ@SBi@@YDiAIY@QHkAJ}@L}@BUNgA"
+          },
+          {
+            "id": "77c4b38b27f5fda0e945755e9b40c382",
+            "p": {
+              "x": 13.4114686,
+              "y": 52.5024017
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2021-01-29T22:59:00Z",
+            "f": "Kottbusser Tor - Kottbusser Straße (Skalitzer Straße/L1005)",
+            "t": "Zossener Straße - Zossener Brücke (Waterlooufer/L1005)",
+            "l": 377,
+            "v": "qsl_IeozpABpBF~CJvFDfCBrB?P?\\?dC?lA?VAt@"
+          },
+          {
+            "id": "4d64e7230f6859842a9b8eed3911277f",
+            "p": {
+              "x": 13.4070329,
+              "y": 52.5010399
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2019-03-18T10:52:41Z",
+            "f": "Oranienstraße",
+            "t": "Wassertorplatz / Gitschiner Straße",
+            "l": 283,
+            "v": "qpm_I}ozpAr@_Al@y@xF_Jl@s@"
+          },
+          {
+            "id": "55c840351a9e0215dcd44e5d50a70fed",
+            "p": {
+              "x": 13.4113451,
+              "y": 52.520924
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2019-10-12T03:41:30Z",
+            "f": "Klosterstraße",
+            "t": "Grunerstraße (B1) / Jüdenstraße",
+            "l": 136,
+            "v": "sgp_IsrzpA@TR~CZpE"
+          },
+          {
+            "id": "0398fd751a218be8ca62459c028e6a58",
+            "p": {
+              "x": 13.4197398,
+              "y": 52.5034258
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2019-02-12T12:08:00Z",
+            "f": "Oranienstraße / Oranienplatz",
+            "t": "Oranienstraße",
+            "l": 283,
+            "v": "edm_Im`{pAm@r@yF~Im@x@s@~@"
+          },
+          {
+            "id": "868f85ba835a501db509991acf364e12",
+            "p": {
+              "x": 13.4102696,
+              "y": 52.518459
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to two lanes",
+            "c": "new roadworks layout",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2020-12-31T22:59:00Z",
+            "f": "Grunerstraße (B1)",
+            "t": "Grunerstraße (B1)",
+            "l": 6,
+            "v": "}}p_Imc{pAFK"
+          },
+          {
+            "id": "58fd25f760a7d70cb8170ac9d6d01020",
+            "p": {
+              "x": 13.4104662,
+              "y": 52.5183038
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "lane closed",
+            "c": "carriageway reduced to one lane",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2021-12-31T05:00:00Z",
+            "f": "Grunerstraße (Alexanderstraße/L1117)",
+            "t": "Holzmarktstraße - Stralauer Straße (Brückenstraße/L1117)",
+            "l": 604,
+            "v": "g}p_Iid{pAb@o@DIFIh@q@RUX[TW^c@RYh@k@FGLM^[h@e@RSv@i@FENIj@]b@Ud@ObAUPEnAQp@?r@At@Dj@Dv@L"
+          },
+          {
+            "id": "9dd1fa009b6347cf3151499143d55612",
+            "p": {
+              "x": 13.4147248,
+              "y": 52.4956447
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-08-31T06:00:00Z",
+            "ed": "2021-04-30T21:59:00Z",
+            "f": "Prinzenstraße (Gitschiner Straße/L1005)",
+            "t": "Schlesische Straße - Oberbaumstraße (Skalitzer Straße/L1005)",
+            "l": 1681,
+            "v": "wtl_Imu{pA@GBK@Q?I?K?MCSCICGAECEA[?SAi@Cg@Ek@Ec@Ac@?AAc@?c@A_@Ae@?kAAq@?_@?{@?m@?U?m@A_@?]?YAcD?w@?w@AoBAkB?g@?g@AwAAs@Aw@A_@?c@?g@?{@CmAA}@EkACy@GuACoACy@Ai@@[@[@UBm@@]?S@W?[Co@Ce@Gi@E]AKAMGy@CYEi@Ca@Gw@AMCa@O}BAa@Eg@I{@QyAGw@CYASAIGs@QwBUkCI_AEi@Ca@KyA[{E[}DKmAAW?I@I@KBMDU?MAMAIIUMQAAQYKOGMISAE"
+          },
+          {
+            "id": "65dbb174c1beaac1ea670ff3d7e4e9d7",
+            "p": {
+              "x": 13.419301,
+              "y": 52.51939
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-11-06T06:00:00Z",
+            "ed": "2021-01-10T19:00:00Z",
+            "f": "Alexanderstraße - Brückenstraße (Stralauer Straße/L1065)",
+            "t": "Karl-Liebknecht-Straße (Spandauer Straße/L1065)",
+            "l": 1104,
+            "v": "e~o_Imu{pAK|AEx@AZALAL?JEbBAn@@hA@fABnA@f@DdAFtDCjBMdBEd@Q~BOjBMfAE`@G^ERITIPELIRS\\Ub@QTa@j@QVUZk@|@u@fAsAnBeAzAQZ{@vACFCVKPSZQVk@z@EFCBEFEHGHIL[NoAnBILMPIN"
+          },
+          {
+            "id": "93c6c48f076fed24903495f28e933c69",
+            "p": {
+              "x": 13.4159756,
+              "y": 52.5216127
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2021-12-31T05:00:00Z",
+            "f": "Karl-Marx-Allee (B1) / Schillingstraße",
+            "t": "Alexanderstraße / Voltairestraße",
+            "l": 15,
+            "v": "}lp_Iuu{pAFh@"
+          },
+          {
+            "id": "39b7f3ce93b96e74a7db3bfe10ff2b39",
+            "p": {
+              "x": 13.4243029,
+              "y": 52.5182334
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2021-12-31T05:00:00Z",
+            "f": "Holzmarktstraße - Stralauer Straße (Brückenstraße/L1117)",
+            "t": "Grunerstraße (Alexanderstraße/L1117)",
+            "l": 200,
+            "v": "_ip_Icw{pAw@Rc@L_@Jc@Tm@XOFi@Zo@h@YT"
+          },
+          {
+            "id": "42bf16b4049ea46dae098e8f6b22451f",
+            "p": {
+              "x": 13.4126999,
+              "y": 52.4971498
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2021-02-26T22:59:00Z",
+            "f": "Kottbusser Tor - Skalitzer Straße (Kottbusser Straße/L1176)",
+            "t": "Sonnenallee - Urbanstraße (Hermannplatz/L1176)",
+            "l": 1259,
+            "v": "}ql_I{x{pAVM`@UxB}@pAm@d@[j@W`@YRQNMPMJGJGd@YHEd@]NKx@m@~@i@nAq@p@[t@a@p@a@jDgBv@e@t@a@p@_@pC}Ad@Wf@Wx@a@j@Yx@a@`Ai@tBgAPIvAu@~A{@`@SRKDANELAF@"
+          },
+          {
+            "id": "157d6c965fac05887d894ffd52a66201",
+            "p": {
+              "x": 13.4199887,
+              "y": 52.5106
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-08-10T06:00:00Z",
+            "ed": "2020-11-30T22:59:00Z",
+            "f": "Lichtenberger Straße - An der Michaelbrücke (Holzmarktstraße/L1065)",
+            "t": "Straße der Pariser Kommune - Stralauer Platz (Mühlenstraße/L1065)",
+            "l": 897,
+            "v": "qoo_I_||pA^y@d@}@p@eANWl@{@`AkBDIDKFKLUTi@`@cAvAiDTm@BIh@uAVq@Rk@r@wBn@qBJ[Ne@f@iB@CHYj@wBn@cCRu@J_@Pq@FSf@eB\\iAj@mB"
+          },
+          {
+            "id": "32084a3336f7308fdd4d7096a9597e0c",
+            "p": {
+              "x": 13.4290048,
+              "y": 52.5110653
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "resurfacing work",
+            "sd": "2020-11-18T06:00:00Z",
+            "ed": "2020-12-15T22:59:00Z",
+            "f": "Holzmarktstraße - An der Michaelbrücke (Lichtenberger Straße/L1119)",
+            "t": "Strausberger Platz - Karl-Marx-Allee (Lichtenberger Straße/L1119)",
+            "l": 590,
+            "v": "opo_Ia}|pA[g@_@i@c@m@_@g@EI[[_AaAq@k@][IIUWyBoByAcAw@c@}@g@KGo@[s@]u@]]QUQIIKOU]"
+          },
+          {
+            "id": "39e3ba5b336dea6725e91a842735d269",
+            "p": {
+              "x": 13.4229187,
+              "y": 52.5126259
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2020-10-14T10:52:09Z",
+            "ed": "2020-12-18T22:59:00Z",
+            "f": "Lichtenberger Straße",
+            "t": "Krautstraße",
+            "l": 220,
+            "v": "y_p_I{e}pAH]BU@EBo@JeBDq@HiADq@HqANeCB_@"
+          },
+          {
+            "id": "298945c8bd256e4d52d1d36d6abc2c79",
+            "p": {
+              "x": 13.4216333,
+              "y": 52.5180548
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "resurfacing work",
+            "sd": "2020-11-18T06:00:00Z",
+            "ed": "2020-12-15T22:59:00Z",
+            "f": "Strausberger Platz - Karl-Marx-Allee (Lichtenberger Straße/L1119)",
+            "t": "Holzmarktstraße - An der Michaelbrücke (Lichtenberger Straße/L1119)",
+            "l": 605,
+            "v": "onp_Iwr}pAXAT?HBPDLFXLp@ZHD\\Rx@d@|@l@n@h@nB|A|AtAx@p@x@p@vApAd@b@JJTTn@l@PLVR^`@"
+          },
+          {
+            "id": "1ba02dd9c8ea6bfe849875d2c7ff2e27",
+            "p": {
+              "x": 13.4290554,
+              "y": 52.5144186
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "resurfacing work",
+            "sd": "2020-11-18T06:00:00Z",
+            "ed": "2020-12-15T22:59:00Z",
+            "f": "Holzmarktstraße - An der Michaelbrücke (Lichtenberger Straße/L1119)",
+            "t": "Strausberger Platz - Karl-Marx-Allee (Lichtenberger Straße/L1119)",
+            "l": 27,
+            "r": "B5 - B1",
+            "v": "omp_Isv}pAAYCYCMCI"
+          },
+          {
+            "id": "afd820531b3c832dafff2a411bd6ac8f",
+            "p": {
+              "x": 13.4301273,
+              "y": 52.519238
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2020-10-14T13:44:13Z",
+            "ed": "2020-12-18T22:59:00Z",
+            "f": "Krautstraße",
+            "t": "Lichtenberger Straße",
+            "l": 220,
+            "v": "e}o_Iuy}pAC^OdCIpAEp@IhAEp@KdBCn@ADCTI\\"
+          },
+          {
+            "id": "0fa3d9b7ea03eca3a9c8556d3a95d69d",
+            "p": {
+              "x": 13.4339267,
+              "y": 52.5208915
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "resurfacing work",
+            "sd": "2020-11-18T06:00:00Z",
+            "ed": "2020-12-15T22:59:00Z",
+            "f": "Andreasstraße - Lebuserstraße (Karl-Marx-Allee/B1)",
+            "t": "Strausberger Platz - Lichtenberger Straße (Karl-Marx-Allee/B1)",
+            "l": 18,
+            "r": "B5 - B1",
+            "v": "upp_I{y}pAEFABEHGL"
+          },
+          {
+            "id": "339c3bce245980d5a8edcb1531eefcca",
+            "p": {
+              "x": 13.4263641,
+              "y": 52.5179618
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-11-28T07:05:00Z",
+            "f": "Lichtenberger Straße / Platz der Vereinten Nationen",
+            "t": "Lichtenberger Straße / Platz der Vereinten Nationen",
+            "l": 21,
+            "v": "u`q_I}|}pAPu@"
+          },
+          {
+            "id": "badeb365fac2c8507b97d45ca3a8cc91",
+            "p": {
+              "x": 13.4244559,
+              "y": 52.5117336
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-09-11T05:00:00Z",
+            "ed": "2020-12-18T22:59:00Z",
+            "f": "Karl-Marx-Allee - Lebuser Straße (Andreasstraße/L1161)",
+            "t": "Stralauer Platz - Holzmarktstraße (An der Schillingbrücke/L1161)",
+            "l": 34,
+            "v": "m}n_Igb~pAv@`@"
+          },
+          {
+            "id": "d95d40db6b16fea8520ba7277ccb6fcc",
+            "p": {
+              "x": 13.4311557,
+              "y": 52.5099174
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2019-07-15T11:10:45Z",
+            "ed": "2020-12-31T22:59:00Z",
+            "f": "Koppenstraße",
+            "t": "Straße der Pariser Kommune / Lange Straße",
+            "l": 194,
+            "v": "mno_Iwz~pAVeAbAgFBI^}Ab@eB"
+          },
+          {
+            "id": "a478b223aa2514861a1ce63f0cd331ba",
+            "p": {
+              "x": 13.4398553,
+              "y": 52.5156222
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2019-07-15T11:10:45Z",
+            "ed": "2020-12-31T22:59:00Z",
+            "f": "Straße der Pariser Kommune / Lange Straße",
+            "t": "Koppenstraße",
+            "l": 167,
+            "v": "iio_Isj_qAc@dB_@|ACHcAfF"
+          }
+        ],
+        "l": 20645
+      },
+      {
+        "id": "CLUSTER_48802",
+        "p": {
+          "x": 13.4330774,
+          "y": 52.5469792
+        },
+        "ic": 13,
+        "ty": 0,
+        "cbl": {
+          "x": 13.4096892,
+          "y": 52.5329921
+        },
+        "ctr": {
+          "x": 13.4585389,
+          "y": 52.5577006
+        },
+        "cs": 17,
+        "cpoi": [
+          {
+            "id": "260205b8f8e511975d866e6268a3145d",
+            "p": {
+              "x": 13.4064181,
+              "y": 52.5353927
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-08-02T10:00:30Z",
+            "f": "Kastanienallee",
+            "t": "Schönhauser Allee / Choriner Straße",
+            "l": 144,
+            "v": "cmt_IqazpAZkAb@_Bl@sBZgA"
+          },
+          {
+            "id": "692bbd8d8740c55aa1b17dac1a849f89",
+            "p": {
+              "x": 13.414803,
+              "y": 52.5410633
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-08-01T15:20:30Z",
+            "f": "Schönhauser Allee / Choriner Straße",
+            "t": "Kastanienallee",
+            "l": 144,
+            "v": "yht_IylzpA[fAm@rBc@~A[jA"
+          },
+          {
+            "id": "0b149dc35ade24270424841ce6f67dda",
+            "p": {
+              "x": 13.4076459,
+              "y": 52.551124
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-11-26T06:00:00Z",
+            "ed": "2020-12-17T22:59:00Z",
+            "f": "Wichertstraße - Schivelbeiner Straße (Schönhauser Allee/B96a)",
+            "t": "Stargarder Straße - Gleimstraße (Schönhauser Allee/B96a)",
+            "l": 327,
+            "r": "B96a",
+            "v": "cxv_I_{zpA`BVrAP\\BTBfALbAJd@D~@HhBN"
+          },
+          {
+            "id": "07326ed91d1febda0a8b7bded4ecfb97",
+            "p": {
+              "x": 13.4154937,
+              "y": 52.5461403
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2021-02-24T22:59:00Z",
+            "f": "Schönhauser Allee - Schivelbeiner Straße (Wichertstraße/L1059)",
+            "t": "Prenzlauer Allee - Wichertstraße (Grellstraße/L1059)",
+            "l": 188,
+            "v": "upv_Iey{pAj@{B`@gBPq@Ja@J_@Rs@Rm@Na@"
+          },
+          {
+            "id": "c839e71013eac1eac98380c46c0eceb3",
+            "p": {
+              "x": 13.4171366,
+              "y": 52.5556174
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-11-05T12:50:08Z",
+            "f": "Elsa-Brändström-Straße (Neumannstraße/L1049)",
+            "t": "Thulestraße (Neumannstraße/L1049)",
+            "l": 123,
+            "v": "e{w_Igv|pAz@Ot@M`@IfAQ"
+          },
+          {
+            "id": "704ccf412d2dcf5d1e6eea9f2f785bed",
+            "p": {
+              "x": 13.4345763,
+              "y": 52.5308042
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2021-04-30T21:59:00Z",
+            "f": "Platz am Königstor - Friedenstraße (Otto-Braun-Straße/B2)",
+            "t": "Danziger Straße (Greifswalder Straße/B2)",
+            "l": 263,
+            "r": "B2",
+            "v": "ejs_Iu}}pAmB_CuAcBcBsBs@}@e@m@"
+          },
+          {
+            "id": "2305da588a55f5d87855cefa18302bf2",
+            "p": {
+              "x": 13.4295208,
+              "y": 52.5329235
+            },
+            "ic": 9,
+            "ty": 0,
+            "cs": 0,
+            "d": "roadworks",
+            "sd": "2020-11-28T07:53:00Z",
+            "f": "Prenzlauer Allee (Danziger Straße/B96a)",
+            "t": "Kniprodestraße (Danziger Straße/B96a)",
+            "l": 125,
+            "r": "B96a",
+            "v": "y}s_Iwq~pAH[J_@Po@J[Ni@FQp@kB"
+          },
+          {
+            "id": "43622979baaab0798ed8c2c8152b61d9",
+            "p": {
+              "x": 13.4402009,
+              "y": 52.5410035
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2020-12-31T22:59:00Z",
+            "f": "Grellstraße (Hosemannstraße/L1139)",
+            "t": "Ostseeplatz - Ostseestraße (Hosemannstraße/L1139)",
+            "l": 574,
+            "v": "}gu_Iw~~pAi@e@aB{AOOaC}B{@y@a@a@e@e@KIUSq@q@SQkDaDgEaE"
+          },
+          {
+            "id": "8d8428e359a4c61bc9f7fc2dcf87df09",
+            "p": {
+              "x": 13.4330145,
+              "y": 52.5419619
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2019-11-25T17:52:01Z",
+            "f": "Prenzlauer Allee (B109)",
+            "t": "Greifswalder Straße (B2)",
+            "l": 135,
+            "v": "qvu_Iwf_qA\\uAR{@r@yCFUHW"
+          },
+          {
+            "id": "cf2b6f73064484507048bb2c8f40b424",
+            "p": {
+              "x": 13.4413157,
+              "y": 52.547716
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2019-11-25T17:52:01Z",
+            "f": "Greifswalder Straße (B2)",
+            "t": "Prenzlauer Allee (B109)",
+            "l": 135,
+            "v": "yru_Ioq_qAIVGTs@xCSz@]tA"
+          },
+          {
+            "id": "1661843a3b511f027b701c3e49dd4dc8",
+            "p": {
+              "x": 13.4340138,
+              "y": 52.5494602
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2020-12-31T22:59:00Z",
+            "f": "Langhansstraße (Roelckestraße/L1139)",
+            "t": "Grellstraße (Hosemannstraße/L1139)",
+            "l": 602,
+            "v": "cev_Iyz_qAj@h@fE`EjD`DRPp@p@TRJHd@d@`@`@z@x@`C|BNN`BzAh@d@"
+          },
+          {
+            "id": "8db84c64d9eaa0d575d9cfcf46a8ebe0",
+            "p": {
+              "x": 13.4392312,
+              "y": 52.5515009
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-11-23T07:00:00Z",
+            "ed": "2020-12-11T22:59:00Z",
+            "f": "Ostseeplatz - Hosemannstraße (Ostseestraße/L1004)",
+            "t": "Prenzlauer Allee - Prenzlauer Promenade (Wisbyer Straße/L1004)",
+            "l": 759,
+            "v": "mfv_I}{_qA?RCVCRa@vAg@dBYbAOf@[fA[bAWz@e@`Bu@fCqAnESn@Oh@CHc@|AgAtDCHUt@GPiBnGe@`BKZM`@"
+          },
+          {
+            "id": "2e30ddb4ae8df0d6ec1001b6eed52b32",
+            "p": {
+              "x": 13.4480604,
+              "y": 52.5492487
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2019-02-18T09:14:43Z",
+            "ed": "2020-12-20T22:59:00Z",
+            "f": "Langhansstraße (Roelckestraße/L1139)",
+            "t": "Pistoriusstraße (Roelckestraße/L1139)",
+            "l": 203,
+            "v": "m{v_Iyo`qA}AwAqAkAmCcC"
+          },
+          {
+            "id": "e4abf599f7c83044506da6b89277b769",
+            "p": {
+              "x": 13.4495726,
+              "y": 52.5508667
+            },
+            "ic": 9,
+            "ty": 0,
+            "cs": 0,
+            "d": "roadworks",
+            "c": "temporary traffic lights",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2021-06-30T21:59:00Z",
+            "f": "Langhansstraße (Roelckestraße/L1139)",
+            "t": "Pistoriusstraße (Roelckestraße/L1139)",
+            "l": 103,
+            "v": "iew_Iay`qAy@s@iB_B"
+          },
+          {
+            "id": "3eded55e470078b6e916caea9029d0a8",
+            "p": {
+              "x": 13.4503219,
+              "y": 52.5516833
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "temporary traffic lights",
+            "sd": "2019-04-09T09:00:00Z",
+            "ed": "2020-12-20T22:59:00Z",
+            "f": "Langhansstraße (Roelckestraße/L1139)",
+            "t": "Pistoriusstraße (Roelckestraße/L1139)",
+            "l": 49,
+            "v": "mjw_Iw}`qAkAeA"
+          },
+          {
+            "id": "07b2164692bfcfd1424fb39d9330f5a5",
+            "p": {
+              "x": 13.4398668,
+              "y": 52.5557154
+            },
+            "ic": 9,
+            "ty": 0,
+            "cs": 0,
+            "d": "roadworks",
+            "c": "temporary traffic lights",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2021-06-30T21:59:00Z",
+            "f": "Pistoriusstraße (Roelckestraße/L1139)",
+            "t": "Langhansstraße (Roelckestraße/L1139)",
+            "l": 355,
+            "v": "ylw_I}_aqAjAdAhB~Ax@r@lCbCpAjA|AvA"
+          },
+          {
+            "id": "e20986aecb401cf0816124947d2e3af0",
+            "p": {
+              "x": 13.4638319,
+              "y": 52.5557613
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-07-10T08:54:47Z",
+            "f": "Große Seestraße",
+            "t": "Rennbahnstraße / Pasedagplatz",
+            "l": 249,
+            "v": "sdx_I{rcqA]][[wHcJ"
+          }
+        ],
+        "l": 4478
+      },
+      {
+        "id": "CLUSTER_48806",
+        "p": {
+          "x": 13.4434689,
+          "y": 52.4923902
+        },
+        "ic": 13,
+        "ty": 0,
+        "cbl": {
+          "x": 13.4249858,
+          "y": 52.4779451
+        },
+        "ctr": {
+          "x": 13.46954,
+          "y": 52.5057932
+        },
+        "cs": 44,
+        "cpoi": [
+          {
+            "id": "a2b24dae11ce67da747c4aa962ffc50d",
+            "p": {
+              "x": 13.423743,
+              "y": 52.4844588
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-11-11T07:00:00Z",
+            "ed": "2021-08-06T21:59:00Z",
+            "f": "Hermannstraße (Flughafenstraße/L1105)",
+            "t": "Tempelhofer Damm - Mehringdamm (Platz der Luftbrücke/L1105)",
+            "l": 2690,
+            "v": "yci_Iea}pAN`C\\pG@TD~@D~@J|BHfBZnDL~AJb@B~@@n@A^Af@C`@GhAEh@SzAS|Aq@rF[hCe@tDcBpMu@vFKp@Kx@If@YrBOfA]~Be@bDCPOpASbBIp@OlAkBbOGf@E`@Gp@ANw@zKCf@IrAE`AATIdJKrQARCVEZEVKfAAPANOVS~AKzBA~AC~@EhCE~@ElBGlCEpBCfA?^ALCPETKf@Oj@YnAMp@CRAFAD"
+          },
+          {
+            "id": "97795decb6f11daff4941ca043d2e44d",
+            "p": {
+              "x": 13.4309525,
+              "y": 52.4895218
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "work on buried services",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2021-02-26T22:59:00Z",
+            "f": "Sonnenallee - Urbanstraße (Hermannplatz/L1176)",
+            "t": "Kottbusser Tor - Skalitzer Straße (Kottbusser Straße/L1176)",
+            "l": 1307,
+            "v": "epj_Iwc}pA]V[Ra@TuBhAeEzBsAp@k@Zu@b@o@\\a@Ri@ZgAn@{@d@{Av@mAp@{BjAcBz@SJSLm@ZmBfAy@b@[PSLQN_@ZGDs@f@EBGDSJQJWNc@TqBbAqAp@sAj@e@T[NWJu@Z"
+          },
+          {
+            "id": "58497b3f85760343d690a17a3d050311",
+            "p": {
+              "x": 13.4315805,
+              "y": 52.4972389
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2021-04-01T21:59:00Z",
+            "f": "Skalitzer Straße",
+            "t": "Skalitzer Straße / Oranienstraße",
+            "l": 21,
+            "v": "mvl_I{h}pAWUGI"
+          },
+          {
+            "id": "2b04a59b7f91940f80896e375a7bf819",
+            "p": {
+              "x": 13.4231422,
+              "y": 52.4960622
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2021-04-01T21:59:00Z",
+            "f": "Adalbertstraße (Oranienstraße/L1067)",
+            "t": "Skalitzer Straße - Wiener Straße (Oranienstraße/L1067)",
+            "l": 26,
+            "v": "mwl_I{i}pAJ_@JEBO"
+          },
+          {
+            "id": "aedaa74132c14aedd7ef3f45cb3a540e",
+            "p": {
+              "x": 13.4341766,
+              "y": 52.4923814
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "bridge closed",
+            "sd": "2020-09-09T06:34:52Z",
+            "f": "Pflügerstraße",
+            "t": "Ohlauer Straße / Paul-Lincke-Ufer",
+            "l": 146,
+            "v": "}mk_Iat}pAoBKMAGAGEOKIIMOc@c@WW"
+          },
+          {
+            "id": "67b98e2b83b10ae18480cd918460783d",
+            "p": {
+              "x": 13.4233287,
+              "y": 52.4957874
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "bridge closed",
+            "sd": "2020-09-08T09:03:39Z",
+            "f": "Ohlauer Straße / Paul-Lincke-Ufer",
+            "t": "Pflügerstraße",
+            "l": 146,
+            "v": "quk_I{w}pAVVb@b@LNHHNJFDF@L@nBJ"
+          },
+          {
+            "id": "2fba594ec1bd9fc0b8fc30f8aa3306b2",
+            "p": {
+              "x": 13.4225833,
+              "y": 52.477785
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-07-27T16:02:47Z",
+            "f": "Flughafenstraße",
+            "t": "Werbellinstraße / Falkstraße",
+            "l": 64,
+            "v": "uuh_Iax}pAz@SVG\\I"
+          },
+          {
+            "id": "c64283177ad29029bdfd5b9c21dcfc84",
+            "p": {
+              "x": 13.4348925,
+              "y": 52.4786689
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-07-27T16:02:47Z",
+            "f": "Werbellinstraße / Falkstraße",
+            "t": "Flughafenstraße",
+            "l": 64,
+            "v": "erh_Iey}pA]HWF{@R"
+          },
+          {
+            "id": "f509af64c2413fb8e7b0a8cb24e87057",
+            "p": {
+              "x": 13.4342911,
+              "y": 52.4981295
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2020-11-15T23:00:00Z",
+            "ed": "2020-12-31T22:59:59Z",
+            "f": "Skalitzer Straße / Lausitzer Straße",
+            "t": "Skalitzer Straße / Görlitzer Straße",
+            "l": 113,
+            "v": "c`m_Iy~}pACEAG?CAMAS?CGi@Gu@O}AGi@E["
+          },
+          {
+            "id": "eca0d640e0050e3575e55ec7bd302ec8",
+            "p": {
+              "x": 13.43338,
+              "y": 52.4894134
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-07-28T06:00:00Z",
+            "ed": "2020-12-16T22:59:00Z",
+            "f": "Wildenbruchstraße - Erkstraße (Sonnenallee/L1115)",
+            "t": "Hermannplatz - Kottbusser Damm (Sonnenallee/L1115)",
+            "l": 105,
+            "v": "mej_Ikb~pAg@nBu@zC"
+          },
+          {
+            "id": "6879a6c78af9c1ad384d25187d60fd9c",
+            "p": {
+              "x": 13.4293501,
+              "y": 52.50453
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2020-11-15T23:00:00Z",
+            "ed": "2020-12-31T22:59:59Z",
+            "f": "Skalitzer Straße / Görlitzer Straße",
+            "t": "Skalitzer Straße / Lausitzer Straße",
+            "l": 113,
+            "v": "_bm_Iuh~pADZFh@N|AFt@Fh@?B@R@L?B@FBD"
+          },
+          {
+            "id": "f81ca2dbca287b22a47d35be4c34c4b6",
+            "p": {
+              "x": 13.4276283,
+              "y": 52.4801002
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-01-27T23:00:00Z",
+            "ed": "2021-03-31T21:59:00Z",
+            "f": "Hermannplatz - Herrmannstraße (Karl-Marx-Straße/L1176)",
+            "t": "Fuldastraße - Flughafenstraße (Karl-Marx-Straße/L1176)",
+            "l": 183,
+            "v": "gri_Iii~pAr@mBh@wA^_A\\_AZo@Xm@"
+          },
+          {
+            "id": "1228a687778f9c510749aace64bda10c",
+            "p": {
+              "x": 13.4385163,
+              "y": 52.4797625
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-11-01T09:34:30Z",
+            "f": "Karl-Marx-Straße",
+            "t": "Sonnenallee",
+            "l": 110,
+            "v": "ali_Ikw~pA{CgE"
+          },
+          {
+            "id": "450f453350d4e51eee4f7764617ccba9",
+            "p": {
+              "x": 13.4381402,
+              "y": 52.4846805
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-01-27T23:00:00Z",
+            "ed": "2021-03-31T21:59:00Z",
+            "f": "Fuldastraße - Flughafenstraße (Karl-Marx-Straße/L1176)",
+            "t": "Hermannplatz - Herrmannstraße (Karl-Marx-Straße/L1176)",
+            "l": 188,
+            "v": "ali_Ikw~pAKPILO^Wl@[|@]~@c@lAw@tB"
+          },
+          {
+            "id": "251291daecdb67b5675fea1817a89090",
+            "p": {
+              "x": 13.4298057,
+              "y": 52.4851934
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-11-01T13:02:30Z",
+            "f": "Sonnenallee",
+            "t": "Karl-Marx-Straße",
+            "l": 110,
+            "v": "}pi_Is}~pAzCfE"
+          },
+          {
+            "id": "2455549d0464babe2185dfd8cdf58005",
+            "p": {
+              "x": 13.4362578,
+              "y": 52.4756296
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-10-24T13:12:00Z",
+            "f": "Werbellinstraße / Morusstraße",
+            "t": "Karl-Marx-Straße",
+            "l": 144,
+            "v": "wzh_Iy__qAs@_L"
+          },
+          {
+            "id": "0506edd25d1ef6d8a98ca8133a5f0ff1",
+            "p": {
+              "x": 13.4358367,
+              "y": 52.4832631
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2020-02-16T23:00:00Z",
+            "ed": "2020-12-23T22:59:59Z",
+            "f": "Karl-Marx-Straße",
+            "t": "Werbellinstraße / Morusstraße",
+            "l": 144,
+            "v": "k|h_Iyl_qAr@~K"
+          },
+          {
+            "id": "1ada21b934a89a468a9de48bfd90beca",
+            "p": {
+              "x": 13.4344445,
+              "y": 52.4971268
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2020-06-17T13:44:23Z",
+            "ed": "2020-12-02T22:59:00Z",
+            "f": "Skalitzer Straße",
+            "t": "Skalitzer Straße",
+            "l": 21,
+            "v": "}}l_Iyp_qARs@"
+          },
+          {
+            "id": "e498162888ae5777e229d11dd359dbd7",
+            "p": {
+              "x": 13.4412844,
+              "y": 52.5033965
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2020-06-17T13:44:23Z",
+            "ed": "2020-12-02T22:59:00Z",
+            "f": "Skalitzer Straße",
+            "t": "Skalitzer Straße",
+            "l": 21,
+            "v": "i}l_Ior_qASr@"
+          },
+          {
+            "id": "7e7a62f8706cee858bc7f70042530712",
+            "p": {
+              "x": 13.4429652,
+              "y": 52.5084859
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2020-12-18T22:59:00Z",
+            "f": "Warschauer Straße - Am Oberbaum (Mühlenstraße/L1065)",
+            "t": "Straße der Pariser Kommune - Stralauer Platz (Mühlenstraße/L1065)",
+            "l": 402,
+            "v": "e`n_Iqv_qAg@bAMRIJw@nAg@r@cA~AMR]h@y@fAy@bA[b@q@z@OTe@p@SZQZ"
+          },
+          {
+            "id": "4fcd516bb5151606cc99066bdefb4fdf",
+            "p": {
+              "x": 13.4466813,
+              "y": 52.5004258
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-06-19T15:20:54Z",
+            "f": "Wrangelstraße",
+            "t": "Wrangelstraße",
+            "l": 17,
+            "v": "m_m_Ieb`qASAKA"
+          },
+          {
+            "id": "b239fa47ecd12ca29de268c343f82320",
+            "p": {
+              "x": 13.4347706,
+              "y": 52.5000801
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-06-19T15:20:25Z",
+            "f": "Oberbaumstraße / Köpenicker Straße",
+            "t": "Oberbaumstraße / Schlesische Straße",
+            "l": 17,
+            "v": "y`m_Iid`qA\\I"
+          },
+          {
+            "id": "7c4d9406128212ff6a9a4435b6733262",
+            "p": {
+              "x": 13.4383621,
+              "y": 52.5043873
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2021-04-01T21:59:00Z",
+            "f": "Schlesische Straße - Oberbaumstraße (Skalitzer Straße/L1005)",
+            "t": "Kottbusser Tor - Kottbusser Straße (Skalitzer Straße/L1005)",
+            "l": 1674,
+            "v": "scm_Iqi`qADLDJLRNVHLFHHPFLBJD\\J`ANnBLxAH|@\\jEJvAJjAHfAHdABTHhAJrABZHhANtBP~BBXH~@Dl@B^@NXdDFr@@RB\\BXBb@@PBd@?V?TAb@El@Cj@AT?`@@l@@|@@Z@t@BrABbABjABz@BbA@f@?L@bB@Z@ZBj@@t@B~B@hA?vA?t@?x@A|EAt@?h@?|@?h@?vA@jF@l@@fA@f@?Z?f@?n@GFCBGLCJCNAL?J@R@H@JBJBFFLBBDBFB"
+          },
+          {
+            "id": "3bda42d86c5cfc26f540bcdf24ca61a4",
+            "p": {
+              "x": 13.4463139,
+              "y": 52.5037251
+            },
+            "ic": 8,
+            "ty": 0,
+            "cs": 0,
+            "d": "no through traffic",
+            "c": "carriageway reduced to one lane",
+            "sd": "2020-06-08T06:00:00Z",
+            "ed": "2021-06-15T21:59:00Z",
+            "f": "Elsenstraße (Am Treptower Park/L1066)",
+            "t": "Skalitzer Straße - Oberbaumstraße (Köpenicker Straße/L1066)",
+            "l": 42,
+            "v": "}am_Ikl`qAOZCFa@t@"
+          },
+          {
+            "id": "6d729451bce8e659e9fca8a5b68af785",
+            "p": {
+              "x": 13.4477829,
+              "y": 52.4814805
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "temporary traffic lights",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2020-11-30T22:59:00Z",
+            "f": "Sonnenallee - Wildenbruchstraße (Erkstraße/L1116)",
+            "t": "Karl-Kunger-Straße (Wildenbruchstraße/L1116)",
+            "l": 132,
+            "v": "awi_Isq`qA_AuAQWmAiBU]"
+          },
+          {
+            "id": "af7af85a31cea0dd96efdd9d5d29b75a",
+            "p": {
+              "x": 13.4402221,
+              "y": 52.4818932
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2019-11-12T11:28:00Z",
+            "f": "Wildenbruchstraße",
+            "t": "Innstraße",
+            "l": 227,
+            "v": "y|i_Iiy`qArE{Kr@cB"
+          },
+          {
+            "id": "9899373b49a78c279db2f8fd5802093c",
+            "p": {
+              "x": 13.439421,
+              "y": 52.4871511
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "temporary traffic lights",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2020-11-30T22:59:00Z",
+            "f": "Karl-Kunger-Straße (Wildenbruchstraße/L1116)",
+            "t": "Sonnenallee - Wildenbruchstraße (Erkstraße/L1116)",
+            "l": 132,
+            "v": "y|i_Iiy`qAT\\lAhBPV~@tA"
+          },
+          {
+            "id": "794f87f65f5d388ff4791818bfe64fb4",
+            "p": {
+              "x": 13.4519276,
+              "y": 52.4857296
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2019-11-12T11:28:00Z",
+            "f": "Truseweg",
+            "t": "Elbestraße",
+            "l": 510,
+            "v": "ypi_IupaqAiBlEO^s@bBsEzK_EzJKV"
+          },
+          {
+            "id": "65b646597aeefca0eea8ff1342b942a9",
+            "p": {
+              "x": 13.4516668,
+              "y": 52.4844931
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2020-11-16T06:00:00Z",
+            "ed": "2021-01-29T16:00:00Z",
+            "f": "Roseggerstraße",
+            "t": "Truseweg",
+            "l": 116,
+            "v": "ugi_IaraqAGPcBjEWj@"
+          },
+          {
+            "id": "ff2d8f33cce71fedc52db43eaa0d15c9",
+            "p": {
+              "x": 13.4566712,
+              "y": 52.4928209
+            },
+            "ic": 6,
+            "ty": 3,
+            "cs": 0,
+            "d": "stationary traffic",
+            "sd": "2020-11-28T08:47:00Z",
+            "ed": "2020-11-28T09:13:35Z",
+            "f": "Elsenstraße",
+            "t": "Bouchéstraße",
+            "l": 173,
+            "dl": 147,
+            "v": "g_k_IujbqAe@v@eEvG"
+          },
+          {
+            "id": "383e7b7f2e7c65a2f4f75fa60bb7746d",
+            "p": {
+              "x": 13.4610605,
+              "y": 52.4988381
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-11-19T06:30:00Z",
+            "ed": "2020-12-04T22:59:00Z",
+            "f": "Stralauer Allee (B96a)",
+            "t": "Stralauer Allee (B96a) / Modersohnstraße",
+            "l": 11,
+            "v": "{}l_I__cqAQK"
+          },
+          {
+            "id": "e9c11d2ef71e67d2a2c47f8e2b41ee04",
+            "p": {
+              "x": 13.4611253,
+              "y": 52.4989319
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-11-19T14:13:02Z",
+            "f": "Stralauer Allee (Modersohnstraße/L1074)",
+            "t": "Revaler Straße (Modersohnstraße/L1074)",
+            "l": 50,
+            "v": "m~l_Im_cqAq@a@_@U"
+          },
+          {
+            "id": "7cbca9674b2cbe3d11e3f6ee760083ee",
+            "p": {
+              "x": 13.4510683,
+              "y": 52.5038192
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "carriageway reduced to one lane",
+            "sd": "2020-11-19T14:13:02Z",
+            "f": "Revaler Straße (Modersohnstraße/L1074)",
+            "t": "Stralauer Allee (Modersohnstraße/L1074)",
+            "l": 252,
+            "v": "}jm_I{gcqAn@^rFbDXP^Tp@`@PJ"
+          },
+          {
+            "id": "a8693e7bb8384e6e17f646cd1aa64d33",
+            "p": {
+              "x": 13.4531684,
+              "y": 52.4994035
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "narrow lanes",
+            "c": "roadworks",
+            "sd": "2020-01-15T23:00:00Z",
+            "ed": "2020-12-31T22:59:59Z",
+            "f": "Stralauer Allee (B96a) / Modersohnstraße",
+            "t": "Persiusstraße / Rochowstraße",
+            "l": 124,
+            "v": "uim_IgkcqAtCoG"
+          },
+          {
+            "id": "81ed424af5a07a872703e3aa835f9000",
+            "p": {
+              "x": 13.4626683,
+              "y": 52.4893687
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to two lanes",
+            "c": "roadworks",
+            "sd": "2020-09-28T06:00:00Z",
+            "ed": "2021-12-31T22:59:00Z",
+            "f": "Am Treptower Park (Elsenstraße/B96a)",
+            "t": "Elsenstraße (Puschkinallee/B96a)",
+            "l": 166,
+            "r": "B96a",
+            "v": "_hk_IencqAKOIKu@kAc@q@kAgBi@w@"
+          },
+          {
+            "id": "172c21fd70c76d9218973a2f2c3b08e8",
+            "p": {
+              "x": 13.4536953,
+              "y": 52.4899176
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-10-16T14:27:01Z",
+            "f": "Elsenstraße",
+            "t": "Elsenstraße",
+            "l": 16,
+            "r": "B96a",
+            "v": "elk_I_rcqAT]"
+          },
+          {
+            "id": "9b774b8eb5db8ee02c14cd407d2005a8",
+            "p": {
+              "x": 13.4628298,
+              "y": 52.5042272
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "narrow lanes",
+            "c": "roadworks",
+            "sd": "2020-01-15T23:00:00Z",
+            "ed": "2020-12-31T22:59:59Z",
+            "f": "Persiusstraße / Rochowstraße",
+            "t": "Stralauer Allee (B96a) / Modersohnstraße",
+            "l": 124,
+            "v": "_em_IwscqAuCnG"
+          },
+          {
+            "id": "32d32a99c63fc567e28478bcf1786bca",
+            "p": {
+              "x": 13.4529303,
+              "y": 52.4923618
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2019-08-08T13:17:01Z",
+            "f": "Am Treptower Park (B96a)",
+            "t": "Grenzallee",
+            "l": 3044,
+            "r": "A100",
+            "v": "}ck_I}scqALFNHFDFBFBFBRHJDNDD@LBNDB@D?B?B?B?HANAPCPC@?D?D@L@D@B?F@JBPDRDLBJBb@JD@HBB@D@RBPBF@F@N?V@P?H?HAPAD?FAJAd@ILCPEPEVGr@ONCRG\\KVINIXQFEPMROHGHGHGNK^[`@_@\\Yd@_@HGPMTOTO\\SXQRIRGVIh@MLCNCXEPAXAd@AZ?^@`CRdALr@H|ARrBRZB\\?d@CTCl@Kh@O^M\\MbAi@p@_@jAs@pAy@l@a@^UZSVONIZM`@Oj@Sh@Sx@Un@MTCf@GVCn@Cx@Al@?h@@^@h@Df@Fh@Hb@JVF\\JZLRHd@Tp@\\p@^d@XNJr@b@f@ZhAr@TNPJRJTJTJb@Rt@Xp@Tr@Vh@PZHXHVFRD`AT\\HRFn@PHBNDn@PZH^JVHRFl@R\\JRHp@\\XNVN^VTPPLLHNNVT`@^VZRXJNHLJNPX\\n@T`@FLBFLNZ\\"
+          },
+          {
+            "id": "70a08c02c33c0337f3758b9d227d9b13",
+            "p": {
+              "x": 13.4641378,
+              "y": 52.4904471
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to two lanes",
+            "c": "roadworks",
+            "sd": "2020-09-28T06:00:00Z",
+            "ed": "2021-12-31T22:59:00Z",
+            "f": "Puschkinallee",
+            "t": "An den Treptowers / Martin-Hoffmann-Straße",
+            "l": 103,
+            "r": "B96a",
+            "v": "eok_I_xcqAmC_E"
+          },
+          {
+            "id": "1ec9cfeb00ce0b45887148e4685b1ca6",
+            "p": {
+              "x": 13.465676,
+              "y": 52.4916308
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "lane closed",
+            "c": "carriageway reduced to one lane",
+            "sd": "2020-05-12T22:00:00Z",
+            "ed": "2021-03-31T21:59:00Z",
+            "f": "Puschkinallee (Elsenstraße/B96a)",
+            "t": "Modersohnstraße (Stralauer Allee/B96a)",
+            "l": 1197,
+            "r": "B96a",
+            "v": "suk_Ik`dqAi@q@GIKMW]aAoA]e@KMgAuACCOQU[GIyAmBaAoAY_@i@s@OQMOMOQQKKMKEEQOg@_@ECIGENCJU`AoBhJo@|CcAtECJKf@e@xBw@pDo@rCm@lCYpAa@lBQx@U~@YpA"
+          },
+          {
+            "id": "c3cc7d2f22f83fd67c28e37bd8ca3a43",
+            "p": {
+              "x": 13.4666762,
+              "y": 52.4978715
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-11-10T17:50:30Z",
+            "f": "Elsenstraße / Martin-Hoffmann-Straße",
+            "t": "Elsenstraße / Martin-Hoffmann-Straße",
+            "l": 11,
+            "r": "B96a",
+            "v": "_~k_IojdqAMV"
+          },
+          {
+            "id": "f25d68d07e4e4b0fe029fa018e36ed70",
+            "p": {
+              "x": 13.4589616,
+              "y": 52.4989939
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "lane closed",
+            "c": "carriageway reduced to two lanes",
+            "sd": "2020-05-12T22:00:00Z",
+            "ed": "2021-12-31T22:59:00Z",
+            "f": "Alt-Stralau - Markgrafendamm (Stralauer Allee/B96a)",
+            "t": "Puschkinallee (Elsenstraße/B96a)",
+            "l": 768,
+            "r": "B96a",
+            "v": "gjl_IgwdqA`Az@p@t@^d@TX`AnA`BtBJNNPDFFJb@h@l@x@z@jA^f@Z`@NRp@|@f@t@`B`Cd@r@RXJPR\\LPX`@p@`A^l@l@~@b@l@JQFK"
+          },
+          {
+            "id": "5e4ce1cbb9b53e0638b685d57afc1ec9",
+            "p": {
+              "x": 13.4705714,
+              "y": 52.4961111
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-11-19T06:00:00Z",
+            "ed": "2020-12-11T22:59:00Z",
+            "f": "Stralauer Allee - Alt-Stralau (Markgrafendamm/L1075)",
+            "t": "Karlshorster Straße (Hauptstraße/L1075)",
+            "l": 1181,
+            "v": "{kl_I{ydqAe@WOGUIYA]SyA}@WMKGWKSIYKyBs@s@ScA[MEg@O}Ae@WGYEg@@aAFs@@WA[GQEKGIK?WQa@GSCQAO@U@YDo@B]@OTwCDa@Do@BSFq@BY@OHu@LmAB]B[TqCv@}JLaBHaAJmADi@De@D[D["
+          },
+          {
+            "id": "bed03e2aeb5ea061683dd154cc6e28bf",
+            "p": {
+              "x": 13.4709459,
+              "y": 52.5060914
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-10-27T07:00:00Z",
+            "ed": "2021-12-31T22:59:00Z",
+            "f": "Kynaststraße (Hauptstraße/L1075)",
+            "t": "Stralauer Allee - Alt-Stralau (Markgrafendamm/L1075)",
+            "l": 802,
+            "v": "ekm_IsweqAAJEf@ATKtAKpAMtACVC`@C\\AX?T@N@LBLDPJTNVJ?HJJFPDZFV@r@A`AGf@AXDVF|Ad@f@NLDbAZr@RxBr@XJRHVJJFVLxA|@\\RPTZRl@\\FDFD"
+          }
+        ],
+        "l": 17007
+      },
+      {
+        "id": "CLUSTER_48819",
+        "p": {
+          "x": 13.4644444,
+          "y": 52.5196867
+        },
+        "ic": 13,
+        "ty": 0,
+        "cbl": {
+          "x": 13.4403348,
+          "y": 52.5110999
+        },
+        "ctr": {
+          "x": 13.4917836,
+          "y": 52.5292866
+        },
+        "cs": 13,
+        "cpoi": [
+          {
+            "id": "151afbf28ef035ac6eabdb624f770fbe",
+            "p": {
+              "x": 13.4458756,
+              "y": 52.524635
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "construction work",
+            "sd": "2020-11-26T15:00:00Z",
+            "ed": "2021-01-15T16:00:00Z",
+            "f": "Pufendorfstraße",
+            "t": "Landsberger Allee",
+            "l": 115,
+            "v": "qkq_Iaa`qAmA~@[ToAz@"
+          },
+          {
+            "id": "1e7ba0ae5cab22898bd9851c4571ef9d",
+            "p": {
+              "x": 13.4527276,
+              "y": 52.5257157
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2020-07-12T22:00:00Z",
+            "ed": "2020-11-30T22:59:59Z",
+            "f": "Danziger Straße (B96a)",
+            "t": "Landsberger Allee / Fritz-Riedel-Straße",
+            "l": 76,
+            "v": "ypr_IqzaqAgA_E"
+          },
+          {
+            "id": "79e11fe83c5022366414cf2b94fb12ec",
+            "p": {
+              "x": 13.4472873,
+              "y": 52.5325019
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2020-07-12T22:00:00Z",
+            "ed": "2020-11-30T22:59:59Z",
+            "f": "Landsberger Allee / Fritz-Riedel-Straße",
+            "t": "Danziger Straße (B96a)",
+            "l": 102,
+            "v": "asr_Iq`bqAfA~DX~@"
+          },
+          {
+            "id": "21ae9e331f7788f14bb9e3237806ff09",
+            "p": {
+              "x": 13.4575643,
+              "y": 52.524758
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to two lanes",
+            "c": "construction work",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2020-12-31T22:59:00Z",
+            "f": "Petersburger Straße - Danziger Straße (Landsberger Allee/L33)",
+            "t": "Storkower Straße (Landsberger Allee/L33)",
+            "l": 178,
+            "v": "wlr_Ik_cqAGe@Ku@K{@QyAUiBMaAIk@Ig@"
+          },
+          {
+            "id": "e76bda102213d1329372b40ef0fb6869",
+            "p": {
+              "x": 13.454316,
+              "y": 52.5322238
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to two lanes",
+            "c": "construction work",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2020-12-31T22:59:00Z",
+            "f": "Karl-Lade-Straße - Oderbruchstraße (Landsberger Allee/L33)",
+            "t": "Petersburger Straße - Danziger Straße (Landsberger Allee/L33)",
+            "l": 186,
+            "v": "uqr_IomcqAL`@F^NdANrAPbBDXBVF`@Jx@H`@BP"
+          },
+          {
+            "id": "5f0e0a68ea817609434a40bc59127118",
+            "p": {
+              "x": 13.4550945,
+              "y": 52.5122031
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2020-11-26T09:40:11Z",
+            "ed": "2020-12-03T22:59:00Z",
+            "f": "Frankfurter Allee (B1) / Mainzer Straße",
+            "t": "Krossener Straße",
+            "l": 102,
+            "v": "kao_IgbdqA~@^VHh@RZHPD"
+          },
+          {
+            "id": "438602709d64cf28076c9380d09c2d93",
+            "p": {
+              "x": 13.4686103,
+              "y": 52.5182165
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "right lane blocked",
+            "sd": "2020-05-27T06:00:00Z",
+            "f": "Gürtelstraße - Möllendorffstraße (Frankfurter Allee/B1)",
+            "t": "Warschauer Straße - Petersburger Straße (Karl-Marx-Allee/B1)",
+            "l": 567,
+            "r": "B5 - B1",
+            "v": "wvo_I}jeqA?@C`@El@Cf@ANAZIfBAXWjFIzAIxAKlBG`ACb@Cl@IjBOdDCf@C\\MpCU|D"
+          },
+          {
+            "id": "e140c8f55f9cd511d27e561d682e9acd",
+            "p": {
+              "x": 13.4753288,
+              "y": 52.5180949
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-09-01T14:19:09Z",
+            "f": "Dolziger Straße",
+            "t": "Pettenkoferstraße",
+            "l": 162,
+            "v": "qpp_IsueqAkFy@EuA"
+          },
+          {
+            "id": "c0bffb36f75e854635c54e1f48d133cb",
+            "p": {
+              "x": 13.4693151,
+              "y": 52.5235982
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2019-11-29T14:31:27Z",
+            "f": "Pettenkoferstraße",
+            "t": "Dolziger Straße",
+            "l": 29,
+            "v": "cxp_IczeqADtA"
+          },
+          {
+            "id": "a629fe540b07eaff3145e49c21ada25e",
+            "p": {
+              "x": 13.478251,
+              "y": 52.517592
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2019-09-21T08:56:30Z",
+            "f": "Frankfurter Allee (B1)",
+            "t": "Bänschstraße",
+            "l": 112,
+            "v": "o`p_IwjfqAwDdC"
+          },
+          {
+            "id": "a10b9c7494d5974e5b2488894b7b891e",
+            "p": {
+              "x": 13.4774745,
+              "y": 52.5154138
+            },
+            "ic": 9,
+            "ty": 0,
+            "cs": 0,
+            "d": "roadworks",
+            "sd": "2020-11-27T16:15:45Z",
+            "f": "Gürtelstraße",
+            "t": "Jessnerstraße",
+            "l": 40,
+            "v": "cfo_Io|fqAE\\Cl@Cd@"
+          },
+          {
+            "id": "d0cc322692f898367a17fff06ff21fad",
+            "p": {
+              "x": 13.4757866,
+              "y": 52.509742
+            },
+            "ic": 9,
+            "ty": 0,
+            "cs": 0,
+            "d": "roadworks",
+            "sd": "2020-11-27T21:25:30Z",
+            "f": "Warschauer Straße - Petersburger Straße (Karl-Marx-Allee/B5)",
+            "t": "Gürtelstraße - Möllendorffstraße (Frankfurter Allee/B5)",
+            "l": 19,
+            "r": "B5 - B1",
+            "v": "apo_IgegqA@S@O@S"
+          },
+          {
+            "id": "eaaa1e9dc44af5e00b8a5b496a814e1f",
+            "p": {
+              "x": 13.485706,
+              "y": 52.5125469
+            },
+            "ic": 9,
+            "ty": 0,
+            "cs": 0,
+            "d": "roadworks",
+            "sd": "2020-11-24T11:18:55Z",
+            "f": "Frankfurter Allee (B1)",
+            "t": "Coppistraße",
+            "l": 34,
+            "v": "efo_IsbjqAf@JPF"
+          }
+        ],
+        "l": 1722
+      },
+      {
+        "id": "CLUSTER_48812",
+        "p": {
+          "x": 13.4495046,
+          "y": 52.4605751
+        },
+        "ic": 13,
+        "ty": 0,
+        "cbl": {
+          "x": 13.4276948,
+          "y": 52.4427223
+        },
+        "ctr": {
+          "x": 13.4606927,
+          "y": 52.4691206
+        },
+        "cs": 23,
+        "cpoi": [
+          {
+            "id": "eebc373c47cfccf55378dc895006e1a2",
+            "p": {
+              "x": 13.428905,
+              "y": 52.460316
+            },
+            "ic": 9,
+            "ty": 0,
+            "cs": 0,
+            "d": "roadworks",
+            "sd": "2020-09-21T05:00:00Z",
+            "f": "Tempelhofer Weg (Gottlieb-Dunkel-Straße/L1028)",
+            "t": "Hermannstraße - Herthastraße (Mariendorfer Weg/L1028)",
+            "l": 15,
+            "v": "a{e_Iar}pAAIC[?E"
+          },
+          {
+            "id": "4a663c42ac18147d1d187895f2c75e93",
+            "p": {
+              "x": 13.4243093,
+              "y": 52.4528367
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2020-11-30T22:59:00Z",
+            "f": "Gottlieb-Dunkel-Straße (Tempelhofer Weg/L1098)",
+            "t": "Tempelhofer Weg (Gradestraße/L1098)",
+            "l": 83,
+            "v": "qed_Iwx}pAjBiD"
+          },
+          {
+            "id": "fb31dc5a958057eca566321ce84258ff",
+            "p": {
+              "x": 13.4342103,
+              "y": 52.4575577
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2020-11-30T22:59:00Z",
+            "f": "Tempelhofer Weg (Gradestraße/L1098)",
+            "t": "Gottlieb-Dunkel-Straße (Tempelhofer Weg/L1098)",
+            "l": 125,
+            "v": "obd_I{~}pAoBnDMXa@v@"
+          },
+          {
+            "id": "492cd59a5e6af9a53f481f4a151d910d",
+            "p": {
+              "x": 13.4395876,
+              "y": 52.4453493
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2020-12-31T22:59:00Z",
+            "f": "Mohriner Allee (Britzer Damm/L75)",
+            "t": "Britzer Damm - Fulhamer Allee (Tempelhofer Weg/L75)",
+            "l": 620,
+            "v": "q_b_Iow~pASHy@P_@B[B[AIFICWOSM{ByAm@a@o@c@qCmBm@a@WQQM{AaAk@_@{@i@k@_@a@UoAw@"
+          },
+          {
+            "id": "9cbc667fc421dd97d332b63e3ab11aed",
+            "p": {
+              "x": 13.4305083,
+              "y": 52.4503663
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2020-12-31T22:59:00Z",
+            "f": "Britzer Damm - Fulhamer Allee (Tempelhofer Weg/L75)",
+            "t": "Mohriner Allee (Britzer Damm/L75)",
+            "l": 565,
+            "v": "i|b_Iag_qAj@^z@h@j@^zA`APLVPl@`@pClBn@b@l@`@zBxARLVNHBJLVDP@f@AlAMVG@?"
+          },
+          {
+            "id": "8d62046a26a56c08ef7066b105d1d907",
+            "p": {
+              "x": 13.43711,
+              "y": 52.4635037
+            },
+            "ic": 9,
+            "ty": 0,
+            "cs": 0,
+            "d": "roadworks",
+            "c": "new road layout",
+            "sd": "2020-09-15T05:00:00Z",
+            "ed": "2021-01-29T22:59:00Z",
+            "f": "Silbersteinstraße / Walterstraße",
+            "t": "Neukölln",
+            "l": 42,
+            "v": "{ef_I_l`qARWb@w@"
+          },
+          {
+            "id": "64516cc832f835d20ae2141c6ec13e62",
+            "p": {
+              "x": 13.4386478,
+              "y": 52.4619301
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "left lane closed",
+            "c": "construction work",
+            "sd": "2020-10-02T05:00:00Z",
+            "ed": "2021-03-31T21:59:00Z",
+            "f": "Grenzallee (Buschkrugallee/L1176)",
+            "t": "Späthstraße - Blaschkoallee (Buschkrugallee/L1176)",
+            "l": 1277,
+            "v": "eue_Ik{`qAJEJGJEJEHCNIn@k@bAs@h@_@Zc@fAq@h@_@`@Y~AgAZSlA}@fBgAn@a@^WHGd@[|AaAJGj@a@rA_AN@n@i@v@c@FO\\QNKr@g@LIbAs@lA{@VQ|@m@tA_AtBwAdByA^Sh@[NId@YZJh@Md@O"
+          },
+          {
+            "id": "9779d506283c5c41d3dc36e92037b471",
+            "p": {
+              "x": 13.4496259,
+              "y": 52.4486039
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2020-12-31T16:00:00Z",
+            "f": "Britzer Damm (Blaschkoallee/L1098)",
+            "t": "Buschkrugallee (Späthstraße/L1098)",
+            "l": 208,
+            "v": "grc_I{xaqAA]GeFCgBAwAAeAAg@Gs@"
+          },
+          {
+            "id": "2e85fc64fb3adcfcacdf63c127a68b49",
+            "p": {
+              "x": 13.4474416,
+              "y": 52.4684031
+            },
+            "ic": 6,
+            "ty": 3,
+            "cs": 0,
+            "d": "stationary traffic",
+            "sd": "2020-11-28T05:07:00Z",
+            "ed": "2020-11-28T09:20:35Z",
+            "f": "Grenzallee (Grenzallee/L1097)",
+            "t": "Buschkrugallee - Karl-Marx-Straße (Grenzallee/L1097)",
+            "l": 367,
+            "dl": 336,
+            "v": "c`f_ImyaqAh@nEj@hEp@hG`@tCFj@Fh@DZHh@Hl@"
+          },
+          {
+            "id": "218889f88d91b70782d6d41d1c4f57d9",
+            "p": {
+              "x": 13.4581932,
+              "y": 52.4536875
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "left lane closed",
+            "c": "construction work",
+            "sd": "2020-10-02T05:00:00Z",
+            "ed": "2021-03-31T21:59:00Z",
+            "f": "Späthstraße - Blaschkoallee (Buschkrugallee/L1176)",
+            "t": "Buschkrugallee (Buschkrugallee/L1176)",
+            "l": 1273,
+            "v": "}sc_IskbqAc@Pq@TMZe@XOHi@Z_@ReBxAuBvAuA~@}@l@WPmAz@cAr@MHs@f@OJ]PMAu@\\q@f@KXsA~@k@`@KF}A`Ae@ZIF_@Vo@`@gBfAmA|@[R_BfAa@Xi@^gAp@k@Na@TGDSHg@Pe@RKDKDIDKDIDWP"
+          },
+          {
+            "id": "a4b84ca54beb9e1a6cde0803cbf06bc4",
+            "p": {
+              "x": 13.4611088,
+              "y": 52.4624676
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-11-28T01:35:00Z",
+            "f": "Grenzallee [26]",
+            "t": "A100",
+            "l": 103,
+            "v": "a{e_Iu_cqAm@a@kAmBQYGI"
+          },
+          {
+            "id": "636df136ff950c6e5644a144f2952bf8",
+            "p": {
+              "x": 13.4615871,
+              "y": 52.4629669
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "left lane closed",
+            "sd": "2020-11-26T05:10:30Z",
+            "ed": "2020-12-31T22:59:00Z",
+            "f": "Späthstraße (Autobahnzubringer Dresden/A113)",
+            "t": "Neukölln (Autobahnzubringer Dresden/A113)",
+            "l": 120,
+            "r": "A113",
+            "v": "{ie_IoccqAaAt@m@f@SNSNg@`@"
+          },
+          {
+            "id": "bd2ce7bba3b6621dc1d2539341b9555f",
+            "p": {
+              "x": 13.4536626,
+              "y": 52.4682432
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "construction work",
+            "sd": "2020-11-25T06:50:57Z",
+            "ed": "2021-02-15T22:59:00Z",
+            "f": "A100",
+            "t": "A113",
+            "l": 488,
+            "v": "_`f_I_dcqALt@VtAZlDZ|Ad@r@RPNNLJFDTJHBFDHBNBN@TAPARE`@QRMHI@ADELORYP]N_@Xw@Zi@Pe@Xs@Pg@"
+          },
+          {
+            "id": "b0fabcd2026c3a1d06bc91f85f99aee0",
+            "p": {
+              "x": 13.4505523,
+              "y": 52.46424
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2020-11-25T07:56:51Z",
+            "ed": "2021-02-15T22:59:00Z",
+            "f": "A100",
+            "t": "A100",
+            "l": 113,
+            "v": "kff_I_dcqAVQNONQd@k@JMJKFGFNJPHNFJ"
+          },
+          {
+            "id": "408a250164056db150e9de0ec4cd0113",
+            "p": {
+              "x": 13.4556848,
+              "y": 52.4653698
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "construction work",
+            "sd": "2019-01-24T09:03:02Z",
+            "ed": "2022-12-30T22:59:00Z",
+            "f": "Karl-Marx-Straße - Lahnstraße (Silbersteinstraße/L1096)",
+            "t": "Grenzallee (Neuköllnische Allee/L1096)",
+            "l": 317,
+            "v": "_{f_IkdcqAF}CF}CFi@Ju@VsAVsAP{@Hc@ZyAl@eB"
+          },
+          {
+            "id": "3af7ad6f910493dc375548f1b4c3bec6",
+            "p": {
+              "x": 13.4592684,
+              "y": 52.4624097
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "sd": "2020-11-24T11:18:55Z",
+            "f": "Buschkrugallee - Karl-Marx-Straße (Grenzallee/L1097)",
+            "t": "Neuköllnische Allee (Grenzallee/L1097)",
+            "l": 409,
+            "v": "sef_IsdcqAGYOe@Me@gAwDOi@[cAKY[w@AE_@{@o@mAS]_BuBs@_Ae@{@"
+          },
+          {
+            "id": "d791e965b724225ada3b15c1d028a881",
+            "p": {
+              "x": 13.4620199,
+              "y": 52.4443969
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "lane closed",
+            "c": "right lane closed",
+            "sd": "2020-07-30T06:00:00Z",
+            "ed": "2020-12-23T22:59:00Z",
+            "f": "Grüner Weg (Buschkrugallee/L1176)",
+            "t": "Späthstraße - Blaschkoallee (Buschkrugallee/L1176)",
+            "l": 636,
+            "v": "_va_I_fcqA]V_@TOHkB~@mDbAgD`A[HaP|E"
+          },
+          {
+            "id": "464e8cfd1ebe71580bde8037a8d6d43c",
+            "p": {
+              "x": 13.452021,
+              "y": 52.4675858
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "construction work",
+            "sd": "2020-11-25T06:46:15Z",
+            "ed": "2021-02-15T22:59:00Z",
+            "f": "Neuköllnische Allee",
+            "t": "A113",
+            "l": 517,
+            "r": "A100",
+            "v": "gaf_IefcqATb@Pb@`@`AV|@H^VfAFZHd@TdC@Z@f@@xA?P?\\?^A^A^?N@z@@t@Bl@DfAFz@RfA\\hCFf@Rp@"
+          },
+          {
+            "id": "4225d581f9e817ffac95a360394ddc43",
+            "p": {
+              "x": 13.4620784,
+              "y": 52.4671673
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2020-11-25T07:52:15Z",
+            "ed": "2021-02-15T22:59:00Z",
+            "f": "A100 / Bergiusstraße",
+            "t": "Straße 12",
+            "l": 82,
+            "v": "yaf_IyhcqASTGFKJKLe@j@OPON"
+          },
+          {
+            "id": "1c2709862e4ce5049c735b64198e1d36",
+            "p": {
+              "x": 13.4615,
+              "y": 52.462484
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2019-08-08T13:18:01Z",
+            "f": "Grenzallee [26]",
+            "t": "Am Treptower Park (B96a)",
+            "l": 2999,
+            "r": "A100",
+            "v": "yaf_ImicqACEOWOWq@{@MOSWe@c@IIGE[W[WKIa@Yc@[a@WQKKGWMWMYM]Oc@Oe@OoA_@w@Uc@MYIUI[Kk@QUIME_@Mw@Uo@QqAe@o@Wq@Wg@Wa@UUMm@_@o@_@k@][QOIGEYO_@S[QWMw@_@KE[Me@OUISG[Ig@Iu@Kc@Eu@CW?o@?y@Do@Du@Fg@Hm@Lg@Lm@Pi@Py@Vo@\\w@f@sA~@oA|@o@b@k@\\u@^_@PaA\\{@Ra@FU@c@AUA]CYEq@I}BYoBWo@Iy@Ia@Eg@AO?c@@]BQBUD_@HQDMBUHUHSHYLGBKFWP_@V[TYT_@Zg@`@q@h@GD[VSPSNKHQLKFQHWH]JYFs@Ns@Nw@NWDSBW@SASAm@GYEc@K{@S_@I]GSGq@SUIg@Uk@WEEGI"
+          },
+          {
+            "id": "bcaef3cb6a417304637cd1291ab94470",
+            "p": {
+              "x": 13.4642279,
+              "y": 52.4712052
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "construction work",
+            "sd": "2019-01-24T09:03:02Z",
+            "ed": "2022-12-30T22:59:00Z",
+            "f": "Grenzallee (Neuköllnische Allee/L1096)",
+            "t": "Karl-Marx-Straße - Lahnstraße (Silbersteinstraße/L1096)",
+            "l": 317,
+            "v": "cuf_Ik_dqAm@dB[xAIb@Qz@WrAWrAKt@Gh@G|CG|C"
+          },
+          {
+            "id": "e15f11d7f95d7d8328ff5e9e778d11ae",
+            "p": {
+              "x": 13.4558819,
+              "y": 52.4706554
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "sd": "2020-11-24T11:18:55Z",
+            "f": "Neuköllnische Allee (Grenzallee/L1097)",
+            "t": "Grenzallee (Grenzallee/L1097)",
+            "l": 401,
+            "v": "cuf_Ik_dqAf@x@NRzBxCT`@\\l@Rb@LVLZv@rB^nAHZf@fB\\lAPn@HX"
+          },
+          {
+            "id": "f7abb9ec355c202c311c905199dcb44c",
+            "p": {
+              "x": 13.4655827,
+              "y": 52.4644036
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "roadworks",
+            "sd": "2020-10-07T16:49:00Z",
+            "ed": "2020-12-31T22:59:59Z",
+            "f": "Haberstraße",
+            "t": "A100 / Grenzallee",
+            "l": 419,
+            "v": "coe_Ii`dqAuDfFiBdCyBvCwApB]h@[`@GHWXGF??"
+          }
+        ],
+        "l": 11496
+      },
+      {
+        "id": "CLUSTER_48818",
+        "p": {
+          "x": 13.4640844,
+          "y": 52.5566801
+        },
+        "ic": 13,
+        "ty": 0,
+        "cbl": {
+          "x": 13.4606123,
+          "y": 52.5538087
+        },
+        "ctr": {
+          "x": 13.4675565,
+          "y": 52.5595513
+        },
+        "cs": 2,
+        "cpoi": [
+          {
+            "id": "0c22727a65cb32fa3ecd7056a47cb39d",
+            "p": {
+              "x": 13.4555331,
+              "y": 52.5616914
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-07-10T08:54:47Z",
+            "f": "Rennbahnstraße / Pasedagplatz",
+            "t": "Große Seestraße",
+            "l": 249,
+            "v": "epx_Iy_dqAvHbJZZ\\\\"
+          },
+          {
+            "id": "534885781414f3a4598bbe4eb7a72726",
+            "p": {
+              "x": 13.4732059,
+              "y": 52.5522857
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "single alternate line traffic",
+            "c": "construction work",
+            "sd": "2020-11-16T06:00:00Z",
+            "ed": "2020-12-04T22:59:00Z",
+            "f": "Indira-Gandhi-Straße (Berliner Allee/B2)",
+            "t": "Buschallee (Berliner Allee/B2)",
+            "l": 15,
+            "r": "B2",
+            "v": "ilw_IgkeqAKIKG"
+          }
+        ],
+        "l": 264
+      },
+      {
+        "id": "CLUSTER_48835",
+        "p": {
+          "x": 13.4997547,
+          "y": 52.5423931
+        },
+        "ic": 13,
+        "ty": 0,
+        "cbl": {
+          "x": 13.4875604,
+          "y": 52.5376403
+        },
+        "ctr": {
+          "x": 13.5143771,
+          "y": 52.5499356
+        },
+        "cs": 3,
+        "cpoi": [
+          {
+            "id": "7b31adfcb8708ae44240caae0b304bbf",
+            "p": {
+              "x": 13.4919196,
+              "y": 52.5403046
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-11-26T13:03:04Z",
+            "f": "Große-Leege-Straße",
+            "t": "Konrad-Wolf-Straße",
+            "l": 219,
+            "v": "ggt_IghiqAk@fAuApCmCxF"
+          },
+          {
+            "id": "f920b2874765a60ef14c6fec73ffd425",
+            "p": {
+              "x": 13.4950818,
+              "y": 52.5464343
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "c": "resurfacing work",
+            "sd": "2020-11-24T08:00:00Z",
+            "ed": "2020-12-07T22:59:00Z",
+            "f": "Degnerstraße (Suermondtstraße/L1056)",
+            "t": "Konrad-Wolf-Straße - Seefelder Straße (Suermondtstraße/L1056)",
+            "l": 313,
+            "v": "ctv_IiekqAJs@v@gFnAiJZgCFa@Hq@"
+          },
+          {
+            "id": "7c8ef0ee1929e0a446db3faaf33000ab",
+            "p": {
+              "x": 13.5199413,
+              "y": 52.5412377
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "right lane blocked",
+            "c": "roadworks",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2020-12-18T22:59:00Z",
+            "f": "Landsberger Allee (Rhinstraße/L1055)",
+            "t": "Marzahner Straße - Gärtnerstraße (Rhinstraße/L1055)",
+            "l": 830,
+            "v": "ost_I{onqA}FhEcFdD{FpDeGhDyBlAeDhBm@XSFWN"
+          }
+        ],
+        "l": 1362
+      },
+      {
+        "id": "CLUSTER_48844",
+        "p": {
+          "x": 13.518903,
+          "y": 52.4872878
+        },
+        "ic": 13,
+        "ty": 0,
+        "cbl": {
+          "x": 13.5061146,
+          "y": 52.4743751
+        },
+        "ctr": {
+          "x": 13.5268119,
+          "y": 52.4955163
+        },
+        "cs": 9,
+        "cpoi": [
+          {
+            "id": "37ef072e2e0918a69165ae901cb64d14",
+            "p": {
+              "x": 13.5001802,
+              "y": 52.4931209
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-08-24T18:13:00Z",
+            "f": "Dolgenseestraße / Hönower Weg",
+            "t": "Tannhäuserstraße",
+            "l": 327,
+            "v": "mjk_Ie|lqAnBt@LFZDLGDSLeANiAJ{@@KFm@Zk@lB_G"
+          },
+          {
+            "id": "55205ebb579d65f24a66186b20b519c5",
+            "p": {
+              "x": 13.512288,
+              "y": 52.4933108
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-08-24T18:13:00Z",
+            "f": "Tannhäuserstraße",
+            "t": "Dolgenseestraße / Hönower Weg",
+            "l": 327,
+            "v": "}~j_IslmqAmB~F[j@Gl@AJKz@OhAMdAERMF[EMGoBu@"
+          },
+          {
+            "id": "4ed92187929dcf6059122431cf89dd99",
+            "p": {
+              "x": 13.5086205,
+              "y": 52.4936419
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-07-14T06:00:00Z",
+            "ed": "2020-12-04T22:59:00Z",
+            "f": "Rummelsburger Straße - Lückstraße (Sewanstraße/L1196)",
+            "t": "Am Tierpark (Sewanstraße/L1196)",
+            "l": 636,
+            "v": "_`l_IkmnqAh@g@FEbAo@z@i@fAq@l@_@d@m@Rk@Hg@@]@SMo@Kg@a@}BkAsG_@wBc@aCWwAMs@c@qC"
+          },
+          {
+            "id": "3bb08edbf7507fa09c8273adf08bd878",
+            "p": {
+              "x": 13.5175809,
+              "y": 52.4982544
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-07-14T06:00:00Z",
+            "ed": "2020-12-04T22:59:00Z",
+            "f": "Am Tierpark (Sewanstraße/L1196)",
+            "t": "Rummelsburger Straße - Lückstraße (Sewanstraße/L1196)",
+            "l": 563,
+            "v": "s{k_IqsoqAVvAb@`C^vBjArG`@|BJf@Ln@ARA\\If@Sj@e@l@m@^gAp@{@h@cAn@GDi@f@"
+          },
+          {
+            "id": "94db1541facce64ea3fc4a3f4e7e9e5d",
+            "p": {
+              "x": 13.5260024,
+              "y": 52.4723526
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-11-24T11:18:55Z",
+            "f": "An der Wuhlheide - Rummelsburger Straße (Edisonstraße/L1055)",
+            "t": "Marksburgstraße (Treskowallee/L1055)",
+            "l": 1443,
+            "v": "{{g_I}woqAiDqDs@u@mBqBmBwB}DkEWYm@g@u@YcASsCo@mAYo@OiASwAQe@Cs@Gi@G}@Kk@Is@Ku@Si@Mg@Oc@IUGmGuAw@ScDq@mE_A"
+          },
+          {
+            "id": "612020b3f7993076fbff9a879116468c",
+            "p": {
+              "x": 13.5202956,
+              "y": 52.4756952
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-10-13T05:30:50Z",
+            "f": "Blockdammweg (Ehrlichstraße/L1191)",
+            "t": "Treskowalle (Ehrlichstraße/L1191)",
+            "l": 83,
+            "v": "{wh_IuipqA`@uA`@uADe@"
+          },
+          {
+            "id": "194169dc84a708ef5364c6833e71d4b7",
+            "p": {
+              "x": 13.5278577,
+              "y": 52.481682
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-10-13T05:30:50Z",
+            "f": "Treskowalle (Ehrlichstraße/L1191)",
+            "t": "Blockdammweg (Ehrlichstraße/L1191)",
+            "l": 69,
+            "v": "wuh_IaopqAa@tAa@tA"
+          },
+          {
+            "id": "85ebb45fe2a014d9ef600320e0cbd422",
+            "p": {
+              "x": 13.5312368,
+              "y": 52.4959683
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-11-25T06:00:00Z",
+            "ed": "2020-12-11T22:59:00Z",
+            "f": "Waldowallee (Treskowallee/L1055)",
+            "t": "Sewanstraße (Am Tierpark/L1055)",
+            "l": 151,
+            "v": "izk_IeupqAu@`@aAd@u@^aAd@OF"
+          },
+          {
+            "id": "3361eb81171624172767ef74d88ee6cc",
+            "p": {
+              "x": 13.5207443,
+              "y": 52.4872931
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-11-24T11:18:55Z",
+            "f": "Marksburgstraße (Treskowallee/L1055)",
+            "t": "An der Wuhlheide - Rummelsburger Straße (Edisonstraße/L1055)",
+            "l": 1462,
+            "v": "chj_Iq}pqAv@PvCn@xEhANDtGxA^H`@Hp@LZFPBF@d@Bt@@z@Ld@D|@JF@TFxAX\\FdAT~@RzDv@b@Jf@Nv@Vf@^LLdDlDfCzCJL~AjBr@z@p@v@hAnA^d@^b@DD"
+          }
+        ],
+        "l": 5061
+      },
+      {
+        "id": "CLUSTER_48850",
+        "p": {
+          "x": 13.5257973,
+          "y": 52.5173125
+        },
+        "ic": 7,
+        "ty": 0,
+        "cbl": {
+          "x": 13.5189114,
+          "y": 52.5124517
+        },
+        "ctr": {
+          "x": 13.5453607,
+          "y": 52.5258614
+        },
+        "cs": 4,
+        "cpoi": [
+          {
+            "id": "a82e0e3a200b0ef8c2890c819633d47f",
+            "p": {
+              "x": 13.5127316,
+              "y": 52.5144205
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-11-24T11:18:55Z",
+            "f": "Allee der Kosmonauten (Rhinstraße/L1055)",
+            "t": "Alt-Friedrichsfelde (Am Tierpark/L1055)",
+            "l": 374,
+            "v": "cvo_IeloqA@?VAR?X@RB\\@^@D?\\BtGHlEB"
+          },
+          {
+            "id": "6494a2d0b98b4ea1ae92c0c66499d05b",
+            "p": {
+              "x": 13.5253235,
+              "y": 52.5123825
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "construction work",
+            "sd": "2020-11-24T11:18:55Z",
+            "f": "Alt-Friedrichsfelde (Am Tierpark/L1055)",
+            "t": "Allee der Kosmonauten (Rhinstraße/L1055)",
+            "l": 130,
+            "v": "yio_IsmoqAkEE]C"
+          },
+          {
+            "id": "180483447ee28af8bffb8bc07b42c3b9",
+            "p": {
+              "x": 13.5191637,
+              "y": 52.5221197
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-09-21T06:00:00Z",
+            "ed": "2020-11-30T22:59:00Z",
+            "f": "Rhinstraße (Allee der Kosmonauten/L1061)",
+            "t": "Marzahner Chaussee (Allee der Kosmonauten/L1061)",
+            "l": 560,
+            "v": "s}q_IqqoqADaBBcA@a@FgD@W@g@^mRByABiBLqK"
+          },
+          {
+            "id": "70b4dcb5bc89ed631215e59bbb3281aa",
+            "p": {
+              "x": 13.5515334,
+              "y": 52.516335
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to one lane",
+            "c": "roadworks",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2020-12-03T22:59:00Z",
+            "f": "Alt-Biesdorf - Alt- Friedrichsfelde (Märkische Allee/B158)",
+            "t": "Allee der Kosmonauten (Märkische Allee/B158)",
+            "l": 1037,
+            "r": "B158",
+            "v": "gcp_IoqtqAI?C?[?C?I?I@G?C?i@DK@_@D_@Fm@LE@IBi@N_@L]Ng@V]Pq@`@o@d@w@r@c@d@QRm@t@EFi@t@aAxAq@hA_@l@mC`EyApBc@f@YZ_@^a@^m@j@SPYTa@Xa@XWLo@^a@Vw@b@w@\\ID"
+          }
+        ],
+        "l": 2101
+      },
+      {
+        "id": "CLUSTER_48858",
+        "p": {
+          "x": 13.5512262,
+          "y": 52.5434262
+        },
+        "ic": 13,
+        "ty": 0,
+        "cbl": {
+          "x": 13.5398152,
+          "y": 52.5401174
+        },
+        "ctr": {
+          "x": 13.5721922,
+          "y": 52.5463844
+        },
+        "cs": 5,
+        "cpoi": [
+          {
+            "id": "caa02401a4b8222c6c3e21fe689945bc",
+            "p": {
+              "x": 13.5455362,
+              "y": 52.5386962
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to two lanes",
+            "c": "work on buried services",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2020-12-18T22:59:00Z",
+            "f": "Poelchaustraße (Märkische Allee/B158)",
+            "t": "Raoul-Wallenberg-Straße (Märkische Allee/B158)",
+            "l": 645,
+            "r": "B158",
+            "v": "wvt_I{nsqAc@WSMm@_@w@e@[SSMc@Yc@YIGYQa@WaAm@u@g@i@]MIGEKIIE_Ao@u@i@US_@[uBiBi@a@iBsAMKIGMIYW"
+          },
+          {
+            "id": "3055f8344a37703799dfd52dcbe6f81e",
+            "p": {
+              "x": 13.5380642,
+              "y": 52.5470362
+            },
+            "ic": 7,
+            "ty": 0,
+            "cs": 0,
+            "d": "carriageway reduced to two lanes",
+            "c": "work on buried services",
+            "sd": "2020-11-24T11:18:55Z",
+            "ed": "2020-12-18T22:59:00Z",
+            "f": "Raoul-Wallenberg-Straße (Märkische Allee/B158)",
+            "t": "Landsberger Allee (Märkische Allee/B158)",
+            "l": 564,
+            "r": "B158",
+            "v": "ewu_IeftqAXTVRrAbAbDnCd@XVNJHLHLHJHFDz@l@FDJFTPh@\\`@ZzBzATNFDd@ZZRNJHDp@b@PJFD"
+          },
+          {
+            "id": "a56303f2f37691a1c0522e979a86d749",
+            "p": {
+              "x": 13.5446899,
+              "y": 52.5410558
+            },
+            "ic": 8,
+            "ty": 4,
+            "cs": 0,
+            "d": "closed",
+            "sd": "2020-09-17T09:03:37Z",
+            "f": "Landsberger Allee",
+            "t": "Kiebitzgrund",
+            "l": 46,
+            "v": "wgu_IiouqALKJKl@g@"
+          },
+          {
+            "id": "277869b1a139ddb89c6b5190eabc1c3b",
+            "p": {
+              "x": 13.555917,
+              "y": 52.5442285
+            },
+            "ic": 9,
+            "ty": 0,
+            "cs": 0,
+            "d": "roadworks",
+            "sd": "2020-09-17T07:00:00Z",
+            "ed": "2020-12-03T22:59:00Z",
+            "f": "Kiebitzgrund",
+            "t": "Landsberger Allee",
+            "l": 46,
+            "v": "oeu_IiquqAm@f@KJMJ"
+          },
+          {
+            "id": "ad21e9dfdfdd22b52fa43c11b3d05db8",
+            "p": {
+              "x": 13.5698356,
+              "y": 52.5498583
+            },
+            "ic": 6,
+            "ty": 3,
+            "cs": 0,
+            "d": "stationary traffic",
+            "sd": "2020-11-28T03:42:00Z",
+            "ed": "2020-11-28T09:25:35Z",
+            "f": "Zossener Straße - Eichener Chaussee (Landsberger Chaussee/L33)",
+            "t": "Allee der Kosmonauten - Raoul-Wallenberg-Straße (Landsberger Allee/L33)",
+            "l": 532,
+            "dl": 577,
+            "v": "{}u_IeyyqA@DX|ALv@P`AJl@~@hFVzARjAb@vCRxAf@pCDd@JjAHdADl@Bx@Bt@DfA"
+          }
+        ],
+        "l": 1833
+      }
+    ]
+  }
+}
