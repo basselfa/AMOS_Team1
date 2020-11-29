@@ -9,7 +9,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import javax.persistence.*;
 
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -17,22 +16,21 @@ import java.util.Optional;
 @DataJpaTest
 public class DatabaseTest {
 
-
     @Autowired
     private ComparisonRepository repo;
 
     @Test
     void testMysqlDatabase() {
 
-        EntityManagerFactory emf=Persistence.createEntityManagerFactory("Comparsion");
+        EntityManagerFactory emf=Persistence.createEntityManagerFactory("Comparison");
         EntityManager em=emf.createEntityManager();
 
         em.getTransaction().begin();
 
         //insert comparison into the table
         Comparison comparison1 = new Comparison("Traffic jam2","Crash5");
-     //   if (em.contains( comparison1 ) ==false )
-            em.persist(comparison1);
+        //   if (em.contains( comparison1 ) ==false )
+        em.persist(comparison1);
 
         //select  all comparisons from table Comparison and cast them to Comparison object
         List<Comparison> arr_comp = (List<Comparison>)em.createQuery("SELECT c FROM Comparison c")
@@ -41,10 +39,6 @@ public class DatabaseTest {
         System.out.println(arr_comp.get(0));
 
         System.out.println(arr_comp.get(0));
-
-
-
-
 
         em.getTransaction().commit();
 
@@ -55,32 +49,40 @@ public class DatabaseTest {
     @Test
     void testIncidentDatabaseConnection() {
 
-        EntityManagerFactory emf=Persistence.createEntityManagerFactory("Incident");
-        EntityManager em=emf.createEntityManager();
+        EntityManagerFactory emf =
+                Persistence.createEntityManagerFactory("Incident");
+        EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
 
-        Incident incident1 = new Incident(1,"major", "Traffic jam in Bergmanstraße", "Berlin", "Germany", 1,
-                "45.5", "67.4", "Bermangstraße", "46.5", "69.5", "Bermangstraße", 1, 0, 20,
-                LocalDateTime.of(
-                2020, 5, 1,
-                12, 30, 0
-        ), LocalDateTime.of(
-                2020, 5, 1,
-                12, 30, 0
-        )  );
+        Incident incident1 =
+                new Incident(1,"major",
+                        "Traffic jam in Bergmannstraße",
+                        "Berlin", "Germany", 1,
+                        "45.5", "67.4",
+                        "Bergmannstraße",
+                        "46.5", "69.5",
+                        "Bergmannstraße",
+                        1, 0, 20,
+                        LocalDateTime.of(
+                        2020, 5, 1,
+                        12, 30, 0),
+                        LocalDateTime.of(
+                        2020, 5, 1,
+                        12, 30, 0),
+                        "670000:690000,681234:691234");
+
+        List<Comparison> arr_comp1 = 
+                (List<Comparison>)em.createNamedQuery("getFromCity")
+                .setParameter("city" ,"Berlin" )
+                .getResultList();
+
         em.persist(incident1);
-
-
         em.getTransaction().commit();
 
         emf.close();
         em.close();
     }
-
-
-
-
 
     @Test
     void test(){

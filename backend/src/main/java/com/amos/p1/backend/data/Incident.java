@@ -1,51 +1,49 @@
 package com.amos.p1.backend.data;
 
-
-
 import javax.persistence.*;
 import java.time.LocalDateTime ;
-import java.util.Date ;
 
-
-
+@NamedQuery(
+        name="getFromCity",
+        query="SELECT i FROM Incident i WHERE i.city = :city"
+)
 
 @Entity
 public class Incident {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
-    private int type; //
-    private String size; //
+    private int type; // type of incident
+    private String size;
     private String description;
     private String city;
     private String country ;
-    private int exitAvailable; // 0:false ,1:true
+    private int exitAvailable; // 0:false, 1:true
     private String startPositionLatitude;
     private String startPositionLongitude;
     private String startPositionStreet;
     private String endPositionLatitude;
     private String endPositionLongitude;
     private String endPositionStreet;
-    private int verified; // 0:false ,1:true
-    private int provider; // 0:Here,1:Tomtom
-
+    private int verified; // 0:false, 1:true
+    private int provider; // 0:Here, 1:Tomtom
     private  Integer delay;
     // reference https://vladmihalcea.com/date-timestamp-jpa-hibernate/
-    private LocalDateTime  entryTime;
-    private  LocalDateTime  endTime;
-    //optional
-    //private  String edges;
+    private LocalDateTime entryTime;
+    private  LocalDateTime endTime;
+    private String edges; // 12.124234:53.536453,
 
     public Incident() {
         super();
     }
+
     public Incident( int type, String size, String description,
                     String city, String country, int exitAvailable,
                     String startPositionLatitude, String startPositionLongitude,
                     String startPositionStreet, String endPositionLatitude,
                     String endPositionLongitude, String endPositionStreet,
                     int verified, int provider, Integer delay,
-                    LocalDateTime   entryTime, LocalDateTime  endTime) {
+                    LocalDateTime entryTime, LocalDateTime endTime, String edges) {
         super();
 
         this.type = type;
@@ -65,6 +63,7 @@ public class Incident {
         this.delay = delay;
         this.entryTime = entryTime;
         this.endTime = endTime;
+        this.edges = edges;
     }
 
     @Basic
@@ -73,61 +72,53 @@ public class Incident {
     public LocalDateTime  getEntryTime() { return entryTime; }
     public void setEntryTime(LocalDateTime  entryTime) { this.entryTime = entryTime; }
 
-
-
     @Basic
     @Column(name = "endTime", columnDefinition="DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
     public LocalDateTime   getEndTime() { return endTime; }
     public void setEndTime(LocalDateTime  endTime) {  this.endTime = endTime; }
 
-
-
-
-
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
     @Basic
     @Column(name = "type", nullable = true)
-    public int getType (){       return type;    }
+    public int getType (){ return type; }
     public void setType(int type) {  this.type = type; }
 
     @Basic
     @Column(name = "size", nullable = true)
-    public String getSize() {        return size; }
+    public String getSize() { return size; }
     public void setSize(String size) {  this.size = size; }
 
     @Basic
     @Column(name = "description", nullable = true)
-    public String getDescription() {        return description; }
-    public void setDescription(String discription) {  this.description = discription; }
+    public String getDescription() { return description; }
+    public void setDescription(String description) {  this.description = description; }
 
     @Basic
     @Column(name = "country", nullable = true)
-    public String getCountry() {        return country; }
+    public String getCountry() { return country; }
     public void setCountry(String country) {  this.country = country; }
 
     @Basic
     @Column(name = "city", nullable = true)
-    public String getCity() {    return city; }
+    public String getCity() { return city; }
     public void setCity(String city) {  this.city = city; }
 
     @Basic
     @Column(name = "exitAvailable", nullable = true)
-    public int getExitAvailable() {    return exitAvailable; }
+    public int getExitAvailable() { return exitAvailable; }
     public void setExitAvailable(int exit) {  this.exitAvailable = exit; }
 
     @Basic
     @Column(name = "startPositionLongitude", nullable = true)
-    public String getStartPositionLongitude() {     return startPositionLongitude; }
+    public String getStartPositionLongitude() { return startPositionLongitude; }
     public void setStartPositionLongitude(String startPositionLongitude) {  this.startPositionLongitude = startPositionLongitude; }
 
     @Basic
     @Column(name = "startPositionLatitude", nullable = true)
-    public String getStartPositionLatitude() {  return startPositionLatitude; }
+    public String getStartPositionLatitude() { return startPositionLatitude; }
     public void setStartPositionLatitude(String startPositionLatitude) { this.startPositionLatitude = startPositionLatitude; }
 
     @Basic
@@ -142,30 +133,33 @@ public class Incident {
 
     @Basic
     @Column(name = "endPositionLongitude", nullable = true)
-    public String getEndPositionLongitude() {  return endPositionLongitude;    }
+    public String getEndPositionLongitude() { return endPositionLongitude; }
     public void setEndPositionLongitude(String endPositionLongitude) {  this.endPositionLongitude = endPositionLongitude; }
 
     @Basic
     @Column(name = "endPositionStreet", nullable = true)
-    public String getEndPositionStreet() {  return endPositionStreet; }
-    public void setEndPositionStreet(String endPositionStreet) {    this.endPositionStreet = endPositionStreet; }
+    public String getEndPositionStreet() { return endPositionStreet; }
+    public void setEndPositionStreet(String endPositionStreet) { this.endPositionStreet = endPositionStreet; }
 
     @Basic
     @Column(name = "verified", nullable = true)
     public int getVerified() { return verified; }
-    public void setVerified(int verified) {   this.verified = verified; }
+    public void setVerified(int verified) { this.verified = verified; }
 
     @Basic
     @Column(name = "delay", nullable = true)
-    public int getDelay() {return delay; }
+    public int getDelay() { return delay; }
     public void setDelay(int delay) { this.delay = delay; }
 
     @Basic
     @Column(name = "provider", nullable = true)
-    public int getProvider() {        return provider; }
-    public void setProvider(int provider) {  this.provider = provider;}
+    public int getProvider() { return provider; }
+    public void setProvider(int provider) { this.provider = provider; }
 
-
+    @Basic
+    @Column(name = "edges", nullable = true)
+    public String getEdges() { return edges; }
+    public void setEdges(String edges) { this.edges = edges; }
 
     @Override
     public String toString() {
@@ -188,10 +182,7 @@ public class Incident {
                 ", delay=" + delay +
                 ", entryTime=" + entryTime +
                 ", endTime=" + endTime +
+                ", edges=" + edges +
                 '}';
     }
 }
-
-
-
-

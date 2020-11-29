@@ -14,8 +14,8 @@ CREATE TABLE Incident (
       verified INT NOT NULL,
       delay INT NOT NULL,
       provider INT NOT NULL,
-      exitAvailable INT NOT NULL ,
-      edges VARCHAR(255) NOT NULL,
+      exitAvailable INT NOT NULL,
       entryTime datetime NOT NULL,
-      endTime datetime NOT NULL
+      endTime datetime NOT NULL,
+      edges VARCHAR(255) NOT NULL
 ) ;

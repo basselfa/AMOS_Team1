@@ -7,7 +7,13 @@ import java.util.List;
 public class TomTomNormalization implements JsonToIncident{
     @Override
     public Incident normalizeOneIncident(String json) {
-        return null;
+        Incident incident = new Incident();
+
+
+        //Json parsed
+        incident.setDescription("roadworks");
+
+        return incident;
     }
 
     @Override

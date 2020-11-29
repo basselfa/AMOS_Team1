@@ -1,6 +1,7 @@
 package com.amos.p1.backend.service;
 
 import com.amos.p1.backend.data.Incident;
+import com.amos.p1.backend.database.MyRepo;
 import com.amos.p1.backend.normalization.JsonToIncident;
 import com.amos.p1.backend.normalization.TomTomNormalization;
 import com.amos.p1.backend.provider.ProviderRequest;
@@ -12,10 +13,8 @@ public class IncidentAggregatorDummy implements IncidentAggregator {
     @Override
     public List<Incident> getFromCity(String city) {
 
-        ProviderRequest tomTomRequest = new TomTomRequestDummy();
-        String responseJson = tomTomRequest.request("", "", "","");
-
-        JsonToIncident tomTomNormalizer = new TomTomNormalization();
-        return tomTomNormalizer.normalize(responseJson);
+        return (List<Incident>) MyRepo.getEntityManager().createNamedQuery("getFromCity")
+                .setParameter("city" ,city )
+                .getResultList();
     }
 }

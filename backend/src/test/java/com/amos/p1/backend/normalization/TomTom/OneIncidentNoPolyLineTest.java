@@ -4,6 +4,7 @@ import com.amos.p1.backend.Helper;
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.normalization.HereNormalization;
 import com.amos.p1.backend.normalization.JsonToIncident;
+import com.amos.p1.backend.normalization.TomTomNormalization;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -18,7 +19,7 @@ public class OneIncidentNoPolyLineTest {
     public OneIncidentNoPolyLineTest(){
         String json = Helper.getFileResourceAsString("normalization/TomTomData/OneIncidentNoPolyLine.json");
 
-        JsonToIncident jsonNormalizer = new HereNormalization();
+        JsonToIncident jsonNormalizer = new TomTomNormalization();
         incident = jsonNormalizer.normalizeOneIncident(json);
     }
 
