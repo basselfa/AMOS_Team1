@@ -14,7 +14,6 @@ public class Locations {
             String[] edgeSplitToParts = Location.split(":");
             locationsList.add(new Location(edgesSplit[0],edgesSplit[1]));
         }
-
     }
 
     public List<Location> getLocationsList() {
