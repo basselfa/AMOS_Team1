@@ -4,6 +4,7 @@ import com.amos.p1.backend.Helper;
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.normalization.HereNormalization;
 import com.amos.p1.backend.normalization.JsonToIncident;
+import com.amos.p1.backend.normalization.TomTomNormalization;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -18,43 +19,45 @@ public class OneIncidentTest {
     public OneIncidentTest(){
         String json = Helper.getFileResourceAsString("normalization/TomTomData/OneIncident.json");
 
-        JsonToIncident jsonNormalizer = new HereNormalization();
+        JsonToIncident jsonNormalizer = new TomTomNormalization();
         incident = jsonNormalizer.normalizeOneIncident(json);
+
+        System.out.println(incident);
     }
 
     @Test
     void testProvider(){
-        assertEquals(incident.getProvider(), 0);
+        assertEquals(0, incident.getProvider());
     }
 
     @Test
     void testId(){
-        assertEquals(incident.getId(), null); //0c8ec1255d93f1498479cbe9eb2db037?
+        assertEquals(null, incident.getId()); //0c8ec1255d93f1498479cbe9eb2db037?
     }
 
     @Test
     void testDescription() {
-        assertEquals(incident.getDescription(), "roadworks");
+        assertEquals( incident.getDescription(), "roadworks");
     }
 
     @Test
     void testEntryTime() {
-        assertEquals(incident.getEntryTime(), LocalDateTime.parse("2020-11-28T06:00:00"));
+        assertEquals(LocalDateTime.parse("2020-11-28T06:00:00"), incident.getEntryTime());
     }
 
     @Test
     void testEndTime() {
-        assertEquals(incident.getEntryTime(), LocalDateTime.parse("2020-11-28T17:00:00"));
+        assertEquals(LocalDateTime.parse("2020-11-28T17:00:00"), incident.getEntryTime());
     }
 
     @Test
     void testFrom(){
-        assertEquals(incident.getStartPositionStreet(), "Spandauer Damm - Fürstenbrunner Weg (Königin-Elisabeth-Straße/L1121)");
+        assertEquals("Spandauer Damm - Fürstenbrunner Weg (Königin-Elisabeth-Straße/L1121)", incident.getStartPositionStreet());
     }
 
     @Test
     void testTo(){
-        assertEquals(incident.getStartPositionStreet(), "Knobelsdorffstraße (Königin-Elisabeth-Straße");
+        assertEquals("Knobelsdorffstraße (Königin-Elisabeth-Straße", incident.getStartPositionStreet());
     }
 
     @Test
