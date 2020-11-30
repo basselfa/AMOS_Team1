@@ -7,7 +7,7 @@
         :color="polyline.color"
       ></l-polyline>
       <l-marker :lat-lng="markerLatLng">
-        <l-icon :icon-url="customMarker"></l-icon>
+        <!-- <l-icon :icon-url="customMarker"></l-icon> -->
         <l-tooltip>This is an incident</l-tooltip>
       </l-marker>
     </l-map>
