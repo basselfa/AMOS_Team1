@@ -30,7 +30,7 @@ public class OneIncidentTest {
         assertEquals(0, incident.getProvider());
     }
 
-/*    @Test
+    @Test
     void testId(){
         assertEquals(null, incident.getId()); //0c8ec1255d93f1498479cbe9eb2db037?
     }
@@ -64,5 +64,5 @@ public class OneIncidentTest {
     void testShape(){
         fail();
         //mnp_Imw`pA|AQXIJEfAk@`@SRGTEdCUjCWnAO\EpAMpC]ZCfBUZERCXC
-    }*/
+    }
 }
