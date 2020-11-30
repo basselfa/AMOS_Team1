@@ -69,5 +69,7 @@ export default {
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   border-radius: 20px;
+      -webkit-box-shadow: 4px 12px 31px -10px #cecece !important;
+  box-shadow: 4px 12px 31px -10px #cecece !important;
 }
 </style>

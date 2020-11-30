@@ -1,20 +1,15 @@
 <template>
   <div id="app">
     <v-app id="main">
-      <v-row>
-        <v-col>
           <router-link to="/historization">historization</router-link>
           <navigation />
           <router-view/>
-        </v-col>
-      </v-row>
     </v-app>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-
 import Navigation from "./components/Navigation.vue";
 import router from './router'
 
@@ -23,8 +18,7 @@ export default {
   router,
   components: {
     Navigation
-  },
-
+  }
 };
 </script>
 
