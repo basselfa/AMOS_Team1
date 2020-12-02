@@ -12,6 +12,11 @@ import java.time.LocalDateTime ;
         query="SELECT i FROM Incident i WHERE i.entryTime >= :entryTime"
 )
 
+@NamedQuery(
+        name="getAllData",
+        query="SELECT i FROM Incident i"
+)
+
 @Entity
 public class Incident {
     @Id

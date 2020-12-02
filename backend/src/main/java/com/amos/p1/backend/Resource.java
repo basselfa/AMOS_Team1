@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -25,4 +26,19 @@ public class Resource {
 
         return ResponseEntity.ok(incidentAggregator.getFromCity(city));
     }
+
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/historization",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    // to be refined with entryTime - getIncidentsByEntryTime()
+    @ResponseBody
+    public ResponseEntity<List<Incident>> getAllIncidents(){
+
+        IncidentAggregator incidentAggregator = new IncidentAggregatorDummy();
+
+        return ResponseEntity.ok(incidentAggregator.getAllData());
+    }
+
 }
