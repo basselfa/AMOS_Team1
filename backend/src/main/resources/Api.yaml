@@ -45,6 +45,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/Comparisons'
 
+  /demo/historization:
+    get:
+      summary: Get all incidents (todo - by time)
+      responses:
+        '200':
+          description: A report with all incidents
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Incidents'
 
 components:
   schemas:
