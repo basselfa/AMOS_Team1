@@ -5,6 +5,34 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
      http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
 
+    <persistence-unit name="Incident">
+        <description> 12</description>
+        <class>com.amos.p1.backend.data.Incident</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://remotemysql.com:3306/lIkqLjf1AL"/>
+            <property name="javax.persistence.jdbc.user" value="lIkqLjf1AL"/>
+            <property name="javax.persistence.jdbc.password" value="yddtBbLwx1"/>
+        </properties>
+    </persistence-unit>
+
+    <persistence-unit name="Comparison">
+        <description>Hibernate EntityManager Demo</description>
+        <class>com.amos.p1.backend.data.Comparison</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://remotemysql.com:3306/lIkqLjf1AL"/>
+            <property name="javax.persistence.jdbc.user" value="lIkqLjf1AL"/>
+            <property name="javax.persistence.jdbc.password" value="yddtBbLwx1"/>
+        </properties>
+    </persistence-unit>
+
     <persistence-unit name="MyRepo">
         <description> 12</description>
         <class>com.amos.p1.backend.data.Incident</class>
@@ -20,18 +48,3 @@
         </properties>
     </persistence-unit>
 </persistence>
-        <!--
-        <persistence-unit name="Comparison">
-            <description>Hibernate EntityManager Demo</description>
-            <class>com.amos.p1.backend.data.Comparison</class>
-            <exclude-unlisted-classes>true</exclude-unlisted-classes>
-            <properties>
-                <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
-                <property name="hibernate.hbm2ddl.auto" value="update"/>
-                <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="javax.persistence.jdbc.url" value="jdbc:mysql://remotemysql.com:3306/lIkqLjf1AL"/>
-                <property name="javax.persistence.jdbc.user" value="lIkqLjf1AL"/>
-                <property name="javax.persistence.jdbc.password" value="yddtBbLwx1"/>
-            </properties>
-        </persistence-unit>
-        -->
