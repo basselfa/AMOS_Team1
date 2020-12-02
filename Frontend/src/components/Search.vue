@@ -10,6 +10,8 @@
       rounded
       shadow
       solo
+      v-model="city"
+      @change="getCity()"
     ></v-autocomplete>
   </div>
 </template>
@@ -21,11 +23,13 @@ export default {
     items: ["Berlin", "Hamburg"],
     search: null,
     select: null,
+    city: null,
   }),
   methods: {
-    getCity: function (city) {
-      alert(city);
-      console.log(city);
+    getCity: function () {
+      this.$emit('change',this.city)
+      alert(this.city);
+      console.log(this.city);
     },
   },
 };

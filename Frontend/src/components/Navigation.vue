@@ -79,6 +79,7 @@ nav {
   border-radius: 30px;
   -webkit-box-shadow: 4px 12px 31px -5px #cecece;
   box-shadow: 4px 12px 31px -5px #cecece;
+  margin-left: 15px;
 }
 .header {
   left: 295px !important;

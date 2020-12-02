@@ -22,7 +22,7 @@ import {
   LPolyline,
   LMarker,
   LPopup,
-  LIcon,
+  // LIcon,
   LTooltip,
 } from "vue2-leaflet";
 export default {
@@ -32,7 +32,7 @@ export default {
     LMap,
     LTileLayer,
     LMarker,
-    LIcon,
+    // LIcon,
     LTooltip,
     LPolyline,
   },
