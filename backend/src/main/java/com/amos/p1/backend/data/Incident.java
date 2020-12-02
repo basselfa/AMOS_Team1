@@ -1,5 +1,8 @@
 package com.amos.p1.backend.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.time.LocalDateTime ;
 
@@ -169,6 +172,9 @@ public class Incident {
     @Column(name = "edges", nullable = true)
     public String getEdges() { return edges; }
     public void setEdges(String edges) { this.edges = edges; }
+
+    @JsonIgnore
+    @JsonProperty(value = "edges_as_locations")
     public Locations getEdgesAsLocations() { return new Locations(edges); }
 
     @Override
