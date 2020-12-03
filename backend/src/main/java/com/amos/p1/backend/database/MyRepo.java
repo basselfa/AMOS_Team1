@@ -1,11 +1,12 @@
 package com.amos.p1.backend.database;
 
-//import org.springframework.beans.factory.annotation.Autowired;
+import com.amos.p1.backend.data.Incident;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.List;
 
 
 @Component
@@ -28,8 +29,12 @@ public class MyRepo {
         return instance.emf;
     }
 
-    //Andere klasse
-    //@Autowired
-    //MyRepo repo;
-
+    public static void InsertIncident(List<Incident> incidents) {
+        instance.em.getTransaction().begin();
+        for(Incident incident : incidents) {
+            instance.em.persist(incident);
+        }
+        instance.em.getTransaction().commit();
+    }
+    
 }

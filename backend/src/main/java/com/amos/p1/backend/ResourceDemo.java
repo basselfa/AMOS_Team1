@@ -1,8 +1,14 @@
 package com.amos.p1.backend;
 
+import com.amos.p1.backend.data.Incident;
+import com.amos.p1.backend.service.IncidentAggregator;
+import com.amos.p1.backend.service.IncidentAggregatorDummy;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
@@ -16,10 +22,33 @@ public class ResourceDemo {
     )
     @ResponseBody
     public ResponseEntity<String> getIncidentsByCity(@RequestParam("city") String city){
+
         String response = getIncidentsResponseString();
+        return ResponseEntity.ok(response);
+    }
+
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/historization",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+
+    // to be refined with entryTime - getIncidentsByEntryTime()
+    @ResponseBody
+    public ResponseEntity<String> getAllIncidents(){
+
+        String response = getAllIncidentsResponseString();
+        return ResponseEntity.ok(response);
+    }
+
+    /*
+    @ResponseBody
+    public ResponseEntity<String> getIncidentsByEntryTime(@RequestParam("entryTime") String entryTime){
+        String response = getHistorizationResponseString();
 
         return ResponseEntity.ok(response);
     }
+    */
 
     @RequestMapping(
             method = RequestMethod.GET,
@@ -150,6 +179,24 @@ public class ResourceDemo {
                 "        ],\n" +
                 "        \"description\": \"Closed due construction\"\n" +
                 "      }\n" +
+                "    }\n" +
+                "  ]\n" +
+                "}";
+        return response;
+    }
+
+    private String getAllIncidentsResponseString() {
+        String response = "{\n" +
+                "  \"incidents\": [\n" +
+                "    {\n" +
+                "      \"providerId\": 1,\n" +
+                "      \"type\": construction,\n" +
+                "      \"city\": Berlin\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"providerId\": 2,\n" +
+                "      \"type\": traffic jam,\n" +
+                "      \"city\": Berlin\n" +
                 "    }\n" +
                 "  ]\n" +
                 "}";

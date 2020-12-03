@@ -1,11 +1,23 @@
 package com.amos.p1.backend.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.time.LocalDateTime ;
 
 @NamedQuery(
         name="getFromCity",
         query="SELECT i FROM Incident i WHERE i.city = :city"
+)
+@NamedQuery(
+        name="getDataFromTime",
+        query="SELECT i FROM Incident i WHERE i.entryTime >= :entryTime"
+)
+
+@NamedQuery(
+        name="getAllData",
+        query="SELECT i FROM Incident i"
 )
 
 @Entity
@@ -30,7 +42,7 @@ public class Incident {
     private  Integer delay;
     // reference https://vladmihalcea.com/date-timestamp-jpa-hibernate/
     private LocalDateTime entryTime;
-    private  LocalDateTime endTime;
+    private LocalDateTime endTime;
     private String edges; // 12.124234:53.536453,
 
     public Incident() {
@@ -160,6 +172,10 @@ public class Incident {
     @Column(name = "edges", nullable = true)
     public String getEdges() { return edges; }
     public void setEdges(String edges) { this.edges = edges; }
+
+    @JsonIgnore
+    @JsonProperty(value = "edges_as_locations")
+    public Locations getEdgesAsLocations() { return new Locations(edges); }
 
     @Override
     public String toString() {
