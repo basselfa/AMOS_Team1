@@ -7,7 +7,7 @@
         :color="polyline.color"
       ></l-polyline>
       <l-marker :lat-lng="markerLatLng">
-        <l-icon :icon-url="customMarker"></l-icon>
+        <!-- <l-icon :icon-url="customMarker"></l-icon> -->
         <l-tooltip>This is an incident</l-tooltip>
       </l-marker>
     </l-map>
@@ -22,7 +22,7 @@ import {
   LPolyline,
   LMarker,
   LPopup,
-  LIcon,
+  // LIcon,
   LTooltip,
 } from "vue2-leaflet";
 export default {
@@ -32,7 +32,7 @@ export default {
     LMap,
     LTileLayer,
     LMarker,
-    LIcon,
+    // LIcon,
     LTooltip,
     LPolyline,
   },
@@ -64,9 +64,12 @@ export default {
   width: 60%;
   margin: 0;
   position: absolute;
-  top: 50%;
+  top: 680px;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+  border-radius: 20px;
+      -webkit-box-shadow: 4px 12px 31px -10px #cecece !important;
+  box-shadow: 4px 12px 31px -10px #cecece !important;
 }
 </style>

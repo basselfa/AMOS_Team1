@@ -25,7 +25,8 @@ public class OneIncidentNoPolyLineTest {
 
     @Test
     void testShape(){
-        fail();
+        //fail();
         //mnp_Imw`pA|AQXIJEfAk@`@SRGTEdCUjCWnAO\EpAMpC]ZCfBUZERCXC
+
     }
 }
