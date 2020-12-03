@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Restcontroller only for static demo purposes. Only use dummy strings for returning to client
+ */
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
 @RequestMapping("demo")
@@ -190,13 +193,13 @@ public class ResourceDemo {
                 "  \"incidents\": [\n" +
                 "    {\n" +
                 "      \"providerId\": 1,\n" +
-                "      \"type\": construction,\n" +
-                "      \"city\": Berlin\n" +
+                "      \"type\": \"construction\",\n" +
+                "      \"city\": \"Berlin\"\n" +
                 "    },\n" +
                 "    {\n" +
                 "      \"providerId\": 2,\n" +
-                "      \"type\": traffic jam,\n" +
-                "      \"city\": Berlin\n" +
+                "      \"type\": \"traffic jam\",\n" +
+                "      \"city\": \"Berlin\"\n" +
                 "    }\n" +
                 "  ]\n" +
                 "}";
