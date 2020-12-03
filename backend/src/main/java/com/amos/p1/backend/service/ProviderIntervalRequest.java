@@ -25,7 +25,8 @@ public class ProviderIntervalRequest {
     private final ProviderRequest tomtomRequest = new TomTomRequestDummy();
     private final ProviderRequest hereRequest = new HereRequestDummy();
 
-    @Scheduled(fixedRate = 5000)
+    // 1000 ms * 60 * 60 = 1 hour
+    @Scheduled(fixedRate = 3600000)
     public void providerCronJob() {
 
         for (CityBoundingBox cityBoundingBox : getCityBoundingBoxes()) {
