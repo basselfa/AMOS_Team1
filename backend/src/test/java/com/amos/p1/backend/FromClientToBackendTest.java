@@ -30,7 +30,7 @@ public class FromClientToBackendTest {
         given()
             .param("city", "berlin")
         .when()
-            .get(base + "/demo/search")
+            .get(base + "/demo/incidents")
         .then()
             .statusCode(200);
     }
@@ -40,7 +40,7 @@ public class FromClientToBackendTest {
         given()
             .param("city", "berlin")
         .when()
-            .get(base + "/demo/search")
+            .get(base + "/demo/incidents")
         .then()
             .contentType(ContentType.JSON);
     }
@@ -53,9 +53,9 @@ public class FromClientToBackendTest {
         given()
             .param("city", "berlin")
         .when()
-            .get(base + "/demo/search")
+            .get(base + "/demo/incidents")
         .then()
-            .body("incidents.size()", is(2));
+            .body("incidents.size()", is(3));
     }
 
     @Test
@@ -63,7 +63,7 @@ public class FromClientToBackendTest {
         given()
             .param("city", "berlin")
         .when()
-            .get(base + "/demo/search")
+            .get(base + "/demo/incidents")
         .then()
             .body("incidents[0].locationX", is(10))
             .body("incidents[0].locationY", is(20))
@@ -72,7 +72,6 @@ public class FromClientToBackendTest {
 
     @Test
     void testGetAllData(){
-        System.out.println(base + "/demo/historization");
         given()
         .when()
             .get(base + "/demo/historization")
