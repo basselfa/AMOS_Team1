@@ -17,31 +17,32 @@ describe('Map', () => {
   beforeEach(() => {
 
     moxios.install();
-    moxios.stubRequest('http://localhost:8082/demo/incidents?city=Berlin', {
-      status: 200,
-      response: {
-        "incidents": [
-            { "shape" : [{
-              "latitude" : "68.99999",
-              "longitude" : "67.99999"
-            }]
-            }
-          ]
-        }
-    })
-
-    wrapper = mount(Map, {
+    wrapper = shallowMount(Map, {
         localVue,
         vuetify
       });
-  
   })
 
-  it('should contain osm map and search bar', (done) => {
-    
-    expect(wrapper.find('#osm-map').exists()).toBe(true)
-    expect(wrapper.find('#search-bar-container').exists()).toBe(true)
+  it('should get city data from request', (done) => {
+
+    wrapper.vm.getSearchValue("Berlin")
+    moxios.wait(function () {
+      let request = moxios.requests.mostRecent()
+      request.respondWith({
+        status: 200,
+        response: {incidents: [
+          { shape : [{
+            latitude : "68.99999",
+            longitude : "67.99999"
+            }]
+          }
+        ]}
+      }).then(function() {
+        expect(wrapper.vm.polyline.latlngs[0]).toEqual(["68.99999", "67.99999"])
+        done()
+      })
   })
+})
 
   afterEach(() => {
     moxios.uninstall();
