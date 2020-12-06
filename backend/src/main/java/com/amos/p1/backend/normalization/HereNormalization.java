@@ -18,7 +18,7 @@ public class HereNormalization implements JsonToIncident {
         try {
             JSONObject incidentData = new JSONObject(json);
             incidentObj.setId(incidentData.getLong("ORIGINAL_TRAFFIC_ITEM_ID"));         //toDo: lange oder kurze Beschreibung?
-            incidentObj.setType(-1);                                                        //toDo: what types exist?
+            incidentObj.setType("-1");                                                        //toDo: what types exist?
             incidentObj.setSize("");                                                        //toDo: was bedeutet das?
             incidentObj.setDescription(incidentData.getString("TRAFFIC_ITEM_TYPE_DESC")); //längerer Satz
             incidentObj.setCity(
@@ -28,7 +28,7 @@ public class HereNormalization implements JsonToIncident {
                             .getString("COUNTY")
             );
             incidentObj.setCountry("DE");                                                   //toDo: warum, ich dachte nur Deutschland ?!
-            incidentObj.setExitAvailable(0);                                                //toDo: wtf?
+           ;
 
 
             // start piont
@@ -81,7 +81,7 @@ public class HereNormalization implements JsonToIncident {
                     incidentData.getBoolean("VERIFIED") ? 1 : 0
             );
 
-            incidentObj.setProvider(0);
+            incidentObj.setProvider("");
             // incidentObj.setDelay();                                                      // toDo: ????
             incidentObj.setEntryTime(
                     parseDate(incidentData.getString("ENTRY_TIME"))

@@ -1,6 +1,7 @@
 package com.amos.p1.backend.database;
 
 import com.amos.p1.backend.data.Comparison;
+import com.amos.p1.backend.data.Request;
 import com.amos.p1.backend.database.ComparisonRepository;
 import com.amos.p1.backend.data.Incident;
 import org.junit.jupiter.api.Test;
@@ -47,7 +48,7 @@ public class DatabaseTest {
     }
 
     @Test
-    void testIncidentDatabaseConnection() {
+    void testRequestDatabaseConnection() {
 
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("Incident");
@@ -56,34 +57,66 @@ public class DatabaseTest {
         em.getTransaction().begin();
 
         Incident incident1 =
-                new Incident(1,"major",
+
+                new Incident("111","222","baustelle","major",
                         "Traffic jam in Bergmannstraße",
                         "Berlin", "Germany", 1,
                         "45.5", "67.4",
                         "Bergmannstraße",
                         "46.5", "69.5",
                         "Bergmannstraße",
-                        1, 0, 20,
+                        1, "dummy",
                         LocalDateTime.of(
                         2020, 5, 1,
                         12, 30, 0),
                         LocalDateTime.of(
                         2020, 5, 1,
                         12, 30, 0),
-                        "670000:690000,681234:691234");
+                        "670000:690000,681234:691234",new Long(70));
 
-        List<Comparison> arr_comp1 = 
-                (List<Comparison>)em.createNamedQuery("getFromCity")
-                .setParameter("city" ,"Berlin" )
-                .getResultList();
-
+//        List<Incident> arr_comp1 =
+//                (List<Incident>)em.createNamedQuery("getFromCity")
+//                .setParameter("city" ,"Berlin" )
+//                .getResultList();
+//        System.out.println(arr_comp1);
         em.persist(incident1);
         em.getTransaction().commit();
 
         emf.close();
         em.close();
-    }
 
+    }
+    @Test
+    void testIncidenIdCreation() {
+        Incident incident2 = new Incident();
+
+        System.out.println("incident id test "+incident2.getId());
+
+    }
+    @Test
+    void testIncidentDatabaseConnection() {
+
+        EntityManagerFactory emf =
+                Persistence.createEntityManagerFactory("MyRepo");
+        EntityManager em = emf.createEntityManager();
+
+        em.getTransaction().begin();
+
+        Request request1 =
+
+                new Request();
+        request1.setRequestId(new Long(111));
+        request1.setRequestTime(LocalDateTime.of(
+                2020, 5, 1,
+                12, 30, 0));
+
+        em.persist(request1);
+        em.getTransaction().commit();
+
+        emf.close();
+        em.close();
+
+    }
     @Test
     void test(){
         repo.save(new Comparison("Traffic jam1", "Crash1"));

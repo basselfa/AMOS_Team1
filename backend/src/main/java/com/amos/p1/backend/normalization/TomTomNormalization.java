@@ -18,10 +18,10 @@ public class TomTomNormalization implements JsonToIncident {
         try {
             JSONObject incJSONObj = new JSONObject(json);
 
-            incJObj.setProvider(1);
+            incJObj.setProvider("1");
 
             incJObj.setId(Long.valueOf(incJSONObj.getString("id").substring(0, 5), 16)); // ID is hex and way to big for a long therefore as workaround cut to 5 chars but has to be fixed appropriately
-            incJObj.setDelay(incJSONObj.getInt("ty"));  // todo this is not Delay but criticality
+//            incJObj.setDelay(incJSONObj.getInt("ty"));  // todo this is not Delay but criticality
             incJObj.setDescription(incJSONObj.getString("d"));
             // incJObj.setType(incJSONObj.getString("c"));  // todo change type of "type" to string e.g.
             incJObj.setStartPositionStreet(incJSONObj.getString("f"));

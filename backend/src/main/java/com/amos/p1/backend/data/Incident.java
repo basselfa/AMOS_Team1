@@ -2,6 +2,7 @@ package com.amos.p1.backend.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime ;
@@ -23,14 +24,17 @@ import java.time.LocalDateTime ;
 @Entity
 public class Incident {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private int type; // type of incident
+
+    private String trafficId;
+    private String eventId;
+    private String type; // type of incident
     private String size;
     private String description;
     private String city;
     private String country ;
-    private int exitAvailable; // 0:false, 1:true
+    private double lengthInMeter;
     private String startPositionLatitude;
     private String startPositionLongitude;
     private String startPositionStreet;
@@ -38,32 +42,34 @@ public class Incident {
     private String endPositionLongitude;
     private String endPositionStreet;
     private int verified; // 0:false, 1:true
-    private int provider; // 0:Here, 1:Tomtom
-    private  Integer delay;
+    private String provider; // 0:Here, 1:Tomtom
     // reference https://vladmihalcea.com/date-timestamp-jpa-hibernate/
     private LocalDateTime entryTime;
     private LocalDateTime endTime;
     private String edges; // 12.124234:53.536453,
+    private Long requestId;
+
+
 
     public Incident() {
         super();
     }
 
-    public Incident( int type, String size, String description,
-                    String city, String country, int exitAvailable,
+    public Incident(String trafficId ,String eventId, String type, String size, String description,
+                    String city, String country,double lengthInMeter,
                     String startPositionLatitude, String startPositionLongitude,
                     String startPositionStreet, String endPositionLatitude,
                     String endPositionLongitude, String endPositionStreet,
-                    int verified, int provider, Integer delay,
-                    LocalDateTime entryTime, LocalDateTime endTime, String edges) {
+                    int verified, String provider,
+                    LocalDateTime entryTime, LocalDateTime endTime, String edges,Long requestId) {
         super();
-
+        this.trafficId = trafficId;
+        this.eventId = eventId;
         this.type = type;
         this.size = size;
         this.description = description;
         this.city = city;
         this.country = country;
-        this.exitAvailable = exitAvailable;
         this.startPositionLatitude = startPositionLatitude;
         this.startPositionLongitude = startPositionLongitude;
         this.startPositionStreet = startPositionStreet;
@@ -72,11 +78,38 @@ public class Incident {
         this.endPositionStreet = endPositionStreet;
         this.verified = verified;
         this.provider = provider;
-        this.delay = delay;
         this.entryTime = entryTime;
+        this.trafficId = trafficId;
         this.endTime = endTime;
         this.edges = edges;
+        this.lengthInMeter = lengthInMeter;
+        this.requestId = requestId;
     }
+    @Basic
+    @Column(name = "requestId",  nullable = true)
+    public Long getRequestId() { return requestId; }
+    public void setRequestId(Long requestId) {  this.requestId = requestId; }
+
+    @Basic
+    @Column(name = "id")
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    @Basic
+    @Column(name = "eventId",  nullable = true)
+    public String getEventId() {        return eventId; }
+    public void setEventId(String eventId) {        this.eventId = eventId; }
+
+
+    @Basic
+    @Column(name = "lengthInMeter",  nullable = true)
+    public double getLengthInMeter() {return lengthInMeter; }
+    public void setLengthInMeter(double lengthInMeter) { this.lengthInMeter = lengthInMeter;}
+
+    @Basic
+    @Column(name = "trafficId",  nullable = true)
+    public String getTrafficId() { return trafficId; }
+    public void setTrafficId(String trafficId) {  this.trafficId = trafficId;    }
 
     @Basic
     @Column(name = "entryTime", columnDefinition="DATETIME")
@@ -90,13 +123,10 @@ public class Incident {
     public LocalDateTime   getEndTime() { return endTime; }
     public void setEndTime(LocalDateTime  endTime) {  this.endTime = endTime; }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-
     @Basic
     @Column(name = "type", nullable = true)
-    public int getType (){ return type; }
-    public void setType(int type) {  this.type = type; }
+    public String getType (){ return type; }
+    public void setType(String type) {  this.type = type; }
 
     @Basic
     @Column(name = "size", nullable = true)
@@ -118,10 +148,6 @@ public class Incident {
     public String getCity() { return city; }
     public void setCity(String city) {  this.city = city; }
 
-    @Basic
-    @Column(name = "exitAvailable", nullable = true)
-    public int getExitAvailable() { return exitAvailable; }
-    public void setExitAvailable(int exit) {  this.exitAvailable = exit; }
 
     @Basic
     @Column(name = "startPositionLongitude", nullable = true)
@@ -158,15 +184,11 @@ public class Incident {
     public int getVerified() { return verified; }
     public void setVerified(int verified) { this.verified = verified; }
 
-    @Basic
-    @Column(name = "delay", nullable = true)
-    public int getDelay() { return delay; }
-    public void setDelay(int delay) { this.delay = delay; }
 
     @Basic
     @Column(name = "provider", nullable = true)
-    public int getProvider() { return provider; }
-    public void setProvider(int provider) { this.provider = provider; }
+    public String getProvider() { return provider; }
+    public void setProvider(String provider) { this.provider = provider; }
 
     @Basic
     @Column(name = "edges", nullable = true)
@@ -181,12 +203,14 @@ public class Incident {
     public String toString() {
         return "Incident{" +
                 "id=" + id +
-                ", type=" + type +
+                ", trafficId='" + trafficId + '\'' +
+                ", eventId='" + eventId + '\'' +
+                ", type='" + type + '\'' +
                 ", size='" + size + '\'' +
                 ", description='" + description + '\'' +
                 ", city='" + city + '\'' +
                 ", country='" + country + '\'' +
-                ", exitAvailable=" + exitAvailable +
+                ", lengthInMeter=" + lengthInMeter +
                 ", startPositionLatitude='" + startPositionLatitude + '\'' +
                 ", startPositionLongitude='" + startPositionLongitude + '\'' +
                 ", startPositionStreet='" + startPositionStreet + '\'' +
@@ -194,11 +218,10 @@ public class Incident {
                 ", endPositionLongitude='" + endPositionLongitude + '\'' +
                 ", endPositionStreet='" + endPositionStreet + '\'' +
                 ", verified=" + verified +
-                ", provider=" + provider +
-                ", delay=" + delay +
+                ", provider='" + provider + '\'' +
                 ", entryTime=" + entryTime +
                 ", endTime=" + endTime +
-                ", edges=" + edges +
+                ", edges='" + edges + '\'' +
                 '}';
     }
 }

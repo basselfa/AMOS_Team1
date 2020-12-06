@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Locations {
 
-    private List<Location> locationsList = null ;
+    private List<Location> locationsList ;
 
     public Locations(String edges) {
         locationsList =  new <Location>ArrayList() ;
@@ -12,7 +12,7 @@ public class Locations {
 
         for (String Location : edgesSplit) {
             String[] edgeSplitToParts = Location.split(":");
-            locationsList.add(new Location(edgesSplit[0],edgesSplit[1]));
+            locationsList.add(new Location(edgeSplitToParts[0],edgeSplitToParts[1]));
         }
     }
 
