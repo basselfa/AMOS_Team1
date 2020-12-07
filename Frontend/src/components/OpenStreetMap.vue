@@ -32,7 +32,7 @@ export default {
     LMap,
     LTileLayer,
     LMarker,
-    // LIcon,
+    //LIcon,
     LTooltip,
     LPolyline,
   },
