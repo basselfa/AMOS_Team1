@@ -3,7 +3,7 @@ import Map from '@/views/Map'
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import moxios from 'moxios'
-import * as Vue2Leaflet from 'vue2-leaflet'; 
+import * as Vue2Leaflet from 'vue2-leaflet'
 
 Vue.use(Vuetify)
 Vue.use(Vue2Leaflet)
@@ -43,6 +43,23 @@ describe('Map', () => {
       })
   })
 })
+
+  it("should get an error from invalid request for city data", async () => {
+
+    const error = new Error("Error: Request failed with status code 500")
+    moxios.stubRequest("http://localhost:8082/demo/incidents?city=Berlin", {
+      error
+    });
+
+    wrapper.vm.getSearchValue("Berlin")
+
+    moxios.wait(() => {
+      expect(wrapper.vm.errorMessage).toEqual(
+        "Error: Request failed with status code 500"
+      )
+      done()
+    })
+  })
 
   afterEach(() => {
     moxios.uninstall();

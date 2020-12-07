@@ -20,6 +20,7 @@
   "dependencies": {
     "axios": "^0.21.0",
     "eslint": "^5.16.0",
+    "flush-promises": "^1.0.2",
     "leaflet": "^1.7.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
