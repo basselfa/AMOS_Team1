@@ -36,7 +36,7 @@ public class HereNormalization implements JsonToIncident {
         }
     }
 
-    private int mapIncidenType(String incidentStr) {
+    private int mapIncidentType(String incidentStr) {
         try {
             return HereIncidents.valueOf(incidentStr.toUpperCase()).getID();
         }catch (IllegalArgumentException ex){
@@ -53,7 +53,7 @@ public class HereNormalization implements JsonToIncident {
             incidentObj.setId(incidentData.getLong("ORIGINAL_TRAFFIC_ITEM_ID"));
 
             incidentObj.setType(
-                    mapIncidenType(incidentData.getString("TRAFFIC_ITEM_TYPE_DESC"
+                    mapIncidentType(incidentData.getString("TRAFFIC_ITEM_TYPE_DESC"
                     ));
 
 
