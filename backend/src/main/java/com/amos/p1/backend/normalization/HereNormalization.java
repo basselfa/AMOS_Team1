@@ -1,7 +1,6 @@
 package com.amos.p1.backend.normalization;
 
 import com.amos.p1.backend.data.Incident;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONArray;
@@ -26,14 +25,23 @@ public class HereNormalization implements JsonToIncident {
         ROADCLOSURE(IncidentTypes.ROADCLOSURE),
         LANERESTRICTION(IncidentTypes.LANERESTRICTION);
 
-        private final IncidentTypes value;
+        private final IncidentTypes incidentType;
 
-        HereIncidents(IncidentTypes value) {
-            this.value = value;
+        HereIncidents(IncidentTypes incidentType) {
+            this.incidentType = incidentType;
         }
 
         public int getID() {
-            return value.getId();
+            return incidentType.getId();
+        }
+    }
+
+    private int mapIncidenType(String incidentStr) {
+        try {
+            return HereIncidents.valueOf(incidentStr.toUpperCase()).getID();
+        }catch (IllegalArgumentException ex){
+            // todo: log - there is a new incident type defined by the API
+            return IncidentTypes.MISC.getId();
         }
     }
 
@@ -45,10 +53,9 @@ public class HereNormalization implements JsonToIncident {
             incidentObj.setId(incidentData.getLong("ORIGINAL_TRAFFIC_ITEM_ID"));
 
             incidentObj.setType(
-                    HereIncidents.valueOf(
-                            incidentData.getString("TRAFFIC_ITEM_TYPE_DESC").toUpperCase()
-                    ).getID()
-            );
+                    mapIncidenType(incidentData.getString("TRAFFIC_ITEM_TYPE_DESC"
+                    ));
+
 
             incidentObj.setSize("");                                                        //toDo: was bedeutet das?
             incidentObj.setDescription(incidentData.getString("TRAFFIC_ITEM_TYPE_DESC")); //längerer Satz
@@ -159,7 +166,5 @@ public class HereNormalization implements JsonToIncident {
     private LocalDateTime parseDate(String timeStr) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
         return LocalDateTime.parse(timeStr, formatter);
-
-
     }
 }
