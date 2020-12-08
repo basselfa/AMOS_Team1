@@ -1,5 +1,5 @@
 <template id="navBar">
-  <div>
+  <div id="navigation">
     <v-navigation-drawer v-model="drawer" app>
       <v-list two-line>
         <v-subheader>NAVIGATION</v-subheader>

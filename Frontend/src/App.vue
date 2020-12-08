@@ -1,9 +1,8 @@
 <template>
   <div id="app">
     <v-app id="main">
-          <router-link to="/historization">historization</router-link>
-          <navigation />
-          <router-view/>
+        <navigation />
+        <router-view/>
     </v-app>
   </div>
 </template>
