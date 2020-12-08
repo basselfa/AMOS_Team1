@@ -22,7 +22,7 @@ public class Helper {
 
         if(encoded == null) throw new IllegalStateException("Getting file went wrong");
 
-        return new String(encoded, StandardCharsets.US_ASCII);
+        return new String(encoded, StandardCharsets.UTF_8);
 
     }
 }

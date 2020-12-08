@@ -39,11 +39,11 @@ public class Incident {
     private String endPositionStreet;
     private int verified; // 0:false, 1:true
     private int provider; // 0:Here, 1:Tomtom
-    private  Integer delay;
+    private  Integer delay;     //-1 -> unknown | 0 low <=> 12 High
     // reference https://vladmihalcea.com/date-timestamp-jpa-hibernate/
     private LocalDateTime entryTime;
     private LocalDateTime endTime;
-    private String edges; // 12.124234:53.536453,
+    private String edges; // 53.536453:12.124234,  | Lat/Long
 
     public Incident() {
         super();

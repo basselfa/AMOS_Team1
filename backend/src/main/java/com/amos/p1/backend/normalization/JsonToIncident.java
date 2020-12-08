@@ -13,7 +13,7 @@ public interface JsonToIncident {
         ROADWORKS,
         PLANNEDEVENT,
         DETOUR,
-        MISC,       // TODO: MISC FOR "UNKNOWN OR "NO CATEGORY"
+        MISC,       // TODO: MISC FOR "UNKNOWN" OR "NO CATEGORY"
         WEATHER,
         ROADCLOSURE,
         LANERESTRICTION;
