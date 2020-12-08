@@ -28,8 +28,7 @@ export default {
   methods: {
     getCity: function () {
       this.$emit('change',this.city)
-      alert(this.city);
-      console.log(this.city);
+      //console.log(this.city);
     },
   },
 };
@@ -41,10 +40,12 @@ export default {
   padding-left: 20%;
   padding-right: 20%;
 }
+
 .search-bar {
   /* -webkit-box-shadow: 4px 12px 31px -10px #cecece !important;
   box-shadow: 4px 12px 31px -10px #cecece !important; */
 }
+
 #search-icon {
   float: left;
   padding-top: 6px;
