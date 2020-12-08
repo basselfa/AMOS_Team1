@@ -11,6 +11,56 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class TomTomNormalization implements JsonToIncident {
+    enum TomTomIncidents {
+        ACCIDENT(IncidentTypes.ACCIDENT),
+        JAM(IncidentTypes.CONGESTION),
+        BROKENDOWNVEHICLE(IncidentTypes.DISABLEDVEHICLE),
+        DANGEROUSCONDITIONS(IncidentTypes.ROADHAZARD),
+        ROADWORKS(IncidentTypes.ROADWORKS),
+        DETOUR(IncidentTypes.MISC),
+        FOG(IncidentTypes.WEATHER),
+        RAIN(IncidentTypes.WEATHER),
+        ICE(IncidentTypes.WEATHER),
+        WIND(IncidentTypes.WEATHER),
+        FLOODING(IncidentTypes.WEATHER),
+        UNKNOWN(IncidentTypes.MISC),
+        ROADCLOSED(IncidentTypes.ROADCLOSURE),
+        CLUSTER(IncidentTypes.MISC),
+        LANECLOSED(IncidentTypes.LANERESTRICTION);
+
+        private final IncidentTypes value;
+
+        TomTomIncidents(IncidentTypes value) {
+            this.value = value;
+        }
+
+        public int getID() {
+            return value.getId();
+        }
+    }
+
+    private String mapICNumberToString(Integer ic) {
+        String[] icStrs = {
+                "UNKNOWN",
+                "ACCIDENT",
+                "FOG",
+                "DANGEROUSCONDITIONS",
+                "RAIN",
+                "ICE",
+                "JAM",
+                "LANECLOSED",
+                "ROADCLOSED",
+                "ROADWORKS",
+                "WIND",
+                "FLOODING",
+                "DETOUR",
+                "CLUSTER",
+                "BROKENDOWNVEHICLE"
+        };
+
+        return icStrs[ic];
+    }
+
     @Override
     public Incident normalizeOneIncident(String json) {
         Incident incJObj = new Incident();
@@ -23,15 +73,13 @@ public class TomTomNormalization implements JsonToIncident {
             incJObj.setId(Long.valueOf(incJSONObj.getString("id").substring(0, 5), 16)); // ID is hex and way to big for a long therefore as workaround cut to 5 chars but has to be fixed appropriately
             incJObj.setDelay(incJSONObj.getInt("ty"));  // todo this is not Delay but criticality
             incJObj.setDescription(incJSONObj.getString("d"));
-            // incJObj.setType(incJSONObj.getString("c"));  // todo change type of "type" to string e.g.
+            incJObj.setType(TomTomIncidents.valueOf(mapICNumberToString(incJSONObj.getInt("ic"))).getID());
             incJObj.setStartPositionStreet(incJSONObj.getString("f"));
             incJObj.setEndPositionStreet(incJSONObj.getString("t"));
             incJObj.setSize(Integer.toString(incJSONObj.getInt("l")));
             incJObj.setEntryTime(parseDate(incJSONObj.getString("sd")));
             incJObj.setEndTime(parseDate(incJSONObj.getString("ed")));
             // todo implement start and end positions with Lon and Lat extracted from Polyline
-            // todo verified, country, city, entryTime, endTime, exitAvailable
-            // todo there is no timestamp given from provider
             // todo Umlaute and special characters in string
 
             if (!incJSONObj.isNull("v")) // if this key exists
