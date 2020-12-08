@@ -12,13 +12,44 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class HereNormalization implements JsonToIncident {
+    enum HereIncidents {
+        ACCIDENT(IncidentTypes.ACCIDENT),
+        CONGESTION(IncidentTypes.CONGESTION),
+        DISABLEDVEHICLE(IncidentTypes.DISABLEDVEHICLE),
+        ROADHAZARD(IncidentTypes.ROADHAZARD),
+        CONSTRUCTION(IncidentTypes.ROADWORKS),
+        PLANNEDEVENT(IncidentTypes.PLANNEDEVENT),
+        MASSTRANSIT(IncidentTypes.MISC),
+        OTHERNEWS(IncidentTypes.MISC),
+        WEATHER(IncidentTypes.WEATHER),
+        MISC(IncidentTypes.MISC),
+        ROADCLOSURE(IncidentTypes.ROADCLOSURE),
+        LANERESTRICTION(IncidentTypes.LANERESTRICTION);
+
+        private final IncidentTypes value;
+
+        HereIncidents(IncidentTypes value) {
+            this.value = value;
+        }
+
+        public int getID() {
+            return value.getId();
+        }
+    }
+
     @Override
     public Incident normalizeOneIncident(String json) {
         Incident incidentObj = new Incident();
         try {
             JSONObject incidentData = new JSONObject(json);
-            incidentObj.setId(incidentData.getLong("ORIGINAL_TRAFFIC_ITEM_ID"));         //toDo: lange oder kurze Beschreibung?
-            incidentObj.setType(-1);                                                        //toDo: what types exist?
+            incidentObj.setId(incidentData.getLong("ORIGINAL_TRAFFIC_ITEM_ID"));
+
+            incidentObj.setType(
+                    HereIncidents.valueOf(
+                            incidentData.getString("TRAFFIC_ITEM_TYPE_DESC").toUpperCase()
+                    ).getID()
+            );
+
             incidentObj.setSize("");                                                        //toDo: was bedeutet das?
             incidentObj.setDescription(incidentData.getString("TRAFFIC_ITEM_TYPE_DESC")); //längerer Satz
             incidentObj.setCity(
@@ -29,7 +60,6 @@ public class HereNormalization implements JsonToIncident {
             );
             incidentObj.setCountry("DE");                                                   //toDo: warum, ich dachte nur Deutschland ?!
             incidentObj.setExitAvailable(0);                                                //toDo: wtf?
-
 
             // start piont
             incidentObj.setStartPositionLatitude(
@@ -51,7 +81,6 @@ public class HereNormalization implements JsonToIncident {
                             .getJSONObject("STREET1")
                             .getString("ADDRESS1")
             );                                                                                  // toDo: ich bekomme eine Kreuzung und keine einzelne Straße
-                                                                                                // toDo: umlaute werden nicht richtig übernommen (charset prüfen)
 
             // end piont
             incidentObj.setEndPositionLatitude(
@@ -75,7 +104,7 @@ public class HereNormalization implements JsonToIncident {
                             .getJSONObject("STREET1")
                             .getString("ADDRESS1")
             );                                                                              // toDo: ich bekomme eine Kreuzung und keine einzelne Straße
-                                                                                            // toDo: umlaute werden nicht richtig übernommen (charset prüfen)
+            // toDo: umlaute werden nicht richtig übernommen (charset prüfen)
 
             incidentObj.setVerified(
                     incidentData.getBoolean("VERIFIED") ? 1 : 0
