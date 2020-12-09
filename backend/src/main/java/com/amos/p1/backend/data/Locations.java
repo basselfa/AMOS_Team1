@@ -20,6 +20,9 @@ public class Locations {
         }
     }
 
+    public void addLocation(Location location){
+        locationsList.add(location);
+    }
     public List<Location> getLocationsList() {
         return locationsList;
     }
