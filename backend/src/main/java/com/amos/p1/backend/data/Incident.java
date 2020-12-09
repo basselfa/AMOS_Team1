@@ -9,6 +9,10 @@ import java.time.LocalDateTime ;
 import java.util.List;
 
 @NamedQuery(
+        name="getFromids",
+        query="SELECT i FROM Incident i WHERE i.id = :id"
+)
+@NamedQuery(
         name="getFromCity",
         query="SELECT i FROM Incident i WHERE i.city = :city"
 )

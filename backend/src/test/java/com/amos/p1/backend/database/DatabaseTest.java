@@ -48,7 +48,7 @@ public class DatabaseTest {
     }
 
     @Test
-    void testRequestDatabaseConnection() {
+    void testIncidentDatabaseConnection() {
 
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("Incident");
@@ -58,7 +58,7 @@ public class DatabaseTest {
 
         Incident incident1 =
 
-                new Incident("111","222","baustelle","major",
+                new Incident("111","baustelle","major",
                         "Traffic jam in Bergmannstraße",
                         "Berlin", "Germany", 1,
                         "45.5", "67.4",
@@ -72,7 +72,7 @@ public class DatabaseTest {
                         LocalDateTime.of(
                         2020, 5, 1,
                         12, 30, 0),
-                        "670000:690000,681234:691234",new Long(70));
+                        "670000:690000,681234:691234");
 
 //        List<Incident> arr_comp1 =
 //                (List<Incident>)em.createNamedQuery("getFromCity")
@@ -94,7 +94,7 @@ public class DatabaseTest {
 
     }
     @Test
-    void testIncidentDatabaseConnection() {
+    void testRequestDatabaseConnection() {
 
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("MyRepo");
@@ -105,7 +105,7 @@ public class DatabaseTest {
         Request request1 =
 
                 new Request();
-        request1.setRequestId(new Long(111));
+        request1.setIncidentsId("1,2,3,4,5,6");
         request1.setRequestTime(LocalDateTime.of(
                 2020, 5, 1,
                 12, 30, 0));
