@@ -1,14 +1,8 @@
 package com.amos.p1.backend;
 
-import com.amos.p1.backend.data.Incident;
-import com.amos.p1.backend.service.IncidentAggregator;
-import com.amos.p1.backend.service.IncidentAggregatorDummy;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * Restcontroller only for static demo purposes. Only use dummy strings for returning to client

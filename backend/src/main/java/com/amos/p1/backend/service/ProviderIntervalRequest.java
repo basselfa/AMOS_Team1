@@ -29,19 +29,39 @@ public class ProviderIntervalRequest {
     private final ProviderRequest tomtomRequest = new TomTomRequestDummy();
     private final ProviderRequest hereRequest = new HereRequestDummy();
 
+    // Will be runned on startup
     // 1000 ms * 60 * 60 = 1 hour
     @Scheduled(fixedRate = 3600000)
     public void providerCronJob() {
 
-        for (CityBoundingBox cityBoundingBox : getCityBoundingBoxes()) {
+//        for (CityBoundingBox cityBoundingBox : getCityBoundingBoxes()) {
+//
+//            List<Incident> hereIncidents = getHereIncidents(cityBoundingBox);
+//            List<Incident> tomTomIncidents = getTomTomIncidents(cityBoundingBox);
+//
+//            saveToDatabase(hereIncidents);
+//            saveToDatabase(tomTomIncidents);
+//        }
+//        System.out.println("The time is now " + dateFormat.format(new Date()));
+    }
 
-            List<Incident> hereIncidents = getHereIncidents(cityBoundingBox);
-            List<Incident> tomTomIncidents = getTomTomIncidents(cityBoundingBox);
+    public List<Incident> getRecentTomTomIncidentsFromCity(String city){
+        CityBoundingBox boundBoxFromCity = getBoundBoxFromCity(city);
 
-            saveToDatabase(hereIncidents);
-            saveToDatabase(tomTomIncidents);
+        return getTomTomIncidents(boundBoxFromCity);
+    }
+
+    private CityBoundingBox getBoundBoxFromCity(String city) {
+
+        List<CityBoundingBox> cityBoundingBoxes = getCityBoundingBoxes();
+
+        for (CityBoundingBox cityBoundingBoxTemp : cityBoundingBoxes) {
+            if (city.equals(cityBoundingBoxTemp.getCity())){
+                return cityBoundingBoxTemp;
+            }
         }
-        System.out.println("The time is now " + dateFormat.format(new Date()));
+
+        throw new IllegalStateException("Couldn't find you boundingbox with city: " + city);
     }
 
     private List<CityBoundingBox> getCityBoundingBoxes(){

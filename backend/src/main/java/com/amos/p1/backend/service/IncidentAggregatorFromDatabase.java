@@ -6,7 +6,7 @@ import com.amos.p1.backend.database.MyRepo;
 // import java.time.LocalDateTime;
 import java.util.List;
 
-public class IncidentAggregatorDummy implements IncidentAggregator {
+public class IncidentAggregatorFromDatabase implements IncidentAggregator {
 
     @Override
     @SuppressWarnings("unchecked")

@@ -2,12 +2,12 @@ package com.amos.p1.backend;
 
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.service.IncidentAggregator;
-import com.amos.p1.backend.service.IncidentAggregatorDummy;
+import com.amos.p1.backend.service.IncidentAggregatorDirectlyFromProvider;
+import com.amos.p1.backend.service.IncidentAggregatorFromDatabase;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -22,7 +22,7 @@ public class Resource {
     @ResponseBody
     public ResponseEntity<List<Incident>> getIncidentsByCity(@RequestParam("city") String city){
 
-        IncidentAggregator incidentAggregator = new IncidentAggregatorDummy();
+        IncidentAggregator incidentAggregator = new IncidentAggregatorDirectlyFromProvider();
 
         return ResponseEntity.ok(incidentAggregator.getFromCity(city));
     }
@@ -36,7 +36,7 @@ public class Resource {
     @ResponseBody
     public ResponseEntity<List<Incident>> getAllIncidents(){
 
-        IncidentAggregator incidentAggregator = new IncidentAggregatorDummy();
+        IncidentAggregator incidentAggregator = new IncidentAggregatorFromDatabase();
 
         return ResponseEntity.ok(incidentAggregator.getAllData());
     }
