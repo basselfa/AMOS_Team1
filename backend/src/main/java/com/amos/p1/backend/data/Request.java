@@ -3,6 +3,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime ;
+import java.util.List;
 
 @Entity
 public class Request {
@@ -17,6 +18,15 @@ public class Request {
 
     public Request() {
         super();
+    }
+
+    public void addIncidents(List<Incident> incidents){
+        //TODO
+    }
+
+    public List<Incident> getIncidents(){
+        //TODO
+        return null;
     }
 
     public Long getId() { return id; }
