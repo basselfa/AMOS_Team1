@@ -37,6 +37,7 @@
         <description> 12</description>
         <class>com.amos.p1.backend.data.Incident</class>
         <class>com.amos.p1.backend.data.Comparison</class>
+        <class>com.amos.p1.backend.data.Request</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>

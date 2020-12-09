@@ -25,7 +25,7 @@ public class OneIncidentTest {
 
     @Test
     void testProvider() {
-        assertEquals(1, incident.getProvider());
+        assertEquals("1", incident.getProvider());
     }
 
     // todo id in Incident is a Long but here it is a hex which is to large for a Long
@@ -41,7 +41,7 @@ public class OneIncidentTest {
 
     @Test
     void testType() {
-        assertEquals(incident.getType(), 10);
+        assertEquals("10", incident.getType());
     }
 
     @Test
@@ -61,7 +61,7 @@ public class OneIncidentTest {
 
     @Test
     void testTo() {
-        assertEquals("Knobelsdorffstraße (Königin-Elisabeth-Straße", incident.getStartPositionStreet());
+        assertEquals("Knobelsdorffstraße (Königin-Elisabeth-Straße/L1121)", incident.getEndPositionStreet());
     }
 
     @Test
