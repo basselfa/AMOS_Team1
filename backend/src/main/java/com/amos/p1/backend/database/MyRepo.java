@@ -39,8 +39,19 @@ public class MyRepo {
         instance.em.getTransaction().commit();
     }
 
-    public static void insertRequest(Request request){
+    public static void insertRequest(List<Incident> incidents){
         //TODO implement it. Request is the main table. Also incidents saving
+        InsertIncident(incidents);
+
+
+        instance.em.getTransaction().begin();
+
+        Request request = new Request();
+        request.addIncidents(incidents);
+        request.setRequestTime(LocalDateTime.now());
+
+        instance.em.persist(request);
+        instance.em.getTransaction().commit();
     }
 
     public static Request getRequest(LocalDateTime localDateTime){

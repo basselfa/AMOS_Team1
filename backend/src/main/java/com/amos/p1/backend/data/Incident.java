@@ -2,11 +2,13 @@ package com.amos.p1.backend.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime ;
-
+@NamedQuery(
+        name="getFromids",
+        query="SELECT i FROM Incident i WHERE i.id = :id"
+)
 @NamedQuery(
         name="getFromCity",
         query="SELECT i FROM Incident i WHERE i.city = :city"
@@ -28,7 +30,6 @@ public class Incident {
     private Long id;
 
     private String trafficId;
-    private String eventId;
     private String type; // type of incident
     private String size;
     private String description;
@@ -48,7 +49,7 @@ public class Incident {
     private LocalDateTime entryTime;
     private LocalDateTime endTime;
     private String edges; // 12.124234:53.536453,
-    private Long requestId;
+
 
 
 
@@ -56,16 +57,16 @@ public class Incident {
         super();
     }
 
-    public Incident(String trafficId ,String eventId, String type, String size, String description,
+    public Incident(String trafficId , String type, String size, String description,
                     String city, String country,double lengthInMeter,
                     String startPositionLatitude, String startPositionLongitude,
                     String startPositionStreet, String endPositionLatitude,
                     String endPositionLongitude, String endPositionStreet,
                     int verified, String provider,
-                    LocalDateTime entryTime, LocalDateTime endTime, String edges,Long requestId) {
+                    LocalDateTime entryTime, LocalDateTime endTime, String edges) {
         super();
         this.trafficId = trafficId;
-        this.eventId = eventId;
+
         this.type = type;
         this.size = size;
         this.description = description;
@@ -84,22 +85,14 @@ public class Incident {
         this.endTime = endTime;
         this.edges = edges;
         this.lengthInMeter = lengthInMeter;
-        this.requestId = requestId;
+
     }
-    @Basic
-    @Column(name = "requestId",  nullable = true)
-    public Long getRequestId() { return requestId; }
-    public void setRequestId(Long requestId) {  this.requestId = requestId; }
 
     @Basic
     @Column(name = "id")
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    @Basic
-    @Column(name = "eventId",  nullable = true)
-    public String getEventId() {        return eventId; }
-    public void setEventId(String eventId) {        this.eventId = eventId; }
 
 
     @Basic
@@ -196,10 +189,6 @@ public class Incident {
     public String getEdges() { return edges; }
     public void setEdges(String edges) { this.edges = edges; }
 
-    public void setEdgesAsLocations(Locations locations){
-        //TODO Locations as edges string
-    }
-
     @JsonIgnore
     @JsonProperty(value = "edges_as_locations")
     public Locations getEdgesAsLocations() { return new Locations(edges); }
@@ -209,7 +198,6 @@ public class Incident {
         return "Incident{" +
                 "id=" + id +
                 ", trafficId='" + trafficId + '\'' +
-                ", eventId='" + eventId + '\'' +
                 ", type='" + type + '\'' +
                 ", size='" + size + '\'' +
                 ", description='" + description + '\'' +
