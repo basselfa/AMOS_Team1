@@ -1,12 +1,16 @@
 package com.amos.p1.backend.normalization;
 
 import com.amos.p1.backend.data.Incident;
+import com.amos.p1.backend.data.Location;
+import com.amos.p1.backend.data.Locations;
+import com.amos.p1.backend.data.Point;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -71,19 +75,49 @@ public class TomTomNormalization implements JsonToIncident {
             incJObj.setProvider("1");
 
             incJObj.setId(Long.valueOf(incJSONObj.getString("id").substring(0, 5), 16)); // ID is hex and way to big for a long therefore as workaround cut to 5 chars but has to be fixed appropriately
-//            incJObj.setDelay(incJSONObj.getInt("ty"));  // todo this is not Delay but criticality
             incJObj.setDescription(incJSONObj.getString("d"));
             incJObj.setType(String.valueOf(TomTomIncidents.valueOf(mapICNumberToString(incJSONObj.getInt("ic"))).getID()));
             incJObj.setStartPositionStreet(incJSONObj.getString("f"));
             incJObj.setEndPositionStreet(incJSONObj.getString("t"));
             incJObj.setSize(Integer.toString(incJSONObj.getInt("l")));
             incJObj.setEntryTime(parseDate(incJSONObj.getString("sd")));
-            incJObj.setEndTime(parseDate(incJSONObj.getString("ed")));
-            // todo implement start and end positions with Lon and Lat extracted from Polyline
-            // todo Umlaute and special characters in string
 
-            if (!incJSONObj.isNull("v")) // if this key exists
-                incJObj.setEdges(incJSONObj.getString("v"));   // todo maybe change name to shape
+            if (!incJSONObj.isNull("ed"))
+                incJObj.setEndTime(parseDate(incJSONObj.getString("ed")));
+
+            // Map original 0-4 to -1-12
+            // Unknown (0) and Undefined (4) get mapped to -1
+            //Integer criticality = incJSONObj.getInt("ty");
+            /*if (criticality == 0 || criticality == 4) {
+                incJObj.setDelay(-1);
+            } else {
+                incJObj.setDelay(criticality * 4);
+            }*/
+
+            // sometimes v (shape as polyline) isn't given hence we can't decode it
+            if (!incJSONObj.isNull("v")) {
+                PolyLineDecoder PLDecoder = new PolyLineDecoder();
+                String polyline = incJSONObj.getString("v");
+
+                List<Point> allPoints = PLDecoder.decode(polyline);
+                List<Point> edges = new ArrayList<>(allPoints);
+
+                Point startPoint = edges.remove(0);
+                Point endPoint = edges.remove(edges.size() - 1);
+
+                //incJObj.setEdges(edges.toString());   // todo maybe change name to shape
+                incJObj.setStartPositionLatitude(startPoint.toString().split(":")[0]);
+                incJObj.setStartPositionLongitude(startPoint.toString().split(":")[1]);
+                incJObj.setEndPositionLatitude(endPoint.toString().split(":")[0]);
+                incJObj.setEndPositionLongitude(endPoint.toString().split(":")[1]);
+
+                Locations lEdges = new Locations();
+                for (int i = 0; i < edges.size(); i++) {
+                    Location edge = new Location(String.valueOf(edges.get(i).getLat()), String.valueOf(edges.get(i).getLng()));
+                    lEdges.addLocation(edge);
+                }
+                incJObj.setEdgesAsLocations(lEdges);
+            }
 
 
         } catch (JSONException e) { //There was an Exception with the JSONObject
