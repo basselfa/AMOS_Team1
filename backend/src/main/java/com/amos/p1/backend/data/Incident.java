@@ -200,6 +200,11 @@ public class Incident {
     public void setEdgesAsLocations(Locations locations){
         List<Location> locationsList = locations.getLocationsList();
 
+        if (locationsList.size() == 0){
+            edges = "";
+            return;
+        }
+
         StringBuilder stringBuilder = new StringBuilder();
         for (Location location : locationsList) {
             stringBuilder
