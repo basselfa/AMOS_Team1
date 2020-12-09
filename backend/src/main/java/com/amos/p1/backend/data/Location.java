@@ -22,11 +22,11 @@ public class Location {
     }
 
     public void setLongitude(String longitude) {
-        longitude = longitude;
+        this.longitude = longitude;
     }
 
     public void setLatitude(String latitude) {
-        latitude = latitude;
+        this.latitude = latitude;
     }
 
 }
