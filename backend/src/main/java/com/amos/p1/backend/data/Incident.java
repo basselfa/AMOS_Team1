@@ -61,13 +61,13 @@ public class Incident {
         super();
     }
 
-    public Incident(String trafficId ,String eventId, String type, String size, String description,
+    public Incident(String trafficId, String type, String size, String description,
                     String city, String country,double lengthInMeter,
                     String startPositionLatitude, String startPositionLongitude,
                     String startPositionStreet, String endPositionLatitude,
                     String endPositionLongitude, String endPositionStreet,
                     int verified, String provider,
-                    LocalDateTime entryTime, LocalDateTime endTime, String edges,Long requestId) {
+                    LocalDateTime entryTime, LocalDateTime endTime, String edges) {
         super();
         this.trafficId = trafficId;
         this.eventId = eventId;
@@ -89,7 +89,6 @@ public class Incident {
         this.endTime = endTime;
         this.edges = edges;
         this.lengthInMeter = lengthInMeter;
-        this.requestId = requestId;
     }
     @Basic
     @Column(name = "requestId",  nullable = true)

@@ -103,7 +103,7 @@ public class ProviderIntervalRequest {
         request.setRequestTime(LocalDateTime.now());
         request.addIncidents(incidents);
 
-        MyRepo.insertRequest(request);
+        //MyRepo.insertRequest(request);
     }
 
 }
