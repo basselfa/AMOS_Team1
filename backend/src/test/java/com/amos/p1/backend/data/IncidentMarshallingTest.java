@@ -2,6 +2,8 @@ package com.amos.p1.backend.data;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -55,15 +57,15 @@ public class IncidentMarshallingTest {
         incident.setDescription("This is a cool description");
         incident.setProvider("1");
 
-        List<Location> locationsList = getLocations();
-        //incident.setEdges(locationsList); TODO: add method to add location to edges
+        Locations locations = getLocations();
+        incident.setEdgesAsLocations(locations);
 
         //TODO: add length, ...
 
         return incident;
     }
 
-    private List<Location> getLocations() {
+    private Locations getLocations() {
         Location location1 = new Location();
         location1.setLatitude("1.2345");
         location1.setLongitude("2.3456");
@@ -73,16 +75,17 @@ public class IncidentMarshallingTest {
         location2.setLongitude("4.5678");
 
         Locations locations = new Locations();
-        List<Location> locationsList = locations.getLocationsList();
-        locationsList.add(location1);
-        locationsList.add(location2);
+        locations.addLocation(location1);
+        locations.addLocation(location2);
 
-        return locationsList;
+        return locations;
     }
 
     @Test
-    void printJson(){
-        System.out.println(json);
+    void printJson() throws JSONException {
+        JSONObject json = new JSONObject(this.json);
+
+        System.out.println(json.toString(3));
     }
 
     @Test
@@ -92,13 +95,13 @@ public class IncidentMarshallingTest {
 
     @Test
     void testLocationAmount(){
-        assertThat(json, hasJsonPath("$.edges", hasSize(2)));
+        assertThat(json, hasJsonPath("$.edgesAsLocations.locationsList", hasSize(2)));
     }
 
     @Test
     void testLocationIndex0(){
-        assertThat(json, hasJsonPath("$.edges[0].latitude", equalTo("1.2345")));
-        assertThat(json, hasJsonPath("$.edges[0].longitude", equalTo("2.3456")));
+        assertThat(json, hasJsonPath("$.edgesAsLocations.locationsList[0].latitude", equalTo("1.2345")));
+        assertThat(json, hasJsonPath("$.edgesAsLocations.locationsList[0].longitude", equalTo("2.3456")));
     }
 
     //TODO: add more tests

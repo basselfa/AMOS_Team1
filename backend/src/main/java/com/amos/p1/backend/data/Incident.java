@@ -6,6 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime ;
+import java.util.List;
 
 @NamedQuery(
         name="getFromCity",
@@ -197,11 +198,22 @@ public class Incident {
     public void setEdges(String edges) { this.edges = edges; }
 
     public void setEdgesAsLocations(Locations locations){
+        List<Location> locationsList = locations.getLocationsList();
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Location location : locationsList) {
+            stringBuilder
+                    .append(location.getLatitude())
+                    .append(":")
+                    .append(location.getLongitude())
+                    .append(",");
+        }
+        stringBuilder.deleteCharAt(stringBuilder.length()-1);
+
+        edges = stringBuilder.toString();
         //TODO Locations as edges string
     }
 
-    @JsonIgnore
-    @JsonProperty(value = "edges_as_locations")
     public Locations getEdgesAsLocations() { return new Locations(edges); }
 
     @Override
