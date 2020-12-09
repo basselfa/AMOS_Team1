@@ -196,6 +196,10 @@ public class Incident {
     public String getEdges() { return edges; }
     public void setEdges(String edges) { this.edges = edges; }
 
+    public void setEdgesAsLocations(Locations locations){
+        //TODO Locations as edges string
+    }
+
     @JsonIgnore
     @JsonProperty(value = "edges_as_locations")
     public Locations getEdgesAsLocations() { return new Locations(edges); }
