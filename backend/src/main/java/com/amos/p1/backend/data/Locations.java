@@ -4,10 +4,14 @@ import java.util.*;
 
 public class Locations {
 
-    private List<Location> locationsList ;
+
+    private List<Location> locationsList = new ArrayList<>() ;
+
+    public Locations(){
+
+    }
 
     public Locations(String edges) {
-        locationsList =  new <Location>ArrayList() ;
         String[] edgesSplit = edges.split(",");
 
         for (String Location : edgesSplit) {
