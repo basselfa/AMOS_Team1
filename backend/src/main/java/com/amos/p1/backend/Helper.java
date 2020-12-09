@@ -1,5 +1,7 @@
 package com.amos.p1.backend;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
@@ -24,5 +26,30 @@ public class Helper {
 
         return new String(encoded, StandardCharsets.UTF_8);
 
+    }
+
+    public static String getPrettyJson(String rawJson){
+        try {
+            JSONObject jsonObject = new JSONObject(rawJson);
+            return jsonObject.toString(3);
+        } catch (JSONException e) {
+            throw new IllegalStateException("Can't prettify this json: " + rawJson);
+        }
+    }
+
+    public static String getPrettyJsonList(String rawJson){
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder
+                .append("{list:")
+                .append(rawJson)
+                .append("}");
+
+        try {
+            JSONObject jsonObject = new JSONObject(stringBuilder.toString());
+            return jsonObject.toString(3);
+        } catch (JSONException e) {
+            throw new IllegalStateException("Can't prettify this json: " + rawJson);
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.amos.p1.backend.data;
 
+import com.amos.p1.backend.Helper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONException;
@@ -83,9 +84,8 @@ public class IncidentMarshallingTest {
 
     @Test
     void printJson() throws JSONException {
-        JSONObject json = new JSONObject(this.json);
 
-        System.out.println(json.toString(3));
+        System.out.println(Helper.getPrettyJson(json));
     }
 
     @Test
