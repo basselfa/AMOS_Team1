@@ -3,6 +3,8 @@ package com.amos.p1.backend.service;
 import com.amos.p1.backend.data.CityBoundingBox;
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.data.Location;
+import com.amos.p1.backend.data.Request;
+import com.amos.p1.backend.database.MyRepo;
 import com.amos.p1.backend.normalization.HereNormalization;
 import com.amos.p1.backend.normalization.JsonToIncident;
 import com.amos.p1.backend.normalization.TomTomNormalization;
@@ -12,7 +14,9 @@ import com.amos.p1.backend.provider.TomTomRequestDummy;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.EntityManager;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -75,7 +79,11 @@ public class ProviderIntervalRequest {
     }
 
     private void saveToDatabase(List<Incident> incidents) {
-        //TODO
+        Request request = new Request();
+        request.setRequestTime(LocalDateTime.now());
+        request.addIncidents(incidents);
+
+        MyRepo.insertRequest(request);
     }
 
 }
