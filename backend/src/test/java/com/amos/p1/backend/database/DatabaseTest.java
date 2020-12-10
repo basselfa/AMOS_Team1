@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import javax.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -96,27 +97,55 @@ public class DatabaseTest {
     @Test
     void testRequestDatabaseConnection() {
 
-        EntityManagerFactory emf =
-                Persistence.createEntityManagerFactory("MyRepo");
-        EntityManager em = emf.createEntityManager();
+        List<Incident> incidents = new ArrayList<Incident>();
+        incidents.add(
 
-        em.getTransaction().begin();
+                new Incident("222","baustelle","major",
+                        "Traffic jam in Bergmannstraße",
+                        "Berlin", "Germany", 1,
+                        "45.5", "67.4",
+                        "Bergmannstraße",
+                        "46.5", "69.5",
+                        "Bergmannstraße",
+                        1, "dummy",
+                        LocalDateTime.of(
+                                2020, 5, 1,
+                                12, 30, 0),
+                        LocalDateTime.of(
+                                2020, 5, 1,
+                                12, 30, 0),
+                        "670000:690000,681234:691234"));
+        incidents.add(
+                new Incident("333","baustelle","major",
+                        "Traffic jam in Bergmannstraße",
+                        "Berlin", "Germany", 1,
+                        "45.5", "67.4",
+                        "Bergmannstraße",
+                        "46.5", "69.5",
+                        "Bergmannstraße",
+                        1, "dummy",
+                        LocalDateTime.of(
+                                2020, 5, 1,
+                                12, 30, 0),
+                        LocalDateTime.of(
+                                2020, 5, 1,
+                                12, 30, 0),
+                        "670000:690000,681234:691234"));
 
-        Request request1 =
-
-                new Request();
-        request1.setIncidentsId("1,2,3,4,5,6");
-        request1.setRequestTime(LocalDateTime.of(
+        Request request = new Request();
+        request.setRequestTime(LocalDateTime.of(
                 2020, 5, 1,
                 12, 30, 0));
+        request.addIncidents(incidents);
 
-        em.persist(request1);
-        em.getTransaction().commit();
+        MyRepo.insertRequest(request);
 
-        emf.close();
-        em.close();
 
+        System.out.println(MyRepo.getRequest(LocalDateTime.of(
+                2020, 5, 1,
+                12, 30, 0)));
     }
+
     @Test
     void test(){
         repo.save(new Comparison("Traffic jam1", "Crash1"));

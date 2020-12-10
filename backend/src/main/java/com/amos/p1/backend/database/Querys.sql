@@ -5,7 +5,6 @@ drop table Incident;
 CREATE TABLE Incident (
                           id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
                           trafficId VARCHAR(255) NOT NULL,
-                          eventId VARCHAR(255) NOT NULL,
                           type VARCHAR(255) NOT NULL,
                           size VARCHAR(255) NOT NULL,
                           description VARCHAR(255) NOT NULL,
@@ -22,18 +21,14 @@ CREATE TABLE Incident (
                           provider  VARCHAR(255) NOT NULL,
                           entryTime datetime NOT NULL,
                           endTime datetime NOT NULL,
-                          edges VARCHAR(255) NOT NULL,
-                          requestId BIGINT NOT NULL,
-                          CONSTRAINT `FK_request_id`
-                          FOREIGN KEY (requestId)
-                          REFERENCES Request(id)
+                          edges VARCHAR(255) NOT NULL
+
 ) ;
 
 
-
+drop TABLE Request ;
 CREATE TABLE Request (
                          id BIGINT  AUTO_INCREMENT  PRIMARY KEY,
-                         requestId BIGINT NOT NULL,
+                         incidentsId VARCHAR(255) NOT NULL,
                          requestTime datetime NOT NULL
 ) ;
-drop TABLE Request

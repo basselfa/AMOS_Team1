@@ -39,24 +39,26 @@ public class MyRepo {
         instance.em.getTransaction().commit();
     }
 
-    public static void insertRequest(List<Incident> incidents){
+    public static void insertRequest(Request request){
         //TODO implement it. Request is the main table. Also incidents saving
+        List<Incident> incidents =request.getIncidents();
         InsertIncident(incidents);
-
+        request.setIncidentsSavedInDb(true);
+        // update incidents id
+        request.addIncidents(incidents);
 
         instance.em.getTransaction().begin();
-
-        Request request = new Request();
-        request.addIncidents(incidents);
-        request.setRequestTime(LocalDateTime.now());
-
         instance.em.persist(request);
         instance.em.getTransaction().commit();
     }
 
     public static Request getRequest(LocalDateTime localDateTime){
         //TODO implement it.
-        return null;
+        List<Request> requests =  instance.em.createNamedQuery("geRequestFromTime")
+                .setParameter("requestTime" ,localDateTime )
+                .getResultList();
+        requests.get(0).setIncidentsSavedInDb(true);
+        return requests.get(0);
     }
 
 }

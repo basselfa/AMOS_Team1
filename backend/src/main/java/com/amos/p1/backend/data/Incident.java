@@ -10,7 +10,7 @@ import java.util.List;
 
 @NamedQuery(
         name="getFromids",
-        query="SELECT i FROM Incident i WHERE i.id = :id"
+        query="SELECT i FROM Incident i WHERE i.id IN :id"
 )
 @NamedQuery(
         name="getFromCity",
@@ -51,6 +51,7 @@ public class Incident {
     // reference https://vladmihalcea.com/date-timestamp-jpa-hibernate/
     private LocalDateTime entryTime;
     private LocalDateTime endTime;
+
     private String edges; // 12.124234:53.536453,
 
 
@@ -59,8 +60,16 @@ public class Incident {
         super();
     }
 
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
+    }
+
     public Incident(String trafficId, String type, String size, String description,
-                    String city, String country,double lengthInMeter,
+                    String city, String country, double lengthInMeter,
                     String startPositionLatitude, String startPositionLongitude,
                     String startPositionStreet, String endPositionLatitude,
                     String endPositionLongitude, String endPositionStreet,
@@ -83,8 +92,8 @@ public class Incident {
         this.provider = provider;
         this.entryTime = entryTime;
         this.trafficId = trafficId;
-        this.endTime = endTime;
         this.edges = edges;
+        this.endTime =endTime;
         this.lengthInMeter = lengthInMeter;
     }
 
@@ -110,11 +119,6 @@ public class Incident {
     public LocalDateTime  getEntryTime() { return entryTime; }
     public void setEntryTime(LocalDateTime  entryTime) { this.entryTime = entryTime; }
 
-    @Basic
-    @Column(name = "endTime", columnDefinition="DATETIME")
-    @Temporal(TemporalType.TIMESTAMP)
-    public LocalDateTime   getEndTime() { return endTime; }
-    public void setEndTime(LocalDateTime  endTime) {  this.endTime = endTime; }
 
     @Basic
     @Column(name = "type", nullable = true)
@@ -232,7 +236,6 @@ public class Incident {
                 ", verified=" + verified +
                 ", provider='" + provider + '\'' +
                 ", entryTime=" + entryTime +
-                ", endTime=" + endTime +
                 ", edges='" + edges + '\'' +
                 '}';
     }
