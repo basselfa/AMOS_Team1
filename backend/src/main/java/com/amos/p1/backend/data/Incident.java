@@ -33,7 +33,6 @@ public class Incident {
     private Long id;
 
     private String trafficId;
-    private String eventId;
     private String type; // type of incident
     private String size;
     private String description;
@@ -53,7 +52,6 @@ public class Incident {
     private LocalDateTime entryTime;
     private LocalDateTime endTime;
     private String edges; // 12.124234:53.536453,
-    private Long requestId;
 
 
 
@@ -70,7 +68,6 @@ public class Incident {
                     LocalDateTime entryTime, LocalDateTime endTime, String edges) {
         super();
         this.trafficId = trafficId;
-        this.eventId = eventId;
         this.type = type;
         this.size = size;
         this.description = description;
@@ -90,20 +87,11 @@ public class Incident {
         this.edges = edges;
         this.lengthInMeter = lengthInMeter;
     }
-    @Basic
-    @Column(name = "requestId",  nullable = true)
-    public Long getRequestId() { return requestId; }
-    public void setRequestId(Long requestId) {  this.requestId = requestId; }
 
     @Basic
     @Column(name = "id")
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
-
-    @Basic
-    @Column(name = "eventId",  nullable = true)
-    public String getEventId() {        return eventId; }
-    public void setEventId(String eventId) {        this.eventId = eventId; }
 
 
     @Basic
@@ -229,7 +217,6 @@ public class Incident {
         return "Incident{" +
                 "id=" + id +
                 ", trafficId='" + trafficId + '\'' +
-                ", eventId='" + eventId + '\'' +
                 ", type='" + type + '\'' +
                 ", size='" + size + '\'' +
                 ", description='" + description + '\'' +
