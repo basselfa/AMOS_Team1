@@ -12,23 +12,68 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class HereNormalization implements JsonToIncident {
+    enum HereIncidents {
+        ACCIDENT(IncidentTypes.ACCIDENT),
+        CONGESTION(IncidentTypes.CONGESTION),
+        DISABLEDVEHICLE(IncidentTypes.DISABLEDVEHICLE),
+        ROADHAZARD(IncidentTypes.ROADHAZARD),
+        CONSTRUCTION(IncidentTypes.ROADWORKS),
+        PLANNEDEVENT(IncidentTypes.PLANNEDEVENT),
+        MASSTRANSIT(IncidentTypes.MISC),
+        OTHERNEWS(IncidentTypes.MISC),
+        WEATHER(IncidentTypes.WEATHER),
+        MISC(IncidentTypes.MISC),
+        ROADCLOSURE(IncidentTypes.ROADCLOSURE),
+        LANERESTRICTION(IncidentTypes.LANERESTRICTION);
+
+        private final IncidentTypes incidentType;
+
+        HereIncidents(IncidentTypes incidentType) {
+            this.incidentType = incidentType;
+        }
+
+        public int getID() {
+            return incidentType.getId();
+        }
+    }
+
+    private int mapIncidentType(String incidentStr) {
+        try {
+            return HereIncidents.valueOf(incidentStr.toUpperCase()).getID();
+        } catch (IllegalArgumentException ex) {
+            // todo: log - there is a new incident type defined by the API
+            return IncidentTypes.MISC.getId();
+        }
+    }
+
     @Override
     public Incident normalizeOneIncident(String json) {
         Incident incidentObj = new Incident();
         try {
             JSONObject incidentData = new JSONObject(json);
-            incidentObj.setId(incidentData.getLong("ORIGINAL_TRAFFIC_ITEM_ID"));         //toDo: lange oder kurze Beschreibung?
-            incidentObj.setType("-1");                                                        //toDo: what types exist?
-            incidentObj.setSize("");                                                        //toDo: was bedeutet das?
-            incidentObj.setDescription(incidentData.getString("TRAFFIC_ITEM_TYPE_DESC")); //längerer Satz
+            incidentObj.setId(incidentData.getLong("ORIGINAL_TRAFFIC_ITEM_ID"));
+
+            incidentObj.setType(String.valueOf(mapIncidentType(incidentData.getString("TRAFFIC_ITEM_TYPE_DESC"))));
+
+
+            incidentObj.setSize(
+                    incidentData.getJSONObject("LOCATION")
+                            .getString("LENGTH")
+            );
+            incidentObj.setDescription(
+                    incidentData.getString("TRAFFIC_ITEM_TYPE_DESC") +
+                            " & " +
+                            incidentData.getJSONArray("TRAFFIC_ITEM_DESCRIPTION").getJSONObject(0).getString("value")
+            );
+
             incidentObj.setCity(
                     incidentData.getJSONObject("LOCATION")
                             .getJSONObject("INTERSECTION")
                             .getJSONObject("ORIGIN")
                             .getString("COUNTY")
             );
-            incidentObj.setCountry("DE");                                                   //toDo: warum, ich dachte nur Deutschland ?!
 
+            //incidentObj.setExitAvailable(0);
 
             // start piont
             incidentObj.setStartPositionLatitude(
@@ -48,9 +93,14 @@ public class HereNormalization implements JsonToIncident {
                             .getJSONObject("INTERSECTION")
                             .getJSONObject("ORIGIN")
                             .getJSONObject("STREET1")
-                            .getString("ADDRESS1")
-            );                                                                                  // toDo: ich bekomme eine Kreuzung und keine einzelne Straße
-                                                                                                // toDo: umlaute werden nicht richtig übernommen (charset prüfen)
+                            .getString("ADDRESS1") +
+                            " - " +
+                            incidentData.getJSONObject("LOCATION")
+                                    .getJSONObject("INTERSECTION")
+                                    .getJSONObject("ORIGIN")
+                                    .getJSONObject("STREET2")
+                                    .getString("ADDRESS1")
+            );
 
             // end piont
             incidentObj.setEndPositionLatitude(
@@ -72,23 +122,52 @@ public class HereNormalization implements JsonToIncident {
                             .getJSONObject("INTERSECTION")
                             .getJSONObject("TO")
                             .getJSONObject("STREET1")
-                            .getString("ADDRESS1")
-            );                                                                              // toDo: ich bekomme eine Kreuzung und keine einzelne Straße
-                                                                                            // toDo: umlaute werden nicht richtig übernommen (charset prüfen)
+                            .getString("ADDRESS1") +
+                            " - " +
+                            incidentData.getJSONObject("LOCATION")
+                                    .getJSONObject("INTERSECTION")
+                                    .getJSONObject("TO")
+                                    .getJSONObject("STREET2")
+                                    .getString("ADDRESS1")
+            );
 
             incidentObj.setVerified(
                     incidentData.getBoolean("VERIFIED") ? 1 : 0
             );
 
             incidentObj.setProvider("0");
-            // incidentObj.setDelay();                                                      // toDo: ????
+
+            if (incidentData.has("CRITICALITY")) {
+                int hereCriticality = (int) incidentData.getJSONObject("CRITICALITY").getLong("ID");
+                int criticality = (4 - hereCriticality) * 3;
+                //incidentObj.setDelay(criticality);
+            } else {
+                //incidentObj.setDelay(-1);
+            }
+
             incidentObj.setEntryTime(
                     parseDate(incidentData.getString("ENTRY_TIME"))
             );
             incidentObj.setEndTime(
                     parseDate(incidentData.getString("END_TIME"))
             );
-            // incidentObj.setEdges();                                                       // toDo: ????
+
+            String edgesString = "";
+            JSONArray geoLocationsArr = incidentData.getJSONObject("LOCATION")
+                    .getJSONObject("GEOLOC")
+                    .getJSONObject("GEOMETRY")
+                    .getJSONObject("SHAPES")
+                    .getJSONArray("SHP");
+
+            for (int i = 0; i < geoLocationsArr.length(); i++) {
+                String partialShape = geoLocationsArr.getJSONObject(i).getString("value");
+                for (String location : partialShape.split(" ")) {
+                    edgesString += location.replace(",", ":") + ",";
+                }
+
+            }
+
+            incidentObj.setEdges(edgesString);
             System.out.println(incidentObj);
         } catch (JSONException e) {
             //json cant be paresed
@@ -129,7 +208,5 @@ public class HereNormalization implements JsonToIncident {
     private LocalDateTime parseDate(String timeStr) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
         return LocalDateTime.parse(timeStr, formatter);
-
-
     }
 }
