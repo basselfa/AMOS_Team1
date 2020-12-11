@@ -2,7 +2,6 @@ package com.amos.p1.backend.database;
 
 import com.amos.p1.backend.data.Comparison;
 import com.amos.p1.backend.data.Request;
-import com.amos.p1.backend.database.ComparisonRepository;
 import com.amos.p1.backend.data.Incident;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -136,7 +135,7 @@ public class DatabaseTest {
         request.setRequestTime(LocalDateTime.of(
                 2020, 5, 1,
                 12, 30, 0));
-        request.addIncidents(incidents);
+        request.setIncidents(incidents);
 
         MyRepo.insertRequest(request);
 

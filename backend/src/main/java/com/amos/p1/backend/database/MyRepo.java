@@ -9,6 +9,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 @Component
@@ -31,7 +33,7 @@ public class MyRepo {
         return instance.emf;
     }
 
-    public static void InsertIncident(List<Incident> incidents) {
+    public static void insertIncident(List<Incident> incidents) {
         instance.em.getTransaction().begin();
         for(Incident incident : incidents) {
             instance.em.persist(incident);
@@ -40,25 +42,48 @@ public class MyRepo {
     }
 
     public static void insertRequest(Request request){
-        //TODO implement it. Request is the main table. Also incidents saving
-        List<Incident> incidents =request.getIncidents();
-        InsertIncident(incidents);
-        request.setIncidentsSavedInDb(true);
-        // update incidents id
-        request.addIncidents(incidents);
+        List<Incident> incidents = request.getIncidents();
+
+        insertIncident(incidents);
+        request.setIncidentsId(getIncidentIds(incidents));
 
         instance.em.getTransaction().begin();
         instance.em.persist(request);
         instance.em.getTransaction().commit();
     }
 
+    private static String getIncidentIds(List<Incident> incidents){
+        String incidentIds = "";
+
+        for (Incident incident : incidents) {
+
+            incidentIds += incident.getId().toString();
+            if (incident != incidents.get(incidents.size() - 1))
+                incidentIds += ",";
+        }
+
+        return incidentIds;
+    }
+
     public static Request getRequest(LocalDateTime localDateTime){
-        //TODO implement it.
-        List<Request> requests =  instance.em.createNamedQuery("geRequestFromTime")
-                .setParameter("requestTime" ,localDateTime )
+        List<Request> requests =  instance.em.createNamedQuery("geRequestFromTime", Request.class)
+                .setParameter("requestTime" , localDateTime)
                 .getResultList();
-        requests.get(0).setIncidentsSavedInDb(true);
-        return requests.get(0);
+        Request request = requests.get(0);
+
+        List<Incident> incidents = getIncidentFromDBByIds(request.getIncidentsId());
+        request.setIncidents(incidents);
+
+        return request;
+    }
+
+    private static List<Incident> getIncidentFromDBByIds(String incidentsId){
+        String[] idSplit = incidentsId.split(",");
+        List<Long> idSplitasLongs = Stream.of(idSplit).map(Long::valueOf).collect(Collectors.toList());
+
+        return instance.em.createNamedQuery("getFromids", Incident.class)
+                .setParameter("id", idSplitasLongs)
+                .getResultList();
     }
 
 }
