@@ -34,7 +34,7 @@ public class Request {
         super();
     }
     // parses Incidents to string ids of incidents
-    public void addIncidents(List<Incident> incidents){
+    public void setIncidents(List<Incident> incidents){
 
         this.incidents = incidents;
          incidentsId = "" ;
@@ -62,7 +62,7 @@ public class Request {
                    .getResultList();
 
            // update if anything gets deleted from incidents
-           addIncidents(incidentAsList);
+           setIncidents(incidentAsList);
 
        }
            return incidents;
