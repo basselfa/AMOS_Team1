@@ -3,7 +3,6 @@ package com.amos.p1.backend;
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.service.IncidentAggregator;
 import com.amos.p1.backend.service.IncidentAggregatorDirectlyFromProvider;
-import com.amos.p1.backend.service.IncidentAggregatorFromDatabase;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +11,8 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
-public class Resource {
+@RequestMapping("withDatabase")
+public class ResourceWithDatabase {
 
     @RequestMapping(
             method = RequestMethod.GET,
@@ -25,20 +25,6 @@ public class Resource {
         IncidentAggregator incidentAggregator = new IncidentAggregatorDirectlyFromProvider();
 
         return ResponseEntity.ok(incidentAggregator.getFromCity(city));
-    }
-
-    @RequestMapping(
-            method = RequestMethod.GET,
-            value = "/historization",
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
-    // to be refined with entryTime - getIncidentsByEntryTime()
-    @ResponseBody
-    public ResponseEntity<List<Incident>> getAllIncidents(){
-
-        IncidentAggregator incidentAggregator = new IncidentAggregatorFromDatabase();
-
-        return ResponseEntity.ok(incidentAggregator.getAllData());
     }
 
 }
