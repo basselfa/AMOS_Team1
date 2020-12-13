@@ -23,12 +23,12 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file backend/pom.xml -Dmaven.test.skip=true 
     - name: Build docker backend 
-      run: docker build -t ${{DOCKER_ID}}/backend backend
+      run: docker build -t ${{secrets.DOCKER_ID}}/backend backend
     - name: Build docker frontend 
-      run: docker build -t ${{DOCKER_ID}}/frontend Frontend
+      run: docker build -t ${{secrets.DOCKER_ID}}/frontend Frontend
     - name: docker login with secret
-      run: docker login -u ${{DOCKER_ID}} -p ${{DOCKER_PW}}
+      run: docker login -u ${{secrets.DOCKER_ID}} -p ${{secrets.DOCKER_PW}}
     - name: docker push backend and frontend to dockerhub (create incremental counter)
-      run: docker push ${{DOCKER_ID}}/backend
+      run: docker push ${{secrets.DOCKER_ID}}/backend
     - name: push frontend to dockerhub
-      run: docker push ${{DOCKER_ID}}/frontend
+      run: docker push ${{secrets.DOCKER_ID}}/frontend
