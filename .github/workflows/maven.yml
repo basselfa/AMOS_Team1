@@ -22,11 +22,13 @@ jobs:
         java-version: 1.8
     - name: Build with Maven
       run: mvn -B package --file backend/pom.xml -Dmaven.test.skip=true 
-#    - name: docker backend 
-#      run: docker build . -t backend
-#    - name: docker build frontend versioning
-#      run: docker build . -t frontend
-#    - name: docker login with secret
-#    - name: docker push backende and frontend to hockerhub (create incremental counter)
-#      run: ---
-#    - name:  
+    - name: Build docker backend 
+      run: docker build -t ${{DOCKER_ID}}/backend backend
+    - name: Build docker frontend 
+      run: docker build -t ${{DOCKER_ID}}/frontend Frontend
+    - name: docker login with secret
+      run: docker login -u ${{DOCKER_ID}} -p ${{DOCKER_PW}}
+    - name: docker push backend and frontend to dockerhub (create incremental counter)
+      run: docker push ${{DOCKER_ID}}/backend
+    - name: push frontend to dockerhub
+      run: docker push ${{DOCKER_ID}}/frontend
