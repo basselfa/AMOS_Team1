@@ -33,7 +33,7 @@ public class OneIncidentTest {
 
     @Test
     void testIncidentType() {
-        assertEquals("4", incident.getType());
+        assertEquals("CONSTRUCTION", incident.getType());
     }
 
     @Test
