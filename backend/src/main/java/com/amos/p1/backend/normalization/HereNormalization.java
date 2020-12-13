@@ -168,7 +168,7 @@ public class HereNormalization implements JsonToIncident {
             }
 
             incidentObj.setEdges(edgesString);
-            System.out.println(incidentObj);
+
         } catch (JSONException e) {
             //json cant be paresed
             e.printStackTrace();
