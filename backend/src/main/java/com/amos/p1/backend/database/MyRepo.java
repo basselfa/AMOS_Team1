@@ -69,6 +69,7 @@ public class MyRepo {
 
           ScriptRunner scriptRunner = new ScriptRunner(con2);
         FileReader fileReader = new FileReader("src/main/resources/schema.sql");
+        scriptRunner.setLogWriter(null);
         scriptRunner.runScript(new BufferedReader(fileReader));
 
 
