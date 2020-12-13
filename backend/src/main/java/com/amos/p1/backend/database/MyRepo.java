@@ -31,21 +31,29 @@ public class MyRepo {
         return instance.emf;
     }
 
-    public static void InsertIncident(List<Incident> incidents) {
+    public static void insertIncident(List<Incident> incidents) {
         instance.em.getTransaction().begin();
         for(Incident incident : incidents) {
             instance.em.persist(incident);
         }
         instance.em.getTransaction().commit();
     }
+    public List<Incident> getIncidents(Long id) {
+        List<Incident> resultList = MyRepo.getEntityManager()
+                .createNamedQuery("getFromids")
+                .setParameter("id", id)
+                .getResultList();
+        return resultList;
+    }
+
 
     public static void insertRequest(Request request){
         //TODO implement it. Request is the main table. Also incidents saving
         List<Incident> incidents =request.getIncidents();
-        InsertIncident(incidents);
+        insertIncident(incidents);
         request.setIncidentsSavedInDb(true);
         // update incidents id
-        request.addIncidents(incidents);
+        request.setIncidents(incidents);
 
         instance.em.getTransaction().begin();
         instance.em.persist(request);
