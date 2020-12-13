@@ -1,7 +1,6 @@
 package com.amos.p1.backend.normalization;
 
 import com.amos.p1.backend.data.Incident;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONArray;
@@ -13,22 +12,22 @@ import java.util.List;
 
 public class HereNormalization implements JsonToIncident {
     enum HereIncidents {
-        ACCIDENT(IncidentTypes.ACCIDENT),
-        CONGESTION(IncidentTypes.CONGESTION),
-        DISABLEDVEHICLE(IncidentTypes.DISABLEDVEHICLE),
-        ROADHAZARD(IncidentTypes.ROADHAZARD),
-        CONSTRUCTION(IncidentTypes.ROADWORKS),
-        PLANNEDEVENT(IncidentTypes.PLANNEDEVENT),
-        MASSTRANSIT(IncidentTypes.MISC),
-        OTHERNEWS(IncidentTypes.MISC),
-        WEATHER(IncidentTypes.WEATHER),
-        MISC(IncidentTypes.MISC),
-        ROADCLOSURE(IncidentTypes.ROADCLOSURE),
-        LANERESTRICTION(IncidentTypes.LANERESTRICTION);
+        ACCIDENT(Incident.IncidentTypes.ACCIDENT),
+        CONGESTION(Incident.IncidentTypes.CONGESTION),
+        DISABLEDVEHICLE(Incident.IncidentTypes.DISABLEDVEHICLE),
+        ROADHAZARD(Incident.IncidentTypes.ROADHAZARD),
+        CONSTRUCTION(Incident.IncidentTypes.ROADWORKS),
+        PLANNEDEVENT(Incident.IncidentTypes.PLANNEDEVENT),
+        MASSTRANSIT(Incident.IncidentTypes.MISC),
+        OTHERNEWS(Incident.IncidentTypes.MISC),
+        WEATHER(Incident.IncidentTypes.WEATHER),
+        MISC(Incident.IncidentTypes.MISC),
+        ROADCLOSURE(Incident.IncidentTypes.ROADCLOSURE),
+        LANERESTRICTION(Incident.IncidentTypes.LANERESTRICTION);
 
-        private final IncidentTypes incidentType;
+        private final Incident.IncidentTypes incidentType;
 
-        HereIncidents(IncidentTypes incidentType) {
+        HereIncidents(Incident.IncidentTypes incidentType) {
             this.incidentType = incidentType;
         }
 
@@ -37,12 +36,12 @@ public class HereNormalization implements JsonToIncident {
         }
     }
 
-    private int mapIncidentType(String incidentStr) {
+    private String mapIncidentType(String incidentStr) {
         try {
-            return HereIncidents.valueOf(incidentStr.toUpperCase()).getID();
+            return HereIncidents.valueOf(incidentStr.toUpperCase()).toString();
         } catch (IllegalArgumentException ex) {
             // todo: log - there is a new incident type defined by the API
-            return IncidentTypes.MISC.getId();
+            return Incident.IncidentTypes.MISC.toString();
         }
     }
 
@@ -168,7 +167,7 @@ public class HereNormalization implements JsonToIncident {
             }
 
             incidentObj.setEdges(edgesString);
-            System.out.println(incidentObj);
+
         } catch (JSONException e) {
             //json cant be paresed
             e.printStackTrace();

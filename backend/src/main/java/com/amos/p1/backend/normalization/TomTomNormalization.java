@@ -16,25 +16,25 @@ import java.util.List;
 
 public class TomTomNormalization implements JsonToIncident {
     enum TomTomIncidents {
-        ACCIDENT(IncidentTypes.ACCIDENT),
-        JAM(IncidentTypes.CONGESTION),
-        BROKENDOWNVEHICLE(IncidentTypes.DISABLEDVEHICLE),
-        DANGEROUSCONDITIONS(IncidentTypes.ROADHAZARD),
-        ROADWORKS(IncidentTypes.ROADWORKS),
-        DETOUR(IncidentTypes.MISC),
-        FOG(IncidentTypes.WEATHER),
-        RAIN(IncidentTypes.WEATHER),
-        ICE(IncidentTypes.WEATHER),
-        WIND(IncidentTypes.WEATHER),
-        FLOODING(IncidentTypes.WEATHER),
-        UNKNOWN(IncidentTypes.MISC),
-        ROADCLOSED(IncidentTypes.ROADCLOSURE),
-        CLUSTER(IncidentTypes.MISC),
-        LANECLOSED(IncidentTypes.LANERESTRICTION);
+        ACCIDENT(Incident.IncidentTypes.ACCIDENT),
+        JAM(Incident.IncidentTypes.CONGESTION),
+        BROKENDOWNVEHICLE(Incident.IncidentTypes.DISABLEDVEHICLE),
+        DANGEROUSCONDITIONS(Incident.IncidentTypes.ROADHAZARD),
+        ROADWORKS(Incident.IncidentTypes.ROADWORKS),
+        DETOUR(Incident.IncidentTypes.MISC),
+        FOG(Incident.IncidentTypes.WEATHER),
+        RAIN(Incident.IncidentTypes.WEATHER),
+        ICE(Incident.IncidentTypes.WEATHER),
+        WIND(Incident.IncidentTypes.WEATHER),
+        FLOODING(Incident.IncidentTypes.WEATHER),
+        UNKNOWN(Incident.IncidentTypes.MISC),
+        ROADCLOSED(Incident.IncidentTypes.ROADCLOSURE),
+        CLUSTER(Incident.IncidentTypes.MISC),
+        LANECLOSED(Incident.IncidentTypes.LANERESTRICTION);
 
-        private final IncidentTypes value;
+        private final Incident.IncidentTypes value;
 
-        TomTomIncidents(IncidentTypes value) {
+        TomTomIncidents(Incident.IncidentTypes value) {
             this.value = value;
         }
 
