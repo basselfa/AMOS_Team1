@@ -10,7 +10,7 @@ public class DatabaseTestHelper {
     public static void insertIncident(Incident incident){
         List<Incident> incidents = new ArrayList<>();
         incidents.add(incident);
-        MyRepo.InsertIncident(incidents);
+        MyRepo.insertIncident(incidents);
     }
 
     public static Incident getIncidentById(long id){

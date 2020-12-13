@@ -40,7 +40,7 @@ public class RequestMarshallingTest {
 
         Request request = new Request();
         request.setRequestTime(LocalDateTime.of(2020, 10, 30, 16, 30));
-        request.addIncidents(incidents);
+        request.setIncidents(incidents);
 
         return request;
     }

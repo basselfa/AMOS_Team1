@@ -86,7 +86,7 @@ public class RequestTest {
     private Request getDummyRequestWithIncidents(List<Incident> incidents) {
         Request request = new Request();
         request.setRequestTime(LOCAL_DATE_TIME_DUMMY);
-        request.addIncidents(incidents);
+        request.setIncidents(incidents);
 
         return  request;
     }
