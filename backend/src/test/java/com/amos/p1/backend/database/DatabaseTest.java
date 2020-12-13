@@ -96,7 +96,7 @@ public class DatabaseTest {
     }
     @Test
     void testRequestDatabaseConnection() {
-
+MyRepo.setUseTestDatabase(true); ;
         List<Incident> incidents = new ArrayList<Incident>();
         incidents.add(
 
@@ -136,7 +136,7 @@ public class DatabaseTest {
         request.setRequestTime(LocalDateTime.of(
                 2020, 5, 1,
                 12, 30, 0));
-        request.addIncidents(incidents);
+        request.setIncidents(incidents);
 
         MyRepo.insertRequest(request);
 

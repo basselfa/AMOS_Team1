@@ -101,7 +101,7 @@ public class ProviderIntervalRequest {
     private void saveToDatabase(List<Incident> incidents) {
         Request request = new Request();
         request.setRequestTime(LocalDateTime.now());
-        request.addIncidents(incidents);
+        request.setIncidents(incidents);
 
         MyRepo.insertRequest(request);
     }
