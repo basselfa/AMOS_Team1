@@ -1,5 +1,6 @@
-drop table Incident;
+drop table if exists Incident;
 
+drop TABLE if exists Request ;
 
 
 CREATE TABLE Incident (
@@ -26,7 +27,6 @@ CREATE TABLE Incident (
 ) ;
 
 
-drop TABLE Request ;
 CREATE TABLE Request (
                          id BIGINT  AUTO_INCREMENT  PRIMARY KEY,
                          incidentsId VARCHAR(255) NOT NULL,
