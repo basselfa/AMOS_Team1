@@ -86,6 +86,35 @@ public class MyRepo {
 
 
 
+    public static void dropAll(){
+          String URl = "jdbc:mysql://localhost:3306/testdb3?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin";
+          String id = "root";
+          String  password = "root";
+         String jdbcDriver = "com.mysql.cj.jdbc.Driver";
+        if (instance.useTestDatabase == false)
+        {
+               URl = "jdbc:mysql://remotemysql.com:3306/lIkqLjf1AL";
+               id = "lIkqLjf1AL";
+               password = "yddtBbLwx1";
+        }
+        Connection con2 = null;
+        try {
+            con2 = DriverManager.getConnection(URl ,id,password);
+            ScriptRunner scriptRunner = new ScriptRunner(con2);
+            FileReader fileReader = new FileReader("src/main/resources/schema.sql");
+            scriptRunner.setLogWriter(null);
+            scriptRunner.runScript(new BufferedReader(fileReader));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+
     public static void insertIncident(List<Incident> incidents) {
         getEntityManager().getTransaction().begin();
         for(Incident incident : incidents) {
