@@ -50,7 +50,7 @@ public class HereNormalization implements JsonToIncident {
         Incident incidentObj = new Incident();
         try {
             JSONObject incidentData = new JSONObject(json);
-            incidentObj.setId(incidentData.getLong("ORIGINAL_TRAFFIC_ITEM_ID"));
+            incidentObj.setTrafficId(incidentData.getString("ORIGINAL_TRAFFIC_ITEM_ID"));
             incidentObj.setType(String.valueOf(mapIncidentType(incidentData.getString("TRAFFIC_ITEM_TYPE_DESC"))));
             incidentObj.setDescription(
                     incidentData.getString("TRAFFIC_ITEM_TYPE_DESC") +

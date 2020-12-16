@@ -75,7 +75,6 @@ public class Incident {
                     int verified, String provider,
                     LocalDateTime entryTime, LocalDateTime endTime, String edges) {
         super();
-        this.trafficId = trafficId;
         this.type = type;
         this.size = size;
         this.description = description;

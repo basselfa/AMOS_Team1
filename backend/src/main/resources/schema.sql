@@ -22,7 +22,7 @@ CREATE TABLE Incident (
                           provider  VARCHAR(255)  ,
                           entryTime datetime  ,
                           endTime datetime  ,
-                          edges VARCHAR(255)
+                          edges VARCHAR(11255)
 
 ) ;
 
