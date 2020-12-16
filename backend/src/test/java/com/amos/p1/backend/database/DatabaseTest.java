@@ -96,7 +96,7 @@ public class DatabaseTest {
     }
     @Test
     void testRequestDatabaseConnection() {
-MyRepo.setUseTestDatabase(true); ;
+MyRepo.setUseTestDatabase(false); ;
         List<Incident> incidents = new ArrayList<Incident>();
         incidents.add(
 

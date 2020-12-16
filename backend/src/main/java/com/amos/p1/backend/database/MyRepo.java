@@ -32,16 +32,16 @@ public class MyRepo {
     private MyRepo() {
         emf = Persistence.createEntityManagerFactory("MyRepo");
         em = emf.createEntityManager();
-
-        try {
-            intialiseTestDB();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-          emfTest = Persistence.createEntityManagerFactory("MyTestRepo");
-          emTest = emfTest.createEntityManager();
+//
+//        try {
+//            intialiseTestDB();
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//          emfTest = Persistence.createEntityManagerFactory("MyTestRepo");
+//          emTest = emfTest.createEntityManager();
 
     }
 
@@ -69,6 +69,7 @@ public class MyRepo {
 
           ScriptRunner scriptRunner = new ScriptRunner(con2);
         FileReader fileReader = new FileReader("src/main/resources/schema.sql");
+        scriptRunner.setLogWriter(null);
         scriptRunner.runScript(new BufferedReader(fileReader));
 
 
@@ -81,6 +82,37 @@ public class MyRepo {
     public static EntityManagerFactory getEntityManagerFactory(){
         if (instance.useTestDatabase == true) return instance.emfTest;
         return instance.emf;
+    }
+
+
+
+    public static void dropAll(){
+        String  URl = "jdbc:mysql://remotemysql.com:3306/lIkqLjf1AL";
+        String   id = "lIkqLjf1AL";
+        String   password = "yddtBbLwx1";
+
+         String jdbcDriver = "com.mysql.cj.jdbc.Driver";
+        if (instance.useTestDatabase == true)
+        {
+             URl = "jdbc:mysql://localhost:3306/testdb3?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin";
+             id = "root";
+              password = "root";
+
+        }
+        Connection con2 = null;
+        try {
+            con2 = DriverManager.getConnection(URl ,id,password);
+            ScriptRunner scriptRunner = new ScriptRunner(con2);
+            FileReader fileReader = new FileReader("src/main/resources/schema.sql");
+            scriptRunner.setLogWriter(null);
+            scriptRunner.runScript(new BufferedReader(fileReader));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 
