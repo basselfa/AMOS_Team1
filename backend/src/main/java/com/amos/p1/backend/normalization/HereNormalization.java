@@ -52,10 +52,6 @@ public class HereNormalization implements JsonToIncident {
             JSONObject incidentData = new JSONObject(json);
             incidentObj.setId(incidentData.getLong("ORIGINAL_TRAFFIC_ITEM_ID"));
             incidentObj.setType(String.valueOf(mapIncidentType(incidentData.getString("TRAFFIC_ITEM_TYPE_DESC"))));
-            incidentObj.setSize(
-                    incidentData.getJSONObject("LOCATION")
-                            .getString("LENGTH")
-            );
             incidentObj.setDescription(
                     incidentData.getString("TRAFFIC_ITEM_TYPE_DESC") +
                             " & " +
@@ -101,6 +97,10 @@ public class HereNormalization implements JsonToIncident {
                     incidentData.getBoolean("VERIFIED") ? 1 : 0
             );
             incidentObj.setProvider("0");
+            incidentObj.setLengthInMeter(
+                    incidentData.getJSONObject("LOCATION")
+                            .getDouble("LENGTH")    //todo: is it really meter??
+            );
             incidentObj.setEdges(parseHereEdges(incidentData));
             parseHereAdress(incidentData, incidentObj);
 
@@ -108,9 +108,9 @@ public class HereNormalization implements JsonToIncident {
             if (incidentData.has("CRITICALITY")) {
                 int hereCriticality = (int) incidentData.getJSONObject("CRITICALITY").getLong("ID");
                 int criticality = (4 - hereCriticality) * 3;
-                //incidentObj.setDelay(criticality);
+                incidentObj.setSize(criticality+"");
             } else {
-                //incidentObj.setDelay(-1);
+                incidentObj.setSize(-1 +"");
             }
 
 
@@ -232,7 +232,7 @@ public class HereNormalization implements JsonToIncident {
             JSONArray trafficItems = obj.getJSONObject("TRAFFIC_ITEMS").getJSONArray("TRAFFIC_ITEM");
 
             // iterate through all incident
-            for (int i = 0; i < trafficItems.length(); i++) {
+            for (int i = 0; i < trafficItems.length(); i++) {       //todo: improve performance with java parallel Streams ?
                 JSONObject trafficItem = trafficItems.getJSONObject(i);
                 Incident incident = normalizeOneIncident(trafficItem.toString());
 
