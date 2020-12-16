@@ -32,16 +32,17 @@ public class MyRepo {
     private MyRepo() {
         emf = Persistence.createEntityManagerFactory("MyRepo");
         em = emf.createEntityManager();
-//
-//        try {
-//            intialiseTestDB();
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//          emfTest = Persistence.createEntityManagerFactory("MyTestRepo");
-//          emTest = emfTest.createEntityManager();
+
+        try {
+            intialiseTestDB();
+
+            emfTest = Persistence.createEntityManagerFactory("MyTestRepo");
+            emTest = emfTest.createEntityManager();
+        } catch (Exception e) {
+
+            System.out.println("Couldn't start test database");
+        }
+
 
     }
 
@@ -118,11 +119,9 @@ public class MyRepo {
 
 
     public static void insertIncident(List<Incident> incidents) {
-        getEntityManager().getTransaction().begin();
         for(Incident incident : incidents) {
             getEntityManager().persist(incident);
         }
-        getEntityManager().getTransaction().commit();
     }
     public static List<Incident> getIncidents(Long id) {
         List<Incident> resultList = MyRepo.getEntityManager()
@@ -135,13 +134,13 @@ public class MyRepo {
 
     public static void insertRequest(Request request){
         //TODO implement it. Request is the main table. Also incidents saving
+        getEntityManager().getTransaction().begin();
         List<Incident> incidents =request.getIncidents();
         insertIncident(incidents);
         request.setIncidentsSavedInDb(true);
         // update incidents id
         request.setIncidents(incidents);
 
-        getEntityManager().getTransaction().begin();
         getEntityManager().persist(request);
         getEntityManager().getTransaction().commit();
     }
