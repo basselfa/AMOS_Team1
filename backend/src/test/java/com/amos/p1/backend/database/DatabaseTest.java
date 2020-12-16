@@ -139,7 +139,7 @@ MyRepo.setUseTestDatabase(false); ;
         request.setIncidents(incidents);
 
         MyRepo.insertRequest(request);
-    
+
 
         System.out.println(MyRepo.getRequest(LocalDateTime.of(
                 2020, 5, 1,
