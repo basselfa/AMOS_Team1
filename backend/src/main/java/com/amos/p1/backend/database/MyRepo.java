@@ -32,16 +32,16 @@ public class MyRepo {
     private MyRepo() {
         emf = Persistence.createEntityManagerFactory("MyRepo");
         em = emf.createEntityManager();
-
-        try {
-            intialiseTestDB();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-          emfTest = Persistence.createEntityManagerFactory("MyTestRepo");
-          emTest = emfTest.createEntityManager();
+//
+//        try {
+//            intialiseTestDB();
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//          emfTest = Persistence.createEntityManagerFactory("MyTestRepo");
+//          emTest = emfTest.createEntityManager();
 
     }
 
@@ -87,15 +87,17 @@ public class MyRepo {
 
 
     public static void dropAll(){
-          String URl = "jdbc:mysql://localhost:3306/testdb3?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin";
-          String id = "root";
-          String  password = "root";
+        String  URl = "jdbc:mysql://remotemysql.com:3306/lIkqLjf1AL";
+        String   id = "lIkqLjf1AL";
+        String   password = "yddtBbLwx1";
+
          String jdbcDriver = "com.mysql.cj.jdbc.Driver";
-        if (instance.useTestDatabase == false)
+        if (instance.useTestDatabase == true)
         {
-               URl = "jdbc:mysql://remotemysql.com:3306/lIkqLjf1AL";
-               id = "lIkqLjf1AL";
-               password = "yddtBbLwx1";
+             URl = "jdbc:mysql://localhost:3306/testdb3?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin";
+             id = "root";
+              password = "root";
+
         }
         Connection con2 = null;
         try {
