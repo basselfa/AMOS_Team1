@@ -170,8 +170,7 @@ public class HereNormalization implements JsonToIncident {
 
         } catch (JSONException e) {
             //json cant be paresed
-            e.printStackTrace();
-            return null;
+            throw new IllegalArgumentException(e);
         }
 
         return incidentObj;
@@ -197,8 +196,7 @@ public class HereNormalization implements JsonToIncident {
 
         } catch (JSONException e) {
             //json cant be paresed
-            e.printStackTrace();
-            return null;
+            throw new IllegalArgumentException(e);
         }
 
         return incidents;
