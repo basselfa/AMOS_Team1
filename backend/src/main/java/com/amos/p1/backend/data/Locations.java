@@ -13,21 +13,21 @@ public class Locations {
 
     public Locations(String edges) {
 
+        if(edges.equals("")){
+            locationsList = new ArrayList<>();
+            return;
+        }
+
         try {
             String[] edgesSplit = edges.split(",");
 
             for (String Location : edgesSplit) {
                 String[] edgeSplitToParts = Location.split(":");
-                locationsList.add(new Location(edgeSplitToParts[0],edgeSplitToParts[1]));
+                locationsList.add(new Location(edgeSplitToParts[0], edgeSplitToParts[1]));
             }
         }catch (Exception ex){
-            // Cant convert edges
-            Location errorLocation = new Location();
-            errorLocation.setLatitude("Error while parsing edges");
-            errorLocation.setLongitude("Error while parsing edges");
-
-            locationsList.add(errorLocation);
-        };
+            throw new IllegalStateException("Cant convert edges: " + edges);
+        }
     }
 
     public void addLocation(Location location){

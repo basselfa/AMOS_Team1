@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 500px; width: 100%">
+  <div>
     <l-map id="osm-map" :zoom="zoom" :center="center" :options="mapOptions">
       <l-tile-layer :url="url" :attribution="attribution" />
       <l-polyline
@@ -60,7 +60,7 @@ export default {
   width: 60%;
   margin: 0;
   position: absolute;
-  top: 680px;
+  top: 550px;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);

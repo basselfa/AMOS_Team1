@@ -49,7 +49,7 @@ export default {
       },
       {
         text: "Historization",
-        icon: "mdi-map",
+        icon: "mdi-poll-box",
         link: "/historization",
       },
       {

@@ -83,7 +83,7 @@ public class IncidentMarshallingTest {
     }
 
     @Test
-    void printJson() throws JSONException {
+    void printJson() {
 
         System.out.println(Helper.getPrettyJson(json));
     }

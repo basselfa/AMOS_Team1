@@ -164,7 +164,7 @@ public class TomTomNormalization implements JsonToIncident {
             clusterPointArray = getClusterPointArray(clusterArray);
 
             // normalize one incident at a time
-            for (JSONArray cPoints : clusterPointArray) {
+            for (JSONArray cPoints : clusterPointArray) { //todo: improve performance with java parallel Streams ?
                 for (int j = 0; j < cPoints.length(); j++)
                     incidentList.add(normalizeOneIncident(cPoints.getJSONObject(j).toString()));
             }

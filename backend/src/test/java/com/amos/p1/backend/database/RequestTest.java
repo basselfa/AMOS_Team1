@@ -11,6 +11,7 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class RequestTest {
 
@@ -69,6 +70,17 @@ public class RequestTest {
 
         List<Incident> incidentsFromDatabase = DatabaseTestHelper.getIncidentListById(firstIncidentId);
         assertThat(incidentsFromDatabase, hasSize(0));
+    }
+
+    @Test
+    void TestDeleteRequest(){
+        Request request = getDummyRequestWithOneDummyIncident();
+        MyRepo.insertRequest(request);
+        Incident incident = request.getIncidents().get(0);
+        long dbId = incident.getId();
+
+        //TODO delete request
+        fail();
     }
 
     private Request getDummyRequestWithIncidents(List<Incident> incidents) {

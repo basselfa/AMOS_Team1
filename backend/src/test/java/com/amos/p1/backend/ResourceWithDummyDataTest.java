@@ -11,7 +11,7 @@ import static org.hamcrest.Matchers.is;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ResourceTest {
+public class ResourceWithDummyDataTest {
 
     @LocalServerPort
     private int port;
@@ -19,7 +19,7 @@ public class ResourceTest {
 
     @BeforeEach
     void setUp() {
-        this.base = "http://localhost:" + port;
+        this.base = "http://localhost:" + port + "/demo";
     }
 
     /**
@@ -30,7 +30,7 @@ public class ResourceTest {
         given()
             .param("city", "berlin")
         .when()
-            .get(base + "/demo/incidents")
+            .get(base + "/incidents")
         .then()
             .statusCode(200);
     }
@@ -40,7 +40,7 @@ public class ResourceTest {
         given()
             .param("city", "berlin")
         .when()
-            .get(base + "/demo/incidents")
+            .get(base + "/incidents")
         .then()
             .contentType(ContentType.JSON);
     }
@@ -53,28 +53,16 @@ public class ResourceTest {
         given()
             .param("city", "berlin")
         .when()
-            .get(base + "/demo/incidents")
+            .get(base + "/incidents")
         .then()
             .body("incidents.size()", is(3));
-    }
-
-    @Test
-    void testGetSpecificIncidentFromBerlinWithGroovyPath(){
-        given()
-            .param("city", "berlin")
-        .when()
-            .get(base + "/demo/incidents")
-        .then()
-            .body("incidents[0].locationX", is(10))
-            .body("incidents[0].locationY", is(20))
-            .body("incidents[0].type", is("Traffic jam"));
     }
 
     @Test
     void testGetAllData(){
         given()
         .when()
-            .get(base + "/demo/historization")
+            .get(base + "/historization")
         .then()
             .body("incidents.size()", is(2));
     }

@@ -34,15 +34,15 @@ public class ProviderIntervalRequest {
     @Scheduled(fixedRate = 3600000)
     public void providerCronJob() {
 
-//        for (CityBoundingBox cityBoundingBox : getCityBoundingBoxes()) {
-//
-//            List<Incident> hereIncidents = getHereIncidents(cityBoundingBox);
-//            List<Incident> tomTomIncidents = getTomTomIncidents(cityBoundingBox);
-//
-//            saveToDatabase(hereIncidents);
-//            saveToDatabase(tomTomIncidents);
-//        }
-//        System.out.println("The time is now " + dateFormat.format(new Date()));
+        for (CityBoundingBox cityBoundingBox : getCityBoundingBoxes()) {
+
+            List<Incident> hereIncidents = getHereIncidents(cityBoundingBox);
+            List<Incident> tomTomIncidents = getTomTomIncidents(cityBoundingBox);
+
+            saveToDatabase(hereIncidents);
+            saveToDatabase(tomTomIncidents);
+        }
+        System.out.println("The time is now " + dateFormat.format(new Date()));
     }
 
     public List<Incident> getRecentTomTomIncidentsFromCity(String city){

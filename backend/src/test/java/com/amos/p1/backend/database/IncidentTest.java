@@ -8,6 +8,7 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class IncidentTest {
 
@@ -65,6 +66,19 @@ public class IncidentTest {
 
         List<Incident> incidents = DatabaseTestHelper.getIncidentListById(dbId);
         assertThat(incidents, hasSize(1));
+    }
+
+    @Test
+    void testDeleteIncident(){
+        Incident incident = DummyIncident.createIncident();
+        DatabaseTestHelper.insertIncident(incident);
+        long dbId = incident.getId();
+
+        //TODO: delete incident
+        fail();
+
+        List<Incident> incidents = DatabaseTestHelper.getIncidentListById(dbId);
+        assertThat(incidents, hasSize(0));
     }
 
 }

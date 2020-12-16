@@ -1,0 +1,630 @@
+{
+  "TIMESTAMP": "12/13/2020 17:19:57 GMT",
+  "VERSION": 2.4,
+  "TRAFFIC_ITEMS": {
+    "TRAFFIC_ITEM": [
+      {
+        "TRAFFIC_ITEM_ID": 4069548315505426198,
+        "ORIGINAL_TRAFFIC_ITEM_ID": 4069549923237463198,
+        "TRAFFIC_ITEM_STATUS_SHORT_DESC": "ACTIVE",
+        "TRAFFIC_ITEM_TYPE_DESC": "CONSTRUCTION",
+        "START_TIME": "12/10/2020 13:55:49",
+        "END_TIME": "01/20/2021 08:00:00",
+        "ENTRY_TIME": "12/10/2020 13:55:49",
+        "CRITICALITY": {
+          "ID": "0",
+          "DESCRIPTION": "critical"
+        },
+        "VERIFIED": true,
+        "ABBREVIATION": {
+          "SHORT_DESC": "CONST",
+          "DESCRIPTION": "construction"
+        },
+        "LOCATION": {
+          "INTERSECTION": {
+            "ORIGIN": {
+              "ID": "",
+              "STREET1": {
+                "ADDRESS1": "Potsdamer Straße"
+              },
+              "STREET2": {
+                "ADDRESS1": "B1"
+              },
+              "COUNTY": "Berlin",
+              "STATE": "",
+              "PROXIMITY": {
+                "ID": "MID",
+                "DESCRIPTION": "midway between"
+              }
+            },
+            "TO": {
+              "ID": "",
+              "STREET1": {
+                "ADDRESS1": "Scharounstraße"
+              },
+              "STREET2": {
+                "ADDRESS1": "Herbert-von-Karajan-Straße"
+              },
+              "COUNTY": "Berlin",
+              "STATE": "",
+              "PROXIMITY": {
+                "ID": "MID",
+                "DESCRIPTION": "midway between"
+              }
+            }
+          },
+          "GEOLOC": {
+            "ORIGIN": {
+              "LATITUDE": 52.50859,
+              "LONGITUDE": 13.36971
+            },
+            "TO": [
+              {
+                "LATITUDE": 52.50912,
+                "LONGITUDE": 13.36827
+              }
+            ],
+            "GEOMETRY": {
+              "SHAPES": {
+                "SHP": [
+                  {
+                    "value": "52.50859,13.36971 52.50877,13.36916",
+                    "FC": 3,
+                    "LID": "77316654F",
+                    "LE": 0.042375934925319436,
+                    "FW": "MD"
+                  },
+                  {
+                    "value": "52.50877,13.36916 52.50894,13.3686 52.50902,13.36841 52.50907,13.36833 52.50912,13.36827",
+                    "FC": 3,
+                    "LID": "53516323F",
+                    "LE": 0.07281261910020577,
+                    "FW": "MD"
+                  }
+                ]
+              }
+            }
+          },
+          "TPEGOpenLRBase64": "CCgBEAAkIwmB4iVW5gAJBQQCAtQACgQDAnMA/3AANQAJBQQCAmAAMAAA",
+          "POLITICAL_BOUNDARY": {
+            "METRO_AREA": {
+              "value": "",
+              "ID": 218
+            },
+            "COUNTY": "Berlin",
+            "MUNICIPALITY": {
+              "NAME": "Berlin"
+            }
+          },
+          "NAVTECH": {
+            "EDGE": {
+              "EDGE_ID": [
+                "77316654",
+                "53516323"
+              ]
+            },
+            "VERSION_ID": "202004"
+          },
+          "LENGTH": 0.07157
+        },
+        "TRAFFIC_ITEM_DETAIL": {
+          "ROAD_CLOSED": true,
+          "EVENT": {
+            "EVENT_ITEM_CANCELLED": false,
+            "SCHEDULED_CONSTRUCTION_EVENT": {
+              "SCHEDULED_CONSTRUCTION_TYPE_DESC": "CONSTRUCTION",
+              "SCHEDULED_CONSTRUCTION_DETAIL": "construction"
+            }
+          },
+          "ALERTC": [
+            {
+              "EVENT_CODE": 735
+            }
+          ]
+        },
+        "TRAFFIC_ITEM_DESCRIPTION": [
+          {
+            "value": "Geschlossen zwischen B1 und Herbert-von-Karajan-Straße - Wegen Baustelle gesperrt.",
+            "TYPE": "short_desc"
+          },
+          {
+            "value": "Geschlossen zwischen B1 und Herbert-von-Karajan-Straße - Wegen Baustelle gesperrt.",
+            "TYPE": "desc"
+          },
+          {
+            "value": "Wegen Baustelle gesperrt.",
+            "TYPE": "no_exit_description"
+          }
+        ],
+        "mid": "HERE-Europe-PR/r_HERE-Europe-PR/57833_TIC/NAVTEQ-ORIGINAL-1|1607608508649",
+        "PRODUCT": "basic"
+      },
+      {
+        "TRAFFIC_ITEM_ID": 2653092379289739894,
+        "ORIGINAL_TRAFFIC_ITEM_ID": 3989040263350926845,
+        "TRAFFIC_ITEM_STATUS_SHORT_DESC": "ACTIVE",
+        "TRAFFIC_ITEM_TYPE_DESC": "CONSTRUCTION",
+        "START_TIME": "12/13/2020 13:56:30",
+        "END_TIME": "12/17/2020 13:55:08",
+        "ENTRY_TIME": "12/13/2020 13:56:30",
+        "CRITICALITY": {
+          "ID": "2",
+          "DESCRIPTION": "minor"
+        },
+        "VERIFIED": true,
+        "ABBREVIATION": {
+          "SHORT_DESC": "CONST",
+          "DESCRIPTION": "construction"
+        },
+        "RDS-TMC_LOCATIONS": {
+          "RDS-TMC": [
+            {
+              "ORIGIN": {
+                "EBU_COUNTRY_CODE": "D",
+                "TABLE_ID": 1,
+                "LOCATION_ID": "32668",
+                "LOCATION_DESC": "Von der Heydt Straße",
+                "RDS_DIRECTION": "-"
+              },
+              "DIRECTION": "+",
+              "ALERTC": {
+                "TRAFFIC_CODE": 803,
+                "QUANTIFIERS": 0,
+                "DESCRIPTION": "Bauarbeiten auf Abschnitt.",
+                "ALERTC_DURATION": "L",
+                "ALERTC_DIRECTION": 1,
+                "UPDATE_CLASS": 11,
+                "PHRASE_CODE": "E11",
+                "EXTENT": "1",
+                "DURATION": 0
+              },
+              "LENGTH": 0.02184,
+              "PRIMARY_OFFSET": 0.01297
+            },
+            {
+              "ORIGIN": {
+                "EBU_COUNTRY_CODE": "D",
+                "TABLE_ID": 1,
+                "LOCATION_ID": "32668",
+                "LOCATION_DESC": "Von der Heydt Straße",
+                "RDS_DIRECTION": "-"
+              },
+              "DIRECTION": "+",
+              "ALERTC": {
+                "TRAFFIC_CODE": 518,
+                "DESCRIPTION": "Fahrbahnverengung.",
+                "ALERTC_DURATION": "L",
+                "ALERTC_DIRECTION": 1,
+                "UPDATE_CLASS": 5,
+                "PHRASE_CODE": "D19",
+                "EXTENT": "1",
+                "DURATION": 0
+              },
+              "LENGTH": 0.02184,
+              "PRIMARY_OFFSET": 0.01297
+            }
+          ]
+        },
+        "LOCATION": {
+          "DEFINED": {
+            "ORIGIN": {
+              "ROADWAY": {
+                "DESCRIPTION": [
+                  {
+                    "value": "Klingelhöferstraße",
+                    "TYPE": "NTCSA"
+                  },
+                  {
+                    "value": "Klingelhöferstraße",
+                    "TYPE": "RDSGN"
+                  },
+                  {
+                    "value": "Klingelhöferstraße",
+                    "TYPE": "LOCAL"
+                  }
+                ],
+                "ID": 50738
+              },
+              "POINT": {
+                "DESCRIPTION": [
+                  {
+                    "value": "Herkulesbrücke",
+                    "TYPE": "NTCSA"
+                  },
+                  {
+                    "value": "Herkulesbrücke",
+                    "TYPE": "RDSGN"
+                  },
+                  {
+                    "value": "Herkulesbrücke",
+                    "TYPE": "LOCAL"
+                  },
+                  {
+                    "value": "Klingelhöferstraße",
+                    "TYPE": "BNAME"
+                  }
+                ],
+                "ID": 32668
+              },
+              "DIRECTION": {
+                "DESCRIPTION": [
+                  {
+                    "value": "PRENZLAUER BERG",
+                    "TYPE": "LOCAL"
+                  },
+                  {
+                    "value": "PRENZLAUER BERG",
+                    "TYPE": "NTCSA"
+                  },
+                  {
+                    "value": "PRENZLAUER BERG",
+                    "TYPE": "RDSGN"
+                  }
+                ],
+                "ID": 0
+              },
+              "PROXIMITY": {
+                "ID": "AT",
+                "DESCRIPTION": "at"
+              }
+            },
+            "TO": {
+              "ROADWAY": {
+                "DESCRIPTION": [
+                  {
+                    "value": "Klingelhöferstraße",
+                    "TYPE": "NTCSA"
+                  },
+                  {
+                    "value": "Klingelhöferstraße",
+                    "TYPE": "RDSGN"
+                  },
+                  {
+                    "value": "Klingelhöferstraße",
+                    "TYPE": "LOCAL"
+                  }
+                ],
+                "ID": 50738
+              },
+              "POINT": {
+                "DESCRIPTION": [
+                  {
+                    "value": "Von der Heydt Straße",
+                    "TYPE": "NTCSA"
+                  },
+                  {
+                    "value": "Von der Heydt Straße",
+                    "TYPE": "RDSGN"
+                  },
+                  {
+                    "value": "Von der Heydt Straße",
+                    "TYPE": "LOCAL"
+                  },
+                  {
+                    "value": "Klingelhöferstraße",
+                    "TYPE": "BNAME"
+                  }
+                ],
+                "ID": 32668
+              },
+              "DIRECTION": {
+                "DESCRIPTION": [
+                  {
+                    "value": "PRENZLAUER BERG",
+                    "TYPE": "LOCAL"
+                  },
+                  {
+                    "value": "PRENZLAUER BERG",
+                    "TYPE": "NTCSA"
+                  },
+                  {
+                    "value": "PRENZLAUER BERG",
+                    "TYPE": "RDSGN"
+                  }
+                ],
+                "ID": 0
+              },
+              "PROXIMITY": {
+                "ID": "AT",
+                "DESCRIPTION": "at"
+              }
+            }
+          },
+          "GEOLOC": {
+            "ORIGIN": {
+              "LATITUDE": 52.50603,
+              "LONGITUDE": 13.35224
+            },
+            "TO": [
+              {
+                "LATITUDE": 52.50634,
+                "LONGITUDE": 13.3522
+              }
+            ]
+          },
+          "TPEGOpenLRBase64": "CCgBEAAkIwl+sSVWVgAJBQQBAg4ACgQDAWIAAAAAVwAJBQQBAnwAMDsE",
+          "NAVTECH": {
+            "EDGE": {
+              "EDGE_ID": [
+                "733293106",
+                "551694815"
+              ]
+            },
+            "VERSION_ID": "202004"
+          },
+          "LENGTH": 0.02184
+        },
+        "TRAFFIC_ITEM_DETAIL": {
+          "ROAD_CLOSED": false,
+          "EVENT": {
+            "EVENT_ITEM_CANCELLED": false,
+            "SCHEDULED_CONSTRUCTION_EVENT": {
+              "SCHEDULED_CONSTRUCTION_TYPE_DESC": "CONSTRUCTION",
+              "SCHEDULED_CONSTRUCTION_DETAIL": "construction"
+            }
+          },
+          "ALERTC": [
+            {
+              "EVENT_CODE": 803
+            },
+            {
+              "EVENT_CODE": 518
+            }
+          ]
+        },
+        "TRAFFIC_ITEM_DESCRIPTION": [
+          {
+            "value": "Bei Von der Heydt Straße - Bauarbeiten auf Abschnitt. Fahrbahnverengung.",
+            "TYPE": "short_desc"
+          },
+          {
+            "value": "Bei Von der Heydt Straße - Bauarbeiten auf Abschnitt. Fahrbahnverengung.",
+            "TYPE": "desc"
+          },
+          {
+            "value": "Bauarbeiten auf Abschnitt. Fahrbahnverengung.",
+            "TYPE": "no_exit_description"
+          }
+        ],
+        "mid": "HERE-Europe-PR/r_HERE-Europe-PR/141450_TIC/NAVTEQ-ORIGINAL-1|1607867756884",
+        "PRODUCT": "basic"
+      },
+      {
+        "TRAFFIC_ITEM_ID": 652335284695725399,
+        "ORIGINAL_TRAFFIC_ITEM_ID": 652335284695725399,
+        "TRAFFIC_ITEM_STATUS_SHORT_DESC": "ACTIVE",
+        "TRAFFIC_ITEM_TYPE_DESC": "CONSTRUCTION",
+        "START_TIME": "12/13/2020 14:51:15",
+        "END_TIME": "12/14/2020 14:51:14",
+        "ENTRY_TIME": "12/13/2020 14:51:18",
+        "CRITICALITY": {
+          "ID": "0",
+          "DESCRIPTION": "critical"
+        },
+        "VERIFIED": true,
+        "ABBREVIATION": {
+          "SHORT_DESC": "CONST",
+          "DESCRIPTION": "construction"
+        },
+        "RDS-TMC_LOCATIONS": {
+          "RDS-TMC": [
+            {
+              "ORIGIN": {
+                "EBU_COUNTRY_CODE": "D",
+                "TABLE_ID": 1,
+                "LOCATION_ID": "31191",
+                "LOCATION_DESC": "Marzahner Straße",
+                "RDS_DIRECTION": "-"
+              },
+              "DIRECTION": "+",
+              "ALERTC": {
+                "TRAFFIC_CODE": 735,
+                "QUANTIFIERS": 0,
+                "DESCRIPTION": "Wegen Baustelle gesperrt.",
+                "ALERTC_DURATION": "L",
+                "ALERTC_DIRECTION": 1,
+                "URGENCY": "U",
+                "UPDATE_CLASS": 5,
+                "PHRASE_CODE": "E1.C1",
+                "EXTENT": "1",
+                "DURATION": 0
+              },
+              "LENGTH": 0.13714,
+              "PRIMARY_OFFSET": 0.00751
+            }
+          ]
+        },
+        "LOCATION": {
+          "DEFINED": {
+            "ORIGIN": {
+              "ROADWAY": {
+                "DESCRIPTION": [
+                  {
+                    "value": "Rhinstraße",
+                    "TYPE": "NTCSA"
+                  },
+                  {
+                    "value": "Rhinstraße",
+                    "TYPE": "RDSGN"
+                  },
+                  {
+                    "value": "Rhinstraße",
+                    "TYPE": "LOCAL"
+                  }
+                ],
+                "ID": 9306
+              },
+              "POINT": {
+                "DESCRIPTION": [
+                  {
+                    "value": "Landsberger Allee",
+                    "TYPE": "NTCSA"
+                  },
+                  {
+                    "value": "Landsberger Allee",
+                    "TYPE": "RDSGN"
+                  },
+                  {
+                    "value": "Landsberger Allee",
+                    "TYPE": "LOCAL"
+                  },
+                  {
+                    "value": "Rhinstraße",
+                    "TYPE": "BNAME"
+                  }
+                ],
+                "ID": 31191
+              },
+              "DIRECTION": {
+                "DESCRIPTION": [
+                  {
+                    "value": "HOHENSCHÖNHAUSEN",
+                    "TYPE": "LOCAL"
+                  },
+                  {
+                    "value": "HOHENSCHÖNHAUSEN",
+                    "TYPE": "NTCSA"
+                  },
+                  {
+                    "value": "HOHENSCHÖNHAUSEN",
+                    "TYPE": "RDSGN"
+                  }
+                ],
+                "ID": 0
+              },
+              "PROXIMITY": {
+                "ID": "AT",
+                "DESCRIPTION": "at"
+              }
+            },
+            "TO": {
+              "ROADWAY": {
+                "DESCRIPTION": [
+                  {
+                    "value": "Rhinstraße",
+                    "TYPE": "NTCSA"
+                  },
+                  {
+                    "value": "Rhinstraße",
+                    "TYPE": "RDSGN"
+                  },
+                  {
+                    "value": "Rhinstraße",
+                    "TYPE": "LOCAL"
+                  }
+                ],
+                "ID": 9306
+              },
+              "POINT": {
+                "DESCRIPTION": [
+                  {
+                    "value": "Marzahner Straße",
+                    "TYPE": "NTCSA"
+                  },
+                  {
+                    "value": "Marzahner Straße",
+                    "TYPE": "RDSGN"
+                  },
+                  {
+                    "value": "Marzahner Straße",
+                    "TYPE": "LOCAL"
+                  },
+                  {
+                    "value": "Rhinstraße",
+                    "TYPE": "BNAME"
+                  }
+                ],
+                "ID": 31191
+              },
+              "DIRECTION": {
+                "DESCRIPTION": [
+                  {
+                    "value": "HOHENSCHÖNHAUSEN",
+                    "TYPE": "LOCAL"
+                  },
+                  {
+                    "value": "HOHENSCHÖNHAUSEN",
+                    "TYPE": "NTCSA"
+                  },
+                  {
+                    "value": "HOHENSCHÖNHAUSEN",
+                    "TYPE": "RDSGN"
+                  }
+                ],
+                "ID": 0
+              },
+              "PROXIMITY": {
+                "ID": "AT",
+                "DESCRIPTION": "at"
+              }
+            }
+          },
+          "GEOLOC": {
+            "ORIGIN": {
+              "LATITUDE": 52.54454,
+              "LONGITUDE": 13.51071
+            },
+            "TO": [
+              {
+                "LATITUDE": 52.54639,
+                "LONGITUDE": 13.50961
+              }
+            ]
+          },
+          "TPEGOpenLRBase64": "CCkBEAAlJAmbjSVdcQAJBQQDAvIACgUEA4FdAP+SALoACQUEAwJwADAAAA==",
+          "NAVTECH": {
+            "EDGE": {
+              "EDGE_ID": [
+                "551734966",
+                "1196860129",
+                "1196860171",
+                "1196860172",
+                "77272491"
+              ]
+            },
+            "VERSION_ID": "202004"
+          },
+          "LENGTH": 0.13714
+        },
+        "TRAFFIC_ITEM_DETAIL": {
+          "ROAD_CLOSED": true,
+          "EVENT": {
+            "EVENT_ITEM_CANCELLED": false,
+            "SCHEDULED_CONSTRUCTION_EVENT": {
+              "SCHEDULED_CONSTRUCTION_TYPE_DESC": "CONSTRUCTION",
+              "SCHEDULED_CONSTRUCTION_DETAIL": "construction"
+            }
+          },
+          "ALERTC": [
+            {
+              "EVENT_CODE": 735
+            }
+          ]
+        },
+        "TRAFFIC_ITEM_DESCRIPTION": [
+          {
+            "value": "Geschlossen bei Marzahner Straße - Wegen Baustelle gesperrt.",
+            "TYPE": "short_desc"
+          },
+          {
+            "value": "Geschlossen bei Marzahner Straße - Wegen Baustelle gesperrt.",
+            "TYPE": "desc"
+          },
+          {
+            "value": "Wegen Baustelle gesperrt.",
+            "TYPE": "no_exit_description"
+          }
+        ],
+        "mid": "4208ad32-f8dc-47cf-a162-d4975d1599e8|1607871078214",
+        "PRODUCT": "basic"
+      }
+    ]
+  },
+  "diagnostic": {
+    "info": "",
+    "sfile": "Incident-E0D01-1607879996652.xml.gz|pr5",
+    "pdd": "trafficml-incident-24-v6"
+  },
+  "TIMESTAMP2": "2020-12-13T17:19:57.000+0000",
+  "EXTENDED_COUNTRY_CODE": "E0"
+}

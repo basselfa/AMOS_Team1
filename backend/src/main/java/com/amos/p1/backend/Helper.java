@@ -1,5 +1,9 @@
 package com.amos.p1.backend;
 
+import com.amos.p1.backend.data.Incident;
+import com.amos.p1.backend.data.Request;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.core.io.ClassPathResource;
@@ -8,6 +12,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 
 public class Helper {
 
@@ -50,6 +55,17 @@ public class Helper {
             return jsonObject.toString(3);
         } catch (JSONException e) {
             throw new IllegalStateException("Can't prettify this json: " + rawJson);
+        }
+    }
+
+    public static String getIncidentListMarshalling(List<Incident> incidentList){
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+
+            String json = objectMapper.writeValueAsString(incidentList);
+            return getPrettyJsonList(json);
+        } catch (JsonProcessingException e) {
+            throw new IllegalStateException(e);
         }
     }
 }

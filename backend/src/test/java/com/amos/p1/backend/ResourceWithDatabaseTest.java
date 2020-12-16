@@ -1,7 +1,6 @@
 package com.amos.p1.backend;
 
 
-import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,11 +8,10 @@ import org.springframework.boot.web.server.LocalServerPort;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ResourceDirectlyFromProviderTest {
+public class ResourceWithDatabaseTest {
 
     @LocalServerPort
     private int port;
@@ -21,7 +19,7 @@ public class ResourceDirectlyFromProviderTest {
 
     @BeforeEach
     void setUp() {
-        this.base = "http://localhost:" + port + "/directlyFromProvider";
+        this.base = "http://localhost:" + port + "/withDatabase";
     }
 
     /**

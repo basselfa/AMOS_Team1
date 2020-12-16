@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
 @RequestMapping("demo")
-public class ResourceDemo {
+public class ResourceWithDummyData {
 
     @RequestMapping(
             method = RequestMethod.GET,
