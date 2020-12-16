@@ -51,10 +51,7 @@ public class HereNormalization implements JsonToIncident {
         try {
             JSONObject incidentData = new JSONObject(json);
             incidentObj.setId(incidentData.getLong("ORIGINAL_TRAFFIC_ITEM_ID"));
-
             incidentObj.setType(String.valueOf(mapIncidentType(incidentData.getString("TRAFFIC_ITEM_TYPE_DESC"))));
-
-
             incidentObj.setSize(
                     incidentData.getJSONObject("LOCATION")
                             .getString("LENGTH")
@@ -64,15 +61,6 @@ public class HereNormalization implements JsonToIncident {
                             " & " +
                             incidentData.getJSONArray("TRAFFIC_ITEM_DESCRIPTION").getJSONObject(0).getString("value")
             );
-
-            incidentObj.setCity(
-                    incidentData.getJSONObject("LOCATION")
-                            .getJSONObject("INTERSECTION")
-                            .getJSONObject("ORIGIN")
-                            .getString("COUNTY")
-            );
-
-            //incidentObj.setExitAvailable(0);
 
             // start piont
             incidentObj.setStartPositionLatitude(
@@ -86,19 +74,6 @@ public class HereNormalization implements JsonToIncident {
                             .getJSONObject("GEOLOC")
                             .getJSONObject("ORIGIN")
                             .getString("LONGITUDE")
-            );
-            incidentObj.setStartPositionStreet(
-                    incidentData.getJSONObject("LOCATION")
-                            .getJSONObject("INTERSECTION")
-                            .getJSONObject("ORIGIN")
-                            .getJSONObject("STREET1")
-                            .getString("ADDRESS1") +
-                            " - " +
-                            incidentData.getJSONObject("LOCATION")
-                                    .getJSONObject("INTERSECTION")
-                                    .getJSONObject("ORIGIN")
-                                    .getJSONObject("STREET2")
-                                    .getString("ADDRESS1")
             );
 
             // end piont
@@ -116,26 +91,20 @@ public class HereNormalization implements JsonToIncident {
                             .getJSONObject(0)
                             .getString("LONGITUDE")
             );
-            incidentObj.setEndPositionStreet(
-                    incidentData.getJSONObject("LOCATION")
-                            .getJSONObject("INTERSECTION")
-                            .getJSONObject("TO")
-                            .getJSONObject("STREET1")
-                            .getString("ADDRESS1") +
-                            " - " +
-                            incidentData.getJSONObject("LOCATION")
-                                    .getJSONObject("INTERSECTION")
-                                    .getJSONObject("TO")
-                                    .getJSONObject("STREET2")
-                                    .getString("ADDRESS1")
+            incidentObj.setEntryTime(
+                    parseDate(incidentData.getString("ENTRY_TIME"))
             );
-
+            incidentObj.setEndTime(
+                    parseDate(incidentData.getString("END_TIME"))
+            );
             incidentObj.setVerified(
                     incidentData.getBoolean("VERIFIED") ? 1 : 0
             );
-
             incidentObj.setProvider("0");
+            incidentObj.setEdges(parseHereEdges(incidentData));
+            parseHereAdress(incidentData, incidentObj);
 
+            // todo: remove ?
             if (incidentData.has("CRITICALITY")) {
                 int hereCriticality = (int) incidentData.getJSONObject("CRITICALITY").getLong("ID");
                 int criticality = (4 - hereCriticality) * 3;
@@ -144,14 +113,18 @@ public class HereNormalization implements JsonToIncident {
                 //incidentObj.setDelay(-1);
             }
 
-            incidentObj.setEntryTime(
-                    parseDate(incidentData.getString("ENTRY_TIME"))
-            );
-            incidentObj.setEndTime(
-                    parseDate(incidentData.getString("END_TIME"))
-            );
 
-            String edgesString = "";
+        } catch (JSONException e) {
+            //json cant be parsed
+            throw new IllegalArgumentException(e);
+        }
+
+        return incidentObj;
+    }
+
+    private String parseHereEdges(JSONObject incidentData) {
+        String edgesString = "";
+        try {
             JSONArray geoLocationsArr = incidentData.getJSONObject("LOCATION")
                     .getJSONObject("GEOLOC")
                     .getJSONObject("GEOMETRY")
@@ -163,17 +136,91 @@ public class HereNormalization implements JsonToIncident {
                 for (String location : partialShape.split(" ")) {
                     edgesString += location.replace(",", ":") + ",";
                 }
+            }
+            return edgesString;
+        } catch (JSONException jex) {
+            return "";
+        }
+    }
 
+    private void parseHereAdress(JSONObject incidentData, Incident incidentObj) {
+
+        try {
+            // intersection or street
+            JSONObject locationJSON = null;
+            if (incidentData.getJSONObject("LOCATION").has("INTERSECTION")) {
+                locationJSON = incidentData.getJSONObject("LOCATION").getJSONObject("INTERSECTION");
+                incidentObj.setStartPositionStreet(
+                        locationJSON
+                                .getJSONObject("ORIGIN")
+                                .getJSONObject("STREET1")
+                                .getString("ADDRESS1") +
+                                " - " +
+                                locationJSON
+                                        .getJSONObject("ORIGIN")
+                                        .getJSONObject("STREET2")
+                                        .getString("ADDRESS1")
+                );
+                incidentObj.setEndPositionStreet(
+                        locationJSON
+                                .getJSONObject("TO")
+                                .getJSONObject("STREET1")
+                                .getString("ADDRESS1") +
+                                " - " +
+                                locationJSON
+                                        .getJSONObject("TO")
+                                        .getJSONObject("STREET2")
+                                        .getString("ADDRESS1")
+                );
+                incidentObj.setCity(
+                        locationJSON
+                                .getJSONObject("ORIGIN")
+                                .getString("COUNTY")
+                );
+
+            } else {
+                locationJSON = incidentData.getJSONObject("LOCATION").getJSONObject("DEFINED");
+
+                incidentObj.setStartPositionStreet(
+                        locationJSON
+                                .getJSONObject("ORIGIN")
+                                .getJSONObject("ROADWAY")
+                                .getJSONArray("DESCRIPTION")
+                                .getJSONObject(0)
+                                .getString("value") +
+                                " - " +
+                                locationJSON
+                                        .getJSONObject("ORIGIN")
+                                        .getJSONObject("POINT")
+                                        .getJSONArray("DESCRIPTION")
+                                        .getJSONObject(0)
+                                        .getString("value")
+                );
+
+                incidentObj.setEndPositionStreet(
+                        locationJSON
+                                .getJSONObject("TO")
+                                .getJSONObject("ROADWAY")
+                                .getJSONArray("DESCRIPTION")
+                                .getJSONObject(0)
+                                .getString("value") +
+                                " - " +
+                                locationJSON
+                                        .getJSONObject("TO")
+                                        .getJSONObject("POINT")
+                                        .getJSONArray("DESCRIPTION")
+                                        .getJSONObject(0)
+                                        .getString("value")
+                );
+                // todo: no City available
             }
 
-            incidentObj.setEdges(edgesString);
 
-        } catch (JSONException e) {
-            //json cant be paresed
-            throw new IllegalArgumentException(e);
+        } catch (JSONException jex) {
+//            System.out.println(incidentData.toString());
+//            jex.printStackTrace();
+//            throw new IllegalArgumentException(jex);
         }
-
-        return incidentObj;
     }
 
     @Override
