@@ -74,7 +74,7 @@ public class TomTomNormalization implements JsonToIncident {
 
             incJObj.setProvider("1");
 
-            incJObj.setId(Long.valueOf(incJSONObj.getString("id").substring(0, 5), 16)); // ID is hex and way to big for a long therefore as workaround cut to 5 chars but has to be fixed appropriately
+         //   incJObj.setTrafficId(Long.valueOf(incJSONObj.getString("id").substring(0, 5), 16)); // ID is hex and way to big for a long therefore as workaround cut to 5 chars but has to be fixed appropriately
             incJObj.setDescription(incJSONObj.getString("d"));
             incJObj.setType(String.valueOf(TomTomIncidents.valueOf(mapICNumberToString(incJSONObj.getInt("ic"))).getID()));
             incJObj.setStartPositionStreet(incJSONObj.getString("f"));
@@ -164,7 +164,7 @@ public class TomTomNormalization implements JsonToIncident {
             clusterPointArray = getClusterPointArray(clusterArray);
 
             // normalize one incident at a time
-            for (JSONArray cPoints : clusterPointArray) {
+            for (JSONArray cPoints : clusterPointArray) { //todo: improve performance with java parallel Streams ?
                 for (int j = 0; j < cPoints.length(); j++)
                     incidentList.add(normalizeOneIncident(cPoints.getJSONObject(j).toString()));
             }

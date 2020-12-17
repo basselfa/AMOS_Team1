@@ -12,6 +12,17 @@ The backend use Spring boot as an application Framework. REST-Endpoints will be 
 # Start Application
 Run ```mvn spring-boot:run```
 
+# Tests
+There need to be a separate MySql database running locally for testing. The database need to have following configuration:
+- running on localhost:3306
+- mysql root password: root
+- mysql password: root
+- mysql database name: testdb3
+
+If you use docker and docker-compose you can start the pre-config test database by
+```docker-compose -f testdatabase-compose.yml up```. After testing use  ```docker-compose -f testdatabase-compose.yml up```
+to tear down the database.
+
 # Developer Information
 Read the test cases /src/test/java/com/amos/p1/backend to understand the application.
 

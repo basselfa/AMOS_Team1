@@ -35,13 +35,14 @@ public class MyRepo {
 
         try {
             intialiseTestDB();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+
+            emfTest = Persistence.createEntityManagerFactory("MyTestRepo");
+            emTest = emfTest.createEntityManager();
+        } catch (Exception e) {
+
+            System.out.println("Couldn't start test database");
         }
-          emfTest = Persistence.createEntityManagerFactory("MyTestRepo");
-          emTest = emfTest.createEntityManager();
+
 
     }
 
@@ -69,6 +70,7 @@ public class MyRepo {
 
           ScriptRunner scriptRunner = new ScriptRunner(con2);
         FileReader fileReader = new FileReader("src/main/resources/schema.sql");
+        scriptRunner.setLogWriter(null);
         scriptRunner.runScript(new BufferedReader(fileReader));
 
 
@@ -85,12 +87,44 @@ public class MyRepo {
 
 
 
-    public static void insertIncident(List<Incident> incidents) {
-        getEntityManager().getTransaction().begin();
-        for(Incident incident : incidents) {
-            getEntityManager().persist(incident);
+    public static void dropAll(){
+        String  URl = "jdbc:mysql://remotemysql.com:3306/lIkqLjf1AL";
+        String   id = "lIkqLjf1AL";
+        String   password = "yddtBbLwx1";
+
+         String jdbcDriver = "com.mysql.cj.jdbc.Driver";
+        if (instance.useTestDatabase == true)
+        {
+             URl = "jdbc:mysql://localhost:3306/testdb3?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin";
+             id = "root";
+              password = "root";
+
         }
-        getEntityManager().getTransaction().commit();
+        Connection con2 = null;
+        try {
+            con2 = DriverManager.getConnection(URl ,id,password);
+            ScriptRunner scriptRunner = new ScriptRunner(con2);
+            FileReader fileReader = new FileReader("src/main/resources/schema.sql");
+            scriptRunner.setLogWriter(null);
+            scriptRunner.runScript(new BufferedReader(fileReader));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+
+    public static void insertIncident(List<Incident> incidents) {
+        for(Incident incident : incidents) {
+            getEntityManager().getTransaction().begin();
+            getEntityManager().persist(incident);
+            getEntityManager().getTransaction().commit();
+
+        }
     }
     public static List<Incident> getIncidents(Long id) {
         List<Incident> resultList = MyRepo.getEntityManager()
@@ -103,13 +137,13 @@ public class MyRepo {
 
     public static void insertRequest(Request request){
         //TODO implement it. Request is the main table. Also incidents saving
+        getEntityManager().getTransaction().begin();
         List<Incident> incidents =request.getIncidents();
         insertIncident(incidents);
         request.setIncidentsSavedInDb(true);
         // update incidents id
         request.setIncidents(incidents);
 
-        getEntityManager().getTransaction().begin();
         getEntityManager().persist(request);
         getEntityManager().getTransaction().commit();
     }

@@ -33,6 +33,7 @@ public class ProviderIntervalRequest {
     // 1000 ms * 60 * 60 = 1 hour
     @Scheduled(fixedRate = 3600000)
     public void providerCronJob() {
+        System.out.println("The time is now " + dateFormat.format(new Date()));
 
         for (CityBoundingBox cityBoundingBox : getCityBoundingBoxes()) {
 
@@ -42,7 +43,6 @@ public class ProviderIntervalRequest {
             saveToDatabase(hereIncidents);
             saveToDatabase(tomTomIncidents);
         }
-        System.out.println("The time is now " + dateFormat.format(new Date()));
     }
 
     public List<Incident> getRecentTomTomIncidentsFromCity(String city){

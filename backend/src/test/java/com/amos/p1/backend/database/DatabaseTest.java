@@ -21,82 +21,11 @@ public class DatabaseTest {
     @Autowired
     private ComparisonRepository repo;
 
-    @Test
-    void testMysqlDatabase() {
 
-        EntityManagerFactory emf=Persistence.createEntityManagerFactory("Comparison");
-        EntityManager em=emf.createEntityManager();
 
-        em.getTransaction().begin();
-
-        //insert comparison into the table
-        Comparison comparison1 = new Comparison("Traffic jam2","Crash5");
-        //   if (em.contains( comparison1 ) ==false )
-        em.persist(comparison1);
-
-        //select  all comparisons from table Comparison and cast them to Comparison object
-        List<Comparison> arr_comp = (List<Comparison>)em.createQuery("SELECT c FROM Comparison c")
-                .getResultList();
-
-        System.out.println(arr_comp.get(0));
-
-        System.out.println(arr_comp.get(0));
-
-        em.getTransaction().commit();
-
-        emf.close();
-        em.close();
-    }
-
-    @Test
-    void testIncidentDatabaseConnection() {
-
-        EntityManagerFactory emf =
-                Persistence.createEntityManagerFactory("Incident");
-        EntityManager em = emf.createEntityManager();
-
-        em.getTransaction().begin();
-
-        Incident incident1 =
-
-                new Incident("111","baustelle","major",
-                        "Traffic jam in Bergmannstraße",
-                        "Berlin", "Germany", 1,
-                        "45.5", "67.4",
-                        "Bergmannstraße",
-                        "46.5", "69.5",
-                        "Bergmannstraße",
-                        1, "dummy",
-                        LocalDateTime.of(
-                        2020, 5, 1,
-                        12, 30, 0),
-                        LocalDateTime.of(
-                        2020, 5, 1,
-                        12, 30, 0),
-                        "670000:690000,681234:691234");
-
-//        List<Incident> arr_comp1 =
-//                (List<Incident>)em.createNamedQuery("getFromCity")
-//                .setParameter("city" ,"Berlin" )
-//                .getResultList();
-//        System.out.println(arr_comp1);
-        em.persist(incident1);
-        em.getTransaction().commit();
-
-        emf.close();
-        em.close();
-
-    }
-    @Test
-    void testIncidenIdCreation() {
-        Incident incident2 = new Incident();
-
-        System.out.println("incident id test "+incident2.getId());
-
-    }
     @Test
     void testRequestDatabaseConnection() {
-MyRepo.setUseTestDatabase(true); ;
+MyRepo.setUseTestDatabase(false);
         List<Incident> incidents = new ArrayList<Incident>();
         incidents.add(
 
