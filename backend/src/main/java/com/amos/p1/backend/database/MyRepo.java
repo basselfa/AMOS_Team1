@@ -120,7 +120,10 @@ public class MyRepo {
 
     public static void insertIncident(List<Incident> incidents) {
         for(Incident incident : incidents) {
+            getEntityManager().getTransaction().begin();
             getEntityManager().persist(incident);
+            getEntityManager().getTransaction().commit();
+
         }
     }
     public static List<Incident> getIncidents(Long id) {
