@@ -22,6 +22,10 @@ public class RequestTest {
         //TODO: clear database
     }
 
+    public RequestTest(){
+        MyRepo.setUseTestDatabase(true);
+    }
+
     @Test
     void testInsertRequestNoIncident() {
         Request request = getDummyRequestWithIncidents(null);

@@ -1,6 +1,7 @@
 package com.amos.p1.backend.service;
 
 import com.amos.p1.backend.data.Incident;
+import com.amos.p1.backend.database.MyRepo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,26 @@ public class IncidentAggregatorFromDatabaseTest {
         List<Incident> incidentList = incidentAggregator.getFromCity("Berlin");
 
         assertThat(incidentList, hasSize(greaterThan(0)));
+    }
+
+    @Test
+    void testGetIncidentsFromCityAndTimeStamp(){
+        throw new IllegalStateException("Not yet implemented yet. Sprint 7");
+    }
+
+    @Test
+    void testGetIncidentsFromCityAndTimeStampNotInDatabase(){
+        throw new IllegalStateException("Not yet implemented yet. Sprint 7");
+    }
+
+    @Test
+    void testGetTimestampsFromCity(){
+        throw new IllegalStateException("Not yet implemented yet. Sprint 7");
+    }
+
+    @Test
+    void testGetTimestampsFromCityNotInDatabase(){
+        throw new IllegalStateException("Not yet implemented yet. Sprint 7");
     }
 
     @Test

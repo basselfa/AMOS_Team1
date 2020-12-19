@@ -17,6 +17,10 @@ public class ProviderIntervalRequestTest {
 
     private final ProviderIntervalRequest providerIntervalRequest = new ProviderIntervalRequest();
 
+    public ProviderIntervalRequestTest(){
+        MyRepo.setUseTestDatabase(true);
+    }
+
     @BeforeEach
     void setUp(){
         //TODO: wipe database

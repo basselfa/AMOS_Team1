@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
  * Restcontroller only for static demo purposes. Only use dummy strings for returning to client
  */
 @RestController
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://0.0.0.0:8080")
 @RequestMapping("demo")
 public class ResourceWithDummyData {
 

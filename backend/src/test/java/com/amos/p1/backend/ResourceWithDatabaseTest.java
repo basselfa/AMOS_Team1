@@ -38,4 +38,20 @@ public class ResourceWithDatabaseTest {
         //System.out.println(Helper.getPrettyJsonList(s));
     }
 
+    @Test
+    void testIncidentByCityAndInvalidTimestamp(){
+        //For example wrong format. Valid: "yyyy-MM-dd HH:mm". Invalid: ""yyyy-dd-MM HH:mm""
+        throw new IllegalStateException("Not yet implemented yet. Sprint 7");
+    }
+
+    @Test
+    void testTimeStampByCityNotInDatabase(){
+        throw new IllegalStateException("Not yet implemented yet. Sprint 7");
+    }
+
+    @Test
+    void testGetAllCities(){
+        throw new IllegalStateException("Not yet implemented yet. Sprint 7");
+    }
+
 }

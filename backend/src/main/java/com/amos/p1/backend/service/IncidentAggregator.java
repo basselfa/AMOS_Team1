@@ -8,7 +8,13 @@ import java.util.List;
 public interface IncidentAggregator {
 
     List<Incident> getFromCity(String city);
+
+    List<Incident> getFromCityAndTimeStamp(String city, LocalDateTime timestamp);
+
+    List<LocalDateTime> getTimestampsFromCity(String city);
+
+    List<String> getCities();
+
     List<Incident> getAllData();
-    // List<Incident> getDataFromTime(LocalDateTime entryTime);
-    
+
 }
