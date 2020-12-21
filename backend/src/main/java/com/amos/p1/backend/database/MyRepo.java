@@ -4,6 +4,8 @@ import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.data.Request;
 import org.apache.ibatis.jdbc.ScriptRunner;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -18,7 +20,8 @@ import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
+@Repository
+@Transactional
 @Component
 public class MyRepo {
 
@@ -137,10 +140,11 @@ public class MyRepo {
 
     public static void insertRequest(Request request){
         //TODO implement it. Request is the main table. Also incidents saving
-        getEntityManager().getTransaction().begin();
         List<Incident> incidents =request.getIncidents();
+        for (Incident incident: incidents ) { incident.setEntryTime(request.getRequestTime());}
         insertIncident(incidents);
         request.setIncidentsSavedInDb(true);
+        getEntityManager().getTransaction().begin();
         // update incidents id
         request.setIncidents(incidents);
 
@@ -149,7 +153,7 @@ public class MyRepo {
     }
 
     public static Request getRequest(LocalDateTime localDateTime){
-        //TODO implement it.
+
         List<Request> requests =  getEntityManager().createNamedQuery("geRequestFromTime")
                 .setParameter("requestTime" ,localDateTime )
                 .getResultList();

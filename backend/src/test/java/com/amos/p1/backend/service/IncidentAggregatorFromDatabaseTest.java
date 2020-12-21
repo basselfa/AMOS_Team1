@@ -1,8 +1,11 @@
 package com.amos.p1.backend.service;
 
 import com.amos.p1.backend.data.Incident;
+import com.amos.p1.backend.database.MyRepo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -13,6 +16,19 @@ import static org.hamcrest.Matchers.*;
 public class IncidentAggregatorFromDatabaseTest {
 
     IncidentAggregator incidentAggregator = new IncidentAggregatorDirectlyFromProvider();;
+    @BeforeAll
+    public static void init() {
+
+        System.out.println("setting Database properties");
+        MyRepo.setUseTestDatabase(true);
+    }
+
+    @BeforeEach
+    void setUp(){
+
+        System.out.println("reintialising Database");
+        MyRepo.dropAll();
+    }
 
     public IncidentAggregatorFromDatabaseTest(){
         ProviderIntervalRequest providerIntervalRequest = new ProviderIntervalRequest();

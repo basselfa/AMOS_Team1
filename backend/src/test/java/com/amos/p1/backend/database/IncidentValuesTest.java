@@ -1,6 +1,8 @@
 package com.amos.p1.backend.database;
 
 import com.amos.p1.backend.data.Incident;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import com.amos.p1.backend.data.Comparison;
 import com.amos.p1.backend.data.Request;
@@ -18,6 +20,19 @@ import static org.hamcrest.Matchers.*;
 public class IncidentValuesTest {
 
     private final Incident incidentFromDb;
+    @BeforeAll
+    public static void init() {
+
+        System.out.println("setting Database properties");
+        MyRepo.setUseTestDatabase(true);
+    }
+
+    @BeforeEach
+    void setUp(){
+
+        System.out.println("reintialising Database");
+        MyRepo.dropAll();
+    }
 
 
     public IncidentValuesTest(){
