@@ -43,6 +43,26 @@ public class IncidentAggregatorFromDatabaseTest {
     }
 
     @Test
+    void testGetIncidentsFromCityAndTimeStamp(){
+        throw new IllegalStateException("Not yet implemented yet. Sprint 7");
+    }
+
+    @Test
+    void testGetIncidentsFromCityAndTimeStampNotInDatabase(){
+        throw new IllegalStateException("Not yet implemented yet. Sprint 7");
+    }
+
+    @Test
+    void testGetTimestampsFromCity(){
+        throw new IllegalStateException("Not yet implemented yet. Sprint 7");
+    }
+
+    @Test
+    void testGetTimestampsFromCityNotInDatabase(){
+        throw new IllegalStateException("Not yet implemented yet. Sprint 7");
+    }
+
+    @Test
     void testGetAllIncidents(){
         List<Incident> incidentList = incidentAggregator.getAllData();
 

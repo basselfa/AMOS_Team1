@@ -18,8 +18,6 @@ public class DatabaseTestHelper {
     }
 
     public static List<Incident> getIncidentListById(long id){
-        return MyRepo.getEntityManager().createNamedQuery("getFromids", Incident.class)
-                .setParameter("id", id)
-                .getResultList();
+        return MyRepo.getIncidents(id);
     }
 }

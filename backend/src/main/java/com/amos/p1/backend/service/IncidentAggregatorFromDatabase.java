@@ -19,15 +19,27 @@ public class IncidentAggregatorFromDatabase implements IncidentAggregator {
         return resultList;
     }
 
+
+    @Override
+    public List<LocalDateTime> getTimestampsFromCity(String city) {
+        throw new IllegalStateException("Not yet implemented yet. Sprint 7");
+    }
+
+    @Override
+    public List<String> getCities() {
+        return null;
+    }
+
+
     // to be refined with entry time - getDataFromTime()
-    @SuppressWarnings("unchecked")
+    @Override
     public List<Incident> getAllData() {
         return (List<Incident>) MyRepo.getEntityManager()
                 .createNamedQuery("getAllData")
                 .getResultList();
     }
 
-    @SuppressWarnings("unchecked")
+   @Override
     public List<Incident> getFromCityAndTimeStamp(String city, LocalDateTime entryTime) {
         return (List<Incident>) MyRepo.getEntityManager()
                 .createNamedQuery("getFromCityAndTimeStamp")

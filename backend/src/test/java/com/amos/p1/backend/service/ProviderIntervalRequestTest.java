@@ -18,12 +18,7 @@ public class ProviderIntervalRequestTest {
 
     private final ProviderIntervalRequest providerIntervalRequest = new ProviderIntervalRequest();
 
-    @BeforeAll
-    public static void init() {
 
-        System.out.println("setting Database properties");
-        MyRepo.setUseTestDatabase(true);
-    }
 
     @BeforeEach
     void setUp(){

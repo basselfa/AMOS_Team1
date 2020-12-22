@@ -32,6 +32,7 @@ public class RequestTest {
     }
 
 
+
     @Test
     void testInsertRequestNoIncident() {
         Request request = getDummyRequestWithIncidents(null);

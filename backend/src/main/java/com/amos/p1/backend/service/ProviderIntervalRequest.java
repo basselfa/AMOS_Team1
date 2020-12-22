@@ -29,13 +29,15 @@ public class ProviderIntervalRequest {
     private final ProviderRequest tomtomRequest = new TomTomRequestDummy();
     private final ProviderRequest hereRequest = new HereRequestDummy();
 
+    private final CityBoundingBoxesService cityBoundingBoxesService = new CityBoundingBoxesService();
+
     // Will be runned on startup
     // 1000 ms * 60 * 60 = 1 hour
     @Scheduled(fixedRate = 3600000)
     public void providerCronJob() {
         System.out.println("The time is now " + dateFormat.format(new Date()));
 
-        for (CityBoundingBox cityBoundingBox : getCityBoundingBoxes()) {
+        for (CityBoundingBox cityBoundingBox : cityBoundingBoxesService.getCityBoundingBoxes()) {
 
             List<Incident> hereIncidents = getHereIncidents(cityBoundingBox);
             List<Incident> tomTomIncidents = getTomTomIncidents(cityBoundingBox);
@@ -46,34 +48,9 @@ public class ProviderIntervalRequest {
     }
 
     public List<Incident> getRecentTomTomIncidentsFromCity(String city){
-        CityBoundingBox boundBoxFromCity = getBoundBoxFromCity(city);
+        CityBoundingBox boundBoxFromCity = cityBoundingBoxesService.getBoundBoxFromCity(city);
 
         return getTomTomIncidents(boundBoxFromCity);
-    }
-
-    private CityBoundingBox getBoundBoxFromCity(String city) {
-
-        List<CityBoundingBox> cityBoundingBoxes = getCityBoundingBoxes();
-
-        for (CityBoundingBox cityBoundingBoxTemp : cityBoundingBoxes) {
-            if (city.equals(cityBoundingBoxTemp.getCity())){
-                return cityBoundingBoxTemp;
-            }
-        }
-
-        throw new IllegalStateException("Couldn't find you boundingbox with city: " + city);
-    }
-
-    private List<CityBoundingBox> getCityBoundingBoxes(){
-        CityBoundingBox berlin = new CityBoundingBox();
-        berlin.setCity("Berlin");
-        berlin.setMinCorner(new Location("52.5542", "13.2823"));
-        berlin.setMaxCorner(new Location("52.4721", "13.5422"));
-
-        List<CityBoundingBox> cityBoundingBoxes = new ArrayList<>();
-        cityBoundingBoxes.add(berlin);
-
-        return cityBoundingBoxes;
     }
 
     private List<Incident> getTomTomIncidents(CityBoundingBox cityBoundingBox){
