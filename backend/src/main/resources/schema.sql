@@ -11,7 +11,6 @@ CREATE TABLE Incident (
                           description VARCHAR(255) ,
                           city VARCHAR(255) ,
                           country VARCHAR(255) ,
-                          lengthInMeter  DOUBLE ,
                           startPositionLatitude VARCHAR(255) ,
                           startPositionLongitude VARCHAR(255) ,
                           startPositionStreet VARCHAR(255) ,
@@ -22,13 +21,14 @@ CREATE TABLE Incident (
                           provider  VARCHAR(255)  ,
                           entryTime datetime  ,
                           endTime datetime  ,
-                          edges VARCHAR(11255)
+                          edges VARCHAR(11255),
+                          lengthInMeter DOUBLE,
+                          requestId BIGINT UNSIGNED
 
 ) ;
 
 
 CREATE TABLE Request (
                          id BIGINT  AUTO_INCREMENT  PRIMARY KEY,
-                         incidentsId VARCHAR(11255)  ,
                          requestTime datetime
 ) ;

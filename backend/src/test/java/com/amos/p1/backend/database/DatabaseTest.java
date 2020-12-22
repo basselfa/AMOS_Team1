@@ -25,13 +25,12 @@ public class DatabaseTest {
 
     @Test
     void testRequestDatabaseConnection() {
-MyRepo.setUseTestDatabase(false);
+MyRepo.setUseTestDatabase(true);
         List<Incident> incidents = new ArrayList<Incident>();
         incidents.add(
-
                 new Incident("222","baustelle","major",
                         "Traffic jam in Bergmannstraße",
-                        "Berlin", "Germany", 1,
+                        "Berlin", "Germany",
                         "45.5", "67.4",
                         "Bergmannstraße",
                         "46.5", "69.5",
@@ -43,11 +42,11 @@ MyRepo.setUseTestDatabase(false);
                         LocalDateTime.of(
                                 2020, 5, 1,
                                 12, 30, 0),
-                        "670000:690000,681234:691234"));
+                        "670000:690000,681234:691234",6.0,new Long(1)));
         incidents.add(
                 new Incident("333","baustelle","major",
                         "Traffic jam in Bergmannstraße",
-                        "Berlin", "Germany", 1,
+                        "Berlin", "Germany",
                         "45.5", "67.4",
                         "Bergmannstraße",
                         "46.5", "69.5",
@@ -59,7 +58,7 @@ MyRepo.setUseTestDatabase(false);
                         LocalDateTime.of(
                                 2020, 5, 1,
                                 12, 30, 0),
-                        "670000:690000,681234:691234"));
+                        "670000:690000,681234:691234",6.0,new Long(1)));
 
         Request request = new Request();
         request.setRequestTime(LocalDateTime.of(

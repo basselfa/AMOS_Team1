@@ -49,13 +49,12 @@ public class IncidentAggregatorFromDatabase implements IncidentAggregator {
     }
 
 
-    /*
-    @SuppressWarnings("unchecked")
-    public List<Incident> getDataFromTime(LocalDateTime entryTime) {
-        return (List<Incident>) MyRepo.getEntityManager().createNamedQuery("getDataFromTime")
-                .setParameter("entryTime", entryTime )
+
+    public List<Incident> getFromRequestTime(LocalDateTime requestTime) {
+        return (List<Incident>) MyRepo.getEntityManager().createNamedQuery("getFromRequestTime")
+                .setParameter("requestTime", requestTime )
                 .getResultList();
     }
-    */
+
 
 }

@@ -140,15 +140,16 @@ public class MyRepo {
     public static void insertRequest(Request request){
         //TODO implement it. Request is the main table. Also incidents saving
         List<Incident> incidents =request.getIncidents();
-        for (Incident incident: incidents ) { incident.setEntryTime(request.getRequestTime());}
-        insertIncident(incidents);
-        request.setIncidentsSavedInDb(true);
-        getEntityManager().getTransaction().begin();
-        // update incidents id
-        request.setIncidents(incidents);
 
+        getEntityManager().getTransaction().begin();
         getEntityManager().persist(request);
         getEntityManager().getTransaction().commit();
+        for (Incident incident:incidents ) { incident.setRequestId(request.getId());}
+
+        insertIncident(incidents);
+        request.setIncidentsSavedInDb(true);
+
+
     }
 
     public static Request getRequest(LocalDateTime localDateTime){
