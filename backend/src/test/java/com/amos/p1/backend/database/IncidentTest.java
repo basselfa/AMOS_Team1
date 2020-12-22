@@ -1,6 +1,9 @@
 package com.amos.p1.backend.database;
 
 import com.amos.p1.backend.data.Incident;
+import org.aspectj.lang.annotation.Before;
+import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,10 +14,18 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class IncidentTest {
+    @BeforeAll
+    public static void init() {
+
+        System.out.println("setting Database properties");
+        MyRepo.setUseTestDatabase(true);
+    }
 
     @BeforeEach
     void setUp(){
-        //TODO: wipe database
+
+        System.out.println("reintialising Database");
+        MyRepo.dropAll();
     }
 
     @Test

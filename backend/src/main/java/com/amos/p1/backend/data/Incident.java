@@ -20,12 +20,15 @@ import java.util.List;
         name = "getDataFromTime",
         query = "SELECT i FROM Incident i WHERE i.entryTime >= :entryTime"
 )
-
 @NamedQuery(
         name = "getAllData",
         query = "SELECT i FROM Incident i"
 )
 
+@NamedQuery(
+        name = "getFromCityAndTimeStamp",
+        query = "SELECT i FROM Incident i WHERE i.city = :city AND i.entryTime >= :entryTime"
+)
 @Entity
 public class Incident {
     @Id

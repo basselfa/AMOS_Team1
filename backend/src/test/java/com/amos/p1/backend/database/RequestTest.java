@@ -2,6 +2,7 @@ package com.amos.p1.backend.database;
 
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.data.Request;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,15 +17,21 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class RequestTest {
 
     private final static LocalDateTime LOCAL_DATE_TIME_DUMMY = LocalDateTime.of(2020, 10, 30, 16, 30);
+    @BeforeAll
+    public static void init() {
+
+        System.out.println("setting Database properties");
+        MyRepo.setUseTestDatabase(true);
+    }
 
     @BeforeEach
     void setUp(){
-        //TODO: clear database
+
+        System.out.println("reintialising Database");
+        MyRepo.dropAll();
     }
 
-    public RequestTest(){
-        MyRepo.setUseTestDatabase(true);
-    }
+
 
     @Test
     void testInsertRequestNoIncident() {
