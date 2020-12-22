@@ -20,8 +20,7 @@ import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Repository
-@Transactional
+
 @Component
 public class MyRepo {
 
