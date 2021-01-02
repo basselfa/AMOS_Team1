@@ -36,8 +36,8 @@ export default {
 
 <style>
 #search-bar-container {
-  padding-top: 4%;
-  padding-left: 20%;
+  padding-top: 100px;
+  padding-left: 300px;
   padding-right: 20%;
 }
 

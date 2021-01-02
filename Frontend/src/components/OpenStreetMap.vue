@@ -57,15 +57,16 @@ export default {
 <style>
 #osm-map {
   height: 80%;
-  width: 60%;
+  width: 70%;
   margin: 0;
   position: absolute;
-  top: 550px;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  top: 200px;
+  left: 300px;
+  /* -ms-transform: translate(-50%, -50%); */
+  /* transform: translate(-50%, -50%); */
   border-radius: 20px;
   -webkit-box-shadow: 4px 12px 31px -10px #cecece !important;
   box-shadow: 4px 12px 31px -10px #cecece !important;
+  z-index: 0;
 }
 </style>
