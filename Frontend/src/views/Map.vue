@@ -23,7 +23,7 @@ export default {
     cityData: null,
     polyline: {
       latlngs: [],
-      color: "green",
+      color: "blue",
     }
   }),
 
@@ -48,13 +48,28 @@ export default {
     },
 
     passCoordinates: function (cityData) {
-      for (var i = 0; i < cityData.incidents[0].shape.length; i++) {
-        this.polyline.latlngs.push([
-          cityData.incidents[0].shape[i].latitude,
-          cityData.incidents[0].shape[i].longitude,
-        ]);
-        //console.log(this.polyline.latlngs);
+      console.log("current citydata:")
+      console.log(cityData)
+      for (var i = 0; i < cityData.length; i++) {
+        var coordinatesArray = cityData[i].edges.split(',');
+        //coordinatesArray //coordinatesArray.split(':').[0]
+        for( var j = 0; j < coordinatesArray.length; j++) {
+          let latitudinal = coordinatesArray[j].split(':')[0];
+          let longitudinal = coordinatesArray[j].split(':')[1];
+          if (typeof latitudinal !== 'undefined' && typeof longitudinal !== 'undefined') {
+          var lineArray = [];
+          this.polyline.latlngs.push([
+          latitudinal, //latitudinal value
+          longitudinal //longitudinal value
+          ]);
+          }
+        }
+        // this.polyline.latlngs.push([
+        //   lineArray
+        //   ]);
       }
+      console.log("<<<<<<<polyliine")
+      console.log(this.polyline);
     },
   },
 };
