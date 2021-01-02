@@ -29,18 +29,17 @@ export default {
 
   methods: {
     getSearchValue: function (value) {
-      //console.log("jetzt hab ichs!" + value);
       this.executeQuery(value);
     },
-    executeQuery: function (city) {
+    executeQuery: function (value) {
       axios
-        .get("http://localhost:8082/demo/incidents?city=" + city, {
+        .get("http://localhost:8082/demo/incidents?city=" + value.city + "&timestamp=" + value.timestamp, {
           headers: { "Access-Control-Allow-Origin": "*" },
         })
         .then((response) => {
-          //console.log(response.data);
+          console.log(response.data.list);
           this.cityData = response.data;
-          this.passCoordinates(response.data);
+          this.passCoordinates(response.data.list);
         })
         .catch((error) => {
           this.errorMessage = error.message;
