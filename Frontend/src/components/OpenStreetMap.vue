@@ -3,6 +3,7 @@
     <l-map id="osm-map" :zoom="zoom" :center="center" :options="mapOptions">
       <l-tile-layer :url="url" :attribution="attribution" />
       <l-polyline
+        v-for="(polyline,index) in polylines" :key="index"
         :lat-lngs="polyline.latlngs"
         :color="polyline.color"
       ></l-polyline>
@@ -27,7 +28,7 @@ import {
 } from "vue2-leaflet";
 export default {
   name: "OpenStreetMap",
-  props: ['polyline'],
+  props: ['polylines'],
   components: {
     LMap,
     LTileLayer,

@@ -1,7 +1,7 @@
 <template>
   <div>
     <search @change="getSearchValue($event)" />
-    <open-street-map :polyline="polyline" />
+    <open-street-map :polylines="polylines" />
   </div>
 </template>
 
@@ -21,10 +21,10 @@ export default {
 
   data: () => ({
     cityData: null,
-    polyline: {
-      latlngs: [],
-      color: "blue",
-    }
+    polylines: [{
+        latlngs: [['52.51784','13.28016'],['52.51771','13.28021'],['52.51765','13.28024'],['52.51729','13.28046']],
+        color: "blue",
+    }]
   }),
 
   methods: {
@@ -48,28 +48,26 @@ export default {
     },
 
     passCoordinates: function (cityData) {
-      console.log("current citydata:")
-      console.log(cityData)
       for (var i = 0; i < cityData.length; i++) {
         var coordinatesArray = cityData[i].edges.split(',');
-        //coordinatesArray //coordinatesArray.split(':').[0]
+        var lineArray = [];
         for( var j = 0; j < coordinatesArray.length; j++) {
           let latitudinal = coordinatesArray[j].split(':')[0];
           let longitudinal = coordinatesArray[j].split(':')[1];
           if (typeof latitudinal !== 'undefined' && typeof longitudinal !== 'undefined') {
-          var lineArray = [];
-          this.polyline.latlngs.push([
-          latitudinal, //latitudinal value
-          longitudinal //longitudinal value
+          lineArray.push([
+            latitudinal,
+            longitudinal
           ]);
           }
         }
-        // this.polyline.latlngs.push([
-        //   lineArray
-        //   ]);
+        this.polylines.push({
+            latlngs: lineArray,
+            color: "blue",
+          });
       }
       console.log("<<<<<<<polyliine")
-      console.log(this.polyline);
+      console.log(this.polylines);
     },
   },
 };
