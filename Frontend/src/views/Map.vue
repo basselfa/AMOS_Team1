@@ -20,11 +20,7 @@ export default {
   },
 
   data: () => ({
-    cityData: null,
-    polylines: [{
-        latlngs: [['52.51784','13.28016'],['52.51771','13.28021'],['52.51765','13.28024'],['52.51729','13.28046']],
-        color: "blue",
-    }]
+    polylines: []
   }),
 
   methods: {
@@ -32,12 +28,13 @@ export default {
       this.executeQuery(value);
     },
     executeQuery: function (value) {
-      axios
+      this.polylines=[]
+      if (value.city!==null) {
+        axios
         .get("http://localhost:8082/demo/incidents?city=" + value.city + "&timestamp=" + value.timestamp, {
           headers: { "Access-Control-Allow-Origin": "*" },
         })
         .then((response) => {
-          console.log(response.data.list);
           this.cityData = response.data;
           this.passCoordinates(response.data.list);
         })
@@ -45,6 +42,7 @@ export default {
           this.errorMessage = error.message;
           console.error("There was an error!", error);
         });
+      }
     },
 
     passCoordinates: function (cityData) {
@@ -66,8 +64,6 @@ export default {
             color: "blue",
           });
       }
-      console.log("<<<<<<<polyliine")
-      console.log(this.polylines);
     },
   },
 };
