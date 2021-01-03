@@ -59,6 +59,8 @@ public class ResourceWithDummyData {
         cities.add("Berlin");
         cities.add("Frankfurt");
         cities.add("Malchin");
+        cities.add("Hamburg");
+        cities.add("Munich");
 
         return ResponseEntity.ok(cities);
     }
