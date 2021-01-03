@@ -13,56 +13,62 @@ vuetify = new Vuetify()
 const localVue = createLocalVue()
 
 describe('Map', () => {
-
-  beforeEach(() => {
-
-    moxios.install();
-    wrapper = shallowMount(Map, {
-        localVue,
-        vuetify
-      });
-  })
-
-  it('should get city data from request', (done) => {
-
-    wrapper.vm.getSearchValue("Berlin")
-    moxios.wait(function () {
-      let request = moxios.requests.mostRecent()
-      request.respondWith({
-        status: 200,
-        response: {incidents: [
-          { shape : [{
-            latitude : "68.99999",
-            longitude : "67.99999"
-            }]
-          }
-        ]}
-      }).then(function() {
-        expect(wrapper.vm.polyline.latlngs[0]).toEqual(["68.99999", "67.99999"])
-        done()
-      })
-  })
-})
-
-  it("should get an error from invalid request for city data", async () => {
-
-    const error = new Error("Error: Request failed with status code 500")
-    moxios.stubRequest("http://localhost:8082/demo/incidents?city=Berlin", {
-      error
-    });
-
-    wrapper.vm.getSearchValue("Berlin")
-
-    moxios.wait(() => {
-      expect(wrapper.vm.errorMessage).toEqual(
-        "Error: Request failed with status code 500"
-      )
-      done()
+    beforeEach(() => {
+        moxios.install()
+        wrapper = shallowMount(Map, {
+            localVue,
+            vuetify,
+        })
     })
-  })
 
-  afterEach(() => {
-    moxios.uninstall();
-    wrapper.destroy()
-  })
+    it('should get city data from request', done => {
+        wrapper.vm.getSearchValue({
+            city: 'Berlin',
+            timestamp: '2020-12-19 13:00',
+        })
+        moxios.wait(function() {
+            let request = moxios.requests.mostRecent()
+            request
+                .respondWith({
+                    status: 200,
+                    response: {
+                        list: [
+                            {
+                                edges:
+                                    '52.51784:13.28016,52.51771:13.28021,52.51765:13.28024',
+                            },
+                        ],
+                    },
+                })
+                .then(function() {
+                    expect(wrapper.vm.polylines[0].latlngs).toEqual([
+                        ['52.51784', '13.28016'],
+                        ['52.51771', '13.28021'],
+                        ['52.51765', '13.28024'],
+                    ])
+                    done()
+                })
+        })
+    })
+
+    it('should get an error from invalid request for city data', async () => {
+        const error = new Error('Error: Request failed with status code 500')
+        moxios.stubRequest('http://localhost:8082/demo/incidents?city=Berlin', {
+            error,
+        })
+
+        wrapper.vm.getSearchValue('Berlin')
+
+        moxios.wait(() => {
+            expect(wrapper.vm.errorMessage).toEqual(
+                'Error: Request failed with status code 500'
+            )
+            done()
+        })
+    })
+
+    afterEach(() => {
+        moxios.uninstall()
+        wrapper.destroy()
+    })
 })
