@@ -23,10 +23,27 @@ public class OneIncidentNoPolyLineTest {
         incident = jsonNormalizer.normalizeOneIncident(json);
     }
 
+    // Shape and Start/Endpoint should be null because without PolyLine we can't extract any
+
     @Test
     void testShape(){
-        //fail();
-        //mnp_Imw`pA|AQXIJEfAk@`@SRGTEdCUjCWnAO\EpAMpC]ZCfBUZERCXC
-
+        assertEquals(incident.getEdges(), null);
     }
+
+    @Test
+    void testStartPoint(){
+        assertEquals(incident.getStartPositionLatitude(), null);
+        assertEquals(incident.getStartPositionLongitude(), null);
+    }
+
+    @Test
+    void testEndPoint(){
+        assertEquals(incident.getEndPositionLatitude(), null);
+        assertEquals(incident.getEndPositionLongitude(), null);
+    }
+
+/*    @Test
+    void testShape(){
+        assertEquals(incident.getEdges(), null);
+    }*/
 }

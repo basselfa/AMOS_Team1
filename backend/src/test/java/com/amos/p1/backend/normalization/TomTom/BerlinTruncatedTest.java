@@ -25,7 +25,6 @@ public class BerlinTruncatedTest {
     @Test
     void testIncidentAmount(){
         assertEquals(4, incidentList.size());
-
     }
 
 }
