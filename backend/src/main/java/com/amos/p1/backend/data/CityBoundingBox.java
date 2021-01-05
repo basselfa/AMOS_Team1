@@ -10,6 +10,12 @@ public class CityBoundingBox {
 
     }
 
+    public CityBoundingBox(String city, Location minCorner, Location maxCorner) {
+        this.city = city;
+        this.minCorner = minCorner; // oben links
+        this.maxCorner = maxCorner; // unten rechts
+    }
+
     public String getCity() {
         return city;
     }
