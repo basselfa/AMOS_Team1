@@ -2,7 +2,7 @@
   <div id="navigation">
     <v-navigation-drawer v-model="drawer" app>
       <v-list two-line>
-        <img src="../../../images/amos_logo.jpg" style="width: 120px">
+        <img src="../../../images/amos_logo.jpg" style="width: 120px" id="logo">
           <v-list-item-group v-model="selectedItem" color="primary">
             <router-link v-for="(item, i) in items" :key="i" :to="item.link">
               <v-list-item v-on:click="selectedItem = +1">
