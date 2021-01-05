@@ -76,6 +76,5 @@ public class ResourceWithDatabase {
         List<CityBoundingBox> cities = cityBoundingBoxesService.getCityBoundingBoxes();
 
         return ResponseEntity.ok(cities);
-
     }
 }
