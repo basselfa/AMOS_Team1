@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -40,6 +41,24 @@ public class IncidentAggregatorFromDatabaseTest {
         List<Incident> incidentList = incidentAggregator.getFromCity("Berlin");
 
         assertThat(incidentList, hasSize(greaterThan(0)));
+    }
+
+    @Test
+    void testGetIncidentsFromCityAndWithType(){
+        List<String> types = new ArrayList<>();
+        types.add("1");
+        types.add("10");
+
+        List<Incident> incidentList = incidentAggregator.getFromCityAndTypes("Berlin", types);
+
+        assertThat(incidentList, hasSize(greaterThan(0)));
+
+        incidentList.forEach(incident -> {
+            assertThat(incident.getType(),
+                    anyOf(equalTo("1"),
+                            equalTo("10"))
+            );
+        });
     }
 
     @Test

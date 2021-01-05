@@ -40,4 +40,18 @@ public class ResourceDirectlyFromProviderTest {
         //System.out.println(Helper.getPrettyJsonList(s));
     }
 
+    @Test
+    void testIncidentsWithTypes(){
+        String s = given()
+                .param("city", "Berlin")
+                .param("types", "1,10")
+            .when()
+                .get(base + "/incidentsWithTypes")
+            .then()
+                .extract()
+                .asString();
+
+        assertThat(s, notNullValue());
+        System.out.println(Helper.getPrettyJsonList(s));
+    }
 }

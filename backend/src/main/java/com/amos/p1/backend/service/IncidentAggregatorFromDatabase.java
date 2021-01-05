@@ -5,6 +5,7 @@ import com.amos.p1.backend.database.MyRepo;
 
 // import java.time.LocalDateTime;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class IncidentAggregatorFromDatabase implements IncidentAggregator {
@@ -17,6 +18,30 @@ public class IncidentAggregatorFromDatabase implements IncidentAggregator {
                 .setParameter("city", city)
                 .getResultList();
         return resultList;
+    }
+
+    @Override
+    public List<Incident> getFromCityAndTypes(String city, List<String> types) {
+        List<Incident> incidents = getFromCity(city);
+
+        List<Incident> filteredIncidents = new ArrayList<>();
+        for (Incident incident : incidents) {
+            if(hasIncidentOneOfThisTypes(incident, types)){
+                filteredIncidents.add(incident);
+            }
+        }
+
+        return filteredIncidents;
+    }
+
+    private boolean hasIncidentOneOfThisTypes(Incident incident, List<String> types){
+        for (String type : types) {
+            if(incident.getType().equals(type)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 

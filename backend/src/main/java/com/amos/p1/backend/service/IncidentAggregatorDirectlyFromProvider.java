@@ -3,6 +3,7 @@ package com.amos.p1.backend.service;
 import com.amos.p1.backend.data.Incident;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class IncidentAggregatorDirectlyFromProvider implements IncidentAggregator {
@@ -11,6 +12,30 @@ public class IncidentAggregatorDirectlyFromProvider implements IncidentAggregato
 
         ProviderIntervalRequest providerIntervalRequest = new ProviderIntervalRequest();
         return providerIntervalRequest.getRecentTomTomIncidentsFromCity("Berlin");
+    }
+
+    @Override
+    public List<Incident> getFromCityAndTypes(String city, List<String> types) {
+        List<Incident> incidents = getFromCity(city);
+
+        List<Incident> filteredIncidents = new ArrayList<>();
+        for (Incident incident : incidents) {
+            if(hasIncidentOneOfThisTypes(incident, types)){
+                filteredIncidents.add(incident);
+            }
+        }
+
+        return filteredIncidents;
+    }
+
+    private boolean hasIncidentOneOfThisTypes(Incident incident, List<String> types){
+        for (String type : types) {
+            if(incident.getType().equals(type)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @Override
