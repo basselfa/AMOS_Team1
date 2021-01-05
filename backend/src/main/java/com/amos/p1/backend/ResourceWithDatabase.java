@@ -29,18 +29,18 @@ public class ResourceWithDatabase {
     )
     @ResponseBody
     public ResponseEntity<List<Incident>> getIncidentsByCity(@RequestParam("city") String city,
-                                                             @RequestParam("timestamp") Optional<String> timestamp){
+                                                             @RequestParam("timestamp") Optional<String> timestamp) {
 
-        if(timestamp.isPresent()){
+        if (timestamp.isPresent()) {
             LocalDateTime localDateTime = parseTimeStamp(timestamp.get());
 
             return ResponseEntity.ok(incidentAggregator.getFromCityAndTimeStamp(city, localDateTime));
-        }else{
+        } else {
             return ResponseEntity.ok(incidentAggregator.getFromCity(city));
         }
     }
 
-    private LocalDateTime parseTimeStamp(String timestamp){
+    private LocalDateTime parseTimeStamp(String timestamp) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return LocalDateTime.parse(timestamp, formatter);
     }
@@ -51,7 +51,7 @@ public class ResourceWithDatabase {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity<List<String>> getTimestampsByCity(@RequestParam("city") String city){
+    public ResponseEntity<List<String>> getTimestampsByCity(@RequestParam("city") String city) {
 
         List<LocalDateTime> localDateTimes = incidentAggregator.getTimestampsFromCity(city);
         List<String> timestamps = parseLocalDateTimes(localDateTimes);
@@ -70,23 +70,12 @@ public class ResourceWithDatabase {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity<List<String>> getAllCities(){
+    public ResponseEntity<List<CityBoundingBox>> getAllCities() {
 
         CityBoundingBoxesService cityBoundingBoxesService = new CityBoundingBoxesService();
-        List<String> cities = parseCityList(cityBoundingBoxesService.getCityBoundingBoxes());
+        List<CityBoundingBox> cities = cityBoundingBoxesService.getCityBoundingBoxes();
 
         return ResponseEntity.ok(cities);
 
     }
-
-    private List<String> parseCityList(List<CityBoundingBox> cityBoundingBoxes) {
-        //TODO: change to lambda
-        List<String> cities = new ArrayList<>();
-        for (CityBoundingBox cityBoundingBox : cityBoundingBoxes) {
-            cities.add(cityBoundingBox.getCity());
-        }
-
-        return cities;
-    }
-
 }

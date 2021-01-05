@@ -19,32 +19,32 @@ public class CityBoundingBoxesService {
 
         cityBoundingBoxes.add(new CityBoundingBox(
                 "Berlin",
-                new Location("52.61873", "13.21846"),
-                new Location("52.37093", "13.69252")
+                new Location("52.39192425798079", "13.129307898046857"),
+                new Location("52.644689636137734", "13.520944272525774")
         ));
 
         cityBoundingBoxes.add(new CityBoundingBox(
                 "München",
-                new Location("48.20022", "11.39352"),
-                new Location("48.07948", "11.68191")
+                new Location("48.09448234888686", "11.474051382615752"),
+                new Location("48.22756934915291", "11.627946833003753")
         ));
 
         cityBoundingBoxes.add(new CityBoundingBox(
                 "Frankfurt am Main",
-                new Location("50.16668", "8.59003"),
-                new Location("50.11291", "8.77895")
+                new Location("50.02335", "8.52842"),
+                new Location("50.21861", "8.72274")
         ));
 
         cityBoundingBoxes.add(new CityBoundingBox(
                 "Hamburg",
-                new Location("53.62411", "9.76440"),
-                new Location("53.44331", "10.31371")
+                new Location("53.45722", "9.82070"),
+                new Location("53.65871", "10.18462")
         ));
 
         cityBoundingBoxes.add(new CityBoundingBox(
                 "Nürnberg",
-                new Location("49.53933", "10.99159"),
-                new Location("49.38693", "11.18934")
+                new Location("49.35247", "10.93617"),
+                new Location("49.4985", "11.22506")
         ));
 
     }
