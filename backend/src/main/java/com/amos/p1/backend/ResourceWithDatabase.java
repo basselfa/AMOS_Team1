@@ -42,6 +42,12 @@ public class ResourceWithDatabase {
         }
     }
 
+
+    private LocalDateTime parseTimeStamp(String timestamp) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return LocalDateTime.parse(timestamp, formatter);
+    }
+
     @RequestMapping(
             method = RequestMethod.GET,
             value = "/incidentsWithTypes",
@@ -59,10 +65,7 @@ public class ResourceWithDatabase {
         return Arrays.asList(types.split(","));
     }
 
-    private LocalDateTime parseTimeStamp(String timestamp){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        return LocalDateTime.parse(timestamp, formatter);
-    }
+
 
     @RequestMapping(
             method = RequestMethod.GET,
@@ -70,7 +73,7 @@ public class ResourceWithDatabase {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity<List<String>> getTimestampsByCity(@RequestParam("city") String city){
+    public ResponseEntity<List<String>> getTimestampsByCity(@RequestParam("city") String city) {
 
         List<LocalDateTime> localDateTimes = incidentAggregator.getTimestampsFromCity(city);
         List<String> timestamps = parseLocalDateTimes(localDateTimes);
@@ -89,10 +92,10 @@ public class ResourceWithDatabase {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity<List<String>> getAllCities(){
+    public ResponseEntity<List<CityBoundingBox>> getAllCities() {
 
         CityBoundingBoxesService cityBoundingBoxesService = new CityBoundingBoxesService();
-        List<String> cities = parseCityList(cityBoundingBoxesService.getCityBoundingBoxes());
+        List<CityBoundingBox> cities = cityBoundingBoxesService.getCityBoundingBoxes();
 
         return ResponseEntity.ok(cities);
 
