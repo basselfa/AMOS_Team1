@@ -1,7 +1,7 @@
 <template>
   <div>
     <search @change="getSearchValue($event)" />
-    <open-street-map :polyline="polyline" />
+    <open-street-map :polylines="polylines" />
   </div>
 </template>
 
@@ -20,41 +20,49 @@ export default {
   },
 
   data: () => ({
-    cityData: null,
-    polyline: {
-      latlngs: [],
-      color: "green",
-    }
+    polylines: []
   }),
 
   methods: {
     getSearchValue: function (value) {
-      //console.log("jetzt hab ichs!" + value);
       this.executeQuery(value);
     },
-    executeQuery: function (city) {
-      axios
-        .get("http://localhost:8082/demo/incidents?city=" + city, {
+    executeQuery: function (value) {
+      this.polylines=[]
+      if (value.city!==null) {
+        axios
+        .get("http://localhost:8082/demo/incidents?city=" + value.city + "&timestamp=" + value.timestamp, {
           headers: { "Access-Control-Allow-Origin": "*" },
         })
         .then((response) => {
-          //console.log(response.data);
           this.cityData = response.data;
-          this.passCoordinates(response.data);
+          this.passCoordinates(response.data.list);
         })
         .catch((error) => {
           this.errorMessage = error.message;
           console.error("There was an error!", error);
         });
+      }
     },
 
     passCoordinates: function (cityData) {
-      for (var i = 0; i < cityData.incidents[0].shape.length; i++) {
-        this.polyline.latlngs.push([
-          cityData.incidents[0].shape[i].latitude,
-          cityData.incidents[0].shape[i].longitude,
-        ]);
-        //console.log(this.polyline.latlngs);
+      for (var i = 0; i < cityData.length; i++) {
+        var coordinatesArray = cityData[i].edges.split(',');
+        var lineArray = [];
+        for( var j = 0; j < coordinatesArray.length; j++) {
+          let latitudinal = coordinatesArray[j].split(':')[0];
+          let longitudinal = coordinatesArray[j].split(':')[1];
+          if (typeof latitudinal !== 'undefined' && typeof longitudinal !== 'undefined') {
+          lineArray.push([
+            latitudinal,
+            longitudinal
+          ]);
+          }
+        }
+        this.polylines.push({
+            latlngs: lineArray,
+            color: "blue",
+          });
       }
     },
   },
