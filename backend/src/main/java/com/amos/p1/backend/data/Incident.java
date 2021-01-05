@@ -363,7 +363,7 @@ public class Incident {
         ROADWORKS,
         PLANNEDEVENT,
         DETOUR,
-        MISC,       // TODO: MISC FOR "UNKNOWN" OR "NO CATEGORY"
+        MISC,       // MISC FOR "UNKNOWN" OR "NO CATEGORY"
         WEATHER,
         ROADCLOSURE,
         LANERESTRICTION;

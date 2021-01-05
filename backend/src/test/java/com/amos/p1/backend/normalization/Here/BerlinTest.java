@@ -12,7 +12,7 @@ public class BerlinTest {
 
     private final List<Incident> incidentList;
 
-    public BerlinTest(){
+    public BerlinTest() {
         String json = Helper.getFileResourceAsString("normalization/HereData/Berlin.json");
 
         JsonToIncident jsonNormalizer = new HereNormalization();
@@ -20,8 +20,8 @@ public class BerlinTest {
     }
 
     @Test
-    void testPrint(){
+    void testPrint() {
         String incidentsJson = Helper.getIncidentListMarshalling(incidentList);
-        System.out.println(incidentsJson);
+        //System.out.println(incidentsJson);
     }
 }

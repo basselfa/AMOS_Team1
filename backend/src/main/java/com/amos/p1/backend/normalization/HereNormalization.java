@@ -11,6 +11,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class HereNormalization implements JsonToIncident {
+    private static final String datePattern = "MM/dd/yyyy HH:mm:ss";
+
     enum HereIncidents {
         ACCIDENT(Incident.IncidentTypes.ACCIDENT),
         CONGESTION(Incident.IncidentTypes.CONGESTION),
@@ -108,9 +110,9 @@ public class HereNormalization implements JsonToIncident {
             if (incidentData.has("CRITICALITY")) {
                 int hereCriticality = (int) incidentData.getJSONObject("CRITICALITY").getLong("ID");
                 int criticality = (4 - hereCriticality) * 3;
-                incidentObj.setSize(criticality+"");
+                incidentObj.setSize(criticality + "");
             } else {
-                incidentObj.setSize(-1 +"");
+                incidentObj.setSize(-1 + "");
             }
 
 
@@ -250,7 +252,7 @@ public class HereNormalization implements JsonToIncident {
     }
 
     private LocalDateTime parseDate(String timeStr) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(datePattern);
         return LocalDateTime.parse(timeStr, formatter);
     }
 }
