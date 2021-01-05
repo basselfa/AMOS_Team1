@@ -8,7 +8,6 @@
         :color="polyline.color"
       ></l-polyline>
       <l-marker :lat-lng="markerLatLng">
-        <!-- <l-icon :icon-url="customMarker"></l-icon> -->
         <l-tooltip>This is an incident</l-tooltip>
       </l-marker>
     </l-map>
@@ -23,7 +22,6 @@ import {
   LPolyline,
   LMarker,
   LPopup,
-  // LIcon,
   LTooltip,
 } from "vue2-leaflet";
 export default {
@@ -33,7 +31,6 @@ export default {
     LMap,
     LTileLayer,
     LMarker,
-    //LIcon,
     LTooltip,
     LPolyline,
   },
@@ -57,7 +54,7 @@ export default {
 
 <style>
 #osm-map {
-  height: 80%;
+  height: 75%;
   width: 70%;
   margin: 0;
   position: absolute;
