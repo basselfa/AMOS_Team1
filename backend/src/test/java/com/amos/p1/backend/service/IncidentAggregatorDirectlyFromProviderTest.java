@@ -43,6 +43,15 @@ public class IncidentAggregatorDirectlyFromProviderTest {
     }
 
     @Test
+    void testGetIncidentsFromCityAndWithTypeListEmpty(){
+        List<String> types = new ArrayList<>();
+
+        List<Incident> incidentList = incidentAggregator.getFromCityAndTypes("Berlin", types);
+
+        assertThat(incidentList, hasSize(greaterThan(0)));
+    }
+
+    @Test
     void testGetAllIncidents(){
         List<Incident> incidentList = incidentAggregator.getAllData();
 

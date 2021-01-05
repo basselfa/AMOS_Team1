@@ -62,6 +62,15 @@ public class IncidentAggregatorFromDatabaseTest {
     }
 
     @Test
+    void testGetIncidentsFromCityAndWithTypeListEmpty(){
+        List<String> types = new ArrayList<>();
+
+        List<Incident> incidentList = incidentAggregator.getFromCityAndTypes("Berlin", types);
+
+        assertThat(incidentList, hasSize(greaterThan(0)));
+    }
+
+    @Test
     void testGetIncidentsFromCityAndTimeStamp(){
         throw new IllegalStateException("Not yet implemented yet. Sprint 7");
     }

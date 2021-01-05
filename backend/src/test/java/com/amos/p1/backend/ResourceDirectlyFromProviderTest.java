@@ -54,4 +54,19 @@ public class ResourceDirectlyFromProviderTest {
         assertThat(s, notNullValue());
         System.out.println(Helper.getPrettyJsonList(s));
     }
+
+    @Test
+    void testIncidentsWithTypeListEmpty(){
+        String s = given()
+                .param("city", "Berlin")
+                .param("types", "")
+            .when()
+                .get(base + "/incidentsWithTypes")
+            .then()
+                .extract()
+                .asString();
+
+        assertThat(s, notNullValue());
+        System.out.println(Helper.getPrettyJsonList(s));
+    }
 }
