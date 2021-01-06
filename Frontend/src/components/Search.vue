@@ -49,7 +49,7 @@ export default {
     timestamp: null,
     timestamps: [],
     // todo get types and types mapping
-    types: ["Accident", "Congestion", "Disabled vehicle", "Road hazard", "Road Works", "Planned event", "Detour", "Misc", "Weather", "Roadclosure", "Lane restriction"],
+    types: ["Accident", "Congestion", "Disabled vehicle", "Road hazard", "Road Works", "Planned event", "Detour", "Misc", "Weather", "LANECLOSED", "Lane restriction"],
     type: []
   }),
   mounted: function () {

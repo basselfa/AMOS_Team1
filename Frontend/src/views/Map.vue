@@ -46,12 +46,12 @@ export default {
       }
       else {
         axios
-        .get("http://localhost:8082/withDatabase/incidentsWithTypes?city=" + value.city + "&types=" + value.type.toString(), {
+        .get("http://localhost:8082/withDatabase/incidentsWithTypes?city=" + value.city + "&types=" + value.type[0], {
           headers: { "Access-Control-Allow-Origin": "*" },
         })
         .then((response) => {
           this.cityData = response.data;
-          this.passCoordinates(response.data.list);
+          this.passCoordinates(response.data);
         })
         .catch((error) => {
           this.errorMessage = error.message;
