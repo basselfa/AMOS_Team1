@@ -1,6 +1,7 @@
 package com.amos.p1.backend;
 
 
+import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.data.Location;
 import com.amos.p1.backend.database.MyRepo;
 import org.json.JSONArray;
@@ -12,6 +13,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -108,6 +113,25 @@ public class ResourceWithDatabaseTest {
 
     @Test
     void testTimeStampByCity() {
+        List<Incident> incidents = new ArrayList<Incident>();
+        incidents.add(
+                new Incident("222","baustelle","major",
+                        "Traffic jam in Bergmannstraße",
+                        "Berlin", "Germany",
+                        "45.5", "67.4",
+                        "Bergmannstraße",
+                        "46.5", "69.5",
+                        "Bergmannstraße",
+                        1, "dummy",
+                        LocalDateTime.of(
+                                2020, 5, 1,
+                                12, 30, 0),
+                        LocalDateTime.of(
+                                2020, 5, 1,
+                                12, 30, 0),
+                        "670000:690000,681234:691234",6.0,new Long(1)));
+        MyRepo.insertIncident(incidents);
+
         String s = given()
                 .param("city", "Berlin")
             .when()
@@ -116,7 +140,7 @@ public class ResourceWithDatabaseTest {
                 .extract()
                 .asString();
 
-        assertThat(s, notNullValue());
+        assertEquals(s, "2020-05-01 12:30");
         System.out.println(Helper.getPrettyJsonList(s));
     }
 
