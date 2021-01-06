@@ -1,9 +1,8 @@
 package com.amos.p1.backend.service;
 
-import  com.amos.p1.backend.data.Incident;
+import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.database.MyRepo;
 
-// import java.time.LocalDateTime;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +46,17 @@ public class IncidentAggregatorFromDatabase implements IncidentAggregator {
 
     @Override
     public List<LocalDateTime> getTimestampsFromCity(String city) {
-        throw new IllegalStateException("Not yet implemented yet. Sprint 7");
+        List<LocalDateTime> timestampList = new ArrayList<LocalDateTime>();
+        List<Incident> incidentList = (List<Incident>) MyRepo.getEntityManager()
+                .createNamedQuery("getTimestampsFromCity")
+                .setParameter("city", city )
+                .getResultList();
+
+        for (Incident incident : incidentList) {
+            timestampList.add(incident.getEntryTime());
+        }
+
+        return timestampList;
     }
 
     @Override
