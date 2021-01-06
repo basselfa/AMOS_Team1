@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -83,7 +84,14 @@ public class ResourceWithDatabase {
 
     private List<String> parseLocalDateTimes(List<LocalDateTime> localDateTimes) {
         //Strings need to have this pattern: yyyy-MM-dd HH:mm.
-        throw new IllegalStateException("Not yet implemented yet. Sprint 7");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        List<String> timestampsAsStrings = new ArrayList<String>();
+
+        for (LocalDateTime time : localDateTimes) {
+            timestampsAsStrings.add(time.format(formatter));
+        }
+
+        return timestampsAsStrings;
     }
 
     @RequestMapping(
