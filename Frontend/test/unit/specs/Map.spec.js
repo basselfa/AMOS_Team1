@@ -32,15 +32,13 @@ describe('Map', () => {
             request
                 .respondWith({
                     status: 200,
-                    response: {
-                        type: 'accident',
-                        list: [
-                            {
-                                edges:
-                                    '52.51784:13.28016,52.51771:13.28021,52.51765:13.28024',
-                            },
-                        ],
-                    },
+                    response: [
+                        {
+                            type: 'accident',
+                            edges:
+                                '52.51784:13.28016,52.51771:13.28021,52.51765:13.28024',
+                        },
+                    ],
                 })
                 .then(function() {
                     expect(wrapper.vm.polylines[0].latlngs).toEqual([
