@@ -34,7 +34,7 @@ public class IncidentAggregatorFromDatabaseTest {
 
     public IncidentAggregatorFromDatabaseTest(){
         ProviderIntervalRequest providerIntervalRequest = new ProviderIntervalRequest();
-        providerIntervalRequest.providerCronJob();
+        //providerIntervalRequest.providerCronJob();
     }
 
     @Test
@@ -136,7 +136,9 @@ public class IncidentAggregatorFromDatabaseTest {
 
     @Test
     void testGetTimestampsFromCityNotInDatabase(){
-        throw new IllegalStateException("Not yet implemented yet. Sprint 7");
+        List<LocalDateTime> timestampList = incidentAggregator.getTimestampsFromCity("DreamLand");
+
+        assertThat(timestampList, is(empty()));
     }
 
     @Test

@@ -29,7 +29,7 @@ public class MyRepo {
     private EntityManagerFactory emf;
     private EntityManager emTest;
     private EntityManagerFactory emfTest;
-    private boolean useTestDatabase =false;
+    private boolean useTestDatabase =true;
 
     private MyRepo() {
         emf = Persistence.createEntityManagerFactory("MyRepo");
@@ -123,15 +123,14 @@ public class MyRepo {
     public static void insertIncident(List<Incident> incidents) {
 
         int i = 0;
-
+        getEntityManager().getTransaction().begin();
         for(Incident incident : incidents) {
-            System.out.println("Saved incident no. " + i);
-            getEntityManager().getTransaction().begin();
+           // System.out.println("Saved incident no. " + i);
             getEntityManager().persist(incident);
-            getEntityManager().getTransaction().commit();
-
             i++;
         }
+        getEntityManager().getTransaction().commit();
+
     }
     public static List<Incident> getIncidents(Long id) {
         List<Incident> resultList = MyRepo.getEntityManager()
