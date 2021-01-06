@@ -96,7 +96,7 @@ public class ResourceWithDatabaseTest {
     }
 
     @Test
-    void testGetAllCities() throws JSONException {
+    void testGetAllCitiesAndCheckBoundingBoxes() throws JSONException {
         String s = given()
                 .param("city", "Berlin")
                 .when()
