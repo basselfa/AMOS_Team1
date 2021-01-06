@@ -2,6 +2,7 @@ package com.amos.p1.backend.service;
 
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.database.MyRepo;
+import org.apache.tomcat.jni.Local;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -46,15 +47,10 @@ public class IncidentAggregatorFromDatabase implements IncidentAggregator {
 
     @Override
     public List<LocalDateTime> getTimestampsFromCity(String city) {
-        List<LocalDateTime> timestampList = new ArrayList<LocalDateTime>();
-        List<Incident> incidentList = (List<Incident>) MyRepo.getEntityManager()
+        List<LocalDateTime> timestampList = (List<LocalDateTime>) MyRepo.getEntityManager()
                 .createNamedQuery("getTimestampsFromCity")
                 .setParameter("city", city )
                 .getResultList();
-
-        for (Incident incident : incidentList) {
-            timestampList.add(incident.getEntryTime());
-        }
 
         return timestampList;
     }
