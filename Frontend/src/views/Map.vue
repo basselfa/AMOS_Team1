@@ -44,7 +44,15 @@ export default {
         });
       }
     },
-
+    /**
+     * Processes the incident data of the selected city.
+     *
+     * @param cityData Incident data from backend
+     * @param coordinatesArray Processed strings into coordinates
+     * @param lineArray Array which collects the coordinates of one incident
+     * @param latitudinal Latitudinal coordinate of a line edge
+     * @param longitudinal Longitidinal coordinate of a line edge
+     */
     passCoordinates: function (cityData) {
       for (var i = 0; i < cityData.length; i++) {
         var coordinatesArray = cityData[i].edges.split(',');

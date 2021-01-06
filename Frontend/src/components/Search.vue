@@ -48,7 +48,7 @@ export default {
     timestamp: null,
     timestamps: [],
     // todo get types and types mapping
-    types: ["construction", "jam"], 
+    types: ["construction", "jam"],
     type: []
   }),
   mounted: function () {
@@ -66,7 +66,12 @@ export default {
   })
   },
   methods: {
-    // on city selection, get all timestamps for city and emit latest timestamp & city 
+    /**
+     * Triggers REST Request to backend for..
+     *
+     * @param city .. a selected city.
+     * @param timestamp .. the latest time stamp.
+     */
     getCity: function () {
       axios.get('http://localhost:8082/demo/timestamps?city='+this.city, {
       headers: { 'Access-Control-Allow-Origin': '*' },
@@ -94,8 +99,6 @@ export default {
 }
 
 .search-bar {
-  /* -webkit-box-shadow: 4px 12px 31px -10px #cecece !important;
-  box-shadow: 4px 12px 31px -10px #cecece !important; */
 }
 
 #search-icon {
