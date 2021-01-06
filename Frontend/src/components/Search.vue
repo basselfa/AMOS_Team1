@@ -29,6 +29,7 @@
           shadow
           multiple
           v-model="type"
+          @change="getCity()"
         ></v-autocomplete>
       </v-col>
     </v-row>
@@ -48,7 +49,7 @@ export default {
     timestamp: null,
     timestamps: [],
     // todo get types and types mapping
-    types: ["construction", "jam"],
+    types: ["Accident", "Congestion", "Disabled vehicle", "Road hazard", "Road Works", "Planned event", "Detour", "Misc", "Weather", "Roadclosure", "Lane restriction"],
     type: []
   }),
   mounted: function () {
@@ -74,18 +75,18 @@ export default {
      */
     getCity: function () {
       axios.get('http://localhost:8082/demo/timestamps?city='+this.city, {
-      headers: { 'Access-Control-Allow-Origin': '*' },
-  })
-  .then(response => {
-    this.timestamps = response.data
-    this.timestamp=this.timestamps[this.timestamps.length-1]
-    this.$emit('change',{city: this.city, timestamp: this.timestamp})
-  })
-  .catch(error => {
-      this.errorMessage = error.message
-      console.error('There was an error!', error)
-      this.loading = false
-  })
+        headers: { 'Access-Control-Allow-Origin': '*' },
+      })
+      .then(response => {
+        this.timestamps = response.data
+        this.timestamp=this.timestamps[this.timestamps.length-1]
+        this.$emit('change',{city: this.city, timestamp: this.timestamp, type: this.type})
+      })
+      .catch(error => {
+          this.errorMessage = error.message
+          console.error('There was an error!', error)
+          this.loading = false
+      })
     },
   },
 };
@@ -96,9 +97,6 @@ export default {
   padding-top: 100px;
   padding-left: 300px;
   padding-right: 20%;
-}
-
-.search-bar {
 }
 
 #search-icon {

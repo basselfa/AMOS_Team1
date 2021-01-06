@@ -85,15 +85,6 @@ public class TomTomNormalization implements JsonToIncident {
             if (!incJSONObj.isNull("ed"))
                 incJObj.setEndTime(parseDate(incJSONObj.getString("ed")));
 
-            // Map original 0-4 to -1-12
-            // Unknown (0) and Undefined (4) get mapped to -1
-            //Integer criticality = incJSONObj.getInt("ty");
-            /*if (criticality == 0 || criticality == 4) {
-                incJObj.setDelay(-1);
-            } else {
-                incJObj.setDelay(criticality * 4);
-            }*/
-
             // sometimes v (shape as polyline) isn't given hence we can't decode it
             if (!incJSONObj.isNull("v")) {
                 PolyLineDecoder PLDecoder = new PolyLineDecoder();
@@ -112,8 +103,8 @@ public class TomTomNormalization implements JsonToIncident {
                 incJObj.setEndPositionLongitude(endPoint.toString().split(":")[1]);
 
                 Locations lEdges = new Locations();
-                for (int i = 0; i < edges.size(); i++) {
-                    Location edge = new Location(String.valueOf(edges.get(i).getLat()), String.valueOf(edges.get(i).getLng()));
+                for (Point point : edges) {
+                    Location edge = new Location(String.valueOf(point.getLat()), String.valueOf(point.getLng()));
                     lEdges.addLocation(edge);
                 }
                 incJObj.setEdgesAsLocations(lEdges);

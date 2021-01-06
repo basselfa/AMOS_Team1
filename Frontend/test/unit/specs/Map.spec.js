@@ -25,6 +25,7 @@ describe('Map', () => {
         wrapper.vm.getSearchValue({
             city: 'Berlin',
             timestamp: '2020-12-19 13:00',
+            type: 'accident',
         })
         moxios.wait(function() {
             let request = moxios.requests.mostRecent()
@@ -32,6 +33,7 @@ describe('Map', () => {
                 .respondWith({
                     status: 200,
                     response: {
+                        type: 'accident',
                         list: [
                             {
                                 edges:
@@ -57,7 +59,11 @@ describe('Map', () => {
             error,
         })
 
-        wrapper.vm.getSearchValue('Berlin')
+        wrapper.vm.getSearchValue({
+            city: 'Berlin',
+            timestamp: '2020-12-19 13:00',
+            type: 'accident',
+        })
 
         moxios.wait(() => {
             expect(wrapper.vm.errorMessage).toEqual(
