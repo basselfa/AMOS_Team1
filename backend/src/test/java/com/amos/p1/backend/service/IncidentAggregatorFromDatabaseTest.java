@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import static org.hamcrest.Matchers.*;
 
 public class IncidentAggregatorFromDatabaseTest {
 
-    IncidentAggregator incidentAggregator = new IncidentAggregatorDirectlyFromProvider();;
+    IncidentAggregator incidentAggregator = new IncidentAggregatorFromDatabase();;
     @BeforeAll
     public static void init() {
 
@@ -70,14 +71,42 @@ public class IncidentAggregatorFromDatabaseTest {
         assertThat(incidentList, hasSize(greaterThan(0)));
     }
 
+
     @Test
     void testGetIncidentsFromCityAndTimeStamp(){
-        throw new IllegalStateException("Not yet implemented yet. Sprint 7");
+
+        List<Incident> incidents = new ArrayList<Incident>();
+        incidents.add(
+                new Incident("222","baustelle","major",
+                        "Traffic jam in Bergmannstraße",
+                        "Berlin", "Germany",
+                        "45.5", "67.4",
+                        "Bergmannstraße",
+                        "46.5", "69.5",
+                        "Bergmannstraße",
+                        1, "dummy",
+                        LocalDateTime.of(
+                                2020, 5, 1,
+                                12, 30, 0),
+                        LocalDateTime.of(
+                                2020, 5, 1,
+                                12, 30, 0),
+                        "670000:690000,681234:691234",6.0,new Long(1)));
+        MyRepo.insertIncident(incidents);
+        List<Incident> incidentList = incidentAggregator.getFromCityAndTimeStamp("Berlin",    LocalDateTime.of(
+                2020, 5, 1,
+                12, 30, 0));
+
+        assertThat(incidentList, hasSize(greaterThan(0)));
     }
 
     @Test
     void testGetIncidentsFromCityAndTimeStampNotInDatabase(){
-        throw new IllegalStateException("Not yet implemented yet. Sprint 7");
+        List<Incident> incidentList = incidentAggregator.getFromCityAndTimeStamp("Berlin",    LocalDateTime.of(
+                0, 1, 1,
+                12, 30, 0));
+
+        assertThat(incidentList, is(empty()));
     }
 
     @Test
