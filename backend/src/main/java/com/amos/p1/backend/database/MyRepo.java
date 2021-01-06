@@ -121,11 +121,16 @@ public class MyRepo {
 
 
     public static void insertIncident(List<Incident> incidents) {
+
+        int i = 0;
+
         for(Incident incident : incidents) {
+            System.out.println("Saved incident no. " + i);
             getEntityManager().getTransaction().begin();
             getEntityManager().persist(incident);
             getEntityManager().getTransaction().commit();
 
+            i++;
         }
     }
     public static List<Incident> getIncidents(Long id) {
