@@ -8,9 +8,7 @@ import com.amos.p1.backend.database.MyRepo;
 import com.amos.p1.backend.normalization.HereNormalization;
 import com.amos.p1.backend.normalization.JsonToIncident;
 import com.amos.p1.backend.normalization.TomTomNormalization;
-import com.amos.p1.backend.provider.HereRequestDummy;
-import com.amos.p1.backend.provider.ProviderRequest;
-import com.amos.p1.backend.provider.TomTomRequestDummy;
+import com.amos.p1.backend.provider.*;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -28,6 +26,8 @@ public class ProviderIntervalRequest {
 
     private final ProviderRequest tomtomRequest = new TomTomRequestDummy();
     private final ProviderRequest hereRequest = new HereRequestDummy();
+//    private final ProviderRequest tomtomRequest = new TomTomRequest();
+//    private final ProviderRequest hereRequest = new HereRequest();
 
     private final CityBoundingBoxesService cityBoundingBoxesService = new CityBoundingBoxesService();
 
@@ -38,13 +38,20 @@ public class ProviderIntervalRequest {
         System.out.println("The time is now " + dateFormat.format(new Date()));
 
         for (CityBoundingBox cityBoundingBox : cityBoundingBoxesService.getCityBoundingBoxes()) {
+            System.out.println("Request data from city: " + cityBoundingBox.getCity());
 
+            System.out.println("Get data from here.com");
             List<Incident> hereIncidents = getHereIncidents(cityBoundingBox);
+            System.out.println("Get data from tomtom");
             List<Incident> tomTomIncidents = getTomTomIncidents(cityBoundingBox);
 
+            System.out.println("Save here incidents. Amount: " + hereIncidents.size());
             saveToDatabase(hereIncidents);
+            System.out.println("Save tomtom incidents. Amount: " + tomTomIncidents.size());
             saveToDatabase(tomTomIncidents);
         }
+
+        System.out.println("Sucessfully saved everything");
     }
 
     public List<Incident> getRecentTomTomIncidentsFromCity(String city){
