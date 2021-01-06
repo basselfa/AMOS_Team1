@@ -30,6 +30,7 @@ export default {
     executeQuery: function (value) {
       this.polylines=[]
       if (value.city!==null) {
+        if(value.type.length == 0) {
         axios
         .get("http://localhost:8082/demo/incidents?city=" + value.city + "&timestamp=" + value.timestamp, {
           headers: { "Access-Control-Allow-Origin": "*" },
@@ -42,6 +43,21 @@ export default {
           this.errorMessage = error.message;
           console.error("There was an error!", error);
         });
+      }
+      else {
+        axios
+        .get("http://localhost:8082/withDatabase/incidentsWithTypes?city=" + value.city + "&types=" + value.type.toString(), {
+          headers: { "Access-Control-Allow-Origin": "*" },
+        })
+        .then((response) => {
+          this.cityData = response.data;
+          this.passCoordinates(response.data.list);
+        })
+        .catch((error) => {
+          this.errorMessage = error.message;
+          console.error("There was an error!", error);
+        });
+      }
       }
     },
     /**
