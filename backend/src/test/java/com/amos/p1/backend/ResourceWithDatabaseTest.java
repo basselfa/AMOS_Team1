@@ -6,6 +6,7 @@ import com.amos.p1.backend.database.MyRepo;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,8 @@ import org.springframework.boot.web.server.LocalServerPort;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.nullValue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ResourceWithDatabaseTest {
@@ -27,7 +30,7 @@ public class ResourceWithDatabaseTest {
     public static void init() {
 
         System.out.println("setting Database properties");
-        MyRepo.setUseTestDatabase(true);
+        MyRepo.setUseTestDatabase(false);
     }
 
 
@@ -92,7 +95,29 @@ public class ResourceWithDatabaseTest {
 
     @Test
     void testTimeStampByCityNotInDatabase() {
-        throw new IllegalStateException("Not yet implemented yet. Sprint 7");
+        String s = given()
+                .param("city", "Shanghai")
+            .when()
+                .get(base + "/timestamps")
+            .then()
+                .extract()
+                .asString();
+
+        assertEquals(s, "[]");
+        System.out.println(Helper.getPrettyJsonList(s));    }
+
+    @Test
+    void testTimeStampByCity() {
+        String s = given()
+                .param("city", "Berlin")
+            .when()
+                .get(base + "/timestamps")
+            .then()
+                .extract()
+                .asString();
+
+        assertThat(s, notNullValue());
+        System.out.println(Helper.getPrettyJsonList(s));
     }
 
     @Test
