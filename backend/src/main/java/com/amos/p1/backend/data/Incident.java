@@ -32,6 +32,10 @@ import java.util.List;
         query = "SELECT i FROM Incident i WHERE i.city = :city AND i.entryTime >= :entryTime"
 )
 @NamedQuery(
+        name = "getTimestampsFromCity",
+        query = "SELECT DISTINCT i.entryTime FROM Incident i WHERE i.city = :city"
+)
+@NamedQuery(
         name = "getFromRequestId",
         query = "SELECT i FROM Incident i WHERE i.requestId = :requestId"
 )
