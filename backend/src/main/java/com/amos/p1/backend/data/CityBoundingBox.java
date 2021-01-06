@@ -48,7 +48,7 @@ public class CityBoundingBox {
 
         return new Location(
                 (latMin + (latMax - latMin) / 2) + "",
-                (longMin + (longMax - longMin)) + ""
+                (longMin + (longMax - longMin) / 2) + ""
         );
     }
 }
