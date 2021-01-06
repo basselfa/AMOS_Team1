@@ -29,6 +29,7 @@ public class IncidentAggregatorDirectlyFromProvider implements IncidentAggregato
     }
 
     private boolean hasIncidentOneOfThisTypes(Incident incident, List<String> types){
+       // todo: make Strems! return types.stream().anyMatch(type-> type.equals(incident.getType()));
         for (String type : types) {
             if(incident.getType().equals(type)) {
                 return true;
