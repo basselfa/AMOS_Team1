@@ -1,6 +1,5 @@
-package com.amos.p1.backend.service;
+package com.amos.p1.backend.service.aggregator;
 
-import com.amos.p1.backend.Helper;
 import com.amos.p1.backend.data.Incident;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,13 +11,13 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-public class IncidentAggregatorDirectlyFromProviderTest {
+public class AggregatorDirectlyFromProviderTest {
 
-    IncidentAggregator incidentAggregator = new IncidentAggregatorDirectlyFromProvider();;
+    Aggregator aggregator = new AggregatorDirectlyFromProvider();;
 
     @Test
     void testGetIncidentsFromCity(){
-        List<Incident> incidentList = incidentAggregator.getFromCity("Berlin");
+        List<Incident> incidentList = aggregator.getFromCity("Berlin");
 
         System.out.println(incidentList);
         assertThat(incidentList, hasSize(greaterThan(0)));
@@ -30,7 +29,7 @@ public class IncidentAggregatorDirectlyFromProviderTest {
         types.add("1");
         types.add("10");
 
-        List<Incident> incidentList = incidentAggregator.getFromCityAndTypes("Berlin", types);
+        List<Incident> incidentList = aggregator.getFromCityAndTypes("Berlin", types);
 
         assertThat(incidentList, hasSize(greaterThan(0)));
 
@@ -46,14 +45,14 @@ public class IncidentAggregatorDirectlyFromProviderTest {
     void testGetIncidentsFromCityAndWithTypeListEmpty(){
         List<String> types = new ArrayList<>();
 
-        List<Incident> incidentList = incidentAggregator.getFromCityAndTypes("Berlin", types);
+        List<Incident> incidentList = aggregator.getFromCityAndTypes("Berlin", types);
 
         assertThat(incidentList, hasSize(greaterThan(0)));
     }
 
     @Test
     void testGetAllIncidents(){
-        List<Incident> incidentList = incidentAggregator.getAllData();
+        List<Incident> incidentList = aggregator.getAllData();
 
         assertThat(incidentList, hasSize(greaterThan(0)));
     }
@@ -61,7 +60,7 @@ public class IncidentAggregatorDirectlyFromProviderTest {
     @Test
     void testMarshallingOneIncidentFromCity() throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
-        List<Incident> berlinIncidents = incidentAggregator.getFromCity("Berlin");
+        List<Incident> berlinIncidents = aggregator.getFromCity("Berlin");
 
         String json = objectMapper.writeValueAsString(berlinIncidents.get(0));
         assertThat(json, notNullValue());
@@ -71,10 +70,15 @@ public class IncidentAggregatorDirectlyFromProviderTest {
     @Test
     void testMarshallingAllIncidentFromCity() throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
-        List<Incident> berlinIncidents = incidentAggregator.getFromCity("Berlin");
+        List<Incident> berlinIncidents = aggregator.getFromCity("Berlin");
 
         String json = objectMapper.writeValueAsString(berlinIncidents);
         assertThat(json, notNullValue());
 
+    }
+
+    @Test
+    void testGetEvaluationCandidates(){
+        throw new IllegalStateException("Needs to be implemented");
     }
 }

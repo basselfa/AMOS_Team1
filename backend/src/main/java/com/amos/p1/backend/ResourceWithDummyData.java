@@ -1,5 +1,7 @@
 package com.amos.p1.backend;
 
+import com.amos.p1.backend.data.ComparisonEvaluationOverTimeDTO;
+import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.service.CityBoundingBoxesService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -63,5 +65,31 @@ public class ResourceWithDummyData {
         cities.add("Munich");
 
         return ResponseEntity.ok(cities);
+    }
+
+
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/comparison",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ResponseBody
+    public ResponseEntity<List<EvaluationCandidate>> getComparison(@RequestParam("city") String city,
+                                                                   @RequestParam("timestamp") String timestamp) {
+
+
+        throw new IllegalStateException("Needs to be implemented");
+    }
+
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/ComparisonEvaluationOverTime",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ResponseBody
+    public ResponseEntity<ComparisonEvaluationOverTimeDTO> getComparisonEvaluationOverTime(@RequestParam("city") String city) {
+
+
+        throw new IllegalStateException("Needs to be implemented");
     }
 }

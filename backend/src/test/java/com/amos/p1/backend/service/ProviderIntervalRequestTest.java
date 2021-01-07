@@ -50,12 +50,7 @@ public class ProviderIntervalRequestTest {
         assertThat(amountOfIncidentsAfterCronJob - amountOfIncidentsBeforeCronjob, greaterThan(0L));
     }
 
-    @Test
-    void testGettingBerlinTomTomIncidents(){
-        List<Incident> berlinIncidents = providerIntervalRequest.getRecentTomTomIncidentsFromCity("Berlin");
 
-        assertThat(berlinIncidents, hasSize(greaterThan(0)));
-    }
 
     @Test
     void testExecutionOnInterval(){
