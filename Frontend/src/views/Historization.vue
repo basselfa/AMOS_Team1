@@ -29,15 +29,21 @@
                 </v-card>
             </v-col>
         </v-row>
+        <div id="charts-container">
+            <div id="chart-comparison" style="margin-top:50px;">
+                <chart />
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
 import axios from 'axios'
+import Chart from '../components/Chart'
 
 export default {
     name: 'Historization',
-    components: {},
+    components: { Chart },
     created() {
         this.fetchData()
     },
