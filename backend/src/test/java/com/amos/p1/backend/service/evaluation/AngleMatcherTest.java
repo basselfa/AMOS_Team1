@@ -8,7 +8,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class AngleMatcherTest {
 
-    AngleMatcher angleMatcher = new AngleMatcher();
+    AngleMatcher angleMatcher;
 
     @Test
     void testMatchingAngleUnder15Degree(){
@@ -25,7 +25,7 @@ public class AngleMatcherTest {
         incident2.setEndPositionLatitude("52.533767");
         incident2.setEndPositionLongitude("13.301173");
 
-        angleMatcher.match(incident1, incident2);
+        angleMatcher = new AngleMatcher(incident1, incident2);
         assertThat(angleMatcher.getConfidence(), equalTo(1));
         assertThat(angleMatcher.isDropped(), equalTo(false));
         assertThat(angleMatcher.getDegree(), equalTo(2.4208526611328125)); // TODO: needs other degree
@@ -45,7 +45,7 @@ public class AngleMatcherTest {
         incident2.setEndPositionLatitude("52.531070");
         incident2.setEndPositionLongitude("13.298252");
 
-        angleMatcher.match(incident1, incident2);
+        angleMatcher= new AngleMatcher(incident1, incident2);
         assertThat(angleMatcher.getConfidence(), equalTo(-1));
         assertThat(angleMatcher.isDropped(), equalTo(false));
         assertThat(angleMatcher.getDegree(), equalTo(22.594406127929688));
@@ -65,7 +65,7 @@ public class AngleMatcherTest {
         incident2.setEndPositionLatitude("52.529486");
         incident2.setEndPositionLongitude("13.289921");
 
-        angleMatcher.match(incident1, incident2);
+        angleMatcher= new AngleMatcher(incident1, incident2);
         assertThat(angleMatcher.isDropped(), equalTo(true));
         assertThat(angleMatcher.getDegree(), equalTo(106.64066314697266));
     }
@@ -84,7 +84,7 @@ public class AngleMatcherTest {
         incident2.setEndPositionLatitude("52.534080");
         incident2.setEndPositionLongitude("13.290938");
 
-        angleMatcher.match(incident1, incident2);
+        angleMatcher= new AngleMatcher(incident1, incident2);
         assertThat(angleMatcher.isDropped(), equalTo(true));
         assertThat(angleMatcher.getDegree(), equalTo(180.0));
     }

@@ -4,32 +4,25 @@ import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.data.Location;
 
 // Thesis page 36
-public class SearchRadiusMatcher implements Matcher {
-    private static int searchboundaryInMeters = 20; // todo: wo soll dieser Configwert stehen?
+public class SearchRadiusMatcher extends Matcher {
+    private static int searchboundaryInMeters = 20;
+    private int confidence;
 
-    //todo: wollen wir einen state haben?
-    int confidence;
-
-
-    @Override
-    public void match(Incident incident1, Incident incident2) {
-        confidence = 0; // reset state todo: wollen wir einen state haben?
-
-
-        IncidentsWrapper locations = new IncidentsWrapper(incident1, incident2);
+    public SearchRadiusMatcher(Incident incident1, Incident incident2) {
+        super(incident1, incident2);
 
         //berechne akzepierte distanz zwischen start und endpunkt
         double distanceIncident1 = calculateDistance(
-                locations.start1Lat,
-                locations.start1Lng,
-                locations.end1Lat,
-                locations.end1Lng
+                start1Lat,
+                start1Lng,
+                end1Lat,
+                end1Lng
         );
         double distanceIncident2 = calculateDistance(
-                locations.start2Lat,
-                locations.start2Lng,
-                locations.end2Lat,
-                locations.end2Lng
+                start2Lat,
+                start2Lng,
+                end2Lat,
+                end2Lng
         );
 
         int accepatbleDistance;
@@ -42,17 +35,17 @@ public class SearchRadiusMatcher implements Matcher {
         }
 
         double distanceStartPoints = calculateDistance(
-                locations.start1Lat,
-                locations.start1Lng,
-                locations.start2Lat,
-                locations.start2Lng
+                start1Lat,
+                start1Lng,
+                start2Lat,
+                start2Lng
         );
 
         double distanceEndPoints = calculateDistance(
-                locations.end1Lat,
-                locations.end1Lng,
-                locations.end2Lat,
-                locations.end2Lng
+                end1Lat,
+                end1Lng,
+                end2Lat,
+                end2Lng
         );
 
         // check start and end point in same area
@@ -65,7 +58,7 @@ public class SearchRadiusMatcher implements Matcher {
         }
 
 
-        //todo: "least distance"
+        //todo: "least distance" -> eigener Matcher
 
     }
 
@@ -79,30 +72,6 @@ public class SearchRadiusMatcher implements Matcher {
         return confidence;
     }
 
-
-    //todo:refactor!
-
-    class IncidentsWrapper {
-        double start1Lat;
-        double start1Lng;
-        double end1Lat;
-        double end1Lng;
-        double start2Lat;
-        double start2Lng;
-        double end2Lat;
-        double end2Lng;
-
-        public IncidentsWrapper(Incident incident1, Incident incident2) {
-            this.start1Lat = Double.parseDouble(incident1.getStartPositionLatitude());
-            this.start1Lng = Double.parseDouble(incident1.getStartPositionLongitude());
-            this.end1Lat = Double.parseDouble(incident1.getEndPositionLatitude());
-            this.end1Lng = Double.parseDouble(incident1.getEndPositionLongitude());
-            this.start2Lat = Double.parseDouble(incident2.getStartPositionLatitude());
-            this.start2Lng = Double.parseDouble(incident2.getStartPositionLongitude());
-            this.end2Lat = Double.parseDouble(incident2.getEndPositionLatitude());
-            this.end2Lng = Double.parseDouble(incident2.getEndPositionLongitude());
-        }
-    }
 
     /* calculate distance beteen Lat/Lng: https://stackoverflow.com/questions/3694380/calculating-distance-between-two-points-using-latitude-longitude*/
     double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
