@@ -1,6 +1,6 @@
 package com.amos.p1.backend.service.aggregator;
 
-import com.amos.p1.backend.data.ComparisonEvaluationOverTimeDTO;
+import com.amos.p1.backend.data.ComparisonEvaluationDTO;
 import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.database.MyRepo;
@@ -92,7 +92,7 @@ public class AggregatorFromDatabase implements Aggregator {
         throw new IllegalStateException();
     }
 
-    public ComparisonEvaluationOverTimeDTO getComparisonEvaluationOverTime(){
+    public List<ComparisonEvaluationDTO> getComparisonEvaluationOverTime(){
         throw new IllegalStateException("needs to be implemented");
     }
 

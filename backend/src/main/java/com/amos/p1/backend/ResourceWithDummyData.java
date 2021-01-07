@@ -1,13 +1,11 @@
 package com.amos.p1.backend;
 
-import com.amos.p1.backend.data.ComparisonEvaluationOverTimeDTO;
+import com.amos.p1.backend.data.ComparisonEvaluationDTO;
 import com.amos.p1.backend.data.EvaluationCandidate;
-import com.amos.p1.backend.service.CityBoundingBoxesService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,7 +85,7 @@ public class ResourceWithDummyData {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity<ComparisonEvaluationOverTimeDTO> getComparisonEvaluationOverTime(@RequestParam("city") String city) {
+    public ResponseEntity<List<ComparisonEvaluationDTO>> getComparisonEvaluationOverTime(@RequestParam("city") String city) {
 
 
         throw new IllegalStateException("Needs to be implemented");
