@@ -3,9 +3,9 @@ package com.amos.p1.backend.service.evaluation;
 import com.amos.p1.backend.data.Incident;
 
 // Thesis page 40
-public class LengthMatcher implements Matcher{
-    @Override
-    public void match(Incident incident1, Incident incident2) {
+public class LengthMatcher extends Matcher{
+    public LengthMatcher(Incident incident1, Incident incident2) {
+        super(incident1,incident2);
         throw new IllegalStateException("Needs to be implemented");
     }
 

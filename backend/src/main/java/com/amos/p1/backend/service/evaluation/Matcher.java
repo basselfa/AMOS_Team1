@@ -23,7 +23,7 @@ public abstract class Matcher {
         this.end2Lng = Double.parseDouble(incident2.getEndPositionLongitude());
     }
 
-    abstract boolean isDropped();
+    public abstract boolean isDropped();
 
-    abstract int getConfidence();
+    public abstract int getConfidence();
 }
