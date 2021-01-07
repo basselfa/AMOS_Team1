@@ -1,6 +1,6 @@
 package com.amos.p1.backend.service.aggregator;
 
-import com.amos.p1.backend.data.ComparisonEvaluationOverTimeDTO;
+import com.amos.p1.backend.data.ComparisonEvaluationDTO;
 import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.data.Incident;
 
@@ -23,5 +23,5 @@ public interface Aggregator {
 
     List<EvaluationCandidate> getEvaluationCandiate(String city, LocalDateTime timestamp);
 
-    ComparisonEvaluationOverTimeDTO getComparisonEvaluationOverTime();
+    List<ComparisonEvaluationDTO> getComparisonEvaluationOverTime();
 }
