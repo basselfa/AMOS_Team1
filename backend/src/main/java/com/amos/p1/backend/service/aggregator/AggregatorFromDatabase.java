@@ -1,14 +1,15 @@
-package com.amos.p1.backend.service;
+package com.amos.p1.backend.service.aggregator;
 
+import com.amos.p1.backend.data.ComparisonEvaluationOverTimeDTO;
+import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.database.MyRepo;
-import org.apache.tomcat.jni.Local;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IncidentAggregatorFromDatabase implements IncidentAggregator {
+public class AggregatorFromDatabase implements Aggregator {
 
     @Override
     @SuppressWarnings("unchecked")
@@ -86,5 +87,13 @@ public class IncidentAggregatorFromDatabase implements IncidentAggregator {
                 .getResultList();
     }
 
+    @Override
+    public List<EvaluationCandidate> getEvaluationCandiate(String city, LocalDateTime timestamp) {
+        throw new IllegalStateException();
+    }
+
+    public ComparisonEvaluationOverTimeDTO getComparisonEvaluationOverTime(){
+        throw new IllegalStateException("needs to be implemented");
+    }
 
 }

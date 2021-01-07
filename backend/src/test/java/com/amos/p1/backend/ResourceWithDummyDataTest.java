@@ -66,4 +66,9 @@ public class ResourceWithDummyDataTest {
         .then()
             .body("incidents.size()", is(2));
     }
+
+    @Test
+    void testComparison(){
+        throw new IllegalStateException("Needs to be implemented");
+    }
 }

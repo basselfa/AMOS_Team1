@@ -1,17 +1,21 @@
-package com.amos.p1.backend.service;
+package com.amos.p1.backend.service.aggregator;
 
+import com.amos.p1.backend.data.ComparisonEvaluationOverTimeDTO;
+import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.data.Incident;
+import com.amos.p1.backend.service.ProviderIntervalRequest;
+import com.amos.p1.backend.service.ProviderNormalizer;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IncidentAggregatorDirectlyFromProvider implements IncidentAggregator {
+public class AggregatorDirectlyFromProvider implements Aggregator {
     @Override
     public List<Incident> getFromCity(String city) {
 
-        ProviderIntervalRequest providerIntervalRequest = new ProviderIntervalRequest();
-        return providerIntervalRequest.getRecentTomTomIncidentsFromCity("Berlin");
+        ProviderNormalizer providerNormalizer = new ProviderNormalizer();
+        return providerNormalizer.getRecentTomTomIncidentsFromCity("Berlin");
     }
 
     @Override
@@ -59,5 +63,15 @@ public class IncidentAggregatorDirectlyFromProvider implements IncidentAggregato
     @Override
     public List<Incident> getAllData() {
         throw new IllegalStateException("Not yet implemented");
+    }
+
+    @Override
+    public List<EvaluationCandidate> getEvaluationCandiate(String city, LocalDateTime timestamp) {
+        throw new IllegalStateException("needs to be implemented");
+    }
+
+    @Override
+    public ComparisonEvaluationOverTimeDTO getComparisonEvaluationOverTime() {
+        throw new IllegalStateException("needs to be implemented");
     }
 }

@@ -82,4 +82,19 @@ public class Request {
                 ", incidentSavedInDb=" + incidentSavedInDb +
                 '}';
     }
+
+    public void setEvaluatedCandidates(List<EvaluationCandidate> reEvaluatedCandidateList) {
+        throw new IllegalStateException("Needs to be implemented");
+    }
+
+    public List<EvaluationCandidate> getEvaluationCandidate(){
+        throw new IllegalStateException("Needs to be implemented");
+    }
+
+    public void setCityName(String location){
+    }
+
+    public String getCityName() {
+        return null;
+    }
 }

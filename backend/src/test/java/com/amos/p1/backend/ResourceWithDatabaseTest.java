@@ -175,4 +175,9 @@ public class ResourceWithDatabaseTest {
         }
 
     }
+
+    @Test
+    void testComparison(){
+        throw new IllegalStateException("Needs to be implemented");
+    }
 }

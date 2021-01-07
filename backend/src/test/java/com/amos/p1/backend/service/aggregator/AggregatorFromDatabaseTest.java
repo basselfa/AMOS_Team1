@@ -1,7 +1,8 @@
-package com.amos.p1.backend.service;
+package com.amos.p1.backend.service.aggregator;
 
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.database.MyRepo;
+import com.amos.p1.backend.service.ProviderIntervalRequest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeAll;
@@ -15,9 +16,9 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-public class IncidentAggregatorFromDatabaseTest {
+public class AggregatorFromDatabaseTest {
 
-    IncidentAggregator incidentAggregator = new IncidentAggregatorFromDatabase();;
+    Aggregator aggregator = new AggregatorFromDatabase();;
     @BeforeAll
     public static void init() {
 
@@ -32,14 +33,14 @@ public class IncidentAggregatorFromDatabaseTest {
         MyRepo.dropAll();
     }
 
-    public IncidentAggregatorFromDatabaseTest(){
+    public AggregatorFromDatabaseTest(){
         ProviderIntervalRequest providerIntervalRequest = new ProviderIntervalRequest();
         //providerIntervalRequest.providerCronJob();
     }
 
     @Test
     void testGetIncidentsFromCity(){
-        List<Incident> incidentList = incidentAggregator.getFromCity("Berlin");
+        List<Incident> incidentList = aggregator.getFromCity("Berlin");
 
         assertThat(incidentList, hasSize(greaterThan(0)));
     }
@@ -50,7 +51,7 @@ public class IncidentAggregatorFromDatabaseTest {
         types.add("1");
         types.add("10");
 
-        List<Incident> incidentList = incidentAggregator.getFromCityAndTypes("Berlin", types);
+        List<Incident> incidentList = aggregator.getFromCityAndTypes("Berlin", types);
 
         assertThat(incidentList, hasSize(greaterThan(0)));
 
@@ -66,7 +67,7 @@ public class IncidentAggregatorFromDatabaseTest {
     void testGetIncidentsFromCityAndWithTypeListEmpty(){
         List<String> types = new ArrayList<>();
 
-        List<Incident> incidentList = incidentAggregator.getFromCityAndTypes("Berlin", types);
+        List<Incident> incidentList = aggregator.getFromCityAndTypes("Berlin", types);
 
         assertThat(incidentList, hasSize(greaterThan(0)));
     }
@@ -93,7 +94,7 @@ public class IncidentAggregatorFromDatabaseTest {
                                 12, 30, 0),
                         "670000:690000,681234:691234",6.0,new Long(1)));
         MyRepo.insertIncident(incidents);
-        List<Incident> incidentList = incidentAggregator.getFromCityAndTimeStamp("Berlin",    LocalDateTime.of(
+        List<Incident> incidentList = aggregator.getFromCityAndTimeStamp("Berlin",    LocalDateTime.of(
                 2020, 5, 1,
                 12, 30, 0));
 
@@ -102,7 +103,7 @@ public class IncidentAggregatorFromDatabaseTest {
 
     @Test
     void testGetIncidentsFromCityAndTimeStampNotInDatabase(){
-        List<Incident> incidentList = incidentAggregator.getFromCityAndTimeStamp("Berlin",    LocalDateTime.of(
+        List<Incident> incidentList = aggregator.getFromCityAndTimeStamp("Berlin",    LocalDateTime.of(
                 0, 1, 1,
                 12, 30, 0));
 
@@ -129,7 +130,7 @@ public class IncidentAggregatorFromDatabaseTest {
                                 12, 30, 0),
                         "670000:690000,681234:691234",6.0,new Long(1)));
         MyRepo.insertIncident(incidents);
-        List<LocalDateTime> timestampList = incidentAggregator.getTimestampsFromCity("Berlin");
+        List<LocalDateTime> timestampList = aggregator.getTimestampsFromCity("Berlin");
 
         assertThat(timestampList, hasSize(greaterThan(0)));
     }
@@ -143,7 +144,7 @@ public class IncidentAggregatorFromDatabaseTest {
 
     @Test
     void testGetAllIncidents(){
-        List<Incident> incidentList = incidentAggregator.getAllData();
+        List<Incident> incidentList = aggregator.getAllData();
 
         assertThat(incidentList, hasSize(greaterThan(0)));
     }
@@ -151,7 +152,7 @@ public class IncidentAggregatorFromDatabaseTest {
     @Test
     void testMarshallingOneIncidentFromCity() throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
-        List<Incident> berlinIncidents = incidentAggregator.getFromCity("Berlin");
+        List<Incident> berlinIncidents = aggregator.getFromCity("Berlin");
 
         String json = objectMapper.writeValueAsString(berlinIncidents.get(0));
         assertThat(json, notNullValue());
@@ -161,7 +162,7 @@ public class IncidentAggregatorFromDatabaseTest {
     @Test
     void testMarshallingAllIncidentFromCity() throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
-        List<Incident> berlinIncidents = incidentAggregator.getFromCity("Berlin");
+        List<Incident> berlinIncidents = aggregator.getFromCity("Berlin");
 
         String json = objectMapper.writeValueAsString(berlinIncidents);
         assertThat(json, notNullValue());

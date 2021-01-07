@@ -1,11 +1,13 @@
-package com.amos.p1.backend.service;
+package com.amos.p1.backend.service.aggregator;
 
+import com.amos.p1.backend.data.ComparisonEvaluationOverTimeDTO;
+import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.data.Incident;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-public interface IncidentAggregator {
+public interface Aggregator {
 
     List<Incident> getFromCity(String city);
 
@@ -19,4 +21,7 @@ public interface IncidentAggregator {
 
     List<Incident> getAllData();
 
+    List<EvaluationCandidate> getEvaluationCandiate(String city, LocalDateTime timestamp);
+
+    ComparisonEvaluationOverTimeDTO getComparisonEvaluationOverTime();
 }
