@@ -4,6 +4,8 @@ import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.data.Request;
 import org.apache.ibatis.jdbc.ScriptRunner;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -119,11 +121,16 @@ public class MyRepo {
 
 
     public static void insertIncident(List<Incident> incidents) {
+
+        int i = 0;
+
         for(Incident incident : incidents) {
+            System.out.println("Saved incident no. " + i);
             getEntityManager().getTransaction().begin();
             getEntityManager().persist(incident);
             getEntityManager().getTransaction().commit();
 
+            i++;
         }
     }
     public static List<Incident> getIncidents(Long id) {
@@ -137,19 +144,21 @@ public class MyRepo {
 
     public static void insertRequest(Request request){
         //TODO implement it. Request is the main table. Also incidents saving
-        getEntityManager().getTransaction().begin();
         List<Incident> incidents =request.getIncidents();
-        insertIncident(incidents);
-        request.setIncidentsSavedInDb(true);
-        // update incidents id
-        request.setIncidents(incidents);
 
+        getEntityManager().getTransaction().begin();
         getEntityManager().persist(request);
         getEntityManager().getTransaction().commit();
+        for (Incident incident:incidents ) { incident.setRequestId(request.getId());}
+
+        insertIncident(incidents);
+        request.setIncidentsSavedInDb(true);
+
+
     }
 
     public static Request getRequest(LocalDateTime localDateTime){
-        //TODO implement it.
+
         List<Request> requests =  getEntityManager().createNamedQuery("geRequestFromTime")
                 .setParameter("requestTime" ,localDateTime )
                 .getResultList();

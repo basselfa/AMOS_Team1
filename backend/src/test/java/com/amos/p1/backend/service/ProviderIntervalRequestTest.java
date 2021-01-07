@@ -3,6 +3,7 @@ package com.amos.p1.backend.service;
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.data.Request;
 import com.amos.p1.backend.database.MyRepo;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,15 @@ public class ProviderIntervalRequestTest {
 
     private final ProviderIntervalRequest providerIntervalRequest = new ProviderIntervalRequest();
 
+
+
     @BeforeEach
     void setUp(){
-        //TODO: wipe database
+
+        System.out.println("reintialising Database");
+        MyRepo.dropAll();
     }
+
 
     @Test
     void testOneMoreRequestAfterCronjob(){

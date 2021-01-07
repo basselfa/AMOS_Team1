@@ -3,12 +3,12 @@
     <l-map id="osm-map" :zoom="zoom" :center="center" :options="mapOptions">
       <l-tile-layer :url="url" :attribution="attribution" />
       <l-polyline
+        v-for="(polyline,index) in polylines" :key="index"
         :lat-lngs="polyline.latlngs"
         :color="polyline.color"
       ></l-polyline>
       <l-marker :lat-lng="markerLatLng">
-        <!-- <l-icon :icon-url="customMarker"></l-icon> -->
-        <l-tooltip>This is an incident</l-tooltip>
+        <l-tooltip>Center</l-tooltip>
       </l-marker>
     </l-map>
   </div>
@@ -22,17 +22,15 @@ import {
   LPolyline,
   LMarker,
   LPopup,
-  // LIcon,
   LTooltip,
 } from "vue2-leaflet";
 export default {
   name: "OpenStreetMap",
-  props: ['polyline'],
+  props: ['polylines'],
   components: {
     LMap,
     LTileLayer,
     LMarker,
-    //LIcon,
     LTooltip,
     LPolyline,
   },
@@ -41,8 +39,7 @@ export default {
       zoom: 15,
       center: latLng(52.509041, 13.330550),
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-      attribution:
-        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      attribution:'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       showParagraph: false,
       mapOptions: {
         zoomSnap: 0.5,
@@ -56,16 +53,15 @@ export default {
 
 <style>
 #osm-map {
-  height: 80%;
-  width: 60%;
+  height: 75%;
+  width: 70%;
   margin: 0;
   position: absolute;
-  top: 550px;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  top: 200px;
+  left: 300px;
   border-radius: 20px;
   -webkit-box-shadow: 4px 12px 31px -10px #cecece !important;
   box-shadow: 4px 12px 31px -10px #cecece !important;
+  z-index: 0;
 }
 </style>

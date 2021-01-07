@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -18,6 +19,34 @@ public class IncidentAggregatorDirectlyFromProviderTest {
     @Test
     void testGetIncidentsFromCity(){
         List<Incident> incidentList = incidentAggregator.getFromCity("Berlin");
+
+        System.out.println(incidentList);
+        assertThat(incidentList, hasSize(greaterThan(0)));
+    }
+
+    @Test
+    void testGetIncidentsFromCityAndWithType(){
+        List<String> types = new ArrayList<>();
+        types.add("1");
+        types.add("10");
+
+        List<Incident> incidentList = incidentAggregator.getFromCityAndTypes("Berlin", types);
+
+        assertThat(incidentList, hasSize(greaterThan(0)));
+
+        incidentList.forEach(incident -> {
+            assertThat(incident.getType(),
+                    anyOf(equalTo("1"),
+                          equalTo("10"))
+            );
+        });
+    }
+
+    @Test
+    void testGetIncidentsFromCityAndWithTypeListEmpty(){
+        List<String> types = new ArrayList<>();
+
+        List<Incident> incidentList = incidentAggregator.getFromCityAndTypes("Berlin", types);
 
         assertThat(incidentList, hasSize(greaterThan(0)));
     }

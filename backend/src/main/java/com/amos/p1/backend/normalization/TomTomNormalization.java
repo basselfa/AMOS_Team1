@@ -76,7 +76,7 @@ public class TomTomNormalization implements JsonToIncident {
 
          //   incJObj.setTrafficId(Long.valueOf(incJSONObj.getString("id").substring(0, 5), 16)); // ID is hex and way to big for a long therefore as workaround cut to 5 chars but has to be fixed appropriately
             incJObj.setDescription(incJSONObj.getString("d"));
-            incJObj.setType(String.valueOf(TomTomIncidents.valueOf(mapICNumberToString(incJSONObj.getInt("ic"))).getID()));
+            incJObj.setType(String.valueOf(TomTomIncidents.valueOf(mapICNumberToString(incJSONObj.getInt("ic"))).toString()));
             incJObj.setStartPositionStreet(incJSONObj.getString("f"));
             incJObj.setEndPositionStreet(incJSONObj.getString("t"));
             incJObj.setSize(Integer.toString(incJSONObj.getInt("l")));
@@ -84,15 +84,6 @@ public class TomTomNormalization implements JsonToIncident {
 
             if (!incJSONObj.isNull("ed"))
                 incJObj.setEndTime(parseDate(incJSONObj.getString("ed")));
-
-            // Map original 0-4 to -1-12
-            // Unknown (0) and Undefined (4) get mapped to -1
-            //Integer criticality = incJSONObj.getInt("ty");
-            /*if (criticality == 0 || criticality == 4) {
-                incJObj.setDelay(-1);
-            } else {
-                incJObj.setDelay(criticality * 4);
-            }*/
 
             // sometimes v (shape as polyline) isn't given hence we can't decode it
             if (!incJSONObj.isNull("v")) {
@@ -112,8 +103,8 @@ public class TomTomNormalization implements JsonToIncident {
                 incJObj.setEndPositionLongitude(endPoint.toString().split(":")[1]);
 
                 Locations lEdges = new Locations();
-                for (int i = 0; i < edges.size(); i++) {
-                    Location edge = new Location(String.valueOf(edges.get(i).getLat()), String.valueOf(edges.get(i).getLng()));
+                for (Point point : edges) {
+                    Location edge = new Location(String.valueOf(point.getLat()), String.valueOf(point.getLng()));
                     lEdges.addLocation(edge);
                 }
                 incJObj.setEdgesAsLocations(lEdges);

@@ -8,9 +8,7 @@ import com.amos.p1.backend.database.MyRepo;
 import com.amos.p1.backend.normalization.HereNormalization;
 import com.amos.p1.backend.normalization.JsonToIncident;
 import com.amos.p1.backend.normalization.TomTomNormalization;
-import com.amos.p1.backend.provider.HereRequestDummy;
-import com.amos.p1.backend.provider.ProviderRequest;
-import com.amos.p1.backend.provider.TomTomRequestDummy;
+import com.amos.p1.backend.provider.*;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -28,6 +26,10 @@ public class ProviderIntervalRequest {
 
     private final ProviderRequest tomtomRequest = new TomTomRequestDummy();
     private final ProviderRequest hereRequest = new HereRequestDummy();
+//    private final ProviderRequest tomtomRequest = new TomTomRequest();
+//    private final ProviderRequest hereRequest = new HereRequest();
+
+    private final CityBoundingBoxesService cityBoundingBoxesService = new CityBoundingBoxesService();
 
     // Will be runned on startup
     // 1000 ms * 60 * 60 = 1 hour
@@ -35,45 +37,27 @@ public class ProviderIntervalRequest {
     public void providerCronJob() {
         System.out.println("The time is now " + dateFormat.format(new Date()));
 
-        for (CityBoundingBox cityBoundingBox : getCityBoundingBoxes()) {
+        for (CityBoundingBox cityBoundingBox : cityBoundingBoxesService.getCityBoundingBoxes()) {
+            System.out.println("Request data from city: " + cityBoundingBox.getCity());
 
+            System.out.println("Get data from here.com");
             List<Incident> hereIncidents = getHereIncidents(cityBoundingBox);
+            System.out.println("Get data from tomtom");
             List<Incident> tomTomIncidents = getTomTomIncidents(cityBoundingBox);
 
+            System.out.println("Save here incidents. Amount: " + hereIncidents.size());
             saveToDatabase(hereIncidents);
+            System.out.println("Save tomtom incidents. Amount: " + tomTomIncidents.size());
             saveToDatabase(tomTomIncidents);
         }
+
+        System.out.println("Sucessfully saved everything");
     }
 
     public List<Incident> getRecentTomTomIncidentsFromCity(String city){
-        CityBoundingBox boundBoxFromCity = getBoundBoxFromCity(city);
+        CityBoundingBox boundBoxFromCity = cityBoundingBoxesService.getBoundBoxFromCity(city);
 
         return getTomTomIncidents(boundBoxFromCity);
-    }
-
-    private CityBoundingBox getBoundBoxFromCity(String city) {
-
-        List<CityBoundingBox> cityBoundingBoxes = getCityBoundingBoxes();
-
-        for (CityBoundingBox cityBoundingBoxTemp : cityBoundingBoxes) {
-            if (city.equals(cityBoundingBoxTemp.getCity())){
-                return cityBoundingBoxTemp;
-            }
-        }
-
-        throw new IllegalStateException("Couldn't find you boundingbox with city: " + city);
-    }
-
-    private List<CityBoundingBox> getCityBoundingBoxes(){
-        CityBoundingBox berlin = new CityBoundingBox();
-        berlin.setCity("Berlin");
-        berlin.setMinCorner(new Location("52.5542", "13.2823"));
-        berlin.setMaxCorner(new Location("52.4721", "13.5422"));
-
-        List<CityBoundingBox> cityBoundingBoxes = new ArrayList<>();
-        cityBoundingBoxes.add(berlin);
-
-        return cityBoundingBoxes;
     }
 
     private List<Incident> getTomTomIncidents(CityBoundingBox cityBoundingBox){

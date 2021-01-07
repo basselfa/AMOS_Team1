@@ -8,6 +8,9 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+
+
+
 @NamedQuery(
         name = "getFromids",
         query = "SELECT i FROM Incident i WHERE i.id IN :id"
@@ -20,12 +23,28 @@ import java.util.List;
         name = "getDataFromTime",
         query = "SELECT i FROM Incident i WHERE i.entryTime >= :entryTime"
 )
-
 @NamedQuery(
         name = "getAllData",
         query = "SELECT i FROM Incident i"
 )
+@NamedQuery(
+        name = "getFromCityAndTimeStamp",
+        query = "SELECT i FROM Incident i WHERE i.city = :city AND i.entryTime >= :entryTime"
+)
+@NamedQuery(
+        name = "getTimestampsFromCity",
+        query = "SELECT DISTINCT i.entryTime FROM Incident i WHERE i.city = :city"
+)
+@NamedQuery(
+        name = "getFromRequestId",
+        query = "SELECT i FROM Incident i WHERE i.requestId = :requestId"
+)
 
+@NamedQuery(
+        name = "getFromRequesTime",
+        query = "SELECT i FROM Incident i ,Request r WHERE i.requestId =r.id " +
+                " And r.requestTime= :requestTime"
+)
 @Entity
 public class Incident {
     @Id
@@ -51,6 +70,7 @@ public class Incident {
     // reference https://vladmihalcea.com/date-timestamp-jpa-hibernate/
     private LocalDateTime entryTime;
     private LocalDateTime endTime;
+    private Long requestId;
 
     private String edges; // 12.124234:53.536453,
 
@@ -59,21 +79,15 @@ public class Incident {
         super();
     }
 
-    public LocalDateTime getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(LocalDateTime endTime) {
-        this.endTime = endTime;
-    }
 
     public Incident(String trafficId, String type, String size, String description,
-                    String city, String country, double lengthInMeter,
+                    String city, String country,
                     String startPositionLatitude, String startPositionLongitude,
                     String startPositionStreet, String endPositionLatitude,
                     String endPositionLongitude, String endPositionStreet,
                     int verified, String provider,
-                    LocalDateTime entryTime, LocalDateTime endTime, String edges) {
+                    LocalDateTime entryTime, LocalDateTime endTime,
+                    String edges , double lengthInMeter,long requestId) {
         super();
         this.type = type;
         this.size = size;
@@ -93,7 +107,22 @@ public class Incident {
         this.edges = edges;
         this.endTime = endTime;
         this.lengthInMeter = lengthInMeter;
+        this.requestId= requestId;
     }
+
+
+
+
+    @Basic
+    @Column(name = "requestId", nullable = true)
+    public Long getRequestId() {    return requestId; }
+    public void setRequestId(Long requestId) { this.requestId = requestId; }
+
+    @Basic
+    @Column(name = "endTime", nullable = true)
+    public LocalDateTime getEndTime() {  return endTime; }
+    public void setEndTime(LocalDateTime endTime) { this.endTime = endTime; }
+
 
     @Basic
     @Column(name = "id")
@@ -338,7 +367,7 @@ public class Incident {
         ROADWORKS,
         PLANNEDEVENT,
         DETOUR,
-        MISC,       // TODO: MISC FOR "UNKNOWN" OR "NO CATEGORY"
+        MISC,       // MISC FOR "UNKNOWN" OR "NO CATEGORY"
         WEATHER,
         ROADCLOSURE,
         LANERESTRICTION;
