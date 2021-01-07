@@ -74,20 +74,16 @@ public class ResourceWithDummyData {
     @ResponseBody
     public ResponseEntity<List<EvaluationCandidate>> getComparison(@RequestParam("city") String city,
                                                                    @RequestParam("timestamp") String timestamp) {
-
-
         throw new IllegalStateException("Needs to be implemented");
     }
 
     @RequestMapping(
             method = RequestMethod.GET,
-            value = "/ComparisonEvaluationOverTime",
+            value = "/comparisonEvaluationOverTime",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
     public ResponseEntity<List<ComparisonEvaluationDTO>> getComparisonEvaluationOverTime(@RequestParam("city") String city) {
-
-
         throw new IllegalStateException("Needs to be implemented");
     }
 }

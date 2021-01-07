@@ -1,6 +1,7 @@
 package com.amos.p1.backend;
 
 import com.amos.p1.backend.data.CityBoundingBox;
+import com.amos.p1.backend.data.ComparisonEvaluationDTO;
 import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.service.CityBoundingBoxesService;
@@ -129,6 +130,16 @@ public class ResourceWithDatabase {
                                                                    @RequestParam("timestamp") String timestamp) {
 
 
+        throw new IllegalStateException("Needs to be implemented");
+    }
+
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/comparisonEvaluationOverTime",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ResponseBody
+    public ResponseEntity<List<ComparisonEvaluationDTO>> getComparisonEvaluationOverTime(@RequestParam("city") String city) {
         throw new IllegalStateException("Needs to be implemented");
     }
 
