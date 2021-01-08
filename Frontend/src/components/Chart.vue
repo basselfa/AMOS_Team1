@@ -1,6 +1,7 @@
 <script>
 import VueCharts from 'vue-chartjs'
 import { Bar, Line } from 'vue-chartjs'
+import router from '../router'
 
 export default {
     extends: Bar,
@@ -79,6 +80,25 @@ export default {
                 ],
             },
             options: {
+                events: [
+                    'mousemove',
+                    'mouseout',
+                    'click',
+                    'touchstart',
+                    'touchmove',
+                ],
+                onClick: e => {
+                    router.push({
+                        name: 'Map',
+                        params: {
+                            mapData: {
+                                city: 'Berlin',
+                                timestamp: '2020-12-19 13:00',
+                                type: [],
+                            },
+                        },
+                    })
+                },
                 scales: {
                     yAxes: [
                         {
@@ -109,7 +129,10 @@ export default {
                     mode: 'single',
                     callbacks: {
                         label: function(tooltipItems, data) {
-                            return tooltipItems.yLabel
+                            return (
+                                tooltipItems.yLabel +
+                                '; click to see on the map'
+                            )
                         },
                     },
                 },
