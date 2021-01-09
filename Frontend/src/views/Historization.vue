@@ -1,37 +1,64 @@
 <template>
     <div class="body-ctn" id="historization-table">
-        <v-row>
-            <v-col>
+        <v-row justify="space-around">
+            <v-col justify="space-around">
                 <v-card>
                     <v-card-title>
                         Traffic Data
-                        <v-spacer></v-spacer>
-                        <v-text-field
-                            v-model="search"
-                            append-icon="mdi-magnify"
-                            label="Search"
-                            single-line
-                            hide-details
-                        ></v-text-field>
                     </v-card-title>
-                    <v-progress-circular
-                        v-if="loading == true"
-                        indeterminate
-                        color="primary"
-                    ></v-progress-circular>
-                    <v-data-table
-                        v-if="loading == false"
-                        :headers="headers"
-                        :items="historizationData"
-                        :search="search"
-                        rounded
-                    ></v-data-table>
+                    <v-row justify="center">
+                        <v-col cols="12" sm="5">
+                            <v-autocomplete
+                                class="search-bar"
+                                :items="this.cities"
+                                prepend-inner-icon="mdi-map-search-outline"
+                                placeholder="Choose a city"
+                                rounded
+                                shadow
+                                solo
+                                v-model="city"
+                                @change="fetchDataForCity()"
+                            ></v-autocomplete>
+                        </v-col>
+                        <v-col cols="12" sm="3">
+                            <v-autocomplete
+                                class="search-bar"
+                                :items="this.cities"
+                                prepend-inner-icon="mdi-map-search-outline"
+                                placeholder="Choose a start time"
+                                rounded
+                                shadow
+                                solo
+                            ></v-autocomplete>
+                        </v-col>
+                        <v-col cols="12" sm="3">
+                            <v-autocomplete
+                                class="search-bar"
+                                :items="this.cities"
+                                prepend-inner-icon="mdi-map-search-outline"
+                                placeholder="Choose an end time"
+                                rounded
+                                shadow
+                                solo
+                            ></v-autocomplete>
+                        </v-col>
+                    </v-row>
                 </v-card>
             </v-col>
         </v-row>
-        <div id="charts-container">
+        <br />
+        <v-progress-circular
+            v-if="loading == true"
+            indeterminate
+            color="primary"
+            style="margin-top:10%"
+        ></v-progress-circular>
+        <div
+            id="charts-container"
+            v-if="loading == false && historizationData !== null"
+        >
             <div id="chart-comparison" style="margin-top:50px;">
-                <chart />
+                <chart :city="this.city" />
             </div>
         </div>
     </div>
@@ -49,42 +76,36 @@ export default {
     },
     data() {
         return {
-            search: '',
+            historizationData: null,
             errorMessage: null,
             loading: null,
-            historizationData: null,
-            headers: [
-                {
-                    text: 'Provider',
-                    align: 'start',
-                    sortable: false,
-                    value: 'provider',
-                },
-                { text: 'Type', value: 'type' },
-                { text: 'Size', value: 'size' },
-                { text: 'Start position street', value: 'startPositionStreet' },
-                { text: 'End position street', value: 'endPositionStreet' },
-                { text: 'City', value: 'city' },
-            ],
+            city: null,
+            cities: [],
         }
     },
     methods: {
         async fetchData() {
-            this.loading = true
-            await axios
+            this.cities = ['Berlin', 'Hamburg'] // todo request
+
+            /*await axios
                 .get('http://localhost:8082/demo/historization/', {
                     headers: { 'Access-Control-Allow-Origin': '*' },
                 })
                 .then(response => {
                     // currently the structure for demo is {incidents: []} and for prod is {[]}
-                    this.historizationData = response.data.incidents
+                    this.historizationData = response.data
                     this.loading = false
                 })
                 .catch(error => {
                     this.errorMessage = error.message
                     console.error('There was an error!', error)
                     this.loading = false
-                })
+                })*/
+        },
+        fetchDataForCity() {
+            this.loading = true
+            this.historizationData = ['placeholder data from request']
+            this.loading = false
         },
     },
 }

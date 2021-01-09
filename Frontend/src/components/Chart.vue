@@ -5,11 +5,12 @@ import router from '../router'
 
 export default {
     extends: Bar,
+    props: ['city'],
     data: function() {
         return {
             datacollection: {
                 labels: [
-                    'Timestamp',
+                    '2020-12-19 13:00',
                     'Timestamp',
                     'Timestamp',
                     'Timestamp',
@@ -22,6 +23,7 @@ export default {
                     'Timestamp',
                     'Timestamp',
                 ],
+
                 datasets: [
                     {
                         label: 'Provider1',
@@ -87,13 +89,13 @@ export default {
                     'touchstart',
                     'touchmove',
                 ],
-                onClick: e => {
+                onClick: function(evt, item) {
                     router.push({
                         name: 'Map',
                         params: {
                             mapData: {
-                                city: 'Berlin',
-                                timestamp: '2020-12-19 13:00',
+                                city: this.city,
+                                timestamp: item[0]['_model'].label,
                                 type: [],
                             },
                         },
@@ -122,7 +124,7 @@ export default {
                     ],
                 },
                 legend: {
-                    display: false,
+                    display: true,
                 },
                 tooltips: {
                     enabled: true,
