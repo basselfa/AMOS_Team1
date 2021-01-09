@@ -123,13 +123,15 @@ public class MyRepo {
     public static void insertIncident(List<Incident> incidents) {
 
         int i = 0;
-        getEntityManager().getTransaction().begin();
+
         for(Incident incident : incidents) {
+            getEntityManager().getTransaction().begin();
            // System.out.println("Saved incident no. " + i);
             getEntityManager().persist(incident);
             i++;
+            getEntityManager().getTransaction().commit();
         }
-        getEntityManager().getTransaction().commit();
+
 
     }
     public static List<Incident> getIncidents(Long id) {
