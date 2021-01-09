@@ -2,6 +2,8 @@ drop table if exists Incident;
 
 drop TABLE if exists Request ;
 
+drop TABLE if exists  EvaluationCandidate;
+
 
 CREATE TABLE Incident (
                           id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -30,5 +32,14 @@ CREATE TABLE Incident (
 
 CREATE TABLE Request (
                          id BIGINT  AUTO_INCREMENT  PRIMARY KEY,
-                         requestTime datetime
+                         requestTime datetime,
+                         cityName VARCHAR(11255)
+
+) ;
+
+CREATE TABLE EvaluationCandidate (
+                         id BIGINT  AUTO_INCREMENT  PRIMARY KEY,
+                         requestId BIGINT UNSIGNED,
+                         confidenceDescription VARCHAR(11255)
+
 ) ;
