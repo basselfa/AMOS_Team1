@@ -21,5 +21,5 @@ public interface Aggregator {
 
     List<EvaluationCandidate> getEvaluationCandiate(String city, LocalDateTime timestamp);
 
-    List<ComparisonEvaluationDTO> getComparisonEvaluationOverTime();
+    List<ComparisonEvaluationDTO> getComparisonEvaluationOverTime(String city);
 }

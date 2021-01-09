@@ -86,6 +86,17 @@ public class ResourceWithDummyData {
     )
     @ResponseBody
     public ResponseEntity<List<ComparisonEvaluationDTO>> getComparisonEvaluationOverTime(@RequestParam("city") String city) {
+
+//        ComparisonEvaluationDTO comparisonEvaluationDTO = new ComparisonEvaluationDTO();
+//        comparisonEvaluationDTO.setDate();
+//        comparisonEvaluationDTO.setHereIncidentsAmount();
+//        comparisonEvaluationDTO.setTomTomIncidentsAmount();
+//
+//
+//        ComparisonEvaluationDTO comparisonEvaluationDTO2 = new ComparisonEvaluationDTO();
+
+
+
         throw new IllegalStateException("Needs to be implemented");
     }
 }
