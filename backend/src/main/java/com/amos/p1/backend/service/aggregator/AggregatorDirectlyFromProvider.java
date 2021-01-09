@@ -15,7 +15,7 @@ public class AggregatorDirectlyFromProvider implements Aggregator {
 
     @Override
     public List<Incident> getIncidents(String city, Optional<LocalDateTime> timestamp, Optional<List<String>> types) {
-        ProviderNormalizer providerNormalizer = new ProviderNormalizer();
+        ProviderNormalizer providerNormalizer = new ProviderNormalizer(true);
         List<Incident> incidents = providerNormalizer.getRecentTomTomIncidentsFromCity("Berlin");
 
         if(types.isPresent()){

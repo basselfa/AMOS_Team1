@@ -3,6 +3,7 @@ package com.amos.p1.backend.service.aggregator;
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.database.MyRepo;
 import com.amos.p1.backend.service.ProviderIntervalRequest;
+import com.amos.p1.backend.service.ProviderNormalizer;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeAll;
@@ -29,16 +30,14 @@ public class AggregatorFromDatabaseTest {
 
     @BeforeEach
     void setUp(){
-
         System.out.println("reintialising Database");
         MyRepo.dropAll();
-    }
 
-    public AggregatorFromDatabaseTest(){
+        //Adding dummy data to database
         ProviderIntervalRequest providerIntervalRequest = new ProviderIntervalRequest();
-        //providerIntervalRequest.providerCronJob();
+        providerIntervalRequest.setProviderNormalizer(new ProviderNormalizer(true));
+        providerIntervalRequest.providerCronJob();
     }
-
     @Test
     void testGetIncidentsFromCity(){
         List<Incident> incidentList = aggregator.getIncidents("Berlin", Optional.empty(), Optional.empty());

@@ -4,9 +4,8 @@ import com.amos.p1.backend.data.CityBoundingBox;
 import com.amos.p1.backend.data.ComparisonEvaluationDTO;
 import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.data.Incident;
-import com.amos.p1.backend.service.CityBoundingBoxesService;
+import com.amos.p1.backend.service.CityBoundingBoxesServiceImpl;
 import com.amos.p1.backend.service.aggregator.Aggregator;
-import com.amos.p1.backend.service.aggregator.AggregatorDirectlyFromProvider;
 import com.amos.p1.backend.service.aggregator.AggregatorFromDatabase;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -94,7 +93,7 @@ public class ResourceWithDatabase {
     @ResponseBody
     public ResponseEntity<List<CityBoundingBox>> getAllCities() {
 
-        CityBoundingBoxesService cityBoundingBoxesService = new CityBoundingBoxesService();
+        CityBoundingBoxesServiceImpl cityBoundingBoxesService = new CityBoundingBoxesServiceImpl();
         List<CityBoundingBox> cities = cityBoundingBoxesService.getCityBoundingBoxes();
 
         return ResponseEntity.ok(cities);
