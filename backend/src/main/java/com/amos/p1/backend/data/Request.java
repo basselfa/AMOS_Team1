@@ -24,6 +24,7 @@ public class Request {
     private LocalDateTime requestTime;
     @Transient
     List<Incident> incidents ;
+    String cityName;
 
     @Transient
     Boolean incidentSavedInDb= false ;
@@ -84,17 +85,20 @@ public class Request {
     }
 
     public void setEvaluatedCandidates(List<EvaluationCandidate> reEvaluatedCandidateList) {
+
         throw new IllegalStateException("Needs to be implemented");
     }
 
     public List<EvaluationCandidate> getEvaluationCandidate(){
         throw new IllegalStateException("Needs to be implemented");
     }
-
-    public void setCityName(String location){
+    @Basic
+    @Column(name = "cityName", nullable = true)
+    public void setCityName(String cityName){
+        this.cityName = cityName;
     }
 
     public String getCityName() {
-        return null;
+        return this.cityName ;
     }
 }
