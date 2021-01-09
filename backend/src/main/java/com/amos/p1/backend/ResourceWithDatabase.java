@@ -32,42 +32,33 @@ public class ResourceWithDatabase {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity<List<Incident>> getIncidentsByCity(@RequestParam("city") String city,
-                                                             @RequestParam("timestamp") Optional<String> timestamp){
+    public ResponseEntity<List<Incident>> getIncidents(@RequestParam("city") String city,
+                                                       @RequestParam("timestamp") Optional<String> timestamp,
+                                                       @RequestParam("types") Optional<String> types){
+
+        Optional<LocalDateTime> timestampParsed = Optional.empty();
+        Optional<List<String>> typesParsed = Optional.empty();
 
         if(timestamp.isPresent()){
-            LocalDateTime localDateTime = parseTimeStamp(timestamp.get());
-
-            return ResponseEntity.ok(aggregator.getFromCityAndTimeStamp(city, localDateTime));
-        }else{
-            return ResponseEntity.ok(aggregator.getFromCity(city));
+            timestampParsed = Optional.of(parseTimeStamp(timestamp.get()));
         }
-    }
 
+        if(types.isPresent()){
+            typesParsed = Optional.of(parseTypes(types.get()));
+        }
+
+        List<Incident> incidents = aggregator.getIncidents(city, timestampParsed, typesParsed);
+        return ResponseEntity.ok(incidents);
+    }
 
     private LocalDateTime parseTimeStamp(String timestamp) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return LocalDateTime.parse(timestamp, formatter);
     }
 
-    @RequestMapping(
-            method = RequestMethod.GET,
-            value = "/incidentsWithTypes",
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
-    @ResponseBody
-    public ResponseEntity<List<Incident>> getIncidentsByCityAndType(@RequestParam("city") String city, @RequestParam("types") String types){
-
-        Aggregator aggregator = new AggregatorDirectlyFromProvider();
-
-        return ResponseEntity.ok(aggregator.getFromCityAndTypes(city, parseTypes(types)));
-    }
-
     private List<String> parseTypes(String types) {
         return Arrays.asList(types.split(","));
     }
-
-
 
     @RequestMapping(
             method = RequestMethod.GET,

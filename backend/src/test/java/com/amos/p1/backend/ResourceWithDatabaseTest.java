@@ -68,7 +68,7 @@ public class ResourceWithDatabaseTest {
                 .param("city", "Berlin")
                 .param("types", "1,10")
             .when()
-                .get(base + "/incidentsWithTypes")
+                .get(base + "/incidents")
             .then()
                 .extract()
                 .asString();
@@ -83,7 +83,7 @@ public class ResourceWithDatabaseTest {
                 .param("city", "Berlin")
                 .param("types", "")
             .when()
-                .get(base + "/incidentsWithTypes")
+                .get(base + "/incidents")
             .then()
                 .extract()
                 .asString();

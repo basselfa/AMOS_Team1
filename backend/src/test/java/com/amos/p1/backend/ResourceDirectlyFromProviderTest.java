@@ -46,13 +46,13 @@ public class ResourceDirectlyFromProviderTest {
                 .param("city", "Berlin")
                 .param("types", "1,10")
             .when()
-                .get(base + "/incidentsWithTypes")
+                .get(base + "/incidents")
             .then()
                 .extract()
                 .asString();
 
         assertThat(s, notNullValue());
-        System.out.println(Helper.getPrettyJsonList(s));
+//        System.out.println(Helper.getPrettyJsonList(s));
     }
 
     @Test
@@ -61,12 +61,12 @@ public class ResourceDirectlyFromProviderTest {
                 .param("city", "Berlin")
                 .param("types", "")
             .when()
-                .get(base + "/incidentsWithTypes")
+                .get(base + "/incidents")
             .then()
                 .extract()
                 .asString();
 
         assertThat(s, notNullValue());
-        System.out.println(Helper.getPrettyJsonList(s));
+//        System.out.println(Helper.getPrettyJsonList(s));
     }
 }

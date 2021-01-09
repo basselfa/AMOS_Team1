@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
 
 
@@ -49,22 +50,13 @@ public class ResourceWithDummyDataTest {
      * Groovy Path: http://docs.groovy-lang.org/latest/html/documentation/#_gpath
      */
     @Test
-    void testGetIncidentsSizeFromBerlin(){
+    void testGetIncidentsHasElementsInList(){
         given()
             .param("city", "berlin")
         .when()
             .get(base + "/incidents")
         .then()
-            .body("incidents.size()", is(3));
-    }
-
-    @Test
-    void testGetAllData(){
-        given()
-        .when()
-            .get(base + "/historization")
-        .then()
-            .body("incidents.size()", is(2));
+            .body("incidents.list.size()", greaterThan(0));
     }
 
     @Test

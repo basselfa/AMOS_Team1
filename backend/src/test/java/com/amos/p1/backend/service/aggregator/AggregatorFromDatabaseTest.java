@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -23,7 +24,7 @@ public class AggregatorFromDatabaseTest {
     public static void init() {
 
         System.out.println("setting Database properties");
-        MyRepo.setUseTestDatabase(false);
+        MyRepo.setUseTestDatabase(true);
     }
 
     @BeforeEach
@@ -40,7 +41,7 @@ public class AggregatorFromDatabaseTest {
 
     @Test
     void testGetIncidentsFromCity(){
-        List<Incident> incidentList = aggregator.getFromCity("Berlin");
+        List<Incident> incidentList = aggregator.getIncidents("Berlin", Optional.empty(), Optional.empty());
 
         assertThat(incidentList, hasSize(greaterThan(0)));
     }
@@ -51,7 +52,7 @@ public class AggregatorFromDatabaseTest {
         types.add("1");
         types.add("10");
 
-        List<Incident> incidentList = aggregator.getFromCityAndTypes("Berlin", types);
+        List<Incident> incidentList = aggregator.getIncidents("Berlin", Optional.empty(), Optional.of(types));
 
         assertThat(incidentList, hasSize(greaterThan(0)));
 
@@ -67,7 +68,7 @@ public class AggregatorFromDatabaseTest {
     void testGetIncidentsFromCityAndWithTypeListEmpty(){
         List<String> types = new ArrayList<>();
 
-        List<Incident> incidentList = aggregator.getFromCityAndTypes("Berlin", types);
+        List<Incident> incidentList = aggregator.getIncidents("Berlin", Optional.empty(), Optional.of(types));
 
         assertThat(incidentList, hasSize(greaterThan(0)));
     }
@@ -77,6 +78,10 @@ public class AggregatorFromDatabaseTest {
     void testGetIncidentsFromCityAndTimeStamp(){
 
         List<Incident> incidents = new ArrayList<Incident>();
+        LocalDateTime timestamp = LocalDateTime.of(
+                2020, 5, 1,
+                12, 30, 0);
+
         incidents.add(
                 new Incident("222","baustelle","major",
                         "Traffic jam in Bergmannstraße",
@@ -86,26 +91,22 @@ public class AggregatorFromDatabaseTest {
                         "46.5", "69.5",
                         "Bergmannstraße",
                         1, "dummy",
-                        LocalDateTime.of(
-                                2020, 5, 1,
-                                12, 30, 0),
-                        LocalDateTime.of(
-                                2020, 5, 1,
-                                12, 30, 0),
+                        timestamp,
+                        timestamp,
                         "670000:690000,681234:691234",6.0,new Long(1)));
         MyRepo.insertIncident(incidents);
-        List<Incident> incidentList = aggregator.getFromCityAndTimeStamp("Berlin",    LocalDateTime.of(
-                2020, 5, 1,
-                12, 30, 0));
+
+        List<Incident> incidentList = aggregator.getIncidents("Berlin", Optional.of(timestamp), Optional.empty());
 
         assertThat(incidentList, hasSize(greaterThan(0)));
     }
 
     @Test
     void testGetIncidentsFromCityAndTimeStampNotInDatabase(){
-        List<Incident> incidentList = aggregator.getFromCityAndTimeStamp("Berlin",    LocalDateTime.of(
+        LocalDateTime timestamp = LocalDateTime.of(
                 0, 1, 1,
-                12, 30, 0));
+                12, 30, 0);
+        List<Incident> incidentList = aggregator.getIncidents("Berlin", Optional.of(timestamp), Optional.empty());
 
         assertThat(incidentList, is(empty()));
     }
@@ -152,7 +153,7 @@ public class AggregatorFromDatabaseTest {
     @Test
     void testMarshallingOneIncidentFromCity() throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
-        List<Incident> berlinIncidents = aggregator.getFromCity("Berlin");
+        List<Incident> berlinIncidents = aggregator.getIncidents("Berlin", Optional.empty(), Optional.empty());
 
         String json = objectMapper.writeValueAsString(berlinIncidents.get(0));
         assertThat(json, notNullValue());
@@ -162,7 +163,7 @@ public class AggregatorFromDatabaseTest {
     @Test
     void testMarshallingAllIncidentFromCity() throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
-        List<Incident> berlinIncidents = aggregator.getFromCity("Berlin");
+        List<Incident> berlinIncidents = aggregator.getIncidents("Berlin", Optional.empty(), Optional.empty());
 
         String json = objectMapper.writeValueAsString(berlinIncidents);
         assertThat(json, notNullValue());

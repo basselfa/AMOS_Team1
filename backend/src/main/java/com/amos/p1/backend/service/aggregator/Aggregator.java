@@ -4,16 +4,14 @@ import com.amos.p1.backend.data.ComparisonEvaluationDTO;
 import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.data.Incident;
 
+import javax.swing.text.html.Option;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public interface Aggregator {
 
-    List<Incident> getFromCity(String city);
-
-    List<Incident> getFromCityAndTypes(String city, List<String> filter);
-
-    List<Incident> getFromCityAndTimeStamp(String city, LocalDateTime timestamp);
+    List<Incident> getIncidents(String city, Optional<LocalDateTime> timestamp, Optional<List<String>> types);
 
     List<LocalDateTime> getTimestampsFromCity(String city);
 

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -17,7 +18,7 @@ public class AggregatorDirectlyFromProviderTest {
 
     @Test
     void testGetIncidentsFromCity(){
-        List<Incident> incidentList = aggregator.getFromCity("Berlin");
+        List<Incident> incidentList = aggregator.getIncidents("Berlin", Optional.empty(), Optional.empty());
 
         System.out.println(incidentList);
         assertThat(incidentList, hasSize(greaterThan(0)));
@@ -29,7 +30,8 @@ public class AggregatorDirectlyFromProviderTest {
         types.add("1");
         types.add("10");
 
-        List<Incident> incidentList = aggregator.getFromCityAndTypes("Berlin", types);
+
+        List<Incident> incidentList = aggregator.getIncidents("Berlin", Optional.empty(), Optional.of(types));
 
         assertThat(incidentList, hasSize(greaterThan(0)));
 
@@ -45,7 +47,7 @@ public class AggregatorDirectlyFromProviderTest {
     void testGetIncidentsFromCityAndWithTypeListEmpty(){
         List<String> types = new ArrayList<>();
 
-        List<Incident> incidentList = aggregator.getFromCityAndTypes("Berlin", types);
+        List<Incident> incidentList = aggregator.getIncidents("Berlin", Optional.empty(), Optional.of(types));
 
         assertThat(incidentList, hasSize(greaterThan(0)));
     }
@@ -60,7 +62,7 @@ public class AggregatorDirectlyFromProviderTest {
     @Test
     void testMarshallingOneIncidentFromCity() throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
-        List<Incident> berlinIncidents = aggregator.getFromCity("Berlin");
+        List<Incident> berlinIncidents = aggregator.getIncidents("Berlin", Optional.empty(), Optional.empty());
 
         String json = objectMapper.writeValueAsString(berlinIncidents.get(0));
         assertThat(json, notNullValue());
@@ -70,7 +72,7 @@ public class AggregatorDirectlyFromProviderTest {
     @Test
     void testMarshallingAllIncidentFromCity() throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
-        List<Incident> berlinIncidents = aggregator.getFromCity("Berlin");
+        List<Incident> berlinIncidents = aggregator.getIncidents("Berlin", Optional.empty(), Optional.empty());
 
         String json = objectMapper.writeValueAsString(berlinIncidents);
         assertThat(json, notNullValue());

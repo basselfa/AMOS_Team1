@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Restcontroller only for static demo purposes. Only use dummy strings for returning to client
@@ -23,8 +24,9 @@ public class ResourceWithDummyData {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity<String> getIncidentsByCity(@RequestParam("city") String city,
-                                                     @RequestParam("timestamp") String timestamp){
+    public ResponseEntity<String> getIncidents(@RequestParam("city") String city,
+                                                     @RequestParam("timestamp") Optional<String> timestamp,
+                                                     @RequestParam("types") Optional<String> types){
 
         String incidents = Helper.getFileResourceAsString("rest-endpoint-dummy/berlin_incidents.json");
 

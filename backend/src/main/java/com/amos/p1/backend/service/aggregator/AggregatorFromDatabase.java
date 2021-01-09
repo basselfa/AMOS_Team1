@@ -5,27 +5,43 @@ import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.database.MyRepo;
 
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class AggregatorFromDatabase implements Aggregator {
 
     @Override
-    @SuppressWarnings("unchecked")
-    public List<Incident> getFromCity(String city) {
-        List<Incident> resultList = MyRepo.getEntityManager()
-                .createNamedQuery("getFromCity")
-                .setParameter("city", city)
-                .getResultList();
-        return resultList;
+    public List<Incident> getIncidents(String city, Optional<LocalDateTime> timestamp, Optional<List<String>> types) {
+
+        TypedQuery<Incident> query;
+
+        if(timestamp.isPresent()){
+            query = MyRepo.getEntityManager()
+                .createNamedQuery("getFromCityAndTimeStamp", Incident.class)
+                .setParameter("city", city )
+                .setParameter("entryTime", timestamp.get());
+        }else{
+            query = MyRepo.getEntityManager()
+                    .createNamedQuery("getFromCity", Incident.class)
+                    .setParameter("city", city);
+        }
+
+        List<Incident> incidents = query.getResultList();
+
+        if(types.isPresent()){
+            incidents = filterIncidentsByType(incidents, types.get());
+        }
+
+        return incidents;
     }
 
-    @Override
-    public List<Incident> getFromCityAndTypes(String city, List<String> types) {
-        List<Incident> incidents = getFromCity(city);
-
+    private List<Incident> filterIncidentsByType(List<Incident> incidents, List<String> types) {
         List<Incident> filteredIncidents = new ArrayList<>();
+
         for (Incident incident : incidents) {
             if(hasIncidentOneOfThisTypes(incident, types)){
                 filteredIncidents.add(incident);
@@ -41,10 +57,8 @@ public class AggregatorFromDatabase implements Aggregator {
                 return true;
             }
         }
-
         return false;
     }
-
 
     @Override
     public List<LocalDateTime> getTimestampsFromCity(String city) {
@@ -69,17 +83,6 @@ public class AggregatorFromDatabase implements Aggregator {
                 .createNamedQuery("getAllData")
                 .getResultList();
     }
-
-   @Override
-    public List<Incident> getFromCityAndTimeStamp(String city, LocalDateTime entryTime) {
-        return (List<Incident>) MyRepo.getEntityManager()
-                .createNamedQuery("getFromCityAndTimeStamp")
-                .setParameter("city", city )
-                .setParameter("entryTime", entryTime )
-                .getResultList();
-    }
-
-
 
     public List<Incident> getFromRequestTime(LocalDateTime requestTime) {
         return (List<Incident>) MyRepo.getEntityManager().createNamedQuery("getFromRequestTime")

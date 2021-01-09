@@ -3,25 +3,31 @@ package com.amos.p1.backend.service.aggregator;
 import com.amos.p1.backend.data.ComparisonEvaluationDTO;
 import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.data.Incident;
+import com.amos.p1.backend.database.MyRepo;
 import com.amos.p1.backend.service.ProviderNormalizer;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class AggregatorDirectlyFromProvider implements Aggregator {
-    @Override
-    public List<Incident> getFromCity(String city) {
 
+    @Override
+    public List<Incident> getIncidents(String city, Optional<LocalDateTime> timestamp, Optional<List<String>> types) {
         ProviderNormalizer providerNormalizer = new ProviderNormalizer();
-        return providerNormalizer.getRecentTomTomIncidentsFromCity("Berlin");
+        List<Incident> incidents = providerNormalizer.getRecentTomTomIncidentsFromCity("Berlin");
+
+        if(types.isPresent()){
+            incidents = filterIncidentsByType(incidents, types.get());
+        }
+
+        return incidents;
     }
 
-    @Override
-    public List<Incident> getFromCityAndTypes(String city, List<String> types) {
-        List<Incident> incidents = getFromCity(city);
-
+    private List<Incident> filterIncidentsByType(List<Incident> incidents, List<String> types) {
         List<Incident> filteredIncidents = new ArrayList<>();
+
         for (Incident incident : incidents) {
             if(hasIncidentOneOfThisTypes(incident, types)){
                 filteredIncidents.add(incident);
@@ -40,12 +46,6 @@ public class AggregatorDirectlyFromProvider implements Aggregator {
         }
 
         return false;
-    }
-
-    @Override
-    public List<Incident> getFromCityAndTimeStamp(String city, LocalDateTime timestamp) {
-        throw new IllegalStateException("Not yet implemented");
-
     }
 
     @Override
