@@ -70,7 +70,7 @@ public class AggregatorDirectlyFromProvider implements Aggregator {
     }
 
     @Override
-    public List<ComparisonEvaluationDTO> getComparisonEvaluationOverTime() {
+    public List<ComparisonEvaluationDTO> getComparisonEvaluationOverTime(String city) {
         throw new IllegalStateException("needs to be implemented");
     }
 }

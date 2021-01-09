@@ -3,6 +3,7 @@ package com.amos.p1.backend.service.aggregator;
 import com.amos.p1.backend.data.ComparisonEvaluationDTO;
 import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.data.Incident;
+import com.amos.p1.backend.data.Request;
 import com.amos.p1.backend.database.MyRepo;
 
 import javax.persistence.Query;
@@ -95,7 +96,20 @@ public class AggregatorFromDatabase implements Aggregator {
         throw new IllegalStateException();
     }
 
-    public List<ComparisonEvaluationDTO> getComparisonEvaluationOverTime(){
+    public List<ComparisonEvaluationDTO> getComparisonEvaluationOverTime(String city){
+
+        List<Request> requests = null;// Get all requests from this city. Use MyRepo Function.
+
+        for (Request request : requests) {
+            //TODO: split to here and tom tom incidents
+
+            // Add two one comparison evaluation dto
+            ComparisonEvaluationDTO comparisonEvaluationDTO = new ComparisonEvaluationDTO();
+
+            // Add ComparisonEvaluationDTO to a list
+        }
+
+        //Return list of ComparisonEvaluationDTO
         throw new IllegalStateException("needs to be implemented");
     }
 
