@@ -3,46 +3,31 @@
         <v-row justify="space-around">
             <v-col justify="space-around">
                 <v-card>
-                    <v-card-title>
+                    <div style="padding:10px;">
+                    <v-card-title >
                         Traffic Data
                     </v-card-title>
+                    
                     <v-row justify="center">
-                        <v-col cols="12" sm="5">
+                        <v-col cols="12" sm="4">
                             <v-autocomplete
                                 class="search-bar"
                                 :items="this.cities"
                                 prepend-inner-icon="mdi-map-search-outline"
                                 placeholder="Choose a city"
-                                rounded
-                                shadow
-                                solo
                                 v-model="city"
                                 @change="fetchDataForCity()"
                             ></v-autocomplete>
                         </v-col>
-                        <v-col cols="12" sm="3">
-                            <v-autocomplete
-                                class="search-bar"
-                                :items="this.cities"
-                                prepend-inner-icon="mdi-map-search-outline"
-                                placeholder="Choose a start time"
-                                rounded
-                                shadow
-                                solo
-                            ></v-autocomplete>
+
+                        <v-col cols="12" sm="4">
+                            <date-time-picker v-model="startTime" :label='startLabel'/>
                         </v-col>
-                        <v-col cols="12" sm="3">
-                            <v-autocomplete
-                                class="search-bar"
-                                :items="this.cities"
-                                prepend-inner-icon="mdi-map-search-outline"
-                                placeholder="Choose an end time"
-                                rounded
-                                shadow
-                                solo
-                            ></v-autocomplete>
+                        <v-col cols="12" sm="4">
+                            <date-time-picker v-model="endTime" :label='endLabel'/>
                         </v-col>
                     </v-row>
+                    </div>
                 </v-card>
             </v-col>
         </v-row>
@@ -67,10 +52,11 @@
 <script>
 import axios from 'axios'
 import Chart from '../components/Chart'
+import DateTimePicker from '../components/DateTimePicker'
 
 export default {
     name: 'Historization',
-    components: { Chart },
+    components: { Chart, DateTimePicker },
     created() {
         this.fetchData()
     },
@@ -81,6 +67,10 @@ export default {
             loading: null,
             city: null,
             cities: [],
+            startTime: '',
+            startLabel: 'Start time',
+            endTime: '',
+            endLabel: 'End time'
         }
     },
     methods: {
