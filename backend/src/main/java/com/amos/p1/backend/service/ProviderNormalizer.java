@@ -2,25 +2,64 @@ package com.amos.p1.backend.service;
 
 import com.amos.p1.backend.data.CityBoundingBox;
 import com.amos.p1.backend.data.Incident;
+import com.amos.p1.backend.data.Location;
 import com.amos.p1.backend.data.Request;
 import com.amos.p1.backend.normalization.HereNormalization;
 import com.amos.p1.backend.normalization.JsonToIncident;
 import com.amos.p1.backend.normalization.TomTomNormalization;
-import com.amos.p1.backend.provider.HereRequestDummy;
-import com.amos.p1.backend.provider.ProviderRequest;
-import com.amos.p1.backend.provider.TomTomRequestDummy;
+import com.amos.p1.backend.provider.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProviderNormalizer {
 
-    private final ProviderRequest tomtomRequest = new TomTomRequestDummy();
-    private final ProviderRequest hereRequest = new HereRequestDummy();
-//    private final ProviderRequest tomtomRequest = new TomTomRequest();
-//    private final ProviderRequest hereRequest = new HereRequest();
+    private final ProviderRequest tomtomRequest;
+    private final ProviderRequest hereRequest;
+    
+    private final CityBoundBoxesService cityBoundingBoxesService;
 
-    private final CityBoundingBoxesService cityBoundingBoxesService = new CityBoundingBoxesService();
+
+    public ProviderNormalizer(boolean useDummy){
+
+        if(useDummy){
+            tomtomRequest = new TomTomRequestDummy();
+            hereRequest = new HereRequestDummy();
+
+            cityBoundingBoxesService = getCityBoundBoxServiceDummy();
+        }else{
+            tomtomRequest = new TomTomRequest();
+            hereRequest = new HereRequest();
+
+            cityBoundingBoxesService = new CityBoundingBoxesServiceImpl();
+        }
+    }
+
+    private CityBoundBoxesService getCityBoundBoxServiceDummy() {
+
+        // Data from 09.January 2020 12:50
+        CityBoundingBox cityBoundingBox = new CityBoundingBox();
+        cityBoundingBox.setCity("Berlin");
+        cityBoundingBox.setMinCorner(new Location("52.509097", "13.381993"));
+        cityBoundingBox.setMaxCorner(new Location("52.525915", "13.415296"));
+
+        CityBoundBoxesService cityBoundingBoxesService;
+        cityBoundingBoxesService = new CityBoundBoxesService(){
+            @Override
+            public List<CityBoundingBox> getCityBoundingBoxes() {
+                List<CityBoundingBox> cityBoundingBoxes = new ArrayList<>();
+                cityBoundingBoxes.add(cityBoundingBox);
+
+                return cityBoundingBoxes;
+            }
+            @Override
+            public CityBoundingBox getBoundBoxFromCity(String city) {
+                return cityBoundingBox;
+            }
+        };
+
+        return cityBoundingBoxesService;
+    }
 
     public List<Request> parseCurrentRequest(){
         List<Request> requests = new ArrayList<>();
@@ -54,24 +93,24 @@ public class ProviderNormalizer {
     }
 
     private List<Incident> getTomTomIncidents(CityBoundingBox cityBoundingBox){
-        String jsonTomTom = tomtomRequest.request(
-                cityBoundingBox.getMinCorner().getLatitude(),
-                cityBoundingBox.getMinCorner().getLongitude(),
-                cityBoundingBox.getMaxCorner().getLatitude(),
-                cityBoundingBox.getMaxCorner().getLongitude());
+        String json = getJson(cityBoundingBox, tomtomRequest);
 
         JsonToIncident normalizationTomTom = new TomTomNormalization();
-        return normalizationTomTom.normalize(jsonTomTom);
+        return normalizationTomTom.normalize(json);
     }
 
     private List<Incident> getHereIncidents(CityBoundingBox cityBoundingBox){
-        String jsonHere = hereRequest.request(
+        String json = getJson(cityBoundingBox, hereRequest);
+
+        JsonToIncident normalizationHere = new HereNormalization();
+        return normalizationHere.normalize(json);
+    }
+
+    private String getJson(CityBoundingBox cityBoundingBox, ProviderRequest request) {
+        return request.request(
                 cityBoundingBox.getMinCorner().getLatitude(),
                 cityBoundingBox.getMinCorner().getLongitude(),
                 cityBoundingBox.getMaxCorner().getLatitude(),
                 cityBoundingBox.getMaxCorner().getLongitude());
-
-        JsonToIncident normalizationHere = new HereNormalization();
-        return normalizationHere.normalize(jsonHere);
     }
 }

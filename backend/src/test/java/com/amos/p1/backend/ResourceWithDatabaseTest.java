@@ -4,6 +4,8 @@ package com.amos.p1.backend;
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.data.Location;
 import com.amos.p1.backend.database.MyRepo;
+import com.amos.p1.backend.service.ProviderIntervalRequest;
+import com.amos.p1.backend.service.ProviderNormalizer;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,15 +37,21 @@ public class ResourceWithDatabaseTest {
     public static void init() {
 
         System.out.println("setting Database properties");
-        MyRepo.setUseTestDatabase(false);
+        MyRepo.setUseTestDatabase(true);
     }
 
 
     @BeforeEach
     void setUp() {
+        this.base = "http://localhost:" + port + "/wi|thDatabase";
+
         System.out.println("reintialising Database");
         MyRepo.dropAll();
-        this.base = "http://localhost:" + port + "/withDatabase";
+
+        //Adding dummy data to database
+        ProviderIntervalRequest providerIntervalRequest = new ProviderIntervalRequest();
+        providerIntervalRequest.setProviderNormalizer(new ProviderNormalizer(true));
+        providerIntervalRequest.providerCronJob();
     }
 
     /**

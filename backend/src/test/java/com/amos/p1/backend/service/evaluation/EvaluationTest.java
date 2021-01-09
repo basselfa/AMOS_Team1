@@ -12,7 +12,7 @@ public class EvaluationTest {
     Request request;
 
     public EvaluationTest(){
-        ProviderNormalizer providerNormalizer = new ProviderNormalizer();
+        ProviderNormalizer providerNormalizer = new ProviderNormalizer(true);
         List<Request> requests = providerNormalizer.parseCurrentRequest();
 
         requests

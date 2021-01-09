@@ -14,7 +14,15 @@ import java.util.List;
 public class ProviderIntervalRequest {
 
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-    private final ProviderNormalizer providerNormalizer = new ProviderNormalizer();
+    private ProviderNormalizer providerNormalizer;
+
+    public ProviderIntervalRequest(){
+        providerNormalizer = new ProviderNormalizer(true);
+    }
+
+    public void setProviderNormalizer(ProviderNormalizer providerNormalizer){
+        this.providerNormalizer = providerNormalizer;
+    }
 
     // Will be runned on startup
     // 1000 ms * 60 * 60 = 1 hour

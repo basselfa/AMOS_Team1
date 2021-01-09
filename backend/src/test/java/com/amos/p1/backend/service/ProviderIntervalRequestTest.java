@@ -19,14 +19,21 @@ public class ProviderIntervalRequestTest {
     private final ProviderIntervalRequest providerIntervalRequest = new ProviderIntervalRequest();
 
 
+    public ProviderIntervalRequestTest(){
+        MyRepo.setUseTestDatabase(true);
+    }
 
     @BeforeEach
     void setUp(){
 
         System.out.println("reintialising Database");
         MyRepo.dropAll();
-    }
 
+        //Adding dummy data to database
+        ProviderIntervalRequest providerIntervalRequest = new ProviderIntervalRequest();
+        providerIntervalRequest.setProviderNormalizer(new ProviderNormalizer(true));
+        providerIntervalRequest.providerCronJob();
+    }
 
     @Test
     void testOneMoreRequestAfterCronjob(){
@@ -36,7 +43,7 @@ public class ProviderIntervalRequestTest {
 
         long amountOfRequestAfterCronJob = getAmountOfRequests();
 
-        assertThat(amountOfRequestAfterCronJob - amountOfRequestsBeforeCronJob, equalTo(1));
+        assertThat(amountOfRequestAfterCronJob - amountOfRequestsBeforeCronJob, equalTo(1L));
     }
 
     @Test
@@ -50,18 +57,9 @@ public class ProviderIntervalRequestTest {
         assertThat(amountOfIncidentsAfterCronJob - amountOfIncidentsBeforeCronjob, greaterThan(0L));
     }
 
-
-
     @Test
     void testExecutionOnInterval(){
-        //TODO: change interval to 5 seconds so we can check after 5 seconds if the cronjob was executed
-        fail("Need to be implemented");
-
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        throw new IllegalStateException("Need to be implemented. Use awaitility library ");
     }
 
     private Long getAmountOfRequests() {
