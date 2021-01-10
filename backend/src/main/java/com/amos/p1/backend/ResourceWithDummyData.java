@@ -114,7 +114,9 @@ public class ResourceWithDummyData {
                 "670000:690000,681234:691234",6.0,new Long(1));
 
         EvaluationCandidate evaluationCandidate = new EvaluationCandidate(incidentTomTom, incidentTomTom);
+        EvaluationCandidate evaluationCandidate2 = new EvaluationCandidate(incidentTomTom, incidentTomTom);
         listEvalCans.add(evaluationCandidate);
+        listEvalCans.add(evaluationCandidate2);
 
         return ResponseEntity.ok(listEvalCans);
     }
@@ -127,7 +129,7 @@ public class ResourceWithDummyData {
     @ResponseBody
     public ResponseEntity<List<ComparisonEvaluationDTO>> getComparisonEvaluationOverTime(@RequestParam("city") String city) {
 
-        List<ComparisonEvaluationDTO> listCEDTO = new ArrayList<> ();
+        List<ComparisonEvaluationDTO> listCEDTO = new ArrayList<>();
 
         ComparisonEvaluationDTO comparisonEvaluationDTO = new ComparisonEvaluationDTO();
         comparisonEvaluationDTO.setDate(new Date());
