@@ -29,19 +29,19 @@ public class ComparisonEvaluationDTO {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm")
     public Date getDate(){
-        throw new IllegalStateException("Needs to be implemented");
+        return this.date;
     }
 
     public int getTomTomIncidentAmount(){
-        throw new IllegalStateException("Needs to be implemented");
+        return this.tomTomIncidentsAmount;
     }
 
     public int getHereIncidentAmount(){
-        throw new IllegalStateException("Needs to be implemented");
+        return this.hereIncidentsAmount;
     }
 
     public int getSameIncidentAmount(){
-        throw new IllegalStateException("Needs to be implemented");
+        return this.sameIncidentAmount;
     }
 
 
