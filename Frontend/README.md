@@ -2,13 +2,15 @@
 
 This project provides a user interface for the **Traffic Data Visualization and Extraction** project by the AMOS Team 1 in WS20/21.
 
-
 ## Requirements
-For development, you will need `node` and `npm` installed. Since we are using the **VueJS Framework**, you will also need to install `Vue`. 
+
+For development, you will need `node` and `npm` installed. Since we are using the **VueJS Framework**, you will also need to install `Vue` and the design framework for `Vuetify`.
+
+For the visualization of the traffic data on a map, we use `OpenStreetMap` and the JavaScript library `Leaflet`.
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 npm install
 
@@ -20,7 +22,11 @@ npm run build
 
 # build for production and view the bundle analyzer report
 npm run build --report
+```
 
+## Tests
+
+```bash
 # run unit tests
 npm run unit
 
@@ -31,13 +37,12 @@ npm run e2e
 npm test
 ```
 
+Coverage will be displayed in the console or you can find a full report under `test\unit\coverage\lcov-report\index.html`
+
 ## Usage
+
 (TODO)
 
-## Authors and Acknowledgment
-(TODO) Authors: Vesela Stefanova, Daniel Fernau, Arian Vaziri, Bassel Fataloun
+## Authors
 
-(TODO) Acknowledgments: André Anders, Prof. Dr. Dirk Riehle, Theo Vassiliou-Gioles
-
-## License
-(TODO) MIT
+Authors: Vesela Stefanova, Daniel Fernau

@@ -2,11 +2,14 @@ package com.amos.p1.backend;
 
 import com.amos.p1.backend.data.ComparisonEvaluationDTO;
 import com.amos.p1.backend.data.EvaluationCandidate;
+import com.amos.p1.backend.data.Incident;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,7 +79,46 @@ public class ResourceWithDummyData {
     @ResponseBody
     public ResponseEntity<List<EvaluationCandidate>> getComparison(@RequestParam("city") String city,
                                                                    @RequestParam("timestamp") String timestamp) {
-        throw new IllegalStateException("Needs to be implemented");
+        List<EvaluationCandidate> listEvalCans = new ArrayList<>();
+
+        Incident incidentTomTom = new Incident("222","baustelle","major",
+                "Traffic jam in Bergmannstraße",
+                "Berlin", "Germany",
+                "45.5", "67.4",
+                "Bergmannstraße",
+                "46.5", "69.5",
+                "Bergmannstraße",
+                1, "dummy",
+                LocalDateTime.of(
+                        2020, 5, 1,
+                        12, 30, 0),
+                LocalDateTime.of(
+                        2020, 5, 1,
+                        12, 30, 0),
+                "670000:690000,681234:691234",6.0,new Long(1));
+
+        Incident incidentHere = new Incident("123","baustelle","major",
+                "Traffic jam in Bergmannstraße",
+                "Munich", "Germany",
+                "45.5", "67.4",
+                "Bergmannstraße",
+                "46.5", "69.5",
+                "Bergmannstraße",
+                1, "dummy",
+                LocalDateTime.of(
+                        2020, 5, 1,
+                        12, 30, 0),
+                LocalDateTime.of(
+                        2020, 5, 1,
+                        12, 30, 0),
+                "670000:690000,681234:691234",6.0,new Long(1));
+
+        EvaluationCandidate evaluationCandidate = new EvaluationCandidate(incidentTomTom, incidentTomTom);
+        EvaluationCandidate evaluationCandidate2 = new EvaluationCandidate(incidentTomTom, incidentTomTom);
+        listEvalCans.add(evaluationCandidate);
+        listEvalCans.add(evaluationCandidate2);
+
+        return ResponseEntity.ok(listEvalCans);
     }
 
     @RequestMapping(
@@ -87,16 +129,31 @@ public class ResourceWithDummyData {
     @ResponseBody
     public ResponseEntity<List<ComparisonEvaluationDTO>> getComparisonEvaluationOverTime(@RequestParam("city") String city) {
 
-//        ComparisonEvaluationDTO comparisonEvaluationDTO = new ComparisonEvaluationDTO();
-//        comparisonEvaluationDTO.setDate();
-//        comparisonEvaluationDTO.setHereIncidentsAmount();
-//        comparisonEvaluationDTO.setTomTomIncidentsAmount();
-//
-//
-//        ComparisonEvaluationDTO comparisonEvaluationDTO2 = new ComparisonEvaluationDTO();
+        List<ComparisonEvaluationDTO> listCEDTO = new ArrayList<>();
+
+        ComparisonEvaluationDTO comparisonEvaluationDTO = new ComparisonEvaluationDTO();
+        comparisonEvaluationDTO.setDate(new Date());
+        comparisonEvaluationDTO.setHereIncidentsAmount(40);
+        comparisonEvaluationDTO.setTomTomIncidentsAmount(55);
+        comparisonEvaluationDTO.setSameIncidentAmount(20);
+        listCEDTO.add(comparisonEvaluationDTO);
 
 
+        ComparisonEvaluationDTO comparisonEvaluationDTO2 = new ComparisonEvaluationDTO();
+        comparisonEvaluationDTO2.setDate(new Date());
+        comparisonEvaluationDTO2.setHereIncidentsAmount(50);
+        comparisonEvaluationDTO2.setTomTomIncidentsAmount(73);
+        comparisonEvaluationDTO2.setSameIncidentAmount(18);
+        listCEDTO.add(comparisonEvaluationDTO2);
 
-        throw new IllegalStateException("Needs to be implemented");
+        ComparisonEvaluationDTO comparisonEvaluationDTO3 = new ComparisonEvaluationDTO();
+        comparisonEvaluationDTO3.setDate(new Date());
+        comparisonEvaluationDTO3.setHereIncidentsAmount(77);
+        comparisonEvaluationDTO3.setTomTomIncidentsAmount(43);
+        comparisonEvaluationDTO3.setSameIncidentAmount(35);
+        listCEDTO.add(comparisonEvaluationDTO3);
+
+
+        return ResponseEntity.ok(listCEDTO);
     }
 }

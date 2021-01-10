@@ -6,9 +6,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 
+import java.util.Date;
+
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -61,6 +62,25 @@ public class ResourceWithDummyDataTest {
 
     @Test
     void testComparison(){
-        throw new IllegalStateException("Needs to be implemented");
+        given()
+            .param("city", "berlin")
+            .param("timestamp", "2021-01-10T16:08:43.780+00:00")
+        .when()
+            .get(base + "/comparison")
+        .then()
+            .body("comparison.size()", equalTo(2));
+    }
+
+    @Test
+    void testComparisonEvaluationOverTime(){
+        Date date = new Date();
+        System.out.println(date);
+        given()
+            .param("city", "berlin")
+        .when()
+            .get(base + "/comparisonEvaluationOverTime")
+        .then()
+            .body("compEval.size()", equalTo(3));
+
     }
 }

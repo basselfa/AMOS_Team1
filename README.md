@@ -9,13 +9,9 @@ Frontend and Backend communicating over REST-Endpoints.
 Loads the data from the Backend via the REST-API and visualizes it in a map.
 Also other forms of data visualization and manipulation will be included.
 
-[Vue.js](https://vuejs.org/) Frontend with [Vuex](https://vuex.vuejs.org/) as the state managment pattern.
+[Vue.js](https://vuejs.org/) Frontend using the design framework [Vuetify](https://vuex.vuejs.org/) and [Vuex](https://vuex.vuejs.org/) as the state managment pattern.
 
-Yet to be decided if openstreetmap is used for data visualization.
-Should be evident which source the visualized data is from.
-
-
-
+For the visualization of the traffic data on a map, we use OpenStreetMap and the JavaScript library Leaflet.
 ## Backend 
 Backend loads the data from 3 different APIs normalizes it and saves it in the database. 
 
@@ -26,3 +22,9 @@ Java Backend using [Maven](https://maven.apache.org/) as an automated build tool
 [JPA](https://de.wikipedia.org/wiki/Java_Persistence_API) is used for easy storing and reading the database.
 
 Database is relational. e.g. MySQL or PostgreSQL.
+
+## Acknowledgments
+Prof. Dr. Dirk Riehle, Theo Vassiliou-Gioles, André Anders
+
+## License
+[MIT](https://github.com/basselfa/AMOS_Team1/blob/main/LICENSE)

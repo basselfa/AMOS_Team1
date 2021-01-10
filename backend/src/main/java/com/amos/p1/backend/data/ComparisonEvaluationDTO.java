@@ -29,19 +29,21 @@ public class ComparisonEvaluationDTO {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm")
 
-    public int getTomTomIncidentsAmount() {
-        return tomTomIncidentsAmount;
+    public Date getDate(){
+        return this.date;
     }
 
-    public int getHereIncidentsAmount() {
-        return hereIncidentsAmount;
+    public int getTomTomIncidentAmount(){
+        return this.tomTomIncidentsAmount;
     }
 
-    public int getSameIncidentAmount() {
-        return sameIncidentAmount;
+    public int getHereIncidentAmount(){
+        return this.hereIncidentsAmount;
     }
 
-    public Date getDate() {
-        return date;
+    public int getSameIncidentAmount(){
+        return this.sameIncidentAmount;
     }
+
+
 }
