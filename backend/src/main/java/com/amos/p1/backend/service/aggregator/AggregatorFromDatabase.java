@@ -92,25 +92,46 @@ public class AggregatorFromDatabase implements Aggregator {
     }
 
     @Override
-    public List<EvaluationCandidate> getEvaluationCandiate(String city, LocalDateTime timestamp) {
-        throw new IllegalStateException();
+    public List<EvaluationCandidate> getEvaluationCandiate(String cityName, LocalDateTime requestTime) {
+        List<Request> requests =  MyRepo.getEntityManager().createNamedQuery("geRequestFromCityNameAndTime")
+                .setParameter("requestTime", requestTime )
+                .setParameter("cityName",  cityName)
+                .getResultList();
+        return requests.get(0).getEvaluationCandidate();
     }
 
-    public List<ComparisonEvaluationDTO> getComparisonEvaluationOverTime(String city){
+    public List<ComparisonEvaluationDTO> getComparisonEvaluationOverTime(String cityName){
 
-        List<Request> requests = null;// Get all requests from this city. Use MyRepo Function.
-
+       // Get all requests from this city.
+        List<Request> requests =  MyRepo.getEntityManager().createNamedQuery("geRequestFromCityName")
+                .setParameter("cityName",  cityName)
+                .getResultList();
+        List<ComparisonEvaluationDTO> comparisonEvaluationDTOList = new ArrayList<ComparisonEvaluationDTO>();
         for (Request request : requests) {
             //TODO: split to here and tom tom incidents
+            List<Incident> tomTomIncidents =  MyRepo.getEntityManager().createNamedQuery("getFromTomTom")
+                    .setParameter("requestId",  request.getId())
+                    .getResultList();
+            List<Incident> hereIncidents =  MyRepo.getEntityManager().createNamedQuery("getFromHere")
+                    .setParameter("requestId",  request.getId())
+                    .getResultList();
 
             // Add two one comparison evaluation dto
             ComparisonEvaluationDTO comparisonEvaluationDTO = new ComparisonEvaluationDTO();
+            comparisonEvaluationDTO.setDate(java.sql.Timestamp.valueOf(request.getRequestTime())); ;
+            comparisonEvaluationDTO.setTomTomIncidentsAmount(tomTomIncidents.size()); ;
+            comparisonEvaluationDTO.setHereIncidentsAmount(hereIncidents.size()); ;
+            comparisonEvaluationDTO.setSameIncidentAmount(request.getEvaluationCandidate().size()); ;
 
             // Add ComparisonEvaluationDTO to a list
+
+            comparisonEvaluationDTOList.add(comparisonEvaluationDTO);
+
+
         }
 
         //Return list of ComparisonEvaluationDTO
-        throw new IllegalStateException("needs to be implemented");
+        return comparisonEvaluationDTOList ;
     }
 
 }

@@ -1,41 +1,101 @@
 package com.amos.p1.backend.data;
 
+import com.amos.p1.backend.database.MyRepo;
 import com.amos.p1.backend.service.evaluation.Matcher;
 import net.minidev.json.annotate.JsonIgnore;
 
+import javax.persistence.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+@NamedQuery(
+        name = "getEvaluationCandidateFromRequestId",
+        query = "SELECT i FROM Incident i WHERE i.requestId = :requestId"
+)
+@Entity
 public class EvaluationCandidate {
-    public EvaluationCandidate(Incident tomTomIncident, Incident hereIncident) {
-        this.tomTomIncident = tomTomIncident;
-        this.hereIncident = hereIncident;
-    }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private Long requestId;
+    private Long tomTomIncidentId;
+    private Long hereIncidentId;
+    private String confidenceDescription;
+    @Transient
     private Incident tomTomIncident;
+    @Transient
     private Incident hereIncident;
-
+    @Transient
     private final List<Matcher> matcherList = new ArrayList<>(); // Dont need to be stored in db
 
-    private String confidenceDescription;
+
+
+    public EvaluationCandidate(Incident tomTomIncident ,Incident hereIncident ) {
+        super();
+        this.tomTomIncident = tomTomIncident;
+        this.hereIncident = hereIncident  ;
+        this.tomTomIncidentId = tomTomIncident.getId();
+        this.hereIncidentId = hereIncident.getId();
+    }
+
+    public EvaluationCandidate() {
+
+    }
+
     //private int score = 0;
+    @Basic
+    @Column(name = "requestId", nullable = true)
+    public Long getRequestId() {    return requestId; }
+    public void setRequestId(Long requestId) { this.requestId = requestId; }
+    public Long getId() {return id; }
+    public void setId(Long id) { this.id = id;    }
+    @Basic
+    @Column(name = "tomTomIncidentId", nullable = true)
+    public Long getTomTomIncidentId() {    return tomTomIncidentId; }
+    public void setTomTomIncidentId(Long tomTomIncidentId) {  this.tomTomIncidentId = tomTomIncidentId; }
+
+    @Basic
+    @Column(name = "hereIncidentId", nullable = true)
+    public Long getHereIncidentId() {   return hereIncidentId;    }
+    public void setHereIncidentId(Long hereIncidentId) { this.hereIncidentId = hereIncidentId; }
+
+    @Basic
+    @Column(name = "confidenceDescription", nullable = true)
+    public String getConfidenceDescription() {
+        return confidenceDescription;
+    }
+
+    public void setConfidenceDescription(String confidenceDescription) {
+        this.confidenceDescription = confidenceDescription;
+    }
 
     public Incident getTomTomIncident() {
-        return tomTomIncident;
+        List<Incident> incidentAsList;
+        incidentAsList = MyRepo.getEntityManager().createNamedQuery("getFromid")
+                .setParameter("id", tomTomIncidentId)
+                .getResultList();
+        return incidentAsList.get(0);
     }
 
     public void setTomTomIncident(Incident tomTomIncident) {
         this.tomTomIncident = tomTomIncident;
+        setTomTomIncidentId(tomTomIncident.getId());
+
     }
 
     public Incident getHereIncident() {
-        return hereIncident;
+        List<Incident> incidentAsList;
+        incidentAsList = MyRepo.getEntityManager().createNamedQuery("getFromid")
+                .setParameter("id", hereIncidentId)
+                .getResultList();
+        return incidentAsList.get(0);
     }
-
     public void setHereIncident(Incident hereIncident) {
         this.hereIncident = hereIncident;
+        setHereIncidentId(hereIncident.getId());
     }
 
     public int getScore() {
@@ -60,11 +120,4 @@ public class EvaluationCandidate {
     }*/
 
 
-    public String getConfidenceDescription() {
-        return confidenceDescription;
-    }
-
-    public void setConfidenceDescription(String confidenceDescription) {
-        this.confidenceDescription = confidenceDescription;
-    }
 }

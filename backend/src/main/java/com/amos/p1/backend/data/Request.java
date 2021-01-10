@@ -12,6 +12,14 @@ import java.util.stream.Stream;
         name="geRequestFromTime",
         query="SELECT r FROM Request r WHERE r.requestTime = :requestTime"
 )
+@NamedQuery(
+        name="geRequestFromCityName",
+        query="SELECT r FROM Request r WHERE r.cityName = :cityName"
+)
+@NamedQuery(
+        name="geRequestFromCityNameAndTime",
+        query="SELECT r FROM Request r WHERE r.cityName = :cityName AND r.requestTime = :requestTime"
+)
 
 @Entity
 public class Request {
@@ -22,10 +30,11 @@ public class Request {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private LocalDateTime requestTime;
+    String cityName;
     @Transient
     List<Incident> incidents ;
-    String cityName;
-
+    @Transient
+    List<EvaluationCandidate> reEvaluatedCandidateList;
     @Transient
     Boolean incidentSavedInDb= false ;
 
@@ -61,7 +70,6 @@ public class Request {
     }
 
 
-
     public Boolean getIncidentsSavedInDb() {return incidentSavedInDb; }
     public void setIncidentsSavedInDb(Boolean incidentSavedInDb) {this.incidentSavedInDb = incidentSavedInDb; }
 
@@ -73,6 +81,11 @@ public class Request {
     @Column(name = "requestTime",columnDefinition="DATETIME")
     public LocalDateTime getRequestTime() { return requestTime;}
     public void setRequestTime(LocalDateTime requestTime) { this.requestTime = requestTime; }
+    @Basic
+    @Column(name = "cityName", nullable = true)
+    public String getCityName() {        return cityName;    }
+    public void setCityName(String cityName) { this.cityName = cityName; }
+
 
     @Override
     public String toString() {
@@ -85,20 +98,22 @@ public class Request {
     }
 
     public void setEvaluatedCandidates(List<EvaluationCandidate> reEvaluatedCandidateList) {
-
-        throw new IllegalStateException("Needs to be implemented");
+        for (EvaluationCandidate EvaluationCandidate :reEvaluatedCandidateList)
+        {
+            EvaluationCandidate.setRequestId(id);
+        }
+        MyRepo.insertEvaluationCandidate(reEvaluatedCandidateList);
+        this.reEvaluatedCandidateList=reEvaluatedCandidateList;
     }
 
     public List<EvaluationCandidate> getEvaluationCandidate(){
-        throw new IllegalStateException("Needs to be implemented");
-    }
-    @Basic
-    @Column(name = "cityName", nullable = true)
-    public void setCityName(String cityName){
-        this.cityName = cityName;
-    }
 
-    public String getCityName() {
-        return this.cityName ;
+        List<EvaluationCandidate> evaluationCandidateAsList;
+        evaluationCandidateAsList = MyRepo.getEntityManager().createNamedQuery("getEvaluationCandidateFromRequestId")
+                .setParameter("requestId", getId())
+                .getResultList();
+
+
+        return evaluationCandidateAsList;
     }
 }

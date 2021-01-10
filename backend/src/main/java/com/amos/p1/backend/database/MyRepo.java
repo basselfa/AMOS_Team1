@@ -1,5 +1,6 @@
 package com.amos.p1.backend.database;
 
+import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.data.Request;
 import org.apache.ibatis.jdbc.ScriptRunner;
@@ -122,13 +123,24 @@ public class MyRepo {
 
     public static void insertIncident(List<Incident> incidents) {
 
-        int i = 0;
 
         for(Incident incident : incidents) {
             getEntityManager().getTransaction().begin();
-           // System.out.println("Saved incident no. " + i);
             getEntityManager().persist(incident);
-            i++;
+            getEntityManager().getTransaction().commit();
+        }
+
+
+    }
+
+    public static void insertEvaluationCandidate(List<EvaluationCandidate> evaluationCandidates) {
+
+
+        for(EvaluationCandidate evaluationCandidate : evaluationCandidates) {
+            getEntityManager().getTransaction().begin();
+
+            getEntityManager().persist(evaluationCandidate);
+
             getEntityManager().getTransaction().commit();
         }
 

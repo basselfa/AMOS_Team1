@@ -1,9 +1,7 @@
 package com.amos.p1.backend;
 
-import com.amos.p1.backend.data.CityBoundingBox;
-import com.amos.p1.backend.data.ComparisonEvaluationDTO;
-import com.amos.p1.backend.data.EvaluationCandidate;
-import com.amos.p1.backend.data.Incident;
+import com.amos.p1.backend.data.*;
+import com.amos.p1.backend.database.MyRepo;
 import com.amos.p1.backend.service.CityBoundingBoxesServiceImpl;
 import com.amos.p1.backend.service.aggregator.Aggregator;
 import com.amos.p1.backend.service.aggregator.AggregatorFromDatabase;
@@ -129,8 +127,11 @@ public class ResourceWithDatabase {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity<List<ComparisonEvaluationDTO>> getComparisonEvaluationOverTime(@RequestParam("city") String city) {
-        throw new IllegalStateException("Needs to be implemented");
+    public ResponseEntity<List<ComparisonEvaluationDTO>> getComparisonEvaluationOverTime(@RequestParam("city") String cityName) {
+
+        return null;
+
+
     }
 
 }

@@ -28,22 +28,20 @@ public class ComparisonEvaluationDTO {
     }
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm")
-    public Date getDate(){
-        throw new IllegalStateException("Needs to be implemented");
+
+    public int getTomTomIncidentsAmount() {
+        return tomTomIncidentsAmount;
     }
 
-    public int getTomTomIncidentAmount(){
-        throw new IllegalStateException("Needs to be implemented");
+    public int getHereIncidentsAmount() {
+        return hereIncidentsAmount;
     }
 
-    public int getHereIncidentAmount(){
-        throw new IllegalStateException("Needs to be implemented");
+    public int getSameIncidentAmount() {
+        return sameIncidentAmount;
     }
 
-    public int getSameIncidentAmount(){
-        throw new IllegalStateException("Needs to be implemented");
+    public Date getDate() {
+        return date;
     }
-
-
-
 }
