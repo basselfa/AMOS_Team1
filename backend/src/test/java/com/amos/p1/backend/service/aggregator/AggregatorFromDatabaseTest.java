@@ -190,8 +190,7 @@ public class AggregatorFromDatabaseTest {
         MyRepo.insertRequest(request);
 
         evaluationCandidates = aggregator.getEvaluationCandidate("Berlin",LOCAL_DATE_TIME_DUMMY );
-        assertThat(evaluationCandidates, is(notNullValue()));
-        ;
+        assertThat(evaluationCandidates, hasSize(greaterThan(0)));
 
     }
 
@@ -212,9 +211,7 @@ public class AggregatorFromDatabaseTest {
 
         List<ComparisonEvaluationDTO> comparisonEvaluationDTOs= aggregator.getComparisonEvaluationOverTime("Berlin" );
         System.out.println(comparisonEvaluationDTOs);
-        assertThat(comparisonEvaluationDTOs, is(notNullValue()));
-        ;
-
+        assertThat(comparisonEvaluationDTOs, hasSize(greaterThan(0)));
     }
 
     private Request getDummyRequestWithOneDummyIncident() {
