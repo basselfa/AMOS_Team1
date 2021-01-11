@@ -4,11 +4,13 @@ import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.data.Request;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.io.ByteStreams;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -21,13 +23,13 @@ public class Helper {
 
         byte[] encoded = null;
         try {
-            Path absolutePath = classPathResource.getFile().toPath();
-            encoded = Files.readAllBytes(absolutePath);
+            InputStream inputStream = classPathResource.getInputStream();
+            encoded = ByteStreams.toByteArray(inputStream);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new IllegalStateException(e);
         }
 
-        if(encoded == null) throw new IllegalStateException("Getting file went wrong");
+        if(encoded == null) throw new IllegalStateException("Getting file went wrong: " + resourcePath);
 
         return new String(encoded, StandardCharsets.UTF_8);
 
