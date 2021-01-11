@@ -35,7 +35,7 @@ public class ProviderIntervalRequest {
         for (Request request : requests) {
             request.setRequestTime(LocalDateTime.now());
 
-            System.out.println("Save here incidents. City: " + request.getCityName() +" Amount: " + request.getIncidents().size());
+            System.out.println("Save incidents into db. City: " + request.getCityName() +" Amount: " + request.getIncidents().size());
             MyRepo.insertRequest(request);
             System.out.println("Sucessfully saved everything");
         }
