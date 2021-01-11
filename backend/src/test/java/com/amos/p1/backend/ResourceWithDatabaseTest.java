@@ -209,7 +209,8 @@ public class ResourceWithDatabaseTest {
                 .jsonPath()
                 .getList("com.amos.p1.backend.data", ComparisonEvaluationDTO.class);
 
-        assertThat(comparisonEvaluationDTOs, is(notNullValue()));
+        System.out.println(comparisonEvaluationDTOs);
+        assertThat(comparisonEvaluationDTOs, hasSize(greaterThan(0)));
 
 
     }
