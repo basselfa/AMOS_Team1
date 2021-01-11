@@ -1,5 +1,6 @@
 package com.amos.p1.backend;
 
+import com.amos.p1.backend.data.EvaluationCandidate;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,8 +8,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 
 import java.util.Date;
+import java.util.List;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 
@@ -82,5 +85,35 @@ public class ResourceWithDummyDataTest {
         .then()
             .body("compEval.size()", equalTo(3));
 
+    }
+
+
+    @Test
+    void testTimeStampsWithUnMarshalling(){
+        List<String> timestamps = given()
+                .param("city", "Berlin") // parameter in the url
+            .when()
+                .get(base + "/timestamps") // Url that you want to test
+            .then()
+                .extract()
+                .body()
+                .jsonPath()
+                .getList(".", String.class); //Extract the root json element to a list of String
+
+        assertThat(timestamps.get(0), equalTo("2020-12-19 12:00"));
+        assertThat(timestamps.get(1), equalTo("2020-12-19 13:00"));
+    }
+
+    @Test
+    void testDateEndpoint(){
+        Date myDate = given()
+                .param("city", "Berlin") // parameter in the url
+            .when()
+                .get(base + "/someDateEndpoint") // Url that you want to test
+            .then()
+                .extract()
+                .as(Date.class); //Extrac as this object
+
+        assertThat(myDate.getTime(), equalTo(123L));
     }
 }
