@@ -5,82 +5,9 @@ import router from '../router'
 
 export default {
     extends: Bar,
-    props: ['city'],
+    props: ['city', 'chartDataCollection'],
     data: function() {
         return {
-            datacollection: {
-                labels: [
-                    '2020-12-19 13:00',
-                    'Timestamp',
-                    'Timestamp',
-                    'Timestamp',
-                    'Timestamp',
-                    'Timestamp',
-                    'Timestamp',
-                    'Timestamp',
-                    'Timestamp',
-                    'Timestamp',
-                    'Timestamp',
-                    'Timestamp',
-                ],
-
-                datasets: [
-                    {
-                        label: 'Provider1',
-                        backgroundColor: 'rgb( 67, 146, 192)',
-                        data: [
-                            800,
-                            900,
-                            1000,
-                            850,
-                            820,
-                            920,
-                            700,
-                            1010,
-                            999,
-                            820,
-                            900,
-                            50,
-                        ],
-                    },
-                    {
-                        label: 'Provider2',
-                        backgroundColor: 'rgb( 244, 186, 94)',
-                        data: [
-                            100,
-                            200,
-                            300,
-                            400,
-                            500,
-                            600,
-                            700,
-                            800,
-                            900,
-                            1000,
-                            1100,
-                            1200,
-                        ],
-                    },
-                    {
-                        label: 'Comparison',
-                        backgroundColor: 'rgb( 242, 99, 66)',
-                        data: [
-                            10,
-                            20,
-                            30,
-                            40,
-                            50,
-                            60,
-                            70,
-                            80,
-                            90,
-                            100,
-                            110,
-                            120,
-                        ],
-                    },
-                ],
-            },
             options: {
                 events: [
                     'mousemove',
@@ -145,7 +72,8 @@ export default {
         }
     },
     mounted() {
-        this.renderChart(this.datacollection, this.options)
+        if (this.chartDataCollection != null) {
+            this.renderChart(this.chartDataCollection, this.options)}
     },
 }
 </script>

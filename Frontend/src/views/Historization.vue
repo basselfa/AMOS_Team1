@@ -21,10 +21,10 @@
                         </v-col>
 
                         <v-col cols="12" sm="4">
-                            <date-time-picker v-model="startTime" :label='startLabel'/>
+                            <date-time-picker v-model="startTime" :label='startLabel' @change="fetchDataForCity()"/>
                         </v-col>
                         <v-col cols="12" sm="4">
-                            <date-time-picker v-model="endTime" :label='endLabel'/>
+                            <date-time-picker v-model="endTime" :label='endLabel' @change="fetchDataForCity()"/>
                         </v-col>
                     </v-row>
                     </div>
@@ -40,10 +40,10 @@
         ></v-progress-circular>
         <div
             id="charts-container"
-            v-if="loading == false && historizationData !== null"
+            v-if="loading == false && chartDataCollection !== null"
         >
-            <div id="chart-comparison" style="margin-top:50px;">
-                <chart :city="this.city" />
+            <div id="chart-comparison" style="margin-top:40px;">
+                <chart :city="this.city" :chartDataCollection="this.chartDataCollection"/>
             </div>
         </div>
     </div>
@@ -62,7 +62,6 @@ export default {
     },
     data() {
         return {
-            historizationData: null,
             errorMessage: null,
             loading: null,
             city: null,
@@ -70,32 +69,80 @@ export default {
             startTime: '',
             startLabel: 'Start time',
             endTime: '',
-            endLabel: 'End time'
+            endLabel: 'End time',
+            comparisonData: {labels: [], tomtom: [], here: [], comparison: []}
         }
     },
     methods: {
         async fetchData() {
-            this.cities = ['Berlin', 'Hamburg'] // todo request
-
-            /*await axios
-                .get('http://localhost:8082/demo/historization/', {
+            axios
+            .get('http://localhost:8082/withDatabase/cities/', {
+                headers: { 'Access-Control-Allow-Origin': '*' },
+            })
+            .then(response => {
+                let cities = []
+                response.data.map(function(item) {  
+                cities.push(item.city);
+                })
+                this.cities = cities
+            })
+            .catch(error => {
+                this.errorMessage = error.message
+                console.error('There was an error!', error)
+                this.loading = false
+            })
+        },
+        async fetchDataForCity() {
+            // filters need to be set
+            if ( this.city && this.startTime && this.endTime ) {
+                // clear data
+                this.comparisonData = {labels: [], tomtom: [], here: [], comparison: []}
+                this.loading = true
+                // get comparison data
+                await axios
+                .get('http://localhost:8082/demo/comparisonEvaluationOverTime/?city=' + this.city, {
                     headers: { 'Access-Control-Allow-Origin': '*' },
                 })
                 .then(response => {
-                    // currently the structure for demo is {incidents: []} and for prod is {[]}
-                    this.historizationData = response.data
-                    this.loading = false
+                    for(let i=0; i<response.data.length; i++) {
+                        // if timestamp between start and end times
+                        if (response.data[i].date >= this.startTime && response.data[i].date <= this.endTime) {
+                            // get the necessary data for the chart
+                            this.comparisonData.labels.push(response.data[i].date)
+                            this.comparisonData.tomtom.push(response.data[i].tomTomIncidentAmount)
+                            this.comparisonData.here.push(response.data[i].hereIncidentAmount)
+                            this.comparisonData.comparison.push(response.data[i].sameIncidentAmount)
+                        }
+                    }
+                    this.chartDataCollection = {
+                    labels: this.comparisonData.labels,
+
+                    datasets: [
+                        {
+                            label: 'Here',
+                            backgroundColor: 'rgb( 67, 146, 192)',
+                            data: this.comparisonData.here,
+                        },
+                        {
+                            label: 'TomTom',
+                            backgroundColor: 'rgb( 244, 186, 94)',
+                            data: this.comparisonData.tomtom,
+                        },
+                        {
+                            label: 'Same incidents',
+                            backgroundColor: 'rgb( 242, 99, 66)',
+                            data: this.comparisonData.comparison,
+                        },
+                    ],
+                }
+                this.loading = false
+            })
+            .catch(error => {
+                this.errorMessage = error.message
+                console.error('There was an error!', error)
+                this.loading = false
                 })
-                .catch(error => {
-                    this.errorMessage = error.message
-                    console.error('There was an error!', error)
-                    this.loading = false
-                })*/
-        },
-        fetchDataForCity() {
-            this.loading = true
-            this.historizationData = ['placeholder data from request']
-            this.loading = false
+            }
         },
     },
 }

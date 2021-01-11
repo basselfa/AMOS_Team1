@@ -79,6 +79,7 @@ export default {
         confirm() {
             this.onUpdateDate()
             this.open = false
+            this.$emit('change');
         },
         onUpdateDate() {
             if (!this.dateModel || !this.timeModel) return false
