@@ -19,7 +19,7 @@ public interface Aggregator {
 
     List<Incident> getAllData();
 
-    List<EvaluationCandidate> getEvaluationCandiate(String city, LocalDateTime timestamp);
+    List<EvaluationCandidate> getEvaluationCandidate(String city, LocalDateTime timestamp);
 
     List<ComparisonEvaluationDTO> getComparisonEvaluationOverTime(String city);
 }

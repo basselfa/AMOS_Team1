@@ -1,5 +1,6 @@
 package com.amos.p1.backend.database;
 
+import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.data.Request;
 import org.junit.jupiter.api.BeforeAll;
@@ -109,5 +110,37 @@ public class RequestTest {
 
         return getDummyRequestWithIncidents(incidents);
     }
+    @Test
+    void testGetRequestFromCityName(){
+        Request request = getDummyRequestWithOneDummyIncident();
+        request.setCityName("Berlin");
+        MyRepo.insertRequest(request);
 
+        List<Request> RequestAsList;
+        RequestAsList = MyRepo.getEntityManager().createNamedQuery("geRequestFromCityName")
+                .setParameter("cityName", "Berlin")
+                .getResultList();
+
+
+        assertThat(RequestAsList, is(notNullValue()));
+    }
+    @Test
+    void testGetInsertEvaluationCandidate(){
+        Request request = getDummyRequestWithOneDummyIncident();
+        request.setCityName("Berlin");
+        MyRepo.insertRequest(request);
+
+        List<EvaluationCandidate> evaluationCandidates = new ArrayList<EvaluationCandidate>();
+        EvaluationCandidate evaluationCandidate = new EvaluationCandidate ();
+        evaluationCandidate.setHereIncidentId(new Long(12));
+        evaluationCandidate.setTomTomIncidentId(new Long(13));
+        evaluationCandidates.add(evaluationCandidate);
+        request.setEvaluatedCandidates(evaluationCandidates);
+
+
+        evaluationCandidates =request.getEvaluationCandidate();
+
+
+        assertThat(evaluationCandidates, is(notNullValue()));
+    }
 }

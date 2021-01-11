@@ -1,11 +1,13 @@
 package com.amos.p1.backend;
 
 
-import com.amos.p1.backend.data.Incident;
-import com.amos.p1.backend.data.Location;
+import com.amos.p1.backend.data.*;
+import com.amos.p1.backend.database.DummyIncident;
 import com.amos.p1.backend.database.MyRepo;
 import com.amos.p1.backend.service.ProviderIntervalRequest;
 import com.amos.p1.backend.service.ProviderNormalizer;
+import com.amos.p1.backend.service.aggregator.Aggregator;
+import com.amos.p1.backend.service.aggregator.AggregatorFromDatabase;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,8 +24,7 @@ import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -32,6 +33,8 @@ public class ResourceWithDatabaseTest {
     @LocalServerPort
     private int port;
     private String base;
+    private final static LocalDateTime LOCAL_DATE_TIME_DUMMY = LocalDateTime.of(2020, 10, 30, 16, 30);
+
 
     @BeforeAll
     public static void init() {
@@ -183,9 +186,72 @@ public class ResourceWithDatabaseTest {
         }
 
     }
+    @Test
+    void testGgetComparisonEvaluationOverTime()  {
+        Request request = getDummyRequestWithOneDummyIncident();
+        request.setCityName("Berlin");
+        MyRepo.insertRequest(request);
+
+        List<EvaluationCandidate> evaluationCandidates = new ArrayList<EvaluationCandidate>();
+        EvaluationCandidate evaluationCandidate = new EvaluationCandidate ();
+        evaluationCandidate.setHereIncidentId(new Long(12));
+        evaluationCandidate.setTomTomIncidentId(new Long(13));
+        evaluationCandidates.add(evaluationCandidate);
+        request.setEvaluatedCandidates(evaluationCandidates);
+
+        List<ComparisonEvaluationDTO> comparisonEvaluationDTOs =given()
+                .param("city", "Berlin")
+                .when()
+                .get(base + "/comparisonEvaluationOverTime")
+                .then()
+                .extract()
+                .body()
+                .jsonPath()
+                .getList("com.amos.p1.backend.data", ComparisonEvaluationDTO.class);
+
+        assertThat(comparisonEvaluationDTOs, is(notNullValue()));
+
+
+    }
+
 
     @Test
     void testComparison(){
-        throw new IllegalStateException("Needs to be implemented");
+        Request request = getDummyRequestWithOneDummyIncident();
+        request.setCityName("Berlin");
+        MyRepo.insertRequest(request);
+
+        List<EvaluationCandidate> evaluationCandidates = new ArrayList<EvaluationCandidate>();
+        EvaluationCandidate evaluationCandidate = new EvaluationCandidate ();
+        evaluationCandidate.setHereIncidentId(new Long(12));
+        evaluationCandidate.setTomTomIncidentId(new Long(13));
+        evaluationCandidates.add(evaluationCandidate);
+        request.setEvaluatedCandidates(evaluationCandidates);
+
+        evaluationCandidates = given()
+                .param("city", "Berlin")
+                .param("timestamp", LOCAL_DATE_TIME_DUMMY)
+                .when()
+                .get(base + "/comparison")
+                .then()
+                .extract()
+                .body()
+                .jsonPath()
+                .getList("com.amos.p1.backend.data", EvaluationCandidate.class);
+        assertThat(evaluationCandidates, is(notNullValue()));
+    }
+    private Request getDummyRequestWithOneDummyIncident() {
+        Incident incident = DummyIncident.createIncident();
+        List<Incident> incidents = new ArrayList<>();
+        incidents.add(incident);
+
+        return getDummyRequestWithIncidents(incidents);
+    }
+    private Request getDummyRequestWithIncidents(List<Incident> incidents) {
+        Request request = new Request();
+        request.setRequestTime(LOCAL_DATE_TIME_DUMMY);
+        request.setIncidents(incidents);
+
+        return  request;
     }
 }

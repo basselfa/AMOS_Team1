@@ -1,6 +1,10 @@
 package com.amos.p1.backend.service.aggregator;
 
+import com.amos.p1.backend.data.ComparisonEvaluationDTO;
+import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.data.Incident;
+import com.amos.p1.backend.data.Request;
+import com.amos.p1.backend.database.DummyIncident;
 import com.amos.p1.backend.database.MyRepo;
 import com.amos.p1.backend.service.ProviderIntervalRequest;
 import com.amos.p1.backend.service.ProviderNormalizer;
@@ -18,9 +22,12 @@ import java.util.Optional;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
+
 public class AggregatorFromDatabaseTest {
 
-    Aggregator aggregator = new AggregatorFromDatabase();;
+    Aggregator aggregator = new AggregatorFromDatabase();
+    private final static LocalDateTime LOCAL_DATE_TIME_DUMMY = LocalDateTime.of(2020, 10, 30, 16, 30);
+
     @BeforeAll
     public static void init() {
 
@@ -167,5 +174,57 @@ public class AggregatorFromDatabaseTest {
         String json = objectMapper.writeValueAsString(berlinIncidents);
         assertThat(json, notNullValue());
 
+    }
+    @Test
+    void testGetEvaluationCandiate() {
+        Request request = getDummyRequestWithOneDummyIncident();
+        request.setCityName("Berlin");
+        MyRepo.insertRequest(request);
+
+        List<EvaluationCandidate> evaluationCandidates = new ArrayList<EvaluationCandidate>();
+        EvaluationCandidate evaluationCandidate = new EvaluationCandidate ();
+        evaluationCandidate.setHereIncidentId(new Long(12));
+        evaluationCandidate.setTomTomIncidentId(new Long(13));
+        evaluationCandidates.add(evaluationCandidate);
+        request.setEvaluatedCandidates(evaluationCandidates);
+
+        evaluationCandidates = aggregator.getEvaluationCandidate("Berlin",LOCAL_DATE_TIME_DUMMY );
+        assertThat(evaluationCandidates, is(notNullValue()));
+        ;
+
+    }
+
+    @Test
+    void testGgetComparisonEvaluationOverTime()  {
+        Request request = getDummyRequestWithOneDummyIncident();
+        request.setCityName("Berlin");
+        MyRepo.insertRequest(request);
+
+        List<EvaluationCandidate> evaluationCandidates = new ArrayList<EvaluationCandidate>();
+        EvaluationCandidate evaluationCandidate = new EvaluationCandidate ();
+        evaluationCandidate.setHereIncidentId(new Long(12));
+        evaluationCandidate.setTomTomIncidentId(new Long(13));
+        evaluationCandidates.add(evaluationCandidate);
+        request.setEvaluatedCandidates(evaluationCandidates);
+
+        List<ComparisonEvaluationDTO> comparisonEvaluationDTOs= aggregator.getComparisonEvaluationOverTime("Berlin" );
+        assertThat(comparisonEvaluationDTOs, is(notNullValue()));
+        ;
+
+    }
+
+    private Request getDummyRequestWithOneDummyIncident() {
+        Incident incident = DummyIncident.createIncident();
+        List<Incident> incidents = new ArrayList<>();
+        incidents.add(incident);
+
+        return getDummyRequestWithIncidents(incidents);
+    }
+    private Request getDummyRequestWithIncidents(List<Incident> incidents) {
+        Request request = new Request();
+        request.setRequestTime(LOCAL_DATE_TIME_DUMMY);
+        request.setIncidents(incidents);
+
+        return  request;
     }
 }

@@ -65,7 +65,7 @@ public class AggregatorDirectlyFromProvider implements Aggregator {
     }
 
     @Override
-    public List<EvaluationCandidate> getEvaluationCandiate(String city, LocalDateTime timestamp) {
+    public List<EvaluationCandidate> getEvaluationCandidate(String city, LocalDateTime timestamp) {
         throw new IllegalStateException("needs to be implemented");
     }
 

@@ -114,13 +114,14 @@ public class ResourceWithDatabase {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity<List<EvaluationCandidate>> getComparison(@RequestParam("city") String city,
+    public ResponseEntity<List<EvaluationCandidate>> getComparison(@RequestParam("city") String cityName,
                                                                    @RequestParam("timestamp") String timestamp) {
+        Aggregator aggregator = new AggregatorFromDatabase();
+
+         return ResponseEntity.ok(aggregator.getEvaluationCandidate(cityName,parseTimeStamp(timestamp)));
 
 
-        throw new IllegalStateException("Needs to be implemented");
     }
-
     @RequestMapping(
             method = RequestMethod.GET,
             value = "/comparisonEvaluationOverTime",
@@ -128,8 +129,10 @@ public class ResourceWithDatabase {
     )
     @ResponseBody
     public ResponseEntity<List<ComparisonEvaluationDTO>> getComparisonEvaluationOverTime(@RequestParam("city") String cityName) {
+        Aggregator aggregator = new AggregatorFromDatabase();
 
-        return null;
+        return ResponseEntity.ok(aggregator.getComparisonEvaluationOverTime(cityName));
+
 
 
     }

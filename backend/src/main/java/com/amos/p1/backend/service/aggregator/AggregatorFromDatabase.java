@@ -90,16 +90,15 @@ public class AggregatorFromDatabase implements Aggregator {
                 .setParameter("requestTime", requestTime )
                 .getResultList();
     }
-
     @Override
-    public List<EvaluationCandidate> getEvaluationCandiate(String cityName, LocalDateTime requestTime) {
+    public List<EvaluationCandidate> getEvaluationCandidate(String cityName, LocalDateTime requestTime) {
         List<Request> requests =  MyRepo.getEntityManager().createNamedQuery("geRequestFromCityNameAndTime")
                 .setParameter("requestTime", requestTime )
                 .setParameter("cityName",  cityName)
                 .getResultList();
         return requests.get(0).getEvaluationCandidate();
     }
-
+    @Override
     public List<ComparisonEvaluationDTO> getComparisonEvaluationOverTime(String cityName){
 
        // Get all requests from this city.
