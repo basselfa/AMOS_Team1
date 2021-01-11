@@ -120,7 +120,8 @@ public class AggregatorFromDatabase implements Aggregator {
             comparisonEvaluationDTO.setDate(java.sql.Timestamp.valueOf(request.getRequestTime())); ;
             comparisonEvaluationDTO.setTomTomIncidentsAmount(tomTomIncidents.size()); ;
             comparisonEvaluationDTO.setHereIncidentsAmount(hereIncidents.size()); ;
-            comparisonEvaluationDTO.setSameIncidentAmount(request.getEvaluationCandidate().size()); ;
+            if(request.getEvaluationCandidate()!= null)
+                comparisonEvaluationDTO.setSameIncidentAmount(request.getEvaluationCandidate().size()); ;
 
             // Add ComparisonEvaluationDTO to a list
 

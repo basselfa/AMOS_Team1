@@ -179,7 +179,7 @@ public class AggregatorFromDatabaseTest {
     void testGetEvaluationCandiate() {
         Request request = getDummyRequestWithOneDummyIncident();
         request.setCityName("Berlin");
-        MyRepo.insertRequest(request);
+
 
         List<EvaluationCandidate> evaluationCandidates = new ArrayList<EvaluationCandidate>();
         EvaluationCandidate evaluationCandidate = new EvaluationCandidate ();
@@ -187,6 +187,7 @@ public class AggregatorFromDatabaseTest {
         evaluationCandidate.setTomTomIncidentId(new Long(13));
         evaluationCandidates.add(evaluationCandidate);
         request.setEvaluatedCandidates(evaluationCandidates);
+        MyRepo.insertRequest(request);
 
         evaluationCandidates = aggregator.getEvaluationCandidate("Berlin",LOCAL_DATE_TIME_DUMMY );
         assertThat(evaluationCandidates, is(notNullValue()));
@@ -198,16 +199,19 @@ public class AggregatorFromDatabaseTest {
     void testGgetComparisonEvaluationOverTime()  {
         Request request = getDummyRequestWithOneDummyIncident();
         request.setCityName("Berlin");
-        MyRepo.insertRequest(request);
+
 
         List<EvaluationCandidate> evaluationCandidates = new ArrayList<EvaluationCandidate>();
         EvaluationCandidate evaluationCandidate = new EvaluationCandidate ();
-        evaluationCandidate.setHereIncidentId(new Long(12));
-        evaluationCandidate.setTomTomIncidentId(new Long(13));
+        evaluationCandidate.setHereIncidentId((long) 12);
+        evaluationCandidate.setTomTomIncidentId( (long)13);
         evaluationCandidates.add(evaluationCandidate);
         request.setEvaluatedCandidates(evaluationCandidates);
+        MyRepo.insertRequest(request);
+
 
         List<ComparisonEvaluationDTO> comparisonEvaluationDTOs= aggregator.getComparisonEvaluationOverTime("Berlin" );
+        System.out.println(comparisonEvaluationDTOs);
         assertThat(comparisonEvaluationDTOs, is(notNullValue()));
         ;
 
