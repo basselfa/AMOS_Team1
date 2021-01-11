@@ -156,4 +156,16 @@ public class ResourceWithDummyData {
 
         return ResponseEntity.ok(listCEDTO);
     }
+
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/someDateEndpoint",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ResponseBody
+    public ResponseEntity<Date> getSomeDateEndpoint(@RequestParam("city") String cityName) {
+
+        return ResponseEntity.ok(new Date(123));
+    }
+
 }
