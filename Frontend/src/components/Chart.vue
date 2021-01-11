@@ -7,7 +7,10 @@ export default {
     extends: Bar,
     props: ['city', 'chartDataCollection'],
     data: function() {
-        return {
+        // needed so we can access the city value inside the onClick function
+        const cityName = this.city;
+        return { 
+            // chart options
             options: {
                 events: [
                     'mousemove',
@@ -21,7 +24,7 @@ export default {
                         name: 'Map',
                         params: {
                             mapData: {
-                                city: this.city,
+                                city: cityName,
                                 timestamp: item[0]['_model'].label,
                                 type: [],
                             },
@@ -73,7 +76,8 @@ export default {
     },
     mounted() {
         if (this.chartDataCollection != null) {
-            this.renderChart(this.chartDataCollection, this.options)}
+            this.renderChart(this.chartDataCollection, this.options)
+        }
     },
 }
 </script>

@@ -43,7 +43,7 @@
                         <v-btn primary small @click="open = false"
                             >Cancel</v-btn
                         >
-                        <v-btn flat small @click="confirm()">Ok</v-btn>
+                        <v-btn small @click="confirm()">Ok</v-btn>
                     </v-flex>
                 </v-layout>
             </div>

@@ -42,7 +42,8 @@
             id="charts-container"
             v-if="loading == false && chartDataCollection !== null"
         >
-            <div id="chart-comparison" style="margin-top:40px;">
+            <div id="chart-comparison" style="margin-top:20px;">
+                {{this.city}}
                 <chart :city="this.city" :chartDataCollection="this.chartDataCollection"/>
             </div>
         </div>
