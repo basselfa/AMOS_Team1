@@ -131,28 +131,47 @@ public class ResourceWithDummyData {
 
         List<ComparisonEvaluationDTO> listCEDTO = new ArrayList<>();
 
-        ComparisonEvaluationDTO comparisonEvaluationDTO = new ComparisonEvaluationDTO();
-        comparisonEvaluationDTO.setDate(new Date());
-        comparisonEvaluationDTO.setHereIncidentsAmount(40);
-        comparisonEvaluationDTO.setTomTomIncidentsAmount(55);
-        comparisonEvaluationDTO.setSameIncidentAmount(20);
-        listCEDTO.add(comparisonEvaluationDTO);
+        ComparisonEvaluationDTO comparisonEvaluationDTO0 = new ComparisonEvaluationDTO();
+        comparisonEvaluationDTO0.setDate(new Date(System.currentTimeMillis() - (5 * 60 * 60 * 1000)));
+        comparisonEvaluationDTO0.setHereIncidentsAmount(40);
+        comparisonEvaluationDTO0.setTomTomIncidentsAmount(55);
+        comparisonEvaluationDTO0.setSameIncidentAmount(20);
+        listCEDTO.add(comparisonEvaluationDTO0);
 
+        ComparisonEvaluationDTO comparisonEvaluationDTO1 = new ComparisonEvaluationDTO();
+        comparisonEvaluationDTO1.setDate(new Date(System.currentTimeMillis() - (4 * 60 * 60 * 1000)));
+        comparisonEvaluationDTO1.setHereIncidentsAmount(30);
+        comparisonEvaluationDTO1.setTomTomIncidentsAmount(56);
+        comparisonEvaluationDTO1.setSameIncidentAmount(23);
+        listCEDTO.add(comparisonEvaluationDTO1);
 
         ComparisonEvaluationDTO comparisonEvaluationDTO2 = new ComparisonEvaluationDTO();
-        comparisonEvaluationDTO2.setDate(new Date());
-        comparisonEvaluationDTO2.setHereIncidentsAmount(50);
-        comparisonEvaluationDTO2.setTomTomIncidentsAmount(73);
-        comparisonEvaluationDTO2.setSameIncidentAmount(18);
+        comparisonEvaluationDTO2.setDate(new Date(System.currentTimeMillis() - (3 * 60 * 60 * 1000)));
+        comparisonEvaluationDTO2.setHereIncidentsAmount(20);
+        comparisonEvaluationDTO2.setTomTomIncidentsAmount(45);
+        comparisonEvaluationDTO2.setSameIncidentAmount(13);
         listCEDTO.add(comparisonEvaluationDTO2);
 
         ComparisonEvaluationDTO comparisonEvaluationDTO3 = new ComparisonEvaluationDTO();
-        comparisonEvaluationDTO3.setDate(new Date());
-        comparisonEvaluationDTO3.setHereIncidentsAmount(77);
-        comparisonEvaluationDTO3.setTomTomIncidentsAmount(43);
-        comparisonEvaluationDTO3.setSameIncidentAmount(35);
+        comparisonEvaluationDTO3.setDate(new Date(System.currentTimeMillis() - (2 * 60 * 60 * 1000)));
+        comparisonEvaluationDTO3.setHereIncidentsAmount(40);
+        comparisonEvaluationDTO3.setTomTomIncidentsAmount(55);
+        comparisonEvaluationDTO3.setSameIncidentAmount(20);
         listCEDTO.add(comparisonEvaluationDTO3);
 
+        ComparisonEvaluationDTO comparisonEvaluationDTO4 = new ComparisonEvaluationDTO();
+        comparisonEvaluationDTO4.setDate(new Date(System.currentTimeMillis() - (1 * 60 * 60 * 1000)));
+        comparisonEvaluationDTO4.setHereIncidentsAmount(50);
+        comparisonEvaluationDTO4.setTomTomIncidentsAmount(73);
+        comparisonEvaluationDTO4.setSameIncidentAmount(18);
+        listCEDTO.add(comparisonEvaluationDTO4);
+
+        ComparisonEvaluationDTO comparisonEvaluationDTO5 = new ComparisonEvaluationDTO();
+        comparisonEvaluationDTO5.setDate(new Date());
+        comparisonEvaluationDTO5.setHereIncidentsAmount(77);
+        comparisonEvaluationDTO5.setTomTomIncidentsAmount(43);
+        comparisonEvaluationDTO5.setSameIncidentAmount(35);
+        listCEDTO.add(comparisonEvaluationDTO5);
 
         return ResponseEntity.ok(listCEDTO);
     }

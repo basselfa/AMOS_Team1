@@ -32,11 +32,13 @@ public class Request {
     private LocalDateTime requestTime;
     String cityName;
     @Transient
-    List<Incident> incidents ;
+    List<Incident> incidents =null ;
     @Transient
-    List<EvaluationCandidate> reEvaluatedCandidateList;
+    List<EvaluationCandidate> reEvaluatedCandidateList =null;
     @Transient
     Boolean incidentSavedInDb= false ;
+    @Transient
+    Boolean evaluationCandidateSavedInDb= false ;
 
 
     public Request() {
@@ -98,16 +100,18 @@ public class Request {
     }
 
     public void setEvaluatedCandidates(List<EvaluationCandidate> reEvaluatedCandidateList) {
-        for (EvaluationCandidate EvaluationCandidate :reEvaluatedCandidateList)
-        {
-            EvaluationCandidate.setRequestId(id);
-        }
-        MyRepo.insertEvaluationCandidate(reEvaluatedCandidateList);
+
         this.reEvaluatedCandidateList=reEvaluatedCandidateList;
     }
 
-    public List<EvaluationCandidate> getEvaluationCandidate(){
 
+
+    public void setEvaluationCandidateSavedInDb(Boolean evaluationCandidateSavedInDb) {
+        this.evaluationCandidateSavedInDb = evaluationCandidateSavedInDb;
+    }
+
+    public List<EvaluationCandidate> getEvaluationCandidate(){
+        if (evaluationCandidateSavedInDb ==false) return reEvaluatedCandidateList;
         List<EvaluationCandidate> evaluationCandidateAsList;
         evaluationCandidateAsList = MyRepo.getEntityManager().createNamedQuery("getEvaluationCandidateFromRequestId")
                 .setParameter("requestId", getId())

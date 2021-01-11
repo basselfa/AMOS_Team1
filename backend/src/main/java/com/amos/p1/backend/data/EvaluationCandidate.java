@@ -114,6 +114,20 @@ public class EvaluationCandidate {
         matcherList.add(matcher);
     }
 
+    @Override
+    public String toString() {
+        return "EvaluationCandidate{" +
+                "id=" + id +
+                ", requestId=" + requestId +
+                ", tomTomIncidentId=" + tomTomIncidentId +
+                ", hereIncidentId=" + hereIncidentId +
+                ", confidenceDescription='" + confidenceDescription + '\'' +
+                ", tomTomIncident=" + tomTomIncident +
+                ", hereIncident=" + hereIncident +
+                ", matcherList=" + matcherList +
+                '}';
+    }
+
     /*public void addMatcherToMatcherList(Class matcherClass) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         Matcher matcher = (Matcher) matcherClass.getDeclaredConstructor(Incident.class, Incident.class).newInstance(tomTomIncident, hereIncident);
         matcherList.add(matcher);

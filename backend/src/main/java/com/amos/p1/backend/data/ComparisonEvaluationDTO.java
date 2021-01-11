@@ -27,6 +27,16 @@ public class ComparisonEvaluationDTO {
         this.sameIncidentAmount = sameIncidentAmount;
     }
 
+    @Override
+    public String toString() {
+        return "ComparisonEvaluationDTO{" +
+                "tomTomIncidentsAmount=" + tomTomIncidentsAmount +
+                ", hereIncidentsAmount=" + hereIncidentsAmount +
+                ", sameIncidentAmount=" + sameIncidentAmount +
+                ", date=" + date +
+                '}';
+    }
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm")
 
     public Date getDate(){

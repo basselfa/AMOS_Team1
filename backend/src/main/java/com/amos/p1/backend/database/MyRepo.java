@@ -162,12 +162,19 @@ public class MyRepo {
         getEntityManager().getTransaction().begin();
         getEntityManager().persist(request);
         getEntityManager().getTransaction().commit();
+        if(incidents==null)return ;
         for (Incident incident:incidents ) { incident.setRequestId(request.getId());}
 
         insertIncident(incidents);
         request.setIncidentsSavedInDb(true);
 
+        List<EvaluationCandidate> evaluationCandidates =request.getEvaluationCandidate();
+        if(evaluationCandidates==null)return ;
+        for (EvaluationCandidate EvaluationCandidate :evaluationCandidates) {  EvaluationCandidate.setRequestId(request.getId());}
 
+
+        MyRepo.insertEvaluationCandidate(evaluationCandidates);
+        request.setEvaluationCandidateSavedInDb(true);
     }
 
     public static Request getRequest(LocalDateTime localDateTime){
@@ -176,6 +183,7 @@ public class MyRepo {
                 .setParameter("requestTime" ,localDateTime )
                 .getResultList();
         requests.get(0).setIncidentsSavedInDb(true);
+        requests.get(0).setEvaluationCandidateSavedInDb(true);
         return requests.get(0);
     }
 
