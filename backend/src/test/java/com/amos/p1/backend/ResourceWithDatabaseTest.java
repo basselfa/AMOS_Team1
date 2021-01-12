@@ -52,75 +52,84 @@ public class ResourceWithDatabaseTest {
         MyRepo.dropAll();
 
         //Adding dummy data to database
-        ProviderIntervalRequest providerIntervalRequest = new ProviderIntervalRequest();
+        ProviderIntervalRequest providerIntervalRequest = new ProviderIntervalRequest(true);
         providerIntervalRequest.setProviderNormalizer(new ProviderNormalizer(true));
         providerIntervalRequest.providerCronJob();
     }
 
-    /**
-     * Status Code: https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
-     */
     @Test
-    void testIncidents() {
-        String s = given()
+    void testIncidentsByCityAndTimestamp(){
+        List<Incident> incidents =
+            given()
                 .param("city", "Berlin")
-                .when()
-                .get(base + "/incidents")
-                .then().extract().asString();
-
-
-        assertThat(s, notNullValue());
-        //System.out.println(Helper.getPrettyJsonList(s));
-    }
-
-    @Test
-    void testIncidentsWithTypes(){
-        String s = given()
-                .param("city", "Berlin")
-                .param("types", "1,10")
+                .param("timestamp", "2020-01-01 00:00")
             .when()
                 .get(base + "/incidents")
             .then()
                 .extract()
-                .asString();
+                .body()
+                .jsonPath()
+                .getList(".", Incident.class);
 
-        assertThat(s, notNullValue());
-        System.out.println(Helper.getPrettyJsonList(s));
+
+        assertThat(incidents, hasSize(greaterThan(0)));
     }
 
     @Test
-    void testIncidentsWithTypeListEmpty(){
-        String s = given()
+    void testIncidentsByCityAndTimestampAndType(){
+        List<Incident> incidents =
+            given()
                 .param("city", "Berlin")
-                .param("types", "")
+                .param("timestamp", "2020-01-01 00:00")
+                .param("types", "LANE_CLOSED")
             .when()
                 .get(base + "/incidents")
             .then()
                 .extract()
-                .asString();
+                .body()
+                .jsonPath()
+                .getList(".", Incident.class);
 
-        assertThat(s, notNullValue());
-        System.out.println(Helper.getPrettyJsonList(s));
+
+        assertThat(incidents, hasSize(greaterThan(0)));
     }
 
     @Test
     void testIncidentByCityAndInvalidTimestamp(){
-        //For example wrong format. Valid: "yyyy-MM-dd HH:mm". Invalid: ""yyyy-dd-MM HH:mm""
-        throw new IllegalStateException("Not yet implemented yet. Sprint 7");
+
+        List<Incident> incidents =
+            given()
+                .param("city", "Berlin")
+                .param("timestamp", "2020-01-01 00:00")
+            .when()
+                .get(base + "/incidents")
+            .then()
+                .extract()
+                .body()
+                .jsonPath()
+                .getList(".", Incident.class);
+
+        assertThat(incidents, hasSize(0));
     }
 
     @Test
-    void testTimeStampByCityNotInDatabase() {
-        String s = given()
-                .param("city", "Shanghai")
+    void testIncidentByCityNotInDb(){
+
+        List<Incident> incidents =
+            given()
+                .param("city", "NOT MY CITY")
+                .param("timestamp", "2020-01-01 00:00")
             .when()
-                .get(base + "/timestamps")
+                .get(base + "/incidents")
             .then()
                 .extract()
-                .asString();
+                .body()
+                .jsonPath()
+                .getList(".", Incident.class);
 
-        assertEquals(s, "[]");
-        System.out.println(Helper.getPrettyJsonList(s));    }
+
+        assertThat(incidents, hasSize(0));
+    }
 
     @Test
     void testTimeStampByCity() {

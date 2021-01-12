@@ -138,9 +138,9 @@ public class RequestTest {
         request.setEvaluatedCandidates(evaluationCandidates);
 
 
-        evaluationCandidates =request.getEvaluationCandidate();
+        evaluationCandidates = request.getEvaluationCandidate();
 
 
-        assertThat(evaluationCandidates, is(notNullValue()));
+        assertThat(evaluationCandidates, hasSize(greaterThan(0)));
     }
 }
