@@ -113,8 +113,8 @@ public class ResourceWithDummyData {
                         12, 30, 0),
                 "670000:690000,681234:691234",6.0,new Long(1));
 
-        EvaluationCandidate evaluationCandidate = new EvaluationCandidate(incidentTomTom, incidentTomTom);
-        EvaluationCandidate evaluationCandidate2 = new EvaluationCandidate(incidentTomTom, incidentTomTom);
+        EvaluationCandidate evaluationCandidate = new EvaluationCandidate(incidentTomTom, incidentHere);
+        EvaluationCandidate evaluationCandidate2 = new EvaluationCandidate(incidentTomTom, incidentHere);
         listEvalCans.add(evaluationCandidate);
         listEvalCans.add(evaluationCandidate2);
 
