@@ -209,7 +209,8 @@ public class ResourceWithDatabaseTest {
                 .jsonPath()
                 .getList("com.amos.p1.backend.data", ComparisonEvaluationDTO.class);
 
-        assertThat(comparisonEvaluationDTOs, is(notNullValue()));
+        System.out.println(comparisonEvaluationDTOs);
+        assertThat(comparisonEvaluationDTOs, hasSize(greaterThan(0)));
 
 
     }
@@ -228,7 +229,7 @@ public class ResourceWithDatabaseTest {
         evaluationCandidates.add(evaluationCandidate);
         request.setEvaluatedCandidates(evaluationCandidates);
 
-        evaluationCandidates = given()
+        List<EvaluationCandidate> evaluationCandidatesFromRest = given()
                 .param("city", "Berlin")
                 .param("timestamp", LOCAL_DATE_TIME_DUMMY)
                 .when()
@@ -237,8 +238,10 @@ public class ResourceWithDatabaseTest {
                 .extract()
                 .body()
                 .jsonPath()
-                .getList("com.amos.p1.backend.data", EvaluationCandidate.class);
-        assertThat(evaluationCandidates, is(notNullValue()));
+                .getList(".", EvaluationCandidate.class);
+
+
+        assertThat(evaluationCandidatesFromRest, hasSize(greaterThan(0)));
     }
     private Request getDummyRequestWithOneDummyIncident() {
         Incident incident = DummyIncident.createIncident();

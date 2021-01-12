@@ -1,5 +1,6 @@
 package com.amos.p1.backend;
 
+import com.amos.p1.backend.data.ComparisonEvaluationDTO;
 import com.amos.p1.backend.data.EvaluationCandidate;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
@@ -65,26 +66,33 @@ public class ResourceWithDummyDataTest {
 
     @Test
     void testComparison(){
-        given()
+        List<EvaluationCandidate> evaluationCandidateList = given()
             .param("city", "berlin")
             .param("timestamp", "2021-01-10T16:08:43.780+00:00")
         .when()
             .get(base + "/comparison")
         .then()
-            .body("comparison.size()", equalTo(2));
+            .extract()
+            .body()
+            .jsonPath()
+            .getList(".", EvaluationCandidate.class);
+
+        assertThat(evaluationCandidateList.size(), equalTo(2));
     }
 
     @Test
     void testComparisonEvaluationOverTime(){
-        Date date = new Date();
-        System.out.println(date);
-        given()
+        List<ComparisonEvaluationDTO> comparisonEvaluationDTOList = given()
             .param("city", "berlin")
         .when()
             .get(base + "/comparisonEvaluationOverTime")
         .then()
-            .body("compEval.size()", equalTo(3));
+            .extract()
+            .body()
+            .jsonPath()
+            .getList(".", ComparisonEvaluationDTO.class);
 
+        assertThat(comparisonEvaluationDTOList.size(), equalTo(6));
     }
 
 
