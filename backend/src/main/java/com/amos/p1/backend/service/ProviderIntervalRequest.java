@@ -37,7 +37,7 @@ public class ProviderIntervalRequest {
     // 1000 ms * 60 * 60 = 1 hour
     @Scheduled(fixedRate = 3600000)
     public void providerCronJob() {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now;
 
         if(useDummy){
             // 01.01.2020 00:00:00
@@ -55,8 +55,9 @@ public class ProviderIntervalRequest {
 
             System.out.println("Save incidents into db. City: " + request.getCityName() +" Amount: " + request.getIncidents().size());
             MyRepo.insertRequest(request);
-            System.out.println("Sucessfully saved everything");
+            System.out.println("Sucessfully saved");
         }
 
+        System.out.println("Sucessfully saved everything");
     }
 }
