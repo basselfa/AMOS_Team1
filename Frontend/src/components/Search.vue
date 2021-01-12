@@ -76,7 +76,6 @@ export default {
             .catch(error => {
                 this.errorMessage = error.message
                 console.error('There was an error!', error)
-                this.loading = false
             })
     },
     methods: {
@@ -106,7 +105,6 @@ export default {
                 .catch(error => {
                     this.errorMessage = error.message
                     console.error('There was an error!', error)
-                    this.loading = false
                 })
         },
     },
