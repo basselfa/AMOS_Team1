@@ -73,7 +73,7 @@ public class ResourceWithDatabaseTest {
                 .jsonPath()
                 .getList(".", Incident.class);
 
-
+        System.out.println(incidents);
         assertThat(incidents, hasSize(greaterThan(0)));
     }
 
@@ -83,7 +83,7 @@ public class ResourceWithDatabaseTest {
             given()
                 .param("city", "Berlin")
                 .param("timestamp", "2020-01-01 00:00")
-                .param("types", "LANE_CLOSED")
+                .param("types", "CONSTRUCTION")
             .when()
                 .get(base + "/incidents")
             .then()
@@ -97,7 +97,7 @@ public class ResourceWithDatabaseTest {
     }
 
     @Test
-    void testIncidentByCityAndInvalidTimestamp(){
+    void testIncidentByCityAndTimestampNotInDb(){
 
         List<Incident> incidents =
             given()
@@ -135,35 +135,18 @@ public class ResourceWithDatabaseTest {
 
     @Test
     void testTimeStampByCity() {
-        List<Incident> incidents = new ArrayList<Incident>();
-        incidents.add(
-                new Incident("222","baustelle","major",
-                        "Traffic jam in Bergmannstraße",
-                        "Berlin", "Germany",
-                        "45.5", "67.4",
-                        "Bergmannstraße",
-                        "46.5", "69.5",
-                        "Bergmannstraße",
-                        1, "dummy",
-                        LocalDateTime.of(
-                                2020, 5, 1,
-                                12, 30, 0),
-                        LocalDateTime.of(
-                                2020, 5, 1,
-                                12, 30, 0),
-                        "670000:690000,681234:691234",6.0,new Long(1)));
-        MyRepo.insertIncident(incidents);
-
-        String s = given()
+        List<String> timeStamps = given()
                 .param("city", "Berlin")
             .when()
                 .get(base + "/timestamps")
             .then()
                 .extract()
-                .asString();
+                .body()
+                .jsonPath()
+                .getList(".", String.class);
 
-        assertEquals(s, "2020-05-01 12:30");
-        System.out.println(Helper.getPrettyJsonList(s));
+        assertThat(timeStamps, hasItem("2020-01-01 00:00"));
+        assertThat(timeStamps, hasSize(1));
     }
 
     @Test
