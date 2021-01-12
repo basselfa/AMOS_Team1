@@ -98,9 +98,9 @@ export default {
                 })
                 .then(response => {
                     let cities = []
-                    for (let i; i < response.data.length; i++) {
-                        cities.push(response.data[i].city)
-                    }
+                    response.data.map(function(item) {  
+                    cities.push(item.city);
+                    })
                     this.cities = cities
                 })
                 .catch(error => {
