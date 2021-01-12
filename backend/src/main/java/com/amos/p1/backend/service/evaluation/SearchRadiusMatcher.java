@@ -99,7 +99,7 @@ public class SearchRadiusMatcher extends Matcher {
     public double getLegthDifferencePercentage() {
         try {
            // return Math.abs(distanceIncident1 - distanceIncident2)*100 / (distanceIncident1 > distanceIncident2 ? distanceIncident1 : distanceIncident2);       // todo: check if correct
-            return Math.abs(distanceIncident1 - distanceIncident2)*100 / ( distanceIncident1 + distanceIncident2);
+            return (Math.abs(distanceIncident1 - distanceIncident2)*100d) /  (distanceIncident1 > distanceIncident2 ? distanceIncident2 : distanceIncident1);
 
         } catch (RuntimeException ex) {
             return 0;
