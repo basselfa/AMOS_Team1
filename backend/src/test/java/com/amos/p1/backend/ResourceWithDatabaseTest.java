@@ -46,15 +46,15 @@ public class ResourceWithDatabaseTest {
 
     @BeforeEach
     void setUp() {
-        this.base = "http://localhost:" + port + "/wi|thDatabase";
+        this.base = "http://localhost:" + port + "/withDatabase";
 
         System.out.println("reintialising Database");
-        MyRepo.dropAll();
+//        MyRepo.dropAll();
 
-        //Adding dummy data to database
-        ProviderIntervalRequest providerIntervalRequest = new ProviderIntervalRequest(true);
-        providerIntervalRequest.setProviderNormalizer(new ProviderNormalizer(true));
-        providerIntervalRequest.providerCronJob();
+//        //Adding dummy data to database
+//        ProviderIntervalRequest providerIntervalRequest = new ProviderIntervalRequest(true);
+//        providerIntervalRequest.setProviderNormalizer(new ProviderNormalizer(true));
+//        providerIntervalRequest.providerCronJob();
     }
 
     @Test
