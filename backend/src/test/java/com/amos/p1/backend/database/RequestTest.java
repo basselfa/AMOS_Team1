@@ -120,7 +120,7 @@ public class RequestTest {
         RequestAsList.add( MyRepo.geRequestFromCityName("Berlin"));
 
 
-        assertThat(RequestAsList, is(notNullValue()));
+        assertThat(RequestAsList, hasSize(greaterThan(0)));
     }
     @Test
     void testGetInsertEvaluationCandidate(){
@@ -135,8 +135,8 @@ public class RequestTest {
         evaluationCandidates.add(evaluationCandidate);
         MyRepo.insertEvaluationCandidate(evaluationCandidates);
 
-
-        assertThat(MyRepo.geEvaluationCandidateFromRequestId(request.getId())
-, is(notNullValue()));
+        List<EvaluationCandidate> actual = MyRepo.geEvaluationCandidateFromRequestId(request.getId());
+        System.out.println(actual);
+        assertThat(actual, hasSize(greaterThan(0)));
     }
 }
