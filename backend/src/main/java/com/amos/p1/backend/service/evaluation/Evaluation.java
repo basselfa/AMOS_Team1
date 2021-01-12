@@ -3,7 +3,6 @@ package com.amos.p1.backend.service.evaluation;
 import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.data.Request;
-import org.hamcrest.Condition;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -48,20 +47,20 @@ public class Evaluation {
         ).collect(Collectors.toList());
 
         // collect all Mainfolds
-        List<Stream<EvaluationCandidate>> mainFolds = unDroppedElements.parallelStream().map(
+        List<List<EvaluationCandidate>> mainFolds = unDroppedElements.parallelStream().map(
                 candidate ->
                         unDroppedElements.stream().filter(
                                 otherCandidate -> (
                                         (candidate.getHereIncident() == otherCandidate.getHereIncident()
                                                 || candidate.getTomTomIncident() == otherCandidate.getTomTomIncident()))
-                        )
-        ).collect(Collectors.toList());
+                        ).collect(Collectors.toList())
+        ).filter(list -> list.size()>1).collect(Collectors.toList());
 
 
         // add none-mainfolds to the final Set
         HashSet mainfoldElements = new HashSet();
         mainFolds.forEach(
-                s -> mainfoldElements.addAll(s.collect(Collectors.toList()))
+                s -> mainfoldElements.addAll(s.stream().collect(Collectors.toList()))
         );
         finalCandidates.addAll(
                 unDroppedElements.stream().filter(e -> !mainfoldElements.contains(e)).collect(Collectors.toList())
@@ -69,23 +68,23 @@ public class Evaluation {
 
 
         //for each set of pairs
-        for (Stream<EvaluationCandidate> candidates : mainFolds) {
+        for (List<EvaluationCandidate> candidates : mainFolds) {
 
             //find the ones with highest configence
-            int highestConfidence = candidates.mapToInt(c -> c.getScore()).max().getAsInt();
-            Stream<EvaluationCandidate> highestConfidenceCandidates = candidates.filter( e -> e.getScore()==highestConfidence);
+            int highestConfidence = candidates.stream().mapToInt(c -> c.getScore()).max().getAsInt();
+            List<EvaluationCandidate> highestConfidenceCandidates = candidates.stream().filter( e -> e.getScore()==highestConfidence).collect(Collectors.toList());
 
-            if(highestConfidenceCandidates.count()>1){
+            if(highestConfidenceCandidates.stream().count()>1){
                 // if more than one pair
-                highestConfidenceCandidates = highestConfidenceCandidates.filter( c -> c.getMatcherList().stream().filter(m -> m instanceof SearchRadiusMatcher).map(m -> ((SearchRadiusMatcher) m).getLegthDifferencePercentage()<60d).anyMatch(r -> r ==true));
+                highestConfidenceCandidates = highestConfidenceCandidates.stream().filter( c -> c.getMatcherList().stream().filter(m -> m instanceof SearchRadiusMatcher).map(m -> ((SearchRadiusMatcher) m).getLegthDifferencePercentage()<60d).anyMatch(r -> r ==true)).collect(Collectors.toList());
             }
-            if(highestConfidenceCandidates.count()>1){
+            if(highestConfidenceCandidates.stream().count()>1){
                 // if more than one pair
-                double smallestDistancePionts = highestConfidenceCandidates.mapToDouble( c -> c.getMatcherList().stream().filter(m -> m instanceof SearchRadiusMatcher).mapToDouble(m -> ((SearchRadiusMatcher) m).getPaitFromAndToDistanceSum()).findFirst().getAsDouble()).min().getAsDouble();
-                highestConfidenceCandidates = highestConfidenceCandidates.filter(c -> c.getMatcherList().stream().filter(m -> m instanceof SearchRadiusMatcher).map(m -> ((SearchRadiusMatcher) m).getPaitFromAndToDistanceSum()==smallestDistancePionts).anyMatch(r -> r ==true));
+                double smallestDistancePionts = highestConfidenceCandidates.stream().mapToDouble( c -> c.getMatcherList().stream().filter(m -> m instanceof SearchRadiusMatcher).mapToDouble(m -> ((SearchRadiusMatcher) m).getFromAndToDistanceSum()).findFirst().getAsDouble()).min().getAsDouble();
+                highestConfidenceCandidates = highestConfidenceCandidates.stream().filter(c -> c.getMatcherList().stream().filter(m -> m instanceof SearchRadiusMatcher).map(m -> ((SearchRadiusMatcher) m).getFromAndToDistanceSum()==smallestDistancePionts).anyMatch(r -> r ==true)).collect(Collectors.toList());
 
             }
-            EvaluationCandidate cacndidate = highestConfidenceCandidates.findFirst().get();
+            EvaluationCandidate cacndidate = highestConfidenceCandidates.stream().findFirst().get();
             finalCandidates.add(cacndidate);
         }
         return  new ArrayList(finalCandidates);
