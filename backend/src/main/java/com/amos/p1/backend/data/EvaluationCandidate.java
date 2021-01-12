@@ -12,7 +12,7 @@ import java.util.List;
 
 @NamedQuery(
         name = "getEvaluationCandidateFromRequestId",
-        query = "SELECT i FROM Incident i WHERE i.requestId = :requestId"
+        query = "SELECT i FROM EvaluationCandidate i WHERE i.requestId = :requestId"
 )
 @Entity
 public class EvaluationCandidate {
@@ -30,6 +30,8 @@ public class EvaluationCandidate {
     private Incident hereIncident;
     @Transient
     private final List<Matcher> matcherList = new ArrayList<>(); // Dont need to be stored in db
+    @Transient
+    Boolean evaluationCandidateSavedInDb= false ;
 
 
 
@@ -73,6 +75,7 @@ public class EvaluationCandidate {
     }
 
     public Incident getTomTomIncident() {
+        if(evaluationCandidateSavedInDb==false) return tomTomIncident;
         List<Incident> incidentAsList;
         incidentAsList = MyRepo.getEntityManager().createNamedQuery("getFromid")
                 .setParameter("id", tomTomIncidentId)
@@ -86,7 +89,15 @@ public class EvaluationCandidate {
 
     }
 
+
+
+    public void setEvaluationCandidateSavedInDb(Boolean evaluationCandidateSavedInDb) {
+        this.evaluationCandidateSavedInDb = evaluationCandidateSavedInDb;
+    }
+
     public Incident getHereIncident() {
+        if(evaluationCandidateSavedInDb==false) return hereIncident;
+
         List<Incident> incidentAsList;
         incidentAsList = MyRepo.getEntityManager().createNamedQuery("getFromid")
                 .setParameter("id", hereIncidentId)

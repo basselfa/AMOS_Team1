@@ -86,17 +86,12 @@ public class AggregatorFromDatabase implements Aggregator {
     }
 
     public List<Incident> getFromRequestTime(LocalDateTime requestTime) {
-        return (List<Incident>) MyRepo.getEntityManager().createNamedQuery("getFromRequestTime")
-                .setParameter("requestTime", requestTime )
-                .getResultList();
+        return MyRepo.getRequest(requestTime).getIncidents();
     }
     @Override
     public List<EvaluationCandidate> getEvaluationCandidate(String cityName, LocalDateTime requestTime) {
-        List<Request> requests =  MyRepo.getEntityManager().createNamedQuery("geRequestFromCityNameAndTime")
-                .setParameter("requestTime", requestTime )
-                .setParameter("cityName",  cityName)
-                .getResultList();
-        return requests.get(0).getEvaluationCandidate();
+      Request request= MyRepo.geRequestFromCityNameAndTime(cityName,requestTime);
+        return request.getEvaluationCandidate();
     }
     @Override
     public List<ComparisonEvaluationDTO> getComparisonEvaluationOverTime(String cityName){
@@ -108,6 +103,7 @@ public class AggregatorFromDatabase implements Aggregator {
         List<ComparisonEvaluationDTO> comparisonEvaluationDTOList = new ArrayList<ComparisonEvaluationDTO>();
         for (Request request : requests) {
             //TODO: split to here and tom tom incidents
+
             List<Incident> tomTomIncidents =  MyRepo.getEntityManager().createNamedQuery("getFromTomTom")
                     .setParameter("requestId",  request.getId())
                     .getResultList();

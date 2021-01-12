@@ -116,10 +116,8 @@ public class RequestTest {
         request.setCityName("Berlin");
         MyRepo.insertRequest(request);
 
-        List<Request> RequestAsList;
-        RequestAsList = MyRepo.getEntityManager().createNamedQuery("geRequestFromCityName")
-                .setParameter("cityName", "Berlin")
-                .getResultList();
+        List<Request> RequestAsList =new ArrayList<Request>();
+        RequestAsList.add( MyRepo.geRequestFromCityName("Berlin"));
 
 
         assertThat(RequestAsList, is(notNullValue()));
