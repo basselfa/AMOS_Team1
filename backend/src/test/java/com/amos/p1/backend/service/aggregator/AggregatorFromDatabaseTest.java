@@ -41,7 +41,7 @@ public class AggregatorFromDatabaseTest {
         MyRepo.dropAll();
 
         //Adding dummy data to database
-        ProviderIntervalRequest providerIntervalRequest = new ProviderIntervalRequest();
+        ProviderIntervalRequest providerIntervalRequest = new ProviderIntervalRequest(true);
         providerIntervalRequest.setProviderNormalizer(new ProviderNormalizer(true));
         providerIntervalRequest.providerCronJob();
     }
