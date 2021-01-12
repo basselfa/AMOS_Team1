@@ -43,11 +43,11 @@ public class ComparisonEvaluationDTO {
         return this.date;
     }
 
-    public int getTomTomIncidentAmount(){
+    public int getTomTomIncidentsAmount(){
         return this.tomTomIncidentsAmount;
     }
 
-    public int getHereIncidentAmount(){
+    public int getHereIncidentsAmount(){
         return this.hereIncidentsAmount;
     }
 

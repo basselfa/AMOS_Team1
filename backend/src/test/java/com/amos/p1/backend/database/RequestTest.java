@@ -116,10 +116,8 @@ public class RequestTest {
         request.setCityName("Berlin");
         MyRepo.insertRequest(request);
 
-        List<Request> RequestAsList;
-        RequestAsList = MyRepo.getEntityManager().createNamedQuery("geRequestFromCityName")
-                .setParameter("cityName", "Berlin")
-                .getResultList();
+        List<Request> RequestAsList =new ArrayList<Request>();
+        RequestAsList.add( MyRepo.geRequestFromCityName("Berlin"));
 
 
         assertThat(RequestAsList, is(notNullValue()));
@@ -135,12 +133,10 @@ public class RequestTest {
         evaluationCandidate.setHereIncidentId(new Long(12));
         evaluationCandidate.setTomTomIncidentId(new Long(13));
         evaluationCandidates.add(evaluationCandidate);
-        request.setEvaluatedCandidates(evaluationCandidates);
+        MyRepo.insertEvaluationCandidate(evaluationCandidates);
 
 
-        evaluationCandidates = request.getEvaluationCandidate();
-
-
-        assertThat(evaluationCandidates, hasSize(greaterThan(0)));
+        assertThat(MyRepo.geEvaluationCandidateFromRequestId(request.getId())
+, is(notNullValue()));
     }
 }

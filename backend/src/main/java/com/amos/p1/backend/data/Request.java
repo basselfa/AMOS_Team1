@@ -89,16 +89,6 @@ public class Request {
     public void setCityName(String cityName) { this.cityName = cityName; }
 
 
-    @Override
-    public String toString() {
-        return "Request{" +
-                "id=" + id +
-                ", requestTime=" + requestTime +
-                ", incidents=" + getIncidents() +
-                ", incidentSavedInDb=" + incidentSavedInDb +
-                '}';
-    }
-
     public void setEvaluatedCandidates(List<EvaluationCandidate> reEvaluatedCandidateList) {
 
         this.reEvaluatedCandidateList=reEvaluatedCandidateList;
@@ -112,12 +102,27 @@ public class Request {
 
     public List<EvaluationCandidate> getEvaluationCandidate(){
         if (evaluationCandidateSavedInDb ==false) return reEvaluatedCandidateList;
+
         List<EvaluationCandidate> evaluationCandidateAsList;
-        evaluationCandidateAsList = MyRepo.getEntityManager().createNamedQuery("getEvaluationCandidateFromRequestId")
+        evaluationCandidateAsList =(List<EvaluationCandidate>) MyRepo.getEntityManager().createNamedQuery("getEvaluationCandidateFromRequestId")
                 .setParameter("requestId", getId())
                 .getResultList();
+        setEvaluatedCandidates(evaluationCandidateAsList);
 
 
         return evaluationCandidateAsList;
+    }
+
+    @Override
+    public String toString() {
+        return "Request{" +
+                "id=" + id +
+                ", requestTime=" + requestTime +
+                ", cityName='" + cityName + '\'' +
+                ", incidents=" + incidents +
+                ", reEvaluatedCandidateList=" + reEvaluatedCandidateList +
+                ", incidentSavedInDb=" + incidentSavedInDb +
+                ", evaluationCandidateSavedInDb=" + evaluationCandidateSavedInDb +
+                '}';
     }
 }

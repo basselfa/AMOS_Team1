@@ -29,7 +29,7 @@
 
 on:
   push:
-    branches: [ cicd-test ]
+    branches: [ production ]
 
 name: Deploy to Amazon ECS
 
@@ -67,6 +67,14 @@ jobs:
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG Frontend
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+        
+    - name: Fill in the new image ID in the Amazon ECS task definition
+      id: task-def-frontend
+      uses: aws-actions/amazon-ecs-render-task-definition@v1
+      with:
+        task-definition: aws-task-definition.json
+        container-name: frontend
+        image: ${{ steps.build-frontend-image.outputs.image }}
   
     - name: Set up JDK 1.8
       uses: actions/setup-java@v1
@@ -90,19 +98,20 @@ jobs:
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG backend
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
-
+        
     - name: Fill in the new image ID in the Amazon ECS task definition
-      id: task-def
+      id: task-def-backend
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
         task-definition: aws-task-definition.json
-        container-name: frontend
-        image: ${{ steps.build-image.outputs.image }}
+        container-name: backend
+        image: ${{ steps.build-backend-image.outputs.image }}
+
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
-        task-definition: ${{ steps.task-def.outputs.task-definition }}
-        service: frontend-release-7
+        task-definition: ${{ steps.task-def-backend.outputs.task-definition }}
+        service: amos-service
         cluster: AMOS2020-proj1
         wait-for-service-stability: true

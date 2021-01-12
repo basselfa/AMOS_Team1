@@ -210,8 +210,10 @@ public class AggregatorFromDatabaseTest {
 
 
         List<ComparisonEvaluationDTO> comparisonEvaluationDTOs= aggregator.getComparisonEvaluationOverTime("Berlin" );
-        System.out.println(comparisonEvaluationDTOs);
-        assertThat(comparisonEvaluationDTOs, hasSize(greaterThan(0)));
+
+        assertThat(comparisonEvaluationDTOs, is(notNullValue()));
+
+
     }
 
     private Request getDummyRequestWithOneDummyIncident() {
