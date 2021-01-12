@@ -17,6 +17,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.test.context.TestPropertySource;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@TestPropertySource(properties = "app.scheduling.enable=false")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ResourceWithDatabaseTest {
 
@@ -49,12 +51,12 @@ public class ResourceWithDatabaseTest {
         this.base = "http://localhost:" + port + "/withDatabase";
 
         System.out.println("reintialising Database");
-//        MyRepo.dropAll();
+        MyRepo.dropAll();
 
-//        //Adding dummy data to database
-//        ProviderIntervalRequest providerIntervalRequest = new ProviderIntervalRequest(true);
-//        providerIntervalRequest.setProviderNormalizer(new ProviderNormalizer(true));
-//        providerIntervalRequest.providerCronJob();
+        //Adding dummy data to database
+        ProviderIntervalRequest providerIntervalRequest = new ProviderIntervalRequest(true);
+        providerIntervalRequest.setProviderNormalizer(new ProviderNormalizer(true));
+        providerIntervalRequest.providerCronJob();
     }
 
     @Test

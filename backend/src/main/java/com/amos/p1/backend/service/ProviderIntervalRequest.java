@@ -2,6 +2,7 @@ package com.amos.p1.backend.service;
 
 import com.amos.p1.backend.data.Request;
 import com.amos.p1.backend.database.MyRepo;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +12,9 @@ import java.util.Date;
 import java.util.List;
 
 @Component
+@ConditionalOnProperty(
+        value = "app.scheduling.enable", havingValue = "true", matchIfMissing = true
+)
 public class ProviderIntervalRequest {
 
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
