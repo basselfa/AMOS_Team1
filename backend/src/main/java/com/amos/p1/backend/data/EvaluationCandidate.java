@@ -47,7 +47,8 @@ public class EvaluationCandidate {
 
     }
 
-    //private int score = 0;
+    private int score;
+    private boolean dropped;
     @Basic
     @Column(name = "requestId", nullable = true)
     public Long getRequestId() {    return requestId; }

@@ -81,7 +81,7 @@ public class ResourceWithDummyDataTest {
     }
 
     @Test
-    void testComparisonEvaluationOverTime(){
+    void testComparisonEvaluationOverTimeListAmount(){
         List<ComparisonEvaluationDTO> comparisonEvaluationDTOList = given()
             .param("city", "berlin")
         .when()
@@ -93,6 +93,21 @@ public class ResourceWithDummyDataTest {
             .getList(".", ComparisonEvaluationDTO.class);
 
         assertThat(comparisonEvaluationDTOList.size(), equalTo(6));
+    }
+
+    @Test
+    void testComparisonEvaluationOverTimeFirstDTOSameIncidents(){
+        List<ComparisonEvaluationDTO> comparisonEvaluationDTOList = given()
+            .param("city", "berlin")
+        .when()
+            .get(base + "/comparisonEvaluationOverTime")
+        .then()
+            .extract()
+            .body()
+            .jsonPath()
+            .getList(".", ComparisonEvaluationDTO.class);
+
+        assertThat(comparisonEvaluationDTOList.get(0).getSameIncidentAmount(), equalTo(20));
     }
 
 
