@@ -55,22 +55,23 @@ describe('Historization', () => {
             localVue,
             vuetify,
         })
-        flushPromises()
 
-        //fetchData is called on created
-        const error = new Error('Error: Request failed with status code 500')
-        moxios.stubRequest('http://localhost:8082/withDatabase/cities/', {
-            error,
-        })
+        const error = new Error('Error: Request failed with status code 400')
 
-        wrapper.vm.fetchData()
+        await wrapper.vm.fetchData()
 
-        moxios.wait(() => {
-            expect(wrapper.vm.errorMessage).toEqual(
-                'Error: Request failed with status code 500'
-            )
-            done()
-        })
+        let request = moxios.requests.mostRecent()
+        request
+            .respondWith({
+                status: 400,
+                response: error,
+            })
+            .then(function() {
+                expect(wrapper.vm.errorMessage).toEqual(
+                    'Error: Request failed with status code 400'
+                )
+                done()
+            })
     })
 
     it('should get comparison data from request', async () => {
@@ -117,23 +118,22 @@ describe('Historization', () => {
             localVue,
             vuetify,
         })
-        flushPromises()
-        const error = new Error('Error: Request failed with status code 500')
-        moxios.stubRequest(
-            'http://localhost:8082/demo/comparisonEvaluationOverTime/?city=Berlin',
-            {
-                error,
-            }
-        )
+        const error = new Error('Error: Request failed with status code 400')
 
-        wrapper.vm.fetchDataForCity()
+        await wrapper.vm.fetchDataForCity()
 
-        moxios.wait(() => {
-            expect(wrapper.vm.errorMessage).toEqual(
-                'Error: Request failed with status code 500'
-            )
-            done()
-        })
+        let request = moxios.requests.mostRecent()
+        request
+            .respondWith({
+                status: 400,
+                response: error,
+            })
+            .then(function() {
+                expect(wrapper.vm.errorMessage).toEqual(
+                    'Error: Request failed with status code 400'
+                )
+                done()
+            })
     })
 
     afterEach(() => {

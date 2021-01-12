@@ -120,7 +120,7 @@ export default {
                     comparison: [],
                 }
                 this.loading = true
-                // get comparison data
+                // get comparison data   
                 await axios
                     .get(
                         'http://' + window.location.hostname + ':8082/demo/comparisonEvaluationOverTime/?city=' +
@@ -137,15 +137,16 @@ export default {
                                 response.data[i].date >= this.startTime &&
                                 response.data[i].date <= this.endTime
                             ) {
+                                console.log(response)
                                 // get the necessary data for the chart
                                 this.comparisonData.labels.push(
                                     response.data[i].date
                                 )
                                 this.comparisonData.tomtom.push(
-                                    response.data[i].tomTomIncidentAmount
+                                    response.data[i].tomTomIncidentsAmount
                                 )
                                 this.comparisonData.here.push(
-                                    response.data[i].hereIncidentAmount
+                                    response.data[i].hereIncidentsAmount
                                 )
                                 this.comparisonData.comparison.push(
                                     response.data[i].sameIncidentAmount
