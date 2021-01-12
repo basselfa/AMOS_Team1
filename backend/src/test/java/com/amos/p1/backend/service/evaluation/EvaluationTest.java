@@ -6,27 +6,31 @@ import com.amos.p1.backend.data.Request;
 import com.amos.p1.backend.service.ProviderNormalizer;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 public class EvaluationTest {
 
     Request request;
 
-    public EvaluationTest(){
+    public EvaluationTest() {
         ProviderNormalizer providerNormalizer = new ProviderNormalizer(true);
         List<Request> requests = providerNormalizer.parseCurrentRequest();
 
         requests
-            .stream()
+                .stream()
                 .filter(request -> request.getCityName().equals("Berlin"))
                 .findFirst()
-            .ifPresent(request -> this.request = request);
+                .ifPresent(request -> this.request = request);
     }
 
 
     @Test
-    void testCalculation(){
+    void testCalculation() {
         Evaluation evaluation = new Evaluation();
         List<EvaluationCandidate> evaluationCandidateList = evaluation.calculateCandidates(request);
 
@@ -34,21 +38,90 @@ public class EvaluationTest {
         List<Incident> tomTomIncidents = request.getIncidents().stream().filter(e -> e.getProvider().equals("1")).collect(Collectors.toList());
 
         // coorect size
-        assert  evaluationCandidateList.size() == herreIncidents.size() * tomTomIncidents.size();
+        assertThat( evaluationCandidateList.size(),equalTo( herreIncidents.size() * tomTomIncidents.size()));
 
         // containing Matchers
-        evaluationCandidateList.forEach( e-> {
-            assert e.getMatcherList().size()>=1;
+        evaluationCandidateList.forEach(e -> {
+            assertThat( e.getMatcherList().size(), equalTo(2));
         });
     }
 
     @Test
-    void testManifolds(){
+    void testManifolds() {
         Evaluation evaluation = new Evaluation();
         List<EvaluationCandidate> evaluationCandidateList = evaluation.calculateCandidates(request);
         List<EvaluationCandidate> reEvaluatedCandidateList = evaluation.dropManifolds(evaluationCandidateList);
 
         //todo: find good test case
     }
+
+
+    @Test
+    void testSameIncidentLocal() {
+        Request req = new Request();
+
+        List<Incident> incidents = new ArrayList<>();
+        Incident incident = new Incident();
+        incident.setStartPositionLatitude("52.534080");
+        incident.setStartPositionLongitude("13.290938");
+        incident.setEndPositionLatitude("52.534576");
+        incident.setEndPositionLongitude("13.300873");
+        incident.setProvider("1");
+        incidents.add(incident);
+
+        incident = new Incident();
+        incident.setStartPositionLatitude("52.534080");
+        incident.setStartPositionLongitude("13.290938");
+        incident.setEndPositionLatitude("52.534576");
+        incident.setEndPositionLongitude("13.300873");
+        incident.setProvider("0");
+        incidents.add(incident);
+
+        req.setIncidents(incidents);
+
+        Evaluation evaluation = new Evaluation();
+        List<EvaluationCandidate> evaluationCandidateList = evaluation.calculateCandidates(req);
+
+        assertThat( evaluationCandidateList.size() , equalTo(1));
+
+        List<EvaluationCandidate> reEvaluatedCandidateList = evaluation.dropManifolds(evaluationCandidateList);
+
+        assertThat( reEvaluatedCandidateList.size() , equalTo(1));
+
+    }
+
+    @Test
+    void testdifferentIncidentLocal() {
+        Request req = new Request();
+
+        List<Incident> incidents = new ArrayList<>();
+        Incident incident = new Incident();
+        incident.setStartPositionLatitude("52.534080");
+        incident.setStartPositionLongitude("13.290938");
+        incident.setEndPositionLatitude("52.534576");
+        incident.setEndPositionLongitude("13.300873");
+        incident.setProvider("1");
+        incidents.add(incident);
+
+        incident = new Incident();
+        incident.setStartPositionLatitude("52.534080");
+        incident.setStartPositionLongitude("13.290938");
+        incident.setEndPositionLatitude("52.534576");
+        incident.setEndPositionLongitude("14.300873");
+        incident.setProvider("0");
+        incidents.add(incident);
+
+        req.setIncidents(incidents);
+
+        Evaluation evaluation = new Evaluation();
+        List<EvaluationCandidate> evaluationCandidateList = evaluation.calculateCandidates(req);
+
+        assertThat( evaluationCandidateList.size() , equalTo(1));
+
+        List<EvaluationCandidate> reEvaluatedCandidateList = evaluation.dropManifolds(evaluationCandidateList);
+
+        assertThat( reEvaluatedCandidateList.size() , equalTo(0));
+    }
+
 
 }

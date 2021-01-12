@@ -44,6 +44,8 @@ public class Evaluation {
         // filter all dropped elements out
         List<EvaluationCandidate> unDroppedElements = evaluationCandidateList.parallelStream().filter(
                 candidate -> !candidate.isDropped()
+        ).filter(
+                c -> c.getMatcherList().stream().filter(m -> m instanceof SearchRadiusMatcher).map(m -> ((SearchRadiusMatcher) m).getLegthDifferencePercentage() < 60d).anyMatch(r -> r == true)
         ).collect(Collectors.toList());
 
         // collect all Mainfolds
@@ -54,7 +56,7 @@ public class Evaluation {
                                         (candidate.getHereIncident() == otherCandidate.getHereIncident()
                                                 || candidate.getTomTomIncident() == otherCandidate.getTomTomIncident()))
                         ).collect(Collectors.toList())
-        ).filter(list -> list.size()>1).collect(Collectors.toList());
+        ).filter(list -> list.size() > 1).collect(Collectors.toList());
 
 
         // add none-mainfolds to the final Set
@@ -72,21 +74,22 @@ public class Evaluation {
 
             //find the ones with highest configence
             int highestConfidence = candidates.stream().mapToInt(c -> c.getScore()).max().getAsInt();
-            List<EvaluationCandidate> highestConfidenceCandidates = candidates.stream().filter( e -> e.getScore()==highestConfidence).collect(Collectors.toList());
+            List<EvaluationCandidate> highestConfidenceCandidates = candidates.stream().filter(e -> e.getScore() == highestConfidence).collect(Collectors.toList());
 
-            if(highestConfidenceCandidates.stream().count()>1){
+            // if(highestConfidenceCandidates.stream().count()>1){
+            // if more than one pair
+            // highestConfidenceCandidates = highestConfidenceCandidates.stream().filter(c -> c.getMatcherList().stream().filter(m -> m instanceof SearchRadiusMatcher).map(m -> ((SearchRadiusMatcher) m).getLegthDifferencePercentage() < 60d).anyMatch(r -> r == true)).collect(Collectors.toList());
+            //  }
+            if (highestConfidenceCandidates.stream().count() > 1) {
                 // if more than one pair
-                highestConfidenceCandidates = highestConfidenceCandidates.stream().filter( c -> c.getMatcherList().stream().filter(m -> m instanceof SearchRadiusMatcher).map(m -> ((SearchRadiusMatcher) m).getLegthDifferencePercentage()<60d).anyMatch(r -> r ==true)).collect(Collectors.toList());
-            }
-            if(highestConfidenceCandidates.stream().count()>1){
-                // if more than one pair
-                double smallestDistancePionts = highestConfidenceCandidates.stream().mapToDouble( c -> c.getMatcherList().stream().filter(m -> m instanceof SearchRadiusMatcher).mapToDouble(m -> ((SearchRadiusMatcher) m).getFromAndToDistanceSum()).findFirst().getAsDouble()).min().getAsDouble();
-                highestConfidenceCandidates = highestConfidenceCandidates.stream().filter(c -> c.getMatcherList().stream().filter(m -> m instanceof SearchRadiusMatcher).map(m -> ((SearchRadiusMatcher) m).getFromAndToDistanceSum()==smallestDistancePionts).anyMatch(r -> r ==true)).collect(Collectors.toList());
+                double smallestDistancePionts = highestConfidenceCandidates.stream().mapToDouble(c -> c.getMatcherList().stream().filter(m -> m instanceof SearchRadiusMatcher).mapToDouble(m -> ((SearchRadiusMatcher) m).getFromAndToDistanceSum()).findFirst().getAsDouble()).min().getAsDouble();
+                highestConfidenceCandidates = highestConfidenceCandidates.stream().filter(c -> c.getMatcherList().stream().filter(m -> m instanceof SearchRadiusMatcher).map(m -> ((SearchRadiusMatcher) m).getFromAndToDistanceSum() == smallestDistancePionts).anyMatch(r -> r == true)).collect(Collectors.toList());
 
             }
-            EvaluationCandidate cacndidate = highestConfidenceCandidates.stream().findFirst().get();
-            finalCandidates.add(cacndidate);
+            Optional<EvaluationCandidate> cacndidate = highestConfidenceCandidates.stream().findFirst();
+            if (cacndidate.isPresent())
+                finalCandidates.add(cacndidate.get());
         }
-        return  new ArrayList(finalCandidates);
+        return new ArrayList(finalCandidates);
     }
 }

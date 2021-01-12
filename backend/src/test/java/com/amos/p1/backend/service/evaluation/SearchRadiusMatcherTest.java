@@ -69,7 +69,7 @@ class SearchRadiusMatcherTest {
         radiusMatcher = new SearchRadiusMatcher(incident1, incident2);
         assertThat(radiusMatcher.getConfidence(), equalTo(1));
         assertThat(radiusMatcher.isDropped(), equalTo(false));
-        assertThat(radiusMatcher.getLegthDifferencePercentage(), equalTo(98.04521040732176));
+        assertThat(radiusMatcher.getLegthDifferencePercentage(), equalTo(10031.280171999533));
         assertThat(radiusMatcher.getFromAndToDistanceSum(), equalTo(67634.13938629092));
     }
 
@@ -91,7 +91,7 @@ class SearchRadiusMatcherTest {
         radiusMatcher = new SearchRadiusMatcher(incident1, incident2);
         assertThat(radiusMatcher.getConfidence(), equalTo(0));
         assertThat(radiusMatcher.isDropped(), equalTo(true));
-        assertThat(radiusMatcher.getLegthDifferencePercentage(), equalTo(1.1515993691574666));
+        assertThat(radiusMatcher.getLegthDifferencePercentage(), equalTo(2.3300313648132946));
         assertThat(radiusMatcher.getFromAndToDistanceSum(), equalTo(259486.14650060693));
     }
 
