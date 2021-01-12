@@ -3,6 +3,8 @@ package com.amos.p1.backend.service.evaluation;
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.data.Location;
 
+import java.io.IOException;
+
 // Thesis page 36
 public class SearchRadiusMatcher extends Matcher {
     private static int searchboundaryInMeters = 20;
@@ -91,14 +93,20 @@ public class SearchRadiusMatcher extends Matcher {
         dist = Math.acos(dist);
         dist = rad2deg(dist);
         dist = dist * 60 * 1.1515;
-        return dist * 1.609344;
+        return dist * 1.609344 * 1000;
     }
 
     public double getLegthDifferencePercentage() {
-        return Math.abs(distanceIncident1 - distanceIncident2) / (distanceIncident1 > distanceIncident2 ? distanceIncident1 : distanceIncident2);
+        try {
+           // return Math.abs(distanceIncident1 - distanceIncident2)*100 / (distanceIncident1 > distanceIncident2 ? distanceIncident1 : distanceIncident2);       // todo: check if correct
+            return Math.abs(distanceIncident1 - distanceIncident2)*100 / ( distanceIncident1 + distanceIncident2);
+
+        } catch (RuntimeException ex) {
+            return 0;
+        }
     }
 
-    public double getPaitFromAndToDistanceSum() {
+    public double getFromAndToDistanceSum() {
         return distanceStartPoints + distanceEndPoints;
     }
 
