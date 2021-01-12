@@ -234,5 +234,18 @@ public class MyRepo {
 
         return request;
     }
+    public static List<EvaluationCandidate> geEvaluationCandidateFromRequestId(Long requestId){
+
+        List<EvaluationCandidate> evaluationCandidates =  MyRepo.getEntityManager().createNamedQuery("getEvaluationCandidateFromRequestId")
+                .setParameter("requestId",  requestId)
+                .getResultList();
+
+
+
+        for(EvaluationCandidate evaluationCandidate : evaluationCandidates) {
+            evaluationCandidate.setEvaluationCandidateSavedInDb(true);}
+
+        return evaluationCandidates;
+    }
 
 }

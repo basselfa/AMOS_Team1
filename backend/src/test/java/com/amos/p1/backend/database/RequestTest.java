@@ -133,12 +133,10 @@ public class RequestTest {
         evaluationCandidate.setHereIncidentId(new Long(12));
         evaluationCandidate.setTomTomIncidentId(new Long(13));
         evaluationCandidates.add(evaluationCandidate);
-        request.setEvaluatedCandidates(evaluationCandidates);
+        MyRepo.insertEvaluationCandidate(evaluationCandidates);
 
 
-        evaluationCandidates =request.getEvaluationCandidate();
-
-
-        assertThat(evaluationCandidates, is(notNullValue()));
+        assertThat(MyRepo.geEvaluationCandidateFromRequestId(request.getId())
+, is(notNullValue()));
     }
 }
