@@ -18,20 +18,21 @@ public class AggregatorFromDatabase implements Aggregator {
     @Override
     public List<Incident> getIncidents(String city, Optional<LocalDateTime> timestamp, Optional<List<String>> types) {
 
-        TypedQuery<Incident> query;
+        List<Incident>  incidents;
 
         if(timestamp.isPresent()){
-            query = MyRepo.getEntityManager()
+            incidents = MyRepo.getEntityManager()
                 .createNamedQuery("getFromCityAndTimeStamp", Incident.class)
                 .setParameter("city", city )
-                .setParameter("entryTime", timestamp.get());
+                .setParameter("entryTime", timestamp.get())
+                    .getResultList();
         }else{
-            query = MyRepo.getEntityManager()
+            incidents = MyRepo.getEntityManager()
                     .createNamedQuery("getFromCity", Incident.class)
-                    .setParameter("city", city);
+                    .setParameter("city", city)
+                    .getResultList();
         }
 
-        List<Incident> incidents = query.getResultList();
 
         if(types.isPresent()){
             incidents = filterIncidentsByType(incidents, types.get());
