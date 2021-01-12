@@ -92,8 +92,8 @@ export default {
     },
     methods: {
         async fetchData() {
-            await axios
-                .get('http://localhost:8082/withDatabase/cities/', {
+            await axios 
+                .get('http://' + window.location.hostname + ':8082/withDatabase/cities', {
                     headers: { 'Access-Control-Allow-Origin': '*' },
                 })
                 .then(response => {
@@ -123,7 +123,7 @@ export default {
                 // get comparison data
                 await axios
                     .get(
-                        'http://localhost:8082/demo/comparisonEvaluationOverTime/?city=' +
+                        'http://' + window.location.hostname + ':8082/demo/comparisonEvaluationOverTime/?city=' +
                             this.city,
                         {
                             headers: { 'Access-Control-Allow-Origin': '*' },

@@ -67,7 +67,7 @@ export default {
     mounted: function() {
         // get list of all cities
         axios
-            .get('http://localhost:8082/demo/cities/', {
+            .get('http://' + window.location.hostname + ':8082/demo/cities/', {
                 headers: { 'Access-Control-Allow-Origin': '*' },
             })
             .then(response => {
@@ -87,8 +87,7 @@ export default {
          */
         getCity: function() {
             axios
-                .get(
-                    'http://localhost:8082/demo/timestamps?city=' + this.city,
+                .get('http://' + window.location.hostname + ':8082/demo/timestamps?city=' + this.city,
                     {
                         headers: { 'Access-Control-Allow-Origin': '*' },
                     }

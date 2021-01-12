@@ -36,7 +36,9 @@ export default {
         },
         executeQuery: function(value) {
             console.log(
-                'http://localhost:8082/demo/incidents?city=' +
+                'http://' +
+                    window.location.hostname +
+                    ':8082/demo/incidents?city=' +
                     value.city +
                     '&timestamp=' +
                     value.timestamp
@@ -46,7 +48,9 @@ export default {
                 if (value.type.length == 0) {
                     axios
                         .get(
-                            'http://localhost:8082/demo/incidents?city=' +
+                            'http://' +
+                                window.location.hostname +
+                                ':8082/demo/incidents?city=' +
                                 value.city +
                                 '&timestamp=' +
                                 value.timestamp,
@@ -63,9 +67,20 @@ export default {
                             console.error('There was an error!', error)
                         })
                 } else {
+                    // take first element of types for testing reasons TODO: pass types properly
+                    console.log(
+                        'http://' +
+                            window.location.hostname +
+                            ':8082/withDatabase/incidentsWithTypes?city=' +
+                            value.city +
+                            '&types=' +
+                            value.type[0]
+                    )
                     axios
                         .get(
-                            'http://localhost:8082/withDatabase/incidentsWithTypes?city=' +
+                            'http://' +
+                                window.location.hostname +
+                                ':8082/withDatabase/incidentsWithTypes?city=' +
                                 value.city +
                                 '&types=' +
                                 value.type[0],
