@@ -24,6 +24,7 @@ public class EvaluationCandidate {
     private Long tomTomIncidentId;
     private Long hereIncidentId;
     private String confidenceDescription;
+    private int score;
     @Transient
     private Incident tomTomIncident;
     @Transient
@@ -32,6 +33,8 @@ public class EvaluationCandidate {
     private final List<Matcher> matcherList = new ArrayList<>(); // Dont need to be stored in db
     @Transient
     Boolean evaluationCandidateSavedInDb= false ;
+    @Transient
+    private boolean dropped;
 
 
 
@@ -47,8 +50,7 @@ public class EvaluationCandidate {
 
     }
 
-    private int score;
-    private boolean dropped;
+
     @Basic
     @Column(name = "requestId", nullable = true)
     public Long getRequestId() {    return requestId; }

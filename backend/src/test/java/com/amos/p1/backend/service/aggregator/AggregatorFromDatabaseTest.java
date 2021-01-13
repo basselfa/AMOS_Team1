@@ -177,35 +177,22 @@ public class AggregatorFromDatabaseTest {
     }
     @Test
     void testGetEvaluationCandiate() {
-        Request request = getDummyRequestWithOneDummyIncident();
-        request.setCityName("Berlin");
+        Request request = createDummyRequest();
 
-
-        List<EvaluationCandidate> evaluationCandidates = new ArrayList<EvaluationCandidate>();
-        EvaluationCandidate evaluationCandidate = new EvaluationCandidate ();
-        evaluationCandidate.setHereIncidentId(new Long(12));
-        evaluationCandidate.setTomTomIncidentId(new Long(13));
-        evaluationCandidates.add(evaluationCandidate);
-        request.setEvaluatedCandidates(evaluationCandidates);
         MyRepo.insertRequest(request);
 
-        evaluationCandidates = aggregator.getEvaluationCandidate("Berlin",LOCAL_DATE_TIME_DUMMY );
+        List<EvaluationCandidate> evaluationCandidates = aggregator.getEvaluationCandidate("Berlin",LocalDateTime.of(
+                2020, 5, 1,
+                12, 30, 0));
+        System.out.println(evaluationCandidates);
         assertThat(evaluationCandidates, hasSize(greaterThan(0)));
 
     }
 
     @Test
     void testGgetComparisonEvaluationOverTime()  {
-        Request request = getDummyRequestWithOneDummyIncident();
-        request.setCityName("Berlin");
+        Request request = createDummyRequest();
 
-
-        List<EvaluationCandidate> evaluationCandidates = new ArrayList<EvaluationCandidate>();
-        EvaluationCandidate evaluationCandidate = new EvaluationCandidate ();
-        evaluationCandidate.setHereIncidentId((long) 12);
-        evaluationCandidate.setTomTomIncidentId( (long)13);
-        evaluationCandidates.add(evaluationCandidate);
-        request.setEvaluatedCandidates(evaluationCandidates);
         MyRepo.insertRequest(request);
 
 
@@ -217,18 +204,41 @@ public class AggregatorFromDatabaseTest {
 
     }
 
-    private Request getDummyRequestWithOneDummyIncident() {
-        Incident incident = DummyIncident.createIncident();
-        List<Incident> incidents = new ArrayList<>();
-        incidents.add(incident);
 
-        return getDummyRequestWithIncidents(incidents);
-    }
-    private Request getDummyRequestWithIncidents(List<Incident> incidents) {
+    Request createDummyRequest(){
+        List<Incident> incidents = new ArrayList<Incident>();
+        incidents.add(
+                new Incident("222","baustelle","major","Traffic jam in Bergmannstraße",
+                        "Berlin", "Germany", "45.5", "67.4",
+                        "Bergmannstraße",  "46.5", "69.5",
+                        "Bergmannstraße",  1, "tomtom",
+                        LocalDateTime.of( 2020, 5, 1, 12, 30, 0),
+                        LocalDateTime.of( 2020, 5, 1, 12, 30, 0),
+                        "670000:690000,681234:691234",6.0,new Long(1)));
+        incidents.add(
+                new Incident("222","baustelle","major","Traffic jam in Bergmannstraße",
+                        "Berlin", "Germany", "45.5", "67.4",
+                        "Bergmannstraße",  "46.5", "69.5",
+                        "Bergmannstraße",  1, "here",
+                        LocalDateTime.of( 2020, 5, 1, 12, 30, 0),
+                        LocalDateTime.of( 2020, 5, 1, 12, 30, 0),
+                        "670000:690000,681234:691234",6.0,new Long(1)));
+
         Request request = new Request();
-        request.setRequestTime(LOCAL_DATE_TIME_DUMMY);
+        request.setRequestTime(LocalDateTime.of(
+                2020, 5, 1,
+                12, 30, 0));
+        request.setCityName("Berlin");
         request.setIncidents(incidents);
 
-        return  request;
+        List<EvaluationCandidate> evaluationCandidates = new ArrayList<EvaluationCandidate>();
+        EvaluationCandidate evaluationCandidate = new EvaluationCandidate ();
+        evaluationCandidate.setTomTomIncident(incidents.get(0));
+        evaluationCandidate.setHereIncident(incidents.get(1));
+        evaluationCandidates.add(evaluationCandidate);
+        request.setEvaluatedCandidates(evaluationCandidates);
+
+        return request;
     }
+
 }
