@@ -35,22 +35,21 @@ export default {
             this.executeQuery(value)
         },
         executeQuery: function(value) {
-            console.log(
-                'http://' +
-                    window.location.hostname +
-                    ':8082/demo/incidents?city=' +
-                    value.city +
-                    '&timestamp=' +
-                    value.timestamp
-            )
+
             this.polylines = []
             if (value.city !== null) {
                 if (value.type.length == 0) {
+                    console.log(  'http://' +
+                                window.location.hostname +
+                                ':8082/withDatabase/incidents?city=' +
+                                value.city +
+                                '&timestamp=' +
+                                value.timestamp,)
                     axios
                         .get(
                             'http://' +
                                 window.location.hostname +
-                                ':8082/demo/incidents?city=' +
+                                ':8082/withDatabase/incidents?city=' +
                                 value.city +
                                 '&timestamp=' +
                                 value.timestamp,
@@ -60,30 +59,33 @@ export default {
                         )
                         .then(response => {
                             this.cityData = response.data
-                            this.passCoordinates(response.data.list)
+                            this.passCoordinates(response.data)
                         })
                         .catch(error => {
                             this.errorMessage = error.message
                             console.error('There was an error!', error)
                         })
                 } else {
-                    // take first element of types for testing reasons TODO: pass types properly
                     console.log(
                         'http://' +
                             window.location.hostname +
-                            ':8082/withDatabase/incidentsWithTypes?city=' +
+                            ':8082/withDatabase/incidents?city=' +
                             value.city +
+                              '&timestamp=' +
+                                value.timestamp +
                             '&types=' +
-                            value.type[0]
+                            value.type.join()
                     )
                     axios
                         .get(
                             'http://' +
                                 window.location.hostname +
-                                ':8082/withDatabase/incidentsWithTypes?city=' +
+                                ':8082/withDatabase/incidents?city=' +
                                 value.city +
+                                  '&timestamp=' +
+                                value.timestamp +
                                 '&types=' +
-                                value.type[0],
+                                value.type.join(),
                             {
                                 headers: { 'Access-Control-Allow-Origin': '*' },
                             }
