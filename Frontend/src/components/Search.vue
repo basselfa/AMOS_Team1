@@ -49,6 +49,7 @@ export default {
         timestamp: null,
         timestamps: [],
         types: [
+            'Construction',
             'Accident',
             'Congestion',
             'Disabled vehicle',
@@ -99,6 +100,7 @@ export default {
                     this.timestamps = response.data
                     this.timestamp = this.timestamps[this.timestamps.length - 1]
                     for (let i=0;i<this.type.length;i++) {
+                        this.type[i] = this.type[i].toUpperCase()
                         this.type[i]=this.type[i].replace(/ /g,"_");
                     }
                     this.$emit('change', {
