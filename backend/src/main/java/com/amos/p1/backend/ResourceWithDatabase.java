@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "http://0.0.0.0:8080")
+@CrossOrigin(origins = "*")
 @RequestMapping("withDatabase")
 public class ResourceWithDatabase {
 
