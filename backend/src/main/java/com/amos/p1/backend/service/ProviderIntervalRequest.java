@@ -1,5 +1,6 @@
 package com.amos.p1.backend.service;
 
+import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.data.Request;
 import com.amos.p1.backend.database.MyRepo;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -19,10 +20,10 @@ public class ProviderIntervalRequest {
 
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
     private ProviderNormalizer providerNormalizer;
-    private boolean useDummy = true;
+    private boolean useDummy = false;
 
     public ProviderIntervalRequest(){
-        providerNormalizer = new ProviderNormalizer(true);
+        providerNormalizer = new ProviderNormalizer(false);
     }
 
     public ProviderIntervalRequest(boolean useDummy) {
@@ -50,6 +51,8 @@ public class ProviderIntervalRequest {
 
         List<Request> requests = providerNormalizer.parseCurrentRequest();
 
+        printLongestEdge(requests);
+
         for (Request request : requests) {
             request.setRequestTime(now);
 
@@ -59,5 +62,22 @@ public class ProviderIntervalRequest {
         }
 
         System.out.println("Sucessfully saved everything");
+    }
+
+    private void printLongestEdge(List<Request> requests) {
+        int size = 0;
+        String longestEdge = "";
+        for (Request request : requests) {
+            for (Incident incident : request.getIncidents()) {
+
+                String edges = incident.getEdges();
+                if(size < edges.length()) {
+                    longestEdge = edges;
+                    size = edges.length();
+                }
+            }
+        }
+        System.out.println("Longes edge size: " + size);
+        System.out.println("Longes edge " + longestEdge);
     }
 }
