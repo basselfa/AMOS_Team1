@@ -34,7 +34,8 @@ public class Evaluation {
                 }
         );
 
-        request.setEvaluatedCandidates(evaluationCandidates);   // notewendig ??
+        evaluationCandidates = dropManifolds(evaluationCandidates);
+
         return evaluationCandidates;
     }
 
