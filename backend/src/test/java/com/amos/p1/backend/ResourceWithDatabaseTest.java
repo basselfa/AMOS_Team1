@@ -74,7 +74,8 @@ public class ResourceWithDatabaseTest {
                 .getList(".", Incident.class);
 
         System.out.println(incidents);
-        assertThat(incidents, hasSize(greaterThan(0)));
+        System.out.println(incidents.get(0));
+        assertThat(incidents, hasSize(49 + 58)); // 49 Here incidents + 58 tomtom incicents
     }
 
     @Test
@@ -93,7 +94,7 @@ public class ResourceWithDatabaseTest {
                 .getList(".", Incident.class);
 
 
-        assertThat(incidents, hasSize(greaterThan(0)));
+        assertThat(incidents, hasSize(41));
     }
 
     @Test
@@ -102,7 +103,7 @@ public class ResourceWithDatabaseTest {
         List<Incident> incidents =
             given()
                 .param("city", "Berlin")
-                .param("timestamp", "2020-01-01 00:00")
+                .param("timestamp", "2020-02-01 00:00")
             .when()
                 .get(base + "/incidents")
             .then()
@@ -171,15 +172,13 @@ public class ResourceWithDatabaseTest {
             System.out.println(Math.abs(cityObj.getJSONObject("centerPoint").getDouble("longitude")));
             System.out.println((longMin + (longMax - longMin) / 2));*/
 
-
             assert (Math.abs(cityObj.getJSONObject("centerPoint").getDouble("latitude") - (latMin + (latMax - latMin) / 2)) < 0.1);
             assert (Math.abs(cityObj.getJSONObject("centerPoint").getDouble("longitude") - (longMin + (longMax - longMin) / 2)) < 0.1);
-
-
-
         }
-
     }
+
+
+
     @Test
     void testGgetComparisonEvaluationOverTime()  {
         Request request = createDummyRequest();
