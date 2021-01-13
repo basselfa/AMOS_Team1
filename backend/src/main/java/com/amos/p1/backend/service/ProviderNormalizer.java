@@ -84,7 +84,9 @@ public class ProviderNormalizer {
             System.out.println("Evaluate Data");
             Evaluation evaluation = new Evaluation();
             List<EvaluationCandidate> evaluationCandidates = evaluation.calculateCandidates(request);
-            System.out.println("Evaluate Data done. Amount of evaluation data: " + evaluationCandidates.size());
+            System.out.println("Amount of evaluation before manifold drop: " + evaluationCandidates.size());
+            evaluationCandidates = evaluation.dropManifolds(evaluationCandidates);
+            System.out.println("Amount of evaluation after manifold drop: " + evaluationCandidates.size());
             request.setEvaluatedCandidates(evaluationCandidates);
 
             requests.add(request);

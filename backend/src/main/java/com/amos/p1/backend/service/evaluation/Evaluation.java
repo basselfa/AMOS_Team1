@@ -34,8 +34,6 @@ public class Evaluation {
                 }
         );
 
-        evaluationCandidates = dropManifolds(evaluationCandidates);
-
         return evaluationCandidates;
     }
 
