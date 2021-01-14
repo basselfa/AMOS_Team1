@@ -37,61 +37,26 @@ export default {
         executeQuery: function(value) {
 
             this.polylines = []
-            if (value.city !== null) {
-                if (value.type.length == 0) {
-                    console.log(  'http://' +
+            if (value.city !== null && value.timestamp !== null) {
+                    let request_url = 
+                                'http://' +
                                 window.location.hostname +
                                 ':8082/withDatabase/incidents?city=' +
                                 value.city +
                                 '&timestamp=' +
-                                value.timestamp,)
+                                value.timestamp
+                    if (value.type.length !== 0) {
+                        request_url = request_url + '&types=' + value.type.join()
+                    }
+                    console.log(request_url)
                     axios
                         .get(
-                            'http://' +
-                                window.location.hostname +
-                                ':8082/withDatabase/incidents?city=' +
-                                value.city +
-                                '&timestamp=' +
-                                value.timestamp,
+                            request_url,
                             {
                                 headers: { 'Access-Control-Allow-Origin': '*' },
                             }
                         )
                         .then(response => {
-                            this.cityData = response.data
-                            this.passCoordinates(response.data)
-                        })
-                        .catch(error => {
-                            this.errorMessage = error.message
-                            console.error('There was an error!', error)
-                        })
-                } else {
-                    console.log(
-                        'http://' +
-                            window.location.hostname +
-                            ':8082/withDatabase/incidents?city=' +
-                            value.city +
-                              '&timestamp=' +
-                                value.timestamp +
-                            '&types=' +
-                            value.type.join()
-                    )
-                    axios
-                        .get(
-                            'http://' +
-                                window.location.hostname +
-                                ':8082/withDatabase/incidents?city=' +
-                                value.city +
-                                  '&timestamp=' +
-                                value.timestamp +
-                                '&types=' +
-                                value.type.join(),
-                            {
-                                headers: { 'Access-Control-Allow-Origin': '*' },
-                            }
-                        )
-                        .then(response => {
-                            this.cityData = response.data
                             this.passCoordinates(response.data)
                         })
                         .catch(error => {
@@ -99,9 +64,42 @@ export default {
                             console.error('There was an error!', error)
                         })
                 }
-            }
+            
         },
         /**
+         * Processes the incident data of the selected city.
+         *
+         * @param cityData Incident data from backend
+         * @param coordinatesArray Processed strings into coordinates
+         * @param lineArray Array which collects the coordinates of one incident
+         * @param latitudinal Latitudinal coordinate of a line edge
+         * @param longitudinal Longitidinal coordinate of a line edge
+         */
+        passCoordinates: function(cityData) {
+            for (var i = 0; i < cityData.length; i++) {
+                var coordinatesArray = cityData[i].edges.split(',')
+                var lineArray = []
+                for (var j = 0; j < coordinatesArray.length; j++) {
+                    let latitudinal = coordinatesArray[j].split(':')[0]
+                    let longitudinal = coordinatesArray[j].split(':')[1]
+                    if (
+                        typeof latitudinal !== 'undefined' &&
+                        typeof longitudinal !== 'undefined'
+                    ) {
+                        lineArray.push([latitudinal, longitudinal])
+                    }
+                }
+                this.polylines.push({
+                    latlngs: lineArray,
+                    color: 'blue',
+                })
+            }
+        },
+    },
+}
+</script>
+
+<style></style>
          * Processes the incident data of the selected city.
          *
          * @param cityData Incident data from backend

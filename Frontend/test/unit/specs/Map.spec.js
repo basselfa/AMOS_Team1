@@ -21,11 +21,11 @@ describe('Map', () => {
         })
     })
 
-    it('should get city data from request', done => {
+    it('should get city data from request', async () => {
         wrapper.vm.getSearchValue({
             city: 'Berlin',
             timestamp: '2020-12-19 13:00',
-            type: 'accident',
+            type: ['Accident'],
         })
         moxios.wait(function() {
             let request = moxios.requests.mostRecent()
@@ -34,7 +34,7 @@ describe('Map', () => {
                     status: 200,
                     response: [
                         {
-                            type: 'accident',
+                            type: 'Accident',
                             edges:
                                 '52.51784:13.28016,52.51771:13.28021,52.51765:13.28024',
                         },
@@ -60,7 +60,7 @@ describe('Map', () => {
         wrapper.vm.getSearchValue({
             city: 'Berlin',
             timestamp: '2020-12-19 13:00',
-            type: 'accident',
+            type: ['Accident'],
         })
 
         moxios.wait(() => {
