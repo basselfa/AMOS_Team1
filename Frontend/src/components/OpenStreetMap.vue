@@ -6,7 +6,7 @@
         v-for="(polyline,index) in polylines" :key="index"
         :lat-lngs="polyline.latlngs"
         :color="polyline.color"
-      ></l-polyline>
+      ><l-tooltip>Test!</l-tooltip></l-polyline>
       <l-marker :lat-lng="markerLatLng">
         <l-tooltip>Center</l-tooltip>
       </l-marker>
@@ -45,7 +45,8 @@ export default {
         zoomSnap: 0.5,
       },
       showMap: true,
-      markerLatLng: [52.509041, 13.330550]
+      markerLatLng: [52.509041, 13.330550],
+      marker:"helö"
     };
   },
 };
