@@ -1,5 +1,6 @@
 package com.amos.p1.backend.database;
 
+import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.data.Request;
 import org.apache.ibatis.jdbc.ScriptRunner;
@@ -29,7 +30,7 @@ public class MyRepo {
     private EntityManagerFactory emf;
     private EntityManager emTest;
     private EntityManagerFactory emfTest;
-    private boolean useTestDatabase =false;
+    private boolean useTestDatabase =true;
 
     private MyRepo() {
         emf = Persistence.createEntityManagerFactory("MyRepo");
@@ -122,16 +123,29 @@ public class MyRepo {
 
     public static void insertIncident(List<Incident> incidents) {
 
-        int i = 0;
 
         for(Incident incident : incidents) {
-            System.out.println("Saved incident no. " + i);
             getEntityManager().getTransaction().begin();
             getEntityManager().persist(incident);
             getEntityManager().getTransaction().commit();
-
-            i++;
         }
+
+
+    }
+
+    public static void insertEvaluationCandidate(List<EvaluationCandidate> evaluationCandidates) {
+
+
+        for(EvaluationCandidate evaluationCandidate : evaluationCandidates) {
+            evaluationCandidate.setEvaluationCandidateSavedInDb(true);
+            getEntityManager().getTransaction().begin();
+
+            getEntityManager().persist(evaluationCandidate);
+
+            getEntityManager().getTransaction().commit();
+        }
+
+
     }
     public static List<Incident> getIncidents(Long id) {
         List<Incident> resultList = MyRepo.getEntityManager()
@@ -149,21 +163,93 @@ public class MyRepo {
         getEntityManager().getTransaction().begin();
         getEntityManager().persist(request);
         getEntityManager().getTransaction().commit();
+        if(incidents==null)return ;
         for (Incident incident:incidents ) { incident.setRequestId(request.getId());}
 
         insertIncident(incidents);
         request.setIncidentsSavedInDb(true);
 
+        List<EvaluationCandidate> evaluationCandidates =request.getEvaluationCandidate();
+        if(evaluationCandidates==null)return ;
+        for (EvaluationCandidate EvaluationCandidate :evaluationCandidates) {
+            EvaluationCandidate.setRequestId(request.getId());
+            EvaluationCandidate.setTomTomIncidentId(EvaluationCandidate.getTomTomIncident().getId());
+            EvaluationCandidate.setHereIncidentId(EvaluationCandidate.getHereIncident().getId());
+        }
 
+
+        MyRepo.insertEvaluationCandidate(evaluationCandidates);
+        request.setEvaluationCandidateSavedInDb(true);
     }
 
-    public static Request getRequest(LocalDateTime localDateTime){
+    public static Request getRequest(LocalDateTime requestTime){
 
         List<Request> requests =  getEntityManager().createNamedQuery("geRequestFromTime")
-                .setParameter("requestTime" ,localDateTime )
+                .setParameter("requestTime" ,requestTime )
                 .getResultList();
-        requests.get(0).setIncidentsSavedInDb(true);
-        return requests.get(0);
+
+        Request request =requests.get(0) ;
+        request.setIncidentsSavedInDb(true);
+        if (request.getEvaluationCandidate()==null||request.getEvaluationCandidate().size()==0)
+            return requests.get(0);
+        request.setIncidentsSavedInDb(true);
+        for(EvaluationCandidate evaluationCandidate : request.getEvaluationCandidate()) {
+            evaluationCandidate.setEvaluationCandidateSavedInDb(true);}
+        request.setEvaluationCandidateSavedInDb(true);
+
+        return request;
+    }
+
+    public static Request geRequestFromCityNameAndTime(String cityName,LocalDateTime requestTime){
+
+        List<Request> requests =  MyRepo.getEntityManager().createNamedQuery("geRequestFromCityNameAndTime")
+                .setParameter("requestTime", requestTime )
+                .setParameter("cityName",  cityName)
+                .getResultList();
+
+        Request request =requests.get(0) ;
+        request.setIncidentsSavedInDb(true);
+        if (request.getEvaluationCandidate()==null||request.getEvaluationCandidate().size()==0)
+            return requests.get(0);
+        request.setIncidentsSavedInDb(true);
+
+        for(EvaluationCandidate evaluationCandidate : request.getEvaluationCandidate()) {
+            evaluationCandidate.setEvaluationCandidateSavedInDb(true);}
+        request.setEvaluationCandidateSavedInDb(true);
+
+        return request;
+    }
+
+    public static Request geRequestFromCityName(String cityName){
+
+        List<Request> requests =  MyRepo.getEntityManager().createNamedQuery("geRequestFromCityName")
+                .setParameter("cityName",  cityName)
+                .getResultList();
+
+        Request request =requests.get(0) ;
+        request.setIncidentsSavedInDb(true);
+        if (request.getEvaluationCandidate()==null||request.getEvaluationCandidate().size()==0)
+            return requests.get(0);
+        request.setIncidentsSavedInDb(true);
+
+        for(EvaluationCandidate evaluationCandidate : request.getEvaluationCandidate()) {
+            evaluationCandidate.setEvaluationCandidateSavedInDb(true);}
+        request.setEvaluationCandidateSavedInDb(true);
+
+        return request;
+    }
+    public static List<EvaluationCandidate> geEvaluationCandidateFromRequestId(Long requestId){
+
+        List<EvaluationCandidate> evaluationCandidates =  MyRepo.getEntityManager().createNamedQuery("getEvaluationCandidateFromRequestId")
+                .setParameter("requestId",  requestId)
+                .getResultList();
+
+
+
+        for(EvaluationCandidate evaluationCandidate : evaluationCandidates) {
+            evaluationCandidate.setEvaluationCandidateSavedInDb(true);}
+
+        return evaluationCandidates;
     }
 
 }

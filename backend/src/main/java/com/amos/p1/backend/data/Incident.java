@@ -16,6 +16,18 @@ import java.util.List;
         query = "SELECT i FROM Incident i WHERE i.id IN :id"
 )
 @NamedQuery(
+        name = "getFromid",
+        query = "SELECT i FROM Incident i WHERE i.id = :id"
+)
+@NamedQuery(
+        name = "getFromTomTom",
+        query = "SELECT i FROM Incident i WHERE i.provider like 'tomtom' AND i.requestId = :requestId "
+)
+@NamedQuery(
+        name = "getFromHere",
+        query = "SELECT i FROM Incident i WHERE i.provider like 'here' AND i.requestId = :requestId "
+)
+@NamedQuery(
         name = "getFromCity",
         query = "SELECT i FROM Incident i WHERE i.city = :city"
 )

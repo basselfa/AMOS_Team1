@@ -1,93 +1,83 @@
 package com.amos.p1.backend.service;
 
-import com.amos.p1.backend.data.CityBoundingBox;
 import com.amos.p1.backend.data.Incident;
-import com.amos.p1.backend.data.Location;
 import com.amos.p1.backend.data.Request;
 import com.amos.p1.backend.database.MyRepo;
-import com.amos.p1.backend.normalization.HereNormalization;
-import com.amos.p1.backend.normalization.JsonToIncident;
-import com.amos.p1.backend.normalization.TomTomNormalization;
-import com.amos.p1.backend.provider.*;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.EntityManager;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Component
+@ConditionalOnProperty(
+        value = "app.scheduling.enable", havingValue = "true", matchIfMissing = true
+)
 public class ProviderIntervalRequest {
 
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+    private ProviderNormalizer providerNormalizer;
+    private boolean useDummy = false;
 
-    private final ProviderRequest tomtomRequest = new TomTomRequestDummy();
-    private final ProviderRequest hereRequest = new HereRequestDummy();
-//    private final ProviderRequest tomtomRequest = new TomTomRequest();
-//    private final ProviderRequest hereRequest = new HereRequest();
+    public ProviderIntervalRequest(){
+        providerNormalizer = new ProviderNormalizer(false);
+    }
 
-    private final CityBoundingBoxesService cityBoundingBoxesService = new CityBoundingBoxesService();
+    public ProviderIntervalRequest(boolean useDummy) {
+        this.useDummy = useDummy;
+    }
+
+    public void setProviderNormalizer(ProviderNormalizer providerNormalizer){
+        this.providerNormalizer = providerNormalizer;
+    }
 
     // Will be runned on startup
     // 1000 ms * 60 * 60 = 1 hour
     @Scheduled(fixedRate = 3600000)
     public void providerCronJob() {
-        System.out.println("The time is now " + dateFormat.format(new Date()));
+        LocalDateTime now;
 
-        for (CityBoundingBox cityBoundingBox : cityBoundingBoxesService.getCityBoundingBoxes()) {
-            System.out.println("Request data from city: " + cityBoundingBox.getCity());
+        if(useDummy){
+            // 01.01.2020 00:00:00
+            now = LocalDateTime.of(2020, 1,1,0,0,0);
+        }else{
+            now = LocalDateTime.now();
+        }
 
-            System.out.println("Get data from here.com");
-            List<Incident> hereIncidents = getHereIncidents(cityBoundingBox);
-            System.out.println("Get data from tomtom");
-            List<Incident> tomTomIncidents = getTomTomIncidents(cityBoundingBox);
+        System.out.println("The time is now " + now);
 
-            System.out.println("Save here incidents. Amount: " + hereIncidents.size());
-            saveToDatabase(hereIncidents);
-            System.out.println("Save tomtom incidents. Amount: " + tomTomIncidents.size());
-            saveToDatabase(tomTomIncidents);
+        List<Request> requests = providerNormalizer.parseCurrentRequest();
+
+        printLongestEdge(requests);
+
+        for (Request request : requests) {
+            request.setRequestTime(now);
+
+            System.out.println("Save incidents into db. City: " + request.getCityName() +" Amount: " + request.getIncidents().size());
+            MyRepo.insertRequest(request);
+            System.out.println("Sucessfully saved");
         }
 
         System.out.println("Sucessfully saved everything");
     }
 
-    public List<Incident> getRecentTomTomIncidentsFromCity(String city){
-        CityBoundingBox boundBoxFromCity = cityBoundingBoxesService.getBoundBoxFromCity(city);
+    private void printLongestEdge(List<Request> requests) {
+        int size = 0;
+        String longestEdge = "";
+        for (Request request : requests) {
+            for (Incident incident : request.getIncidents()) {
 
-        return getTomTomIncidents(boundBoxFromCity);
+                String edges = incident.getEdges();
+                if(size < edges.length()) {
+                    longestEdge = edges;
+                    size = edges.length();
+                }
+            }
+        }
+        System.out.println("Longes edge size: " + size);
+        System.out.println("Longes edge " + longestEdge);
     }
-
-    private List<Incident> getTomTomIncidents(CityBoundingBox cityBoundingBox){
-        String jsonTomTom = tomtomRequest.request(
-                cityBoundingBox.getMinCorner().getLatitude(),
-                cityBoundingBox.getMinCorner().getLongitude(),
-                cityBoundingBox.getMaxCorner().getLatitude(),
-                cityBoundingBox.getMaxCorner().getLongitude());
-
-        JsonToIncident normalizationTomTom = new TomTomNormalization();
-        return normalizationTomTom.normalize(jsonTomTom);
-    }
-
-    private List<Incident> getHereIncidents(CityBoundingBox cityBoundingBox){
-        String jsonHere = hereRequest.request(
-                cityBoundingBox.getMinCorner().getLatitude(),
-                cityBoundingBox.getMinCorner().getLongitude(),
-                cityBoundingBox.getMaxCorner().getLatitude(),
-                cityBoundingBox.getMaxCorner().getLongitude());
-
-        JsonToIncident normalizationHere = new HereNormalization();
-        return normalizationHere.normalize(jsonHere);
-    }
-
-    private void saveToDatabase(List<Incident> incidents) {
-        Request request = new Request();
-        request.setRequestTime(LocalDateTime.now());
-        request.setIncidents(incidents);
-
-        MyRepo.insertRequest(request);
-    }
-
 }

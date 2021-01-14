@@ -18,15 +18,6 @@ describe('Historization', () => {
         moxios.install()
     })
 
-    it('should contain historization table', () => {
-        wrapper = shallowMount(Historization, {
-            localVue,
-            vuetify,
-        })
-
-        expect(wrapper.find('#historization-table').exists()).toBe(true)
-    })
-
     it('should call fetchData() when created', done => {
         const testMethod = jest.spyOn(Historization.methods, 'fetchData')
 
@@ -34,69 +25,115 @@ describe('Historization', () => {
             localVue,
             vuetify,
         })
-
         expect(testMethod).toHaveBeenCalled()
         done()
     })
 
-    it('should get historization data from request', async () => {
+    it('should get cities from request', async () => {
         wrapper = shallowMount(Historization, {
             localVue,
             vuetify,
         })
-        await flushPromises()
+        flushPromises()
+        //fetchData is called on created
+        moxios.wait(function() {
+            let request = moxios.requests.mostRecent()
+            request
+                .respondWith({
+                    status: 200,
+                    response: [{ city: 'Berlin' }, { city: 'Muenchen' }],
+                })
+                .then(function() {
+                    expect(wrapper.vm.cities).toEqual(['Berlin', 'Muenchen'])
+                    done()
+                })
+        })
+    })
 
-        // todo: structure needs to be changed after incident is refactored in backend
-        moxios.stubRequest('http://localhost:8082/demo/historization/', {
-            status: 200,
-            response: {
-                incidents: [
-                    {
-                        provider: 1,
-                        type: 'traffic jam',
-                        size: 'major',
-                        startPositionStreet: 'bismarkstraße',
-                        endPositionStreet: 'bergmanstraße',
-                        city: 'berlin',
-                    },
-                ],
-            },
+    it('should get an error from invalid request for cities', async () => {
+        wrapper = shallowMount(Historization, {
+            localVue,
+            vuetify,
         })
 
-        wrapper.vm.fetchData()
+        const error = new Error('Error: Request failed with status code 400')
+
+        await wrapper.vm.fetchData()
+
+        let request = moxios.requests.mostRecent()
+        request
+            .respondWith({
+                status: 400,
+                response: error,
+            })
+            .then(function() {
+                expect(wrapper.vm.errorMessage).toEqual(
+                    'Error: Request failed with status code 400'
+                )
+                done()
+            })
+    })
+
+    it('should get comparison data from request', async () => {
+        wrapper = shallowMount(Historization, {
+            localVue,
+            vuetify,
+        })
+
+        wrapper.setData({ city: 'Berlin' })
+        wrapper.setData({ startTime: '2020-01-13 12:00' })
+        wrapper.setData({ endTime: '2020-01-13 13:00' })
+        flushPromises()
+
+        moxios.stubRequest(
+            'http://localhost:8082/demo/comparisonEvaluationOverTime/?city=Berlin',
+            {
+                status: 200,
+                response: [
+                    {
+                        sameIncidentAmount: 20,
+                        date: '2021-01-11 10:50',
+                        tomTomIncidentAmount: 55,
+                        hereIncidentAmount: 40,
+                    },
+                ],
+            }
+        )
+
+        wrapper.vm.fetchDataForCity()
 
         moxios.wait(() => {
-            expect(wrapper.vm.historizationData).toEqual({
-                provider: 1,
-                type: 'traffic jam',
-                size: 'major',
-                startPositionStreet: 'bismarkstraße',
-                endPositionStreet: 'bergmanstraße',
-                city: 'berlin',
+            expect(wrapper.vm.comparisonData).toEqual({
+                labels: ['2021-01-11 10:50'],
+                tomtom: [55],
+                here: [40],
+                comparison: [20],
             })
             done()
         })
     })
 
-    it('should get an error from invalid request for historization data', async () => {
+    it('should get an error from invalid request for comparison data', async () => {
         wrapper = shallowMount(Historization, {
             localVue,
             vuetify,
         })
-        await flushPromises()
-        const error = new Error('Error: Request failed with status code 500')
-        moxios.stubRequest('http://localhost:8082/demo/historization/', {
-            error,
-        })
+        const error = new Error('Error: Request failed with status code 400')
 
-        wrapper.vm.fetchData()
+        await wrapper.vm.fetchDataForCity()
 
-        moxios.wait(() => {
-            expect(wrapper.vm.errorMessage).toEqual(
-                'Error: Request failed with status code 500'
-            )
-            done()
-        })
+        let request = moxios.requests.mostRecent()
+        request
+            .respondWith({
+                status: 400,
+                response: error,
+            })
+            .then(function() {
+                expect(wrapper.vm.errorMessage).toEqual(
+                    'Error: Request failed with status code 400'
+                )
+                done()
+            })
     })
 
     afterEach(() => {

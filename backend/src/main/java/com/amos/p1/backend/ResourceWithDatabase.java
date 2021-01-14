@@ -1,16 +1,14 @@
 package com.amos.p1.backend;
 
-import com.amos.p1.backend.data.CityBoundingBox;
-import com.amos.p1.backend.data.Incident;
-import com.amos.p1.backend.service.CityBoundingBoxesService;
-import com.amos.p1.backend.service.IncidentAggregator;
-import com.amos.p1.backend.service.IncidentAggregatorDirectlyFromProvider;
-import com.amos.p1.backend.service.IncidentAggregatorFromDatabase;
+import com.amos.p1.backend.data.*;
+import com.amos.p1.backend.database.MyRepo;
+import com.amos.p1.backend.service.CityBoundingBoxesServiceImpl;
+import com.amos.p1.backend.service.aggregator.Aggregator;
+import com.amos.p1.backend.service.aggregator.AggregatorFromDatabase;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -19,11 +17,11 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "http://0.0.0.0:8080")
+@CrossOrigin(origins = "*")
 @RequestMapping("withDatabase")
 public class ResourceWithDatabase {
 
-    private final IncidentAggregator incidentAggregator = new IncidentAggregatorFromDatabase();
+    private final Aggregator aggregator = new AggregatorFromDatabase();
 
     @RequestMapping(
             method = RequestMethod.GET,
@@ -31,42 +29,33 @@ public class ResourceWithDatabase {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseBody
-    public ResponseEntity<List<Incident>> getIncidentsByCity(@RequestParam("city") String city,
-                                                             @RequestParam("timestamp") Optional<String> timestamp){
+    public ResponseEntity<List<Incident>> getIncidents(@RequestParam("city") String city,
+                                                       @RequestParam("timestamp") Optional<String> timestamp,
+                                                       @RequestParam("types") Optional<String> types){
+
+        Optional<LocalDateTime> timestampParsed = Optional.empty();
+        Optional<List<String>> typesParsed = Optional.empty();
 
         if(timestamp.isPresent()){
-            LocalDateTime localDateTime = parseTimeStamp(timestamp.get());
-
-            return ResponseEntity.ok(incidentAggregator.getFromCityAndTimeStamp(city, localDateTime));
-        }else{
-            return ResponseEntity.ok(incidentAggregator.getFromCity(city));
+            timestampParsed = Optional.of(parseTimeStamp(timestamp.get()));
         }
-    }
 
+        if(types.isPresent()){
+            typesParsed = Optional.of(parseTypes(types.get()));
+        }
+
+        List<Incident> incidents = aggregator.getIncidents(city, timestampParsed, typesParsed);
+        return ResponseEntity.ok(incidents);
+    }
 
     private LocalDateTime parseTimeStamp(String timestamp) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return LocalDateTime.parse(timestamp, formatter);
     }
 
-    @RequestMapping(
-            method = RequestMethod.GET,
-            value = "/incidentsWithTypes",
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
-    @ResponseBody
-    public ResponseEntity<List<Incident>> getIncidentsByCityAndType(@RequestParam("city") String city, @RequestParam("types") String types){
-
-        IncidentAggregator incidentAggregator = new IncidentAggregatorDirectlyFromProvider();
-
-        return ResponseEntity.ok(incidentAggregator.getFromCityAndTypes(city, parseTypes(types)));
-    }
-
     private List<String> parseTypes(String types) {
         return Arrays.asList(types.split(","));
     }
-
-
 
     @RequestMapping(
             method = RequestMethod.GET,
@@ -76,7 +65,7 @@ public class ResourceWithDatabase {
     @ResponseBody
     public ResponseEntity<List<String>> getTimestampsByCity(@RequestParam("city") String city) {
 
-        List<LocalDateTime> localDateTimes = incidentAggregator.getTimestampsFromCity(city);
+        List<LocalDateTime> localDateTimes = aggregator.getTimestampsFromCity(city);
         List<String> timestamps = parseLocalDateTimes(localDateTimes);
 
         return ResponseEntity.ok(timestamps);
@@ -102,7 +91,7 @@ public class ResourceWithDatabase {
     @ResponseBody
     public ResponseEntity<List<CityBoundingBox>> getAllCities() {
 
-        CityBoundingBoxesService cityBoundingBoxesService = new CityBoundingBoxesService();
+        CityBoundingBoxesServiceImpl cityBoundingBoxesService = new CityBoundingBoxesServiceImpl();
         List<CityBoundingBox> cities = cityBoundingBoxesService.getCityBoundingBoxes();
 
         return ResponseEntity.ok(cities);
@@ -117,6 +106,35 @@ public class ResourceWithDatabase {
         }
 
         return cities;
+    }
+
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/comparison",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ResponseBody
+    public ResponseEntity<List<EvaluationCandidate>> getComparison(@RequestParam("city") String cityName,
+                                                                   @RequestParam("timestamp") String timestamp) {
+        Aggregator aggregator = new AggregatorFromDatabase();
+
+         return ResponseEntity.ok(aggregator.getEvaluationCandidate(cityName,parseTimeStamp(timestamp)));
+
+
+    }
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/comparisonEvaluationOverTime",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ResponseBody
+    public ResponseEntity<List<ComparisonEvaluationDTO>> getComparisonEvaluationOverTime(@RequestParam("city") String cityName) {
+        Aggregator aggregator = new AggregatorFromDatabase();
+
+        return ResponseEntity.ok(aggregator.getComparisonEvaluationOverTime(cityName));
+
+
+
     }
 
 }

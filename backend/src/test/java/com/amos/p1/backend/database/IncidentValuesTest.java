@@ -4,12 +4,6 @@ import com.amos.p1.backend.data.Incident;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import com.amos.p1.backend.data.Comparison;
-import com.amos.p1.backend.data.Request;
-import com.amos.p1.backend.database.ComparisonRepository;
-import com.amos.p1.backend.data.Incident;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;

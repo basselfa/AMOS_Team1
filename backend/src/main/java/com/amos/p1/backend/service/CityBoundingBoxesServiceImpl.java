@@ -6,11 +6,11 @@ import com.amos.p1.backend.data.Location;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CityBoundingBoxesService {
+public class CityBoundingBoxesServiceImpl implements CityBoundBoxesService{
 
     private final List<CityBoundingBox> cityBoundingBoxes = new ArrayList<>();
 
-    public CityBoundingBoxesService() {
+    public CityBoundingBoxesServiceImpl() {
         initBoundingBoxes();
     }
 
@@ -49,10 +49,12 @@ public class CityBoundingBoxesService {
 
     }
 
+    @Override
     public List<CityBoundingBox> getCityBoundingBoxes() {
         return cityBoundingBoxes;
     }
 
+    @Override
     public CityBoundingBox getBoundBoxFromCity(String city) {
         for (CityBoundingBox cityBoundingBoxTemp : cityBoundingBoxes) {
             if (city.equals(cityBoundingBoxTemp.getCity())) {

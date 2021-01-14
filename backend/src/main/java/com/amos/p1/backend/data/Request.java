@@ -12,6 +12,14 @@ import java.util.stream.Stream;
         name="geRequestFromTime",
         query="SELECT r FROM Request r WHERE r.requestTime = :requestTime"
 )
+@NamedQuery(
+        name="geRequestFromCityName",
+        query="SELECT r FROM Request r WHERE r.cityName = :cityName"
+)
+@NamedQuery(
+        name="geRequestFromCityNameAndTime",
+        query="SELECT r FROM Request r WHERE r.cityName = :cityName AND r.requestTime = :requestTime"
+)
 
 @Entity
 public class Request {
@@ -22,11 +30,15 @@ public class Request {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private LocalDateTime requestTime;
+    String cityName;
     @Transient
-    List<Incident> incidents ;
-
+    List<Incident> incidents =null ;
+    @Transient
+    List<EvaluationCandidate> reEvaluatedCandidateList =null;
     @Transient
     Boolean incidentSavedInDb= false ;
+    @Transient
+    Boolean evaluationCandidateSavedInDb= false ;
 
 
     public Request() {
@@ -60,7 +72,6 @@ public class Request {
     }
 
 
-
     public Boolean getIncidentsSavedInDb() {return incidentSavedInDb; }
     public void setIncidentsSavedInDb(Boolean incidentSavedInDb) {this.incidentSavedInDb = incidentSavedInDb; }
 
@@ -72,14 +83,46 @@ public class Request {
     @Column(name = "requestTime",columnDefinition="DATETIME")
     public LocalDateTime getRequestTime() { return requestTime;}
     public void setRequestTime(LocalDateTime requestTime) { this.requestTime = requestTime; }
+    @Basic
+    @Column(name = "cityName", nullable = true)
+    public String getCityName() {        return cityName;    }
+    public void setCityName(String cityName) { this.cityName = cityName; }
+
+
+    public void setEvaluatedCandidates(List<EvaluationCandidate> reEvaluatedCandidateList) {
+
+        this.reEvaluatedCandidateList=reEvaluatedCandidateList;
+    }
+
+
+
+    public void setEvaluationCandidateSavedInDb(Boolean evaluationCandidateSavedInDb) {
+        this.evaluationCandidateSavedInDb = evaluationCandidateSavedInDb;
+    }
+
+    public List<EvaluationCandidate> getEvaluationCandidate(){
+        if (evaluationCandidateSavedInDb ==false) return reEvaluatedCandidateList;
+
+        List<EvaluationCandidate> evaluationCandidateAsList;
+        evaluationCandidateAsList =(List<EvaluationCandidate>) MyRepo.getEntityManager().createNamedQuery("getEvaluationCandidateFromRequestId")
+                .setParameter("requestId", getId())
+                .getResultList();
+        setEvaluatedCandidates(evaluationCandidateAsList);
+
+
+        return evaluationCandidateAsList;
+    }
 
     @Override
     public String toString() {
         return "Request{" +
                 "id=" + id +
                 ", requestTime=" + requestTime +
-                ", incidents=" + getIncidents() +
+                ", cityName='" + cityName + '\'' +
+                ", incidents=" + incidents +
+                ", reEvaluatedCandidateList=" + reEvaluatedCandidateList +
                 ", incidentSavedInDb=" + incidentSavedInDb +
+                ", evaluationCandidateSavedInDb=" + evaluationCandidateSavedInDb +
                 '}';
     }
 }
