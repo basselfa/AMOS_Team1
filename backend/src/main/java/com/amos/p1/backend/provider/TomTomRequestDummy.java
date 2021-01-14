@@ -9,4 +9,9 @@ public class TomTomRequestDummy implements ProviderRequest {
         return Helper.getFileResourceAsString("provider-dummy-data/TomTomBerlin.json");
 
     }
+
+    @Override
+    public String getUrl(String minLatitude, String minLongitude, String maxLatitude, String maxLongitude) {
+        return null;
+    }
 }

@@ -28,7 +28,7 @@ public class HereRequest implements ProviderRequest {
 
     }
 
-    private String getUrl(String minLatitude, String minLongitude, String maxLatitude, String maxLongitude){
+    public String getUrl(String minLatitude, String minLongitude, String maxLatitude, String maxLongitude){
 
         String bbox = new StringBuilder()
                 .append(minLatitude)

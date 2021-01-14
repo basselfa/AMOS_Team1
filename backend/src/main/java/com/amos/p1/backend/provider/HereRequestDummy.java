@@ -10,4 +10,9 @@ public class HereRequestDummy implements ProviderRequest {
     public String request(String minLatitude, String minLongitude, String maxLatitude, String maxLongitude) {
         return Helper.getFileResourceAsString("provider-dummy-data/HereBerlin.json");
     }
+
+    @Override
+    public String getUrl(String minLatitude, String minLongitude, String maxLatitude, String maxLongitude) {
+        return null;
+    }
 }

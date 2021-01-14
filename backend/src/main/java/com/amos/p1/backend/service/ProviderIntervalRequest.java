@@ -20,10 +20,10 @@ public class ProviderIntervalRequest {
 
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
     private ProviderNormalizer providerNormalizer;
-    private boolean useDummy = false;
+    private boolean useDummy = true;
 
     public ProviderIntervalRequest(){
-        providerNormalizer = new ProviderNormalizer(false);
+        providerNormalizer = new ProviderNormalizer(true);
     }
 
     public ProviderIntervalRequest(boolean useDummy) {
