@@ -1,12 +1,12 @@
 package com.amos.p1.backend.service;
 
-import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.data.Request;
 import com.amos.p1.backend.database.MyRepo;
-import org.junit.jupiter.api.BeforeAll;
+import com.amos.p1.backend.service.providernormalizer.ProviderNormalizer;
+import com.amos.p1.backend.service.providernormalizer.ProviderNormalizerDummyBerlinSmall;
+import com.amos.p1.backend.service.providernormalizer.ProviderNormalizerImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -30,9 +30,11 @@ public class ProviderIntervalRequestTest {
         MyRepo.dropAll();
 
         //Adding dummy data to database
-        ProviderIntervalRequest providerIntervalRequest = new ProviderIntervalRequest(true);
-        providerIntervalRequest.setProviderNormalizer(new ProviderNormalizer(true));
-        providerIntervalRequest.providerCronJob();
+        ProviderNormalizer providerNormalizer = new ProviderNormalizerDummyBerlinSmall();
+        List<Request> requests = providerNormalizer.parseCurrentRequest();
+        for (Request request : requests) {
+            MyRepo.insertRequest(request);
+        }
     }
 
     @Test

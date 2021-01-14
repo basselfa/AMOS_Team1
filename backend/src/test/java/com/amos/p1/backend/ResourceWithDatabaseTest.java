@@ -2,16 +2,14 @@ package com.amos.p1.backend;
 
 
 import com.amos.p1.backend.data.*;
-import com.amos.p1.backend.database.DummyIncident;
 import com.amos.p1.backend.database.MyRepo;
 import com.amos.p1.backend.service.ProviderIntervalRequest;
-import com.amos.p1.backend.service.ProviderNormalizer;
-import com.amos.p1.backend.service.aggregator.Aggregator;
-import com.amos.p1.backend.service.aggregator.AggregatorFromDatabase;
+import com.amos.p1.backend.service.providernormalizer.ProviderNormalizer;
+import com.amos.p1.backend.service.providernormalizer.ProviderNormalizerDummyBerlinSmall;
+import com.amos.p1.backend.service.providernormalizer.ProviderNormalizerImpl;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,8 +17,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.TestPropertySource;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
@@ -36,25 +32,22 @@ public class ResourceWithDatabaseTest {
     private int port;
     private String base;
 
-    @BeforeAll
-    public static void init() {
+    public ResourceWithDatabaseTest() {
 
-        System.out.println("setting Database properties");
         MyRepo.setUseTestDatabase(true);
-    }
-
-
-    @BeforeEach
-    void setUp() {
-        this.base = "http://localhost:" + port + "/withDatabase";
-
-        System.out.println("reintialising Database");
         MyRepo.dropAll();
 
         //Adding dummy data to database
-        ProviderIntervalRequest providerIntervalRequest = new ProviderIntervalRequest(true);
-        providerIntervalRequest.setProviderNormalizer(new ProviderNormalizer(true));
-        providerIntervalRequest.providerCronJob();
+        ProviderNormalizer providerNormalizer = new ProviderNormalizerDummyBerlinSmall();
+        List<Request> requests = providerNormalizer.parseCurrentRequest();
+        for (Request request : requests) {
+            MyRepo.insertRequest(request);
+        }
+    }
+
+    @BeforeEach
+    void setup(){
+        this.base = "http://localhost:" + port + "/withDatabase";
     }
 
     @Test
@@ -177,6 +170,25 @@ public class ResourceWithDatabaseTest {
 
     @Test
     void testComparisonEvaluationOverTime(){
+        List<ComparisonEvaluationDTO> comparisonEvaluationDTOs =
+                given()
+                    .param("city", "Berlin")
+                .when()
+                    .get(base + "/comparisonEvaluationOverTime")
+                .then()
+                    .extract()
+                    .body()
+                    .jsonPath()
+                    .getList(".", ComparisonEvaluationDTO.class);
+
+        assertThat(comparisonEvaluationDTOs, hasSize(1));
+        assertThat(comparisonEvaluationDTOs.get(0).getSameIncidentAmount(), equalTo(9));
+        assertThat(comparisonEvaluationDTOs.get(0).getHereIncidentsAmount(), equalTo(49));
+        assertThat(comparisonEvaluationDTOs.get(0).getSameIncidentAmount(), equalTo(58));
+    }
+
+    @Test
+    void testComparisonEvaluationOverTime2(){
         List<ComparisonEvaluationDTO> comparisonEvaluationDTOs =
                 given()
                     .param("city", "Berlin")

@@ -4,17 +4,17 @@ import com.amos.p1.backend.data.ComparisonEvaluationDTO;
 import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.data.Request;
-import com.amos.p1.backend.database.DummyIncident;
 import com.amos.p1.backend.database.MyRepo;
 import com.amos.p1.backend.service.ProviderIntervalRequest;
-import com.amos.p1.backend.service.ProviderNormalizer;
+import com.amos.p1.backend.service.providernormalizer.ProviderNormalizer;
+import com.amos.p1.backend.service.providernormalizer.ProviderNormalizerDummyBerlinSmall;
+import com.amos.p1.backend.service.providernormalizer.ProviderNormalizerImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Time;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,24 +27,17 @@ import static org.hamcrest.Matchers.*;
 public class AggregatorFromDatabaseTest {
 
     Aggregator aggregator = new AggregatorFromDatabase();
-    private final static LocalDateTime LOCAL_DATE_TIME_DUMMY = LocalDateTime.of(2020, 10, 30, 16, 30);
 
-    @BeforeAll
-    public static void init() {
+    Request berlinRequest;
 
-        System.out.println("setting Database properties");
+    public AggregatorFromDatabaseTest(){
         MyRepo.setUseTestDatabase(true);
-    }
-
-    @BeforeEach
-    void setUp() {
-        System.out.println("reintialising Database");
         MyRepo.dropAll();
 
         //Adding dummy data to database
-        ProviderIntervalRequest providerIntervalRequest = new ProviderIntervalRequest(true);
-        providerIntervalRequest.setProviderNormalizer(new ProviderNormalizer(true));
-        providerIntervalRequest.providerCronJob();
+        ProviderNormalizer providerNormalizer = new ProviderNormalizerDummyBerlinSmall();
+        berlinRequest = providerNormalizer.parseCurrentRequest().get(0);
+        MyRepo.insertRequest(berlinRequest);
     }
 
     @Test
@@ -178,46 +171,9 @@ public class AggregatorFromDatabaseTest {
 
     }
 
-/*    @Test
-    void testGetEvaluationCandiate() {
-        Request request = createDummyRequest();
-
-        MyRepo.insertRequest(request);
-
-        List<EvaluationCandidate> evaluationCandidates = aggregator.getEvaluationCandidate("Berlin", LocalDateTime.of(
-                2020, 5, 1,
-                12, 30, 0));
-        System.out.println(evaluationCandidates);
-        assertThat(evaluationCandidates, hasSize(greaterThan(0)));
-
-    }*/
-
-
-    Request berlinRequest;
-
-    public AggregatorFromDatabaseTest() {
-        ProviderNormalizer providerNormalizer = new ProviderNormalizer(true);
-        List<Request> requests = providerNormalizer.parseCurrentRequest();
-
-        requests
-                .stream()
-                .filter(request -> request.getCityName().equals("Berlin"))
-                .findFirst()
-                .ifPresent(request -> this.berlinRequest = request);
-
-        berlinRequest.setRequestTime(LocalDateTime.of(
-                2021, 1, 9,
-                11, 21, 25));
-    }
-
-
     @Test
     void testGetEvaluationCandiate() {
-        MyRepo.insertRequest(berlinRequest);
-
-        List<EvaluationCandidate> evaluationCandidates = aggregator.getEvaluationCandidate("Berlin", LocalDateTime.of(
-                2021, 1, 9,
-                11, 21, 25));
+        List<EvaluationCandidate> evaluationCandidates = aggregator.getEvaluationCandidate("Berlin", berlinRequest.getRequestTime());
         System.out.println(evaluationCandidates);
 
 
@@ -229,25 +185,8 @@ public class AggregatorFromDatabaseTest {
 
     }
 
-/*    @Test
-    void testGgetComparisonEvaluationOverTime() {
-        Request request = createDummyRequest();
-
-        MyRepo.insertRequest(request);
-
-
-        List<ComparisonEvaluationDTO> comparisonEvaluationDTOs = aggregator.getComparisonEvaluationOverTime("Berlin");
-
-        System.out.println(comparisonEvaluationDTOs);
-        assertThat(comparisonEvaluationDTOs, hasSize(greaterThan(0)));
-
-
-    }*/
-
     @Test
     void testGetComparisonEvaluationOverTime() {
-        MyRepo.insertRequest(berlinRequest);
-
         List<ComparisonEvaluationDTO> comparisonEvaluationDTOs = aggregator.getComparisonEvaluationOverTime("Berlin");
 
         System.out.println(comparisonEvaluationDTOs);
@@ -258,42 +197,4 @@ public class AggregatorFromDatabaseTest {
         assertThat(comparisonEvaluationDTOs.get(0).getSameIncidentAmount(), equalTo(58));
 
     }
-
-
-    Request createDummyRequest() {
-        List<Incident> incidents = new ArrayList<Incident>();
-        incidents.add(
-                new Incident("222", "baustelle", "major", "Traffic jam in Bergmannstraße",
-                        "Berlin", "Germany", "45.5", "67.4",
-                        "Bergmannstraße", "46.5", "69.5",
-                        "Bergmannstraße", 1, "tomtom",
-                        LocalDateTime.of(2020, 5, 1, 12, 30, 0),
-                        LocalDateTime.of(2020, 5, 1, 12, 30, 0),
-                        "670000:690000,681234:691234", 6.0, new Long(1)));
-        incidents.add(
-                new Incident("222", "baustelle", "major", "Traffic jam in Bergmannstraße",
-                        "Berlin", "Germany", "45.5", "67.4",
-                        "Bergmannstraße", "46.5", "69.5",
-                        "Bergmannstraße", 1, "here",
-                        LocalDateTime.of(2020, 5, 1, 12, 30, 0),
-                        LocalDateTime.of(2020, 5, 1, 12, 30, 0),
-                        "670000:690000,681234:691234", 6.0, new Long(1)));
-
-        Request request = new Request();
-        request.setRequestTime(LocalDateTime.of(
-                2020, 5, 1,
-                12, 30, 0));
-        request.setCityName("Berlin");
-        request.setIncidents(incidents);
-
-        List<EvaluationCandidate> evaluationCandidates = new ArrayList<EvaluationCandidate>();
-        EvaluationCandidate evaluationCandidate = new EvaluationCandidate();
-        evaluationCandidate.setTomTomIncident(incidents.get(0));
-        evaluationCandidate.setHereIncident(incidents.get(1));
-        evaluationCandidates.add(evaluationCandidate);
-        request.setEvaluatedCandidates(evaluationCandidates);
-
-        return request;
-    }
-
 }

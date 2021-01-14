@@ -3,8 +3,9 @@ package com.amos.p1.backend.service.aggregator;
 import com.amos.p1.backend.data.ComparisonEvaluationDTO;
 import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.data.Incident;
-import com.amos.p1.backend.database.MyRepo;
-import com.amos.p1.backend.service.ProviderNormalizer;
+import com.amos.p1.backend.service.providernormalizer.ProviderNormalizer;
+import com.amos.p1.backend.service.providernormalizer.ProviderNormalizerDummyBerlinSmall;
+import com.amos.p1.backend.service.providernormalizer.ProviderNormalizerImpl;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,8 +16,10 @@ public class AggregatorDirectlyFromProvider implements Aggregator {
 
     @Override
     public List<Incident> getIncidents(String city, Optional<LocalDateTime> timestamp, Optional<List<String>> types) {
-        ProviderNormalizer providerNormalizer = new ProviderNormalizer(true);
-        List<Incident> incidents = providerNormalizer.getRecentTomTomIncidentsFromCity("Berlin");
+        ProviderNormalizer providerNormalizer = new ProviderNormalizerDummyBerlinSmall();
+        List<Incident> incidents = providerNormalizer
+                .parseCurrentRequest()
+                .get(0).getIncidents();
 
         if(types.isPresent()){
             incidents = filterIncidentsByType(incidents, types.get());

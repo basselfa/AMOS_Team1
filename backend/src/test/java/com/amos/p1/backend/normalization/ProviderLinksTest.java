@@ -24,8 +24,6 @@ public class ProviderLinksTest {
             System.out.println(cityBoundingBox.getCity());
             System.out.println("Tomtom: " + getUrl(cityBoundingBox, tomtomRequest));
             System.out.println("Here: " + getUrl(cityBoundingBox, hereRequest));
-
-            break;
         }
     }
 
