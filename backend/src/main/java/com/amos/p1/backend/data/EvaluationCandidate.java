@@ -163,6 +163,16 @@ public class EvaluationCandidate {
         return null;
     }
 
+
+//    public class getMatcherByClass<T>{
+//        public T get(Class matcherClass) {
+//            Optional<Matcher> matcher = matcherList.stream().filter(m -> matcherClass.isInstance(m)).findFirst();
+//            if (matcher.isPresent())
+//                return (T) matcher.get();
+//            return null;
+//        }
+//    }
+
     @Override
     public String toString() {
         return "EvaluationCandidate{" +

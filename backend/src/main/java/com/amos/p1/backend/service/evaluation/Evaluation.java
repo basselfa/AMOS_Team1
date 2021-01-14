@@ -97,8 +97,11 @@ public class Evaluation {
             //  }
             if (highestConfidenceCandidates.stream().count() > 1) {
                 // if more than one pair
-                double smallestDistancePionts = highestConfidenceCandidates.stream().mapToDouble(c -> c.getMatcherList().stream().filter(m -> m instanceof SearchRadiusMatcher).mapToDouble(m -> ((SearchRadiusMatcher) m).getFromAndToDistanceSum()).findFirst().getAsDouble()).min().getAsDouble();
-                highestConfidenceCandidates = highestConfidenceCandidates.stream().filter(c -> c.getMatcherList().stream().filter(m -> m instanceof SearchRadiusMatcher).map(m -> ((SearchRadiusMatcher) m).getFromAndToDistanceSum() == smallestDistancePionts).anyMatch(r -> r == true)).collect(Collectors.toList());
+                //double smallestDistancePionts = highestConfidenceCandidates.stream().mapToDouble(c -> c.getMatcherList().stream().filter(m -> m instanceof SearchRadiusMatcher).mapToDouble(m -> ((SearchRadiusMatcher) m).getFromAndToDistanceSum()).findFirst().getAsDouble()).min().getAsDouble();
+                double smallestDistancePionts = highestConfidenceCandidates.stream().mapToDouble(c -> c.getMatcherByClass(SearchRadiusMatcher.class).getConfidence()).min().getAsDouble();
+//                double smallestDistancePionts = highestConfidenceCandidates.stream().mapToDouble(c -> new c.getMatcherByClass<SearchRadiusMatcher>().get().getConfidence()).min().getAsDouble();
+
+               highestConfidenceCandidates = highestConfidenceCandidates.stream().filter(c -> c.getMatcherList().stream().filter(m -> m instanceof SearchRadiusMatcher).map(m -> ((SearchRadiusMatcher) m).getFromAndToDistanceSum() == smallestDistancePionts).anyMatch(r -> r == true)).collect(Collectors.toList());
 
             }
             Optional<EvaluationCandidate> cacndidate = highestConfidenceCandidates.stream().findFirst();
