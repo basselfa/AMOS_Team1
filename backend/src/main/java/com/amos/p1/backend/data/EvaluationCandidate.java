@@ -3,7 +3,7 @@ package com.amos.p1.backend.data;
 import com.amos.p1.backend.database.MyRepo;
 import com.amos.p1.backend.service.evaluation.Matcher;
 import com.amos.p1.backend.service.evaluation.SearchRadiusMatcher;
-import net.minidev.json.annotate.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.lang.reflect.InvocationTargetException;
