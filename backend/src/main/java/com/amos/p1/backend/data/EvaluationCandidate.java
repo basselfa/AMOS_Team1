@@ -36,8 +36,6 @@ public class EvaluationCandidate {
     @Transient
     private boolean dropped;
 
-
-
     public EvaluationCandidate(Incident tomTomIncident ,Incident hereIncident ) {
         super();
         this.tomTomIncident = tomTomIncident;
@@ -92,7 +90,13 @@ public class EvaluationCandidate {
 
     }
 
+    public void setScore(int score) {
+        this.score = score;
+    }
 
+    public void setDropped(boolean dropped) {
+        this.dropped = dropped;
+    }
 
     public void setEvaluationCandidateSavedInDb(Boolean evaluationCandidateSavedInDb) {
         this.evaluationCandidateSavedInDb = evaluationCandidateSavedInDb;
@@ -113,11 +117,11 @@ public class EvaluationCandidate {
     }
 
     public int getScore() {
-        return matcherList.stream().mapToInt(matcher -> matcher.getConfidence()).sum();
+        return score;
     }
 
     public boolean isDropped(){
-        return  matcherList.stream().anyMatch(matcher -> matcher.isDropped());
+        return  dropped;
     }
 
     public List<Matcher> getMatcherList() {
