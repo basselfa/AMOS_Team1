@@ -15,6 +15,11 @@ public class ExtraCloseMatcher extends Matcher{
     }
 
     @Override
+    public String getDescription() {
+        throw new IllegalStateException("Needs to be implemented");
+    }
+
+    @Override
     public int getConfidence() {
         throw new IllegalStateException("Needs to be implemented");
     }

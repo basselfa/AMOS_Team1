@@ -76,6 +76,11 @@ public class SearchRadiusMatcher extends Matcher {
     }
 
     @Override
+    public String getDescription() {
+        return "[SearchRadiusMatcher: score " + confidence + " |isDropped" + isDropped() +" ] ";
+    }
+
+    @Override
     public boolean isDropped() {
         return confidence == 0;
     }
@@ -98,8 +103,8 @@ public class SearchRadiusMatcher extends Matcher {
 
     public double getLegthDifferencePercentage() {
         try {
-           // return Math.abs(distanceIncident1 - distanceIncident2)*100 / (distanceIncident1 > distanceIncident2 ? distanceIncident1 : distanceIncident2);       // todo: check if correct
-            return (Math.abs(distanceIncident1 - distanceIncident2)*100d) /  (distanceIncident1 > distanceIncident2 ? distanceIncident2 : distanceIncident1);
+            // return Math.abs(distanceIncident1 - distanceIncident2)*100 / (distanceIncident1 > distanceIncident2 ? distanceIncident1 : distanceIncident2);       // todo: check if correct
+            return (Math.abs(distanceIncident1 - distanceIncident2) * 100d) / (distanceIncident1 > distanceIncident2 ? distanceIncident2 : distanceIncident1);
 
         } catch (RuntimeException ex) {
             return 0;

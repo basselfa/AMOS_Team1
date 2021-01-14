@@ -19,22 +19,35 @@ public class Evaluation {
         // create all permutations of Incidents of both providers
         List<EvaluationCandidate> evaluationCandidates = herreIncidents.parallelStream().flatMap(
                 herreIncident -> tomTomIncidents.stream().map(
-                        tomTomIncident -> new EvaluationCandidate(tomTomIncident, herreIncident)
+                        tomTomIncident -> {
+                            // create EvaluationCandidate and fill with data
+                            EvaluationCandidate candidate = new EvaluationCandidate(tomTomIncident, herreIncident);
+
+                            candidate.setHereIncident(herreIncident);
+                            candidate.setTomTomIncident(tomTomIncident);
+
+                            candidate.addMatcherToMatcherList(new AngleMatcher(herreIncident, tomTomIncident));
+                            candidate.addMatcherToMatcherList(new SearchRadiusMatcher(herreIncident, tomTomIncident));
+
+                            // evaluate Matchers ans store results in EvaluationCandidate
+                            candidate.setScore(
+                                    candidate.getMatcherList().stream().mapToInt(matcher -> matcher.getConfidence()).sum()
+                            );
+
+                            candidate.setDropped(
+                                    candidate.getMatcherList().stream().anyMatch(matcher -> matcher.isDropped())
+                            );
+
+                            candidate.setConfidenceDescription(
+                                    candidate.getMatcherList().stream().map(matcher -> matcher.getDescription()).reduce("", (a, b) -> (a + b))
+                            );
+
+                            return candidate;
+                        }
                 )
         ).collect(Collectors.toList());
 
-
-        evaluationCandidates.forEach(
-                candidate -> {
-                    AngleMatcher angleMatcher = new AngleMatcher(candidate.getHereIncident(), candidate.getTomTomIncident());
-                    SearchRadiusMatcher searchRadiusMatcher = new SearchRadiusMatcher(candidate.getHereIncident(), candidate.getTomTomIncident());
-
-                    candidate.addMatcherToMatcherList(angleMatcher);
-                    candidate.addMatcherToMatcherList(searchRadiusMatcher);
-                }
-        );
-
-        request.setEvaluatedCandidates(evaluationCandidates);   // notewendig ??
+        request.setEvaluatedCandidates(evaluationCandidates);
         return evaluationCandidates;
     }
 
