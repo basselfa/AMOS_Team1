@@ -145,6 +145,7 @@ public class EvaluationCandidate {
         return dropped;
     }
 
+    @JsonIgnore
     public List<Matcher> getMatcherList() {
         return Collections.unmodifiableList(matcherList);
     }
@@ -153,6 +154,7 @@ public class EvaluationCandidate {
         matcherList.add(matcher);
     }
 
+    @JsonIgnore
     public Matcher getMatcherByClass(Class matcherClass) {
         Optional<Matcher> matcher = matcherList.stream().filter(m -> matcherClass.isInstance(m)).findFirst();
         if (matcher.isPresent())
