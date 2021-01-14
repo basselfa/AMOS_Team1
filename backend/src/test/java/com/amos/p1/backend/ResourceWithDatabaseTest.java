@@ -176,7 +176,7 @@ public class ResourceWithDatabaseTest {
     }
 
     @Test
-    void testKangComparisonEvaluationOverTime(){
+    void testComparisonEvaluationOverTime(){
         List<ComparisonEvaluationDTO> comparisonEvaluationDTOs =
                 given()
                     .param("city", "Berlin")
@@ -195,7 +195,7 @@ public class ResourceWithDatabaseTest {
     }
 
     @Test
-    void testKangComparison(){
+    void testComparison(){
         List<EvaluationCandidate> evaluationCandidates =
                 given()
                     .param("city", "Berlin")
