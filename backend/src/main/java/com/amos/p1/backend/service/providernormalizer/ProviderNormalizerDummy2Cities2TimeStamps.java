@@ -12,8 +12,8 @@ public class ProviderNormalizerDummy2Cities2TimeStamps extends ProviderNormalize
     @Override
     public List<Request> parseCurrentRequest() {
 
-        LocalDateTime Date2020_01_14 = LocalDateTime.of(2020, 1, 14, 10, 0, 0);
-        LocalDateTime Date2020_01_15 = LocalDateTime.of(2020, 1, 15, 0, 0, 0);
+        LocalDateTime date2020_01_14 = LocalDateTime.of(2020, 1, 14, 10, 0, 0);
+        LocalDateTime date2020_01_15 = LocalDateTime.of(2020, 1, 15, 0, 0, 0);
 
         List<Request> requests = new ArrayList<>();
 
@@ -21,28 +21,28 @@ public class ProviderNormalizerDummy2Cities2TimeStamps extends ProviderNormalize
                 "Berlin",
                 T2020_01_14_HERE_BERLIN,
                 T2020_01_14_TOMTOM_BERLIN,
-                Date2020_01_14
+                date2020_01_14
         );
 
         Request requestMuenchen2020_01_14 = getRequest(
                 "Berlin",
                 T2020_01_14_HERE_MUENCHEN,
                 T2020_01_14_TOMTOM_MUENCHEN,
-                Date2020_01_14
+                date2020_01_14
         );
 
         Request requestBerlin2020_01_15 = getRequest(
                 "München",
                 T2020_01_15_HERE_BERLIN,
                 T2020_01_15_TOMTOM_BERLIN,
-                Date2020_01_15
+                date2020_01_15
         );
 
         Request requestMuenchen2020_01_15 = getRequest(
                 "München",
                 T2020_01_15_HERE_MUENCHEN,
                 T2020_01_15_TOMTOM_MUENCHEN,
-                Date2020_01_15
+                date2020_01_15
         );
 
         requests.add(requestBerlin2020_01_14);

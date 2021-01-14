@@ -188,25 +188,6 @@ public class ResourceWithDatabaseTest {
     }
 
     @Test
-    void testComparisonEvaluationOverTime2(){
-        List<ComparisonEvaluationDTO> comparisonEvaluationDTOs =
-                given()
-                    .param("city", "Berlin")
-                .when()
-                    .get(base + "/comparisonEvaluationOverTime")
-                .then()
-                    .extract()
-                    .body()
-                    .jsonPath()
-                    .getList(".", ComparisonEvaluationDTO.class);
-
-        assertThat(comparisonEvaluationDTOs, hasSize(1));
-        assertThat(comparisonEvaluationDTOs.get(0).getSameIncidentAmount(), equalTo(9));
-        assertThat(comparisonEvaluationDTOs.get(0).getHereIncidentsAmount(), equalTo(49));
-        assertThat(comparisonEvaluationDTOs.get(0).getSameIncidentAmount(), equalTo(58));
-    }
-
-    @Test
     void testComparison(){
         List<EvaluationCandidate> evaluationCandidates =
                 given()
