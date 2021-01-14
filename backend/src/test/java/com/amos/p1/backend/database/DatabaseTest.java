@@ -26,7 +26,7 @@ MyRepo.setUseTestDatabase(true);
                         "Bergmannstraße",
                         "46.5", "69.5",
                         "Bergmannstraße",
-                        1, "dummy",
+                        1, "tomtom",
                         LocalDateTime.of(
                                 2020, 5, 1,
                                 12, 30, 0),
@@ -42,7 +42,7 @@ MyRepo.setUseTestDatabase(true);
                         "Bergmannstraße",
                         "46.5", "69.5",
                         "Bergmannstraße",
-                        1, "dummy",
+                        1, "here",
                         LocalDateTime.of(
                                 2020, 5, 1,
                                 12, 30, 0),

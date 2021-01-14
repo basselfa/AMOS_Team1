@@ -17,7 +17,7 @@ import java.util.Optional;
  * Restcontroller only for static demo purposes. Only use dummy strings for returning to client
  */
 @RestController
-@CrossOrigin(origins = "http://0.0.0.0:8080")
+@CrossOrigin(origins = "*")
 @RequestMapping("demo")
 public class ResourceWithDummyData {
 

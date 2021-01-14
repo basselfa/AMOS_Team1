@@ -40,6 +40,7 @@ CREATE TABLE Request (
 CREATE TABLE EvaluationCandidate (
                          id BIGINT  AUTO_INCREMENT  PRIMARY KEY,
                          tomTomIncidentId BIGINT   UNSIGNED,
+                         score INT,
                          hereIncidentId BIGINT   UNSIGNED,
                          requestId BIGINT UNSIGNED,
                          confidenceDescription VARCHAR(11255)

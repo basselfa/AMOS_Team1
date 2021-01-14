@@ -124,19 +124,50 @@ public class RequestTest {
     }
     @Test
     void testGetInsertEvaluationCandidate(){
-        Request request = getDummyRequestWithOneDummyIncident();
-        request.setCityName("Berlin");
-        MyRepo.insertRequest(request);
 
-        List<EvaluationCandidate> evaluationCandidates = new ArrayList<EvaluationCandidate>();
-        EvaluationCandidate evaluationCandidate = new EvaluationCandidate ();
-        evaluationCandidate.setHereIncidentId(new Long(12));
-        evaluationCandidate.setTomTomIncidentId(new Long(13));
-        evaluationCandidates.add(evaluationCandidate);
-        MyRepo.insertEvaluationCandidate(evaluationCandidates);
+     Request request = createDummyRequest();
+     MyRepo.insertRequest(request);
 
         List<EvaluationCandidate> actual = MyRepo.geEvaluationCandidateFromRequestId(request.getId());
         System.out.println(actual);
+
         assertThat(actual, hasSize(greaterThan(0)));
     }
+
+    Request createDummyRequest(){
+        List<Incident> incidents = new ArrayList<Incident>();
+        incidents.add(
+                new Incident("222","baustelle","major","Traffic jam in Bergmannstraße",
+                        "Berlin", "Germany", "45.5", "67.4",
+                        "Bergmannstraße",  "46.5", "69.5",
+                        "Bergmannstraße",  1, "tomtom",
+                        LocalDateTime.of( 2020, 5, 1, 12, 30, 0),
+                        LocalDateTime.of( 2020, 5, 1, 12, 30, 0),
+                        "670000:690000,681234:691234",6.0,new Long(1)));
+        incidents.add(
+                new Incident("222","baustelle","major","Traffic jam in Bergmannstraße",
+                        "Berlin", "Germany", "45.5", "67.4",
+                        "Bergmannstraße",  "46.5", "69.5",
+                        "Bergmannstraße",  1, "tomtom",
+                        LocalDateTime.of( 2020, 5, 1, 12, 30, 0),
+                        LocalDateTime.of( 2020, 5, 1, 12, 30, 0),
+                        "670000:690000,681234:691234",6.0,new Long(1)));
+
+        Request request = new Request();
+        request.setRequestTime(LocalDateTime.of(
+                2020, 5, 1,
+                12, 30, 0));
+        request.setIncidents(incidents);
+
+        List<EvaluationCandidate> evaluationCandidates = new ArrayList<EvaluationCandidate>();
+        EvaluationCandidate evaluationCandidate = new EvaluationCandidate ();
+        evaluationCandidate.setTomTomIncident(incidents.get(0));
+        evaluationCandidate.setHereIncident(incidents.get(1));
+        evaluationCandidates.add(evaluationCandidate);
+        request.setEvaluatedCandidates(evaluationCandidates);
+
+        return request;
+    }
+
+
 }

@@ -29,7 +29,7 @@
 
 on:
   push:
-    branches: [ production ]
+    branches: [ production, test ]
 
 name: Deploy to Amazon ECS
 

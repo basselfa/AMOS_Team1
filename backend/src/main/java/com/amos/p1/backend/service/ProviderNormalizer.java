@@ -1,13 +1,11 @@
 package com.amos.p1.backend.service;
 
-import com.amos.p1.backend.data.CityBoundingBox;
-import com.amos.p1.backend.data.Incident;
-import com.amos.p1.backend.data.Location;
-import com.amos.p1.backend.data.Request;
+import com.amos.p1.backend.data.*;
 import com.amos.p1.backend.normalization.HereNormalization;
 import com.amos.p1.backend.normalization.JsonToIncident;
 import com.amos.p1.backend.normalization.TomTomNormalization;
 import com.amos.p1.backend.provider.*;
+import com.amos.p1.backend.service.evaluation.Evaluation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,8 +69,10 @@ public class ProviderNormalizer {
 
             System.out.println("Get data from here.com");
             List<Incident> hereIncidents = getHereIncidents(cityBoundingBox);
+            System.out.println("Amount of here data: " + hereIncidents.size());
             System.out.println("Get data from tomtom");
             List<Incident> tomTomIncidents = getTomTomIncidents(cityBoundingBox);
+            System.out.println("Amount of tomtom data: " + tomTomIncidents.size());
 
             incidents.addAll(hereIncidents);
             incidents.addAll(tomTomIncidents);
@@ -80,6 +80,15 @@ public class ProviderNormalizer {
             Request request = new Request();
             request.setCityName(cityBoundingBox.getCity());
             request.setIncidents(incidents);
+
+            System.out.println("Evaluate Data");
+            Evaluation evaluation = new Evaluation();
+            List<EvaluationCandidate> evaluationCandidates = evaluation.calculateCandidates(request);
+            System.out.println("Amount of evaluation before manifold drop: " + evaluationCandidates.size());
+            evaluationCandidates = evaluation.dropManifolds(evaluationCandidates);
+            System.out.println("Amount of evaluation after manifold drop: " + evaluationCandidates.size());
+            request.setEvaluatedCandidates(evaluationCandidates);
+
             requests.add(request);
         }
 

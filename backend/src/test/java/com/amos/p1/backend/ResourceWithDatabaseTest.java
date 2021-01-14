@@ -35,8 +35,6 @@ public class ResourceWithDatabaseTest {
     @LocalServerPort
     private int port;
     private String base;
-    private final static LocalDateTime LOCAL_DATE_TIME_DUMMY = LocalDateTime.of(2020, 10, 30, 16, 30);
-
 
     @BeforeAll
     public static void init() {
@@ -74,7 +72,8 @@ public class ResourceWithDatabaseTest {
                 .getList(".", Incident.class);
 
         System.out.println(incidents);
-        assertThat(incidents, hasSize(greaterThan(0)));
+        System.out.println(incidents.get(0));
+        assertThat(incidents, hasSize(49 + 58)); // 49 Here incidents + 58 tomtom incicents
     }
 
     @Test
@@ -93,7 +92,7 @@ public class ResourceWithDatabaseTest {
                 .getList(".", Incident.class);
 
 
-        assertThat(incidents, hasSize(greaterThan(0)));
+        assertThat(incidents, hasSize(41));
     }
 
     @Test
@@ -102,7 +101,7 @@ public class ResourceWithDatabaseTest {
         List<Incident> incidents =
             given()
                 .param("city", "Berlin")
-                .param("timestamp", "2020-01-01 00:00")
+                .param("timestamp", "2020-02-01 00:00")
             .when()
                 .get(base + "/incidents")
             .then()
@@ -171,84 +170,50 @@ public class ResourceWithDatabaseTest {
             System.out.println(Math.abs(cityObj.getJSONObject("centerPoint").getDouble("longitude")));
             System.out.println((longMin + (longMax - longMin) / 2));*/
 
-
             assert (Math.abs(cityObj.getJSONObject("centerPoint").getDouble("latitude") - (latMin + (latMax - latMin) / 2)) < 0.1);
             assert (Math.abs(cityObj.getJSONObject("centerPoint").getDouble("longitude") - (longMin + (longMax - longMin) / 2)) < 0.1);
-
-
-
         }
-
     }
+
     @Test
-    void testGgetComparisonEvaluationOverTime()  {
-        Request request = getDummyRequestWithOneDummyIncident();
-        request.setCityName("Berlin");
-        MyRepo.insertRequest(request);
-
-        List<EvaluationCandidate> evaluationCandidates = new ArrayList<EvaluationCandidate>();
-        EvaluationCandidate evaluationCandidate = new EvaluationCandidate ();
-        evaluationCandidate.setHereIncidentId(new Long(12));
-        evaluationCandidate.setTomTomIncidentId(new Long(13));
-        evaluationCandidates.add(evaluationCandidate);
-        request.setEvaluatedCandidates(evaluationCandidates);
-
-        List<ComparisonEvaluationDTO> comparisonEvaluationDTOs =given()
-                .param("city", "Berlin")
+    void testComparisonEvaluationOverTime(){
+        List<ComparisonEvaluationDTO> comparisonEvaluationDTOs =
+                given()
+                    .param("city", "Berlin")
                 .when()
-                .get(base + "/comparisonEvaluationOverTime")
+                    .get(base + "/comparisonEvaluationOverTime")
                 .then()
-                .extract()
-                .body()
-                .jsonPath()
-                .getList("com.amos.p1.backend.data", ComparisonEvaluationDTO.class);
+                    .extract()
+                    .body()
+                    .jsonPath()
+                    .getList(".", ComparisonEvaluationDTO.class);
 
-        System.out.println(comparisonEvaluationDTOs);
-        assertThat(comparisonEvaluationDTOs, hasSize(greaterThan(0)));
-
-
+        assertThat(comparisonEvaluationDTOs, hasSize(1));
+        assertThat(comparisonEvaluationDTOs.get(0).getSameIncidentAmount(), equalTo(9));
+        assertThat(comparisonEvaluationDTOs.get(0).getHereIncidentsAmount(), equalTo(49));
+        assertThat(comparisonEvaluationDTOs.get(0).getSameIncidentAmount(), equalTo(58));
     }
-
 
     @Test
     void testComparison(){
-        Request request = getDummyRequestWithOneDummyIncident();
-        request.setCityName("Berlin");
-        MyRepo.insertRequest(request);
-
-        List<EvaluationCandidate> evaluationCandidates = new ArrayList<EvaluationCandidate>();
-        EvaluationCandidate evaluationCandidate = new EvaluationCandidate ();
-        evaluationCandidate.setHereIncidentId(new Long(12));
-        evaluationCandidate.setTomTomIncidentId(new Long(13));
-        evaluationCandidates.add(evaluationCandidate);
-        request.setEvaluatedCandidates(evaluationCandidates);
-
-        List<EvaluationCandidate> evaluationCandidatesFromRest = given()
-                .param("city", "Berlin")
-                .param("timestamp", LOCAL_DATE_TIME_DUMMY)
+        List<EvaluationCandidate> evaluationCandidates =
+                given()
+                    .param("city", "Berlin")
+                    .param("timestamp", "2020-01-01 00:00")
                 .when()
-                .get(base + "/comparison")
+                    .get(base + "/comparison")
                 .then()
-                .extract()
-                .body()
-                .jsonPath()
-                .getList(".", EvaluationCandidate.class);
+                    .extract()
+                    .body()
+                    .jsonPath()
+                    .getList(".", EvaluationCandidate.class);
 
+        assertThat(evaluationCandidates, hasSize(9));
 
-        assertThat(evaluationCandidatesFromRest, hasSize(greaterThan(0)));
+        assertThat(evaluationCandidates.get(0).getHereIncident(), is(notNullValue()));
+        assertThat(evaluationCandidates.get(0).getTomTomIncident(), is(notNullValue()));
+        assertThat(evaluationCandidates.get(0).getScore(), is(not(0)));
+        assertThat(evaluationCandidates.get(0).getConfidenceDescription(), not(equalTo("")));
     }
-    private Request getDummyRequestWithOneDummyIncident() {
-        Incident incident = DummyIncident.createIncident();
-        List<Incident> incidents = new ArrayList<>();
-        incidents.add(incident);
 
-        return getDummyRequestWithIncidents(incidents);
-    }
-    private Request getDummyRequestWithIncidents(List<Incident> incidents) {
-        Request request = new Request();
-        request.setRequestTime(LOCAL_DATE_TIME_DUMMY);
-        request.setIncidents(incidents);
-
-        return  request;
-    }
 }

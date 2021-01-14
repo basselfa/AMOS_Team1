@@ -48,8 +48,8 @@ export default {
         city: null,
         timestamp: null,
         timestamps: [],
-        // todo get types and types mapping
         types: [
+            'Construction',
             'Accident',
             'Congestion',
             'Disabled vehicle',
@@ -59,7 +59,7 @@ export default {
             'Detour',
             'Misc',
             'Weather',
-            'LANECLOSED',
+            'Lane closed',
             'Lane restriction',
         ],
         type: [],
@@ -67,11 +67,15 @@ export default {
     mounted: function() {
         // get list of all cities
         axios
-            .get('http://' + window.location.hostname + ':8082/demo/cities/', {
+            .get('http://' + window.location.hostname + ':8082/withDatabase/cities/', {
                 headers: { 'Access-Control-Allow-Origin': '*' },
             })
             .then(response => {
-                this.cities = response.data
+                let cities = []
+                response.data.map(function(item) {  
+                    cities.push(item.city);
+                })
+                this.cities = cities
             })
             .catch(error => {
                 this.errorMessage = error.message
@@ -87,7 +91,7 @@ export default {
          */
         getCity: function() {
             axios
-                .get('http://' + window.location.hostname + ':8082/demo/timestamps?city=' + this.city,
+                .get('http://' + window.location.hostname + ':8082/withDatabase/timestamps?city=' + this.city,
                     {
                         headers: { 'Access-Control-Allow-Origin': '*' },
                     }
@@ -95,6 +99,10 @@ export default {
                 .then(response => {
                     this.timestamps = response.data
                     this.timestamp = this.timestamps[this.timestamps.length - 1]
+                    for (let i=0;i<this.type.length;i++) {
+                        this.type[i] = this.type[i].toUpperCase()
+                        this.type[i]=this.type[i].replace(/ /g,"_");
+                    }
                     this.$emit('change', {
                         city: this.city,
                         timestamp: this.timestamp,

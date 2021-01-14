@@ -171,7 +171,11 @@ public class MyRepo {
 
         List<EvaluationCandidate> evaluationCandidates =request.getEvaluationCandidate();
         if(evaluationCandidates==null)return ;
-        for (EvaluationCandidate EvaluationCandidate :evaluationCandidates) {  EvaluationCandidate.setRequestId(request.getId());}
+        for (EvaluationCandidate EvaluationCandidate :evaluationCandidates) {
+            EvaluationCandidate.setRequestId(request.getId());
+            EvaluationCandidate.setTomTomIncidentId(EvaluationCandidate.getTomTomIncident().getId());
+            EvaluationCandidate.setHereIncidentId(EvaluationCandidate.getHereIncident().getId());
+        }
 
 
         MyRepo.insertEvaluationCandidate(evaluationCandidates);
