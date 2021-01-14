@@ -7,10 +7,7 @@ import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @NamedQuery(
         name = "getEvaluationCandidateFromRequestId",
@@ -185,5 +182,18 @@ public class EvaluationCandidate {
                 ", hereIncident=" + hereIncident +
                 ", matcherList=" + matcherList +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EvaluationCandidate that = (EvaluationCandidate) o;
+        return score == that.score && dropped == that.dropped && Objects.equals(id, that.id) && Objects.equals(requestId, that.requestId) && Objects.equals(tomTomIncidentId, that.tomTomIncidentId) && Objects.equals(hereIncidentId, that.hereIncidentId) && Objects.equals(confidenceDescription, that.confidenceDescription) && Objects.equals(tomTomIncident, that.tomTomIncident) && Objects.equals(hereIncident, that.hereIncident) && Objects.equals(matcherList, that.matcherList) && Objects.equals(evaluationCandidateSavedInDb, that.evaluationCandidateSavedInDb);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, requestId, tomTomIncidentId, hereIncidentId, confidenceDescription, score, tomTomIncident, hereIncident, matcherList, evaluationCandidateSavedInDb, dropped);
     }
 }

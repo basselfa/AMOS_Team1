@@ -14,6 +14,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.sql.Time;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ public class AggregatorFromDatabaseTest {
     }
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         System.out.println("reintialising Database");
         MyRepo.dropAll();
 
@@ -45,15 +46,16 @@ public class AggregatorFromDatabaseTest {
         providerIntervalRequest.setProviderNormalizer(new ProviderNormalizer(true));
         providerIntervalRequest.providerCronJob();
     }
+
     @Test
-    void testGetIncidentsFromCity(){
+    void testGetIncidentsFromCity() {
         List<Incident> incidentList = aggregator.getIncidents("Berlin", Optional.empty(), Optional.empty());
 
         assertThat(incidentList, hasSize(greaterThan(0)));
     }
 
     @Test
-    void testGetIncidentsFromCityAndWithType(){
+    void testGetIncidentsFromCityAndWithType() {
         List<String> types = new ArrayList<>();
         types.add("1");
         types.add("10");
@@ -71,7 +73,7 @@ public class AggregatorFromDatabaseTest {
     }
 
     @Test
-    void testGetIncidentsFromCityAndWithTypeListEmpty(){
+    void testGetIncidentsFromCityAndWithTypeListEmpty() {
         List<String> types = new ArrayList<>();
 
         List<Incident> incidentList = aggregator.getIncidents("Berlin", Optional.empty(), Optional.of(types));
@@ -81,7 +83,7 @@ public class AggregatorFromDatabaseTest {
 
 
     @Test
-    void testGetIncidentsFromCityAndTimeStamp(){
+    void testGetIncidentsFromCityAndTimeStamp() {
 
         List<Incident> incidents = new ArrayList<Incident>();
         LocalDateTime timestamp = LocalDateTime.of(
@@ -89,7 +91,7 @@ public class AggregatorFromDatabaseTest {
                 12, 30, 0);
 
         incidents.add(
-                new Incident("222","baustelle","major",
+                new Incident("222", "baustelle", "major",
                         "Traffic jam in Bergmannstraße",
                         "Berlin", "Germany",
                         "45.5", "67.4",
@@ -99,7 +101,7 @@ public class AggregatorFromDatabaseTest {
                         1, "dummy",
                         timestamp,
                         timestamp,
-                        "670000:690000,681234:691234",6.0,new Long(1)));
+                        "670000:690000,681234:691234", 6.0, new Long(1)));
         MyRepo.insertIncident(incidents);
 
         List<Incident> incidentList = aggregator.getIncidents("Berlin", Optional.of(timestamp), Optional.empty());
@@ -108,7 +110,7 @@ public class AggregatorFromDatabaseTest {
     }
 
     @Test
-    void testGetIncidentsFromCityAndTimeStampNotInDatabase(){
+    void testGetIncidentsFromCityAndTimeStampNotInDatabase() {
         LocalDateTime timestamp = LocalDateTime.of(
                 0, 1, 1,
                 12, 30, 0);
@@ -118,10 +120,10 @@ public class AggregatorFromDatabaseTest {
     }
 
     @Test
-    void testGetTimestampsFromCity(){
+    void testGetTimestampsFromCity() {
         List<Incident> incidents = new ArrayList<Incident>();
         incidents.add(
-                new Incident("222","baustelle","major",
+                new Incident("222", "baustelle", "major",
                         "Traffic jam in Bergmannstraße",
                         "Berlin", "Germany",
                         "45.5", "67.4",
@@ -135,7 +137,7 @@ public class AggregatorFromDatabaseTest {
                         LocalDateTime.of(
                                 2020, 5, 1,
                                 12, 30, 0),
-                        "670000:690000,681234:691234",6.0,new Long(1)));
+                        "670000:690000,681234:691234", 6.0, new Long(1)));
         MyRepo.insertIncident(incidents);
         List<LocalDateTime> timestampList = aggregator.getTimestampsFromCity("Berlin");
 
@@ -143,14 +145,14 @@ public class AggregatorFromDatabaseTest {
     }
 
     @Test
-    void testGetTimestampsFromCityNotInDatabase(){
-       // List<LocalDateTime> timestampList = incidentAggregator.getTimestampsFromCity("DreamLand");
+    void testGetTimestampsFromCityNotInDatabase() {
+        // List<LocalDateTime> timestampList = incidentAggregator.getTimestampsFromCity("DreamLand");
 
-       // assertThat(timestampList, is(empty()));
+        // assertThat(timestampList, is(empty()));
     }
 
     @Test
-    void testGetAllIncidents(){
+    void testGetAllIncidents() {
         List<Incident> incidentList = aggregator.getAllData();
 
         assertThat(incidentList, hasSize(greaterThan(0)));
@@ -175,54 +177,107 @@ public class AggregatorFromDatabaseTest {
         assertThat(json, notNullValue());
 
     }
-    @Test
+
+/*    @Test
     void testGetEvaluationCandiate() {
         Request request = createDummyRequest();
 
         MyRepo.insertRequest(request);
 
-        List<EvaluationCandidate> evaluationCandidates = aggregator.getEvaluationCandidate("Berlin",LocalDateTime.of(
+        List<EvaluationCandidate> evaluationCandidates = aggregator.getEvaluationCandidate("Berlin", LocalDateTime.of(
                 2020, 5, 1,
                 12, 30, 0));
         System.out.println(evaluationCandidates);
         assertThat(evaluationCandidates, hasSize(greaterThan(0)));
 
+    }*/
+
+
+    Request berlinRequest;
+
+    public AggregatorFromDatabaseTest() {
+        ProviderNormalizer providerNormalizer = new ProviderNormalizer(true);
+        List<Request> requests = providerNormalizer.parseCurrentRequest();
+
+        requests
+                .stream()
+                .filter(request -> request.getCityName().equals("Berlin"))
+                .findFirst()
+                .ifPresent(request -> this.berlinRequest = request);
+
+        berlinRequest.setRequestTime(LocalDateTime.of(
+                2021, 1, 9,
+                11, 21, 25));
     }
 
+
     @Test
-    void testGgetComparisonEvaluationOverTime()  {
+    void testGetEvaluationCandiate() {
+        MyRepo.insertRequest(berlinRequest);
+
+        List<EvaluationCandidate> evaluationCandidates = aggregator.getEvaluationCandidate("Berlin", LocalDateTime.of(
+                2021, 1, 9,
+                11, 21, 25));
+        System.out.println(evaluationCandidates);
+
+
+        assertThat(evaluationCandidates, hasSize(equalTo(berlinRequest.getEvaluationCandidate().size())));
+
+        berlinRequest.getEvaluationCandidate().forEach(
+                candidate -> {assert(evaluationCandidates.contains(candidate));}
+        );
+
+    }
+
+/*    @Test
+    void testGgetComparisonEvaluationOverTime() {
         Request request = createDummyRequest();
 
         MyRepo.insertRequest(request);
 
 
-        List<ComparisonEvaluationDTO> comparisonEvaluationDTOs= aggregator.getComparisonEvaluationOverTime("Berlin" );
+        List<ComparisonEvaluationDTO> comparisonEvaluationDTOs = aggregator.getComparisonEvaluationOverTime("Berlin");
 
         System.out.println(comparisonEvaluationDTOs);
         assertThat(comparisonEvaluationDTOs, hasSize(greaterThan(0)));
 
 
+    }*/
+
+    @Test
+    void testGetComparisonEvaluationOverTime() {
+        MyRepo.insertRequest(berlinRequest);
+
+        List<ComparisonEvaluationDTO> comparisonEvaluationDTOs = aggregator.getComparisonEvaluationOverTime("Berlin");
+
+        System.out.println(comparisonEvaluationDTOs);
+
+        assertThat(comparisonEvaluationDTOs, hasSize(1));
+        assertThat(comparisonEvaluationDTOs.get(0).getSameIncidentAmount(), equalTo(9));
+        assertThat(comparisonEvaluationDTOs.get(0).getHereIncidentsAmount(), equalTo(49));
+        assertThat(comparisonEvaluationDTOs.get(0).getSameIncidentAmount(), equalTo(58));
+
     }
 
 
-    Request createDummyRequest(){
+    Request createDummyRequest() {
         List<Incident> incidents = new ArrayList<Incident>();
         incidents.add(
-                new Incident("222","baustelle","major","Traffic jam in Bergmannstraße",
+                new Incident("222", "baustelle", "major", "Traffic jam in Bergmannstraße",
                         "Berlin", "Germany", "45.5", "67.4",
-                        "Bergmannstraße",  "46.5", "69.5",
-                        "Bergmannstraße",  1, "tomtom",
-                        LocalDateTime.of( 2020, 5, 1, 12, 30, 0),
-                        LocalDateTime.of( 2020, 5, 1, 12, 30, 0),
-                        "670000:690000,681234:691234",6.0,new Long(1)));
+                        "Bergmannstraße", "46.5", "69.5",
+                        "Bergmannstraße", 1, "tomtom",
+                        LocalDateTime.of(2020, 5, 1, 12, 30, 0),
+                        LocalDateTime.of(2020, 5, 1, 12, 30, 0),
+                        "670000:690000,681234:691234", 6.0, new Long(1)));
         incidents.add(
-                new Incident("222","baustelle","major","Traffic jam in Bergmannstraße",
+                new Incident("222", "baustelle", "major", "Traffic jam in Bergmannstraße",
                         "Berlin", "Germany", "45.5", "67.4",
-                        "Bergmannstraße",  "46.5", "69.5",
-                        "Bergmannstraße",  1, "here",
-                        LocalDateTime.of( 2020, 5, 1, 12, 30, 0),
-                        LocalDateTime.of( 2020, 5, 1, 12, 30, 0),
-                        "670000:690000,681234:691234",6.0,new Long(1)));
+                        "Bergmannstraße", "46.5", "69.5",
+                        "Bergmannstraße", 1, "here",
+                        LocalDateTime.of(2020, 5, 1, 12, 30, 0),
+                        LocalDateTime.of(2020, 5, 1, 12, 30, 0),
+                        "670000:690000,681234:691234", 6.0, new Long(1)));
 
         Request request = new Request();
         request.setRequestTime(LocalDateTime.of(
@@ -232,7 +287,7 @@ public class AggregatorFromDatabaseTest {
         request.setIncidents(incidents);
 
         List<EvaluationCandidate> evaluationCandidates = new ArrayList<EvaluationCandidate>();
-        EvaluationCandidate evaluationCandidate = new EvaluationCandidate ();
+        EvaluationCandidate evaluationCandidate = new EvaluationCandidate();
         evaluationCandidate.setTomTomIncident(incidents.get(0));
         evaluationCandidate.setHereIncident(incidents.get(1));
         evaluationCandidates.add(evaluationCandidate);
