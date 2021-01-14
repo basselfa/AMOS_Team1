@@ -42,12 +42,14 @@ public class Evaluation {
                                     candidate.getMatcherList().stream().map(matcher -> matcher.getDescription()).reduce("", (a, b) -> (a + b))
                             );
 
+                            candidate.getMatcherByClass(AngleMatcher.class);
+
+
                             return candidate;
                         }
                 )
         ).collect(Collectors.toList());
 
-        request.setEvaluatedCandidates(evaluationCandidates);
         return evaluationCandidates;
     }
 

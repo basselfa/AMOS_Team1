@@ -2,6 +2,7 @@ package com.amos.p1.backend.data;
 
 import com.amos.p1.backend.database.MyRepo;
 import com.amos.p1.backend.service.evaluation.Matcher;
+import com.amos.p1.backend.service.evaluation.SearchRadiusMatcher;
 import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @NamedQuery(
         name = "getEvaluationCandidateFromRequestId",
@@ -32,14 +34,14 @@ public class EvaluationCandidate {
     @Transient
     private final List<Matcher> matcherList = new ArrayList<>(); // Dont need to be stored in db
     @Transient
-    Boolean evaluationCandidateSavedInDb= false ;
+    Boolean evaluationCandidateSavedInDb = false;
     @Transient
     private boolean dropped;
 
-    public EvaluationCandidate(Incident tomTomIncident ,Incident hereIncident ) {
+    public EvaluationCandidate(Incident tomTomIncident, Incident hereIncident) {
         super();
         this.tomTomIncident = tomTomIncident;
-        this.hereIncident = hereIncident  ;
+        this.hereIncident = hereIncident;
         this.tomTomIncidentId = tomTomIncident.getId();
         this.hereIncidentId = hereIncident.getId();
     }
@@ -48,22 +50,43 @@ public class EvaluationCandidate {
 
     }
 
-
     @Basic
     @Column(name = "requestId", nullable = true)
-    public Long getRequestId() {    return requestId; }
-    public void setRequestId(Long requestId) { this.requestId = requestId; }
-    public Long getId() {return id; }
-    public void setId(Long id) { this.id = id;    }
+    public Long getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(Long requestId) {
+        this.requestId = requestId;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Basic
     @Column(name = "tomTomIncidentId", nullable = true)
-    public Long getTomTomIncidentId() {    return tomTomIncidentId; }
-    public void setTomTomIncidentId(Long tomTomIncidentId) {  this.tomTomIncidentId = tomTomIncidentId; }
+    public Long getTomTomIncidentId() {
+        return tomTomIncidentId;
+    }
+
+    public void setTomTomIncidentId(Long tomTomIncidentId) {
+        this.tomTomIncidentId = tomTomIncidentId;
+    }
 
     @Basic
     @Column(name = "hereIncidentId", nullable = true)
-    public Long getHereIncidentId() {   return hereIncidentId;    }
-    public void setHereIncidentId(Long hereIncidentId) { this.hereIncidentId = hereIncidentId; }
+    public Long getHereIncidentId() {
+        return hereIncidentId;
+    }
+
+    public void setHereIncidentId(Long hereIncidentId) {
+        this.hereIncidentId = hereIncidentId;
+    }
 
     @Basic
     @Column(name = "confidenceDescription", nullable = true)
@@ -76,7 +99,7 @@ public class EvaluationCandidate {
     }
 
     public Incident getTomTomIncident() {
-        if(evaluationCandidateSavedInDb==false) return tomTomIncident;
+        if (evaluationCandidateSavedInDb == false) return tomTomIncident;
         List<Incident> incidentAsList;
         incidentAsList = MyRepo.getEntityManager().createNamedQuery("getFromid")
                 .setParameter("id", tomTomIncidentId)
@@ -103,7 +126,7 @@ public class EvaluationCandidate {
     }
 
     public Incident getHereIncident() {
-        if(evaluationCandidateSavedInDb==false) return hereIncident;
+        if (evaluationCandidateSavedInDb == false) return hereIncident;
 
         List<Incident> incidentAsList;
         incidentAsList = MyRepo.getEntityManager().createNamedQuery("getFromid")
@@ -111,6 +134,7 @@ public class EvaluationCandidate {
                 .getResultList();
         return incidentAsList.get(0);
     }
+
     public void setHereIncident(Incident hereIncident) {
         this.hereIncident = hereIncident;
         setHereIncidentId(hereIncident.getId());
@@ -120,8 +144,8 @@ public class EvaluationCandidate {
         return score;
     }
 
-    public boolean isDropped(){
-        return  dropped;
+    public boolean isDropped() {
+        return dropped;
     }
 
     public List<Matcher> getMatcherList() {
@@ -130,6 +154,13 @@ public class EvaluationCandidate {
 
     public void addMatcherToMatcherList(Matcher matcher) {
         matcherList.add(matcher);
+    }
+
+    public Matcher getMatcherByClass(Class matcherClass) {
+        Optional<Matcher> matcher = matcherList.stream().filter(m -> matcherClass.isInstance(m)).findFirst();
+        if (matcher.isPresent())
+            return matcher.get();
+        return null;
     }
 
     @Override
@@ -145,11 +176,4 @@ public class EvaluationCandidate {
                 ", matcherList=" + matcherList +
                 '}';
     }
-
-    /*public void addMatcherToMatcherList(Class matcherClass) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        Matcher matcher = (Matcher) matcherClass.getDeclaredConstructor(Incident.class, Incident.class).newInstance(tomTomIncident, hereIncident);
-        matcherList.add(matcher);
-    }*/
-
-
 }
