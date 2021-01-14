@@ -18,7 +18,7 @@ describe('Search', () => {
             localVue,
             vuetify,
             propsData: {
-                city: 'verlin',
+                city: 'Berlin',
             },
         })
     })
@@ -28,24 +28,40 @@ describe('Search', () => {
     })
 
     it('should emit city and latest timestamp', async () => {
-        wrapper.setData({ city: 'Berlin' })
-        await flushPromises()
-
-        moxios.stubRequest(
-            'http://localhost:8082/demo/timestamps?city=Berlin',
-            {
+        wrapper.setData({ city: 'Berlin', type: ['Accident', 'Lane closed'] })
+        flushPromises()
+        await wrapper.vm.getCity()
+        moxios.requests
+            .mostRecent()
+            .respondWith({
                 status: 200,
                 response: ['2020-12-19 12:00', '2020-12-19 13:00'],
-            }
-        )
+            })
+            .then(function() {
+                expect(wrapper.emitted().change[0]).toEqual([
+                    { city: 'Berlin', timestamp: '2020-12-19 13:00' },
+                ])
+                done()
+            })
+    })
 
-        wrapper.vm.getCity()
-        moxios.wait(() => {
-            expect(wrapper.emitted().change[0]).toEqual([
-                { city: 'Berlin', timestamp: '2020-12-19 13:00' },
-            ])
-            done()
-        })
+    it('should get error from request', async () => {
+        wrapper.setData({ city: 'Berlin', type: ['Accident', 'Lane closed'] })
+        const error = new Error('Error: Request failed with status code 400')
+        flushPromises()
+        await wrapper.vm.getCity()
+        moxios.requests
+            .mostRecent()
+            .respondWith({
+                status: 400,
+                response: error,
+            })
+            .then(function() {
+                expect(wrapper.vm.errorMessage).toEqual(
+                    'Error: Request failed with status code 400'
+                )
+                done()
+            })
     })
 
     afterEach(() => {

@@ -35,7 +35,6 @@ export default {
             this.executeQuery(value)
         },
         executeQuery: function(value) {
-
             this.polylines = []
             if (value.city !== null && value.timestamp !== null) {
                     let request_url = 
@@ -67,39 +66,6 @@ export default {
             
         },
         /**
-         * Processes the incident data of the selected city.
-         *
-         * @param cityData Incident data from backend
-         * @param coordinatesArray Processed strings into coordinates
-         * @param lineArray Array which collects the coordinates of one incident
-         * @param latitudinal Latitudinal coordinate of a line edge
-         * @param longitudinal Longitidinal coordinate of a line edge
-         */
-        passCoordinates: function(cityData) {
-            for (var i = 0; i < cityData.length; i++) {
-                var coordinatesArray = cityData[i].edges.split(',')
-                var lineArray = []
-                for (var j = 0; j < coordinatesArray.length; j++) {
-                    let latitudinal = coordinatesArray[j].split(':')[0]
-                    let longitudinal = coordinatesArray[j].split(':')[1]
-                    if (
-                        typeof latitudinal !== 'undefined' &&
-                        typeof longitudinal !== 'undefined'
-                    ) {
-                        lineArray.push([latitudinal, longitudinal])
-                    }
-                }
-                this.polylines.push({
-                    latlngs: lineArray,
-                    color: 'blue',
-                })
-            }
-        },
-    },
-}
-</script>
-
-<style></style>
          * Processes the incident data of the selected city.
          *
          * @param cityData Incident data from backend
