@@ -189,11 +189,11 @@ public class EvaluationCandidate {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EvaluationCandidate that = (EvaluationCandidate) o;
-        return score == that.score && dropped == that.dropped && Objects.equals(id, that.id) && Objects.equals(requestId, that.requestId) && Objects.equals(tomTomIncidentId, that.tomTomIncidentId) && Objects.equals(hereIncidentId, that.hereIncidentId) && Objects.equals(confidenceDescription, that.confidenceDescription) && Objects.equals(tomTomIncident, that.tomTomIncident) && Objects.equals(hereIncident, that.hereIncident) && Objects.equals(matcherList, that.matcherList) && Objects.equals(evaluationCandidateSavedInDb, that.evaluationCandidateSavedInDb);
+        return score == that.score && dropped == that.dropped && Objects.equals(id, that.id) && Objects.equals(requestId, that.requestId) && Objects.equals(tomTomIncidentId, that.tomTomIncidentId) && Objects.equals(hereIncidentId, that.hereIncidentId) && Objects.equals(confidenceDescription, that.confidenceDescription) && Objects.equals(tomTomIncident, that.tomTomIncident) && Objects.equals(hereIncident, that.hereIncident) ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, requestId, tomTomIncidentId, hereIncidentId, confidenceDescription, score, tomTomIncident, hereIncident, matcherList, evaluationCandidateSavedInDb, dropped);
+        return Objects.hash(id, requestId, tomTomIncidentId, hereIncidentId, confidenceDescription, score, tomTomIncident, hereIncident, dropped);
     }
 }
