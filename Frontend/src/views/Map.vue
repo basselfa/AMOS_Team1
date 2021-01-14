@@ -91,6 +91,7 @@ export default {
                 this.polylines.push({
                     latlngs: lineArray,
                     color: 'blue',
+                    text:"hello"+Math.random()
                 })
             }
         },
