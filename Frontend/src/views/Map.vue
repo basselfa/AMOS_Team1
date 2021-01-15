@@ -76,6 +76,7 @@ export default {
          */
         passCoordinates: function(cityData) {
             for (var i = 0; i < cityData.length; i++) {
+                console.log(cityData[i])
                 var coordinatesArray = cityData[i].edges.split(',')
                 var lineArray = []
                 for (var j = 0; j < coordinatesArray.length; j++) {
@@ -91,7 +92,10 @@ export default {
                 this.polylines.push({
                     latlngs: lineArray,
                     color: 'blue',
-                    text:"hello"+Math.random()
+                    criticality:cityData[i].size,
+                    description:(cityData[i].description!=='undefined' ? cityData[i].description.split("&")[1] : "Description not available"),
+                    length:cityData[i].lengthInMeter,
+                    type:cityData[i].type
                 })
             }
         },
