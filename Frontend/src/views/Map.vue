@@ -37,33 +37,29 @@ export default {
         executeQuery: function(value) {
             this.polylines = []
             if (value.city !== null && value.timestamp !== null) {
-                    let request_url = 
-                                'http://' +
-                                window.location.hostname +
-                                ':8082/withDatabase/incidents?city=' +
-                                value.city +
-                                '&timestamp=' +
-                                value.timestamp
-                    if (value.type.length !== 0) {
-                        request_url = request_url + '&types=' + value.type.join()
-                    }
-                    console.log(request_url)
-                    axios
-                        .get(
-                            request_url,
-                            {
-                                headers: { 'Access-Control-Allow-Origin': '*' },
-                            }
-                        )
-                        .then(response => {
-                            this.passCoordinates(response.data)
-                        })
-                        .catch(error => {
-                            this.errorMessage = error.message
-                            console.error('There was an error!', error)
-                        })
+                let request_url =
+                    'http://' +
+                    window.location.hostname +
+                    ':8082/withDatabase/incidents?city=' +
+                    value.city +
+                    '&timestamp=' +
+                    value.timestamp
+                if (value.type.length !== 0) {
+                    request_url = request_url + '&types=' + value.type.join()
                 }
-            
+                console.log(request_url)
+                axios
+                    .get(request_url, {
+                        headers: { 'Access-Control-Allow-Origin': '*' },
+                    })
+                    .then(response => {
+                        this.passCoordinates(response.data)
+                    })
+                    .catch(error => {
+                        this.errorMessage = error.message
+                        console.error('There was an error!', error)
+                    })
+            }
         },
         /**
          * Processes the incident data of the selected city.
@@ -76,7 +72,6 @@ export default {
          */
         passCoordinates: function(cityData) {
             for (var i = 0; i < cityData.length; i++) {
-                console.log(cityData[i])
                 var coordinatesArray = cityData[i].edges.split(',')
                 var lineArray = []
                 for (var j = 0; j < coordinatesArray.length; j++) {
@@ -92,10 +87,10 @@ export default {
                 this.polylines.push({
                     latlngs: lineArray,
                     color: 'blue',
-                    criticality:cityData[i].size,
-                    description:(cityData[i].description!=='undefined' ? cityData[i].description.split("&")[1] : "Description not available"),
-                    length:cityData[i].lengthInMeter,
-                    type:cityData[i].type
+                    criticality: cityData[i].size,
+                    description: cityData[i].description !== 'undefined' ? cityData[i].description.split('&')[1] : 'Description not available',
+                    length: cityData[i].lengthInMeter,
+                    type: cityData[i].type,
                 })
             }
         },

@@ -46,7 +46,6 @@ export default {
       },
       showMap: true,
       markerLatLng: [52.509041, 13.330550],
-      marker:"helö"
     };
   },
 };
