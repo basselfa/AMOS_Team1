@@ -179,7 +179,7 @@ public class ResourceWithDatabaseTest {
                     .getList(".", ComparisonEvaluationDTO.class);
 
         assertThat(comparisonEvaluationDTOs, hasSize(1));
-        assertThat(comparisonEvaluationDTOs.get(0).getSameIncidentAmount(), equalTo(9));
+        assertThat(comparisonEvaluationDTOs.get(0).getSameIncidentAmount(), equalTo(8));
         assertThat(comparisonEvaluationDTOs.get(0).getHereIncidentsAmount(), equalTo(49));
         assertThat(comparisonEvaluationDTOs.get(0).getTomTomIncidentsAmount(), equalTo(58));
     }
