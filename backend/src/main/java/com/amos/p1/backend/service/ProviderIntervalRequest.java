@@ -1,9 +1,10 @@
 package com.amos.p1.backend.service;
 
+import com.amos.p1.backend.configuration.RequestCreatorConfig;
 import com.amos.p1.backend.data.Request;
 import com.amos.p1.backend.database.MyRepo;
 import com.amos.p1.backend.service.requestcreator.RequestCreator;
-import com.amos.p1.backend.service.requestcreator.RequestCreatorDummyBerlinSmall;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,14 @@ import java.util.List;
 )
 public class ProviderIntervalRequest {
 
+    private final RequestCreatorConfig requestCreatorConfig;
+
+    @Autowired
+    public ProviderIntervalRequest(RequestCreatorConfig requestCreatorConfig){
+
+        this.requestCreatorConfig = requestCreatorConfig;
+    }
+
     /**
      *  Will be runned on startup
      *  1000 ms * 60 * 60 = 1 hour
@@ -27,7 +36,7 @@ public class ProviderIntervalRequest {
         LocalDateTime now = LocalDateTime.now();
         System.out.println("The time is now " + now);
 
-        RequestCreator requestCreator = new RequestCreatorDummyBerlinSmall();
+        RequestCreator requestCreator = requestCreatorConfig.getRequestCreator();
         List<Request> requests = requestCreator.buildRequests();
 
         for (Request request : requests) {

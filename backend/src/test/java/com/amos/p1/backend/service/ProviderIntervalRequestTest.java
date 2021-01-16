@@ -1,5 +1,6 @@
 package com.amos.p1.backend.service;
 
+import com.amos.p1.backend.configuration.RequestCreatorConfigDevelopment;
 import com.amos.p1.backend.data.Request;
 import com.amos.p1.backend.database.MyRepo;
 import com.amos.p1.backend.service.requestcreator.RequestCreator;
@@ -15,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class ProviderIntervalRequestTest {
 
-    private final ProviderIntervalRequest providerIntervalRequest = new ProviderIntervalRequest();
+    private final ProviderIntervalRequest providerIntervalRequest = new ProviderIntervalRequest(new RequestCreatorConfigDevelopment());
 
 
     public ProviderIntervalRequestTest(){

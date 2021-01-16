@@ -66,7 +66,7 @@ public abstract class RequestCreatorDummy implements RequestCreator {
 
 
     protected static final String T2020_01_14_HERE_BERLIN = "provider-dummy-data/2020-01-14_10-00/here-berlin.json";
-    protected static final String T2020_01_14_TOMTOM_BERLIN = "provider-dummy-data/2020-01-14_10-00/here-berlin.json";
+    protected static final String T2020_01_14_TOMTOM_BERLIN = "provider-dummy-data/2020-01-14_10-00/tomtom-berlin.json";
 
     protected static final String T2020_01_14_HERE_FRANKFURT = "provider-dummy-data/2020-01-14_10-00/here-frankfurt_am_main.json";
     protected static final String T2020_01_14_TOMTOM_FRANKFURT = "provider-dummy-data/2020-01-14_10-00/tomtom-frankfurt_am_main.json";
@@ -114,6 +114,11 @@ public abstract class RequestCreatorDummy implements RequestCreator {
         });
 
         return requests;
+    }
+
+    @Override
+    public void setTimeStamp(LocalDateTime timestamp) {
+
     }
 
     protected Request buildRequest(String city, String hereJsonPath, String tomtomJsonPath, LocalDateTime timestamp) {

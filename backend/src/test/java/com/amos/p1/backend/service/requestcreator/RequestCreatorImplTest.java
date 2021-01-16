@@ -19,8 +19,10 @@ class RequestCreatorImplTest {
         fail();
         LocalDateTime now = LocalDateTime.now();
 
-        RequestCreatorImpl providerNormalizer = new RequestCreatorImpl(now);
-        List<Request> requests = providerNormalizer.buildRequests();
+        RequestCreatorImpl requestCreator = new RequestCreatorImpl();
+        requestCreator.setTimeStamp(now);
+
+        List<Request> requests = requestCreator.buildRequests();
 
         CityBoundBoxesService cityBoundBoxesService = new CityBoundingBoxesServiceImpl();
         int cityAmount = cityBoundBoxesService.getCityBoundingBoxes().size();

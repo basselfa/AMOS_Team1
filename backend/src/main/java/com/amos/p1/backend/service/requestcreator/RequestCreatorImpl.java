@@ -20,11 +20,7 @@ public class RequestCreatorImpl implements RequestCreator {
     
     private final CityBoundBoxesService cityBoundingBoxesService = new CityBoundingBoxesServiceImpl();
 
-    private final LocalDateTime timestamp;
-
-    public RequestCreatorImpl(LocalDateTime timestamp){
-        this.timestamp = timestamp;
-    }
+    private LocalDateTime timestamp;
 
     public List<Request> buildRequests(){
         List<Request> requests = new ArrayList<>();
@@ -61,6 +57,11 @@ public class RequestCreatorImpl implements RequestCreator {
         }
 
         return requests;
+    }
+
+    @Override
+    public void setTimeStamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
     }
 
     public List<Incident> getRecentTomTomIncidentsFromCity(String city){
