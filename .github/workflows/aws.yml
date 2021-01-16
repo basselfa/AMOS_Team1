@@ -29,7 +29,7 @@
 
 on:
   push:
-    branches: [ production, test ]
+    branches: [ 61-amos-cicd-bugfix ]
 
 name: Deploy to Amazon ECS
 
@@ -58,7 +58,7 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: amos
-        IMAGE_TAG: ${{ github.sha }}
+        IMAGE_TAG: frontend-${{ github.head_ref }}-${{ github.sha }}
       run: |
         # Build a docker container and
         # push it to ECR so that it can
@@ -89,7 +89,7 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: amos
-        IMAGE_TAG: ${{ github.sha }}backend
+        IMAGE_TAG: backend-${{ github.head_ref }}-${{ github.sha }}
       run: |
         # Build a docker container and
         # push it to ECR so that it can
@@ -103,7 +103,7 @@ jobs:
       id: task-def-backend
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
-        task-definition: aws-task-definition.json
+        task-definition: ${{ steps.task-def-frontend.outputs.task-definition }}
         container-name: backend
         image: ${{ steps.build-backend-image.outputs.image }}
 
