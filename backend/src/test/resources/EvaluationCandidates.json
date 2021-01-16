@@ -1,957 +1,156 @@
 [
-  {
-    "id": 24908,
-    "requestId": 24800,
-    "tomTomIncidentId": 24870,
-    "hereIncidentId": 24834,
-    "confidenceDescription": "[SearchRadiusMatcher: score 1 |isDroppedfalse |angle0.6723175][SearchRadiusMatcher: score 1 |isDroppedfalse ] ",
-    "score": 2,
-    "tomTomIncident": {
-      "id": 24870,
-      "trafficId": null,
-      "type": "ROADCLOSED",
-      "size": "93",
-      "description": "closed",
-      "city": null,
-      "country": null,
-      "lengthInMeter": 0.0,
-      "startPositionLatitude": "52.51527",
-      "startPositionLongitude": "13.38454",
-      "startPositionStreet": "Behrenstraße (B2)",
-      "endPositionLatitude": "52.51444",
-      "endPositionLongitude": "13.38479",
-      "endPositionStreet": "Französische Straße / Glinkastraße",
-      "verified": 0,
-      "provider": "1",
-      "entryTime": "2018-10-10T12:00:00",
-      "endTime": "2021-06-30T21:59:59",
-      "requestId": 24800,
-      "edges": "52.51502:13.38461",
-      "edgesAsLocations": {
-        "locationsList": [
-          {
-            "latitude": "52.51502",
-            "longitude": "13.38461"
-          }
-        ]
-      }
-    },
-    "hereIncident": {
-      "id": 24834,
-      "trafficId": "3566369787703156776",
-      "type": "CONSTRUCTION",
-      "size": "12",
-      "description": "CONSTRUCTION & Geschlossen zwischen Behrenstraße und Französische Straße - Wegen Baustelle gesperrt.",
-      "city": "Berlin",
-      "country": null,
-      "lengthInMeter": 0.04928,
-      "startPositionLatitude": "52.515285",
-      "startPositionLongitude": "13.38453",
-      "startPositionStreet": "Mauerstraße - Behrenstraße",
-      "endPositionLatitude": "52.51468",
-      "endPositionLongitude": "13.38472",
-      "endPositionStreet": "Mauerstraße - Französische Straße",
-      "verified": 1,
-      "provider": "0",
-      "entryTime": "2020-12-15T15:46:10",
-      "endTime": "2021-07-08T13:00:00",
-      "requestId": 24800,
-      "edges": "52.51538:13.3845,52.51468:13.38472,",
-      "edgesAsLocations": {
-        "locationsList": [
-          {
-            "latitude": "52.51538",
-            "longitude": "13.3845"
-          },
-          {
-            "latitude": "52.51468",
-            "longitude": "13.38472"
-          }
-        ]
-      }
-    },
-    "matcherList": [
-      {
-        "confidence": 1,
-        "dropped": false,
-        "degree": 0.6723175048828125,
-        "description": "[SearchRadiusMatcher: score 1 |isDroppedfalse |angle0.6723175]"
+    {
+      "tomTomIncident": {
+        "country": "Germany",
+        "startPositionLatitude": "45.5",
+        "endPositionStreet": "Bergmannstraße",
+        "city": "Berlin",
+        "startPositionLongitude": "67.4",
+        "verified": 1,
+        "edges": "670000:690000,681234:691234",
+        "description": "Traffic jam in Bergmannstraße",
+        "type": "baustelle",
+        "lengthInMeter": 6,
+        "startPositionStreet": "Bergmannstraße",
+        "entryTime": "2020-05-01T12:30:00",
+        "size": "major",
+        "edgesAsLocations": {
+          "locationsList": [
+            {
+              "latitude": "670000",
+              "longitude": "690000"
+            },
+            {
+              "latitude": "681234",
+              "longitude": "691234"
+            }
+          ]
+        },
+        "endPositionLongitude": "69.5",
+        "provider": "tomtom",
+        "requestId": 1,
+        "trafficId": "222",
+        "id": null,
+        "endTime": "2020-05-01T12:30:00",
+        "endPositionLatitude": "46.5"
       },
-      {
-        "confidence": 1,
-        "dropped": false,
-        "fromAndToDistanceSum": 28.903699724180296,
-        "legthDifferencePercentage": 36.99623688727331,
-        "description": "[SearchRadiusMatcher: score 1 |isDroppedfalse ] "
-      }
-    ],
-    "dropped": false
-  },
-  {
-    "id": 24909,
-    "requestId": 24800,
-    "tomTomIncidentId": 24875,
-    "hereIncidentId": 24838,
-    "confidenceDescription": "[SearchRadiusMatcher: score 1 |isDroppedfalse |angle0.9035034][SearchRadiusMatcher: score 1 |isDroppedfalse ] ",
-    "score": 2,
-    "tomTomIncident": {
-      "id": 24875,
-      "trafficId": null,
-      "type": "ROADCLOSED",
-      "size": "497",
-      "description": "closed",
-      "city": null,
-      "country": null,
-      "lengthInMeter": 0.0,
-      "startPositionLatitude": "52.51035",
-      "startPositionLongitude": "13.38995",
-      "startPositionStreet": "Leipziger Straße (Friedrichstraße/L1051)",
-      "endPositionLatitude": "52.51476",
-      "endPositionLongitude": "13.38916",
-      "endPositionStreet": "Französische Straße (Friedrichstraße/L1051)",
-      "verified": 0,
-      "provider": "1",
-      "entryTime": "2020-08-21T03:50:00",
-      "endTime": "2021-01-31T22:59:00",
-      "requestId": 24800,
-      "edges": "52.51053:13.38993,52.51055:13.38993,52.5108:13.38989,52.51122:13.38981,52.51132:13.38979,52.51144:13.38972,52.51155:13.38971,52.51162:13.38969,52.51212:13.38961,52.513:13.38946,52.51355:13.38938,52.51361:13.38942,52.51388:13.38936,52.51437:13.38927,52.5144:13.38921,52.51453:13.3892",
-      "edgesAsLocations": {
-        "locationsList": [
-          {
-            "latitude": "52.51053",
-            "longitude": "13.38993"
-          },
-          {
-            "latitude": "52.51055",
-            "longitude": "13.38993"
-          },
-          {
-            "latitude": "52.5108",
-            "longitude": "13.38989"
-          },
-          {
-            "latitude": "52.51122",
-            "longitude": "13.38981"
-          },
-          {
-            "latitude": "52.51132",
-            "longitude": "13.38979"
-          },
-          {
-            "latitude": "52.51144",
-            "longitude": "13.38972"
-          },
-          {
-            "latitude": "52.51155",
-            "longitude": "13.38971"
-          },
-          {
-            "latitude": "52.51162",
-            "longitude": "13.38969"
-          },
-          {
-            "latitude": "52.51212",
-            "longitude": "13.38961"
-          },
-          {
-            "latitude": "52.513",
-            "longitude": "13.38946"
-          },
-          {
-            "latitude": "52.51355",
-            "longitude": "13.38938"
-          },
-          {
-            "latitude": "52.51361",
-            "longitude": "13.38942"
-          },
-          {
-            "latitude": "52.51388",
-            "longitude": "13.38936"
-          },
-          {
-            "latitude": "52.51437",
-            "longitude": "13.38927"
-          },
-          {
-            "latitude": "52.5144",
-            "longitude": "13.38921"
-          },
-          {
-            "latitude": "52.51453",
-            "longitude": "13.3892"
-          }
-        ]
-      }
-    },
-    "hereIncident": {
-      "id": 24838,
-      "trafficId": "2506019995946426227",
-      "type": "CONSTRUCTION",
-      "size": "12",
-      "description": "CONSTRUCTION & Geschlossen bei Taubenstraße - Wegen Baustelle gesperrt.",
-      "city": null,
-      "country": null,
-      "lengthInMeter": 0.27762,
-      "startPositionLatitude": "52.51036",
-      "startPositionLongitude": "13.3899",
-      "startPositionStreet": "Friedrichstraße - Mohrenstraße",
-      "endPositionLatitude": "52.51435",
-      "endPositionLongitude": "13.38925",
-      "endPositionStreet": "Friedrichstraße - Taubenstraße",
-      "verified": 1,
-      "provider": "0",
-      "entryTime": "2020-12-20T09:55:10",
-      "endTime": "2021-01-31T21:00:00",
-      "requestId": 24800,
-      "edges": "",
-      "edgesAsLocations": {
-        "locationsList": []
-      }
-    },
-    "matcherList": [
-      {
-        "confidence": 1,
-        "dropped": false,
-        "degree": 0.90350341796875,
-        "description": "[SearchRadiusMatcher: score 1 |isDroppedfalse |angle0.9035034]"
+      "score": 5,
+      "hereIncident": {
+        "country": "Germany",
+        "startPositionLatitude": "45.5",
+        "endPositionStreet": "Bergmannstraße",
+        "city": "Berlin",
+        "startPositionLongitude": "67.4",
+        "verified": 1,
+        "edges": "670000:690000,681234:691234",
+        "description": "Traffic jam in Bergmannstraße",
+        "type": "baustelle",
+        "lengthInMeter": 6,
+        "startPositionStreet": "Bergmannstraße",
+        "entryTime": "2020-05-01T12:30:00",
+        "size": "major",
+        "edgesAsLocations": {
+          "locationsList": [
+            {
+              "latitude": "670000",
+              "longitude": "690000"
+            },
+            {
+              "latitude": "681234",
+              "longitude": "691234"
+            }
+          ]
+        },
+        "endPositionLongitude": "69.5",
+        "provider": "here",
+        "requestId": 1,
+        "trafficId": "222",
+        "id": null,
+        "endTime": "2020-05-01T12:30:00",
+        "endPositionLatitude": "46.5"
       },
-      {
-        "confidence": 1,
-        "dropped": false,
-        "fromAndToDistanceSum": 49.55359040568728,
-        "legthDifferencePercentage": 10.638781714023745,
-        "description": "[SearchRadiusMatcher: score 1 |isDroppedfalse ] "
-      }
-    ],
-    "dropped": false
-  },
-  {
-    "id": 24910,
-    "requestId": 24800,
-    "tomTomIncidentId": 24874,
-    "hereIncidentId": 24817,
-    "confidenceDescription": "[SearchRadiusMatcher: score 1 |isDroppedfalse |angle0.90534973][SearchRadiusMatcher: score 1 |isDroppedfalse ] ",
-    "score": 2,
-    "tomTomIncident": {
-      "id": 24874,
-      "trafficId": null,
-      "type": "ROADCLOSED",
-      "size": "497",
-      "description": "closed",
-      "city": null,
-      "country": null,
-      "lengthInMeter": 0.0,
-      "startPositionLatitude": "52.51476",
-      "startPositionLongitude": "13.38917",
-      "startPositionStreet": "Französische Straße (Friedrichstraße/L1051)",
-      "endPositionLatitude": "52.51033",
-      "endPositionLongitude": "13.38982",
-      "endPositionStreet": "Leipziger Straße (Friedrichstraße/L1051)",
-      "verified": 0,
-      "provider": "1",
-      "entryTime": "2020-08-21T03:50:00",
-      "endTime": "2021-01-31T22:59:00",
-      "requestId": 24800,
-      "edges": "52.51453:13.38921,52.5144:13.38922,52.51436:13.38918,52.51387:13.38927,52.5136:13.38931,52.51354:13.38938,52.51299:13.38946,52.51211:13.38961,52.51161:13.38969,52.51154:13.38971,52.51143:13.38972,52.51129:13.38968,52.51121:13.38969,52.51098:13.38972,52.51063:13.38978,52.51052:13.38979",
-      "edgesAsLocations": {
-        "locationsList": [
-          {
-            "latitude": "52.51453",
-            "longitude": "13.38921"
-          },
-          {
-            "latitude": "52.5144",
-            "longitude": "13.38922"
-          },
-          {
-            "latitude": "52.51436",
-            "longitude": "13.38918"
-          },
-          {
-            "latitude": "52.51387",
-            "longitude": "13.38927"
-          },
-          {
-            "latitude": "52.5136",
-            "longitude": "13.38931"
-          },
-          {
-            "latitude": "52.51354",
-            "longitude": "13.38938"
-          },
-          {
-            "latitude": "52.51299",
-            "longitude": "13.38946"
-          },
-          {
-            "latitude": "52.51211",
-            "longitude": "13.38961"
-          },
-          {
-            "latitude": "52.51161",
-            "longitude": "13.38969"
-          },
-          {
-            "latitude": "52.51154",
-            "longitude": "13.38971"
-          },
-          {
-            "latitude": "52.51143",
-            "longitude": "13.38972"
-          },
-          {
-            "latitude": "52.51129",
-            "longitude": "13.38968"
-          },
-          {
-            "latitude": "52.51121",
-            "longitude": "13.38969"
-          },
-          {
-            "latitude": "52.51098",
-            "longitude": "13.38972"
-          },
-          {
-            "latitude": "52.51063",
-            "longitude": "13.38978"
-          },
-          {
-            "latitude": "52.51052",
-            "longitude": "13.38979"
-          }
-        ]
-      }
+      "requestId": null,
+      "dropped": false,
+      "hereIncidentId": null,
+      "id": null,
+      "confidenceDescription": null,
+      "tomTomIncidentId": null
     },
-    "hereIncident": {
-      "id": 24817,
-      "trafficId": "1397315666675732917",
-      "type": "CONSTRUCTION",
-      "size": "12",
-      "description": "CONSTRUCTION & Geschlossen bei Leipziger Straße - Wegen Baustelle gesperrt.",
-      "city": null,
-      "country": null,
-      "lengthInMeter": 0.27798,
-      "startPositionLatitude": "52.51435",
-      "startPositionLongitude": "13.38925",
-      "startPositionStreet": "Friedrichstraße - Reinhardtstraße",
-      "endPositionLatitude": "52.51036",
-      "endPositionLongitude": "13.3899",
-      "endPositionStreet": "Friedrichstraße - Leipziger Straße",
-      "verified": 1,
-      "provider": "0",
-      "entryTime": "2021-01-09T08:54:26",
-      "endTime": "2021-01-31T21:00:00",
-      "requestId": 24800,
-      "edges": "",
-      "edgesAsLocations": {
-        "locationsList": []
-      }
-    },
-    "matcherList": [
-      {
-        "confidence": 1,
-        "dropped": false,
-        "degree": 0.9053497314453125,
-        "description": "[SearchRadiusMatcher: score 1 |isDroppedfalse |angle0.90534973]"
+    {
+      "tomTomIncident": {
+        "country": "Germany",
+        "startPositionLatitude": "45.5",
+        "endPositionStreet": "Bergmannstraße",
+        "city": "Berlin",
+        "startPositionLongitude": "67.4",
+        "verified": 1,
+        "edges": "670000:690000,681234:691234",
+        "description": "Traffic jam in Bergmannstraße",
+        "type": "baustelle",
+        "lengthInMeter": 6,
+        "startPositionStreet": "Bergmannstraße",
+        "entryTime": "2020-05-01T12:30:00",
+        "size": "major",
+        "edgesAsLocations": {
+          "locationsList": [
+            {
+              "latitude": "670000",
+              "longitude": "690000"
+            },
+            {
+              "latitude": "681234",
+              "longitude": "691234"
+            }
+          ]
+        },
+        "endPositionLongitude": "69.5",
+        "provider": "tomtom",
+        "requestId": 1,
+        "trafficId": "333",
+        "id": null,
+        "endTime": "2020-05-01T12:30:00",
+        "endPositionLatitude": "46.5"
       },
-      {
-        "confidence": 1,
-        "dropped": false,
-        "fromAndToDistanceSum": 52.2662477419894,
-        "legthDifferencePercentage": 10.925507800009068,
-        "description": "[SearchRadiusMatcher: score 1 |isDroppedfalse ] "
-      }
-    ],
-    "dropped": false
-  },
-  {
-    "id": 24911,
-    "requestId": 24800,
-    "tomTomIncidentId": 24889,
-    "hereIncidentId": 24846,
-    "confidenceDescription": "[SearchRadiusMatcher: score 1 |isDroppedfalse |angle0.32603455][SearchRadiusMatcher: score 2 |isDroppedfalse ] ",
-    "score": 3,
-    "tomTomIncident": {
-      "id": 24889,
-      "trafficId": null,
-      "type": "LANECLOSED",
-      "size": "412",
-      "description": "carriageway reduced to one lane",
-      "city": null,
-      "country": null,
-      "lengthInMeter": 0.0,
-      "startPositionLatitude": "52.51281",
-      "startPositionLongitude": "13.41155",
-      "startPositionStreet": "Inselstraße (Wallstraße/L1066)",
-      "endPositionLatitude": "52.51103",
-      "endPositionLongitude": "13.4165",
-      "endPositionStreet": "Heinrich-Heine-Straße - Brückenstraße (Köpenicker Straße/L1066)",
-      "verified": 0,
-      "provider": "1",
-      "entryTime": "2020-07-27T06:00:00",
-      "endTime": "2021-01-24T22:59:00",
-      "requestId": 24800,
-      "edges": "52.51258:13.41181,52.51254:13.41186,52.51244:13.41198,52.51232:13.41215,52.51228:13.41221,52.51223:13.41232,52.51208:13.41261,52.51175:13.41321,52.51166:13.41341,52.51157:13.41346,52.51155:13.4135,52.51151:13.41357,52.51147:13.41365,52.51144:13.41371,52.51138:13.41383,52.51136:13.41391,52.51134:13.414,52.51133:13.4141,52.51131:13.41431,52.5113:13.41444,52.51127:13.41481,52.51132:13.41494,52.51131:13.41503,52.51126:13.41541,52.5112:13.41572,52.51113:13.41603,52.51111:13.41614",
-      "edgesAsLocations": {
-        "locationsList": [
-          {
-            "latitude": "52.51258",
-            "longitude": "13.41181"
-          },
-          {
-            "latitude": "52.51254",
-            "longitude": "13.41186"
-          },
-          {
-            "latitude": "52.51244",
-            "longitude": "13.41198"
-          },
-          {
-            "latitude": "52.51232",
-            "longitude": "13.41215"
-          },
-          {
-            "latitude": "52.51228",
-            "longitude": "13.41221"
-          },
-          {
-            "latitude": "52.51223",
-            "longitude": "13.41232"
-          },
-          {
-            "latitude": "52.51208",
-            "longitude": "13.41261"
-          },
-          {
-            "latitude": "52.51175",
-            "longitude": "13.41321"
-          },
-          {
-            "latitude": "52.51166",
-            "longitude": "13.41341"
-          },
-          {
-            "latitude": "52.51157",
-            "longitude": "13.41346"
-          },
-          {
-            "latitude": "52.51155",
-            "longitude": "13.4135"
-          },
-          {
-            "latitude": "52.51151",
-            "longitude": "13.41357"
-          },
-          {
-            "latitude": "52.51147",
-            "longitude": "13.41365"
-          },
-          {
-            "latitude": "52.51144",
-            "longitude": "13.41371"
-          },
-          {
-            "latitude": "52.51138",
-            "longitude": "13.41383"
-          },
-          {
-            "latitude": "52.51136",
-            "longitude": "13.41391"
-          },
-          {
-            "latitude": "52.51134",
-            "longitude": "13.414"
-          },
-          {
-            "latitude": "52.51133",
-            "longitude": "13.4141"
-          },
-          {
-            "latitude": "52.51131",
-            "longitude": "13.41431"
-          },
-          {
-            "latitude": "52.5113",
-            "longitude": "13.41444"
-          },
-          {
-            "latitude": "52.51127",
-            "longitude": "13.41481"
-          },
-          {
-            "latitude": "52.51132",
-            "longitude": "13.41494"
-          },
-          {
-            "latitude": "52.51131",
-            "longitude": "13.41503"
-          },
-          {
-            "latitude": "52.51126",
-            "longitude": "13.41541"
-          },
-          {
-            "latitude": "52.5112",
-            "longitude": "13.41572"
-          },
-          {
-            "latitude": "52.51113",
-            "longitude": "13.41603"
-          },
-          {
-            "latitude": "52.51111",
-            "longitude": "13.41614"
-          }
-        ]
-      }
-    },
-    "hereIncident": {
-      "id": 24846,
-      "trafficId": "100241704935906135",
-      "type": "CONSTRUCTION",
-      "size": "6",
-      "description": "CONSTRUCTION & Bei Heinrich-Heine-Straße - Bauarbeiten auf Abschnitt. Fahrbahn von auf einen Fahrstreifen verengt.",
-      "city": null,
-      "country": null,
-      "lengthInMeter": 0.25333,
-      "startPositionLatitude": "52.51275",
-      "startPositionLongitude": "13.4116",
-      "startPositionStreet": "Köpenicker Straße - Inselstraße",
-      "endPositionLatitude": "52.51103",
-      "endPositionLongitude": "13.41647",
-      "endPositionStreet": "Köpenicker Straße - Heinrich-Heine-Straße",
-      "verified": 1,
-      "provider": "0",
-      "entryTime": "2020-12-15T15:44:42",
-      "endTime": "2021-01-24T22:59:00",
-      "requestId": 24800,
-      "edges": "",
-      "edgesAsLocations": {
-        "locationsList": []
-      }
-    },
-    "matcherList": [
-      {
-        "confidence": 1,
-        "dropped": false,
-        "degree": 0.3260345458984375,
-        "description": "[SearchRadiusMatcher: score 1 |isDroppedfalse |angle0.32603455]"
+      "score": 3,
+      "hereIncident": {
+        "country": "Germany",
+        "startPositionLatitude": "45.5",
+        "endPositionStreet": "Bergmannstraße",
+        "city": "Berlin",
+        "startPositionLongitude": "67.4",
+        "verified": 1,
+        "edges": "670000:690000,681234:691234",
+        "description": "Traffic jam in Bergmannstraße",
+        "type": "baustelle",
+        "lengthInMeter": 6,
+        "startPositionStreet": "Bergmannstraße",
+        "entryTime": "2020-05-01T12:30:00",
+        "size": "major",
+        "edgesAsLocations": {
+          "locationsList": [
+            {
+              "latitude": "670000",
+              "longitude": "690000"
+            },
+            {
+              "latitude": "681234",
+              "longitude": "691234"
+            }
+          ]
+        },
+        "endPositionLongitude": "69.5",
+        "provider": "here",
+        "requestId": 1,
+        "trafficId": "444",
+        "id": null,
+        "endTime": "2020-05-01T12:30:00",
+        "endPositionLatitude": "46.5"
       },
-      {
-        "confidence": 2,
-        "dropped": false,
-        "fromAndToDistanceSum": 9.509061358594948,
-        "legthDifferencePercentage": 2.110779370508683,
-        "description": "[SearchRadiusMatcher: score 2 |isDroppedfalse ] "
-      }
-    ],
-    "dropped": false
-  },
-  {
-    "id": 24912,
-    "requestId": 24800,
-    "tomTomIncidentId": 24887,
-    "hereIncidentId": 24820,
-    "confidenceDescription": "[SearchRadiusMatcher: score 1 |isDroppedfalse |angle0.7801666][SearchRadiusMatcher: score 2 |isDroppedfalse ] ",
-    "score": 3,
-    "tomTomIncident": {
-      "id": 24887,
-      "trafficId": null,
-      "type": "ROADCLOSED",
-      "size": "136",
-      "description": "closed",
-      "city": null,
-      "country": null,
-      "lengthInMeter": 0.0,
-      "startPositionLatitude": "52.51696",
-      "startPositionLongitude": "13.41045",
-      "startPositionStreet": "Grunerstraße (B1) / Jüdenstraße",
-      "endPositionLatitude": "52.51721",
-      "endPositionLongitude": "13.41241",
-      "endPositionStreet": "Grunerstraße (B1) / Klosterstraße",
-      "verified": 0,
-      "provider": "1",
-      "entryTime": "2019-10-12T03:41:30",
-      "endTime": null,
-      "requestId": 24800,
-      "edges": "52.5171:13.4115,52.5172:13.4123",
-      "edgesAsLocations": {
-        "locationsList": [
-          {
-            "latitude": "52.5171",
-            "longitude": "13.4115"
-          },
-          {
-            "latitude": "52.5172",
-            "longitude": "13.4123"
-          }
-        ]
-      }
-    },
-    "hereIncident": {
-      "id": 24820,
-      "trafficId": "1479194815378930795",
-      "type": "CONSTRUCTION",
-      "size": "12",
-      "description": "CONSTRUCTION & Geschlossen zwischen Jüdenstraße und Klosterstraße - Wegen Baustelle gesperrt.",
-      "city": "Berlin",
-      "country": null,
-      "lengthInMeter": 0.08573,
-      "startPositionLatitude": "52.51696",
-      "startPositionLongitude": "13.41042",
-      "startPositionStreet": "Parochialstraße - Jüdenstraße",
-      "endPositionLatitude": "52.51724",
-      "endPositionLongitude": "13.4124",
-      "endPositionStreet": "Parochialstraße - Klosterstraße",
-      "verified": 1,
-      "provider": "0",
-      "entryTime": "2020-12-15T15:46:09",
-      "endTime": "2021-01-13T10:00:00",
-      "requestId": 24800,
-      "edges": "52.51696:13.41042,52.51724:13.4124,",
-      "edgesAsLocations": {
-        "locationsList": [
-          {
-            "latitude": "52.51696",
-            "longitude": "13.41042"
-          },
-          {
-            "latitude": "52.51724",
-            "longitude": "13.4124"
-          }
-        ]
-      }
-    },
-    "matcherList": [
-      {
-        "confidence": 1,
-        "dropped": false,
-        "degree": 0.7801666259765625,
-        "description": "[SearchRadiusMatcher: score 1 |isDroppedfalse |angle0.7801666]"
-      },
-      {
-        "confidence": 2,
-        "dropped": false,
-        "fromAndToDistanceSum": 5.434578439612539,
-        "legthDifferencePercentage": 1.506416206547883,
-        "description": "[SearchRadiusMatcher: score 2 |isDroppedfalse ] "
-      }
-    ],
-    "dropped": false
-  },
-  {
-    "id": 24913,
-    "requestId": 24800,
-    "tomTomIncidentId": 24853,
-    "hereIncidentId": 24803,
-    "confidenceDescription": "[SearchRadiusMatcher: score 1 |isDroppedfalse |angle0.24061584][SearchRadiusMatcher: score 2 |isDroppedfalse ] ",
-    "score": 3,
-    "tomTomIncident": {
-      "id": 24853,
-      "trafficId": null,
-      "type": "ROADCLOSED",
-      "size": "169",
-      "description": "closed",
-      "city": null,
-      "country": null,
-      "lengthInMeter": 0.0,
-      "startPositionLatitude": "52.51313",
-      "startPositionLongitude": "13.40709",
-      "startPositionStreet": "Gertraudenstraße - Mühlenstraße (Fischerinsel/L1066)",
-      "endPositionLatitude": "52.51201",
-      "endPositionLongitude": "13.40875",
-      "endPositionStreet": "Wallstraße (Neue Roßstraße/L1066)",
-      "verified": 0,
-      "provider": "1",
-      "entryTime": "2019-12-18T11:37:15",
-      "endTime": "2021-10-15T21:59:59",
-      "requestId": 24800,
-      "edges": "52.51294:13.40737,52.51254:13.40797,52.51251:13.40802,52.51248:13.40807,52.51242:13.40816,52.51236:13.40825,52.51231:13.40833,52.51224:13.40843",
-      "edgesAsLocations": {
-        "locationsList": [
-          {
-            "latitude": "52.51294",
-            "longitude": "13.40737"
-          },
-          {
-            "latitude": "52.51254",
-            "longitude": "13.40797"
-          },
-          {
-            "latitude": "52.51251",
-            "longitude": "13.40802"
-          },
-          {
-            "latitude": "52.51248",
-            "longitude": "13.40807"
-          },
-          {
-            "latitude": "52.51242",
-            "longitude": "13.40816"
-          },
-          {
-            "latitude": "52.51236",
-            "longitude": "13.40825"
-          },
-          {
-            "latitude": "52.51231",
-            "longitude": "13.40833"
-          },
-          {
-            "latitude": "52.51224",
-            "longitude": "13.40843"
-          }
-        ]
-      }
-    },
-    "hereIncident": {
-      "id": 24803,
-      "trafficId": "133870147940382962",
-      "type": "CONSTRUCTION",
-      "size": "12",
-      "description": "CONSTRUCTION & Geschlossen bei Wallstraße - Wegen Baustelle gesperrt.",
-      "city": null,
-      "country": null,
-      "lengthInMeter": 0.10769,
-      "startPositionLatitude": "52.51313",
-      "startPositionLongitude": "13.40708",
-      "startPositionStreet": "Neue Roßstraße - Gertraudenstraße",
-      "endPositionLatitude": "52.51198",
-      "endPositionLongitude": "13.4088",
-      "endPositionStreet": "Neue Roßstraße - Wallstraße",
-      "verified": 1,
-      "provider": "0",
-      "entryTime": "2021-01-09T09:13:55",
-      "endTime": "2021-02-21T14:00:00",
-      "requestId": 24800,
-      "edges": "",
-      "edgesAsLocations": {
-        "locationsList": []
-      }
-    },
-    "matcherList": [
-      {
-        "confidence": 1,
-        "dropped": false,
-        "degree": 0.2406158447265625,
-        "description": "[SearchRadiusMatcher: score 1 |isDroppedfalse |angle0.24061584]"
-      },
-      {
-        "confidence": 2,
-        "dropped": false,
-        "fromAndToDistanceSum": 5.429221710810809,
-        "legthDifferencePercentage": 3.0995097927861806,
-        "description": "[SearchRadiusMatcher: score 2 |isDroppedfalse ] "
-      }
-    ],
-    "dropped": false
-  },
-  {
-    "id": 24914,
-    "requestId": 24800,
-    "tomTomIncidentId": 24890,
-    "hereIncidentId": 24842,
-    "confidenceDescription": "[SearchRadiusMatcher: score 1 |isDroppedfalse |angle0.78017664][SearchRadiusMatcher: score 2 |isDroppedfalse ] ",
-    "score": 3,
-    "tomTomIncident": {
-      "id": 24890,
-      "trafficId": null,
-      "type": "ROADCLOSED",
-      "size": "136",
-      "description": "closed",
-      "city": null,
-      "country": null,
-      "lengthInMeter": 0.0,
-      "startPositionLatitude": "52.51722",
-      "startPositionLongitude": "13.41242",
-      "startPositionStreet": "Klosterstraße",
-      "endPositionLatitude": "52.51697",
-      "endPositionLongitude": "13.41046",
-      "endPositionStreet": "Grunerstraße (B1) / Jüdenstraße",
-      "verified": 0,
-      "provider": "1",
-      "entryTime": "2019-10-12T03:41:30",
-      "endTime": null,
-      "requestId": 24800,
-      "edges": "52.51721:13.41231,52.51711:13.41151",
-      "edgesAsLocations": {
-        "locationsList": [
-          {
-            "latitude": "52.51721",
-            "longitude": "13.41231"
-          },
-          {
-            "latitude": "52.51711",
-            "longitude": "13.41151"
-          }
-        ]
-      }
-    },
-    "hereIncident": {
-      "id": 24842,
-      "trafficId": "62244441811149221",
-      "type": "CONSTRUCTION",
-      "size": "12",
-      "description": "CONSTRUCTION & Geschlossen zwischen Klosterstraße und Jüdenstraße - Wegen Baustelle gesperrt.",
-      "city": "Berlin",
-      "country": null,
-      "lengthInMeter": 0.08573,
-      "startPositionLatitude": "52.51724",
-      "startPositionLongitude": "13.4124",
-      "startPositionStreet": "Parochialstraße - Klosterstraße",
-      "endPositionLatitude": "52.51696",
-      "endPositionLongitude": "13.41042",
-      "endPositionStreet": "Parochialstraße - Jüdenstraße",
-      "verified": 1,
-      "provider": "0",
-      "entryTime": "2020-12-15T15:46:11",
-      "endTime": "2021-01-13T10:00:00",
-      "requestId": 24800,
-      "edges": "52.51724:13.4124,52.51696:13.41042,",
-      "edgesAsLocations": {
-        "locationsList": [
-          {
-            "latitude": "52.51724",
-            "longitude": "13.4124"
-          },
-          {
-            "latitude": "52.51696",
-            "longitude": "13.41042"
-          }
-        ]
-      }
-    },
-    "matcherList": [
-      {
-        "confidence": 1,
-        "dropped": false,
-        "degree": 0.7801766395568848,
-        "description": "[SearchRadiusMatcher: score 1 |isDroppedfalse |angle0.78017664]"
-      },
-      {
-        "confidence": 2,
-        "dropped": false,
-        "fromAndToDistanceSum": 5.532289162092214,
-        "legthDifferencePercentage": 1.506416206547883,
-        "description": "[SearchRadiusMatcher: score 2 |isDroppedfalse ] "
-      }
-    ],
-    "dropped": false
-  },
-  {
-    "id": 24915,
-    "requestId": 24800,
-    "tomTomIncidentId": 24883,
-    "hereIncidentId": 24809,
-    "confidenceDescription": "[SearchRadiusMatcher: score 1 |isDroppedfalse |angle0.5025635][SearchRadiusMatcher: score 1 |isDroppedfalse ] ",
-    "score": 2,
-    "tomTomIncident": {
-      "id": 24883,
-      "trafficId": null,
-      "type": "ROADCLOSED",
-      "size": "209",
-      "description": "closed",
-      "city": null,
-      "country": null,
-      "lengthInMeter": 0.0,
-      "startPositionLatitude": "52.512",
-      "startPositionLongitude": "13.40876",
-      "startPositionStreet": "Wallstraße (Neue Roßstraße/L1066)",
-      "endPositionLatitude": "52.51339",
-      "endPositionLongitude": "13.40672",
-      "endPositionStreet": "Gertraudenstraße - Mühlenstraße (Fischerinsel/L1066)",
-      "verified": 0,
-      "provider": "1",
-      "entryTime": "2019-12-18T11:36:48",
-      "endTime": "2021-10-15T21:59:59",
-      "requestId": 24800,
-      "edges": "52.51223:13.40844,52.5123:13.40834,52.51235:13.40826,52.51241:13.40817,52.51247:13.40808,52.5125:13.40803,52.51253:13.40798,52.51293:13.40738,52.51312:13.4071,52.51323:13.40695",
-      "edgesAsLocations": {
-        "locationsList": [
-          {
-            "latitude": "52.51223",
-            "longitude": "13.40844"
-          },
-          {
-            "latitude": "52.5123",
-            "longitude": "13.40834"
-          },
-          {
-            "latitude": "52.51235",
-            "longitude": "13.40826"
-          },
-          {
-            "latitude": "52.51241",
-            "longitude": "13.40817"
-          },
-          {
-            "latitude": "52.51247",
-            "longitude": "13.40808"
-          },
-          {
-            "latitude": "52.5125",
-            "longitude": "13.40803"
-          },
-          {
-            "latitude": "52.51253",
-            "longitude": "13.40798"
-          },
-          {
-            "latitude": "52.51293",
-            "longitude": "13.40738"
-          },
-          {
-            "latitude": "52.51312",
-            "longitude": "13.4071"
-          },
-          {
-            "latitude": "52.51323",
-            "longitude": "13.40695"
-          }
-        ]
-      }
-    },
-    "hereIncident": {
-      "id": 24809,
-      "trafficId": "3538282302374676916",
-      "type": "CONSTRUCTION",
-      "size": "12",
-      "description": "CONSTRUCTION & Geschlossen bei Mühlendamm - Wegen Baustelle gesperrt.",
-      "city": null,
-      "country": null,
-      "lengthInMeter": 0.10769,
-      "startPositionLatitude": "52.51198",
-      "startPositionLongitude": "13.4088",
-      "startPositionStreet": "Neue Roßstraße - Wallstraße",
-      "endPositionLatitude": "52.51313",
-      "endPositionLongitude": "13.40708",
-      "endPositionStreet": "Fischerinsel - Mühlendamm",
-      "verified": 1,
-      "provider": "0",
-      "entryTime": "2021-01-09T08:22:56",
-      "endTime": "2021-02-21T14:00:00",
-      "requestId": 24800,
-      "edges": "",
-      "edgesAsLocations": {
-        "locationsList": []
-      }
-    },
-    "matcherList": [
-      {
-        "confidence": 1,
-        "dropped": false,
-        "degree": 0.5025634765625,
-        "description": "[SearchRadiusMatcher: score 1 |isDroppedfalse |angle0.5025635]"
-      },
-      {
-        "confidence": 1,
-        "dropped": false,
-        "fromAndToDistanceSum": 41.3065273872006,
-        "legthDifferencePercentage": 19.848416055815303,
-        "description": "[SearchRadiusMatcher: score 1 |isDroppedfalse ] "
-      }
-    ],
-    "dropped": false
-  }
+      "requestId": null,
+      "dropped": false,
+      "hereIncidentId": null,
+      "id": null,
+      "confidenceDescription": null,
+      "tomTomIncidentId": null
+    }
 ]

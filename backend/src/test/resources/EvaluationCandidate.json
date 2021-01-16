@@ -11,22 +11,7 @@
     "type": "baustelle",
     "lengthInMeter": 6,
     "startPositionStreet": "Bergmannstraße",
-    "entryTime": {
-      "dayOfWeek": "FRIDAY",
-      "month": "MAY",
-      "hour": 12,
-      "dayOfYear": 122,
-      "year": 2020,
-      "dayOfMonth": 1,
-      "monthValue": 5,
-      "nano": 0,
-      "chronology": {
-        "calendarType": "iso8601",
-        "id": "ISO"
-      },
-      "minute": 30,
-      "second": 0
-    },
+    "entryTime": "2020-05-01T12:30:00",
     "size": "major",
     "edgesAsLocations": {
       "locationsList": [
@@ -45,22 +30,7 @@
     "requestId": 1,
     "trafficId": "222",
     "id": null,
-    "endTime": {
-      "dayOfWeek": "FRIDAY",
-      "month": "MAY",
-      "hour": 12,
-      "dayOfYear": 122,
-      "year": 2020,
-      "dayOfMonth": 1,
-      "monthValue": 5,
-      "nano": 0,
-      "chronology": {
-        "calendarType": "iso8601",
-        "id": "ISO"
-      },
-      "minute": 30,
-      "second": 0
-    },
+    "endTime": "2020-05-01T12:30:00",
     "endPositionLatitude": "46.5"
   },
   "score": 0,
@@ -76,22 +46,7 @@
     "type": "baustelle",
     "lengthInMeter": 6,
     "startPositionStreet": "Bergmannstraße",
-    "entryTime": {
-      "dayOfWeek": "FRIDAY",
-      "month": "MAY",
-      "hour": 12,
-      "dayOfYear": 122,
-      "year": 2020,
-      "dayOfMonth": 1,
-      "monthValue": 5,
-      "nano": 0,
-      "chronology": {
-        "calendarType": "iso8601",
-        "id": "ISO"
-      },
-      "minute": 30,
-      "second": 0
-    },
+    "entryTime": "2020-05-01T12:30:00",
     "size": "major",
     "edgesAsLocations": {
       "locationsList": [
@@ -110,26 +65,10 @@
     "requestId": 1,
     "trafficId": "222",
     "id": null,
-    "endTime": {
-      "dayOfWeek": "FRIDAY",
-      "month": "MAY",
-      "hour": 12,
-      "dayOfYear": 122,
-      "year": 2020,
-      "dayOfMonth": 1,
-      "monthValue": 5,
-      "nano": 0,
-      "chronology": {
-        "calendarType": "iso8601",
-        "id": "ISO"
-      },
-      "minute": 30,
-      "second": 0
-    },
+    "endTime": "2020-05-01T12:30:00",
     "endPositionLatitude": "46.5"
   },
   "requestId": null,
-  "matcherList": [],
   "dropped": false,
   "hereIncidentId": null,
   "id": null,
