@@ -103,7 +103,7 @@ jobs:
       id: task-def-backend
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
-        task-definition: aws-task-definition.json
+        task-definition: ${{ steps.build-frontend.image.outputs.task-definition }}
         container-name: backend
         image: ${{ steps.build-backend-image.outputs.image }}
 
