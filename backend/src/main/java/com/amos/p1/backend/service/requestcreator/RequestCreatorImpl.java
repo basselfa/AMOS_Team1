@@ -1,4 +1,4 @@
-package com.amos.p1.backend.service.providernormalizer;
+package com.amos.p1.backend.service.requestcreator;
 
 import com.amos.p1.backend.data.*;
 import com.amos.p1.backend.normalization.HereNormalization;
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProviderNormalizerImpl implements ProviderNormalizer{
+public class RequestCreatorImpl implements RequestCreator {
 
     private final ProviderRequest tomtomRequest = new TomTomRequest();
     private final ProviderRequest hereRequest = new HereRequest();
@@ -22,11 +22,11 @@ public class ProviderNormalizerImpl implements ProviderNormalizer{
 
     private final LocalDateTime timestamp;
 
-    public ProviderNormalizerImpl(LocalDateTime timestamp){
+    public RequestCreatorImpl(LocalDateTime timestamp){
         this.timestamp = timestamp;
     }
 
-    public List<Request> parseCurrentRequest(){
+    public List<Request> buildRequests(){
         List<Request> requests = new ArrayList<>();
 
         for (CityBoundingBox cityBoundingBox : cityBoundingBoxesService.getCityBoundingBoxes()) {

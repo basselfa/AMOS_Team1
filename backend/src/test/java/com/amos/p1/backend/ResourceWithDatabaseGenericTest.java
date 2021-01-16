@@ -3,24 +3,16 @@ package com.amos.p1.backend;
 
 import com.amos.p1.backend.data.ComparisonEvaluationDTO;
 import com.amos.p1.backend.data.EvaluationCandidate;
-import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.data.Request;
 import com.amos.p1.backend.database.MyRepo;
-import com.amos.p1.backend.service.providernormalizer.ProviderNormalizer;
-import com.amos.p1.backend.service.providernormalizer.ProviderNormalizerDummy2Cities2TimeStamps;
-import com.amos.p1.backend.service.providernormalizer.ProviderNormalizerDummy2CitiesSameTimeStamp;
-import com.amos.p1.backend.service.providernormalizer.ProviderNormalizerDummyBerlinSmall;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.amos.p1.backend.service.requestcreator.RequestCreator;
+import com.amos.p1.backend.service.requestcreator.RequestCreatorDummy2Cities2TimeStamps;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.TestPropertySource;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -44,8 +36,8 @@ public class ResourceWithDatabaseGenericTest {
         MyRepo.dropAll();
 
         //Adding dummy data to database
-        ProviderNormalizer providerNormalizer = new ProviderNormalizerDummy2Cities2TimeStamps();
-        List<Request> requests = providerNormalizer.parseCurrentRequest();
+        RequestCreator requestCreator = new RequestCreatorDummy2Cities2TimeStamps();
+        List<Request> requests = requestCreator.buildRequests();
         for (Request request : requests) {
             MyRepo.insertRequest(request);
         }

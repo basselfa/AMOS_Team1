@@ -1,4 +1,4 @@
-package com.amos.p1.backend.service.providernormalizer;
+package com.amos.p1.backend.service.requestcreator;
 
 import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.data.Incident;
@@ -10,14 +10,13 @@ import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.jupiter.api.Assertions.*;
 
-class ProviderNormalizerDummyBerlinSmallTest {
+class RequestCreatorDummyBerlinSmallTest {
 
     @Test
     void testDummyRequestAndIncidentSize(){
-        ProviderNormalizer providerNormalizer = new ProviderNormalizerDummyBerlinSmall();
-        List<Request> requests = providerNormalizer.parseCurrentRequest();
+        RequestCreator requestCreator = new RequestCreatorDummyBerlinSmall();
+        List<Request> requests = requestCreator.buildRequests();
 
         assertThat(requests.size(), equalTo(1));
         assertThat(requests.get(0).getIncidents(), hasSize(107));
@@ -41,8 +40,8 @@ class ProviderNormalizerDummyBerlinSmallTest {
 
     @Test
     void testDummyConstructionTypeAmount(){
-        ProviderNormalizer providerNormalizer = new ProviderNormalizerDummyBerlinSmall();
-        List<Request> requests = providerNormalizer.parseCurrentRequest();
+        RequestCreator requestCreator = new RequestCreatorDummyBerlinSmall();
+        List<Request> requests = requestCreator.buildRequests();
 
 
         long typeConstructionAmount =
@@ -56,9 +55,9 @@ class ProviderNormalizerDummyBerlinSmallTest {
 
     @Test
     void testDummyEvaluationCandidate(){
-        ProviderNormalizer providerNormalizer = new ProviderNormalizerDummyBerlinSmall();
+        RequestCreator requestCreator = new RequestCreatorDummyBerlinSmall();
 
-        List<Request> requests = providerNormalizer.parseCurrentRequest();
+        List<Request> requests = requestCreator.buildRequests();
 
         List<EvaluationCandidate> evaluationCandidates = requests.get(0).getEvaluationCandidate();
         assertThat(evaluationCandidates, hasSize(8));

@@ -5,14 +5,11 @@ import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.data.Request;
 import com.amos.p1.backend.database.MyRepo;
-import com.amos.p1.backend.service.ProviderIntervalRequest;
-import com.amos.p1.backend.service.providernormalizer.ProviderNormalizer;
-import com.amos.p1.backend.service.providernormalizer.ProviderNormalizerDummyBerlinSmall;
-import com.amos.p1.backend.service.providernormalizer.ProviderNormalizerImpl;
+import com.amos.p1.backend.service.requestcreator.RequestCreator;
+import com.amos.p1.backend.service.requestcreator.RequestCreatorDummy;
+import com.amos.p1.backend.service.requestcreator.RequestCreatorDummyBerlinSmall;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -35,9 +32,14 @@ public class AggregatorFromDatabaseTest {
         MyRepo.dropAll();
 
         //Adding dummy data to database
-        ProviderNormalizer providerNormalizer = new ProviderNormalizerDummyBerlinSmall();
-        berlinRequest = providerNormalizer.parseCurrentRequest().get(0);
-        MyRepo.insertRequest(berlinRequest);
+        RequestCreatorDummy requestCreator = new RequestCreatorDummyBerlinSmall();
+
+        List<Request> requests = requestCreator.buildRequests();
+        for (Request request : requests) {
+            MyRepo.insertRequest(request);
+        }
+
+        berlinRequest = requestCreator.getRequest("Berlin", LocalDateTime.of(2020, 1,1,0,0,0));
     }
 
     @Test

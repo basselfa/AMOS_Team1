@@ -2,9 +2,8 @@ package com.amos.p1.backend.service;
 
 import com.amos.p1.backend.data.Request;
 import com.amos.p1.backend.database.MyRepo;
-import com.amos.p1.backend.service.providernormalizer.ProviderNormalizer;
-import com.amos.p1.backend.service.providernormalizer.ProviderNormalizerDummyBerlinSmall;
-import com.amos.p1.backend.service.providernormalizer.ProviderNormalizerImpl;
+import com.amos.p1.backend.service.requestcreator.RequestCreator;
+import com.amos.p1.backend.service.requestcreator.RequestCreatorDummyBerlinSmall;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,8 +29,8 @@ public class ProviderIntervalRequestTest {
         MyRepo.dropAll();
 
         //Adding dummy data to database
-        ProviderNormalizer providerNormalizer = new ProviderNormalizerDummyBerlinSmall();
-        List<Request> requests = providerNormalizer.parseCurrentRequest();
+        RequestCreator requestCreator = new RequestCreatorDummyBerlinSmall();
+        List<Request> requests = requestCreator.buildRequests();
         for (Request request : requests) {
             MyRepo.insertRequest(request);
         }

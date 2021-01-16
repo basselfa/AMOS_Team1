@@ -3,14 +3,11 @@ package com.amos.p1.backend;
 
 import com.amos.p1.backend.data.*;
 import com.amos.p1.backend.database.MyRepo;
-import com.amos.p1.backend.service.ProviderIntervalRequest;
-import com.amos.p1.backend.service.providernormalizer.ProviderNormalizer;
-import com.amos.p1.backend.service.providernormalizer.ProviderNormalizerDummyBerlinSmall;
-import com.amos.p1.backend.service.providernormalizer.ProviderNormalizerImpl;
+import com.amos.p1.backend.service.requestcreator.RequestCreator;
+import com.amos.p1.backend.service.requestcreator.RequestCreatorDummyBerlinSmall;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -38,8 +35,8 @@ public class ResourceWithDatabaseTest {
         MyRepo.dropAll();
 
         //Adding dummy data to database
-        ProviderNormalizer providerNormalizer = new ProviderNormalizerDummyBerlinSmall();
-        List<Request> requests = providerNormalizer.parseCurrentRequest();
+        RequestCreator requestCreator = new RequestCreatorDummyBerlinSmall();
+        List<Request> requests = requestCreator.buildRequests();
         for (Request request : requests) {
             MyRepo.insertRequest(request);
         }

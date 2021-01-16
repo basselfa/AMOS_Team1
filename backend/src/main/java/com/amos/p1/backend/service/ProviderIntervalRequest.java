@@ -1,16 +1,13 @@
 package com.amos.p1.backend.service;
 
-import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.data.Request;
 import com.amos.p1.backend.database.MyRepo;
-import com.amos.p1.backend.service.providernormalizer.ProviderNormalizer;
-import com.amos.p1.backend.service.providernormalizer.ProviderNormalizerDummyBerlinSmall;
-import com.amos.p1.backend.service.providernormalizer.ProviderNormalizerImpl;
+import com.amos.p1.backend.service.requestcreator.RequestCreator;
+import com.amos.p1.backend.service.requestcreator.RequestCreatorDummyBerlinSmall;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -30,8 +27,8 @@ public class ProviderIntervalRequest {
         LocalDateTime now = LocalDateTime.now();
         System.out.println("The time is now " + now);
 
-        ProviderNormalizer providerNormalizer = new ProviderNormalizerDummyBerlinSmall();
-        List<Request> requests = providerNormalizer.parseCurrentRequest();
+        RequestCreator requestCreator = new RequestCreatorDummyBerlinSmall();
+        List<Request> requests = requestCreator.buildRequests();
 
         for (Request request : requests) {
             System.out.println("Save incidents into db. City: " + request.getCityName() +" Amount: " + request.getIncidents().size());

@@ -17,6 +17,7 @@ class EvaluationCandidateMarshallerTest {
     @Test
     void testSerialize() throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
 
         EvaluationCandidate evaluationCandidate = getEvaluationDummy();
         String json = objectMapper.writeValueAsString(evaluationCandidate);
