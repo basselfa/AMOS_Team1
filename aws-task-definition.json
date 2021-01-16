@@ -179,7 +179,7 @@
     }
   ],
   "placementConstraints": [],
-  "memory": "1024",
+  "memory": "2048",
   "taskRoleArn": "arn:aws:iam::617363111108:role/ecsTaskExecutionRole",
   "compatibilities": [
     "EC2",
@@ -242,7 +242,7 @@
     "FARGATE"
   ],
   "networkMode": "awsvpc",
-  "cpu": "512",
+  "cpu": "1024",
   "revision": 2,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
