@@ -9,7 +9,7 @@
         "logDriver": "awslogs",
         "secretOptions": null,
         "options": {
-          "awslogs-group": "/ecs/full-deployment",
+          "awslogs-group": "/ecs/full-deployment-v2",
           "awslogs-region": "eu-central-1",
           "awslogs-stream-prefix": "ecs"
         }
@@ -63,7 +63,7 @@
         "logDriver": "awslogs",
         "secretOptions": null,
         "options": {
-          "awslogs-group": "/ecs/full-deployment",
+          "awslogs-group": "/ecs/full-deployment-v2",
           "awslogs-region": "eu-central-1",
           "awslogs-stream-prefix": "ecs"
         }
@@ -109,6 +109,73 @@
       "systemControls": null,
       "privileged": null,
       "name": "backend"
+    },
+    {
+      "dnsSearchDomains": null,
+      "environmentFiles": null,
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "secretOptions": null,
+        "options": {
+          "awslogs-group": "/ecs/full-deployment-v2",
+          "awslogs-region": "eu-central-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "entryPoint": null,
+      "portMappings": [
+        {
+          "hostPort": 3306,
+          "protocol": "tcp",
+          "containerPort": 3306
+        }
+      ],
+      "command": null,
+      "linuxParameters": null,
+      "cpu": 0,
+      "environment": [
+        {
+          "name": "MYSQL_DATABASE",
+          "value": "testdb3"
+        },
+        {
+          "name": "MYSQL_PASSWORD",
+          "value": "root"
+        },
+        {
+          "name": "MYSQL_ROOT_PASSWORD",
+          "value": "root"
+        }
+      ],
+      "resourceRequirements": null,
+      "ulimits": null,
+      "dnsServers": null,
+      "mountPoints": [],
+      "workingDirectory": null,
+      "secrets": null,
+      "dockerSecurityOptions": null,
+      "memory": null,
+      "memoryReservation": null,
+      "volumesFrom": [],
+      "stopTimeout": null,
+      "image": "mysql:8.0.22",
+      "startTimeout": null,
+      "firelensConfiguration": null,
+      "dependsOn": null,
+      "disableNetworking": null,
+      "interactive": null,
+      "healthCheck": null,
+      "essential": true,
+      "links": null,
+      "hostname": null,
+      "extraHosts": null,
+      "pseudoTerminal": null,
+      "user": null,
+      "readonlyRootFilesystem": null,
+      "dockerLabels": null,
+      "systemControls": null,
+      "privileged": null,
+      "name": "database"
     }
   ],
   "placementConstraints": [],
@@ -118,8 +185,8 @@
     "EC2",
     "FARGATE"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:eu-central-1:617363111108:task-definition/full-deployment:12",
-  "family": "full-deployment",
+  "taskDefinitionArn": "arn:aws:ecs:eu-central-1:617363111108:task-definition/full-deployment-v2:2",
+  "family": "full-deployment-v2",
   "requiresAttributes": [
     {
       "targetId": null,
@@ -176,7 +243,7 @@
   ],
   "networkMode": "awsvpc",
   "cpu": "512",
-  "revision": 12,
+  "revision": 2,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
   "proxyConfiguration": null,
