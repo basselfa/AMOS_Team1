@@ -61,31 +61,31 @@ public abstract class RequestCreatorDummy implements RequestCreator {
         }
     }
 
-    protected final static String T2020_01_01_HERE_BERLIN_SMALL = "provider-dummy-data/2020-01-01_00:00_small/HereBerlin.json";
-    protected final static String T2020_01_01_TOMTOM_BERLIN_SMALL = "provider-dummy-data/2020-01-01_00:00_small/TomTomBerlin.json";
+    protected final static String T2020_01_01_HERE_BERLIN_SMALL = "provider-dummy-data/2020-01-01_00-00_small/HereBerlin.json";
+    protected final static String T2020_01_01_TOMTOM_BERLIN_SMALL = "provider-dummy-data/2020-01-01_00-00_small/TomTomBerlin.json";
 
 
-    protected static final String T2020_01_14_HERE_BERLIN = "provider-dummy-data/2020-01-14_10:00/here-berlin.json";
-    protected static final String T2020_01_14_TOMTOM_BERLIN = "provider-dummy-data/2020-01-14_10:00/here-berlin.json";
+    protected static final String T2020_01_14_HERE_BERLIN = "provider-dummy-data/2020-01-14_10-00/here-berlin.json";
+    protected static final String T2020_01_14_TOMTOM_BERLIN = "provider-dummy-data/2020-01-14_10-00/here-berlin.json";
 
-    protected static final String T2020_01_14_HERE_FRANKFURT = "provider-dummy-data/2020-01-14_10:00/here-frankfurt_am_main.json";
-    protected static final String T2020_01_14_TOMTOM_FRANKFURT = "provider-dummy-data/2020-01-14_10:00/tomtom-frankfurt_am_main.json";
+    protected static final String T2020_01_14_HERE_FRANKFURT = "provider-dummy-data/2020-01-14_10-00/here-frankfurt_am_main.json";
+    protected static final String T2020_01_14_TOMTOM_FRANKFURT = "provider-dummy-data/2020-01-14_10-00/tomtom-frankfurt_am_main.json";
 
-    protected static final String T2020_01_14_HERE_HAMBURG = "provider-dummy-data/2020-01-14_10:00/here-hamburg.json";
-    protected static final String T2020_01_14_TOMTOM_HAMBURG = "provider-dummy-data/2020-01-14_10:00/tomtom_hamburg.json";
+    protected static final String T2020_01_14_HERE_HAMBURG = "provider-dummy-data/2020-01-14_10-00/here-hamburg.json";
+    protected static final String T2020_01_14_TOMTOM_HAMBURG = "provider-dummy-data/2020-01-14_10-00/tomtom_hamburg.json";
 
-    protected static final String T2020_01_14_HERE_MUENCHEN = "provider-dummy-data/2020-01-14_10:00/here-muenchen.json";
-    protected static final String T2020_01_14_TOMTOM_MUENCHEN = "provider-dummy-data/2020-01-14_10:00/tomtom-muenchen.json";
+    protected static final String T2020_01_14_HERE_MUENCHEN = "provider-dummy-data/2020-01-14_10-00/here-muenchen.json";
+    protected static final String T2020_01_14_TOMTOM_MUENCHEN = "provider-dummy-data/2020-01-14_10-00/tomtom-muenchen.json";
 
-    protected static final String T2020_01_14_HERE_NUERNBERG = "provider-dummy-data/2020-01-14_10:00/here-nuernberg.json";
-    protected static final String T2020_01_14_TOMTOM_NUERNBERG = "provider-dummy-data/2020-01-14_10:00/tomtom-nuernberg.json";
+    protected static final String T2020_01_14_HERE_NUERNBERG = "provider-dummy-data/2020-01-14_10-00/here-nuernberg.json";
+    protected static final String T2020_01_14_TOMTOM_NUERNBERG = "provider-dummy-data/2020-01-14_10-00/tomtom-nuernberg.json";
 
 
-    protected static final String T2020_01_15_HERE_BERLIN = "provider-dummy-data/2020-01-15_00:00/here-berlin.json";
-    protected static final String T2020_01_15_TOMTOM_BERLIN = "provider-dummy-data/2020-01-15_00:00/here-berlin.json";
+    protected static final String T2020_01_15_HERE_BERLIN = "provider-dummy-data/2020-01-15_00-00/here-berlin.json";
+    protected static final String T2020_01_15_TOMTOM_BERLIN = "provider-dummy-data/2020-01-15_00-00/here-berlin.json";
 
-    protected static final String T2020_01_15_HERE_MUENCHEN = "provider-dummy-data/2020-01-15_00:00/here-muenchen.json";
-    protected static final String T2020_01_15_TOMTOM_MUENCHEN = "provider-dummy-data/2020-01-15_00:00/tomtom-muenchen.json";
+    protected static final String T2020_01_15_HERE_MUENCHEN = "provider-dummy-data/2020-01-15_00-00/here-muenchen.json";
+    protected static final String T2020_01_15_TOMTOM_MUENCHEN = "provider-dummy-data/2020-01-15_00-00/tomtom-muenchen.json";
 
 
     protected final List<RequestData> requestData = new ArrayList<>();
