@@ -50,10 +50,12 @@ public class AggregatorFromDatabaseTest {
     }
 
     @Test
+    //TODO: change types. Types are now strings, not ints
     void testGetIncidentsFromCityAndWithType() {
+        //Adding timestamp to aggregator
+
         List<String> types = new ArrayList<>();
-        types.add("1");
-        types.add("10");
+        types.add("CONSTRUCTION");
 
         List<Incident> incidentList = aggregator.getIncidents("Berlin", Optional.empty(), Optional.of(types));
 
@@ -78,6 +80,7 @@ public class AggregatorFromDatabaseTest {
 
 
     @Test
+    // TODO: Make generic test about getting incidents
     void testGetIncidentsFromCityAndTimeStamp() {
 
         List<Incident> incidents = new ArrayList<Incident>();
@@ -115,6 +118,7 @@ public class AggregatorFromDatabaseTest {
     }
 
     @Test
+    // TODO: use dummy berlin
     void testGetTimestampsFromCity() {
         List<Incident> incidents = new ArrayList<Incident>();
         incidents.add(
@@ -136,24 +140,18 @@ public class AggregatorFromDatabaseTest {
         MyRepo.insertIncident(incidents);
         List<LocalDateTime> timestampList = aggregator.getTimestampsFromCity("Berlin");
 
-        assertThat(timestampList, hasSize(greaterThan(0)));
+        assertThat(timestampList, hasSize(1));
     }
 
     @Test
     void testGetTimestampsFromCityNotInDatabase() {
-        // List<LocalDateTime> timestampList = incidentAggregator.getTimestampsFromCity("DreamLand");
+        List<LocalDateTime> timestampList = aggregator.getTimestampsFromCity("DreamLand");
 
-        // assertThat(timestampList, is(empty()));
+        assertThat(timestampList, is(empty()));
     }
 
     @Test
-    void testGetAllIncidents() {
-        List<Incident> incidentList = aggregator.getAllData();
-
-        assertThat(incidentList, hasSize(greaterThan(0)));
-    }
-
-    @Test
+    // TODO: Move to resource test
     void testMarshallingOneIncidentFromCity() throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         List<Incident> berlinIncidents = aggregator.getIncidents("Berlin", Optional.empty(), Optional.empty());
@@ -164,6 +162,7 @@ public class AggregatorFromDatabaseTest {
     }
 
     @Test
+    // TODO: Move to resource test
     void testMarshallingAllIncidentFromCity() throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         List<Incident> berlinIncidents = aggregator.getIncidents("Berlin", Optional.empty(), Optional.empty());
@@ -180,10 +179,7 @@ public class AggregatorFromDatabaseTest {
 
 
         assertThat(evaluationCandidates, hasSize(equalTo(berlinRequest.getEvaluationCandidate().size())));
-
-        berlinRequest.getEvaluationCandidate().forEach(
-                candidate -> {assert(evaluationCandidates.contains(candidate));}
-        );
+        assertThat(evaluationCandidates, contains(berlinRequest.getEvaluationCandidate()));
 
     }
 
@@ -196,7 +192,7 @@ public class AggregatorFromDatabaseTest {
         assertThat(comparisonEvaluationDTOs, hasSize(1));
         assertThat(comparisonEvaluationDTOs.get(0).getSameIncidentAmount(), equalTo(9));
         assertThat(comparisonEvaluationDTOs.get(0).getHereIncidentsAmount(), equalTo(49));
-        assertThat(comparisonEvaluationDTOs.get(0).getSameIncidentAmount(), equalTo(58));
+        assertThat(comparisonEvaluationDTOs.get(0).getTomTomIncidentsAmount(), equalTo(58));
 
     }
 }

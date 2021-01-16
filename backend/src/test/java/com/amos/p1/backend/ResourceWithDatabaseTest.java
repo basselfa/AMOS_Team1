@@ -181,7 +181,7 @@ public class ResourceWithDatabaseTest {
         assertThat(comparisonEvaluationDTOs, hasSize(1));
         assertThat(comparisonEvaluationDTOs.get(0).getSameIncidentAmount(), equalTo(9));
         assertThat(comparisonEvaluationDTOs.get(0).getHereIncidentsAmount(), equalTo(49));
-        assertThat(comparisonEvaluationDTOs.get(0).getSameIncidentAmount(), equalTo(58));
+        assertThat(comparisonEvaluationDTOs.get(0).getTomTomIncidentsAmount(), equalTo(58));
     }
 
     @Test
@@ -205,5 +205,7 @@ public class ResourceWithDatabaseTest {
         assertThat(evaluationCandidates.get(0).getScore(), is(not(0)));
         assertThat(evaluationCandidates.get(0).getConfidenceDescription(), not(equalTo("")));
     }
+
+
 
 }
