@@ -29,7 +29,7 @@
 
 on:
   push:
-    branches: [ 61-amos-cicd-bugfix ]
+    branches: [ production ]
 
 name: Deploy to Amazon ECS
 
