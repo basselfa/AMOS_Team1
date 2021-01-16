@@ -1,65 +1,32 @@
-package com.amos.p1.backend.service;
+package com.amos.p1.backend.service.requestcreator;
 
 import com.amos.p1.backend.data.*;
 import com.amos.p1.backend.normalization.HereNormalization;
 import com.amos.p1.backend.normalization.JsonToIncident;
 import com.amos.p1.backend.normalization.TomTomNormalization;
 import com.amos.p1.backend.provider.*;
+import com.amos.p1.backend.service.CityBoundBoxesService;
+import com.amos.p1.backend.service.CityBoundingBoxesServiceImpl;
 import com.amos.p1.backend.service.evaluation.Evaluation;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProviderNormalizer {
+public class RequestCreatorImpl implements RequestCreator {
 
-    private final ProviderRequest tomtomRequest;
-    private final ProviderRequest hereRequest;
+    private final ProviderRequest tomtomRequest = new TomTomRequest();
+    private final ProviderRequest hereRequest = new HereRequest();
     
-    private final CityBoundBoxesService cityBoundingBoxesService;
+    private final CityBoundBoxesService cityBoundingBoxesService = new CityBoundingBoxesServiceImpl();
 
+    private final LocalDateTime timestamp;
 
-    public ProviderNormalizer(boolean useDummy){
-
-        if(useDummy){
-            tomtomRequest = new TomTomRequestDummy();
-            hereRequest = new HereRequestDummy();
-
-            cityBoundingBoxesService = getCityBoundBoxServiceDummy();
-        }else{
-            tomtomRequest = new TomTomRequest();
-            hereRequest = new HereRequest();
-
-            cityBoundingBoxesService = new CityBoundingBoxesServiceImpl();
-        }
+    public RequestCreatorImpl(LocalDateTime timestamp){
+        this.timestamp = timestamp;
     }
 
-    private CityBoundBoxesService getCityBoundBoxServiceDummy() {
-
-        // Data from 09.January 2020 12:50
-        CityBoundingBox cityBoundingBox = new CityBoundingBox();
-        cityBoundingBox.setCity("Berlin");
-        cityBoundingBox.setMinCorner(new Location("52.509097", "13.381993"));
-        cityBoundingBox.setMaxCorner(new Location("52.525915", "13.415296"));
-
-        CityBoundBoxesService cityBoundingBoxesService;
-        cityBoundingBoxesService = new CityBoundBoxesService(){
-            @Override
-            public List<CityBoundingBox> getCityBoundingBoxes() {
-                List<CityBoundingBox> cityBoundingBoxes = new ArrayList<>();
-                cityBoundingBoxes.add(cityBoundingBox);
-
-                return cityBoundingBoxes;
-            }
-            @Override
-            public CityBoundingBox getBoundBoxFromCity(String city) {
-                return cityBoundingBox;
-            }
-        };
-
-        return cityBoundingBoxesService;
-    }
-
-    public List<Request> parseCurrentRequest(){
+    public List<Request> buildRequests(){
         List<Request> requests = new ArrayList<>();
 
         for (CityBoundingBox cityBoundingBox : cityBoundingBoxesService.getCityBoundingBoxes()) {
@@ -80,6 +47,7 @@ public class ProviderNormalizer {
             Request request = new Request();
             request.setCityName(cityBoundingBox.getCity());
             request.setIncidents(incidents);
+            request.setRequestTime(timestamp);
 
             System.out.println("Evaluate Data");
             Evaluation evaluation = new Evaluation();

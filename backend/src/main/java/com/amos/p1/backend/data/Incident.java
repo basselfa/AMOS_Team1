@@ -7,8 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
-
-
+import java.util.Objects;
 
 
 @NamedQuery(
@@ -369,6 +368,19 @@ public class Incident {
                 ", entryTime=" + entryTime +
                 ", edges='" + edges + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Incident incident = (Incident) o;
+        return Double.compare(incident.lengthInMeter, lengthInMeter) == 0 && verified == incident.verified && Objects.equals(id, incident.id) && Objects.equals(trafficId, incident.trafficId) && Objects.equals(type, incident.type) && Objects.equals(size, incident.size) && Objects.equals(description, incident.description) && Objects.equals(city, incident.city) && Objects.equals(country, incident.country) && Objects.equals(startPositionLatitude, incident.startPositionLatitude) && Objects.equals(startPositionLongitude, incident.startPositionLongitude) && Objects.equals(startPositionStreet, incident.startPositionStreet) && Objects.equals(endPositionLatitude, incident.endPositionLatitude) && Objects.equals(endPositionLongitude, incident.endPositionLongitude) && Objects.equals(endPositionStreet, incident.endPositionStreet) && Objects.equals(provider, incident.provider) && Objects.equals(entryTime, incident.entryTime) && Objects.equals(endTime, incident.endTime) && Objects.equals(requestId, incident.requestId) && Objects.equals(edges, incident.edges);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, trafficId, type, size, description, city, country, lengthInMeter, startPositionLatitude, startPositionLongitude, startPositionStreet, endPositionLatitude, endPositionLongitude, endPositionStreet, verified, provider, entryTime, endTime, requestId, edges);
     }
 
     public enum IncidentTypes {    //do not change order!

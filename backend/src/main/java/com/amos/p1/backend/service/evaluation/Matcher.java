@@ -26,4 +26,6 @@ public abstract class Matcher {
     public abstract boolean isDropped();
 
     public abstract int getConfidence();
+
+    public abstract String getDescription();
 }

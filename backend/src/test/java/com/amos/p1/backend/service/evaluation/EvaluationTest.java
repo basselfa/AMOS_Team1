@@ -3,7 +3,8 @@ package com.amos.p1.backend.service.evaluation;
 import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.data.Request;
-import com.amos.p1.backend.service.ProviderNormalizer;
+import com.amos.p1.backend.service.requestcreator.RequestCreator;
+import com.amos.p1.backend.service.requestcreator.RequestCreatorDummyBerlinSmall;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -18,8 +19,8 @@ public class EvaluationTest {
     Request request;
 
     public EvaluationTest() {
-        ProviderNormalizer providerNormalizer = new ProviderNormalizer(true);
-        List<Request> requests = providerNormalizer.parseCurrentRequest();
+        RequestCreator requestCreator = new RequestCreatorDummyBerlinSmall();
+        List<Request> requests = requestCreator.buildRequests();
 
         requests
                 .stream()
