@@ -29,7 +29,7 @@
 
 on:
   push:
-    branches: [ 58-amos-cicd-database-container ]
+    branches: [ 61-amos-cicd-bugfix ]
 
 name: Deploy to Amazon ECS
 
