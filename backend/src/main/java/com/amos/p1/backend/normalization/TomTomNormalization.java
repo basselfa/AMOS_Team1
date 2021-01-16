@@ -112,8 +112,7 @@ public class TomTomNormalization implements JsonToIncident {
 
 
         } catch (JSONException e) { //There was an Exception with the JSONObject
-            e.printStackTrace();
-            return null;
+            throw new IllegalStateException(e);
         }
 
         return incJObj;
@@ -162,8 +161,7 @@ public class TomTomNormalization implements JsonToIncident {
 
 
         } catch (JSONException e) {
-            e.printStackTrace();
-            return null;
+            throw new IllegalStateException(e);
         }
 
 

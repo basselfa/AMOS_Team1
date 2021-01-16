@@ -82,7 +82,7 @@ public abstract class RequestCreatorDummy implements RequestCreator {
 
 
     protected static final String T2020_01_15_HERE_BERLIN = "provider-dummy-data/2020-01-15_00-00/here-berlin.json";
-    protected static final String T2020_01_15_TOMTOM_BERLIN = "provider-dummy-data/2020-01-15_00-00/here-berlin.json";
+    protected static final String T2020_01_15_TOMTOM_BERLIN = "provider-dummy-data/2020-01-15_00-00/tomtom-berlin.json";
 
     protected static final String T2020_01_15_HERE_MUENCHEN = "provider-dummy-data/2020-01-15_00-00/here-muenchen.json";
     protected static final String T2020_01_15_TOMTOM_MUENCHEN = "provider-dummy-data/2020-01-15_00-00/tomtom-muenchen.json";
