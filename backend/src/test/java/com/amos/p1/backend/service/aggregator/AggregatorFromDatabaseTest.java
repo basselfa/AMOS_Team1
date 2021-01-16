@@ -205,9 +205,10 @@ public class AggregatorFromDatabaseTest {
 
 
         assertThat(comparisonEvaluationDTOs, hasSize(1));
-        assertThat(comparisonEvaluationDTOs.get(0).getSameIncidentAmount(), equalTo(9));
-        assertThat(comparisonEvaluationDTOs.get(0).getHereIncidentsAmount(), equalTo(49));
-        assertThat(comparisonEvaluationDTOs.get(0).getTomTomIncidentsAmount(), equalTo(58));
+
+        assertThat(comparisonEvaluationDTOs.get(0).getSameIncidentAmount(), equalTo(berlinRequest.getEvaluationCandidate().size()));
+        assertThat(comparisonEvaluationDTOs.get(0).getHereIncidentsAmount(), equalTo((int) berlinRequest.getIncidents().stream().filter(i -> i.getProvider().equals("0")).count()));
+        assertThat(comparisonEvaluationDTOs.get(0).getTomTomIncidentsAmount(), equalTo((int) berlinRequest.getIncidents().stream().filter(i -> i.getProvider().equals("1")).count()));
     }
 
     private void deepCompareIncidentLists(List<Incident> sourceList, List<Incident> resultList) {
