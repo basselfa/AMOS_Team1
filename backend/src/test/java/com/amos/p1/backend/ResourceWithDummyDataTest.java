@@ -65,7 +65,7 @@ public class ResourceWithDummyDataTest {
     }
 
     @Test
-    void testComparison(){
+    void testComparisonListAmount(){
         List<EvaluationCandidate> evaluationCandidateList = given()
             .param("city", "berlin")
             .param("timestamp", "2021-01-10T16:08:43.780+00:00")
@@ -78,6 +78,22 @@ public class ResourceWithDummyDataTest {
             .getList(".", EvaluationCandidate.class);
 
         assertThat(evaluationCandidateList.size(), equalTo(2));
+    }
+
+    @Test
+    void testComparisonNotExisting(){
+        List<EvaluationCandidate> evaluationCandidateList = given()
+            .param("city", "shanghai")
+            .param("timestamp", "2021-01-09T16:08:43.780+00:00")
+        .when()
+            .get(base + "/comparison")
+        .then()
+            .extract()
+            .body()
+            .jsonPath()
+            .getList(".", EvaluationCandidate.class);
+
+        assertThat(evaluationCandidateList.size(), equalTo(0));
     }
 
     @Test
