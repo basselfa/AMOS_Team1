@@ -11,6 +11,7 @@ public class DescriptionMatcher extends Matcher{
         throw new IllegalStateException("Needs to be implemented");
     }
 
+
     @Override
     public boolean isDropped() {
         throw new IllegalStateException("Needs to be implemented");
@@ -18,6 +19,11 @@ public class DescriptionMatcher extends Matcher{
 
     @Override
     public int getConfidence() {
+        throw new IllegalStateException("Needs to be implemented");
+    }
+
+    @Override
+    public String getDescription() {
         throw new IllegalStateException("Needs to be implemented");
     }
 }

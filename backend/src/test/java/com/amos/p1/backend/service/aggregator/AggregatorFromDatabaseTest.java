@@ -4,20 +4,21 @@ import com.amos.p1.backend.data.ComparisonEvaluationDTO;
 import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.data.Request;
-import com.amos.p1.backend.database.DummyIncident;
 import com.amos.p1.backend.database.MyRepo;
-import com.amos.p1.backend.service.ProviderIntervalRequest;
-import com.amos.p1.backend.service.ProviderNormalizer;
+import com.amos.p1.backend.service.requestcreator.RequestCreator;
+import com.amos.p1.backend.service.requestcreator.RequestCreatorDummy;
+import com.amos.p1.backend.service.requestcreator.RequestCreatorDummyBerlinSmall;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+import org.checkerframework.checker.nullness.Opt;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -26,91 +27,105 @@ import static org.hamcrest.Matchers.*;
 public class AggregatorFromDatabaseTest {
 
     Aggregator aggregator = new AggregatorFromDatabase();
-    private final static LocalDateTime LOCAL_DATE_TIME_DUMMY = LocalDateTime.of(2020, 10, 30, 16, 30);
+    Request berlinRequest;
 
-    @BeforeAll
-    public static void init() {
-
-        System.out.println("setting Database properties");
+    public AggregatorFromDatabaseTest() {
         MyRepo.setUseTestDatabase(true);
-    }
-
-    @BeforeEach
-    void setUp(){
-        System.out.println("reintialising Database");
         MyRepo.dropAll();
 
         //Adding dummy data to database
-        ProviderIntervalRequest providerIntervalRequest = new ProviderIntervalRequest(true);
-        providerIntervalRequest.setProviderNormalizer(new ProviderNormalizer(true));
-        providerIntervalRequest.providerCronJob();
+        RequestCreatorDummy requestCreator = new RequestCreatorDummyBerlinSmall();
+
+        List<Request> requests = requestCreator.buildRequests();
+        for (Request request : requests) {
+            MyRepo.insertRequest(request);
+        }
+
+        berlinRequest = requestCreator.getRequest("Berlin", LocalDateTime.of(2020, 1, 1, 0, 0, 0));
     }
+
     @Test
-    void testGetIncidentsFromCity(){
+    void testGetIncidentsFromCity() {
         List<Incident> incidentList = aggregator.getIncidents("Berlin", Optional.empty(), Optional.empty());
 
-        assertThat(incidentList, hasSize(greaterThan(0)));
+        assertThat(incidentList, hasSize(greaterThan(0)));                               // List not empty
+        assertThat(incidentList, hasSize(equalTo(berlinRequest.getIncidents().size())));       // as long as input List TODO: Kang -> stimmt das so?
+
+        deepCompareIncidentLists(berlinRequest.getIncidents(), incidentList);
     }
 
     @Test
-    void testGetIncidentsFromCityAndWithType(){
+    void testGetIncidentsFromCityAndWithType() {
+        // test for set of types
         List<String> types = new ArrayList<>();
-        types.add("1");
-        types.add("10");
+        types.add(Incident.IncidentTypes.CONGESTION.toString());
+        types.add(Incident.IncidentTypes.ROADCLOSURE.toString());
+
+        List<Incident> resultIncidentList = aggregator.getIncidents("Berlin", Optional.ofNullable(berlinRequest.getRequestTime()), Optional.of(types));
+        List<Incident> sourceIncidentList = berlinRequest.getIncidents().stream().filter(i -> types.contains(i.getType())).collect(Collectors.toList());
+
+        assertThat(resultIncidentList, hasSize(equalTo(sourceIncidentList.size())));   // correct amount ?
+
+        resultIncidentList.forEach(
+                incident ->
+                        assertThat(types, contains(incident.getType()))     // only incidnets with correct type
+        );
+
+        sourceIncidentList.forEach(
+                incident -> {
+                    assertThat(resultIncidentList, contains(incident));     // no duplicates or corrupted data -> all fine!
+                }
+        );
+
+        // test all types individually
+        Arrays.stream(Incident.IncidentTypes.values()).sequential().map(s -> s.toString()).forEach(
+                type ->
+                {
+                    List<String> types2 = new ArrayList<String>();
+                    types2.add(type);
+                    List<Incident> resultIncidentList2 = aggregator.getIncidents("Berlin", Optional.ofNullable(berlinRequest.getRequestTime()), Optional.of(types2));
+                    List<Incident> sourceIncidentList2 = berlinRequest.getIncidents().stream().filter(i -> type.equals(i.getType())).collect(Collectors.toList());
+
+                    System.out.println(type);
+                    assertThat(resultIncidentList2, hasSize(equalTo(sourceIncidentList2.size())));   // correct amount ?
+
+                    resultIncidentList2.forEach(
+                            incident ->
+                                    assertThat(type, equalTo(incident.getType()))     // only incidnets with correct type
+                    );
+
+                    sourceIncidentList2.forEach(
+                            incident -> {
+                                assertThat(resultIncidentList2, contains(incident));     // no duplicates or corrupted data -> all fine!
+                            }
+                    );
+                }
+        );
+
+
+    }
+
+    /*@Test
+    void testGetIncidentsFromCityAndWithTypeListEmpty() {
+        List<String> types = new ArrayList<>();
 
         List<Incident> incidentList = aggregator.getIncidents("Berlin", Optional.empty(), Optional.of(types));
 
         assertThat(incidentList, hasSize(greaterThan(0)));
-
-        incidentList.forEach(incident -> {
-            assertThat(incident.getType(),
-                    anyOf(equalTo("1"),
-                            equalTo("10"))
-            );
-        });
-    }
-
-    @Test
-    void testGetIncidentsFromCityAndWithTypeListEmpty(){
-        List<String> types = new ArrayList<>();
-
-        List<Incident> incidentList = aggregator.getIncidents("Berlin", Optional.empty(), Optional.of(types));
-
-        assertThat(incidentList, hasSize(greaterThan(0)));
-    }
+    }*/
 
 
     @Test
-    void testGetIncidentsFromCityAndTimeStamp(){
+    void testGetIncidentsFromCityAndTimeStamp() {
+        List<Incident> incidentList = aggregator.getIncidents("Berlin", Optional.of(berlinRequest.getRequestTime()), Optional.empty());
 
-        List<Incident> incidents = new ArrayList<Incident>();
+        deepCompareIncidentLists(berlinRequest.getIncidents(), incidentList);
+    }
+
+    @Test
+    void testGetIncidentsFromCityAndTimeStampNotInDatabase() {
         LocalDateTime timestamp = LocalDateTime.of(
-                2020, 5, 1,
-                12, 30, 0);
-
-        incidents.add(
-                new Incident("222","baustelle","major",
-                        "Traffic jam in Bergmannstraße",
-                        "Berlin", "Germany",
-                        "45.5", "67.4",
-                        "Bergmannstraße",
-                        "46.5", "69.5",
-                        "Bergmannstraße",
-                        1, "dummy",
-                        timestamp,
-                        timestamp,
-                        "670000:690000,681234:691234",6.0,new Long(1)));
-        MyRepo.insertIncident(incidents);
-
-        List<Incident> incidentList = aggregator.getIncidents("Berlin", Optional.of(timestamp), Optional.empty());
-
-        assertThat(incidentList, hasSize(greaterThan(0)));
-    }
-
-    @Test
-    void testGetIncidentsFromCityAndTimeStampNotInDatabase(){
-        LocalDateTime timestamp = LocalDateTime.of(
-                0, 1, 1,
+                10, 1, 1,
                 12, 30, 0);
         List<Incident> incidentList = aggregator.getIncidents("Berlin", Optional.of(timestamp), Optional.empty());
 
@@ -118,45 +133,21 @@ public class AggregatorFromDatabaseTest {
     }
 
     @Test
-    void testGetTimestampsFromCity(){
-        List<Incident> incidents = new ArrayList<Incident>();
-        incidents.add(
-                new Incident("222","baustelle","major",
-                        "Traffic jam in Bergmannstraße",
-                        "Berlin", "Germany",
-                        "45.5", "67.4",
-                        "Bergmannstraße",
-                        "46.5", "69.5",
-                        "Bergmannstraße",
-                        1, "dummy",
-                        LocalDateTime.of(
-                                2020, 5, 1,
-                                12, 30, 0),
-                        LocalDateTime.of(
-                                2020, 5, 1,
-                                12, 30, 0),
-                        "670000:690000,681234:691234",6.0,new Long(1)));
-        MyRepo.insertIncident(incidents);
+    void testGetTimestampsFromCity() {
         List<LocalDateTime> timestampList = aggregator.getTimestampsFromCity("Berlin");
 
-        assertThat(timestampList, hasSize(greaterThan(0)));
+        assertThat(timestampList, contains(berlinRequest.getRequestTime()));
     }
 
     @Test
-    void testGetTimestampsFromCityNotInDatabase(){
-       // List<LocalDateTime> timestampList = incidentAggregator.getTimestampsFromCity("DreamLand");
+    void testGetTimestampsFromCityNotInDatabase() {
+        List<LocalDateTime> timestampList = aggregator.getTimestampsFromCity("DreamLand");
 
-       // assertThat(timestampList, is(empty()));
+        assertThat(timestampList, is(empty()));
     }
 
     @Test
-    void testGetAllIncidents(){
-        List<Incident> incidentList = aggregator.getAllData();
-
-        assertThat(incidentList, hasSize(greaterThan(0)));
-    }
-
-    @Test
+        // TODO: Move to resource test
     void testMarshallingOneIncidentFromCity() throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         List<Incident> berlinIncidents = aggregator.getIncidents("Berlin", Optional.empty(), Optional.empty());
@@ -167,6 +158,7 @@ public class AggregatorFromDatabaseTest {
     }
 
     @Test
+        // TODO: Move to resource test
     void testMarshallingAllIncidentFromCity() throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         List<Incident> berlinIncidents = aggregator.getIncidents("Berlin", Optional.empty(), Optional.empty());
@@ -175,70 +167,86 @@ public class AggregatorFromDatabaseTest {
         assertThat(json, notNullValue());
 
     }
+
     @Test
     void testGetEvaluationCandiate() {
-        Request request = createDummyRequest();
+        List<EvaluationCandidate> evaluationCandidates = aggregator.getEvaluationCandidate("Berlin", berlinRequest.getRequestTime());
 
-        MyRepo.insertRequest(request);
+        assertThat(evaluationCandidates, hasSize(equalTo(berlinRequest.getEvaluationCandidate().size())));  //richtige Größe
 
-        List<EvaluationCandidate> evaluationCandidates = aggregator.getEvaluationCandidate("Berlin",LocalDateTime.of(
-                2020, 5, 1,
-                12, 30, 0));
-        System.out.println(evaluationCandidates);
-        assertThat(evaluationCandidates, hasSize(greaterThan(0)));
+
+        List<Long> evaluationCandidateIDs = evaluationCandidates.stream().map(c -> c.getId()).collect(Collectors.toList());
+        berlinRequest.getEvaluationCandidate().forEach(
+                sourceCandidate -> {
+                    Long id = sourceCandidate.getId();
+                    boolean idIsPresent = evaluationCandidateIDs.contains(id);
+                    assertThat(idIsPresent, equalTo(true)); // candidate wih id is not present ?
+
+                    // assertThat(evaluationCandidateIDs, contains(id));
+
+                    EvaluationCandidate resultCandidate = evaluationCandidates.stream().filter(c -> c.getId() == id).findFirst().get();
+
+                    assertThat(resultCandidate.getScore(), equalTo(sourceCandidate.getScore()));
+                    assertThat(resultCandidate.getConfidenceDescription(), equalTo(sourceCandidate.getConfidenceDescription()));
+                    assertThat(resultCandidate.getRequestId(), equalTo(sourceCandidate.getRequestId()));
+                    assertThat(resultCandidate.getTomTomIncident(), equalTo(sourceCandidate.getTomTomIncident()));
+                    assertThat(resultCandidate.getHereIncident(), equalTo(sourceCandidate.getHereIncident()));
+                    assertThat(resultCandidate.isDropped(), equalTo(sourceCandidate.isDropped()));
+                    assertThat(resultCandidate.getTomTomIncidentId(), equalTo(sourceCandidate.getTomTomIncidentId()));
+                    assertThat(resultCandidate.getHereIncidentId(), equalTo(sourceCandidate.getHereIncidentId()));
+                }
+        );
 
     }
 
     @Test
-    void testGgetComparisonEvaluationOverTime()  {
-        Request request = createDummyRequest();
-
-        MyRepo.insertRequest(request);
+    void testGetComparisonEvaluationOverTime() {
+        List<ComparisonEvaluationDTO> comparisonEvaluationDTOs = aggregator.getComparisonEvaluationOverTime("Berlin");
 
 
-        List<ComparisonEvaluationDTO> comparisonEvaluationDTOs= aggregator.getComparisonEvaluationOverTime("Berlin" );
+        assertThat(comparisonEvaluationDTOs, hasSize(1));
 
-        System.out.println(comparisonEvaluationDTOs);
-        assertThat(comparisonEvaluationDTOs, hasSize(greaterThan(0)));
-
-
+        assertThat(comparisonEvaluationDTOs.get(0).getSameIncidentAmount(), equalTo(berlinRequest.getEvaluationCandidate().size()));
+        assertThat(comparisonEvaluationDTOs.get(0).getHereIncidentsAmount(), equalTo((int) berlinRequest.getIncidents().stream().filter(i -> i.getProvider().equals("0")).count()));
+        assertThat(comparisonEvaluationDTOs.get(0).getTomTomIncidentsAmount(), equalTo((int) berlinRequest.getIncidents().stream().filter(i -> i.getProvider().equals("1")).count()));
     }
 
+    private void deepCompareIncidentLists(List<Incident> sourceList, List<Incident> resultList) {
+        assertThat(resultList, hasSize(equalTo(sourceList.size())));
 
-    Request createDummyRequest(){
-        List<Incident> incidents = new ArrayList<Incident>();
-        incidents.add(
-                new Incident("222","baustelle","major","Traffic jam in Bergmannstraße",
-                        "Berlin", "Germany", "45.5", "67.4",
-                        "Bergmannstraße",  "46.5", "69.5",
-                        "Bergmannstraße",  1, "tomtom",
-                        LocalDateTime.of( 2020, 5, 1, 12, 30, 0),
-                        LocalDateTime.of( 2020, 5, 1, 12, 30, 0),
-                        "670000:690000,681234:691234",6.0,new Long(1)));
-        incidents.add(
-                new Incident("222","baustelle","major","Traffic jam in Bergmannstraße",
-                        "Berlin", "Germany", "45.5", "67.4",
-                        "Bergmannstraße",  "46.5", "69.5",
-                        "Bergmannstraße",  1, "here",
-                        LocalDateTime.of( 2020, 5, 1, 12, 30, 0),
-                        LocalDateTime.of( 2020, 5, 1, 12, 30, 0),
-                        "670000:690000,681234:691234",6.0,new Long(1)));
+        sourceList.forEach(
+                sourceIncident -> { //für jeden surce Incident ...
+                    Optional<Incident> optResultIncident = resultList.stream().filter(i -> i.getId() == sourceIncident.getId()).findAny();
+                    assertThat(optResultIncident.isPresent(), equalTo(true));   // ein Incident mit der ID fehlt in der resultList
 
-        Request request = new Request();
-        request.setRequestTime(LocalDateTime.of(
-                2020, 5, 1,
-                12, 30, 0));
-        request.setCityName("Berlin");
-        request.setIncidents(incidents);
+                    Incident resultIncident = optResultIncident.get();
 
-        List<EvaluationCandidate> evaluationCandidates = new ArrayList<EvaluationCandidate>();
-        EvaluationCandidate evaluationCandidate = new EvaluationCandidate ();
-        evaluationCandidate.setTomTomIncident(incidents.get(0));
-        evaluationCandidate.setHereIncident(incidents.get(1));
-        evaluationCandidates.add(evaluationCandidate);
-        request.setEvaluatedCandidates(evaluationCandidates);
+                    deepCompareInciden(sourceIncident, resultIncident);
 
-        return request;
+                    assertThat(resultList, contains(sourceIncident));   // ist in resultList vorhanden
+                }
+        );
+    }
+
+    private void deepCompareInciden(Incident sourceIncident, Incident resultIncident) {
+        assertThat(sourceIncident.getTrafficId(), equalTo(resultIncident.getTrafficId()));
+        assertThat(sourceIncident.getType(), equalTo(resultIncident.getType()));
+        assertThat(sourceIncident.getSize(), equalTo(resultIncident.getSize()));
+        assertThat(sourceIncident.getDescription(), equalTo(resultIncident.getDescription()));
+        assertThat(sourceIncident.getCity(), equalTo(resultIncident.getCity()));
+        assertThat(sourceIncident.getCountry(), equalTo(resultIncident.getCountry()));
+        assertThat(sourceIncident.getLengthInMeter(), equalTo(resultIncident.getLengthInMeter()));
+        assertThat(sourceIncident.getStartPositionLatitude(), equalTo(resultIncident.getStartPositionLatitude()));
+        assertThat(sourceIncident.getStartPositionLongitude(), equalTo(resultIncident.getStartPositionLongitude()));
+        assertThat(sourceIncident.getStartPositionStreet(), equalTo(resultIncident.getStartPositionStreet()));
+        assertThat(sourceIncident.getEndPositionLatitude(), equalTo(resultIncident.getEndPositionLatitude()));
+        assertThat(sourceIncident.getEndPositionLongitude(), equalTo(resultIncident.getEndPositionLongitude()));
+        assertThat(sourceIncident.getEndPositionStreet(), equalTo(resultIncident.getEndPositionStreet()));
+        assertThat(sourceIncident.getVerified(), equalTo(resultIncident.getVerified()));
+        assertThat(sourceIncident.getProvider(), equalTo(resultIncident.getProvider()));
+        assertThat(sourceIncident.getEntryTime(), equalTo(resultIncident.getEntryTime()));
+        assertThat(sourceIncident.getEndTime(), equalTo(resultIncident.getEndTime()));
+        assertThat(sourceIncident.getEdges(), equalTo(resultIncident.getEdges()));
     }
 
 }

@@ -1,0 +1,156 @@
+[
+    {
+      "tomTomIncident": {
+        "country": "Germany",
+        "startPositionLatitude": "45.5",
+        "endPositionStreet": "Bergmannstraße",
+        "city": "Berlin",
+        "startPositionLongitude": "67.4",
+        "verified": 1,
+        "edges": "670000:690000,681234:691234",
+        "description": "Traffic jam in Bergmannstraße",
+        "type": "baustelle",
+        "lengthInMeter": 6,
+        "startPositionStreet": "Bergmannstraße",
+        "entryTime": "2020-05-01T12:30:00",
+        "size": "major",
+        "edgesAsLocations": {
+          "locationsList": [
+            {
+              "latitude": "670000",
+              "longitude": "690000"
+            },
+            {
+              "latitude": "681234",
+              "longitude": "691234"
+            }
+          ]
+        },
+        "endPositionLongitude": "69.5",
+        "provider": "tomtom",
+        "requestId": 1,
+        "trafficId": "222",
+        "id": null,
+        "endTime": "2020-05-01T12:30:00",
+        "endPositionLatitude": "46.5"
+      },
+      "score": 5,
+      "hereIncident": {
+        "country": "Germany",
+        "startPositionLatitude": "45.5",
+        "endPositionStreet": "Bergmannstraße",
+        "city": "Berlin",
+        "startPositionLongitude": "67.4",
+        "verified": 1,
+        "edges": "670000:690000,681234:691234",
+        "description": "Traffic jam in Bergmannstraße",
+        "type": "baustelle",
+        "lengthInMeter": 6,
+        "startPositionStreet": "Bergmannstraße",
+        "entryTime": "2020-05-01T12:30:00",
+        "size": "major",
+        "edgesAsLocations": {
+          "locationsList": [
+            {
+              "latitude": "670000",
+              "longitude": "690000"
+            },
+            {
+              "latitude": "681234",
+              "longitude": "691234"
+            }
+          ]
+        },
+        "endPositionLongitude": "69.5",
+        "provider": "here",
+        "requestId": 1,
+        "trafficId": "222",
+        "id": null,
+        "endTime": "2020-05-01T12:30:00",
+        "endPositionLatitude": "46.5"
+      },
+      "requestId": null,
+      "dropped": false,
+      "hereIncidentId": null,
+      "id": null,
+      "confidenceDescription": null,
+      "tomTomIncidentId": null
+    },
+    {
+      "tomTomIncident": {
+        "country": "Germany",
+        "startPositionLatitude": "45.5",
+        "endPositionStreet": "Bergmannstraße",
+        "city": "Berlin",
+        "startPositionLongitude": "67.4",
+        "verified": 1,
+        "edges": "670000:690000,681234:691234",
+        "description": "Traffic jam in Bergmannstraße",
+        "type": "baustelle",
+        "lengthInMeter": 6,
+        "startPositionStreet": "Bergmannstraße",
+        "entryTime": "2020-05-01T12:30:00",
+        "size": "major",
+        "edgesAsLocations": {
+          "locationsList": [
+            {
+              "latitude": "670000",
+              "longitude": "690000"
+            },
+            {
+              "latitude": "681234",
+              "longitude": "691234"
+            }
+          ]
+        },
+        "endPositionLongitude": "69.5",
+        "provider": "tomtom",
+        "requestId": 1,
+        "trafficId": "333",
+        "id": null,
+        "endTime": "2020-05-01T12:30:00",
+        "endPositionLatitude": "46.5"
+      },
+      "score": 3,
+      "hereIncident": {
+        "country": "Germany",
+        "startPositionLatitude": "45.5",
+        "endPositionStreet": "Bergmannstraße",
+        "city": "Berlin",
+        "startPositionLongitude": "67.4",
+        "verified": 1,
+        "edges": "670000:690000,681234:691234",
+        "description": "Traffic jam in Bergmannstraße",
+        "type": "baustelle",
+        "lengthInMeter": 6,
+        "startPositionStreet": "Bergmannstraße",
+        "entryTime": "2020-05-01T12:30:00",
+        "size": "major",
+        "edgesAsLocations": {
+          "locationsList": [
+            {
+              "latitude": "670000",
+              "longitude": "690000"
+            },
+            {
+              "latitude": "681234",
+              "longitude": "691234"
+            }
+          ]
+        },
+        "endPositionLongitude": "69.5",
+        "provider": "here",
+        "requestId": 1,
+        "trafficId": "444",
+        "id": null,
+        "endTime": "2020-05-01T12:30:00",
+        "endPositionLatitude": "46.5"
+      },
+      "requestId": null,
+      "dropped": false,
+      "hereIncidentId": null,
+      "id": null,
+      "confidenceDescription": null,
+      "tomTomIncidentId": null
+    }
+]

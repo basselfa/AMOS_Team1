@@ -28,7 +28,7 @@ public class TomTomRequest implements ProviderRequest {
         }
     }
 
-    private String getUrl(String minLatitude, String minLongitude, String maxLatitude, String maxLongitude){
+    public String getUrl(String minLatitude, String minLongitude, String maxLatitude, String maxLongitude){
         //https://api.tomtom.com/traffic/services/4/incidentDetails/s3/52.5542%2C13.2823%2C52.4721%2C13.5422/10/-1/json?projection=EPSG4326&geometries=original&expandCluster=true&key=*****
         ///json?projection=EPSG4326&geometries=original&expandCluster=true&key=*****
 
