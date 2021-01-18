@@ -140,7 +140,7 @@ public class RequestTest {
                 new Incident("222","baustelle","major","Traffic jam in Bergmannstraße",
                         "Berlin", "Germany", "45.5", "67.4",
                         "Bergmannstraße",  "46.5", "69.5",
-                        "Bergmannstraße",  1, "tomtom",
+                        "Bergmannstraße",  1, "0",
                         LocalDateTime.of( 2020, 5, 1, 12, 30, 0),
                         LocalDateTime.of( 2020, 5, 1, 12, 30, 0),
                         "670000:690000,681234:691234",6.0,new Long(1)));
@@ -148,7 +148,7 @@ public class RequestTest {
                 new Incident("222","baustelle","major","Traffic jam in Bergmannstraße",
                         "Berlin", "Germany", "45.5", "67.4",
                         "Bergmannstraße",  "46.5", "69.5",
-                        "Bergmannstraße",  1, "tomtom",
+                        "Bergmannstraße",  1, "1",
                         LocalDateTime.of( 2020, 5, 1, 12, 30, 0),
                         LocalDateTime.of( 2020, 5, 1, 12, 30, 0),
                         "670000:690000,681234:691234",6.0,new Long(1)));
