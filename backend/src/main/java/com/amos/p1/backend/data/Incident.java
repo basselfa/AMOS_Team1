@@ -20,11 +20,11 @@ import java.util.Objects;
 )
 @NamedQuery(
         name = "getFromTomTom",
-        query = "SELECT i FROM Incident i WHERE i.provider like 'tomtom' AND i.requestId = :requestId "
+        query = "SELECT i FROM Incident i WHERE i.provider like '1' AND i.requestId = :requestId "
 )
 @NamedQuery(
         name = "getFromHere",
-        query = "SELECT i FROM Incident i WHERE i.provider like 'here' AND i.requestId = :requestId "
+        query = "SELECT i FROM Incident i WHERE i.provider like '0' AND i.requestId = :requestId "
 )
 @NamedQuery(
         name = "getFromCity",
