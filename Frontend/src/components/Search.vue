@@ -1,7 +1,7 @@
 <template>
     <div id="search-bar-container">
         <v-row>
-            <v-col cols="12" sm="6" md="8">
+            <v-col cols="12" sm="4" md="4">
                 <v-autocomplete
                     class="search-bar"
                     :items="this.cities"
@@ -16,11 +16,12 @@
                     @change="getCity()"
                 ></v-autocomplete>
             </v-col>
-            <v-col cols="12" sm="6" md="4">
+            <v-col cols="12" sm="4" md="8">
                 <v-autocomplete
                     :disabled="this.timestamps.length > 0 ? false : true"
                     class="search-bar"
                     :items="this.types"
+                    v-model="type"
                     prepend-inner-icon="mdi-map-search-outline"
                     chips
                     deletable-chips
@@ -28,7 +29,6 @@
                     rounded
                     shadow
                     multiple
-                    v-model="type"
                     @change="getCity()"
                 ></v-autocomplete>
             </v-col>
@@ -43,7 +43,6 @@ export default {
     name: 'Search',
     data: () => ({
         search: null,
-        select: null,
         cities: [],
         city: null,
         timestamp: null,
@@ -99,14 +98,10 @@ export default {
                 .then(response => {
                     this.timestamps = response.data
                     this.timestamp = this.timestamps[this.timestamps.length - 1]
-                    for (let i=0;i<this.type.length;i++) {
-                        this.type[i] = this.type[i].toUpperCase()
-                        this.type[i]=this.type[i].replace(/ /g,"_");
-                    }
                     this.$emit('change', {
                         city: this.city,
                         timestamp: this.timestamp,
-                        type: this.type,
+                        type: this.type.map(x => x.toUpperCase().replace(/ /g,"_")),
                     })
                 })
                 .catch(error => {

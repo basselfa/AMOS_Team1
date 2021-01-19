@@ -35,70 +35,30 @@ export default {
             this.executeQuery(value)
         },
         executeQuery: function(value) {
-
             this.polylines = []
-            if (value.city !== null) {
-                if (value.type.length == 0) {
-                    console.log(  'http://' +
-                                window.location.hostname +
-                                ':8082/withDatabase/incidents?city=' +
-                                value.city +
-                                '&timestamp=' +
-                                value.timestamp,)
-                    axios
-                        .get(
-                            'http://' +
-                                window.location.hostname +
-                                ':8082/withDatabase/incidents?city=' +
-                                value.city +
-                                '&timestamp=' +
-                                value.timestamp,
-                            {
-                                headers: { 'Access-Control-Allow-Origin': '*' },
-                            }
-                        )
-                        .then(response => {
-                            this.cityData = response.data
-                            this.passCoordinates(response.data)
-                        })
-                        .catch(error => {
-                            this.errorMessage = error.message
-                            console.error('There was an error!', error)
-                        })
-                } else {
-                    console.log(
-                        'http://' +
-                            window.location.hostname +
-                            ':8082/withDatabase/incidents?city=' +
-                            value.city +
-                              '&timestamp=' +
-                                value.timestamp +
-                            '&types=' +
-                            value.type.join()
-                    )
-                    axios
-                        .get(
-                            'http://' +
-                                window.location.hostname +
-                                ':8082/withDatabase/incidents?city=' +
-                                value.city +
-                                  '&timestamp=' +
-                                value.timestamp +
-                                '&types=' +
-                                value.type.join(),
-                            {
-                                headers: { 'Access-Control-Allow-Origin': '*' },
-                            }
-                        )
-                        .then(response => {
-                            this.cityData = response.data
-                            this.passCoordinates(response.data)
-                        })
-                        .catch(error => {
-                            this.errorMessage = error.message
-                            console.error('There was an error!', error)
-                        })
+            if (value.city !== null && value.timestamp !== null) {
+                let request_url =
+                    'http://' +
+                    window.location.hostname +
+                    ':8082/withDatabase/incidents?city=' +
+                    value.city +
+                    '&timestamp=' +
+                    value.timestamp
+                if (value.type.length !== 0) {
+                    request_url = request_url + '&types=' + value.type.join()
                 }
+                console.log(request_url)
+                axios
+                    .get(request_url, {
+                        headers: { 'Access-Control-Allow-Origin': '*' },
+                    })
+                    .then(response => {
+                        this.passCoordinates(response.data)
+                    })
+                    .catch(error => {
+                        this.errorMessage = error.message
+                        console.error('There was an error!', error)
+                    })
             }
         },
         /**
@@ -127,6 +87,10 @@ export default {
                 this.polylines.push({
                     latlngs: lineArray,
                     color: 'blue',
+                    criticality: cityData[i].size,
+                    description: cityData[i].description !== 'undefined' ? cityData[i].description.split('&')[1] : 'Description not available',
+                    length: cityData[i].lengthInMeter,
+                    type: cityData[i].type,
                 })
             }
         },
