@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 
-@Component
+
 public class MyRepo {
 
     private static final MyRepo instance = new MyRepo();
