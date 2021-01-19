@@ -16,21 +16,30 @@ import java.util.Optional;
 public class AggregatorFromDatabase implements Aggregator {
 
     @Override
-    public List<Incident> getIncidents(String city, Optional<LocalDateTime> timestamp, Optional<List<String>> types) {
+    public List<Incident> getIncidents(String cityName, Optional<LocalDateTime> timestamp, Optional<List<String>> types) {
 
-        List<Incident>  incidents;
+        List<Incident>  incidents = new ArrayList<Incident>();
 
         if(timestamp.isPresent()){
-            incidents = MyRepo.getEntityManager()
-                .createNamedQuery("getFromCityAndTimeStamp", Incident.class)
-                .setParameter("city", city )
-                .setParameter("entryTime", timestamp.get())
+            List<Request>  requests;
+            requests = MyRepo.getEntityManager()
+                .createNamedQuery("geRequestFromCityNameAndTime", Request.class)
+                .setParameter("cityName", cityName )
+                .setParameter("requestTime", timestamp.get())
                     .getResultList();
+            for (Request request : requests ) {
+                incidents.addAll(request.getIncidents()) ;
+
+            }
         }else{
-            incidents = MyRepo.getEntityManager()
-                    .createNamedQuery("getFromCity", Incident.class)
-                    .setParameter("city", city)
+            List<Request>  requests;
+            requests = MyRepo.getEntityManager()
+                    .createNamedQuery("geRequestFromCityName", Request.class)
+                    .setParameter("cityName", cityName )
                     .getResultList();
+            for (Request request : requests ) {
+                incidents.addAll(request.getIncidents());
+            }
         }
 
 

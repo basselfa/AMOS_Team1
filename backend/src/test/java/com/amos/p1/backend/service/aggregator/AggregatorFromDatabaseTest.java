@@ -47,7 +47,7 @@ public class AggregatorFromDatabaseTest {
     @Test
     void testGetIncidentsFromCity() {
         List<Incident> incidentList = aggregator.getIncidents("Berlin", Optional.empty(), Optional.empty());
-
+        System.out.println(berlinRequest.getIncidents());
         assertThat(incidentList, hasSize(greaterThan(0)));                               // List not empty
         assertThat(incidentList, hasSize(equalTo(berlinRequest.getIncidents().size())));       // as long as input List TODO: Kang -> stimmt das so?
 
