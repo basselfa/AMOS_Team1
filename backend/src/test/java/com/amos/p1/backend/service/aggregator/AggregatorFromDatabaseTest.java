@@ -51,7 +51,13 @@ public class AggregatorFromDatabaseTest {
         assertThat(incidentList, hasSize(greaterThan(0)));                               // List not empty
         assertThat(incidentList, hasSize(equalTo(berlinRequest.getIncidents().size())));       // as long as input List TODO: Kang -> stimmt das so?
 
-        deepCompareIncidentLists(berlinRequest.getIncidents(), incidentList);
+
+        for (int i = 0; i < incidentList.size(); i++) {
+            assertThat(incidentList.get(i), equalTo(berlinRequest.getIncidents().get(i)));
+        }
+
+//        assertThat(incidentList.get(0), equalTo(berlinRequest.getIncidents().get(0)));
+//        deepCompareIncidentLists(berlinRequest.getIncidents(), incidentList);
     }
 
     @Test
@@ -119,7 +125,10 @@ public class AggregatorFromDatabaseTest {
     void testGetIncidentsFromCityAndTimeStamp() {
         List<Incident> incidentList = aggregator.getIncidents("Berlin", Optional.of(berlinRequest.getRequestTime()), Optional.empty());
 
-        deepCompareIncidentLists(berlinRequest.getIncidents(), incidentList);
+        for (int i = 0; i < incidentList.size(); i++) {
+            assertThat(incidentList.get(i), equalTo(berlinRequest.getIncidents().get(i)));
+        }
+//        deepCompareIncidentLists(berlinRequest.getIncidents(), incidentList);
     }
 
     @Test
