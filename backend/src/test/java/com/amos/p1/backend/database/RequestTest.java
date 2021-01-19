@@ -70,6 +70,8 @@ public class RequestTest {
 
     @Test
     void testNoIncidentInDatabaseAfterDeletingInRequestObject(){
+        fail("Maybe not needed");
+
         Request request = getDummyRequestWithOneDummyIncident();
         MyRepo.insertRequest(request);
         Incident incident = request.getIncidents().get(0);
