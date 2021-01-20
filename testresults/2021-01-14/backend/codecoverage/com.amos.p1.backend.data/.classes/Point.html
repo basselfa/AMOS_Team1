@@ -1,0 +1,162 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Point</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.amos.p1.backend.data</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Point (com.amos.p1.backend.data)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Point</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (4/ 8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    26.9%
+  </span>
+  <span class="absValue">
+    (7/ 26)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.amos.p1.backend.data;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.io.Serializable;
+<i>4</i>&nbsp;import java.util.Iterator;
+<i>5</i>&nbsp;import java.util.List;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;/**
+<i>8</i>&nbsp; * Simple geographical point represented by a couple of doubles. Google&#39;s GeoPoint is a couple of micro-degrees
+<i>9</i>&nbsp; * represented by integers.
+<i>10</i>&nbsp; */
+<i>11</i>&nbsp;public class Point implements Serializable {
+<i>12</i>&nbsp;    private static final long serialVersionUID = 1L;
+<i>13</i>&nbsp;    private final double lat;
+<i>14</i>&nbsp;    private final double lng;
+<i>15</i>&nbsp;
+<b class="fc"><i>16</i>&nbsp;    public Point(double lat, double lng) {</b>
+<b class="fc"><i>17</i>&nbsp;        this.lat = lat;</b>
+<b class="fc"><i>18</i>&nbsp;        this.lng = lng;</b>
+<b class="fc"><i>19</i>&nbsp;    }</b>
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;    public double getLat() {
+<b class="fc"><i>22</i>&nbsp;        return lat;</b>
+<i>23</i>&nbsp;    }
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    public double getLng() {
+<b class="fc"><i>26</i>&nbsp;        return lng;</b>
+<i>27</i>&nbsp;    }
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    @Override
+<i>30</i>&nbsp;    public String toString() {
+<b class="fc"><i>31</i>&nbsp;        return lat + &quot;:&quot; + lng;</b>
+<i>32</i>&nbsp;    }
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;    /**
+<i>35</i>&nbsp;     * Utility method to export coordinates for use with GeoJSON. This standard requires longitude first. See
+<i>36</i>&nbsp;     * http://geojson.org/geojson-spec.html#positions
+<i>37</i>&nbsp;     */
+<i>38</i>&nbsp;    public static String toGeoJSON(List&lt;Point&gt; points) {
+<b class="nc"><i>39</i>&nbsp;        StringBuilder buff = new StringBuilder(&quot;[&quot;);</b>
+<b class="nc"><i>40</i>&nbsp;        Iterator&lt;Point&gt; itr = points.iterator();</b>
+<b class="nc"><i>41</i>&nbsp;        while (itr.hasNext()) {</b>
+<b class="nc"><i>42</i>&nbsp;            buff.append(toGeoJSON(itr.next()));</b>
+<b class="nc"><i>43</i>&nbsp;            if (itr.hasNext()) {</b>
+<b class="nc"><i>44</i>&nbsp;                buff.append(&quot;,&quot;);</b>
+<i>45</i>&nbsp;            }
+<i>46</i>&nbsp;        }
+<b class="nc"><i>47</i>&nbsp;        buff.append(&quot;]&quot;);</b>
+<b class="nc"><i>48</i>&nbsp;        return buff.toString();</b>
+<i>49</i>&nbsp;    }
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;    public static String toGeoJSON(Point point) {
+<b class="nc"><i>52</i>&nbsp;        return &quot;[&quot; + point.getLng() + &quot;,&quot; + point.getLat() + &quot;]&quot;;</b>
+<i>53</i>&nbsp;    }
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;    /**
+<i>56</i>&nbsp;     * We consider that two point are equals if both latitude and longitude are &quot;nearly&quot; the same. With a precision of
+<i>57</i>&nbsp;     * 1e-3 degree
+<i>58</i>&nbsp;     */
+<i>59</i>&nbsp;    @Override
+<i>60</i>&nbsp;    public boolean equals(Object o) {
+<b class="nc"><i>61</i>&nbsp;        if (!(o instanceof Point)) {</b>
+<b class="nc"><i>62</i>&nbsp;            return false;</b>
+<i>63</i>&nbsp;        }
+<b class="nc"><i>64</i>&nbsp;        Point that = (Point) o;</b>
+<b class="nc"><i>65</i>&nbsp;        if (Math.abs(that.getLat() - lat) &gt; 0.001) {</b>
+<b class="nc"><i>66</i>&nbsp;            return false;</b>
+<i>67</i>&nbsp;        }
+<b class="nc"><i>68</i>&nbsp;        return Math.abs(that.getLng() - lng) &lt;= 0.001;</b>
+<i>69</i>&nbsp;    }
+<i>70</i>&nbsp;
+<i>71</i>&nbsp;    @Override
+<i>72</i>&nbsp;    public int hashCode() {
+<b class="nc"><i>73</i>&nbsp;        int hash = 5;</b>
+<b class="nc"><i>74</i>&nbsp;        hash = 37 * hash + (int) (Double.doubleToLongBits(this.lat) ^ (Double.doubleToLongBits(this.lat) &gt;&gt;&gt; 32));</b>
+<b class="nc"><i>75</i>&nbsp;        hash = 37 * hash + (int) (Double.doubleToLongBits(this.lng) ^ (Double.doubleToLongBits(this.lng) &gt;&gt;&gt; 32));</b>
+<b class="nc"><i>76</i>&nbsp;        return hash;</b>
+<i>77</i>&nbsp;    }
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-01-14 10:13</div>
+</div>
+</body>
+</html>

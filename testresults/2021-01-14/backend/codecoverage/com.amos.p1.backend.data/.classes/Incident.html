@@ -1,0 +1,527 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Incident</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.amos.p1.backend.data</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Incident (com.amos.p1.backend.data)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Incident</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (45/ 45)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (98/ 98)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Incident$HibernateProxy$410VdR70</td>
+  </tr>
+  <tr>
+    <td class="name">Incident$HibernateProxy$51H6itEx</td>
+  </tr>
+  <tr>
+    <td class="name">Incident$HibernateProxy$8KjuW4oK</td>
+  </tr>
+  <tr>
+    <td class="name">Incident$HibernateProxy$bnVM5say</td>
+  </tr>
+  <tr>
+    <td class="name">Incident$HibernateProxy$eZduHVzF</td>
+  </tr>
+  <tr>
+    <td class="name">Incident$HibernateProxy$jlbI4BJE</td>
+  </tr>
+  <tr>
+    <td class="name">Incident$HibernateProxy$M63L9lEy</td>
+  </tr>
+  <tr>
+    <td class="name">Incident$HibernateProxy$tpjsrkNo</td>
+  </tr>
+  <tr>
+    <td class="name">Incident$HibernateProxy$ZhabQtxv</td>
+  </tr>
+  <tr>
+    <td class="name">Incident$IncidentTypes</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.3%
+  </span>
+  <span class="absValue">
+    (12/ 13)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    97.9%
+  </span>
+  <span class="absValue">
+    (47/ 48)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    99.1%
+  </span>
+  <span class="absValue">
+    (110/ 111)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.amos.p1.backend.data;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.fasterxml.jackson.annotation.JsonIgnore;
+<i>4</i>&nbsp;import com.fasterxml.jackson.annotation.JsonProperty;
+<i>5</i>&nbsp;import org.hibernate.annotations.GenericGenerator;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;import javax.persistence.*;
+<i>8</i>&nbsp;import java.time.LocalDateTime;
+<i>9</i>&nbsp;import java.util.List;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;@NamedQuery(
+<i>15</i>&nbsp;        name = &quot;getFromids&quot;,
+<i>16</i>&nbsp;        query = &quot;SELECT i FROM Incident i WHERE i.id IN :id&quot;
+<i>17</i>&nbsp;)
+<i>18</i>&nbsp;@NamedQuery(
+<i>19</i>&nbsp;        name = &quot;getFromid&quot;,
+<i>20</i>&nbsp;        query = &quot;SELECT i FROM Incident i WHERE i.id = :id&quot;
+<i>21</i>&nbsp;)
+<i>22</i>&nbsp;@NamedQuery(
+<i>23</i>&nbsp;        name = &quot;getFromTomTom&quot;,
+<i>24</i>&nbsp;        query = &quot;SELECT i FROM Incident i WHERE i.provider like &#39;tomtom&#39; AND i.requestId = :requestId &quot;
+<i>25</i>&nbsp;)
+<i>26</i>&nbsp;@NamedQuery(
+<i>27</i>&nbsp;        name = &quot;getFromHere&quot;,
+<i>28</i>&nbsp;        query = &quot;SELECT i FROM Incident i WHERE i.provider like &#39;here&#39; AND i.requestId = :requestId &quot;
+<i>29</i>&nbsp;)
+<i>30</i>&nbsp;@NamedQuery(
+<i>31</i>&nbsp;        name = &quot;getFromCity&quot;,
+<i>32</i>&nbsp;        query = &quot;SELECT i FROM Incident i WHERE i.city = :city&quot;
+<i>33</i>&nbsp;)
+<i>34</i>&nbsp;@NamedQuery(
+<i>35</i>&nbsp;        name = &quot;getDataFromTime&quot;,
+<i>36</i>&nbsp;        query = &quot;SELECT i FROM Incident i WHERE i.entryTime &gt;= :entryTime&quot;
+<i>37</i>&nbsp;)
+<i>38</i>&nbsp;@NamedQuery(
+<i>39</i>&nbsp;        name = &quot;getAllData&quot;,
+<i>40</i>&nbsp;        query = &quot;SELECT i FROM Incident i&quot;
+<i>41</i>&nbsp;)
+<i>42</i>&nbsp;@NamedQuery(
+<i>43</i>&nbsp;        name = &quot;getFromCityAndTimeStamp&quot;,
+<i>44</i>&nbsp;        query = &quot;SELECT i FROM Incident i WHERE i.city = :city AND i.entryTime &gt;= :entryTime&quot;
+<i>45</i>&nbsp;)
+<i>46</i>&nbsp;@NamedQuery(
+<i>47</i>&nbsp;        name = &quot;getTimestampsFromCity&quot;,
+<i>48</i>&nbsp;        query = &quot;SELECT DISTINCT i.entryTime FROM Incident i WHERE i.city = :city&quot;
+<i>49</i>&nbsp;)
+<i>50</i>&nbsp;@NamedQuery(
+<i>51</i>&nbsp;        name = &quot;getFromRequestId&quot;,
+<i>52</i>&nbsp;        query = &quot;SELECT i FROM Incident i WHERE i.requestId = :requestId&quot;
+<i>53</i>&nbsp;)
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;@NamedQuery(
+<i>56</i>&nbsp;        name = &quot;getFromRequesTime&quot;,
+<i>57</i>&nbsp;        query = &quot;SELECT i FROM Incident i ,Request r WHERE i.requestId =r.id &quot; +
+<i>58</i>&nbsp;                &quot; And r.requestTime= :requestTime&quot;
+<i>59</i>&nbsp;)
+<i>60</i>&nbsp;@Entity
+<i>61</i>&nbsp;public class Incident {
+<i>62</i>&nbsp;    @Id
+<i>63</i>&nbsp;    @GeneratedValue(strategy = GenerationType.AUTO)
+<i>64</i>&nbsp;    private Long id;
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;    private String trafficId;
+<i>67</i>&nbsp;    private String type; // type of incident
+<i>68</i>&nbsp;    private String size;
+<i>69</i>&nbsp;    private String description;
+<i>70</i>&nbsp;    private String city;
+<i>71</i>&nbsp;    private String country;
+<i>72</i>&nbsp;    private double lengthInMeter;
+<i>73</i>&nbsp;    private String startPositionLatitude;
+<i>74</i>&nbsp;    private String startPositionLongitude;
+<i>75</i>&nbsp;    private String startPositionStreet;
+<i>76</i>&nbsp;    private String endPositionLatitude;
+<i>77</i>&nbsp;    private String endPositionLongitude;
+<i>78</i>&nbsp;    private String endPositionStreet;
+<i>79</i>&nbsp;    private int verified; // 0:false, 1:true
+<i>80</i>&nbsp;
+<i>81</i>&nbsp;    private String provider; // 0:Here, 1:Tomtom
+<i>82</i>&nbsp;    // reference https://vladmihalcea.com/date-timestamp-jpa-hibernate/
+<i>83</i>&nbsp;    private LocalDateTime entryTime;
+<i>84</i>&nbsp;    private LocalDateTime endTime;
+<i>85</i>&nbsp;    private Long requestId;
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;    private String edges; // 12.124234:53.536453,
+<i>88</i>&nbsp;
+<i>89</i>&nbsp;
+<i>90</i>&nbsp;    public Incident() {
+<b class="fc"><i>91</i>&nbsp;        super();</b>
+<b class="fc"><i>92</i>&nbsp;    }</b>
+<i>93</i>&nbsp;
+<i>94</i>&nbsp;
+<i>95</i>&nbsp;    public Incident(String trafficId, String type, String size, String description,
+<i>96</i>&nbsp;                    String city, String country,
+<i>97</i>&nbsp;                    String startPositionLatitude, String startPositionLongitude,
+<i>98</i>&nbsp;                    String startPositionStreet, String endPositionLatitude,
+<i>99</i>&nbsp;                    String endPositionLongitude, String endPositionStreet,
+<i>100</i>&nbsp;                    int verified, String provider,
+<i>101</i>&nbsp;                    LocalDateTime entryTime, LocalDateTime endTime,
+<i>102</i>&nbsp;                    String edges , double lengthInMeter,long requestId) {
+<b class="fc"><i>103</i>&nbsp;        super();</b>
+<b class="fc"><i>104</i>&nbsp;        this.type = type;</b>
+<b class="fc"><i>105</i>&nbsp;        this.size = size;</b>
+<b class="fc"><i>106</i>&nbsp;        this.description = description;</b>
+<b class="fc"><i>107</i>&nbsp;        this.city = city;</b>
+<b class="fc"><i>108</i>&nbsp;        this.country = country;</b>
+<b class="fc"><i>109</i>&nbsp;        this.startPositionLatitude = startPositionLatitude;</b>
+<b class="fc"><i>110</i>&nbsp;        this.startPositionLongitude = startPositionLongitude;</b>
+<b class="fc"><i>111</i>&nbsp;        this.startPositionStreet = startPositionStreet;</b>
+<b class="fc"><i>112</i>&nbsp;        this.endPositionLatitude = endPositionLatitude;</b>
+<b class="fc"><i>113</i>&nbsp;        this.endPositionLongitude = endPositionLongitude;</b>
+<b class="fc"><i>114</i>&nbsp;        this.endPositionStreet = endPositionStreet;</b>
+<b class="fc"><i>115</i>&nbsp;        this.verified = verified;</b>
+<b class="fc"><i>116</i>&nbsp;        this.provider = provider;</b>
+<b class="fc"><i>117</i>&nbsp;        this.entryTime = entryTime;</b>
+<b class="fc"><i>118</i>&nbsp;        this.trafficId = trafficId;</b>
+<b class="fc"><i>119</i>&nbsp;        this.edges = edges;</b>
+<b class="fc"><i>120</i>&nbsp;        this.endTime = endTime;</b>
+<b class="fc"><i>121</i>&nbsp;        this.lengthInMeter = lengthInMeter;</b>
+<b class="fc"><i>122</i>&nbsp;        this.requestId= requestId;</b>
+<b class="fc"><i>123</i>&nbsp;    }</b>
+<i>124</i>&nbsp;
+<i>125</i>&nbsp;
+<i>126</i>&nbsp;
+<i>127</i>&nbsp;
+<i>128</i>&nbsp;    @Basic
+<i>129</i>&nbsp;    @Column(name = &quot;requestId&quot;, nullable = true)
+<b class="fc"><i>130</i>&nbsp;    public Long getRequestId() {    return requestId; }</b>
+<b class="fc"><i>131</i>&nbsp;    public void setRequestId(Long requestId) { this.requestId = requestId; }</b>
+<i>132</i>&nbsp;
+<i>133</i>&nbsp;    @Basic
+<i>134</i>&nbsp;    @Column(name = &quot;endTime&quot;, nullable = true)
+<b class="fc"><i>135</i>&nbsp;    public LocalDateTime getEndTime() {  return endTime; }</b>
+<b class="fc"><i>136</i>&nbsp;    public void setEndTime(LocalDateTime endTime) { this.endTime = endTime; }</b>
+<i>137</i>&nbsp;
+<i>138</i>&nbsp;
+<i>139</i>&nbsp;    @Basic
+<i>140</i>&nbsp;    @Column(name = &quot;id&quot;)
+<i>141</i>&nbsp;    public Long getId() {
+<b class="fc"><i>142</i>&nbsp;        return id;</b>
+<i>143</i>&nbsp;    }
+<i>144</i>&nbsp;
+<i>145</i>&nbsp;    public void setId(Long id) {
+<b class="fc"><i>146</i>&nbsp;        this.id = id;</b>
+<b class="fc"><i>147</i>&nbsp;    }</b>
+<i>148</i>&nbsp;
+<i>149</i>&nbsp;
+<i>150</i>&nbsp;    @Basic
+<i>151</i>&nbsp;    @Column(name = &quot;lengthInMeter&quot;, nullable = true)
+<i>152</i>&nbsp;    public double getLengthInMeter() {
+<b class="fc"><i>153</i>&nbsp;        return lengthInMeter;</b>
+<i>154</i>&nbsp;    }
+<i>155</i>&nbsp;
+<i>156</i>&nbsp;    public void setLengthInMeter(double lengthInMeter) {
+<b class="fc"><i>157</i>&nbsp;        this.lengthInMeter = lengthInMeter;</b>
+<b class="fc"><i>158</i>&nbsp;    }</b>
+<i>159</i>&nbsp;
+<i>160</i>&nbsp;    @Basic
+<i>161</i>&nbsp;    @Column(name = &quot;trafficId&quot;, nullable = true)
+<i>162</i>&nbsp;    public String getTrafficId() {
+<b class="fc"><i>163</i>&nbsp;        return trafficId;</b>
+<i>164</i>&nbsp;    }
+<i>165</i>&nbsp;
+<i>166</i>&nbsp;    public void setTrafficId(String trafficId) {
+<b class="fc"><i>167</i>&nbsp;        this.trafficId = trafficId;</b>
+<b class="fc"><i>168</i>&nbsp;    }</b>
+<i>169</i>&nbsp;
+<i>170</i>&nbsp;    @Basic
+<i>171</i>&nbsp;    @Column(name = &quot;entryTime&quot;, columnDefinition = &quot;DATETIME&quot;)
+<i>172</i>&nbsp;    @Temporal(TemporalType.TIMESTAMP)
+<i>173</i>&nbsp;    public LocalDateTime getEntryTime() {
+<b class="fc"><i>174</i>&nbsp;        return entryTime;</b>
+<i>175</i>&nbsp;    }
+<i>176</i>&nbsp;
+<i>177</i>&nbsp;    public void setEntryTime(LocalDateTime entryTime) {
+<b class="fc"><i>178</i>&nbsp;        this.entryTime = entryTime;</b>
+<b class="fc"><i>179</i>&nbsp;    }</b>
+<i>180</i>&nbsp;
+<i>181</i>&nbsp;
+<i>182</i>&nbsp;    @Basic
+<i>183</i>&nbsp;    @Column(name = &quot;type&quot;, nullable = true)
+<i>184</i>&nbsp;    public String getType() {
+<b class="fc"><i>185</i>&nbsp;        return type;</b>
+<i>186</i>&nbsp;    }
+<i>187</i>&nbsp;
+<i>188</i>&nbsp;    public void setType(String type) {
+<b class="fc"><i>189</i>&nbsp;        this.type = type;</b>
+<b class="fc"><i>190</i>&nbsp;    }</b>
+<i>191</i>&nbsp;
+<i>192</i>&nbsp;    @Basic
+<i>193</i>&nbsp;    @Column(name = &quot;size&quot;, nullable = true)
+<i>194</i>&nbsp;    public String getSize() {
+<b class="fc"><i>195</i>&nbsp;        return size;</b>
+<i>196</i>&nbsp;    }
+<i>197</i>&nbsp;
+<i>198</i>&nbsp;    public void setSize(String size) {
+<b class="fc"><i>199</i>&nbsp;        this.size = size;</b>
+<b class="fc"><i>200</i>&nbsp;    }</b>
+<i>201</i>&nbsp;
+<i>202</i>&nbsp;    @Basic
+<i>203</i>&nbsp;    @Column(name = &quot;description&quot;, nullable = true)
+<i>204</i>&nbsp;    public String getDescription() {
+<b class="fc"><i>205</i>&nbsp;        return description;</b>
+<i>206</i>&nbsp;    }
+<i>207</i>&nbsp;
+<i>208</i>&nbsp;    public void setDescription(String description) {
+<b class="fc"><i>209</i>&nbsp;        this.description = description;</b>
+<b class="fc"><i>210</i>&nbsp;    }</b>
+<i>211</i>&nbsp;
+<i>212</i>&nbsp;    @Basic
+<i>213</i>&nbsp;    @Column(name = &quot;country&quot;, nullable = true)
+<i>214</i>&nbsp;    public String getCountry() {
+<b class="fc"><i>215</i>&nbsp;        return country;</b>
+<i>216</i>&nbsp;    }
+<i>217</i>&nbsp;
+<i>218</i>&nbsp;    public void setCountry(String country) {
+<b class="fc"><i>219</i>&nbsp;        this.country = country;</b>
+<b class="fc"><i>220</i>&nbsp;    }</b>
+<i>221</i>&nbsp;
+<i>222</i>&nbsp;    @Basic
+<i>223</i>&nbsp;    @Column(name = &quot;city&quot;, nullable = true)
+<i>224</i>&nbsp;    public String getCity() {
+<b class="fc"><i>225</i>&nbsp;        return city;</b>
+<i>226</i>&nbsp;    }
+<i>227</i>&nbsp;
+<i>228</i>&nbsp;    public void setCity(String city) {
+<b class="fc"><i>229</i>&nbsp;        this.city = city;</b>
+<b class="fc"><i>230</i>&nbsp;    }</b>
+<i>231</i>&nbsp;
+<i>232</i>&nbsp;
+<i>233</i>&nbsp;    @Basic
+<i>234</i>&nbsp;    @Column(name = &quot;startPositionLongitude&quot;, nullable = true)
+<i>235</i>&nbsp;    public String getStartPositionLongitude() {
+<b class="fc"><i>236</i>&nbsp;        return startPositionLongitude;</b>
+<i>237</i>&nbsp;    }
+<i>238</i>&nbsp;
+<i>239</i>&nbsp;    public void setStartPositionLongitude(String startPositionLongitude) {
+<b class="fc"><i>240</i>&nbsp;        this.startPositionLongitude = startPositionLongitude;</b>
+<b class="fc"><i>241</i>&nbsp;    }</b>
+<i>242</i>&nbsp;
+<i>243</i>&nbsp;    @Basic
+<i>244</i>&nbsp;    @Column(name = &quot;startPositionLatitude&quot;, nullable = true)
+<i>245</i>&nbsp;    public String getStartPositionLatitude() {
+<b class="fc"><i>246</i>&nbsp;        return startPositionLatitude;</b>
+<i>247</i>&nbsp;    }
+<i>248</i>&nbsp;
+<i>249</i>&nbsp;    public void setStartPositionLatitude(String startPositionLatitude) {
+<b class="fc"><i>250</i>&nbsp;        this.startPositionLatitude = startPositionLatitude;</b>
+<b class="fc"><i>251</i>&nbsp;    }</b>
+<i>252</i>&nbsp;
+<i>253</i>&nbsp;    @Basic
+<i>254</i>&nbsp;    @Column(name = &quot;startPositionStreet&quot;, nullable = true)
+<i>255</i>&nbsp;    public String getStartPositionStreet() {
+<b class="fc"><i>256</i>&nbsp;        return startPositionStreet;</b>
+<i>257</i>&nbsp;    }
+<i>258</i>&nbsp;
+<i>259</i>&nbsp;    public void setStartPositionStreet(String startPositionStreet) {
+<b class="fc"><i>260</i>&nbsp;        this.startPositionStreet = startPositionStreet;</b>
+<b class="fc"><i>261</i>&nbsp;    }</b>
+<i>262</i>&nbsp;
+<i>263</i>&nbsp;    @Basic
+<i>264</i>&nbsp;    @Column(name = &quot;endPositionLatitude&quot;, nullable = true)
+<i>265</i>&nbsp;    public String getEndPositionLatitude() {
+<b class="fc"><i>266</i>&nbsp;        return endPositionLatitude;</b>
+<i>267</i>&nbsp;    }
+<i>268</i>&nbsp;
+<i>269</i>&nbsp;    public void setEndPositionLatitude(String endPositionLatitude) {
+<b class="fc"><i>270</i>&nbsp;        this.endPositionLatitude = endPositionLatitude;</b>
+<b class="fc"><i>271</i>&nbsp;    }</b>
+<i>272</i>&nbsp;
+<i>273</i>&nbsp;    @Basic
+<i>274</i>&nbsp;    @Column(name = &quot;endPositionLongitude&quot;, nullable = true)
+<i>275</i>&nbsp;    public String getEndPositionLongitude() {
+<b class="fc"><i>276</i>&nbsp;        return endPositionLongitude;</b>
+<i>277</i>&nbsp;    }
+<i>278</i>&nbsp;
+<i>279</i>&nbsp;    public void setEndPositionLongitude(String endPositionLongitude) {
+<b class="fc"><i>280</i>&nbsp;        this.endPositionLongitude = endPositionLongitude;</b>
+<b class="fc"><i>281</i>&nbsp;    }</b>
+<i>282</i>&nbsp;
+<i>283</i>&nbsp;    @Basic
+<i>284</i>&nbsp;    @Column(name = &quot;endPositionStreet&quot;, nullable = true)
+<i>285</i>&nbsp;    public String getEndPositionStreet() {
+<b class="fc"><i>286</i>&nbsp;        return endPositionStreet;</b>
+<i>287</i>&nbsp;    }
+<i>288</i>&nbsp;
+<i>289</i>&nbsp;    public void setEndPositionStreet(String endPositionStreet) {
+<b class="fc"><i>290</i>&nbsp;        this.endPositionStreet = endPositionStreet;</b>
+<b class="fc"><i>291</i>&nbsp;    }</b>
+<i>292</i>&nbsp;
+<i>293</i>&nbsp;    @Basic
+<i>294</i>&nbsp;    @Column(name = &quot;verified&quot;, nullable = true)
+<i>295</i>&nbsp;    public int getVerified() {
+<b class="fc"><i>296</i>&nbsp;        return verified;</b>
+<i>297</i>&nbsp;    }
+<i>298</i>&nbsp;
+<i>299</i>&nbsp;    public void setVerified(int verified) {
+<b class="fc"><i>300</i>&nbsp;        this.verified = verified;</b>
+<b class="fc"><i>301</i>&nbsp;    }</b>
+<i>302</i>&nbsp;
+<i>303</i>&nbsp;
+<i>304</i>&nbsp;    @Basic
+<i>305</i>&nbsp;    @Column(name = &quot;provider&quot;, nullable = true)
+<i>306</i>&nbsp;    public String getProvider() {
+<b class="fc"><i>307</i>&nbsp;        return provider;</b>
+<i>308</i>&nbsp;    }
+<i>309</i>&nbsp;
+<i>310</i>&nbsp;    public void setProvider(String provider) {
+<b class="fc"><i>311</i>&nbsp;        this.provider = provider;</b>
+<b class="fc"><i>312</i>&nbsp;    }</b>
+<i>313</i>&nbsp;
+<i>314</i>&nbsp;    @Basic
+<i>315</i>&nbsp;    @Column(name = &quot;edges&quot;, nullable = true)
+<i>316</i>&nbsp;    public String getEdges() {
+<b class="fc"><i>317</i>&nbsp;        return edges;</b>
+<i>318</i>&nbsp;    }
+<i>319</i>&nbsp;
+<i>320</i>&nbsp;    public void setEdges(String edges) {
+<b class="fc"><i>321</i>&nbsp;        this.edges = edges;</b>
+<b class="fc"><i>322</i>&nbsp;    }</b>
+<i>323</i>&nbsp;
+<i>324</i>&nbsp;    public void setEdgesAsLocations(Locations locations) {
+<b class="fc"><i>325</i>&nbsp;        List&lt;Location&gt; locationsList = locations.getLocationsList();</b>
+<i>326</i>&nbsp;
+<b class="fc"><i>327</i>&nbsp;        if (locationsList.size() == 0) {</b>
+<b class="fc"><i>328</i>&nbsp;            edges = &quot;&quot;;</b>
+<b class="fc"><i>329</i>&nbsp;            return;</b>
+<i>330</i>&nbsp;        }
+<i>331</i>&nbsp;
+<b class="fc"><i>332</i>&nbsp;        StringBuilder stringBuilder = new StringBuilder();</b>
+<b class="fc"><i>333</i>&nbsp;        for (Location location : locationsList) {</b>
+<b class="fc"><i>334</i>&nbsp;            stringBuilder</b>
+<b class="fc"><i>335</i>&nbsp;                    .append(location.getLatitude())</b>
+<b class="fc"><i>336</i>&nbsp;                    .append(&quot;:&quot;)</b>
+<b class="fc"><i>337</i>&nbsp;                    .append(location.getLongitude())</b>
+<b class="fc"><i>338</i>&nbsp;                    .append(&quot;,&quot;);</b>
+<b class="fc"><i>339</i>&nbsp;        }</b>
+<b class="fc"><i>340</i>&nbsp;        stringBuilder.deleteCharAt(stringBuilder.length() - 1);</b>
+<i>341</i>&nbsp;
+<b class="fc"><i>342</i>&nbsp;        edges = stringBuilder.toString();</b>
+<i>343</i>&nbsp;        //TODO Locations as edges string
+<b class="fc"><i>344</i>&nbsp;    }</b>
+<i>345</i>&nbsp;
+<i>346</i>&nbsp;    public Locations getEdgesAsLocations() {
+<b class="fc"><i>347</i>&nbsp;        return new Locations(edges);</b>
+<i>348</i>&nbsp;    }
+<i>349</i>&nbsp;
+<i>350</i>&nbsp;    @Override
+<i>351</i>&nbsp;    public String toString() {
+<b class="fc"><i>352</i>&nbsp;        return &quot;Incident{&quot; +</b>
+<i>353</i>&nbsp;                &quot;id=&quot; + id +
+<i>354</i>&nbsp;                &quot;, trafficId=&#39;&quot; + trafficId + &#39;\&#39;&#39; +
+<i>355</i>&nbsp;                &quot;, type=&#39;&quot; + type + &#39;\&#39;&#39; +
+<i>356</i>&nbsp;                &quot;, size=&#39;&quot; + size + &#39;\&#39;&#39; +
+<i>357</i>&nbsp;                &quot;, description=&#39;&quot; + description + &#39;\&#39;&#39; +
+<i>358</i>&nbsp;                &quot;, city=&#39;&quot; + city + &#39;\&#39;&#39; +
+<i>359</i>&nbsp;                &quot;, country=&#39;&quot; + country + &#39;\&#39;&#39; +
+<i>360</i>&nbsp;                &quot;, lengthInMeter=&quot; + lengthInMeter +
+<i>361</i>&nbsp;                &quot;, startPositionLatitude=&#39;&quot; + startPositionLatitude + &#39;\&#39;&#39; +
+<i>362</i>&nbsp;                &quot;, startPositionLongitude=&#39;&quot; + startPositionLongitude + &#39;\&#39;&#39; +
+<i>363</i>&nbsp;                &quot;, startPositionStreet=&#39;&quot; + startPositionStreet + &#39;\&#39;&#39; +
+<i>364</i>&nbsp;                &quot;, endPositionLatitude=&#39;&quot; + endPositionLatitude + &#39;\&#39;&#39; +
+<i>365</i>&nbsp;                &quot;, endPositionLongitude=&#39;&quot; + endPositionLongitude + &#39;\&#39;&#39; +
+<i>366</i>&nbsp;                &quot;, endPositionStreet=&#39;&quot; + endPositionStreet + &#39;\&#39;&#39; +
+<i>367</i>&nbsp;                &quot;, verified=&quot; + verified +
+<i>368</i>&nbsp;                &quot;, provider=&#39;&quot; + provider + &#39;\&#39;&#39; +
+<i>369</i>&nbsp;                &quot;, entryTime=&quot; + entryTime +
+<i>370</i>&nbsp;                &quot;, edges=&#39;&quot; + edges + &#39;\&#39;&#39; +
+<i>371</i>&nbsp;                &#39;}&#39;;
+<i>372</i>&nbsp;    }
+<i>373</i>&nbsp;
+<b class="fc"><i>374</i>&nbsp;    public enum IncidentTypes {    //do not change order!</b>
+<b class="fc"><i>375</i>&nbsp;        ACCIDENT,</b>
+<b class="fc"><i>376</i>&nbsp;        CONGESTION,</b>
+<b class="fc"><i>377</i>&nbsp;        DISABLEDVEHICLE,</b>
+<b class="fc"><i>378</i>&nbsp;        ROADHAZARD,</b>
+<b class="fc"><i>379</i>&nbsp;        ROADWORKS,</b>
+<b class="fc"><i>380</i>&nbsp;        PLANNEDEVENT,</b>
+<b class="fc"><i>381</i>&nbsp;        DETOUR,</b>
+<b class="fc"><i>382</i>&nbsp;        MISC,       // MISC FOR &quot;UNKNOWN&quot; OR &quot;NO CATEGORY&quot;</b>
+<b class="fc"><i>383</i>&nbsp;        WEATHER,</b>
+<b class="fc"><i>384</i>&nbsp;        ROADCLOSURE,</b>
+<b class="fc"><i>385</i>&nbsp;        LANERESTRICTION;</b>
+<i>386</i>&nbsp;
+<i>387</i>&nbsp;        public int getId() {
+<b class="nc"><i>388</i>&nbsp;            return ordinal();</b>
+<i>389</i>&nbsp;        }
+<i>390</i>&nbsp;    }
+<i>391</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-01-14 10:13</div>
+</div>
+</body>
+</html>

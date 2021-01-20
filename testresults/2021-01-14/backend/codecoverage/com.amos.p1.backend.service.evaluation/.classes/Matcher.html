@@ -1,0 +1,112 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Matcher</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.amos.p1.backend.service.evaluation</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Matcher (com.amos.p1.backend.service.evaluation)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Matcher</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/ 10)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.amos.p1.backend.service.evaluation;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.amos.p1.backend.data.Incident;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;public abstract class Matcher {
+<i>6</i>&nbsp;    double start1Lat;
+<i>7</i>&nbsp;    double start1Lng;
+<i>8</i>&nbsp;    double end1Lat;
+<i>9</i>&nbsp;    double end1Lng;
+<i>10</i>&nbsp;    double start2Lat;
+<i>11</i>&nbsp;    double start2Lng;
+<i>12</i>&nbsp;    double end2Lat;
+<i>13</i>&nbsp;    double end2Lng;
+<i>14</i>&nbsp;
+<b class="fc"><i>15</i>&nbsp;    public Matcher(Incident incident1, Incident incident2){</b>
+<b class="fc"><i>16</i>&nbsp;        this.start1Lat = Double.parseDouble(incident1.getStartPositionLatitude());</b>
+<b class="fc"><i>17</i>&nbsp;        this.start1Lng = Double.parseDouble(incident1.getStartPositionLongitude());</b>
+<b class="fc"><i>18</i>&nbsp;        this.end1Lat = Double.parseDouble(incident1.getEndPositionLatitude());</b>
+<b class="fc"><i>19</i>&nbsp;        this.end1Lng = Double.parseDouble(incident1.getEndPositionLongitude());</b>
+<b class="fc"><i>20</i>&nbsp;        this.start2Lat = Double.parseDouble(incident2.getStartPositionLatitude());</b>
+<b class="fc"><i>21</i>&nbsp;        this.start2Lng = Double.parseDouble(incident2.getStartPositionLongitude());</b>
+<b class="fc"><i>22</i>&nbsp;        this.end2Lat = Double.parseDouble(incident2.getEndPositionLatitude());</b>
+<b class="fc"><i>23</i>&nbsp;        this.end2Lng = Double.parseDouble(incident2.getEndPositionLongitude());</b>
+<b class="fc"><i>24</i>&nbsp;    }</b>
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;    public abstract boolean isDropped();
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    public abstract int getConfidence();
+<i>29</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-01-14 10:13</div>
+</div>
+</body>
+</html>
