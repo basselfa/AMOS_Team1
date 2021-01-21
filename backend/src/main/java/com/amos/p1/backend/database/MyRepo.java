@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 
-@Component
+
 public class MyRepo {
 
     private static final MyRepo instance = new MyRepo();
@@ -164,7 +164,11 @@ public class MyRepo {
         getEntityManager().persist(request);
         getEntityManager().getTransaction().commit();
         if(incidents==null)return ;
-        for (Incident incident:incidents ) { incident.setRequestId(request.getId());}
+        for (Incident incident:incidents ) { incident.setRequestId(request.getId());
+          //  incident.setEntryTime(request.getRequestTime());
+      //      incident.setCity(request.getCityName());
+        }
+
 
         insertIncident(incidents);
         request.setIncidentsSavedInDb(true);

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.test.context.TestPropertySource;
 
 import java.util.Date;
 import java.util.List;
@@ -15,7 +16,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-
+@TestPropertySource(properties = "app.scheduling.enable=false")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ResourceWithDummyDataTest {
 
@@ -61,14 +62,14 @@ public class ResourceWithDummyDataTest {
         .when()
             .get(base + "/incidents")
         .then()
-            .body("incidents.list.size()", greaterThan(0));
+            .body("size()", greaterThan(0));
     }
 
     @Test
     void testComparisonListAmount(){
         List<EvaluationCandidate> evaluationCandidateList = given()
             .param("city", "berlin")
-            .param("timestamp", "2021-01-10T16:08:43.780+00:00")
+            .param("timestamp", "2021-01-10 00:00")
         .when()
             .get(base + "/comparison")
         .then()
@@ -78,22 +79,6 @@ public class ResourceWithDummyDataTest {
             .getList(".", EvaluationCandidate.class);
 
         assertThat(evaluationCandidateList.size(), equalTo(2));
-    }
-
-    @Test
-    void testComparisonNotExisting(){
-        List<EvaluationCandidate> evaluationCandidateList = given()
-            .param("city", "shanghai")
-            .param("timestamp", "2021-01-09T16:08:43.780+00:00")
-        .when()
-            .get(base + "/comparison")
-        .then()
-            .extract()
-            .body()
-            .jsonPath()
-            .getList(".", EvaluationCandidate.class);
-
-        assertThat(evaluationCandidateList.size(), equalTo(0));
     }
 
     @Test

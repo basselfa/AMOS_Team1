@@ -20,11 +20,11 @@ import java.util.Objects;
 )
 @NamedQuery(
         name = "getFromTomTom",
-        query = "SELECT i FROM Incident i WHERE i.provider like 'tomtom' AND i.requestId = :requestId "
+        query = "SELECT i FROM Incident i WHERE i.provider like '1' AND i.requestId = :requestId "
 )
 @NamedQuery(
         name = "getFromHere",
-        query = "SELECT i FROM Incident i WHERE i.provider like 'here' AND i.requestId = :requestId "
+        query = "SELECT i FROM Incident i WHERE i.provider like '0' AND i.requestId = :requestId "
 )
 @NamedQuery(
         name = "getFromCity",
@@ -42,10 +42,7 @@ import java.util.Objects;
         name = "getFromCityAndTimeStamp",
         query = "SELECT i FROM Incident i WHERE i.city = :city AND i.entryTime >= :entryTime"
 )
-@NamedQuery(
-        name = "getTimestampsFromCity",
-        query = "SELECT DISTINCT i.entryTime FROM Incident i WHERE i.city = :city"
-)
+
 @NamedQuery(
         name = "getFromRequestId",
         query = "SELECT i FROM Incident i WHERE i.requestId = :requestId"
@@ -370,17 +367,18 @@ public class Incident {
                 '}';
     }
 
-    @Override
+
+        @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Incident incident = (Incident) o;
-        return Double.compare(incident.lengthInMeter, lengthInMeter) == 0 && verified == incident.verified && Objects.equals(id, incident.id) && Objects.equals(trafficId, incident.trafficId) && Objects.equals(type, incident.type) && Objects.equals(size, incident.size) && Objects.equals(description, incident.description) && Objects.equals(city, incident.city) && Objects.equals(country, incident.country) && Objects.equals(startPositionLatitude, incident.startPositionLatitude) && Objects.equals(startPositionLongitude, incident.startPositionLongitude) && Objects.equals(startPositionStreet, incident.startPositionStreet) && Objects.equals(endPositionLatitude, incident.endPositionLatitude) && Objects.equals(endPositionLongitude, incident.endPositionLongitude) && Objects.equals(endPositionStreet, incident.endPositionStreet) && Objects.equals(provider, incident.provider) && Objects.equals(entryTime, incident.entryTime) && Objects.equals(endTime, incident.endTime) && Objects.equals(requestId, incident.requestId) && Objects.equals(edges, incident.edges);
+        return Double.compare(incident.lengthInMeter, lengthInMeter) == 0 && verified == incident.verified && Objects.equals(trafficId, incident.trafficId) && Objects.equals(type, incident.type) && Objects.equals(size, incident.size) && Objects.equals(description, incident.description) && Objects.equals(city, incident.city) && Objects.equals(country, incident.country) && Objects.equals(startPositionLatitude, incident.startPositionLatitude) && Objects.equals(startPositionLongitude, incident.startPositionLongitude) && Objects.equals(startPositionStreet, incident.startPositionStreet) && Objects.equals(endPositionLatitude, incident.endPositionLatitude) && Objects.equals(endPositionLongitude, incident.endPositionLongitude) && Objects.equals(endPositionStreet, incident.endPositionStreet) && Objects.equals(provider, incident.provider) && Objects.equals(entryTime, incident.entryTime) && Objects.equals(endTime, incident.endTime) && Objects.equals(edges, incident.edges);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, trafficId, type, size, description, city, country, lengthInMeter, startPositionLatitude, startPositionLongitude, startPositionStreet, endPositionLatitude, endPositionLongitude, endPositionStreet, verified, provider, entryTime, endTime, requestId, edges);
+        return Objects.hash(trafficId, type, size, description, city, country, lengthInMeter, startPositionLatitude, startPositionLongitude, startPositionStreet, endPositionLatitude, endPositionLongitude, endPositionStreet, verified, provider, entryTime, endTime, edges);
     }
 
     public enum IncidentTypes {    //do not change order!

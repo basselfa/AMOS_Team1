@@ -81,9 +81,6 @@ public class ResourceWithDummyData {
                                                                    @RequestParam("timestamp") String timestamp) {
         List<EvaluationCandidate> listEvalCans = new ArrayList<>();
 
-        if (city != "berlin" || timestamp != "2021-01-10T16:08:43.780+00:00")
-            return ResponseEntity.ok(listEvalCans);
-
         Incident incidentTomTom = new Incident("222","baustelle","major",
                 "Traffic jam in Bergmannstraße",
                 "Berlin", "Germany",

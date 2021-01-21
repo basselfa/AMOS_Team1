@@ -20,6 +20,10 @@ import java.util.stream.Stream;
         name="geRequestFromCityNameAndTime",
         query="SELECT r FROM Request r WHERE r.cityName = :cityName AND r.requestTime = :requestTime"
 )
+@NamedQuery(
+        name = "getTimestampsFromCity",
+        query = "SELECT DISTINCT i.requestTime FROM Request i WHERE i.cityName = :city"
+)
 
 @Entity
 public class Request {

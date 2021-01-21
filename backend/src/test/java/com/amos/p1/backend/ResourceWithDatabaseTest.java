@@ -198,7 +198,7 @@ public class ResourceWithDatabaseTest {
                     .jsonPath()
                     .getList(".", EvaluationCandidate.class);
 
-        assertThat(evaluationCandidates, hasSize(9));
+        assertThat(evaluationCandidates, hasSize(8));
 
         assertThat(evaluationCandidates.get(0).getHereIncident(), is(notNullValue()));
         assertThat(evaluationCandidates.get(0).getTomTomIncident(), is(notNullValue()));

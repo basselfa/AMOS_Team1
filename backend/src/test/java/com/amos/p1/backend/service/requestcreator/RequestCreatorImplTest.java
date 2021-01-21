@@ -16,7 +16,7 @@ class RequestCreatorImplTest {
 
     @Test
     void testNormalDataRequestAndIncidentSize(){
-        fail();
+        fail("Fail because we dont want to overuse the free tier of provider APIs");
         LocalDateTime now = LocalDateTime.now();
 
         RequestCreatorImpl requestCreator = new RequestCreatorImpl();

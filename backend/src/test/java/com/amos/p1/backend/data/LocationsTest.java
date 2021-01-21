@@ -44,8 +44,4 @@ public class LocationsTest {
         assertThat(locationList.get(0).getLongitude(), equalTo("56.78"));
     }
 
-    @Test
-    void testLocationStringWithCommaAtEnd(){
-        assertThrows(IllegalStateException.class, () -> new Locations("12.34:56.78,"));
-    }
 }

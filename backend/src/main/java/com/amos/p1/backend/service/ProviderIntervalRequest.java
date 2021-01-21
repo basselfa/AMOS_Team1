@@ -34,9 +34,12 @@ public class ProviderIntervalRequest {
     public void providerCronJob() {
 
         LocalDateTime now = LocalDateTime.now();
-        System.out.println("The time is now " + now);
+        LocalDateTime nowNoSeconds = LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), now.getHour(), now.getMinute());
+
+        System.out.println("The time is now " + nowNoSeconds);
 
         RequestCreator requestCreator = requestCreatorConfig.getRequestCreator();
+        requestCreator.setTimeStamp(nowNoSeconds);
         List<Request> requests = requestCreator.buildRequests();
 
         for (Request request : requests) {
