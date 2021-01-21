@@ -14,6 +14,10 @@ import javax.persistence.Persistence;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -53,7 +57,10 @@ public class MyRepo {
     public static void setUseTestDatabase(boolean useTestDatabase) { instance.useTestDatabase = useTestDatabase; }
 
     public  void intialiseTestDB() throws SQLException, FileNotFoundException {
-        final  String URl = "jdbc:mysql://localhost:3306/testdb3?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin";
+
+        String hostAddress = getHostAdress();
+
+        final  String URl = "jdbc:mysql://" + hostAddress + ":3306/testdb3?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin";
         final  String userpass ="&createDatabaseIfNotExist=true";
         final  String id = "root";
         final  String  password = "root";
@@ -77,7 +84,20 @@ public class MyRepo {
         scriptRunner.runScript(new BufferedReader(fileReader));
 
 
-    };
+    }
+
+    private String getHostAdress() {
+        try(final DatagramSocket socket = new DatagramSocket()){
+            socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+            String hostAddress = socket.getLocalAddress().getHostAddress();
+            System.out.println(hostAddress);
+            return hostAddress;
+        } catch (SocketException | UnknownHostException e) {
+            throw new IllegalStateException("e");
+        }
+    }
+
+    ;
     public static EntityManager getEntityManager(){
         if (instance.useTestDatabase == true) return instance.emTest;
         return instance.em;
