@@ -100,11 +100,11 @@ public class AggregatorFromDatabaseTest {
                                     assertThat(type, equalTo(incident.getType()))     // only incidnets with correct type
                     );
 
-                    sourceIncidentList2.forEach(
-                            incident -> {
-                                assertThat(resultIncidentList2, contains(incident));     // no duplicates or corrupted data -> all fine!
-                            }
-                    );
+
+                    for (int i = 0; i < resultIncidentList2.size(); i++) {
+                        assertThat(resultIncidentList2.get(i), equalTo(sourceIncidentList2.get(i)));        // test darf fehlschlagen, wenn reihenfoleg vertauscht sit
+                    }
+
                 }
         );
 
@@ -222,7 +222,6 @@ public class AggregatorFromDatabaseTest {
 
     private void deepCompareIncidentLists(List<Incident> sourceList, List<Incident> resultList) {
         assertThat(resultList, hasSize(equalTo(sourceList.size())));
-
         sourceList.forEach(
                 sourceIncident -> { //für jeden surce Incident ...
                     Optional<Incident> optResultIncident = resultList.stream().filter(i -> i.getId() == sourceIncident.getId()).findAny();

@@ -373,8 +373,25 @@ public class Incident {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Incident incident = (Incident) o;
-        return Double.compare(incident.lengthInMeter, lengthInMeter) == 0 && verified == incident.verified && Objects.equals(trafficId, incident.trafficId) && Objects.equals(type, incident.type) && Objects.equals(size, incident.size) && Objects.equals(description, incident.description) && Objects.equals(city, incident.city) && Objects.equals(country, incident.country) && Objects.equals(startPositionLatitude, incident.startPositionLatitude) && Objects.equals(startPositionLongitude, incident.startPositionLongitude) && Objects.equals(startPositionStreet, incident.startPositionStreet) && Objects.equals(endPositionLatitude, incident.endPositionLatitude) && Objects.equals(endPositionLongitude, incident.endPositionLongitude) && Objects.equals(endPositionStreet, incident.endPositionStreet) && Objects.equals(provider, incident.provider) && Objects.equals(entryTime, incident.entryTime) && Objects.equals(endTime, incident.endTime) && Objects.equals(edges, incident.edges);
-    }
+            return Double.compare(incident.lengthInMeter, lengthInMeter) == 0 &&
+                    verified == incident.verified &&
+                    Objects.equals(trafficId, incident.trafficId) &&
+                    Objects.equals(type, incident.type) &&
+                    Objects.equals(size, incident.size) &&
+                    Objects.equals(description, incident.description) &&
+                    Objects.equals(city, incident.city) &&
+                    Objects.equals(country, incident.country) &&
+                    Objects.equals(startPositionLatitude, incident.startPositionLatitude) &&
+                    Objects.equals(startPositionLongitude, incident.startPositionLongitude) &&
+                    Objects.equals(startPositionStreet, incident.startPositionStreet) &&
+                    Objects.equals(endPositionLatitude, incident.endPositionLatitude) &&
+                    Objects.equals(endPositionLongitude, incident.endPositionLongitude) &&
+                    Objects.equals(endPositionStreet, incident.endPositionStreet) &&
+                    Objects.equals(provider, incident.provider) &&
+                    Objects.equals(entryTime, incident.entryTime) &&
+                    Objects.equals(endTime, incident.endTime) &&
+                    Objects.equals(edges, incident.edges);
+        }
 
     @Override
     public int hashCode() {
