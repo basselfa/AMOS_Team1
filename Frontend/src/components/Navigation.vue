@@ -53,6 +53,11 @@ export default {
         link: "/historization",
       },
       {
+        text: "Configuration",
+        icon: "mdi-cog",
+        link: "/configuration",
+      },
+      {
         text: "About",
         icon: "mdi-information",
         link: "/about",
