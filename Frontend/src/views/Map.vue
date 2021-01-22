@@ -118,7 +118,7 @@ export default {
                     latlngs: lineArray,
                     color: 'blue',
                     criticality: cityData[i].size,
-                    description: cityData[i].description !== 'undefined' ? cityData[i].description.split('&')[1] : 'Description not available',
+                    description: cityData[i].description ? ( cityData[i].description.includes("&") ? cityData[i].description.split('&')[1] : cityData[i].description) : 'Description not available',
                     length: cityData[i].lengthInMeter,
                     type: cityData[i].type,
                 })
