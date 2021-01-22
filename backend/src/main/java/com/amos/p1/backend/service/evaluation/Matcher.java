@@ -12,7 +12,12 @@ public abstract class Matcher {
     double end2Lat;
     double end2Lng;
 
-    public Matcher(Incident incident1, Incident incident2){
+    public Matcher() {
+    }
+
+
+
+    public Matcher(Incident incident1, Incident incident2) {
         this.start1Lat = Double.parseDouble(incident1.getStartPositionLatitude());
         this.start1Lng = Double.parseDouble(incident1.getStartPositionLongitude());
         this.end1Lat = Double.parseDouble(incident1.getEndPositionLatitude());
