@@ -16,6 +16,10 @@ import javax.persistence.Persistence;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -49,6 +53,20 @@ public class MyRepo {
         }
 
 
+    }
+
+    /**
+     * Return the ip adress of the host. Example: 192.168.0.183
+     */
+    private String getHostAdress() {
+        try(final DatagramSocket socket = new DatagramSocket()){
+            socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+            String hostAddress = socket.getLocalAddress().getHostAddress();
+            System.out.println(hostAddress);
+            return hostAddress;
+        } catch (SocketException | UnknownHostException e) {
+            throw new IllegalStateException(e);
+        }
     }
 
     public static boolean isUseTestDatabase() {  return instance.useTestDatabase;}
