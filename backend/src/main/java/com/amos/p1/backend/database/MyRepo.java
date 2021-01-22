@@ -1,9 +1,11 @@
 package com.amos.p1.backend.database;
 
+import com.amos.p1.backend.data.CityInformation;
 import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.data.Request;
 import org.apache.ibatis.jdbc.ScriptRunner;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -254,6 +256,18 @@ public class MyRepo {
             evaluationCandidate.setEvaluationCandidateSavedInDb(true);}
 
         return evaluationCandidates;
+    }
+
+    public void addCityInformation(CityInformation cityInformation){
+        throw new IllegalStateException("not yet implemented");
+    }
+
+    public List<CityInformation> getAllCityInformation(){
+        throw new IllegalStateException("not yet implemented");
+    }
+
+    public void deleteCityInformation(long id){
+        throw new IllegalStateException("not yet implemented");
     }
 
 }
