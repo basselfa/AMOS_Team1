@@ -276,15 +276,15 @@ public class MyRepo {
         return evaluationCandidates;
     }
 
-    public void addCityInformation(CityInformation cityInformation){
+    public static void addCityInformation(CityInformation cityInformation){
         throw new IllegalStateException("not yet implemented");
     }
 
-    public List<CityInformation> getAllCityInformation(){
+    public static List<CityInformation> getAllCityInformation(){
         throw new IllegalStateException("not yet implemented");
     }
 
-    public void deleteCityInformation(long id){
+    public static void deleteCityInformation(long id){
         throw new IllegalStateException("not yet implemented");
     }
 
