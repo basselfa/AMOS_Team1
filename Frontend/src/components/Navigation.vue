@@ -35,7 +35,7 @@ export default {
   name: "Navigation",
   data: () => ({
     drawer: null,
-    selectedItem: 1,
+    selectedItem: 0,
     items: [
       {
         text: "Home",
