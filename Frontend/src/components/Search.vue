@@ -101,7 +101,7 @@ export default {
                     this.$emit('change', {
                         city: this.city,
                         timestamp: this.timestamp,
-                        type: this.type.map(x => x.toUpperCase().replace(/ /g,"_")),
+                        type: this.type.map(x => x.toUpperCase().replace(/ /g,"")),
                     })
                 })
                 .catch(error => {
