@@ -34,10 +34,9 @@ export default {
         getSearchValue: function(value) {
             this.executeQuery(value)
         },
-        executeQuery: function(value) {
-            this.polylines = []
-            if (value.city !== null && value.timestamp !== null) {
-                let request_url =
+
+        async getIncidents(value) {
+            let request_url =
                     'http://' +
                     window.location.hostname +
                     ':8082/withDatabase/incidents?city=' +
@@ -47,18 +46,49 @@ export default {
                 if (value.type.length !== 0) {
                     request_url = request_url + '&types=' + value.type.join()
                 }
-                console.log(request_url)
-                axios
+                await axios
                     .get(request_url, {
                         headers: { 'Access-Control-Allow-Origin': '*' },
                     })
                     .then(response => {
-                        this.passCoordinates(response.data)
+                        this.incidentsData = response.data
+                        
                     })
                     .catch(error => {
                         this.errorMessage = error.message
                         console.error('There was an error!', error)
                     })
+        },
+        async getComparison(value) {
+            let request_url =
+                    'http://' +
+                    window.location.hostname +
+                    ':8082/withDatabase/comparison?city=' +
+                    value.city +
+                    '&timestamp=' +
+                    value.timestamp
+
+                    await axios
+                    .get(request_url, {
+                        headers: { 'Access-Control-Allow-Origin': '*' },
+                    })
+                    .then(response => {
+                        this.comparisonData = response.data
+                        
+                    })
+                    .catch(error => {
+                        this.errorMessage = error.message
+                        console.error('There was an error!', error)
+                    })
+        },
+        executeQuery: async function(value) {
+            this.polylines = []
+            if (value.city !== null && value.timestamp !== null) {
+                await this.getIncidents(value)
+                await this.getComparison(value)
+                //console.log(this.incidentsData.length)
+                //console.log(this.comparisonData.length)
+                this.passCoordinates(this.incidentsData) 
             }
         },
         /**
