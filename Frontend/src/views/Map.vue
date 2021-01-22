@@ -31,64 +31,60 @@ export default {
     },
 
     methods: {
-        getSearchValue: function(value) {
-            this.executeQuery(value)
+        getSearchValue: function(searchValue) {
+            this.executeQuery(searchValue)
         },
 
         async getIncidents(value) {
             let request_url =
-                    'http://' +
-                    window.location.hostname +
-                    ':8082/withDatabase/incidents?city=' +
-                    value.city +
-                    '&timestamp=' +
-                    value.timestamp
-                if (value.type.length !== 0) {
-                    request_url = request_url + '&types=' + value.type.join()
-                }
-                await axios
-                    .get(request_url, {
-                        headers: { 'Access-Control-Allow-Origin': '*' },
-                    })
-                    .then(response => {
-                        this.incidentsData = response.data
-                        
-                    })
-                    .catch(error => {
-                        this.errorMessage = error.message
-                        console.error('There was an error!', error)
-                    })
+                'http://' +
+                window.location.hostname +
+                ':8082/withDatabase/incidents?city=' +
+                value.city +
+                '&timestamp=' +
+                value.timestamp
+            if (value.type.length !== 0) {
+                request_url = request_url + '&types=' + value.type.join()
+            }
+            await axios
+                .get(request_url, {
+                    headers: { 'Access-Control-Allow-Origin': '*' },
+                })
+                .then(response => {
+                    this.incidentsData = response.data
+                })
+                .catch(error => {
+                    this.errorMessage = error.message
+                    console.error('There was an error!', error)
+                })
         },
         async getComparison(value) {
             let request_url =
-                    'http://' +
-                    window.location.hostname +
-                    ':8082/withDatabase/comparison?city=' +
-                    value.city +
-                    '&timestamp=' +
-                    value.timestamp
+                'http://' +
+                window.location.hostname +
+                ':8082/withDatabase/comparison?city=' +
+                value.city +
+                '&timestamp=' +
+                value.timestamp
 
-                    await axios
-                    .get(request_url, {
-                        headers: { 'Access-Control-Allow-Origin': '*' },
-                    })
-                    .then(response => {
-                        this.comparisonData = response.data
-                        
-                    })
-                    .catch(error => {
-                        this.errorMessage = error.message
-                        console.error('There was an error!', error)
-                    })
+            await axios
+                .get(request_url, {
+                    headers: { 'Access-Control-Allow-Origin': '*' },
+                })
+                .then(response => {
+                    this.comparisonData = response.data
+                })
+                .catch(error => {
+                    this.errorMessage = error.message
+                    console.error('There was an error!', error)
+                })
         },
         executeQuery: async function(value) {
             this.polylines = []
             if (value.city !== null && value.timestamp !== null) {
                 await this.getIncidents(value)
                 await this.getComparison(value)
-                //console.log(this.incidentsData.length)
-                //console.log(this.comparisonData.length)
-                this.passCoordinates(this.incidentsData) 
+                this.passCoordinates(this.incidentsData)
             }
         },
         /**
@@ -100,9 +96,9 @@ export default {
          * @param latitudinal Latitudinal coordinate of a line edge
          * @param longitudinal Longitidinal coordinate of a line edge
          */
-        passCoordinates: function(cityData) {
-            for (var i = 0; i < cityData.length; i++) {
-                var coordinatesArray = cityData[i].edges.split(',')
+        passCoordinates: function(incidentsData) {
+            for (var i = 0; i < incidentsData.length; i++) {
+                var coordinatesArray = incidentsData[i].edges.split(',')
                 var lineArray = []
                 for (var j = 0; j < coordinatesArray.length; j++) {
                     let latitudinal = coordinatesArray[j].split(':')[0]
@@ -114,14 +110,30 @@ export default {
                         lineArray.push([latitudinal, longitudinal])
                     }
                 }
+                var color
+                // tomtom = yellow
+                if (incidentsData[i].provider == "0") {color = "yellow"}
+                // here = blue
+                else if (incidentsData[i].provider == "1") {color = "blue"}
+                
+                // check if overlapping by checking if the incident is contained in comparisonData
+                if ( this.comparisonData.some(code => code.tomTomIncidentId === incidentsData[i].id) || this.comparisonData.some(code => code.hereIncidentId === incidentsData[i].id) ) {
+                    color = "red"
+                    //if ( this.polylines.some(inc => JSON.stringify(inc.latlngs) === JSON.stringify(lineArray) ) === true ) {console.log("hi")}
+}
                 this.polylines.push({
                     latlngs: lineArray,
-                    color: 'blue',
-                    criticality: cityData[i].size,
-                    description: cityData[i].description ? ( cityData[i].description.includes("&") ? cityData[i].description.split('&')[1] : cityData[i].description) : 'Description not available',
-                    length: cityData[i].lengthInMeter,
-                    type: cityData[i].type,
+                    color: color,
+                    criticality: incidentsData[i].size,
+                    description: incidentsData[i].description
+                        ? incidentsData[i].description.includes('&')
+                            ? incidentsData[i].description.split('&')[1]
+                            : incidentsData[i].description
+                        : 'Description not available',
+                    length: incidentsData[i].lengthInMeter,
+                    type: incidentsData[i].type,
                 })
+                
             }
         },
     },
