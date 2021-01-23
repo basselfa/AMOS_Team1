@@ -110,17 +110,33 @@ export default {
                         lineArray.push([latitudinal, longitudinal])
                     }
                 }
-                var color
-                // tomtom = yellow
-                if (incidentsData[i].provider == "0") {color = "yellow"}
-                // here = blue
-                else if (incidentsData[i].provider == "1") {color = "blue"}
-                
+
+                let color
                 // check if overlapping by checking if the incident is contained in comparisonData
-                if ( this.comparisonData.some(code => code.tomTomIncidentId === incidentsData[i].id) || this.comparisonData.some(code => code.hereIncidentId === incidentsData[i].id) ) {
-                    color = "red"
-                    //if ( this.polylines.some(inc => JSON.stringify(inc.latlngs) === JSON.stringify(lineArray) ) === true ) {console.log("hi")}
-}
+                let overlapping =
+                    this.comparisonData.some(
+                        code => code.tomTomIncidentId === incidentsData[i].id
+                    ) ||
+                    this.comparisonData.some(
+                        code => code.hereIncidentId === incidentsData[i].id
+                    )
+                // get incident provider
+                let here = incidentsData[i].provider == '0'
+                let tomtom = incidentsData[i].provider == '1'
+
+                // tomtom = yellow
+                if (tomtom) {
+                    color = 'yellow'
+                }
+                // here = blue
+                else if (here) {
+                    color = 'blue'
+                }
+                // same = red
+                if (overlapping) {
+                    color = 'red'
+                }
+
                 this.polylines.push({
                     latlngs: lineArray,
                     color: color,
@@ -133,7 +149,6 @@ export default {
                     length: incidentsData[i].lengthInMeter,
                     type: incidentsData[i].type,
                 })
-                
             }
         },
     },
