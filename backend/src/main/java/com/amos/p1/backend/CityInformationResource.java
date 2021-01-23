@@ -1,23 +1,39 @@
 package com.amos.p1.backend;
 
 import com.amos.p1.backend.data.CityInformation;
+import com.amos.p1.backend.database.MyRepo;
+import openj9.internal.tools.attach.target.Response;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 public class CityInformationResource {
 
-    public void addCityInformation(CityInformation cityInformation){
-        throw new IllegalStateException("not yet implemented");
+    @PostMapping("/cityinformation")
+    public ResponseEntity<?> addCityInformation(@RequestBody CityInformation cityInformation){
+        MyRepo.addCityInformation(cityInformation);
+        return ResponseEntity.ok(null);
     }
 
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/cityinformation",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ResponseBody
     public ResponseEntity<List<CityInformation>> getAllCityInformation(){
-        throw new IllegalStateException("not yet implemented");
-
+        List<CityInformation> allCityInformation = MyRepo.getAllCityInformation();
+        return ResponseEntity.ok(allCityInformation);
     }
 
-    public void deleteCityInformation(long id){
-        throw new IllegalStateException("not yet implemented");
+    @RequestMapping(
+            method = RequestMethod.DELETE,
+            value = "/cityinformation"
+    )
+    public ResponseEntity<?> deleteCityInformation(@RequestParam("id") long id){
+        MyRepo.deleteCityInformation(id);
+        return ResponseEntity.ok(null);
     }
-
 }
