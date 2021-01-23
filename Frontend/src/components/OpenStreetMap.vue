@@ -36,9 +36,9 @@ export default {
   },
   data() {
     return {
-      zoom: 15,
-      center: latLng(52.509041, 13.330550),
-      url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+      zoom: 13,
+      center: latLng(52.515000, 13.3800575),
+      url: "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",
       attribution:'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       showParagraph: false,
       mapOptions: {
