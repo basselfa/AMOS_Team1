@@ -3,13 +3,13 @@
     <v-card class="mx-auto config-card" max-width="800">
         <v-card-text>
             <div>This selection will appear for your map and historization data. <br> Select the cities to be investigated <br> by amos traffic tracker.</div>
-            <div v-for="(city,index) in cities" :key="index" >
+            <div v-for="(city,index) in cities" :key="index">
 
                 <v-chip x-large class="form-chip center">
 
                     <v-row class="form-row">
                         <v-col cols="2" md="3">
-                            <v-text-field  label="City" required :value="city.name">
+                            <v-text-field label="City" required :value="city.name">
                             </v-text-field>
                         </v-col>
                         <v-col cols="2" md="3">
@@ -26,7 +26,7 @@
             </div>
         </v-card-text>
         <v-card-actions class="center">
-            <v-btn text color="blue accent-4" background="grey">
+            <v-btn @click="requestCityData" text color="blue accent-4" background="grey">
                 Submit slection
             </v-btn>
         </v-card-actions>
@@ -70,18 +70,35 @@ export default {
         }, ],
         rules: [
             value => !!value || 'Required.',
-            value => (value && 180 <= value >= -180 ) || 'Must be between -180 and 180 degrees.',
+            value => (value && 180 <= value >= -180) || 'Must be between -180 and 180 degrees.',
         ],
     }),
     mounted() {},
 
-    methods: {},
+    methods: {
+        requestCityData: function () {
+          console.log("request triggered");
+            axios
+                .get('http://' + window.location.hostname + ':8082/withDatabase/cityinformation', {
+                    headers: {
+                        'Access-Control-Allow-Origin': '*'
+                    },
+                })
+                .then(this.cities = response)
+                .catch(error => {
+                    this.errorMessage = error.message
+                    console.error('There was an error!', error)
+                })
+                console.log(this.cities);
+        }
+    },
 }
 </script>
 
 <style>
 .config-card {
     margin-top: max(150px, 8%);
+    margin-left: max(150px, 8%);
     border-radius: 30px !important;
 }
 
