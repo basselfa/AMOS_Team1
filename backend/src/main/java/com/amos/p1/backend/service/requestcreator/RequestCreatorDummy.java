@@ -7,6 +7,7 @@ import com.amos.p1.backend.data.Request;
 import com.amos.p1.backend.normalization.HereNormalization;
 import com.amos.p1.backend.normalization.JsonToIncident;
 import com.amos.p1.backend.normalization.TomTomNormalization;
+import com.amos.p1.backend.service.cityboundingbox.CityBoundingBoxesService;
 import com.amos.p1.backend.service.evaluation.Evaluation;
 
 import java.time.LocalDateTime;
@@ -120,6 +121,12 @@ public abstract class RequestCreatorDummy implements RequestCreator {
     public void setTimeStamp(LocalDateTime timestamp) {
 
     }
+
+    @Override
+    public void setCityBoundingBoxes(CityBoundingBoxesService cityBoundingBoxesService){
+
+    }
+
 
     protected Request buildRequest(String city, String hereJsonPath, String tomtomJsonPath, LocalDateTime timestamp) {
         JsonToIncident normalizationHere = new HereNormalization();

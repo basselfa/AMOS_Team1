@@ -5,8 +5,7 @@ import com.amos.p1.backend.normalization.HereNormalization;
 import com.amos.p1.backend.normalization.JsonToIncident;
 import com.amos.p1.backend.normalization.TomTomNormalization;
 import com.amos.p1.backend.provider.*;
-import com.amos.p1.backend.service.CityBoundBoxesService;
-import com.amos.p1.backend.service.CityBoundingBoxesServiceImpl;
+import com.amos.p1.backend.service.cityboundingbox.CityBoundingBoxesService;
 import com.amos.p1.backend.service.evaluation.Evaluation;
 
 import java.time.LocalDateTime;
@@ -18,8 +17,7 @@ public class RequestCreatorImpl implements RequestCreator {
     private final ProviderRequest tomtomRequest = new TomTomRequest();
     private final ProviderRequest hereRequest = new HereRequest();
     
-    private final CityBoundBoxesService cityBoundingBoxesService = new CityBoundingBoxesServiceImpl();
-
+    private CityBoundingBoxesService cityBoundingBoxesService;
     private LocalDateTime timestamp;
 
     public List<Request> buildRequests(){
@@ -64,10 +62,9 @@ public class RequestCreatorImpl implements RequestCreator {
         this.timestamp = timestamp;
     }
 
-    public List<Incident> getRecentTomTomIncidentsFromCity(String city){
-        CityBoundingBox boundBoxFromCity = cityBoundingBoxesService.getBoundBoxFromCity(city);
-
-        return getTomTomIncidents(boundBoxFromCity);
+    @Override
+    public void setCityBoundingBoxes(CityBoundingBoxesService cityBoundingBoxesService) {
+        this.cityBoundingBoxesService = cityBoundingBoxesService;
     }
 
     private List<Incident> getTomTomIncidents(CityBoundingBox cityBoundingBox){

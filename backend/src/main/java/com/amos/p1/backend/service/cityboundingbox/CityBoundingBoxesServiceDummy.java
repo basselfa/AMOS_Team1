@@ -1,4 +1,4 @@
-package com.amos.p1.backend.service;
+package com.amos.p1.backend.service.cityboundingbox;
 
 import com.amos.p1.backend.data.CityBoundingBox;
 import com.amos.p1.backend.data.Location;
@@ -6,11 +6,11 @@ import com.amos.p1.backend.data.Location;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CityBoundingBoxesServiceImpl implements CityBoundBoxesService{
+public class CityBoundingBoxesServiceDummy implements CityBoundingBoxesService {
 
     private final List<CityBoundingBox> cityBoundingBoxes = new ArrayList<>();
 
-    public CityBoundingBoxesServiceImpl() {
+    public CityBoundingBoxesServiceDummy() {
         initBoundingBoxes();
     }
 

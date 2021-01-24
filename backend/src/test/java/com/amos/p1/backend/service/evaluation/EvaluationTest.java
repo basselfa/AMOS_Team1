@@ -43,7 +43,7 @@ public class EvaluationTest {
 
         // containing Matchers
         evaluationCandidateList.forEach(e -> {
-            assertThat( e.getMatcherList().size(), equalTo(2));
+            assertThat( e.getMatcherList().size(), equalTo(3));
         });
     }
 
@@ -68,6 +68,7 @@ public class EvaluationTest {
         incident.setEndPositionLatitude("52.534576");
         incident.setEndPositionLongitude("13.300873");
         incident.setProvider("1");
+        incident.setType(Incident.IncidentTypes.ACCIDENT.toString());
         incidents.add(incident);
 
         incident = new Incident();
@@ -76,6 +77,7 @@ public class EvaluationTest {
         incident.setEndPositionLatitude("52.534576");
         incident.setEndPositionLongitude("13.300873");
         incident.setProvider("0");
+        incident.setType(Incident.IncidentTypes.ACCIDENT.toString());
         incidents.add(incident);
 
         req.setIncidents(incidents);

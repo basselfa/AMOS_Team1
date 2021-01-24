@@ -1,9 +1,11 @@
 package com.amos.p1.backend.database;
 
+import com.amos.p1.backend.data.CityInformation;
 import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.data.Request;
 import org.apache.ibatis.jdbc.ScriptRunner;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +16,10 @@ import javax.persistence.Persistence;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -47,6 +53,20 @@ public class MyRepo {
         }
 
 
+    }
+
+    /**
+     * Return the ip adress of the host. Example: 192.168.0.183
+     */
+    private String getHostAdress() {
+        try(final DatagramSocket socket = new DatagramSocket()){
+            socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+            String hostAddress = socket.getLocalAddress().getHostAddress();
+            System.out.println(hostAddress);
+            return hostAddress;
+        } catch (SocketException | UnknownHostException e) {
+            throw new IllegalStateException(e);
+        }
     }
 
     public static boolean isUseTestDatabase() {  return instance.useTestDatabase;}
@@ -254,6 +274,18 @@ public class MyRepo {
             evaluationCandidate.setEvaluationCandidateSavedInDb(true);}
 
         return evaluationCandidates;
+    }
+
+    public static void addCityInformation(CityInformation cityInformation){
+        throw new IllegalStateException("not yet implemented");
+    }
+
+    public static List<CityInformation> getAllCityInformation(){
+        throw new IllegalStateException("not yet implemented");
+    }
+
+    public static void deleteCityInformation(long id){
+        throw new IllegalStateException("not yet implemented");
     }
 
 }
