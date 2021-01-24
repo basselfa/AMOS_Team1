@@ -11,6 +11,12 @@
         <l-tooltip>Center</l-tooltip>
       </l-marker>
     </l-map>
+    <div class="legend">
+      <p>
+        Legend of data provider colors:
+      </p>
+    <v-chip color='rgb(255, 233, 66)'>Yellow - TomTom</v-chip><v-chip color = 'rgb( 27, 143, 209)'>Blue - Here</v-chip><v-chip color = 'rgb(255, 85, 18)'> Red - Both</v-chip>
+    </div>
   </div>
 </template>
 
@@ -63,5 +69,12 @@ export default {
   -webkit-box-shadow: 4px 12px 31px -10px #cecece !important;
   box-shadow: 4px 12px 31px -10px #cecece !important;
   z-index: 0;
+}
+
+.legend{
+  position: fixed;
+  bottom:0;
+  margin-left: 320px;
+  float:left;
 }
 </style>
