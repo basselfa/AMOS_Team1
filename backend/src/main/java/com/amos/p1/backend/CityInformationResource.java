@@ -2,7 +2,6 @@ package com.amos.p1.backend;
 
 import com.amos.p1.backend.data.CityInformation;
 import com.amos.p1.backend.database.MyRepo;
-import openj9.internal.tools.attach.target.Response;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
