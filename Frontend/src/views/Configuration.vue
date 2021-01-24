@@ -1,21 +1,29 @@
 <template>
 <div>
-    <v-card class="mx-auto config-card" max-width="800">
+    <v-card class="mx-auto config-card" max-width="800" rounded>
         <v-card-text>
             <div>Select the cities to be investigated <br> by amos traffic tracker.</div>
-            <div v-for="city in cities" v-bind:key="city">
+            <div v-for="(city,index) in cities" :key="index" >
+
                 <v-chip x-large class="form-chip center">
+
                     <v-row class="form-row">
-                        <v-col cols="12" md="4">
-                            <v-text-field :rules="rules" :counter="10" label="City" required> {{city.name}}</v-text-field>
+
+                        <v-col cols="2" md="3">
+                            <v-text-field :rules="rules" :counter="10" label="City" required :value="city.name">
+                            </v-text-field>
                         </v-col>
 
-                        <v-col cols="12" md="4">
-                            <v-text-field :rules="rules" :counter="10" label="Center coordinates" required>{{city.center}}</v-text-field>
+                        <v-col cols="2" md="3">
+                            <v-text-field :rules="rules"  label="Latitudinal value for center" required :value="city.centerLatitude"></v-text-field>
                         </v-col>
 
-                        <v-col cols="12" md="4">
-                            <v-text-field label="Radius" required>{{city.radius}}</v-text-field>
+                        <v-col cols="2" md="3">
+                            <v-text-field :rules="rules" label="Longitudinal value for center" required :value="city.centerLongitude"></v-text-field>
+                        </v-col>
+
+                        <v-col cols="2" md="3">
+                            <v-text-field label="Radius" required :value="city.radius"></v-text-field>
                         </v-col>
                     </v-row>
                 </v-chip>
@@ -40,23 +48,28 @@ export default {
     data: () => ({
         cities: [{
             name: "Berlin",
-            center: "51.55",
+            centerLatitude: "51.55",
+            centerLongitude: "51.55",
             radius: "50"
         }, {
             name: "Frankfurt",
-            center: "51.55",
+            centerLatitude: "51.55",
+            centerLongitude: "51.55",
             radius: "50"
         }, {
             name: "München",
-            center: "51.55",
+            centerLatitude: "51.55",
+            centerLongitude: "51.55",
             radius: "50"
         }, {
             name: "Hamburg",
-            center: "51.55",
+            centerLatitude: "51.55",
+            centerLongitude: "51.55",
             radius: "50"
         }, {
             name: "Köln",
-            center: "51.55",
+            centerLatitude: "51.55",
+            centerLongitude: "51.55",
             radius: "50"
         }, ],
         rules: [
@@ -72,17 +85,18 @@ export default {
 
 <style>
 .config-card {
-    margin-top: max(100px, 5%);
+    margin-top: max(150px, 8%);
+    border-radius: 30px !important;
 }
 
 .form-chip {
-    width: 700px;
+    width: 1200px;
     margin: 10px;
     background: rgb(243, 243, 243) !important;
 }
 
 .form-row {
-    width: 800px;
+    /* width: 800px; */
 }
 
 .center {
