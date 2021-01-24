@@ -25,8 +25,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 
 public class MyRepo {
@@ -39,8 +40,26 @@ public class MyRepo {
     private boolean useTestDatabase =true;
 
     private MyRepo() {
-        emf = Persistence.createEntityManagerFactory("MyRepo");
-        em = emf.createEntityManager();
+
+
+        try {
+
+
+            Map<String, String> persistenceMap = new HashMap<String, String>();
+
+            String elasticIp = getHostAdress();
+            persistenceMap.put("javax.persistence.jdbc.url", "jdbc:mysql://"+elasticIp+":3306/testdb3?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=Europe/Berlin");
+            persistenceMap.put("javax.persistence.jdbc.user", "root");
+            persistenceMap.put("javax.persistence.jdbc.password", "root");
+            persistenceMap.put("javax.persistence.jdbc.driver", "com.mysql.cj.jdbc.Driver");
+
+            emf = Persistence.createEntityManagerFactory("MyRepo", persistenceMap);
+            em = emf.createEntityManager();
+        } catch (Exception e) {
+
+            System.out.println("Couldn't start test database");
+        }
+
 
         try {
             intialiseTestDB();
