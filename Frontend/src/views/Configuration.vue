@@ -1,27 +1,23 @@
 <template>
 <div>
-    <v-card class="mx-auto config-card" max-width="800" rounded>
+    <v-card class="mx-auto config-card" max-width="800">
         <v-card-text>
-            <div>Select the cities to be investigated <br> by amos traffic tracker.</div>
+            <div>This selection will appear for your map and historization data. <br> Select the cities to be investigated <br> by amos traffic tracker.</div>
             <div v-for="(city,index) in cities" :key="index" >
 
                 <v-chip x-large class="form-chip center">
 
                     <v-row class="form-row">
-
                         <v-col cols="2" md="3">
-                            <v-text-field :rules="rules" :counter="10" label="City" required :value="city.name">
+                            <v-text-field  label="City" required :value="city.name">
                             </v-text-field>
                         </v-col>
-
                         <v-col cols="2" md="3">
-                            <v-text-field :rules="rules"  label="Latitudinal value for center" required :value="city.centerLatitude"></v-text-field>
+                            <v-text-field :rules="rules" label="Latitudinal value for center" required :value="city.centerLatitude"></v-text-field>
                         </v-col>
-
                         <v-col cols="2" md="3">
                             <v-text-field :rules="rules" label="Longitudinal value for center" required :value="city.centerLongitude"></v-text-field>
                         </v-col>
-
                         <v-col cols="2" md="3">
                             <v-text-field label="Radius" required :value="city.radius"></v-text-field>
                         </v-col>
@@ -30,7 +26,7 @@
             </div>
         </v-card-text>
         <v-card-actions class="center">
-            <v-btn text color="deep-blue accent-4">
+            <v-btn text color="blue accent-4" background="grey">
                 Submit slection
             </v-btn>
         </v-card-actions>
@@ -74,7 +70,7 @@ export default {
         }, ],
         rules: [
             value => !!value || 'Required.',
-            value => (value && value.length >= 3) || 'Min 3 characters',
+            value => (value && 180 <= value >= -180 ) || 'Must be between -180 and 180 degrees.',
         ],
     }),
     mounted() {},
@@ -91,7 +87,7 @@ export default {
 
 .form-chip {
     width: 1200px;
-    margin: 10px;
+    margin: 8px;
     background: rgb(243, 243, 243) !important;
 }
 
