@@ -1,8 +1,7 @@
 package com.amos.p1.backend;
 
 import com.amos.p1.backend.data.*;
-import com.amos.p1.backend.database.MyRepo;
-import com.amos.p1.backend.service.CityBoundingBoxesServiceImpl;
+import com.amos.p1.backend.service.cityboundingbox.CityBoundingBoxesServiceImpl;
 import com.amos.p1.backend.service.aggregator.Aggregator;
 import com.amos.p1.backend.service.aggregator.AggregatorFromDatabase;
 import org.springframework.http.MediaType;
