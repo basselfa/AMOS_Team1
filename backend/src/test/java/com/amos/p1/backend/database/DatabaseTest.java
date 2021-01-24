@@ -79,7 +79,7 @@ public class DatabaseTest {
         information.setId(234);
         information.setCentreLatitude("145.345346");
         information.setCentreLongitude("4.02344");
-        information.setSearchRadiusInMeter("234");
+        information.setSearchRadiusInMeter(234);
 
         MyRepo.addCityInformation(information);
 
@@ -96,7 +96,7 @@ public class DatabaseTest {
         information.setId(234);
         information.setCentreLatitude("145.345346");
         information.setCentreLongitude("4.02344");
-        information.setSearchRadiusInMeter("234");
+        information.setSearchRadiusInMeter(234);
 
         MyRepo.addCityInformation(information);
 

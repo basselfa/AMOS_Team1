@@ -8,7 +8,7 @@ public class CityInformation {
     private String cityName;
     private String centreLatitude;
     private String centreLongitude;
-    private String searchRadiusInMeter;
+    private int searchRadiusInMeter;
 
     public long getId() {
         return id;
@@ -42,11 +42,11 @@ public class CityInformation {
         this.centreLongitude = centreLongitude;
     }
 
-    public String getSearchRadiusInMeter() {
+    public int getSearchRadiusInMeter() {
         return searchRadiusInMeter;
     }
 
-    public void setSearchRadiusInMeter(String searchRadiusInMeter) {
+    public void setSearchRadiusInMeter(int searchRadiusInMeter) {
         this.searchRadiusInMeter = searchRadiusInMeter;
     }
 
