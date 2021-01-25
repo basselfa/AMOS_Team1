@@ -70,7 +70,7 @@ public class MyRepo {
     }
 
     public static void intialiseDB(String url) {
-      
+
         final String jdbcDriver = "com.mysql.cj.jdbc.Driver";
         try {
             Class.forName(jdbcDriver);
@@ -89,20 +89,7 @@ public class MyRepo {
             throw new IllegalStateException(e);
         }
 
-    }
-
-    private String getHostAdress() {
-        try(final DatagramSocket socket = new DatagramSocket()){
-            socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
-            String hostAddress = socket.getLocalAddress().getHostAddress();
-            System.out.println(hostAddress);
-            return hostAddress;
-        } catch (SocketException | UnknownHostException e) {
-            throw new IllegalStateException("e");
-        }
-    }
-
-    ;
+    };
     public static EntityManager getEntityManager(){
         return instance.em;
     }
