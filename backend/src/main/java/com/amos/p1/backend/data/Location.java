@@ -13,6 +13,11 @@ public class Location {
         this.longitude = longitude;
     }
 
+    public Location(double latitude, double longitude){
+        this.latitude = String.valueOf(latitude);
+        this.longitude = String.valueOf(longitude);
+    }
+
     public String getLatitude() {
         return latitude;
     }
@@ -29,4 +34,11 @@ public class Location {
         this.latitude = latitude;
     }
 
+    public double getLatitudeAsFloat(){
+        return Double.parseDouble(latitude);
+    }
+
+    public double getLongitudeAsFloat(){
+        return Double.parseDouble(longitude);
+    }
 }

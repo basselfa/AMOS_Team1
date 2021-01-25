@@ -1,8 +1,8 @@
 package com.amos.p1.backend.service.requestcreator;
 
 import com.amos.p1.backend.data.Request;
-import com.amos.p1.backend.service.CityBoundBoxesService;
-import com.amos.p1.backend.service.CityBoundingBoxesServiceImpl;
+import com.amos.p1.backend.service.cityboundingbox.CityBoundingBoxesService;
+import com.amos.p1.backend.service.cityboundingbox.CityBoundingBoxesServiceImpl;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -24,8 +24,8 @@ class RequestCreatorImplTest {
 
         List<Request> requests = requestCreator.buildRequests();
 
-        CityBoundBoxesService cityBoundBoxesService = new CityBoundingBoxesServiceImpl();
-        int cityAmount = cityBoundBoxesService.getCityBoundingBoxes().size();
+        CityBoundingBoxesService cityBoundingBoxesService = new CityBoundingBoxesServiceImpl();
+        int cityAmount = cityBoundingBoxesService.getCityBoundingBoxes().size();
 
         assertThat(requests.size(), equalTo(cityAmount));
         for (Request request : requests) {

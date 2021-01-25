@@ -1,5 +1,6 @@
 package com.amos.p1.backend.service;
 
+import com.amos.p1.backend.configuration.CityBoundingBoxServiceConfig;
 import com.amos.p1.backend.configuration.RequestCreatorConfig;
 import com.amos.p1.backend.data.Request;
 import com.amos.p1.backend.database.MyRepo;
@@ -19,11 +20,13 @@ import java.util.List;
 public class ProviderIntervalRequest {
 
     private final RequestCreatorConfig requestCreatorConfig;
+    private final CityBoundingBoxServiceConfig cityBoundingBoxServiceConfig;
 
     @Autowired
-    public ProviderIntervalRequest(RequestCreatorConfig requestCreatorConfig){
+    public ProviderIntervalRequest(RequestCreatorConfig requestCreatorConfig, CityBoundingBoxServiceConfig cityBoundingBoxServiceConfig){
 
         this.requestCreatorConfig = requestCreatorConfig;
+        this.cityBoundingBoxServiceConfig = cityBoundingBoxServiceConfig;
     }
 
     /**
@@ -40,6 +43,8 @@ public class ProviderIntervalRequest {
 
         RequestCreator requestCreator = requestCreatorConfig.getRequestCreator();
         requestCreator.setTimeStamp(nowNoSeconds);
+        requestCreator.setCityBoundingBoxes(cityBoundingBoxServiceConfig.getCityBoundBoxesService());
+
         List<Request> requests = requestCreator.buildRequests();
 
         for (Request request : requests) {
