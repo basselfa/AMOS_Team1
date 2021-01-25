@@ -42,7 +42,7 @@ public class MyRepo {
 
         final String elasticIp = getHostAdress();
         url = "jdbc:mysql://" + elasticIp + ":3306/testdb3?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin&createDatabaseIfNotExist=true";
-
+        System.out.println("Connect to db: " + url);
         intialiseDB(url);
 
         Map<String, Object> persistenceMap = new HashMap<>();
@@ -58,7 +58,6 @@ public class MyRepo {
         try(final DatagramSocket socket = new DatagramSocket()){
             socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
             String hostAddress = socket.getLocalAddress().getHostAddress();
-            System.out.println(hostAddress);
             return hostAddress;
         } catch (SocketException | UnknownHostException e) {
             throw new IllegalStateException(e);
