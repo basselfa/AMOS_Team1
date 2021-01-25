@@ -35,20 +35,15 @@ public class MyRepo {
     private static final MyRepo instance = new MyRepo();
     private EntityManager em;
     private EntityManagerFactory emf;
-    private EntityManager emTest;
-    private EntityManagerFactory emfTest;
-    private boolean useTestDatabase = false;
+
+    private String url;
 
     private MyRepo() {
 
         final String elasticIp = getHostAdress();
-        String url = "jdbc:mysql://" + elasticIp + ":3306/testdb3?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin&createDatabaseIfNotExist=true";
+        url = "jdbc:mysql://" + elasticIp + ":3306/testdb3?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin&createDatabaseIfNotExist=true";
 
-        try {
-            intialiseDB(url);
-        } catch (SQLException | FileNotFoundException throwables) {
-            throwables.printStackTrace();
-        }
+        intialiseDB(url);
 
         Map<String, Object> persistenceMap = new HashMap<>();
         persistenceMap.put("javax.persistence.jdbc.url", url);
@@ -70,10 +65,11 @@ public class MyRepo {
         }
     }
 
-    public static boolean isUseTestDatabase() {  return instance.useTestDatabase;}
-    public static void setUseTestDatabase(boolean useTestDatabase) { instance.useTestDatabase = useTestDatabase; }
+    public static void setUseTestDatabase(boolean useTestDatabase) {
 
-    public  void intialiseDB(String url) throws SQLException, FileNotFoundException {
+    }
+
+    public static void intialiseDB(String url) {
 
         final String jdbcDriver = "com.mysql.cj.jdbc.Driver";
         try {
@@ -82,55 +78,29 @@ public class MyRepo {
             e.printStackTrace();
         }
 
-        //intialise schema in datadb
-        Connection connection = DriverManager.getConnection(url , "root", "root");
+        try {
+            //intialise schema in datadb
+            Connection connection = DriverManager.getConnection(url , "root", "root");
 
-        ScriptRunner scriptRunner = new ScriptRunner(connection);
-        FileReader fileReader = new FileReader("src/main/resources/schema.sql");
-        scriptRunner.runScript(new BufferedReader(fileReader));
+            ScriptRunner scriptRunner = new ScriptRunner(connection);
+            FileReader fileReader = new FileReader("src/main/resources/schema.sql");
+            scriptRunner.runScript(new BufferedReader(fileReader));
+        }catch (Exception e){
+            throw new IllegalStateException(e);
+        }
+
     };
     public static EntityManager getEntityManager(){
-        if (instance.useTestDatabase == true) return instance.emTest;
         return instance.em;
     }
 
     public static EntityManagerFactory getEntityManagerFactory(){
-        if (instance.useTestDatabase == true) return instance.emfTest;
         return instance.emf;
     }
 
-
-
     public static void dropAll(){
-        String  URl = "jdbc:mysql://remotemysql.com:3306/lIkqLjf1AL";
-        String   id = "lIkqLjf1AL";
-        String   password = "yddtBbLwx1";
-
-         String jdbcDriver = "com.mysql.cj.jdbc.Driver";
-        if (instance.useTestDatabase == true)
-        {
-             URl = "jdbc:mysql://localhost:3306/testdb3?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin";
-             id = "root";
-              password = "root";
-
-        }
-        Connection con2 = null;
-        try {
-            con2 = DriverManager.getConnection(URl ,id,password);
-            ScriptRunner scriptRunner = new ScriptRunner(con2);
-            FileReader fileReader = new FileReader("src/main/resources/schema.sql");
-            scriptRunner.setLogWriter(null);
-            scriptRunner.runScript(new BufferedReader(fileReader));
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-
+        intialiseDB(instance.url);
     }
-
-
 
     public static void insertIncident(List<Incident> incidents) {
 
