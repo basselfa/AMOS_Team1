@@ -37,47 +37,27 @@ public class MyRepo {
     private EntityManagerFactory emf;
     private EntityManager emTest;
     private EntityManagerFactory emfTest;
-    private boolean useTestDatabase =true;
+    private boolean useTestDatabase = false;
 
     private MyRepo() {
 
-        try {
 
-            intialiseDB();
-
-        } catch (Exception e) {
-
-            System.out.println("Couldn't intilaise database");
-        }
-
+        final String url = "jdbc:mysql://192.168.0.183:3307/testdb2?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin&createDatabaseIfNotExist=true";
 
         try {
-
-            emfTest = Persistence.createEntityManagerFactory("MyTestRepo");
-
-            Map<String, Object> persistenceMap = emfTest.getProperties();
-
-            String elasticIp = getHostAdress();
-            persistenceMap.put("javax.persistence.jdbc.url", "jdbc:mysql://"+elasticIp+":3306/testdb3?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin" ); ;
-
-            emf = Persistence.createEntityManagerFactory("MyRepo", persistenceMap);
-            System.out.println(emf.getProperties());
-            em = emf.createEntityManager();
-        } catch (Exception e) {
-
-            System.out.println("Couldn't start aws database");
+            intialiseDB(url);
+        } catch (SQLException | FileNotFoundException throwables) {
+            throwables.printStackTrace();
         }
 
+        emf = Persistence.createEntityManagerFactory("MyRepo");
+//        Map<String, Object> persistenceMap = emf.getProperties();
+//        String elasticIp = getHostAdress();
+//        persistenceMap.put("javax.persistence.jdbc.url", url);
+//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyTest", persistenceMap);
 
-        try {
-            emfTest = Persistence.createEntityManagerFactory("MyTestRepo");
-            emTest = emfTest.createEntityManager();
-        } catch (Exception e) {
-
-            System.out.println("Couldn't start test database");
-        }
-
-
+//        System.out.println(emf.getProperties());
+        em = emf.createEntityManager();
     }
 
     /**
@@ -97,48 +77,21 @@ public class MyRepo {
     public static boolean isUseTestDatabase() {  return instance.useTestDatabase;}
     public static void setUseTestDatabase(boolean useTestDatabase) { instance.useTestDatabase = useTestDatabase; }
 
-    public  void intialiseDB() throws SQLException, FileNotFoundException {
-        String urlTemp =  "jdbc:mysql://localhost:3306/testdb3?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin";
-;
-        if(useTestDatabase== false)
-            urlTemp = "jdbc:mysql://"+getHostAdress()+":3306/testdb3?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin";
+    public  void intialiseDB(String url) throws SQLException, FileNotFoundException {
 
-
-        final  String URl = urlTemp;
-        System.out.println(urlTemp);
-        final  String userpass ="&createDatabaseIfNotExist=true";
-        final  String id = "root";
-        final  String  password = "root";
         final String jdbcDriver = "com.mysql.cj.jdbc.Driver";
-
-//        create database if not created
         try {
             Class.forName(jdbcDriver);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        System.out.println(urlTemp);
 
+        //intialise schema in datadb
+        Connection connection = DriverManager.getConnection(url , "root", "root");
 
-        try{
-        Connection con1 = DriverManager.getConnection(URl + userpass, id, password);
-        Statement statement = con1.createStatement();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-
-        System.out.println(urlTemp);
-
-//intialise schema in datadb
-        Connection con2 = DriverManager.getConnection(URl ,id,password);
-
-          ScriptRunner scriptRunner = new ScriptRunner(con2);
+        ScriptRunner scriptRunner = new ScriptRunner(connection);
         FileReader fileReader = new FileReader("src/main/resources/schema.sql");
-        scriptRunner.setLogWriter(null);
         scriptRunner.runScript(new BufferedReader(fileReader));
-
-
     };
     public static EntityManager getEntityManager(){
         if (instance.useTestDatabase == true) return instance.emTest;
