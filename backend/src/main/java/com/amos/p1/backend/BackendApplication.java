@@ -20,14 +20,6 @@ public class BackendApplication {
  
 	public static void main(String[] args) {
 		SpringApplication.run(BackendApplication.class, args);
-
-		try(final DatagramSocket socket = new DatagramSocket()){
-			socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
-			String hostAddress = socket.getLocalAddress().getHostAddress();
-			System.out.println(hostAddress);
-		} catch (SocketException | UnknownHostException e) {
-			e.printStackTrace();
-		}
 	}
 
 	@Bean
