@@ -10,6 +10,7 @@
         <class>com.amos.p1.backend.data.Incident</class>
         <class>com.amos.p1.backend.data.Request</class>
         <class>com.amos.p1.backend.data.EvaluationCandidate</class>
+        <class>com.amos.p1.backend.data.CityInformation</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
@@ -25,6 +26,7 @@
         <class>com.amos.p1.backend.data.Incident</class>
         <class>com.amos.p1.backend.data.Request</class>
         <class>com.amos.p1.backend.data.EvaluationCandidate</class>
+        <class>com.amos.p1.backend.data.CityInformation</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>

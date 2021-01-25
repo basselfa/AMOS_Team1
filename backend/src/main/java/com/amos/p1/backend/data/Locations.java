@@ -21,7 +21,6 @@ public class Locations {
         try {
             String[] edgesSplit = edges.split(",");
 
-            for (String Location : edgesSplit) {
             for (String location : edgesSplit) {
 
                 String[] edgeSplitToParts = location.split(":");
