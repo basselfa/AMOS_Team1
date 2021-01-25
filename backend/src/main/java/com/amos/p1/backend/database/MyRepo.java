@@ -41,8 +41,8 @@ public class MyRepo {
 
     private MyRepo() {
 
-
-        final String url = "jdbc:mysql://192.168.0.183:3307/testdb2?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin&createDatabaseIfNotExist=true";
+        final String elasticIp = getHostAdress();
+        String url = "jdbc:mysql://" + elasticIp + ":3306/testdb3?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin&createDatabaseIfNotExist=true";
 
         try {
             intialiseDB(url);
@@ -50,13 +50,9 @@ public class MyRepo {
             throwables.printStackTrace();
         }
 
-        emf = Persistence.createEntityManagerFactory("MyRepo");
-//        Map<String, Object> persistenceMap = emf.getProperties();
-//        String elasticIp = getHostAdress();
-//        persistenceMap.put("javax.persistence.jdbc.url", url);
-//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyTest", persistenceMap);
-
-//        System.out.println(emf.getProperties());
+        Map<String, Object> persistenceMap = new HashMap<>();
+        persistenceMap.put("javax.persistence.jdbc.url", url);
+        emf = Persistence.createEntityManagerFactory("MyRepo", persistenceMap);
         em = emf.createEntityManager();
     }
 

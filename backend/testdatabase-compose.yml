@@ -1,8 +1,8 @@
 mysql:
   image: mysql:8.0.22
   ports:
-    - "3307:3306"
+    - "3306:3306"
   environment:
     - MYSQL_ROOT_PASSWORD=root
     - MYSQL_PASSWORD=root
-    - MYSQL_DATABASE=testdb2
+    - MYSQL_DATABASE=testdb3
