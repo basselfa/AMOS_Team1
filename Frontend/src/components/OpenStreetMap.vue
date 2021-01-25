@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="map-wrapper">
     <l-map id="osm-map" :zoom="zoom" :center="center" :options="mapOptions">
       <l-tile-layer :url="url" :attribution="attribution" />
       <l-polyline
@@ -12,10 +12,12 @@
       </l-marker>
     </l-map>
     <div class="legend">
-      <p>
-        Legend of data provider colors:
-      </p>
-    <v-chip color='rgb(255, 233, 66)'>Yellow - TomTom</v-chip><v-chip color = 'rgb( 27, 143, 209)'>Blue - Here</v-chip><v-chip color = 'rgb(255, 85, 18)'> Red - Both</v-chip>
+      Legend:
+      <ul class="legend-items">
+        <li><span class="legend-item-tomtom"></span>TomTom</li>
+        <li><span class="legend-item-here"></span>Here</li>
+        <li><span class="legend-item-both"></span>Both</li>
+      </ul>
     </div>
   </div>
 </template>
@@ -58,12 +60,16 @@ export default {
 </script>
 
 <style>
+.map-wrapper {
+  height:100%;
+}
+
 #osm-map {
-  height: 75%;
-  width: 70%;
+ height: calc(100% - 200px);
+  width: calc(100vw - 400px);
   margin: 0;
   position: absolute;
-  top: 200px;
+  top: 160px;
   left: 300px;
   border-radius: 20px;
   -webkit-box-shadow: 4px 12px 31px -10px #cecece !important;
@@ -73,8 +79,19 @@ export default {
 
 .legend{
   position: fixed;
-  bottom:0;
-  margin-left: 320px;
+  bottom:10px;
+  margin-left: 300px;
+  padding-left:5px;
   float:left;
+  display:flex;
+  font-size:13px;
 }
+
+.legend-items { list-style: none; margin-left: -10px; }
+.legend-items li { float: left; margin-right: 10px; }
+.legend-items span { border: 0px; float: left; width: 30px; height: 12px; margin: 4px }
+
+.legend-items .legend-item-tomtom { background-color: rgb(255, 233, 66) }
+.legend-items .legend-item-here { background-color: rgb( 27, 143, 209) }
+.legend-items .legend-item-both { background-color: rgb(255, 85, 18) }
 </style>

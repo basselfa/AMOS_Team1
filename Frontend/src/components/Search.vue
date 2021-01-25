@@ -1,6 +1,6 @@
 <template>
     <div id="search-bar-container">
-        <v-row>
+        <v-row  class="search-group">
             <v-col cols="12" sm="4" md="4">
                 <v-autocomplete
                     class="search-bar"
@@ -33,7 +33,7 @@
                 ></v-autocomplete>
             </v-col>
         </v-row>
-    </div>
+        </div>
 </template>
 
 <script>
@@ -115,14 +115,12 @@ export default {
 
 <style>
 #search-bar-container {
-    padding-top: 100px;
     padding-left: 300px;
-    padding-right: 20%;
+    padding-top: 70px;
 }
 
-#search-icon {
-    float: left;
-    padding-top: 6px;
-    padding-right: 6px;
+.search-group {
+    position:absolute;
+    width:70%;
 }
 </style>
