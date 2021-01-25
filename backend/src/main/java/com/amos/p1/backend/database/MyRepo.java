@@ -37,7 +37,7 @@ public class MyRepo {
     private EntityManagerFactory emf;
     private EntityManager emTest;
     private EntityManagerFactory emfTest;
-    private boolean useTestDatabase =true;
+    private boolean useTestDatabase =false;
 
     private MyRepo() {
 
@@ -50,32 +50,37 @@ public class MyRepo {
             System.out.println("Couldn't intilaise database");
         }
 
-
-        try {
-
-            emfTest = Persistence.createEntityManagerFactory("MyTestRepo");
-
-            Map<String, Object> persistenceMap = emfTest.getProperties();
-
-            String elasticIp = getHostAdress();
-            persistenceMap.put("javax.persistence.jdbc.url", "jdbc:mysql://"+elasticIp+":3306/testdb3?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin" ); ;
-
-            emf = Persistence.createEntityManagerFactory("MyRepo", persistenceMap);
-            System.out.println(emf.getProperties());
-            em = emf.createEntityManager();
-        } catch (Exception e) {
-
-            System.out.println("Couldn't start aws database");
-        }
+       if (useTestDatabase==false) {
+           try {
 
 
-        try {
-            emfTest = Persistence.createEntityManagerFactory("MyTestRepo");
-            emTest = emfTest.createEntityManager();
-        } catch (Exception e) {
+               Map<String, Object> persistenceMap = new HashMap<String, Object>();
 
-            System.out.println("Couldn't start test database");
-        }
+               String elasticIp = getHostAdress();
+               persistenceMap.put("javax.persistence.jdbc.url", "jdbc:mysql://" + elasticIp + ":3306/testdb3?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin");
+               ;
+               System.out.println(persistenceMap);
+               emf = Persistence.createEntityManagerFactory("MyAwsRepo", persistenceMap);
+               System.out.println(emf.getProperties());
+               em = emf.createEntityManager();
+               System.out.println("started aws database");
+           } catch (Exception e) {
+
+               System.out.println("Couldn't start aws database");
+           }
+       }
+       else {
+
+
+           try {
+               emfTest = Persistence.createEntityManagerFactory("MyTestRepo");
+               emTest = emfTest.createEntityManager();
+               System.out.println("started test database");
+           } catch (Exception e) {
+
+               System.out.println("Couldn't start test database");
+           }
+       }
 
 
     }
@@ -99,16 +104,19 @@ public class MyRepo {
 
     public  void intialiseDB() throws SQLException, FileNotFoundException {
         String urlTemp =  "jdbc:mysql://localhost:3306/testdb3?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin";
-;
-        if(useTestDatabase== false)
-            urlTemp = "jdbc:mysql://"+getHostAdress()+":3306/testdb3?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin";
-
-
+        String  idTmp = "root";
+        String  passwordTmp = "root";
+        if(useTestDatabase== false) {
+            urlTemp = "jdbc:mysql://" + getHostAdress() + ":3306/testdb3?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin";
+            idTmp="awsss";
+            passwordTmp="awsss";
+        }
+        final String  id = idTmp;
+        final String  password = passwordTmp;
         final  String URl = urlTemp;
         System.out.println(urlTemp);
         final  String userpass ="&createDatabaseIfNotExist=true";
-        final  String id = "root";
-        final  String  password = "root";
+
         final String jdbcDriver = "com.mysql.cj.jdbc.Driver";
 
 //        create database if not created

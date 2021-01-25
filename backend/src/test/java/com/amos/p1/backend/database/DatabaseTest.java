@@ -23,7 +23,7 @@ public class DatabaseTest {
     public static void init() {
 
         System.out.println("setting Database properties");
-        MyRepo.setUseTestDatabase(true);
+    //    MyRepo.setUseTestDatabase(true);
     }
 
     @BeforeEach
