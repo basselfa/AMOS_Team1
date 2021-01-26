@@ -132,16 +132,20 @@ public class CityInformationResourceTest {
 
     @Test
     void testAddCityInformation(){
-            given()
-                    .param("cityName", "dortmund")
-                    .param("centreLongitude", "52.50877")
-                    .param("centreLatitude", "13.50877")
-                    .param("searchRadiusInMeter", "63")
-                    .header("Accept", ContentType.JSON.getAcceptHeader())
-            .when()
-                .post(base + "/cityinformation") // Url that you want to test
-            .then()
-                .statusCode(200);
+
+        CityInformationIncomingDTO cityInformationIncomingDTO = new CityInformationIncomingDTO();
+        cityInformationIncomingDTO.setCityName("dortmund");
+        cityInformationIncomingDTO.setCentreLatitude("52.50877");
+        cityInformationIncomingDTO.setCentreLongitude("13.50877");
+        cityInformationIncomingDTO.setSearchRadiusInMeter(63);
+
+        given()
+            .body(cityInformationIncomingDTO)
+            .contentType(ContentType.JSON)
+        .when()
+            .post(base + "/cityinformation") // Url that you want to test
+        .then()
+            .statusCode(200);
 
         List<CityInformation> allCityInformation = given()
             .when()
@@ -187,5 +191,4 @@ public class CityInformationResourceTest {
         assertThat(allCityInformation.get(2).getSearchRadiusInMeter(), equalTo(2222));
     }
 
-    }
-
+}
