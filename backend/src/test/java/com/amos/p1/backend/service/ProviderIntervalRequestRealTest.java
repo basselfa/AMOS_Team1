@@ -1,9 +1,6 @@
 package com.amos.p1.backend.service;
 
-import com.amos.p1.backend.configuration.CityBoundingBoxServiceConfigDevelopment;
-import com.amos.p1.backend.configuration.CityBoundingBoxServiceConfigProduction;
-import com.amos.p1.backend.configuration.RequestCreatorConfigDevelopment;
-import com.amos.p1.backend.configuration.RequestCreatorConfigProduction;
+import com.amos.p1.backend.configuration.*;
 import com.amos.p1.backend.data.CityInformation;
 import com.amos.p1.backend.data.Location;
 import com.amos.p1.backend.data.Request;
@@ -21,7 +18,11 @@ import static org.hamcrest.Matchers.greaterThan;
 
 public class ProviderIntervalRequestRealTest {
 
-    private final ProviderIntervalRequest providerIntervalRequest = new ProviderIntervalRequest(new RequestCreatorConfigProduction(), new CityBoundingBoxServiceConfigProduction());
+    private final ProviderIntervalRequest providerIntervalRequest =
+            new ProviderIntervalRequest(
+                    new RequestCreatorConfigProduction(),
+                    new CityBoundingBoxServiceConfigRealData()
+            );
 
 
     public ProviderIntervalRequestRealTest(){
@@ -62,7 +63,7 @@ public class ProviderIntervalRequestRealTest {
 
         long amountOfRequestAfterCronJob = getAmountOfRequests();
 
-        assertThat(amountOfRequestAfterCronJob - amountOfRequestsBeforeCronJob, equalTo(2L));
+        assertThat(amountOfRequestAfterCronJob - amountOfRequestsBeforeCronJob, equalTo(1L));
     }
 
     @Test

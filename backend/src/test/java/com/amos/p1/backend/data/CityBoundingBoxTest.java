@@ -28,4 +28,18 @@ class CityBoundingBoxTest {
         assertThat(cityBoundingBox.getMaxCorner().getLongitudeAsFloat(), closeTo(60.1395, error));
     }
 
+    @Test
+    void testCentrePoint(){
+        CityBoundingBox berlin = new CityBoundingBox(
+                "Berlin",
+                new Location("52.39192425798079", "13.129307898046857"),
+                new Location("52.644689636137734", "13.520944272525774")
+        );
+
+        double latitude = berlin.getCenterPoint().getLatitudeAsFloat();
+        double longitude = berlin.getCenterPoint().getLongitudeAsFloat();
+        assertThat(latitude, closeTo(52.518306947, 0.00001));
+        assertThat(longitude, closeTo(13.325126085, 0.00001));
+    }
+
 }

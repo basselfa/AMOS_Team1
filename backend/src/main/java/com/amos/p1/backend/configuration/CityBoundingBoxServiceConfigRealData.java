@@ -12,9 +12,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Profile("production")
-public class CityBoundingBoxServiceConfigProduction implements CityBoundingBoxServiceConfig{
+public class CityBoundingBoxServiceConfigRealData implements CityBoundingBoxServiceConfig{
 
-    public CityBoundingBoxServiceConfigProduction(){
+    public CityBoundingBoxServiceConfigRealData(){
         System.out.println("Using CityBoundingBox Service Config for production");
     }
 
@@ -27,19 +27,14 @@ public class CityBoundingBoxServiceConfigProduction implements CityBoundingBoxSe
     }
 
     private void saveDummyCityInformationIntoDb() {
-        CityBoundingBoxesService cityBoundingBoxesServiceDummy = new CityBoundingBoxesServiceDummy();
-        for (CityBoundingBox cityBoundingBox : cityBoundingBoxesServiceDummy.getCityBoundingBoxes()) {
 
-            String city = cityBoundingBox.getCity();
-            Location centrePoint = cityBoundingBox.getCenterPoint();
+        CityInformation cityInformation = new CityInformation();
+        cityInformation.setCityName("Berlin");
+        cityInformation.setCentreLatitude("52.515531");
+        cityInformation.setCentreLongitude("13.381941");
+        cityInformation.setSearchRadiusInMeter(1000);
 
-            CityInformation cityInformation = new CityInformation();
-            cityInformation.setCityName(city);
-            cityInformation.setCentreLatitude(centrePoint.getLatitude());
-            cityInformation.setCentreLongitude(centrePoint.getLongitude());
-            cityInformation.setSearchRadiusInMeter(13000);
+        MyRepo.insertCityInformation(cityInformation);
 
-            MyRepo.insertCityInformation(cityInformation);
-        }
     }
 }
