@@ -1,5 +1,6 @@
 package com.amos.p1.backend;
  
+import com.amos.p1.backend.database.MyRepo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -20,14 +21,6 @@ public class BackendApplication {
  
 	public static void main(String[] args) {
 		SpringApplication.run(BackendApplication.class, args);
-
-		try(final DatagramSocket socket = new DatagramSocket()){
-			socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
-			String hostAddress = socket.getLocalAddress().getHostAddress();
-			System.out.println(hostAddress);
-		} catch (SocketException | UnknownHostException e) {
-			e.printStackTrace();
-		}
 	}
 
 	@Bean

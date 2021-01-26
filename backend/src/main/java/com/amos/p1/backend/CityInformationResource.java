@@ -12,7 +12,7 @@ public class CityInformationResource {
 
     @PostMapping("/cityinformation")
     public ResponseEntity<?> addCityInformation(@RequestBody CityInformation cityInformation){
-        MyRepo.addCityInformation(cityInformation);
+        MyRepo.insertCityInformation(cityInformation);
         return ResponseEntity.ok(null);
     }
 

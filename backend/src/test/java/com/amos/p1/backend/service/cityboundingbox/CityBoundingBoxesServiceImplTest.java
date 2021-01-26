@@ -26,8 +26,8 @@ class CityBoundingBoxesServiceImplTest {
         cityInformation2.setCentreLongitude("20.0000");
         cityInformation2.setSearchRadiusInMeter(5000);
 
-        MyRepo.addCityInformation(cityInformation1);
-        MyRepo.addCityInformation(cityInformation2);
+        MyRepo.insertCityInformation(cityInformation1);
+        MyRepo.insertCityInformation(cityInformation2);
 
         CityBoundingBoxesService cityBoundingBoxesService = new CityBoundingBoxesServiceImpl();
         List<CityBoundingBox> cityBoundingBoxes = cityBoundingBoxesService.getCityBoundingBoxes();

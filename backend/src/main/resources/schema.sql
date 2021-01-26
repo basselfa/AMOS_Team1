@@ -4,6 +4,8 @@ drop TABLE if exists Request ;
 
 drop TABLE if exists  EvaluationCandidate;
 
+drop TABLE if exists  CityInformation;
+
 
 CREATE TABLE Incident (
                           id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -46,3 +48,14 @@ CREATE TABLE EvaluationCandidate (
                          confidenceDescription VARCHAR(11255)
 
 ) ;
+
+
+
+CREATE TABLE CityInformation (
+                         id BIGINT  AUTO_INCREMENT  PRIMARY KEY,
+                         cityName VARCHAR(255),
+                         centreLatitude VARCHAR(255),
+                         centreLongitude VARCHAR(255),
+                         searchRadiusInMeter INT
+) ;
+

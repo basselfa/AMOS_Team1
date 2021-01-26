@@ -25,8 +25,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 
 public class MyRepo {
@@ -34,25 +35,20 @@ public class MyRepo {
     private static final MyRepo instance = new MyRepo();
     private EntityManager em;
     private EntityManagerFactory emf;
-    private EntityManager emTest;
-    private EntityManagerFactory emfTest;
-    private boolean useTestDatabase =true;
+
+    private String url;
 
     private MyRepo() {
-        emf = Persistence.createEntityManagerFactory("MyRepo");
+
+        final String elasticIp = getHostAdress();
+        url = "jdbc:mysql://" + elasticIp + ":3306/testdb3?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin&createDatabaseIfNotExist=true";
+        System.out.println("Connect to db: " + url);
+        intialiseDB(url);
+
+        Map<String, Object> persistenceMap = new HashMap<>();
+        persistenceMap.put("javax.persistence.jdbc.url", url);
+        emf = Persistence.createEntityManagerFactory("MyRepo", persistenceMap);
         em = emf.createEntityManager();
-
-        try {
-            intialiseTestDB();
-
-            emfTest = Persistence.createEntityManagerFactory("MyTestRepo");
-            emTest = emfTest.createEntityManager();
-        } catch (Exception e) {
-
-            System.out.println("Couldn't start test database");
-        }
-
-
     }
 
     /**
@@ -62,84 +58,48 @@ public class MyRepo {
         try(final DatagramSocket socket = new DatagramSocket()){
             socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
             String hostAddress = socket.getLocalAddress().getHostAddress();
-            System.out.println(hostAddress);
             return hostAddress;
         } catch (SocketException | UnknownHostException e) {
             throw new IllegalStateException(e);
         }
     }
 
-    public static boolean isUseTestDatabase() {  return instance.useTestDatabase;}
-    public static void setUseTestDatabase(boolean useTestDatabase) { instance.useTestDatabase = useTestDatabase; }
+    public static void setUseTestDatabase(boolean useTestDatabase) {
 
-    public  void intialiseTestDB() throws SQLException, FileNotFoundException {
-        final  String URl = "jdbc:mysql://localhost:3306/testdb3?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin";
-        final  String userpass ="&createDatabaseIfNotExist=true";
-        final  String id = "root";
-        final  String  password = "root";
+    }
+
+    public static void intialiseDB(String url) {
+
         final String jdbcDriver = "com.mysql.cj.jdbc.Driver";
-
-//        create database if not created
         try {
             Class.forName(jdbcDriver);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        Connection con1 = DriverManager.getConnection(URl + userpass, id, password);
-        Statement statement = con1.createStatement();
 
-//intialise schema in datadb
-        Connection con2 = DriverManager.getConnection(URl ,id,password);
+        try {
+            //intialise schema in datadb
+            Connection connection = DriverManager.getConnection(url , "root", "root");
 
-          ScriptRunner scriptRunner = new ScriptRunner(con2);
-        FileReader fileReader = new FileReader("src/main/resources/schema.sql");
-        scriptRunner.setLogWriter(null);
-        scriptRunner.runScript(new BufferedReader(fileReader));
-
+            ScriptRunner scriptRunner = new ScriptRunner(connection);
+            FileReader fileReader = new FileReader("src/main/resources/schema.sql");
+            scriptRunner.runScript(new BufferedReader(fileReader));
+        }catch (Exception e){
+            throw new IllegalStateException(e);
+        }
 
     };
     public static EntityManager getEntityManager(){
-        if (instance.useTestDatabase == true) return instance.emTest;
         return instance.em;
     }
 
     public static EntityManagerFactory getEntityManagerFactory(){
-        if (instance.useTestDatabase == true) return instance.emfTest;
         return instance.emf;
     }
 
-
-
     public static void dropAll(){
-        String  URl = "jdbc:mysql://remotemysql.com:3306/lIkqLjf1AL";
-        String   id = "lIkqLjf1AL";
-        String   password = "yddtBbLwx1";
-
-         String jdbcDriver = "com.mysql.cj.jdbc.Driver";
-        if (instance.useTestDatabase == true)
-        {
-             URl = "jdbc:mysql://localhost:3306/testdb3?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin";
-             id = "root";
-              password = "root";
-
-        }
-        Connection con2 = null;
-        try {
-            con2 = DriverManager.getConnection(URl ,id,password);
-            ScriptRunner scriptRunner = new ScriptRunner(con2);
-            FileReader fileReader = new FileReader("src/main/resources/schema.sql");
-            scriptRunner.setLogWriter(null);
-            scriptRunner.runScript(new BufferedReader(fileReader));
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-
+        intialiseDB(instance.url);
     }
-
-
 
     public static void insertIncident(List<Incident> incidents) {
 
@@ -152,6 +112,37 @@ public class MyRepo {
 
 
     }
+    public static void insertCityInformation(CityInformation cityInformation) {
+
+
+            getEntityManager().getTransaction().begin();
+            getEntityManager().persist(cityInformation);
+            getEntityManager().getTransaction().commit();
+
+
+
+    }
+
+    public static List<CityInformation> getAllCityInformation(){
+
+
+
+        return getEntityManager().createNamedQuery("getAllCityInformation").getResultList();
+    }
+
+    public static void deleteCityInformation(Long id ){
+
+        getEntityManager().getTransaction().begin();
+        List<CityInformation> cityInformations = getEntityManager().createNamedQuery("getCityInformationFromId")
+                .setParameter("id", id)
+                .getResultList();
+
+        System.out.println(cityInformations);
+
+        getEntityManager().remove(cityInformations.get(0));
+        getEntityManager().getTransaction().commit();
+    }
+
 
     public static void insertEvaluationCandidate(List<EvaluationCandidate> evaluationCandidates) {
 
@@ -276,16 +267,7 @@ public class MyRepo {
         return evaluationCandidates;
     }
 
-    public static void addCityInformation(CityInformation cityInformation){
-        throw new IllegalStateException("not yet implemented");
-    }
 
-    public static List<CityInformation> getAllCityInformation(){
-        throw new IllegalStateException("not yet implemented");
-    }
 
-    public static void deleteCityInformation(long id){
-        throw new IllegalStateException("not yet implemented");
-    }
 
 }
