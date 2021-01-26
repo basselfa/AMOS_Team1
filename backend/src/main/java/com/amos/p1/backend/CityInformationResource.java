@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping()
+@RequestMapping("withDatabase")
 public class CityInformationResource {
 
     @PostMapping("/cityinformation")
