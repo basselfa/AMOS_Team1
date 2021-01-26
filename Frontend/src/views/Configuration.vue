@@ -26,7 +26,7 @@
             </div>
         </v-card-text>
         <v-card-actions class="center">
-            <v-btn @click="requestCityData" text color="blue accent-4" background="grey">
+            <v-btn @click="postRequestCityData" text color="blue accent-4" background="grey">
                 Submit slection
             </v-btn>
         </v-card-actions>
@@ -76,8 +76,8 @@ export default {
     mounted() {},
 
     methods: {
-        requestCityData: function () {
-          console.log("request triggered");
+        getRequestCityData: function () {
+            console.log("request triggered");
             axios
                 .get('http://' + window.location.hostname + ':8082/withDatabase/cityinformation', {
                     headers: {
@@ -89,7 +89,23 @@ export default {
                     this.errorMessage = error.message
                     console.error('There was an error!', error)
                 })
-                console.log(this.cities);
+            console.log(this.cities);
+        },
+
+        postRequestCityData: function () {
+            console.log("request triggered");
+            axios
+                .post('http://' + window.location.hostname + ':8082/withDatabase/cityinformation', this.cities, {
+                    headers: {
+                        'Access-Control-Allow-Origin': '*'
+                    }
+                })
+                .then(response => this.cities = response.data)
+                .catch(error => {
+                    this.errorMessage = error.message
+                    console.error('There was an error!', error)
+                })
+            console.log(this.cities);
         }
     },
 }

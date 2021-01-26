@@ -1,0 +1,84 @@
+import {
+  mount,
+  shallowMount,
+  createLocalVue
+} from '@vue/test-utils'
+import Configuration from '@/components/Configuration'
+import Vue from 'vue'
+import Vuetify from 'vuetify'
+import moxios from 'moxios'
+import flushPromises from 'flush-promises'
+
+Vue.use(Vuetify)
+const localVue = createLocalVue()
+let vuetify
+let wrapper
+
+describe('Configuration', () => {
+  beforeEach(() => {
+    moxios.install()
+    vuetify = new Vuetify()
+    wrapper = shallowMount(Configuration, {
+      localVue,
+      vuetify,
+      propsData: {
+        city: 'Berlin',
+      },
+    })
+  })
+
+  it('should contain card element', () => {
+    expect(wrapper.find('.config-card').exists()).toBe(true)
+  })
+
+  it('should contain form elements', () => {
+    expect(wrapper.find('.form-chip').exists()).toBe(true)
+  })
+
+  it('stub response for city get request', function (done) {
+    moxios.stubRequest('http://localhost:8082/withDatabase/cityinformation', {
+      status: 200,
+      response: [{
+        name: "Berlin",
+        centerLatitude: "51.55",
+        centerLongitude: "51.55",
+        searchRadiusInMeter: "50"
+      }]
+    })
+
+    wrapper.vm.getRequestCityData()
+
+    moxios.wait(() => {
+      expect(wrapper.vm.cities).toEqual(
+        [{
+          name: "Berlin",
+          centerLatitude: "51.55",
+          centerLongitude: "51.55",
+          searchRadiusInMeter: "50"
+        }]
+      )
+      done()
+    })
+    it('stub response for city get request', function (done) {
+      const error = new Error('Error: Request failed with status code 500')
+      moxios.stubRequest('http://localhost:8082/withDatabase/cityinformation', {
+        error,
+      })
+    })
+
+    wrapper.vm.getRequestCityData()
+
+    moxios.wait(() => {
+      expect(wrapper.vm.errorMessage).toEqual(
+        'Error: Request failed with status code 500'
+      )
+      done()
+    })
+
+
+    afterEach(() => {
+      moxios.uninstall()
+      wrapper.destroy()
+    })
+  })
+})
