@@ -14,7 +14,7 @@ public class CityInformationResource {
     @PostMapping("/cityinformation")
     public ResponseEntity<?> addCityInformation(@RequestBody CityInformation cityInformation){
         MyRepo.addCityInformation(cityInformation);
-        return ResponseEntity.ok(null);
+        return (ResponseEntity<?>) ResponseEntity.ok();
     }
 
     @RequestMapping(
@@ -34,6 +34,6 @@ public class CityInformationResource {
     )
     public ResponseEntity<?> deleteCityInformation(@RequestParam("id") long id){
         MyRepo.deleteCityInformation(id);
-        return ResponseEntity.ok(null);
+        return (ResponseEntity<?>) ResponseEntity.ok();
     }
 }
