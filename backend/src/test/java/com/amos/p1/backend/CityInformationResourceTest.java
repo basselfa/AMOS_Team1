@@ -154,5 +154,31 @@ public class CityInformationResourceTest {
         assertThat(allCityInformation.size(), equalTo(3));
     }
 
+    @Test
+    void testAddCityInformationWithUnmarshalling(){
+            given()
+                    .param("cityName", "dortmund")
+                    .param("centreLongitude", "52.50877")
+                    .param("centreLatitude", "13.50877")
+                    .param("searchRadiusInMeter", "63")
+                    .header("Accept", ContentType.JSON.getAcceptHeader())
+            .when()
+                .post(base + "/cityinformation") // Url that you want to test
+            .then()
+                .statusCode(200);
+
+        List<CityInformation> allCityInformation = given()
+            .when()
+                .get(base + "/cityinformation") // Url that you want to test
+            .then()
+                .extract()
+                .body()
+                .jsonPath()
+                .getList(".", CityInformation.class); //Extract the root json element to a list of String
+
+        assertThat(allCityInformation.get(2).getCityName(), equalTo("dortmund"));
+        assertThat(allCityInformation.get(2).getCentreLatitude(), equalTo("13.50877"));
+    }
+
     }
 
