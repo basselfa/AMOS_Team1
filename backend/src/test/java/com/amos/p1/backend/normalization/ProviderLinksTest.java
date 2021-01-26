@@ -1,21 +1,18 @@
 package com.amos.p1.backend.normalization;
 
 import com.amos.p1.backend.data.CityBoundingBox;
-import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.provider.HereRequest;
 import com.amos.p1.backend.provider.ProviderRequest;
 import com.amos.p1.backend.provider.TomTomRequest;
-import com.amos.p1.backend.service.CityBoundBoxesService;
-import com.amos.p1.backend.service.CityBoundingBoxesServiceImpl;
+import com.amos.p1.backend.service.cityboundingbox.CityBoundingBoxesService;
+import com.amos.p1.backend.service.cityboundingbox.CityBoundingBoxesServiceImpl;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 public class ProviderLinksTest {
 
     private final TomTomRequest tomtomRequest = new TomTomRequest();
     private final HereRequest hereRequest = new HereRequest();
-    private final CityBoundBoxesService cityBoundingBoxesService = new CityBoundingBoxesServiceImpl();
+    private final CityBoundingBoxesService cityBoundingBoxesService = new CityBoundingBoxesServiceImpl();
 
 
     @Test

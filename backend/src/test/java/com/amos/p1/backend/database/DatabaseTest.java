@@ -3,6 +3,8 @@ package com.amos.p1.backend.database;
 import com.amos.p1.backend.data.CityInformation;
 import com.amos.p1.backend.data.Request;
 import com.amos.p1.backend.data.Incident;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -16,6 +18,20 @@ import java.util.List;
 
 @DataJpaTest
 public class DatabaseTest {
+
+    @BeforeAll
+    public static void init() {
+
+        System.out.println("setting Database properties");
+    //    MyRepo.setUseTestDatabase(true);
+    }
+
+    @BeforeEach
+    void setUp(){
+
+        System.out.println("reintialising Database");
+        MyRepo.dropAll();
+    }
 
 
     @Test
@@ -71,34 +87,34 @@ public class DatabaseTest {
 
     @Test
     void testStoreCityInforamtion() {
-        MyRepo.setUseTestDatabase(true);
+
 
         CityInformation information = new CityInformation();
 
         information.setCityName("Hamburg");
-        information.setId(234);
+
         information.setCentreLatitude("145.345346");
         information.setCentreLongitude("4.02344");
-        information.setSearchRadiusInMeter("234");
+        information.setSearchRadiusInMeter(234);
 
-        MyRepo.addCityInformation(information);
+        MyRepo.insertCityInformation(information);
 
         assertThat(MyRepo.getAllCityInformation().get(0), equalTo(information));
     }
 
     @Test
     void testDeleteCityInforamtion() {
-        MyRepo.setUseTestDatabase(true);
+
 
         CityInformation information = new CityInformation();
 
         information.setCityName("Hamburg");
-        information.setId(234);
+
         information.setCentreLatitude("145.345346");
         information.setCentreLongitude("4.02344");
-        information.setSearchRadiusInMeter("234");
+        information.setSearchRadiusInMeter(234);
 
-        MyRepo.addCityInformation(information);
+        MyRepo.insertCityInformation(information);
 
         assertThat(MyRepo.getAllCityInformation().get(0), equalTo(information));
 

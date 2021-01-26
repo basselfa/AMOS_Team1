@@ -2,7 +2,6 @@ package com.amos.p1.backend;
 
 import com.amos.p1.backend.data.CityInformation;
 import com.amos.p1.backend.database.MyRepo;
-import openj9.internal.tools.attach.target.Response;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +12,8 @@ public class CityInformationResource {
 
     @PostMapping("/cityinformation")
     public ResponseEntity<?> addCityInformation(@RequestBody CityInformation cityInformation){
-        MyRepo.addCityInformation(cityInformation);
-        return (ResponseEntity<?>) ResponseEntity.ok();
+        MyRepo.insertCityInformation(cityInformation);
+        return ResponseEntity.ok(null);
     }
 
     @RequestMapping(
@@ -34,6 +33,6 @@ public class CityInformationResource {
     )
     public ResponseEntity<?> deleteCityInformation(@RequestParam("id") long id){
         MyRepo.deleteCityInformation(id);
-        return (ResponseEntity<?>) ResponseEntity.ok();
+        return ResponseEntity.ok(null);
     }
 }
