@@ -14,12 +14,10 @@ import java.util.List;
 @RequestMapping("withDatabase")
 public class CityInformationResource {
 
-    @RequestMapping(
-            method = RequestMethod.POST,
-            value ="/cityinformation",
-            produces = MediaType.APPLICATION_JSON_VALUE
+    @PostMapping(
+            value ="/cityinformation"
     )
-    public ResponseEntity<?> addCityInformation(CityInformationIncomingDTO cityInformationIncomingDTO){
+    public ResponseEntity<?> addCityInformation(@RequestBody CityInformationIncomingDTO cityInformationIncomingDTO){
         CityInformation cityInformation = new CityInformation();
 
         cityInformation.setCityName(cityInformationIncomingDTO.getCityName());

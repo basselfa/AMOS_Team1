@@ -1,6 +1,7 @@
 package com.amos.p1.backend;
 
 import com.amos.p1.backend.data.CityInformation;
+import com.amos.p1.backend.data.CityInformationIncomingDTO;
 import com.amos.p1.backend.data.ComparisonEvaluationDTO;
 import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.database.MyRepo;
@@ -156,16 +157,20 @@ public class CityInformationResourceTest {
 
     @Test
     void testAddCityInformationWithUnmarshalling(){
-            given()
-                    .param("cityName", "dortmund")
-                    .param("centreLongitude", "52.50877")
-                    .param("centreLatitude", "13.50877")
-                    .param("searchRadiusInMeter", "63")
-                    .header("Accept", ContentType.JSON.getAcceptHeader())
-            .when()
-                .post(base + "/cityinformation") // Url that you want to test
-            .then()
-                .statusCode(200);
+
+        CityInformationIncomingDTO cityInformationIncomingDTO = new CityInformationIncomingDTO();
+        cityInformationIncomingDTO.setCityName("Berlin");
+        cityInformationIncomingDTO.setCentreLatitude("10.111");
+        cityInformationIncomingDTO.setCentreLongitude("12.111");
+        cityInformationIncomingDTO.setSearchRadiusInMeter(2222);
+
+        given()
+            .body(cityInformationIncomingDTO)
+            .contentType(ContentType.JSON)
+        .when()
+            .post(base + "/cityinformation") // Url that you want to test
+        .then()
+            .statusCode(200);
 
         List<CityInformation> allCityInformation = given()
             .when()
@@ -176,8 +181,10 @@ public class CityInformationResourceTest {
                 .jsonPath()
                 .getList(".", CityInformation.class); //Extract the root json element to a list of String
 
-        assertThat(allCityInformation.get(2).getCityName(), equalTo("dortmund"));
-        assertThat(allCityInformation.get(2).getCentreLatitude(), equalTo("13.50877"));
+        assertThat(allCityInformation.get(2).getCityName(), equalTo("Berlin"));
+        assertThat(allCityInformation.get(2).getCentreLatitude(), equalTo("10.111"));
+        assertThat(allCityInformation.get(2).getCentreLongitude(), equalTo("12.111"));
+        assertThat(allCityInformation.get(2).getSearchRadiusInMeter(), equalTo(2222));
     }
 
     }
