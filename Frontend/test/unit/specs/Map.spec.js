@@ -2,219 +2,144 @@ import { mount, shallowMount, createLocalVue } from '@vue/test-utils'
 import Map from '@/views/Map'
 import Vue from 'vue'
 import Vuetify from 'vuetify'
-import moxios from 'moxios'
-import axios from 'axios'
 import * as Vue2Leaflet from 'vue2-leaflet'
-import flushPromises from 'flush-promises'
-jest.mock('axios');
-
+import axios from "axios";
+const MockAdapter = require("axios-mock-adapter");
 
 Vue.use(Vuetify)
 Vue.use(Vue2Leaflet)
 let vuetify
-let wrapper
 vuetify = new Vuetify()
 const localVue = createLocalVue()
 
-
 describe('Map', () => {
-    beforeEach(() => {
-        jest.clearAllMocks();
+    let wrapper;
+    let mock;
 
-        moxios.install()
+    beforeEach(() => {
+        mock = new MockAdapter(axios);
         wrapper = shallowMount(Map, {
             localVue,
             vuetify,
         })
-        flushPromises()
         
     })
- 
 
+  it("should get incidents data from request", async () => {
+    const fakeData ={
+        type: 'Accident',
+        edges:
+            '52.51784:13.28016,52.51771:13.28021,52.51765:13.28024',
+    }
 
+    mock.onGet("http://localhost:8082/withDatabase/incidents?city=Berlin&timestamp=2020-12-19 13:00&types=Accident").reply(200, fakeData);
 
-     it('should get incidents data from request', async () => {
+    await wrapper.vm.getIncidents({city: 'Berlin',
+    timestamp: '2020-12-19 13:00',
+    type: ['Accident']});
 
-        axios.get = jest.fn().mockResolvedValue({
-            data: [
-                {
-                    type: 'Accident',
-                    edges:
-                        '52.51784:13.28016,52.51771:13.28021,52.51765:13.28024',
-                }
-            ]
-          }); 
+    expect(wrapper.vm.incidentsData).toEqual({
+        type: 'Accident',
+        edges:
+            '52.51784:13.28016,52.51771:13.28021,52.51765:13.28024',
+    })
+
+  })
+
+  it("should get comparison data from request", async () => {
+    const fakeData = {
+        tomTomIncidentId: '22',
+        hereIncidentId: '23'
+    }
+
+    mock.onGet("http://localhost:8082/withDatabase/comparison?city=Berlin&timestamp=2020-12-19 13:00").reply(200, fakeData);
+
+    await wrapper.vm.getComparison({city: 'Berlin',
+    timestamp: '2020-12-19 13:00'});
+
+    expect(wrapper.vm.comparisonData).toEqual({
+        tomTomIncidentId: '22',
+        hereIncidentId: '23'
+    })
+  })
+
+  it("should get error from incidents data request", async () => {
+    let error = new Error()
+
+    mock.onGet("http://localhost:8082/withDatabase/incidents?city=Berlin&timestamp=2020-12-19 13:00&types=Accident").reply(500, error)
+
+    await wrapper.vm.getIncidents({city: 'Berlin',
+    timestamp: '2020-12-19 13:00',type: ['Accident']});
+
+    expect(wrapper.vm.errorMessage).toEqual(
+        "Request failed with status code 500"
+    )
+  })
+
+  it("should get error from comparison data request", async () => {
+    let error = new Error()
+
+    mock.onGet("http://localhost:8082/withDatabase/comparison?city=Berlin&timestamp=2020-12-19 13:00").reply(500, error)
+
+    await wrapper.vm.getComparison({city: 'Berlin',
+    timestamp: '2020-12-19 13:00'});
+
+    expect(wrapper.vm.errorMessage).toEqual(
+        "Request failed with status code 500"
+    )
+  })
+
+  it("should call executeQuery()", async () => {
+
+        wrapper.vm.executeQuery = jest.fn();
+
+        wrapper.vm.getSearchValue({city: 'Berlin', timestamp: '2020-12-19 13:00'});
+        expect(wrapper.vm.executeQuery).toHaveBeenCalled();
+    })
+
+    it("should not call passCoordinates()", async () => {
+
+        wrapper.vm.passCoordinates = jest.fn();
         
-        await wrapper.vm.getIncidents({
-            city: 'Berlin',
-            timestamp: '2020-12-19 13:00',
-            type: ['Accident'],
-        }).then(() => {
-            expect(wrapper.vm.incidentData).toEqual(
-                {
-                    type: 'Accident',
-                    edges:
-                        '52.51784:13.28016,52.51771:13.28021,52.51765:13.28024',
-                }
-            )
+        wrapper.vm.executeQuery({city: '', timestamp: ''});
 
-    }) 
-}) /*
-    it('should get incidents data from request', async () => {
-
-        
-        moxios.stubRequest(
-            'http://localhost:8082/withDatabase/incidents?city=Berlin&timestamp=2020-12-19 13:00&types=Accident',
-            {
-                status: 200,
-                response: [
-                    {
-                        type: 'Accident',
-                        edges:
-                            '52.51784:13.28016,52.51771:13.28021,52.51765:13.28024',
-                    },
-                ],
-            }
-        )
-        wrapper.vm.getIncidents({
-            city: 'Berlin',
-            timestamp: '2020-12-19 13:00',
-            type: ['Accident'],
-        })
-        moxios.wait(function() {
-            expect(wrapper.vm.incidentData).toEqual(
-                {
-                    type: 'Accident',
-                    edges:
-                        '52.51784:13.28016,52.51771:13.28021,52.51765:13.28024',
-                }
-            )
-            done()
-        })
-    }) 
-*/
-    it('should get comparison data from request', async () => {
-
-        moxios.stubRequest(
-            'http://localhost:8082/withDatabase/comparison?city=Berlin&timestamp=2020-12-19 13:00',
-            {
-                status: 200,
-                response: [
-                    {
-                        idtomtom: '1',
-                        idhere: '2'
-                    },
-                ],
-            }
-        )
-        wrapper.vm.getComparison({
-            city: 'Berlin',
-            timestamp: '2020-12-19 13:00'
-        })
-        moxios.wait(function() {
-            expect(wrapper.vm.comparisonData).toEqual({
-                idtomtom: '1',
-                idhere: '2'
-            })
-            done()
-        })
+        expect(wrapper.vm.passCoordinates).not.toHaveBeenCalled();
     })
 
-    it('should get error from incidents data request', async () => {
+    it("should get edges for incidents ", async () => {
 
-        let error = new Error('Error: Request failed with status code 500')
-        moxios.stubRequest(
-            'http://localhost:8082/withDatabase/incidents?city=Berlin&timestamp=2020-12-19 13:00&types=Accident',
-            {
-                error
-            }
-        )
+        wrapper.vm.comparisonData = [{
+            tomTomIncidentId: '22',
+            hereIncidentId: '23'
+        },
+        {
+            tomTomIncidentId: '32',
+            hereIncidentId: '33'
+        }] 
 
-        wrapper.vm.getIncidents({
-            city: 'Berlin',
-            timestamp: '2020-12-19 13:00',
-            type: ['Accident'],
-        })
-        moxios.wait(function() {
-            expect(wrapper.vm.errorMessage).toEqual(
-                'Error: Request failed with status code 500'
-            )
-            done()
-        })
-    })
+        let incidentDummyData = [{
+            type: 'Accident',
+            edges: '52.51784:13.28016,52.51771:13.28021,52.51765:13.28024',
+            size:1,
+            description:"description",
+            lengthInMeter:55,
+            provider:"1"
+        }]
 
-    it('should get error from comparison data request', async () => {
+        wrapper.vm.passCoordinates(incidentDummyData);
 
-        let error = new Error('Error: Request failed with status code 500')
-        moxios.stubRequest(
-            'http://localhost:8082/withDatabase/comparison?city=Berlin&timestamp=2020-12-19 13:00',
-            {
-               error
-            }
-        )
-        wrapper.vm.getComparison({
-            city: 'Berlin',
-            timestamp: '2020-12-19 13:00'
-        })
-        moxios.wait(function() {
-            expect(wrapper.vm.errorMessage).toEqual(
-                'Error: Request failed with status code 500'
-            )
-            done()
-        })
-    })
+        expect(wrapper.vm.polylines).toEqual([{
+            "color": "rgb(255, 233, 66)", 
+            "criticality": 1, 
+            "description": "description", 
+            "latlngs": [["52.51784", "13.28016"], ["52.51771", "13.28021"], ["52.51765", "13.28024"]], 
+            "length": 55, "type": 
+            "Accident"}])
 
-    it('should get city data from request', async () => {
-        await wrapper.vm.getSearchValue({
-            city: 'Berlin',
-            timestamp: '2020-12-19 13:00',
-            type: ['Accident'],
-        })
-        let request = moxios.requests.mostRecent()
-        request
-            .respondWith({
-                status: 200,
-                response: [
-                    {
-                        type: 'Accident',
-                        edges:
-                            '52.51784:13.28016,52.51771:13.28021,52.51765:13.28024',
-                    },
-                ],
-            })
-            .then(function() {
-                expect(wrapper.vm.polylines[0].latlngs).toEqual([
-                    ['52.51784', '13.28016'],
-                    ['52.51771', '13.28021'],
-                    ['52.51765', '13.28024'],
-                ])
-                done()
-            })
-    })
-
-    it('should get an error from invalid request for city data', async () => {
-        let error = new Error('Error: Request failed with status code 500')
-        moxios.stubRequest('http://localhost:8082/demo/incidents?city=Berlin', {
-            error,
-        })
-
-        wrapper.vm.getSearchValue({
-            city: 'Berlin',
-            timestamp: '2020-12-19 13:00',
-            type: ['Accident'],
-        })
-
-        moxios.wait(() => {
-            expect(wrapper.vm.errorMessage).toEqual(
-                'Error: Request failed with status code 500'
-            )
-            done()
-        })
     })
 
     afterEach(() => {
-        moxios.uninstall()
-        wrapper.destroy()
+        mock.restore();
     })
 })
  
