@@ -9,17 +9,17 @@
 
                     <v-row class="form-row">
                         <v-col cols="2" md="3">
-                            <v-text-field label="City" required :value="city.name">
+                            <v-text-field label="City" required :value="city.cityName">
                             </v-text-field>
                         </v-col>
                         <v-col cols="2" md="3">
-                            <v-text-field :rules="rules" label="Latitudinal value for center" required :value="city.centerLatitude"></v-text-field>
+                            <v-text-field :rules="rules" label="Latitudinal value for center" required :value="city.centreLatitude"></v-text-field>
                         </v-col>
                         <v-col cols="2" md="3">
-                            <v-text-field :rules="rules" label="Longitudinal value for center" required :value="city.centerLongitude"></v-text-field>
+                            <v-text-field :rules="rules" label="Longitudinal value for center" required :value="city.centreLongitude"></v-text-field>
                         </v-col>
                         <v-col cols="2" md="3">
-                            <v-text-field label="Radius" required :value="city.radius"></v-text-field>
+                            <v-text-field label="Radius" required :value="city.searchRadiusInMeter"></v-text-field>
                         </v-col>
                     </v-row>
                 </v-chip>
@@ -42,38 +42,15 @@ export default {
     components: {},
 
     data: () => ({
-        cities: [{
-            name: "Berlin",
-            centerLatitude: "51.55",
-            centerLongitude: "51.55",
-            radius: "50"
-        }, {
-            name: "Frankfurt",
-            centerLatitude: "51.55",
-            centerLongitude: "51.55",
-            radius: "50"
-        }, {
-            name: "München",
-            centerLatitude: "51.55",
-            centerLongitude: "51.55",
-            radius: "50"
-        }, {
-            name: "Hamburg",
-            centerLatitude: "51.55",
-            centerLongitude: "51.55",
-            radius: "50"
-        }, {
-            name: "Köln",
-            centerLatitude: "51.55",
-            centerLongitude: "51.55",
-            radius: "50"
-        }, ],
+        cities: [],
         rules: [
             value => !!value || 'Required.',
             value => (value && 180 <= value >= -180) || 'Must be between -180 and 180 degrees.',
         ],
     }),
-    mounted() {},
+    mounted() {
+      this.getRequestCityData();
+    },
 
     methods: {
         getRequestCityData: function () {
@@ -84,28 +61,41 @@ export default {
                         'Access-Control-Allow-Origin': '*'
                     },
                 })
-                .then(this.cities = response)
+                .then(response => {
+                  console.log("from get:");
+                  console.log(response);
+                  response.data.forEach(city => {
+                    this.cities.push(city)
+                  });
+                  console.log("from get:");
+                  console.log(this.cities);
+                })
                 .catch(error => {
                     this.errorMessage = error.message
                     console.error('There was an error!', error)
                 })
-            console.log(this.cities);
         },
 
         postRequestCityData: function () {
             console.log("request triggered");
-            axios
-                .post('http://' + window.location.hostname + ':8082/withDatabase/cityinformation', this.cities, {
-                    headers: {
-                        'Access-Control-Allow-Origin': '*'
-                    }
-                })
-                .then(response => this.cities = response.data)
-                .catch(error => {
-                    this.errorMessage = error.message
-                    console.error('There was an error!', error)
-                })
-            console.log(this.cities);
+            this.cities.forEach(city => {
+
+                axios
+                    .post('http://' + window.location.hostname + ':8082/withDatabase/cityinformation', city, {
+                        headers: {
+                            'Access-Control-Allow-Origin': '*',
+                            'Content-Type': 'application/json',
+                            'accept': 'application/json'
+                        }
+                    })
+                    .then(response => this.cities = response.data)
+                    .catch(error => {
+                        this.errorMessage = error.message
+                        console.error('There was an error!', error)
+                    })
+                console.log(city);
+            });
+
         }
     },
 }
