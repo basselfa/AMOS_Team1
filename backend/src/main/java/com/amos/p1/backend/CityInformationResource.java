@@ -44,6 +44,6 @@ public class CityInformationResource {
     )
     public ResponseEntity<?> deleteCityInformation(@RequestParam("id") long id){
         MyRepo.deleteCityInformation(id);
-        return (ResponseEntity<?>) ResponseEntity.ok();
+        return ResponseEntity.ok(null);
     }
 }
