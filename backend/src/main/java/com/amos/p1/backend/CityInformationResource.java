@@ -14,8 +14,12 @@ import java.util.List;
 @RequestMapping("withDatabase")
 public class CityInformationResource {
 
-    @PostMapping("/cityinformation")
-    public ResponseEntity<?> addCityInformation(@RequestBody CityInformationIncomingDTO cityInformationIncomingDTO){
+    @RequestMapping(
+            method = RequestMethod.POST,
+            value ="/cityinformation",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<?> addCityInformation(CityInformationIncomingDTO cityInformationIncomingDTO){
         CityInformation cityInformation = new CityInformation();
 
         cityInformation.setCityName(cityInformationIncomingDTO.getCityName());
@@ -24,7 +28,7 @@ public class CityInformationResource {
         cityInformation.setSearchRadiusInMeter(cityInformationIncomingDTO.getSearchRadiusInMeter());
 
         MyRepo.insertCityInformation(cityInformation);
-        return (ResponseEntity<?>) ResponseEntity.ok();
+        return ResponseEntity.ok(null);
     }
 
     @RequestMapping(
@@ -40,7 +44,8 @@ public class CityInformationResource {
 
     @RequestMapping(
             method = RequestMethod.DELETE,
-            value = "/cityinformation"
+            value = "/cityinformation",
+            produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<?> deleteCityInformation(@RequestParam("id") long id){
         MyRepo.deleteCityInformation(id);

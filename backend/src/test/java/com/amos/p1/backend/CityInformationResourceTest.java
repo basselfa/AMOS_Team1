@@ -129,12 +129,14 @@ public class CityInformationResourceTest {
             assertThat(allCityInformation.size(), equalTo(1));
         }
 
+    @Test
     void testAddCityInformation(){
             given()
                     .param("cityName", "dortmund")
                     .param("centreLongitude", "52.50877")
                     .param("centreLatitude", "13.50877")
                     .param("searchRadiusInMeter", "63")
+                    .header("Accept", ContentType.JSON.getAcceptHeader())
             .when()
                 .post(base + "/cityinformation") // Url that you want to test
             .then()
