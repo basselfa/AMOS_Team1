@@ -3,7 +3,9 @@ package com.amos.p1.backend;
 import com.amos.p1.backend.data.CityInformation;
 import com.amos.p1.backend.data.ComparisonEvaluationDTO;
 import com.amos.p1.backend.data.EvaluationCandidate;
+import com.amos.p1.backend.database.MyRepo;
 import io.restassured.http.ContentType;
+import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,10 +28,29 @@ public class CityInformationResourceTest {
         private int port;
         private String base;
 
-        //TODO Add Dummy Data
         @BeforeEach
         void setUp() {
             this.base = "http://localhost:" + port + "/withDatabase";
+        }
+
+        @BeforeEach
+        void prepareDatabase() {
+            MyRepo.dropAll();
+
+            CityInformation cityInformation1 = new CityInformation();
+            cityInformation1.setCityName("Berlin");
+            cityInformation1.setCentreLongitude("52.50877");
+            cityInformation1.setCentreLatitude("13.36916");
+            cityInformation1.setSearchRadiusInMeter(5000);
+
+            CityInformation cityInformation2 = new CityInformation();
+            cityInformation2.setCityName("Berlin");
+            cityInformation2.setCentreLongitude("52.50859");
+            cityInformation2.setCentreLatitude("13.36971");
+            cityInformation2.setSearchRadiusInMeter(5000);
+
+            MyRepo.insertCityInformation(cityInformation1);
+            MyRepo.insertCityInformation(cityInformation2);
         }
 
         /**
@@ -63,7 +84,6 @@ public class CityInformationResourceTest {
         @Test
         void testGetAllCityInformationWithUnMarshalling(){
             List<CityInformation> allCityInformation = given()
-                .param("", "") // parameter in the url
             .when()
                 .get(base + "/cityinformation") // Url that you want to test
             .then()
@@ -72,10 +92,65 @@ public class CityInformationResourceTest {
                 .jsonPath()
                 .getList(".", CityInformation.class); //Extract the root json element to a list of String
 
-            //TODO
-            assertThat(allCityInformation.get(0), equalTo("2020-12-19 12:00"));
-            assertThat(allCityInformation.get(1), equalTo("2020-12-19 13:00"));
+            assertThat(allCityInformation.get(0).getCityName(), equalTo("Berlin"));
+            assertThat(allCityInformation.get(1).getCentreLatitude(), equalTo("13.36971"));
         }
+
+        @Test
+        void testDeleteCityInformation(){
+            List<CityInformation> allCityInformation = given()
+            .when()
+                .get(base + "/cityinformation") // Url that you want to test
+            .then()
+                .extract()
+                .body()
+                .jsonPath()
+                .getList(".", CityInformation.class); //Extract the root json element to a list of String
+
+
+            Long cityInformationId = allCityInformation.get(1).getId();
+
+            given()
+                .param("id", cityInformationId)
+            .when()
+                .delete(base + "/cityinformation") // Url that you want to test
+            .then()
+                .statusCode(200);
+
+            allCityInformation = given()
+                .when()
+                    .get(base + "/cityinformation") // Url that you want to test
+                .then()
+                    .extract()
+                    .body()
+                    .jsonPath()
+                    .getList(".", CityInformation.class); //Extract the root json element to a list of String
+
+            assertThat(allCityInformation.size(), equalTo(1));
+        }
+
+    void testAddCityInformation(){
+            given()
+                    .param("cityName", "dortmund")
+                    .param("centreLongitude", "52.50877")
+                    .param("centreLatitude", "13.50877")
+                    .param("searchRadiusInMeter", "63")
+            .when()
+                .post(base + "/cityinformation") // Url that you want to test
+            .then()
+                .statusCode(200);
+
+        List<CityInformation> allCityInformation = given()
+            .when()
+                .get(base + "/cityinformation") // Url that you want to test
+            .then()
+                .extract()
+                .body()
+                .jsonPath()
+                .getList(".", CityInformation.class); //Extract the root json element to a list of String
+
+        assertThat(allCityInformation.size(), equalTo(3));
+    }
 
     }
 
