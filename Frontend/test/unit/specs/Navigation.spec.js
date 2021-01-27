@@ -26,8 +26,8 @@ describe('Navigation', () => {
   it('should contain navigation amos logo', () => {
     expect(wrapper.find('#logo').exists()).toBe(true)
   })
-  it('should contain 4 navigation items', () => {
-    expect(wrapper.findAll('v-list-item-stub').length).toEqual(4)
+  it('should contain 5 navigation items', () => {
+    expect(wrapper.findAll('v-list-item-stub').length).toEqual(5)
   })
 
   afterEach(() => {
