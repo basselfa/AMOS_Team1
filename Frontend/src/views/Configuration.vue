@@ -7,17 +7,17 @@
                 <v-chip ref="form" x-large class="form-chip center">
                     <v-row class="form-row">
                         <v-col cols="4" md="3">
-                            <v-text-field ref="cityName" :v-model="cityName" label="City" required :value="city.cityName">
+                            <v-text-field ref="cityName" v-model="cities[index].cityName" label="City" required :value="city.cityName">
                             </v-text-field>
                         </v-col>
                         <v-col cols="3" md="2">
-                            <v-text-field ref="centreLatitude" :v-model="centreLatitude" :rules="rules" label="Latitudinal value for center" required :value="city.centreLatitude"></v-text-field>
+                            <v-text-field ref="centreLatitude" v-model="cities[index].centreLatitude" :rules="rules" label="Latitudinal value for center" required :value="city.centreLatitude"></v-text-field>
                         </v-col>
                         <v-col cols="3" md="2">
-                            <v-text-field ref="centreLongitude" :v-model="centreLongitude" :rules="rules" label="Longitudinal value for center" required :value="city.centreLongitude"></v-text-field>
+                            <v-text-field ref="centreLongitude" v-model="cities[index].centreLongitude" :rules="rules" label="Longitudinal value for center" required :value="city.centreLongitude"></v-text-field>
                         </v-col>
                         <v-col cols="3" md="2">
-                            <v-text-field ref="searchRadiusInMeter" :v-model="searchRadiusInMeter" label="Radius" required :value="city.searchRadiusInMeter"></v-text-field>
+                            <v-text-field ref="searchRadiusInMeter" v-model="cities[index].searchRadiusInMeter" label="Radius" required :value="city.searchRadiusInMeter"></v-text-field>
                         </v-col>
                         <v-col cols="1" md="1">
                             <v-btn :loading="loading" class="rm-btn" color="error" small @click="removeCity(city.id)">
@@ -50,10 +50,6 @@ export default {
     components: {},
 
     data: () => ({
-        cityName: "",
-        centreLatitude: "",
-        centreLongitude: "",
-        searchRadiusInMeter: "",
         cities: [],
         loading: false,
         rules: [
@@ -106,14 +102,11 @@ export default {
         },
         // TODO Set Timeout
         async postRequestCityData(selectedCity) {
+            console.log(selectedCity.cityName)
             this.loading = true
             var cityAlreadySelected = false;
-            // if (selectedCity.cityName == "" && selectedCity.centreLongitude == "" && selectedCity.centreLatitude == "" && selectedCity.searchRadiusInMeter == "") {
-            //     selectedCity.name = this.cityName;
-            //     selectedCity.centreLongitude = this.centreLongitude;
-            //     selectedCity.centreLatitude = this.centreLatitude;
-            //     selectedCity.searchRadiusInMeter = this.searchRadiusInMeter;
-            // }
+            
+        // ist es unten city.name oder city.cityName?
             for (const city of this.cities) {
                 if (city.name == selectedCity.name || selectedCity != "") {
                     alert("city already selected");
