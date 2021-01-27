@@ -58,7 +58,6 @@ export default {
 
     methods: {
         getRequestCityData: function () {
-            console.log("request triggered");
             axios
                 .get('http://' + window.location.hostname + ':8082/withDatabase/cityinformation', {
                     headers: {
