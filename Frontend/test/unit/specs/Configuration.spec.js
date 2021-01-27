@@ -69,8 +69,9 @@ describe('Configuration', () => {
         error,
       })
 
-    wrapper.vm.getRequestCityData()
 
+    wrapper.vm.getRequestCityData()
+  })
     moxios.wait(() => {
       expect(wrapper.vm.errorMessage).toEqual(
         'Error: Request failed with status code 500'
@@ -79,6 +80,44 @@ describe('Configuration', () => {
     })
   })
 */
+    afterEach(() => {
+      moxios.uninstall()
+      wrapper.destroy()
+    })
+  })
+
+  it('stub response for city deletion request', function (done) {
+    moxios.stubRequest('http://localhost:8082/withDatabase/cityinformation?id=8720', {
+      status: 200,
+      response: [{}]
+    })
+
+    wrapper.vm.removeCity("8720")
+
+    moxios.wait(() => {
+      expect(wrapper.vm.cities).toEqual(
+        []
+      )
+      done()
+    })
+  })
+    it('stub response for city get request', function (done) {
+      const error = new Error('Error: Request failed with status code 500')
+      moxios.stubRequest('http://localhost:8082/withDatabase/cityinformation?id=1', {
+        error,
+      })
+
+
+    wrapper.vm.removeCity("1")
+
+    moxios.wait(() => {
+      expect(wrapper.vm.errorMessage).toEqual(
+        'Error: Request failed with status code 500'
+      )
+      done()
+    })
+  })
+
     afterEach(() => {
       moxios.uninstall()
       wrapper.destroy()
