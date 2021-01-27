@@ -25,7 +25,7 @@
                             </v-btn>
                         </v-col>
                         <v-col cols="1" md="2">
-                            <v-btn :loading="loading" class="rm-btn" color="submit" small @click="postRequestCityData(city)">
+                            <v-btn :loading="loading" class="rm-btn" color="submit" small @click="postRequestCityData(city,city.id)">
                                 Save
                             </v-btn>
                         </v-col>
@@ -101,35 +101,24 @@ export default {
             this.getRequestCityData();
         },
         // TODO Set Timeout
-        async postRequestCityData(selectedCity) {
+        async postRequestCityData(selectedCity, previouscityId) {
             console.log(selectedCity.cityName)
             this.loading = true
-            var cityAlreadySelected = false;
-            
-        // ist es unten city.name oder city.cityName?
-            for (const city of this.cities) {
-                if (city.name == selectedCity.name || selectedCity != "") {
-                    alert("city already selected");
-                    cityAlreadySelected = true;
-                }
-            }
-            if (cityAlreadySelected == false) {
-                const post = await axios
-                    .post('http://' + window.location.hostname + ':8082/withDatabase/cityinformation', selectedCity, {
-                        headers: {
-                            'Access-Control-Allow-Origin': '*',
-                            'Content-Type': 'application/json',
-                            'accept': 'application/json'
-                        },
-                    })
-                    .then()
-                    .catch(error => {
-                        this.errorMessage = error.message
-                        console.error('There was an error!', error)
-                    })
-                this.getRequestCityData();
-            }
-
+            const post = await axios
+                .post('http://' + window.location.hostname + ':8082/withDatabase/cityinformation', selectedCity, {
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                        'Content-Type': 'application/json',
+                        'accept': 'application/json'
+                    },
+                })
+                .then()
+                .catch(error => {
+                    this.errorMessage = error.message
+                    console.error('There was an error!', error)
+                })
+            this.removeCity(previouscityId);
+            this.getRequestCityData();
             this.loading = false
         },
         addRow: function () {
