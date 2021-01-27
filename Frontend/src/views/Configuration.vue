@@ -54,7 +54,7 @@ export default {
         loading: false,
         rules: [
             value => !!value || 'Required.',
-            value => (value && 180 <= value >= -180) || 'Must be between -180 and 180 degrees.',
+            value => (value!='' && (value >= 180|| value <= -180)) || 'Must be between -180 and 180 degrees.',
         ],
     }),
     mounted() {
@@ -71,8 +71,6 @@ export default {
                 })
                 .then(response => {
                     this.cities = [];
-                    console.log("from get:");
-                    console.log(response);
                     response.data.forEach(city => {
                         this.cities.push(city)
                     });
