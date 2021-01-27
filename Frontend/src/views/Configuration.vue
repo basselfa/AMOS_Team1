@@ -11,7 +11,7 @@
                             </v-text-field>
                         </v-col>
                         <v-col cols="3" md="2">
-                            <v-text-field ref="centreLatitude" :v-model="centreLatitude" :rules="rules" label="Latitudinal value for center" required :value="city.centreLatitude">{{centreLatitude}}</v-text-field>
+                            <v-text-field ref="centreLatitude" :v-model="centreLatitude" :rules="rules" label="Latitudinal value for center" required :value="city.centreLatitude"></v-text-field>
                         </v-col>
                         <v-col cols="3" md="2">
                             <v-text-field ref="centreLongitude" :v-model="centreLongitude" :rules="rules" label="Longitudinal value for center" required :value="city.centreLongitude"></v-text-field>
@@ -108,12 +108,12 @@ export default {
         async postRequestCityData(selectedCity) {
             this.loading = true
             var cityAlreadySelected = false;
-            if (selectedCity.cityName == "" && selectedCity.centreLongitude == "" && selectedCity.centreLatitude == "" && selectedCity.searchRadiusInMeter == "") {
-                selectedCity.name = this.cityName;
-                selectedCity.centreLongitude = this.centreLongitude;
-                selectedCity.centreLatitude = this.centreLatitude;
-                selectedCity.searchRadiusInMeter = this.searchRadiusInMeter;
-            }
+            // if (selectedCity.cityName == "" && selectedCity.centreLongitude == "" && selectedCity.centreLatitude == "" && selectedCity.searchRadiusInMeter == "") {
+            //     selectedCity.name = this.cityName;
+            //     selectedCity.centreLongitude = this.centreLongitude;
+            //     selectedCity.centreLatitude = this.centreLatitude;
+            //     selectedCity.searchRadiusInMeter = this.searchRadiusInMeter;
+            // }
             for (const city of this.cities) {
                 if (city.name == selectedCity.name || selectedCity != "") {
                     alert("city already selected");
