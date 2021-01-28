@@ -6,7 +6,7 @@
           <div style="padding: 10px">
             <v-card-title> Traffic Data </v-card-title>
 
-            <v-row justify="center">
+            <v-row justify="center" style="padding: 0px 20px">
               <v-col cols="12" sm="4">
                 <v-autocomplete
                   class="search-bar"
@@ -34,10 +34,10 @@
               </v-col>
             </v-row>
             <v-row>
-              <p style="margin-left: 10px">
+              <small style="padding: 0px 30px; margin-top:-10px">
                 The overlapping incident totals (red) are a subset of the
                 respective number of total incidents.
-              </p>
+              </small>
             </v-row>
             <br />
             <v-progress-circular
