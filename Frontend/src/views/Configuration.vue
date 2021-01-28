@@ -54,7 +54,7 @@ export default {
         loading: false,
         rules: [
             value => !!value || 'Required.',
-            value => (value!='' && (value <= 180 || value >= -180)) || 'Must be between -180 and 180 degrees.',
+            value => (value && (value <= 180 && value >= -180)) || 'Must be between -180 and 180 degrees.',
         ],
     }),
     mounted() {
@@ -141,6 +141,7 @@ export default {
 .form-chip {
     width: 1000px;
     margin: 8px;
+    padding:40px 20px;
     background: rgb(243, 243, 243) !important;
 }
 
@@ -156,5 +157,12 @@ export default {
 
 .rm-btn {
     margin-top: 18px !important
+}
+
+.v-text-field__details {
+  display: inline-block;
+  min-width:120px;
+  white-space: normal;
+  height:30px;
 }
 </style>
