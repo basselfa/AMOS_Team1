@@ -17,6 +17,6 @@ public class RequestCreatorConfigProduction implements RequestCreatorConfig{
 
     @Override
     public RequestCreator getRequestCreator() {
-        return new RequestCreatorDummyBerlinSmall();
+        return new RequestCreatorImpl();
     }
 }

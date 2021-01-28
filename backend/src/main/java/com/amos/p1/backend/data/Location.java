@@ -1,5 +1,7 @@
 package com.amos.p1.backend.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Location {
     private String latitude;
     private String longitude;
@@ -34,10 +36,12 @@ public class Location {
         this.latitude = latitude;
     }
 
+    @JsonIgnore
     public double getLatitudeAsFloat(){
         return Double.parseDouble(latitude);
     }
 
+    @JsonIgnore
     public double getLongitudeAsFloat(){
         return Double.parseDouble(longitude);
     }

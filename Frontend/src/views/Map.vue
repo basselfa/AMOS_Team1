@@ -31,68 +31,167 @@ export default {
     },
 
     methods: {
-        getSearchValue: function(value) {
-            this.executeQuery(value)
+        /**
+         * Get the data according to the search criteria and process it
+         *
+         * @param searchValue Object that contains city, timestamp, and type
+         */
+        getSearchValue: function(searchValue) {
+            this.executeQuery(searchValue)
         },
-        executeQuery: function(value) {
+
+        /**
+         * Get incidents from backend
+         *
+         * @param value Object that contains city, timestamp, and type
+         */
+        async getIncidents(value) {
+            let request_url =
+                'http://' +
+                window.location.hostname +
+                ':8082/withDatabase/incidents?city=' +
+                value.city +
+                '&timestamp=' +
+                value.timestamp
+            if (value.type.length !== 0) {
+                request_url = request_url + '&types=' + value.type.join()
+            }
+            await axios
+                .get(request_url, {
+                    headers: { 'Access-Control-Allow-Origin': '*' },
+                })
+                .then(response => {
+                    this.incidentsData = response.data
+                })
+                .catch(error => {
+                    this.errorMessage = error.message
+                    console.error('There was an error!', error)
+                })
+        },
+        /**
+         * Get incident comparison from backend
+         *
+         * @param value Object that contains city and timestamp
+         */
+        async getComparison(value) {
+            let request_url =
+                'http://' +
+                window.location.hostname +
+                ':8082/withDatabase/comparison?city=' +
+                value.city +
+                '&timestamp=' +
+                value.timestamp
+
+            await axios
+                .get(request_url, {
+                    headers: { 'Access-Control-Allow-Origin': '*' },
+                })
+                .then(response => {
+                    this.comparisonData = response.data
+                })
+                .catch(error => {
+                    this.errorMessage = error.message
+                    console.error('There was an error!', error)
+                })
+        },
+        /**
+         * Get incidents and incident comparison from backend and process the data for the map
+         *
+         * @param value Object that contains city, timestamp, (and type)
+         */
+        executeQuery: async function(value) {
             this.polylines = []
             if (value.city !== null && value.timestamp !== null) {
-                let request_url =
-                    'http://' +
-                    window.location.hostname +
-                    ':8082/withDatabase/incidents?city=' +
-                    value.city +
-                    '&timestamp=' +
-                    value.timestamp
-                if (value.type.length !== 0) {
-                    request_url = request_url + '&types=' + value.type.join()
-                }
-                console.log(request_url)
-                axios
-                    .get(request_url, {
-                        headers: { 'Access-Control-Allow-Origin': '*' },
-                    })
-                    .then(response => {
-                        this.passCoordinates(response.data)
-                    })
-                    .catch(error => {
-                        this.errorMessage = error.message
-                        console.error('There was an error!', error)
-                    })
+                await this.getIncidents(value)
+                await this.getComparison(value)
+                this.passCoordinates(this.incidentsData)
             }
         },
+
         /**
          * Processes the incident data of the selected city.
          *
-         * @param cityData Incident data from backend
-         * @param coordinatesArray Processed strings into coordinates
-         * @param lineArray Array which collects the coordinates of one incident
-         * @param latitudinal Latitudinal coordinate of a line edge
-         * @param longitudinal Longitidinal coordinate of a line edge
+         * @param incidentsData Incidents data from backend
          */
-        passCoordinates: function(cityData) {
-            for (var i = 0; i < cityData.length; i++) {
-                var coordinatesArray = cityData[i].edges.split(',')
-                var lineArray = []
-                for (var j = 0; j < coordinatesArray.length; j++) {
-                    let latitudinal = coordinatesArray[j].split(':')[0]
-                    let longitudinal = coordinatesArray[j].split(':')[1]
-                    if (
-                        typeof latitudinal !== 'undefined' &&
-                        typeof longitudinal !== 'undefined'
-                    ) {
-                        lineArray.push([latitudinal, longitudinal])
-                    }
-                }
+        passCoordinates(incidentsData) {
+            for (var i = 0; i < incidentsData.length; i++) {
+                // get edges for polyline
+                var lineArray = this.getEdges(incidentsData[i])
+                // get color for polyline
+                var color = this.compareIncidents(incidentsData[i])
+                // add polyline to the polylines array
                 this.polylines.push({
                     latlngs: lineArray,
-                    color: 'blue',
-                    criticality: cityData[i].size,
-                    description: cityData[i].description !== 'undefined' ? cityData[i].description.split('&')[1] : 'Description not available',
-                    length: cityData[i].lengthInMeter,
-                    type: cityData[i].type,
+                    color: color,
+                    criticality: incidentsData[i].size,
+                    description: incidentsData[i].description
+                        ? incidentsData[i].description.includes('&')
+                            ? incidentsData[i].description.split('&')[1]
+                            : incidentsData[i].description
+                        : 'Description not available',
+                    length: incidentsData[i].lengthInMeter,
+                    type: incidentsData[i].type,
                 })
             }
+        },
+
+        /**
+         * Get incident edges for the map polylines
+         *
+         * @param incident An incident object
+         */
+        getEdges(incident) {
+            var coordinatesArray = incident.edges.split(',')
+            var lineArray = []
+            for (var j = 0; j < coordinatesArray.length; j++) {
+                let latitudinal = coordinatesArray[j].split(':')[0]
+                let longitudinal = coordinatesArray[j].split(':')[1]
+                if (
+                    typeof latitudinal !== 'undefined' &&
+                    typeof longitudinal !== 'undefined'
+                ) {
+                    lineArray.push([latitudinal, longitudinal])
+                }
+            }
+            return lineArray
+        },
+
+        /**
+         * Check if incidents for both providers are overlapping and assign polyline colors
+         *
+         * @param incident An incident object
+         */
+        compareIncidents(incident) {
+            // check if overlapping by checking if the incident is contained in comparisonData
+            let overlapping =
+                this.comparisonData.some(
+                    comparisonIncident =>
+                        comparisonIncident.tomTomIncidentId === incident.id
+                ) ||
+                this.comparisonData.some(
+                    comparisonIncident =>
+                        comparisonIncident.hereIncidentId === incident.id
+                )
+            // get incident provider
+            let here = incident.provider == '0'
+            let tomtom = incident.provider == '1'
+
+            // assign colors
+            let color
+            // tomtom = yellow
+            if (tomtom) {
+                color = 'rgb(255, 233, 66)'
+            }
+            // here = blue
+            else if (here) {
+                color = 'rgb( 27, 143, 209)'
+            }
+            // same = red
+            if (overlapping) {
+                color = 'rgb(255, 85, 18)'
+            }
+
+            return color
         },
     },
 }

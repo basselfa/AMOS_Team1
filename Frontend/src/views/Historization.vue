@@ -92,13 +92,13 @@ export default {
     },
     methods: {
         async fetchData() {
-            await axios 
+            await axios
                 .get('http://' + window.location.hostname + ':8082/withDatabase/cities', {
                     headers: { 'Access-Control-Allow-Origin': '*' },
                 })
                 .then(response => {
                     let cities = []
-                    response.data.map(function(item) {  
+                    response.data.map(function(item) {
                     cities.push(item.city);
                     })
                     this.cities = cities
@@ -120,10 +120,10 @@ export default {
                     comparison: [],
                 }
                 this.loading = true
-                // get comparison data   
+                // get comparison data
                 await axios
                     .get(
-                        'http://' + window.location.hostname + ':8082/demo/comparisonEvaluationOverTime/?city=' +
+                        'http://' + window.location.hostname + ':8082/withDatabase/comparisonEvaluationOverTime/?city=' +
                             this.city,
                         {
                             headers: { 'Access-Control-Allow-Origin': '*' },

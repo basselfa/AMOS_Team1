@@ -1,6 +1,7 @@
 package com.amos.p1.backend;
 
 import com.amos.p1.backend.data.CityInformation;
+import com.amos.p1.backend.data.CityInformationIncomingDTO;
 import com.amos.p1.backend.database.MyRepo;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -8,10 +9,22 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
+@CrossOrigin(origins = "*")
+@RequestMapping("withDatabase")
 public class CityInformationResource {
 
-    @PostMapping("/cityinformation")
-    public ResponseEntity<?> addCityInformation(@RequestBody CityInformation cityInformation){
+    @PostMapping(
+            value ="/cityinformation"
+    )
+    public ResponseEntity<?> addCityInformation(@RequestBody CityInformationIncomingDTO cityInformationIncomingDTO){
+        CityInformation cityInformation = new CityInformation();
+
+        cityInformation.setCityName(cityInformationIncomingDTO.getCityName());
+        cityInformation.setCentreLatitude(cityInformationIncomingDTO.getCentreLatitude());
+        cityInformation.setCentreLongitude(cityInformationIncomingDTO.getCentreLongitude());
+        cityInformation.setSearchRadiusInMeter(cityInformationIncomingDTO.getSearchRadiusInMeter());
+
         MyRepo.insertCityInformation(cityInformation);
         return ResponseEntity.ok(null);
     }
@@ -29,7 +42,8 @@ public class CityInformationResource {
 
     @RequestMapping(
             method = RequestMethod.DELETE,
-            value = "/cityinformation"
+            value = "/cityinformation",
+            produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<?> deleteCityInformation(@RequestParam("id") long id){
         MyRepo.deleteCityInformation(id);
