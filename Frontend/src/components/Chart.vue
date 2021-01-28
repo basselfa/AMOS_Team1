@@ -5,10 +5,11 @@ import router from '../router'
 
 export default {
     extends: Bar,
-    props: ['city', 'chartDataCollection'],
+    props: ['city', 'chartDataCollection', 'legend'],
     data: function() {
         // needed so we can access the city value inside the onClick function
-        const cityName = this.city;
+        const cityName = this.city
+        const ifLegend = this.legend
         return { 
             // chart options
             options: {
@@ -54,7 +55,7 @@ export default {
                     ],
                 },
                 legend: {
-                    display: true,
+                    display: ifLegend,
                 },
                 tooltips: {
                     enabled: true,
