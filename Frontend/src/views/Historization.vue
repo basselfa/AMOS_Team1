@@ -35,6 +35,9 @@
                                 />
                             </v-col>
                         </v-row>
+                        <v-row>
+                          <p style="margin-left: 10px">The overlapping incident totals (red) are a subset of the respective number of total incidents. </p>
+                        </v-row>
                     </div>
                 </v-card>
             </v-col>
