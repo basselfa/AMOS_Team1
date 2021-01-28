@@ -61,7 +61,7 @@
             </div>
             <div
               id="charts-container"
-              v-if="loading != false && chartDataCollection == null"
+              v-if="loading == false && chartDataCollection == null"
             >
               <div id="chart-comparison-default">
                 <chart
@@ -92,7 +92,7 @@ export default {
   data() {
     return {
       errorMessage: null,
-      loading: null,
+      loading: false,
       city: null,
       cities: [],
       startTime: "",
@@ -105,6 +105,7 @@ export default {
         here: [],
         comparison: [],
       },
+      chartDataCollection: null,
       chartDataDefault: {
               labels: ['', '', ''],
               datasets: [
