@@ -20,6 +20,8 @@ export default {
     },
 
     data: () => ({
+        incidentsData: [],
+        comparisonData: [],
         polylines: [],
         cityCenter: ''
     }),
