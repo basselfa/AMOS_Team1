@@ -1,8 +1,8 @@
 <template>
-<div>
+<div class="config-container">
     <v-card class="mx-auto config-card" max-width="900">
         <v-card-text>
-            <div>This selection will appear for your map and historization data. <br> Select the cities to be investigated <br> by amos traffic tracker.</div>
+            <div>This selection will appear for your map and historization data. <br> Select the cities to be investigated <br> by the AMOS traffic tracker.</div>
             <div v-for="(city,index) in cities" :key="index">
                 <v-chip ref="form" x-large class="form-chip center">
                     <v-row class="form-row">
@@ -132,37 +132,51 @@ export default {
 </script>
 
 <style>
+
+.config-container {
+    position: absolute;
+    top: 80px;
+    padding-bottom:30px;
+}
 .config-card {
-    margin-top: max(150px, 8%);
-    margin-left: max(150px, 8%);
-    border-radius: 30px !important;
+  border-radius: 30px !important;
+  width: calc(100vw - 400px);
+  margin: 0;
+
+  left: 300px;
+  border-radius: 20px;
 }
 
-.form-chip {
+.config-card .form-chip {
     width: 1000px;
-    margin: 8px;
-    padding:40px 20px;
+    margin-top: 8px;
+    padding:50px 20px;
     background: rgb(243, 243, 243) !important;
+    border-radius:10px;
 }
 
-.form-row {
+.config-card .form-row {
     /* width: 800px; */
 }
 
-.center {
+.config-card .center {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.rm-btn {
-    margin-top: 18px !important
+.config-card .rm-btn {
+    margin-top: 40px !important
 }
 
-.v-text-field__details {
+.config-card .v-text-field__details {
   display: inline-block;
   min-width:120px;
   white-space: normal;
   height:30px;
+}
+
+.config-card .v-text-field {
+    margin-top:25px;
 }
 </style>
