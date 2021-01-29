@@ -29,6 +29,7 @@ public class Evaluation {
                             candidate.addMatcherToMatcherList(new AngleMatcher(herreIncident, tomTomIncident));
                             candidate.addMatcherToMatcherList(new SearchRadiusMatcher(herreIncident, tomTomIncident));
                             candidate.addMatcherToMatcherList(new DescriptionMatcher(herreIncident, tomTomIncident));
+                            candidate.addMatcherToMatcherList(new LengthMatcher(herreIncident, tomTomIncident));
 
                             // evaluate Matchers ans store results in EvaluationCandidate
                             candidate.setScore(
