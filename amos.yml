@@ -1,0 +1,20 @@
+services:
+  mysql:
+    network_mode: host
+    image: mysql:8.0.22
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_DATABASE=testdb3
+  backend:
+    network_mode: host
+    ports:
+      - "8082:8082"
+    image: amostraffic/backend:kang
+  frontend:
+    network_mode: host
+    ports:
+      - "8080:8080"
+    image: amostraffic/frontend:kang
