@@ -19,7 +19,9 @@ import java.net.UnknownHostException;
 @EnableScheduling
 public class BackendApplication {
  
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
+
+		Thread.sleep(60000);
 		SpringApplication.run(BackendApplication.class, args);
 	}
 

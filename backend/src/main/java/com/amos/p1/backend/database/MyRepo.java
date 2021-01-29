@@ -1,10 +1,13 @@
 package com.amos.p1.backend.database;
 
+import com.amos.p1.backend.Helper;
 import com.amos.p1.backend.data.CityInformation;
 import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.data.Request;
+import com.mysql.cj.jdbc.MysqlDataSource;
 import org.apache.ibatis.jdbc.ScriptRunner;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -13,9 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
@@ -82,8 +83,13 @@ public class MyRepo {
             Connection connection = DriverManager.getConnection(url , "root", "root");
 
             ScriptRunner scriptRunner = new ScriptRunner(connection);
-            FileReader fileReader = new FileReader("src/main/resources/schema.sql");
-            scriptRunner.runScript(new BufferedReader(fileReader));
+
+            ClassPathResource classPathResource = new ClassPathResource("schema.sql");
+            InputStream schemaInputstream = classPathResource.getInputStream();
+            Reader targetReader = new InputStreamReader(schemaInputstream);
+
+            scriptRunner.runScript(new BufferedReader(targetReader));
+            targetReader.close();
         }catch (Exception e){
             throw new IllegalStateException(e);
         }
