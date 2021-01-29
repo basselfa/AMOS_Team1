@@ -1,7 +1,7 @@
 <template>
     <div>
         <search @change="getSearchValue($event)" />
-        <open-street-map :polylines="polylines" />
+        <open-street-map :polylines="polylines" :cityCenter="cityCenter" />
     </div>
 </template>
 
@@ -21,6 +21,7 @@ export default {
 
     data: () => ({
         polylines: [],
+        cityCenter: ''
     }),
 
     props: ['mapData'],
@@ -40,6 +41,32 @@ export default {
             this.executeQuery(searchValue)
         },
 
+        /**
+         * Get incidents from backend
+         *
+         * @param value Object that contains city, timestamp, and type
+         */
+        async getCenter(value) {
+            let request_url =
+                'http://' +
+                window.location.hostname +
+                ':8082/withDatabase/cities'
+            await axios
+                .get(request_url, {
+                    headers: { 'Access-Control-Allow-Origin': '*' },
+                })
+                .then(response => {
+                    for (let i = 0; i < response.data.length; i++) {
+                        if (response.data[i].city == value.city) {
+                            this.cityCenter = response.data[i].centerPoint
+                        }
+                    }
+                })
+                .catch(error => {
+                    this.errorMessage = error.message
+                    console.error('There was an error!', error)
+                })
+        },
         /**
          * Get incidents from backend
          *
@@ -102,6 +129,7 @@ export default {
         executeQuery: async function(value) {
             this.polylines = []
             if (value.city !== null && value.timestamp !== null) {
+                await this.getCenter(value)
                 await this.getIncidents(value)
                 await this.getComparison(value)
                 this.passCoordinates(this.incidentsData)
