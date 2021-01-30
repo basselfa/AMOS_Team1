@@ -49,7 +49,7 @@ public class EvaluationTest {
     }
 
     @Test
-    void testManifolds() {
+    void testManifoldsLocal() {
         Evaluation evaluation = new Evaluation();
         Request req = new Request();
         List<Incident> incidents = new ArrayList<>();
