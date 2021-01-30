@@ -44,7 +44,7 @@ public class Evaluation {
                                     candidate.getMatcherList().stream().map(matcher -> matcher.getDescription()).reduce("", (a, b) -> (a + b))
                             );
 
-                            candidate.getMatcherByClass(AngleMatcher.class);
+                            //candidate.getMatcherByClass(AngleMatcher.class);
 
 
                             return candidate;
@@ -62,7 +62,8 @@ public class Evaluation {
         List<EvaluationCandidate> unDroppedElements = evaluationCandidateList.parallelStream().filter(
                 candidate -> !candidate.isDropped()
         ).filter(
-                c -> c.getMatcherList().stream().filter(m -> m instanceof SearchRadiusMatcher).map(m -> ((SearchRadiusMatcher) m).getLegthDifferencePercentage() < 60d).anyMatch(r -> r == true)
+                // c -> c.getMatcherList().stream().filter(m -> m instanceof SearchRadiusMatcher).map(m -> ((SearchRadiusMatcher) m).getLegthDifferencePercentage() < 60d).anyMatch(r -> r == true)
+                c -> ((SearchRadiusMatcher) c.getMatcherByClass(SearchRadiusMatcher.class)).getFromAndToDistanceSum() < 60d
         ).collect(Collectors.toList());
 
         // collect all Mainfolds
@@ -103,7 +104,7 @@ public class Evaluation {
                 double smallestDistancePionts = highestConfidenceCandidates.stream().mapToDouble(c -> c.getMatcherByClass(SearchRadiusMatcher.class).getConfidence()).min().getAsDouble();
 //                double smallestDistancePionts = highestConfidenceCandidates.stream().mapToDouble(c -> new c.getMatcherByClass<SearchRadiusMatcher>().get().getConfidence()).min().getAsDouble();
 
-               highestConfidenceCandidates = highestConfidenceCandidates.stream().filter(c -> c.getMatcherList().stream().filter(m -> m instanceof SearchRadiusMatcher).map(m -> ((SearchRadiusMatcher) m).getFromAndToDistanceSum() == smallestDistancePionts).anyMatch(r -> r == true)).collect(Collectors.toList());
+                highestConfidenceCandidates = highestConfidenceCandidates.stream().filter(c -> c.getMatcherList().stream().filter(m -> m instanceof SearchRadiusMatcher).map(m -> ((SearchRadiusMatcher) m).getFromAndToDistanceSum() == smallestDistancePionts).anyMatch(r -> r == true)).collect(Collectors.toList());
 
             }
             Optional<EvaluationCandidate> cacndidate = highestConfidenceCandidates.stream().findFirst();
