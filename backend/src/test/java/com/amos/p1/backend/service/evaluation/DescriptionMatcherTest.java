@@ -58,6 +58,7 @@ class DescriptionMatcherTest {
         assertThat(descriptionMatcher.getConfidence(), equalTo(0));
         assertThat(descriptionMatcher.isDropped(), equalTo(true));
     }
+
     @Test
     void testNoNullException() {
         Incident incident1 = new Incident();

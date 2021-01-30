@@ -37,7 +37,7 @@ describe('Configuration', () => {
     expect(wrapper.find('.v-chip__content').exists()).toBe(true)
   })
 
-  it('stub response for city get request', function (done) {
+  it('should get city information from request', function (done) {
     moxios.stubRequest('http://localhost:8082/withDatabase/cityinformation', {
       status: 200,
       response: [{
@@ -62,14 +62,75 @@ describe('Configuration', () => {
       done()
     })
   })
-  /*
-    it('stub response for city get request', function (done) {
-      const error = new Error('Error: Request failed with status code 500')
+
+  it('should get unaccptabe values for latitude&longitude in city information from request', function (done) {
+    moxios.stubRequest('http://localhost:8082/withDatabase/cityinformation', {
+      status: 200,
+      response: [{
+        name: "Berlin",
+        centerLatitude: "190",
+        centerLongitude: "190",
+        searchRadiusInMeter: "50"
+      }]
+    })
+
+    wrapper.vm.getRequestCityData()
+
+    moxios.wait(() => {
+      expect(wrapper.vm.cities).toEqual(
+        [{
+          name: "Berlin",
+          centerLatitude: "190",
+          centerLongitude: "190",
+          searchRadiusInMeter: "50"
+        }]
+      )
+      done()
+    })
+  })
+  
+    it('should get error for city information from request', function (done) {
+      const error = new Error('Request failed with status code 500')
       moxios.stubRequest('http://localhost:8082/withDatabase/cityinformation', {
+        status:500,
+        response: error,
+      })
+
+
+    wrapper.vm.getRequestCityData()
+
+    moxios.wait(() => {
+      expect(wrapper.vm.errorMessage).toEqual(
+        'Request failed with status code 500'
+      )
+      done()
+    })
+  })
+
+
+  it('should remove a city', async () => {
+    moxios.stubRequest('http://localhost:8082/withDatabase/cityinformation?id=8720', {
+      status: 200,
+      response: [{}]
+    })
+
+    await wrapper.vm.removeCity("8720")
+
+    moxios.wait(() => {
+      expect(wrapper.vm.cities).toEqual(
+        []
+      )
+      done()
+    })
+  })
+
+    it('should get an error when removing city', async () => {
+      const error = new Error('Error: Request failed with status code 500')
+      moxios.stubRequest('http://localhost:8082/withDatabase/cityinformation?id=1', {
         error,
       })
 
-    wrapper.vm.getRequestCityData()
+    await wrapper.vm.removeCity("1")
 
     moxios.wait(() => {
       expect(wrapper.vm.errorMessage).toEqual(
@@ -78,7 +139,7 @@ describe('Configuration', () => {
       done()
     })
   })
-*/
+
     afterEach(() => {
       moxios.uninstall()
       wrapper.destroy()

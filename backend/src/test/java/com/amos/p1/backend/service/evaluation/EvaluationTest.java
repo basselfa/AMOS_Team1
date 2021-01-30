@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.in;
 
 public class EvaluationTest {
 
@@ -39,21 +40,59 @@ public class EvaluationTest {
         List<Incident> tomTomIncidents = request.getIncidents().stream().filter(e -> e.getProvider().equals("1")).collect(Collectors.toList());
 
         // coorect size
-        assertThat( evaluationCandidateList.size(),equalTo( herreIncidents.size() * tomTomIncidents.size()));
+        assertThat(evaluationCandidateList.size(), equalTo(herreIncidents.size() * tomTomIncidents.size()));
 
         // containing Matchers
         evaluationCandidateList.forEach(e -> {
-            assertThat( e.getMatcherList().size(), equalTo(3));
+            assertThat(e.getMatcherList().size(), equalTo(4));
         });
     }
 
     @Test
     void testManifolds() {
         Evaluation evaluation = new Evaluation();
-        List<EvaluationCandidate> evaluationCandidateList = evaluation.calculateCandidates(request);
+        Request req = new Request();
+        List<Incident> incidents = new ArrayList<>();
+
+        // 0 and 1 should be matching
+
+        incidents.add(getBaseIncident(true, 0));
+
+        Incident inc = getBaseIncident(false, 1);
+        inc.setDescription("Accident");
+        incidents.add(inc);
+
+        inc = getBaseIncident(false, 2);
+        inc.setDescription("Bullshit");
+        incidents.add(inc);
+
+
+        req.setIncidents(incidents);
+
+
+        List<EvaluationCandidate> evaluationCandidateList = evaluation.calculateCandidates(req);
         List<EvaluationCandidate> reEvaluatedCandidateList = evaluation.dropManifolds(evaluationCandidateList);
 
+        assertThat(evaluationCandidateList.size(), equalTo(2));
+        assertThat(reEvaluatedCandidateList.get(0).getTomTomIncident().getId(), equalTo(1L));
+
+
         //todo: find good test case
+    }
+
+    private Incident getBaseIncident(boolean here, long id) {
+        Incident incident = new Incident();
+        incident.setStartPositionLatitude("52.0");
+        incident.setStartPositionLongitude("13.0");
+        incident.setEndPositionLatitude("52.0");
+        incident.setEndPositionLongitude("13.0");
+        incident.setType(Incident.IncidentTypes.ACCIDENT.toString());
+        incident.setDescription("An Accident");
+        incident.setProvider(here ? "0" : "1");
+        incident.setLengthInMeter(50);
+        incident.setId(id);
+
+        return incident;
     }
 
 
@@ -85,11 +124,11 @@ public class EvaluationTest {
         Evaluation evaluation = new Evaluation();
         List<EvaluationCandidate> evaluationCandidateList = evaluation.calculateCandidates(req);
 
-        assertThat( evaluationCandidateList.size() , equalTo(1));
+        assertThat(evaluationCandidateList.size(), equalTo(1));
 
         List<EvaluationCandidate> reEvaluatedCandidateList = evaluation.dropManifolds(evaluationCandidateList);
 
-        assertThat( reEvaluatedCandidateList.size() , equalTo(1));
+        assertThat(reEvaluatedCandidateList.size(), equalTo(1));
 
     }
 
@@ -119,12 +158,10 @@ public class EvaluationTest {
         Evaluation evaluation = new Evaluation();
         List<EvaluationCandidate> evaluationCandidateList = evaluation.calculateCandidates(req);
 
-        assertThat( evaluationCandidateList.size() , equalTo(1));
+        assertThat(evaluationCandidateList.size(), equalTo(1));
 
         List<EvaluationCandidate> reEvaluatedCandidateList = evaluation.dropManifolds(evaluationCandidateList);
 
-        assertThat( reEvaluatedCandidateList.size() , equalTo(0));
+        assertThat(reEvaluatedCandidateList.size(), equalTo(0));
     }
-
-
 }
