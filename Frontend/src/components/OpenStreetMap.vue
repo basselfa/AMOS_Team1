@@ -2,6 +2,7 @@
   <div class="map-wrapper">
     <l-map ref="map" id="osm-map" :zoom="zoom" :center="center" :options="mapOptions">
       <l-tile-layer :url="url" :attribution="attribution" />
+      <v-polyline-decorator v-for="(polyline,index) in polylines" :key="index" :paths="polyline.latlngs" :patterns="patterns"></v-polyline-decorator>
       <l-polyline
         v-for="(polyline,index) in polylines" :key="index"
         :lat-lngs="polyline.latlngs"
@@ -32,6 +33,9 @@ import {
   LPopup,
   LTooltip,
 } from "vue2-leaflet";
+import Vue2LeafletPolylinedecorator from 'vue2-leaflet-polylinedecorator'
+import L from 'leaflet'
+
 export default {
   name: "OpenStreetMap",
   props: ['polylines', 'cityCenter'],
@@ -41,6 +45,8 @@ export default {
     LMarker,
     LTooltip,
     LPolyline,
+    
+      'v-polyline-decorator': Vue2LeafletPolylinedecorator
   },
 watch: { 
     cityCenter: {
@@ -53,6 +59,7 @@ watch: {
     },
   data() {
     return {
+
       zoom: 13,
       center: latLng(52.515000, 13.3800575),
       url: "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",
@@ -63,6 +70,10 @@ watch: {
       },
       showMap: true,
       markerLatLng: [52.509041, 13.330550],
+      patterns: [
+        { offset: 12, repeat: 25, symbol: L.Symbol.dash({pixelSize: 10, pathOptions: {color: '#f00', weight: 2}}) },
+        { offset: 0, repeat: 25, symbol: L.Symbol.dash({pixelSize: 0}) }
+      ],
     };
   },
 };
