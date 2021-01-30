@@ -2,24 +2,20 @@ package com.amos.p1.backend;
 
 import com.amos.p1.backend.data.CityInformation;
 import com.amos.p1.backend.data.CityInformationIncomingDTO;
-import com.amos.p1.backend.data.ComparisonEvaluationDTO;
-import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.database.MyRepo;
 import io.restassured.http.ContentType;
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.TestPropertySource;
 
-import java.util.Date;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.greaterThan;
+
 
 
 @TestPropertySource(properties = "app.scheduling.enable=false")
