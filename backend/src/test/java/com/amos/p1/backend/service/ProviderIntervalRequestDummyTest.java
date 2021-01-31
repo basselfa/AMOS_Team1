@@ -17,8 +17,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class ProviderIntervalRequestDummyTest {
 
-    private final ProviderIntervalRequest providerIntervalRequest = new ProviderIntervalRequest(new RequestCreatorConfigDevelopment(), new CityBoundingBoxServiceConfigDevelopment());
-
+    private ProviderIntervalRequest providerIntervalRequest;
 
     public ProviderIntervalRequestDummyTest(){
         MyRepo.setUseTestDatabase(true);
@@ -26,6 +25,10 @@ public class ProviderIntervalRequestDummyTest {
 
     @BeforeEach
     void setUp(){
+        providerIntervalRequest = new ProviderIntervalRequest(
+                new RequestCreatorConfigDevelopment(),
+                new CityBoundingBoxServiceConfigDevelopment()
+        );
 
         System.out.println("reintialising Database");
         MyRepo.dropAll();
