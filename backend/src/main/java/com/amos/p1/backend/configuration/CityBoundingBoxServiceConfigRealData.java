@@ -13,13 +13,13 @@ import org.springframework.stereotype.Component;
 public class CityBoundingBoxServiceConfigRealData implements CityBoundingBoxServiceConfig{
 
     public CityBoundingBoxServiceConfigRealData(){
-        System.out.println("Using CityBoundingBox Service Config for production");
+        System.out.println("Using CityBoundingBox Service Config for real data");
+        saveDummyCityInformationIntoDb();
     }
 
     @Override
     public CityBoundingBoxesService getCityBoundBoxesService() {
 
-        saveDummyCityInformationIntoDb();
 
         return new CityBoundingBoxesServiceImpl();
     }

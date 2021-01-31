@@ -14,10 +14,13 @@ import org.springframework.stereotype.Component;
 @Profile("default")
 public class CityBoundingBoxServiceConfigDevelopment implements CityBoundingBoxServiceConfig{
 
+    public CityBoundingBoxServiceConfigDevelopment(){
+        System.out.println("Using CityBoundingBox Service Config for development");
+        saveDummyCityInformationIntoDb();
+    }
+
     @Override
     public CityBoundingBoxesService getCityBoundBoxesService() {
-        saveDummyCityInformationIntoDb();
-
         return new CityBoundingBoxesServiceImpl();
     }
 
