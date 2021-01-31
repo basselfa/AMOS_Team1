@@ -38,12 +38,12 @@ public class HereNormalization implements JsonToIncident {
         }
     }
 
-    private String mapIncidentType(String incidentStr) {
+    private Incident.IncidentTypes mapIncidentType(String incidentStr) {
         try {
-            return HereIncidents.valueOf(incidentStr.toUpperCase()).toString();
+            return HereIncidents.valueOf(incidentStr.toUpperCase()).incidentType;
         } catch (IllegalArgumentException ex) {
             // todo: log - there is a new incident type defined by the API
-            return Incident.IncidentTypes.MISC.toString();
+            return Incident.IncidentTypes.MISC;
         }
     }
 

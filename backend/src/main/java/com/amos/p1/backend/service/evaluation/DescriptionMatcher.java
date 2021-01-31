@@ -30,7 +30,7 @@ public class DescriptionMatcher extends Matcher {
 
     @Override
     public boolean isDropped() {
-        return confidence == 0;
+        return false;
     }
 
     @Override
