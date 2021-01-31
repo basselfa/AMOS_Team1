@@ -101,6 +101,7 @@ export default {
         async postRequestCityData(selectedCity, previouscityId) {
             console.log(selectedCity.cityName)
             this.loading = true
+            selectedCity.searchRadiusInMeter = parseInt(selectedCity.searchRadiusInMeter);
             const post = await axios
                 .post('http://' + window.location.hostname + ':8082/withDatabase/cityinformation', selectedCity, {
                     headers: {
