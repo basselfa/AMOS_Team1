@@ -12,7 +12,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BerlinTest {
 
-    private final List<Incident> incidentList;
+    private List<Incident> incidentList;
+
 
     public BerlinTest(){
         String json = Helper.getFileResourceAsString("normalization/TomTomData/Berlin.json");
@@ -25,6 +26,16 @@ public class BerlinTest {
     void testIncidentAmount(){
         String incidentsJson = Helper.getIncidentListMarshalling(incidentList);
         System.out.println(incidentsJson);
+    }
+
+    @Test
+    void testIncidentTypes(){
+        String json = Helper.getFileResourceAsString("normalization/TomTomData/Berlin.json");
+
+        JsonToIncident jsonNormalizer = new TomTomNormalization();
+        incidentList = jsonNormalizer.normalize(json);
+
+        assertEquals("LANERESTRICTION", incidentList.get(0).getType());
     }
 
 
