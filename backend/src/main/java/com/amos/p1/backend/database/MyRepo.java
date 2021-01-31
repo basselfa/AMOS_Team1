@@ -42,7 +42,7 @@ public class MyRepo {
     private MyRepo() {
 
         final String elasticIp = getHostAdress();
-        url = "jdbc:mysql://" + elasticIp + ":3306/testdb3?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin&createDatabaseIfNotExist=true";
+        url = "jdbc:mysql://" + "localhost" + ":3306/testdb3?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin&createDatabaseIfNotExist=true";
         System.out.println("Connect to db: " + url);
         intialiseDB(url);
 
