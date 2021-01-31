@@ -71,7 +71,7 @@ export default {
             })
             .then(response => {
                 let cities = []
-                response.data.map(function(item) {  
+                response.data.map(function(item) {
                     cities.push(item.city);
                 })
                 this.cities = cities

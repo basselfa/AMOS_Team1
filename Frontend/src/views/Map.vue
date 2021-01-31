@@ -103,7 +103,9 @@ export default {
             this.polylines = []
             if (value.city !== null && value.timestamp !== null) {
                 await this.getIncidents(value)
+                console.log("Incidents received: " + this.incidentsData.length)
                 await this.getComparison(value)
+                console.log("Comparison incidents received: " +this.comparisonData.length)
                 this.passCoordinates(this.incidentsData)
             }
         },
@@ -188,6 +190,7 @@ export default {
             }
             // same = red
             if (overlapping) {
+                console.log("Overlapping found")
                 color = 'rgb(255, 85, 18)'
             }
 

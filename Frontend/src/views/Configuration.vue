@@ -17,7 +17,7 @@
                             <v-text-field ref="centreLongitude" v-model="cities[index].centreLongitude" :rules="rules" label="Longitudinal value for center" required :value="city.centreLongitude"></v-text-field>
                         </v-col>
                         <v-col cols="3" md="2">
-                            <v-text-field ref="searchRadiusInMeter" v-model="cities[index].searchRadiusInMeter" label="Radius" required :value="city.searchRadiusInMeter"></v-text-field>
+                            <v-text-field ref="searchRadiusInMeter" v-model="cities[index].searchRadiusInMeter" label="Radius in meter" required :value="city.searchRadiusInMeter"></v-text-field>
                         </v-col>
                         <v-col cols="1" md="1">
                             <v-btn :loading="loading" class="rm-btn" color="error" small @click="removeCity(city.id)">
@@ -54,7 +54,7 @@ export default {
         loading: false,
         rules: [
             value => !!value || 'Required.',
-            value => (value!='' && (value <= 180 || value >= -180)) || 'Must be between -180 and 180 degrees.',
+            value => (value && (value <= 180 && value >= -180)) || 'Must be between -180 and 180 degrees.',
         ],
     }),
     mounted() {
@@ -101,6 +101,7 @@ export default {
         async postRequestCityData(selectedCity, previouscityId) {
             console.log(selectedCity.cityName)
             this.loading = true
+            selectedCity.searchRadiusInMeter = parseInt(selectedCity.searchRadiusInMeter);
             const post = await axios
                 .post('http://' + window.location.hostname + ':8082/withDatabase/cityinformation', selectedCity, {
                     headers: {
@@ -141,6 +142,7 @@ export default {
 .form-chip {
     width: 1000px;
     margin: 8px;
+    padding:40px 20px;
     background: rgb(243, 243, 243) !important;
 }
 
@@ -156,5 +158,12 @@ export default {
 
 .rm-btn {
     margin-top: 18px !important
+}
+
+.v-text-field__details {
+  display: inline-block;
+  min-width:120px;
+  white-space: normal;
+  height:30px;
 }
 </style>

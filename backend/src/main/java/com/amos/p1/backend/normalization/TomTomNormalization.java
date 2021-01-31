@@ -43,6 +43,16 @@ public class TomTomNormalization implements JsonToIncident {
         }
     }
 
+
+    private Incident.IncidentTypes mapIncidentType(String incidentStr) {
+        try {
+            return TomTomNormalization.TomTomIncidents.valueOf(incidentStr.toUpperCase()).value;
+        } catch (IllegalArgumentException ex) {
+            // todo: log - there is a new incident type defined by the API
+            return Incident.IncidentTypes.MISC;
+        }
+    }
+
     private String mapICNumberToString(Integer ic) {
         String[] icStrs = {
                 "UNKNOWN",
@@ -76,14 +86,25 @@ public class TomTomNormalization implements JsonToIncident {
 
          //   incJObj.setTrafficId(Long.valueOf(incJSONObj.getString("id").substring(0, 5), 16)); // ID is hex and way to big for a long therefore as workaround cut to 5 chars but has to be fixed appropriately
             incJObj.setDescription(incJSONObj.getString("d"));
-            incJObj.setType(String.valueOf(TomTomIncidents.valueOf(mapICNumberToString(incJSONObj.getInt("ic"))).toString()));
+            incJObj.setType(String.valueOf(mapIncidentType(mapICNumberToString(incJSONObj.getInt("ic"))).toString()));
             incJObj.setStartPositionStreet(incJSONObj.getString("f"));
             incJObj.setEndPositionStreet(incJSONObj.getString("t"));
-            incJObj.setSize(Integer.toString(incJSONObj.getInt("l")));
+            incJObj.setLengthInMeter(incJSONObj.getInt("l"));
             incJObj.setEntryTime(parseDate(incJSONObj.getString("sd")));
 
             if (!incJSONObj.isNull("ed"))
                 incJObj.setEndTime(parseDate(incJSONObj.getString("ed")));
+
+
+            // Map original 0-4 to -1-12
+            // Unknown (0) and Undefined (4) get mapped to -1
+            Integer criticality = incJSONObj.getInt("ty");
+            if (criticality == 0 || criticality == 4) {
+                incJObj.setSize(Integer.toString(-1));
+            } else {
+                incJObj.setSize(Integer.toString(criticality * 4));
+            }
+
 
             // sometimes v (shape as polyline) isn't given hence we can't decode it
             if (!incJSONObj.isNull("v")) {

@@ -18,12 +18,7 @@ import static org.hamcrest.Matchers.greaterThan;
 
 public class ProviderIntervalRequestRealTest {
 
-    private final ProviderIntervalRequest providerIntervalRequest =
-            new ProviderIntervalRequest(
-                    new RequestCreatorConfigProduction(),
-                    new CityBoundingBoxServiceConfigRealData()
-            );
-
+    private ProviderIntervalRequest providerIntervalRequest;
 
     public ProviderIntervalRequestRealTest(){
         MyRepo.setUseTestDatabase(true);
@@ -34,6 +29,12 @@ public class ProviderIntervalRequestRealTest {
 
         System.out.println("reintialising Database");
         MyRepo.dropAll();
+
+        providerIntervalRequest =
+                new ProviderIntervalRequest(
+                        new RequestCreatorConfigProduction(),
+                        new CityBoundingBoxServiceConfigRealData()
+                );
 
         CityInformation cityInformation1 = new CityInformation();
         cityInformation1.setCityName("Berlin");

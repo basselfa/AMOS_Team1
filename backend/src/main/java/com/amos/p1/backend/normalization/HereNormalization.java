@@ -38,12 +38,12 @@ public class HereNormalization implements JsonToIncident {
         }
     }
 
-    private String mapIncidentType(String incidentStr) {
+    private Incident.IncidentTypes mapIncidentType(String incidentStr) {
         try {
-            return HereIncidents.valueOf(incidentStr.toUpperCase()).toString();
+            return HereIncidents.valueOf(incidentStr.toUpperCase()).incidentType;
         } catch (IllegalArgumentException ex) {
             // todo: log - there is a new incident type defined by the API
-            return Incident.IncidentTypes.MISC.toString();
+            return Incident.IncidentTypes.MISC;
         }
     }
 
@@ -101,7 +101,7 @@ public class HereNormalization implements JsonToIncident {
             incidentObj.setProvider("0");
             incidentObj.setLengthInMeter(
                     incidentData.getJSONObject("LOCATION")
-                            .getDouble("LENGTH")    //todo: is it really meter??
+                            .getDouble("LENGTH")* 1000    //todo: is it really meter??
             );
             incidentObj.setEdges(parseHereEdges(incidentData));
             parseHereAdress(incidentData, incidentObj);
