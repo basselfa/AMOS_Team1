@@ -70,7 +70,7 @@ export default {
             if (!this.dateModel) return ''
             const [year, month, day] = this.dateModel.split('-')
             let monthNames = ['Jan', 'Feb', 'Mar','Apr', 'May', 'June', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
-            let monthName = monthNames[parseInt(month)]
+            let monthName = monthNames[parseInt(month)-1]
             return `${monthName} ${day}, ${year}` + ' ' + selectedTime
         },
     },

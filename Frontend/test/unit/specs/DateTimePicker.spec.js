@@ -15,7 +15,6 @@ describe('DateTimePicker', () => {
         wrapper = mount(DateTimePicker, {
             localVue,
             vuetify,
-            propsData: { label: 'start', value: '20-01-06 13:13' },
         })
     })
 
@@ -29,9 +28,8 @@ describe('DateTimePicker', () => {
     })
 
     it('should emit change on click confirm', () => {
-        wrapper.setData({ timeModel: '12:13', dateModel: '24-01-20' })
-
-        expect(wrapper.vm.currentSelection).toEqual('Feb 20, 24 12:13')
+        wrapper.setData({ timeModel: '12:13', dateModel: '21-01-15' })
+        expect(wrapper.vm.currentSelection).toEqual('Jan 15, 21 12:13')
     })
 
     afterEach(() => {
