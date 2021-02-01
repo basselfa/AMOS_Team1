@@ -1,6 +1,6 @@
 <template>
   <div class="map-wrapper">
-    <l-map id="osm-map" :zoom="zoom" :center="center" :options="mapOptions">
+    <l-map ref="map" id="osm-map" :zoom="zoom" :center="center" :options="mapOptions">
       <l-tile-layer :url="url" :attribution="attribution" />
       <l-polyline
         v-for="(polyline,index) in polylines" :key="index"
@@ -34,7 +34,7 @@ import {
 } from "vue2-leaflet";
 export default {
   name: "OpenStreetMap",
-  props: ['polylines'],
+  props: ['polylines', 'cityCenter'],
   components: {
     LMap,
     LTileLayer,
@@ -42,6 +42,15 @@ export default {
     LTooltip,
     LPolyline,
   },
+watch: { 
+    cityCenter: {
+        deep: true,
+        handler: function(newVal, oldVal){
+          this.$refs.map.setZoom(10)
+          this.$refs.map.setCenter([this.cityCenter.latitude, this.cityCenter.longitude])
+        }
+      }
+    },
   data() {
     return {
       zoom: 13,

@@ -123,4 +123,8 @@ export default {
     position:absolute;
     width:70%;
 }
+
+.v-autocomplete.v-select.v-input--is-focused input {
+        min-width: 0px !important
+}
 </style>
