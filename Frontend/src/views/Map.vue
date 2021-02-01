@@ -195,7 +195,9 @@ export default {
          */
         compareIncidents(incident) {
             // check if overlapping by checking if the incident is contained in comparisonData
-            let overlapping =
+            let overlapping = false
+            if (this.comparisonData.length > 0) {
+             overlapping =
                 this.comparisonData.some(
                     comparisonIncident =>
                         comparisonIncident.tomTomIncidentId === incident.id
@@ -204,6 +206,7 @@ export default {
                     comparisonIncident =>
                         comparisonIncident.hereIncidentId === incident.id
                 )
+            } 
             // get incident provider
             let here = incident.provider == '0'
             let tomtom = incident.provider == '1'
