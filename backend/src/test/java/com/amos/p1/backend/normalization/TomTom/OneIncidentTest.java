@@ -41,7 +41,7 @@ public class OneIncidentTest {
 
     @Test
     void testType() {
-        assertEquals("10", incident.getType());
+        assertEquals("LANERESTRICTION", incident.getType());
     }
 
     @Test
