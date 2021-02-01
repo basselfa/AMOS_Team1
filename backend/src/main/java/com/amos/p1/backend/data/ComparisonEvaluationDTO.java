@@ -37,7 +37,7 @@ public class ComparisonEvaluationDTO {
                 '}';
     }
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 
     public Date getDate(){
         return this.date;
