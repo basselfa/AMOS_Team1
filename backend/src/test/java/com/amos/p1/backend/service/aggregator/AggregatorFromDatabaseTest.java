@@ -211,7 +211,7 @@ public class AggregatorFromDatabaseTest {
     @Test
     void testGetComparisonEvaluationOverTime() {
         List<ComparisonEvaluationDTO> comparisonEvaluationDTOs = aggregator.getComparisonEvaluationOverTime("Berlin");
-
+        System.out.println(comparisonEvaluationDTOs);
 
         assertThat(comparisonEvaluationDTOs, hasSize(1));
 

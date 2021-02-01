@@ -1,5 +1,7 @@
 package com.amos.p1.backend;
  
+import com.amos.p1.backend.database.DatabaseConfig;
+import com.amos.p1.backend.database.DatabaseHelper;
 import com.amos.p1.backend.database.MyRepo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,9 +21,12 @@ import java.net.UnknownHostException;
 @EnableScheduling
 public class BackendApplication {
  
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) {
 
-		Thread.sleep(60000);
+		DatabaseConfig databaseConfig = new DatabaseConfig();
+		DatabaseHelper databaseHelper = new DatabaseHelper(databaseConfig);
+		databaseHelper.waitForDatabase(10000);
+
 		SpringApplication.run(BackendApplication.class, args);
 	}
 

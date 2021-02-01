@@ -71,7 +71,7 @@ export default {
             })
             .then(response => {
                 let cities = []
-                response.data.map(function(item) {  
+                response.data.map(function(item) {
                     cities.push(item.city);
                 })
                 this.cities = cities
@@ -122,5 +122,9 @@ export default {
 .search-group {
     position:absolute;
     width:70%;
+}
+
+.v-autocomplete.v-select.v-input--is-focused input {
+        min-width: 0px !important
 }
 </style>

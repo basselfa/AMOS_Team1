@@ -21,10 +21,7 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -33,6 +30,7 @@ import java.util.Map;
 
 public class MyRepo {
 
+    private static final DatabaseConfig databaseConfig = new DatabaseConfig();
     private static final MyRepo instance = new MyRepo();
     private EntityManager em;
     private EntityManagerFactory emf;
@@ -40,10 +38,11 @@ public class MyRepo {
     private String url;
 
     private MyRepo() {
+        System.out.println("My Repo start");
 
-        final String elasticIp = getHostAdress();
-        url = "jdbc:mysql://" + elasticIp + ":3306/testdb3?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin&createDatabaseIfNotExist=true";
+        url = databaseConfig.getURL() + "/" + databaseConfig.getDatabaseName() + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin&createDatabaseIfNotExist=true";
         System.out.println("Connect to db: " + url);
+
         intialiseDB(url);
 
         Map<String, Object> persistenceMap = new HashMap<>();
@@ -52,26 +51,13 @@ public class MyRepo {
         em = emf.createEntityManager();
     }
 
-    /**
-     * Return the ip adress of the host. Example: 192.168.0.183
-     */
-    private String getHostAdress() {
-        try(final DatagramSocket socket = new DatagramSocket()){
-            socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
-            String hostAddress = socket.getLocalAddress().getHostAddress();
-            return hostAddress;
-        } catch (SocketException | UnknownHostException e) {
-            throw new IllegalStateException(e);
-        }
-    }
-
     public static void setUseTestDatabase(boolean useTestDatabase) {
 
     }
 
     public static void intialiseDB(String url) {
 
-        final String jdbcDriver = "com.mysql.cj.jdbc.Driver";
+        final String jdbcDriver = databaseConfig.getJdbcDriver();
         try {
             Class.forName(jdbcDriver);
         } catch (ClassNotFoundException e) {

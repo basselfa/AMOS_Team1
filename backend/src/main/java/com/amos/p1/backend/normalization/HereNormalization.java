@@ -101,7 +101,7 @@ public class HereNormalization implements JsonToIncident {
             incidentObj.setProvider("0");
             incidentObj.setLengthInMeter(
                     incidentData.getJSONObject("LOCATION")
-                            .getDouble("LENGTH")    //todo: is it really meter??
+                            .getDouble("LENGTH")* 1000    //todo: is it really meter??
             );
             incidentObj.setEdges(parseHereEdges(incidentData));
             parseHereAdress(incidentData, incidentObj);

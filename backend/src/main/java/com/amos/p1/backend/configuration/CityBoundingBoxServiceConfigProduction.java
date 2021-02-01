@@ -16,13 +16,11 @@ public class CityBoundingBoxServiceConfigProduction implements CityBoundingBoxSe
 
     public CityBoundingBoxServiceConfigProduction(){
         System.out.println("Using CityBoundingBox Service Config for production");
+        saveDummyCityInformationIntoDb();
     }
 
     @Override
     public CityBoundingBoxesService getCityBoundBoxesService() {
-
-        saveDummyCityInformationIntoDb();
-
         return new CityBoundingBoxesServiceImpl();
     }
 
