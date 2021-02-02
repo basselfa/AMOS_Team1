@@ -1,7 +1,7 @@
 <template>
     <div>
         <search @change="getSearchValue($event)" />
-        <open-street-map :polylines="polylines" />
+        <open-street-map :polylines="polylines" :cityCenter="cityCenter" />
     </div>
 </template>
 
@@ -20,7 +20,10 @@ export default {
     },
 
     data: () => ({
+        incidentsData: [],
+        comparisonData: [],
         polylines: [],
+        cityCenter: ''
     }),
 
     props: ['mapData'],
@@ -40,6 +43,32 @@ export default {
             this.executeQuery(searchValue)
         },
 
+        /**
+         * Get incidents from backend
+         *
+         * @param value Object that contains city, timestamp, and type
+         */
+        async getCenter(value) {
+            let request_url =
+                'http://' +
+                window.location.hostname +
+                ':8082/withDatabase/cities'
+            await axios
+                .get(request_url, {
+                    headers: { 'Access-Control-Allow-Origin': '*' },
+                })
+                .then(response => {
+                    for (let i = 0; i < response.data.length; i++) {
+                        if (response.data[i].city == value.city) {
+                            this.cityCenter = response.data[i].centerPoint
+                        }
+                    }
+                })
+                .catch(error => {
+                    this.errorMessage = error.message
+                    console.error('There was an error!', error)
+                })
+        },
         /**
          * Get incidents from backend
          *
@@ -102,6 +131,7 @@ export default {
         executeQuery: async function(value) {
             this.polylines = []
             if (value.city !== null && value.timestamp !== null) {
+                await this.getCenter(value)
                 await this.getIncidents(value)
                 console.log("Incidents received: " + this.incidentsData.length)
                 await this.getComparison(value)
@@ -165,7 +195,9 @@ export default {
          */
         compareIncidents(incident) {
             // check if overlapping by checking if the incident is contained in comparisonData
-            let overlapping =
+            let overlapping = false
+            if (this.comparisonData.length > 0) {
+             overlapping =
                 this.comparisonData.some(
                     comparisonIncident =>
                         comparisonIncident.tomTomIncidentId === incident.id
@@ -174,6 +206,7 @@ export default {
                     comparisonIncident =>
                         comparisonIncident.hereIncidentId === incident.id
                 )
+            } 
             // get incident provider
             let here = incident.provider == '0'
             let tomtom = incident.provider == '1'

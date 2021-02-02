@@ -50,11 +50,24 @@
               id="charts-container"
               v-if="loading == false && chartDataCollection !== null"
             >
-              <div id="chart-comparison" style="margin-top: 20px">
+              <div id="chart-comparison">
                 {{ this.city }}
                 <chart
                   :city="this.city"
                   :chartDataCollection="this.chartDataCollection"
+                  :legend=true
+                />
+              </div>
+            </div>
+            <div
+              id="charts-container"
+              v-if="loading == false && chartDataCollection == null"
+            >
+              <div id="chart-comparison-default">
+                <chart
+                  :city="Empty"
+                  :chartDataCollection="this.chartDataDefault"
+                  :legend=false
                 />
               </div>
             </div>
@@ -79,7 +92,7 @@ export default {
   data() {
     return {
       errorMessage: null,
-      loading: null,
+      loading: false,
       city: null,
       cities: [],
       startTime: "",
@@ -92,7 +105,28 @@ export default {
         here: [],
         comparison: [],
       },
-    };
+      chartDataCollection: null,
+      chartDataDefault: {
+              labels: ['', '', ''],
+              datasets: [
+                {
+                  label: "",
+                  backgroundColor: "rgb( 67, 146, 192)",
+                  data: [0,0,0],
+                },
+                {
+                  label: "",
+                  backgroundColor: "rgb( 244, 186, 94)",
+                  data: [0,0,0],
+                },
+                {
+                  label: "",
+                  backgroundColor: "rgb( 242, 99, 66)",
+                  data: [0,0,0],
+                }
+              ]
+            }
+    }
   },
   methods: {
     async fetchData() {
