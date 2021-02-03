@@ -2,12 +2,12 @@
   <div class="map-wrapper">
     <l-map ref="map" id="osm-map" :zoom="zoom" :center="center" :options="mapOptions">
       <l-tile-layer :url="url" :attribution="attribution" />
-      <v-polyline-decorator v-for="(polyline,index) in polylines" v-if="true==true" :key="index" :paths="polyline.latlngs" :patterns="patterns"></v-polyline-decorator>
+      <v-polyline-decorator v-for="(polyline,index) in polylines" v-if="polyline.provider==1&&polyline.color=='rgb(255, 85, 18)'" :key="index+'decorator'" :paths="polyline.latlngs" :patterns="patterns"></v-polyline-decorator>
       <l-polyline
         v-for="(polyline,index) in polylines" :key="index"
         :lat-lngs="polyline.latlngs"
         :color="polyline.color"
-      ><l-tooltip sticky="true">{{polyline.description}} <br> <span style="font-weight:500">{{polyline.type}}</span>, <span style="color:rgb( 230, 70, 80);font-weight:500">Criticality: {{polyline.criticality}}</span> Length: {{polyline.length}}</l-tooltip></l-polyline>
+      ><l-tooltip sticky="true">{{polyline.description}} <br> <span style="font-weight:500">{{polyline.type}}</span>, Provider: {{polyline.provider}}, <span style="color:rgb( 230, 70, 80);font-weight:500">Criticality: {{polyline.criticality}}</span> Length: {{polyline.length}}</l-tooltip></l-polyline>
       <l-marker :lat-lng="markerLatLng">
         <l-tooltip>Center</l-tooltip>
       </l-marker>
@@ -69,8 +69,7 @@ watch: {
       showMap: true,
       markerLatLng: [52.509041, 13.330550],
       patterns: [
-        { offset: 10, repeat: 25, symbol: L.Symbol.dash({pixelSize: 10, pathOptions: {color: '#000', weight: 1}}) },
-      //  { offset: 0, repeat: 25, symbol: L.Symbol.dash({pixelSize: 0}) }
+        { offset: 10, repeat: 15, symbol: L.Symbol.dash({pixelSize: 5, pathOptions: {color: '#000', weight: 1}}) },
       ],
     };
   },
