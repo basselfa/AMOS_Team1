@@ -161,7 +161,7 @@ export default {
                             ? incidentsData[i].description.split('&')[1]
                             : incidentsData[i].description
                         : 'Description not available',
-                    length: incidentsData[i].lengthInMeter,
+                    length: incidentsData[i].lengthInMeter.toFixed(2),
                     type: incidentsData[i].type,
                 })
             }

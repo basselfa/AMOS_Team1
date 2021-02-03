@@ -6,7 +6,7 @@
         v-for="(polyline,index) in polylines" :key="index"
         :lat-lngs="polyline.latlngs"
         :color="polyline.color"
-      ><l-tooltip sticky="true">{{polyline.description}} <br> <span style="font-weight:500">{{polyline.type}}</span>, <span style="color:rgb( 230, 70, 80);font-weight:500">Criticality: {{polyline.criticality}}</span> Length: {{polyline.length}}</l-tooltip></l-polyline>
+      ><l-tooltip sticky="true">{{polyline.description}} <br> <span style="font-weight:500">{{polyline.type}}</span>, <span style="color:rgb( 230, 70, 80);font-weight:500">Criticality: {{polyline.criticality}}</span> Length: {{polyline.length}}m</l-tooltip></l-polyline>
       <l-marker :lat-lng="markerLatLng">
         <l-tooltip>Center</l-tooltip>
       </l-marker>
