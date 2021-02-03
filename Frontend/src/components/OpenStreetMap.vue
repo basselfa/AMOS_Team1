@@ -7,7 +7,7 @@
         :lat-lngs="polyline.latlngs"
         :color="polyline.color"
       ><l-tooltip sticky="true">{{polyline.description}} <br> <span style="font-weight:500">{{polyline.type}}</span>, <span style="color:rgb( 230, 70, 80);font-weight:500">Criticality: {{polyline.criticality}}</span> Length: {{polyline.length}}m</l-tooltip></l-polyline>
-      <l-marker :lat-lng="markerLatLng">
+      <l-marker :lat-lng="center">
         <l-tooltip>Center</l-tooltip>
       </l-marker>
     </l-map>
@@ -46,23 +46,23 @@ watch: {
     cityCenter: {
         deep: true,
         handler: function(newVal, oldVal){
+          this.center = latLng(this.cityCenter.latitude, this.cityCenter.longitude)
+          this.$refs.map.setCenter(this.center)
           this.$refs.map.setZoom(10)
-          this.$refs.map.setCenter([this.cityCenter.latitude, this.cityCenter.longitude])
         }
       }
     },
   data() {
     return {
-      zoom: 13,
-      center: latLng(52.515000, 13.3800575),
+      zoom: 10,
+      center: latLng(52.51830694705926, 13.325126085286316),
       url: "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",
       attribution:'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       showParagraph: false,
       mapOptions: {
-        zoomSnap: 0.5,
+        zoomSnap: 0.5
       },
       showMap: true,
-      markerLatLng: [52.509041, 13.330550],
     };
   },
 };

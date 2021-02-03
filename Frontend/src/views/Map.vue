@@ -131,12 +131,13 @@ export default {
         executeQuery: async function(value) {
             this.polylines = []
             if (value.city !== null && value.timestamp !== null) {
-                await this.getCenter(value)
-                await this.getIncidents(value)
-                console.log("Incidents received: " + this.incidentsData.length)
-                await this.getComparison(value)
-                console.log("Comparison incidents received: " +this.comparisonData.length)
-                this.passCoordinates(this.incidentsData)
+                await this.getCenter(value).then( async () => {
+                  await this.getIncidents(value)
+                  console.log("Incidents received: " + this.incidentsData.length)
+                  await this.getComparison(value)
+                  console.log("Comparison incidents received: " + this.comparisonData.length)
+                  this.passCoordinates(this.incidentsData)
+                })
             }
         },
 
