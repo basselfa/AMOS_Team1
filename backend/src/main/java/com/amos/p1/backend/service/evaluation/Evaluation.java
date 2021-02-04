@@ -20,18 +20,16 @@ public class Evaluation {
         List<EvaluationCandidate> evaluationCandidates = herreIncidents.parallelStream().flatMap(
                 herreIncident -> tomTomIncidents.stream().map(
                         tomTomIncident -> {
-                            // create EvaluationCandidate and fill with data
+                            // create EvaluationCandidates and fill with data
                             EvaluationCandidate candidate = new EvaluationCandidate(tomTomIncident, herreIncident);
 
-                            candidate.setHereIncident(herreIncident);
-                            candidate.setTomTomIncident(tomTomIncident);
+                            candidate.addMatcher(AngleMatcher.class);
+                            candidate.addMatcher(SearchRadiusMatcher.class);
+                            candidate.addMatcher(DescriptionMatcher.class);
+                            candidate.addMatcher(LengthMatcher.class);
+                            // ... add Matcher here
 
-                            candidate.addMatcherToMatcherList(new AngleMatcher(herreIncident, tomTomIncident));
-                            candidate.addMatcherToMatcherList(new SearchRadiusMatcher(herreIncident, tomTomIncident));
-                            candidate.addMatcherToMatcherList(new DescriptionMatcher(herreIncident, tomTomIncident));
-                            candidate.addMatcherToMatcherList(new LengthMatcher(herreIncident, tomTomIncident));
-
-                            // evaluate Matchers ans store results in EvaluationCandidate
+                            // dynamically evaluate Matchers ans store results in EvaluationCandidate
                             candidate.setScore(
                                     candidate.getMatcherList().stream().mapToInt(matcher -> matcher.getConfidence()).sum()
                             );
@@ -43,10 +41,6 @@ public class Evaluation {
                             candidate.setConfidenceDescription(
                                     candidate.getMatcherList().stream().map(matcher -> matcher.getDescription()).reduce("", (a, b) -> (a + b))
                             );
-
-                            //candidate.getMatcherByClass(AngleMatcher.class);
-
-
                             return candidate;
                         }
                 )
@@ -63,7 +57,7 @@ public class Evaluation {
                 candidate -> !candidate.isDropped()
         ).filter(
                 // c -> c.getMatcherList().stream().filter(m -> m instanceof SearchRadiusMatcher).map(m -> ((SearchRadiusMatcher) m).getLegthDifferencePercentage() < 60d).anyMatch(r -> r == true)
-                c -> ((SearchRadiusMatcher) c.getMatcherByClass(SearchRadiusMatcher.class)).getFromAndToDistanceSum() < 60d
+                c -> (c.getMatcherByClass(SearchRadiusMatcher.class)).getFromAndToDistanceSum() < 60d
         ).collect(Collectors.toList());
 
         // collect all Mainfolds
@@ -104,7 +98,7 @@ public class Evaluation {
                 double smallestDistancePionts = highestConfidenceCandidates.stream().mapToDouble(c -> c.getMatcherByClass(SearchRadiusMatcher.class).getConfidence()).min().getAsDouble();
 //                double smallestDistancePionts = highestConfidenceCandidates.stream().mapToDouble(c -> new c.getMatcherByClass<SearchRadiusMatcher>().get().getConfidence()).min().getAsDouble();
 
-                highestConfidenceCandidates = highestConfidenceCandidates.stream().filter(c -> c.getMatcherList().stream().filter(m -> m instanceof SearchRadiusMatcher).map(m -> ((SearchRadiusMatcher) m).getFromAndToDistanceSum() == smallestDistancePionts).anyMatch(r -> r == true)).collect(Collectors.toList());
+                highestConfidenceCandidates = highestConfidenceCandidates.stream().filter(c -> c.getMatcherByClass(SearchRadiusMatcher.class).getFromAndToDistanceSum() == smallestDistancePionts).collect(Collectors.toList());
 
             }
             Optional<EvaluationCandidate> cacndidate = highestConfidenceCandidates.stream().findFirst();
