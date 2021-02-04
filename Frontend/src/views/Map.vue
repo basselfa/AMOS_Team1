@@ -205,6 +205,8 @@ export default {
                         comparisonIncident.hereIncidentId === incident.id
                 )
             // get incident provider
+            // here = 0 
+            // tomtom = 1
             let here = incident.provider == '0'
             let tomtom = incident.provider == '1'
 
@@ -220,7 +222,7 @@ export default {
             }
             // same = red
             if (overlapping) {
-                console.log("Overlapping found")
+                console.log("Overlapping incident(s) found")
                 color = 'rgb(255, 85, 18)'
             }
 

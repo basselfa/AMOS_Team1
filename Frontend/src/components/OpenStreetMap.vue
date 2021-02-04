@@ -3,6 +3,7 @@
     <l-map ref="map" id="osm-map" :zoom="zoom" :center="center" :options="mapOptions">
       <l-tile-layer :url="url" :attribution="attribution" />
       <v-polyline-decorator v-for="(polyline,index) in polylines" v-if="polyline.provider==1&&polyline.color=='rgb(255, 85, 18)'" :key="index+'decorator'" :paths="polyline.latlngs" :patterns="patterns"></v-polyline-decorator>
+      <!-- <l-polyline-offset :lat-lngs="latlngs" :offset="offset" color="red" /> -->
       <l-polyline
         v-for="(polyline,index) in polylines" :key="index"
         :lat-lngs="polyline.latlngs"
@@ -34,6 +35,7 @@ import {
   LTooltip,
 } from "vue2-leaflet";
 import Vue2LeafletPolylinedecorator from 'vue2-leaflet-polylinedecorator'
+import LPolylineOffset from 'vue2-leaflet-polylineoffset'
 import L from 'leaflet'
 
 export default {
@@ -45,7 +47,8 @@ export default {
     LMarker,
     LTooltip,
     LPolyline,
-    'v-polyline-decorator': Vue2LeafletPolylinedecorator
+    'v-polyline-decorator': Vue2LeafletPolylinedecorator,
+    LPolylineOffset,
   },
 watch: { 
     cityCenter: {
