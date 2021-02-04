@@ -1,6 +1,8 @@
 <template>
 <div class="config-container">
-    <v-card class="mx-auto config-card" max-width="900">
+<v-row justify="space-around">
+<v-col justify="space-around">
+    <v-card class="config-card">
         <v-card-text>
             <div>This selection will appear for your map and historization data. <br> Select the cities to be investigated <br> by the AMOS traffic tracker.</div>
             <div v-for="(city,index) in cities" :key="index">
@@ -39,6 +41,9 @@
             </v-btn>
         </v-card-actions>
     </v-card>
+    
+    </v-col>
+    </v-row>
 </div>
 </template>
 
@@ -133,31 +138,28 @@ export default {
 </script>
 
 <style>
-
 .config-container {
-    position: absolute;
-    top: 80px;
-    padding-bottom:30px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
-.config-card {
-  border-radius: 30px !important;
-  width: calc(100vw - 400px);
-  margin: 0;
 
-  left: 300px;
-  border-radius: 20px;
+@media only screen and (min-width: 992px) {
+  .config-container {
+    padding-left: 295px;
+  }
+}
+
+.config-card {
+  border-radius: 20px !important;
+  padding: 10px;
 }
 
 .config-card .form-chip {
-    width: 1000px;
+    width: 100%;
     margin-top: 8px;
-    padding:50px 20px;
+    padding:50px 10px;
     background: rgb(243, 243, 243) !important;
     border-radius:10px;
-}
-
-.config-card .form-row {
-    /* width: 800px; */
 }
 
 .config-card .center {

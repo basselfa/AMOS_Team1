@@ -1,7 +1,7 @@
 <template>
     <div id="search-bar-container">
-        <v-row  class="search-group">
-            <v-col cols="12" sm="4" md="4">
+        <v-row class="search-group">
+            <v-col cols="12" sm="6" md="4" class="search-col">
                 <v-autocomplete
                     class="search-bar"
                     :items="this.cities"
@@ -16,7 +16,7 @@
                     @change="getCity()"
                 ></v-autocomplete>
             </v-col>
-            <v-col cols="12" sm="4" md="8">
+            <v-col cols="12" sm="6" md="8" class="search-col">
                 <v-autocomplete
                     :disabled="this.timestamps.length > 0 ? false : true"
                     class="search-bar"
@@ -114,17 +114,7 @@ export default {
 </script>
 
 <style>
-#search-bar-container {
-    padding-left: 300px;
-    padding-top: 70px;
-}
-
-.search-group {
-    position:absolute;
-    width:70%;
-}
-
 .v-autocomplete.v-select.v-input--is-focused input {
-        min-width: 0px !important
+    min-width: 0px !important
 }
 </style>

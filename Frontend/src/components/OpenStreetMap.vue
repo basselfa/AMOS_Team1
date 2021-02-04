@@ -74,22 +74,29 @@ watch: {
 }
 
 #osm-map {
- height: calc(100% - 200px);
-  width: calc(100vw - 400px);
+  height: calc(100% - 200px);
+  width: calc(100vw - 45px);
   margin: 0;
   position: absolute;
-  top: 160px;
-  left: 300px;
+  top: 260px;
+  left: 15px;
   border-radius: 20px;
   -webkit-box-shadow: 4px 12px 31px -10px #cecece !important;
   box-shadow: 4px 12px 31px -10px #cecece !important;
   z-index: 0;
 }
 
+@media only screen and (min-width: 992px) {
+  #osm-map  {
+    top: 160px;
+    width: calc(100vw - 330px);
+    left: 300px;
+  }
+}
+
 .legend{
   position: fixed;
   bottom:10px;
-  margin-left: 300px;
   padding-left:5px;
   float:left;
   display:flex;
