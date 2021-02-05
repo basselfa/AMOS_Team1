@@ -74,7 +74,7 @@ watch: {
 }
 
 #osm-map {
-  height: calc(100% - 200px);
+  height: calc(100% - 300px);
   width: calc(100vw - 45px);
   margin: 0;
   position: absolute;
@@ -89,6 +89,7 @@ watch: {
 @media only screen and (min-width: 600px) {
   #osm-map  {
     top: 160px;
+    height: calc(100% - 200px);
   }
 }
 
@@ -96,6 +97,7 @@ watch: {
   #osm-map  {
     top: 160px;
     width: calc(100vw - 330px);
+    height: calc(100% - 200px);
     left: 300px;
   }
 }
