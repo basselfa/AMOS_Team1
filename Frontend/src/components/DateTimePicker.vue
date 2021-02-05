@@ -7,9 +7,10 @@
             lazy
             transition="scale-transition"
             offset-y
-            max-width="560px"
-            min-width="560px"
+            class="datetime-modal testest"
+          :max-width="isMobile ? '380px' : '560px'" :min-width="isMobile ? '380px' : '560px'"
         >
+        
             <template v-slot:activator="{ on }">
                 <v-text-field
                     v-model="displayDate"
@@ -22,13 +23,13 @@
 
             <div class="v-date-time-widget-container">
                 <v-layout row wrap>
-                    <v-flex xs12 sm6>
+                    <v-flex xs6 sm6>
                         <v-date-picker
                             v-model="dateModel"
                             color="#3486b5"
                         ></v-date-picker>
                     </v-flex>
-                    <v-flex xs12 sm6>
+                    <v-flex xs6 sm6>
                         <v-time-picker
                             color="#3486b5"
                             v-if="open"
@@ -61,6 +62,7 @@ export default {
             displayDate: '',
             dateModel: '',
             timeModel: '13:00',
+            isMobile: false
         }
     },
 
@@ -75,6 +77,12 @@ export default {
         },
     },
 
+    mounted () {
+      this.onResize()
+
+      window.addEventListener('resize', this.onResize, { passive: true })
+    },
+
     methods: {
         confirm() {
             this.onUpdateDate()
@@ -86,6 +94,9 @@ export default {
             this.displayDate = this.dateModel + ' ' + this.timeModel
             this.$emit('input', this.displayDate)
         },
+        onResize () {
+        this.isMobile = window.innerWidth < 540
+      },
     },
 }
 </script>
@@ -93,7 +104,7 @@ export default {
 <style>
 .v-date-time-widget-container {
     background: white;
-    padding: 15px;
+    padding: 0px 5px 10px 5px;
 }
 
 .v-time-picker-title {
@@ -109,9 +120,40 @@ export default {
 }
 
 .v-time-picker-clock {
+    top:20px;
+    margin-left: -10px;
+    width: 90%;
+    flex: 0.9 0 auto !important;
+    padding-top: 0 !important;
+}
+   
+@media only screen and (min-width: 540px) {
+.v-time-picker-clock {
     margin-left: 10px;
     width: 90%;
     flex: 0.9 0 auto !important;
     padding-top: 0 !important;
+}
+}
+
+.v-picker--date .v-picker__body {
+    width:200px !important;
+    height:280px !important;
+}
+
+.v-picker--time .v-picker__body {
+    width:220px !important;
+    height:220px !important;
+}
+
+@media only screen and (min-width: 540px) {
+  .v-picker--time .v-picker__body {
+    width:290px !important;  
+    height:290px !important;
+}
+.v-picker--date .v-picker__body {
+    width:300px !important;
+}
+
 }
 </style>

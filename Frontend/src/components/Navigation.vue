@@ -78,18 +78,28 @@ a:visited,
 a:link,
 a:active {
   color: black;
-  text-decoration: none !important; /* no underline */
+  text-decoration: none !important; 
 }
+
 nav {
   border-radius: 30px;
   -webkit-box-shadow: 4px 12px 31px -5px #cecece;
   box-shadow: 4px 12px 31px -5px #cecece;
   margin-left: 15px;
 }
+
 .header {
-  left: 295px !important;
+  left: 15px;
   -webkit-box-shadow: 4px 12px 31px -10px #cecece !important;
   box-shadow: 4px 12px 31px -10px #cecece !important;
+}
+
+@media only screen and (min-width: 1270px) {
+  .header {
+    left: 295px !important;
+    -webkit-box-shadow: 4px 12px 31px -10px #cecece !important;
+    box-shadow: 4px 12px 31px -10px #cecece !important;
+  }
 }
 </style>
 

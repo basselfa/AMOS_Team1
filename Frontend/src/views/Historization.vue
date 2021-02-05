@@ -1,9 +1,9 @@
 <template>
-  <div class="body-ctn" id="historization-table">
+  <div class="historization-container" id="historization-table">
     <v-row justify="space-around">
       <v-col justify="space-around">
-        <v-card>
-          <div style="padding: 10px">
+        <v-card style="padding: 10px; border-radius:20px">
+          <div>
             <v-card-title> Traffic Data </v-card-title>
 
             <v-row justify="center" style="padding: 0px 20px">
@@ -229,9 +229,15 @@ export default {
 </script>
 
 <style>
-.body-ctn {
+.historization-container {
+  padding-left: 15px;
+  padding-right: 15px;
   overflow: hidden;
-  padding-left: 295px;
-  padding-top: 75px;
+}
+
+@media only screen and (min-width: 1270px) {
+  .historization-container {
+    padding-left: 295px;
+  }
 }
 </style>
