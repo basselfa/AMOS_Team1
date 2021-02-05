@@ -246,4 +246,10 @@ export default {
     padding-left: 295px;
   }
 }
+
+.map-container .v-text-field__details {
+    display:none;
+    height: 0px;
+    margin:0px !important;
+}
 </style>

@@ -86,6 +86,12 @@ watch: {
   z-index: 0;
 }
 
+@media only screen and (min-width: 600px) {
+  #osm-map  {
+    top: 160px;
+  }
+}
+
 @media only screen and (min-width: 992px) {
   #osm-map  {
     top: 160px;

@@ -114,7 +114,17 @@ export default {
 </script>
 
 <style>
-.v-autocomplete.v-select.v-input--is-focused input {
+.search-group .v-autocomplete.v-select.v-input--is-focused input {
     min-width: 0px !important
+}
+
+.search-group .search-col {
+ padding:0px;
+}
+
+@media only screen and (min-width: 600px) {
+  .search-group .search-col {
+    padding: 10px;
+  }
 }
 </style>
