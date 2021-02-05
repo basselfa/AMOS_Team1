@@ -93,7 +93,7 @@ watch: {
   }
 }
 
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 1270px) {
   #osm-map  {
     top: 160px;
     width: calc(100vw - 330px);

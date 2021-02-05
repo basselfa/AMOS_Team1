@@ -104,7 +104,7 @@ export default {
             this.loading = false;
             this.getRequestCityData();
         },
-        // TODO Set Timeout
+        // TODO Set Timeout // will this be done?
         async postRequestCityData(selectedCity, previouscityId) {
             console.log(selectedCity.cityName)
             this.loading = true
@@ -122,6 +122,7 @@ export default {
                     this.errorMessage = error.message
                     console.error('There was an error!', error)
                 })
+                // TODO? shouldnt the code below be in the then() block?
             this.removeCity(previouscityId);
             this.getRequestCityData();
             this.loading = false
@@ -145,7 +146,7 @@ export default {
   padding-right: 15px;
 }
 
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 1270px) {
   .config-container {
     padding-left: 295px;
   }
@@ -171,7 +172,14 @@ export default {
 }
 
 .config-card .rm-btn {
-    margin-top: 40px !important
+    margin-top: -30px !important
+}
+
+@media only screen and (min-width: 690px) {
+  .config-card .rm-btn {
+    margin-top: 40px !important;
+    margin: 0px 10px 0px 10px;
+  }
 }
 
 .config-card .v-text-field__details {
@@ -185,8 +193,4 @@ export default {
     margin-top:25px;
 }
 
-.btn-col {
-    padding:0px;
-    margin:0px;
-}
 </style>

@@ -94,7 +94,7 @@ nav {
   box-shadow: 4px 12px 31px -10px #cecece !important;
 }
 
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 1270px) {
   .header {
     left: 295px !important;
     -webkit-box-shadow: 4px 12px 31px -10px #cecece !important;
