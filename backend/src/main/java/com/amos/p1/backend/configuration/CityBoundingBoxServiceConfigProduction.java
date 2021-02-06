@@ -35,7 +35,7 @@ public class CityBoundingBoxServiceConfigProduction implements CityBoundingBoxSe
             cityInformation.setCityName(city);
             cityInformation.setCentreLatitude(centrePoint.getLatitude());
             cityInformation.setCentreLongitude(centrePoint.getLongitude());
-            cityInformation.setSearchRadiusInMeter(13000);
+            cityInformation.setSearchRadiusInMeter(13000); // Use for every city the same radius
 
             MyRepo.insertCityInformation(cityInformation);
         }
