@@ -15,6 +15,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class TomTomNormalization implements JsonToIncident {
+    // Enum for mapping TomTomIncidentTypes to normalized IncidentTypes shared with the incidents from Here data
     enum TomTomIncidents {
         ACCIDENT(Incident.IncidentTypes.ACCIDENT),
         JAM(Incident.IncidentTypes.CONGESTION),
@@ -53,6 +54,7 @@ public class TomTomNormalization implements JsonToIncident {
         }
     }
 
+    // map IncidentType int from TomTom to the string equivalent from the docs https://developer.tomtom.com/traffic-api/traffic-api-documentation-traffic-incidents/incident-details
     private String mapICNumberToString(Integer ic) {
         String[] icStrs = {
                 "UNKNOWN",
@@ -82,9 +84,12 @@ public class TomTomNormalization implements JsonToIncident {
         try {
             JSONObject incJSONObj = new JSONObject(json);
 
+            // set provider to TomTom (1)
             incJObj.setProvider("1");
 
-         //   incJObj.setTrafficId(Long.valueOf(incJSONObj.getString("id").substring(0, 5), 16)); // ID is hex and way to big for a long therefore as workaround cut to 5 chars but has to be fixed appropriately
+            //map the different JSON Data to the according Object Attributes. See def. https://developer.tomtom.com/traffic-api/traffic-api-documentation-traffic-incidents/incident-details
+
+            //   incJObj.setTrafficId(Long.valueOf(incJSONObj.getString("id").substring(0, 5), 16)); // ID is hex and way to big for a long therefore as workaround cut to 5 chars but has to be fixed appropriately
             incJObj.setDescription(incJSONObj.getString("d"));
             incJObj.setType(String.valueOf(mapIncidentType(mapICNumberToString(incJSONObj.getInt("ic"))).toString()));
             incJObj.setStartPositionStreet(incJSONObj.getString("f"));
@@ -107,6 +112,7 @@ public class TomTomNormalization implements JsonToIncident {
 
 
             // sometimes v (shape as polyline) isn't given hence we can't decode it
+            // otherwise decode polyline to array of LatLong Pints
             if (!incJSONObj.isNull("v")) {
                 PolyLineDecoder PLDecoder = new PolyLineDecoder();
                 String polyline = incJSONObj.getString("v");

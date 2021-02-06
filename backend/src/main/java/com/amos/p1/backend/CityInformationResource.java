@@ -18,6 +18,7 @@ public class CityInformationResource {
             value ="/cityinformation"
     )
     public ResponseEntity<?> addCityInformation(@RequestBody CityInformationIncomingDTO cityInformationIncomingDTO){
+        // map CityInformationIncomingDTO to CityInformation Object. Essentially it just adds an ID automatically in the Database.
         CityInformation cityInformation = new CityInformation();
 
         cityInformation.setCityName(cityInformationIncomingDTO.getCityName());

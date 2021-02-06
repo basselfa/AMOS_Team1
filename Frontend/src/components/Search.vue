@@ -1,7 +1,7 @@
 <template>
     <div id="search-bar-container">
-        <v-row  class="search-group">
-            <v-col cols="12" sm="4" md="4">
+        <v-row class="search-group">
+            <v-col cols="12" sm="6" md="4" class="search-col">
                 <v-autocomplete
                     class="search-bar"
                     :items="this.cities"
@@ -16,7 +16,7 @@
                     @change="getCity()"
                 ></v-autocomplete>
             </v-col>
-            <v-col cols="12" sm="4" md="8">
+            <v-col cols="12" sm="6" md="8" class="search-col">
                 <v-autocomplete
                     :disabled="this.timestamps.length > 0 ? false : true"
                     class="search-bar"
@@ -96,13 +96,18 @@ export default {
                     }
                 )
                 .then(response => {
+                    console.log("Timestamps received for " + this.city + ": " + response.data.length)
                     this.timestamps = response.data
-                    this.timestamp = this.timestamps[this.timestamps.length - 1]
-                    this.$emit('change', {
-                        city: this.city,
-                        timestamp: this.timestamp,
-                        type: this.type.map(x => x.toUpperCase().replace(/ /g,"")),
-                    })
+                    if (this.timestamps.length < 1) {
+                        console.error("No timestamps received for this city")
+                    } else {
+                        this.timestamp = this.timestamps[this.timestamps.length - 1]
+                        this.$emit('change', {
+                            city: this.city,
+                            timestamp: this.timestamp,
+                            type: this.type.map(x => x.toUpperCase().replace(/ /g,"")),
+                        })
+                    }
                 })
                 .catch(error => {
                     this.errorMessage = error.message
@@ -114,17 +119,17 @@ export default {
 </script>
 
 <style>
-#search-bar-container {
-    padding-left: 300px;
-    padding-top: 70px;
+.search-group .v-autocomplete.v-select.v-input--is-focused input {
+    min-width: 0px !important
 }
 
-.search-group {
-    position:absolute;
-    width:70%;
+.search-group .search-col {
+ padding:0px;
 }
 
-.v-autocomplete.v-select.v-input--is-focused input {
-        min-width: 0px !important
+@media only screen and (min-width: 600px) {
+  .search-group .search-col {
+    padding: 10px;
+  }
 }
 </style>
