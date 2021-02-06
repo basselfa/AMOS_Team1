@@ -42,7 +42,12 @@ export default {
     LTooltip,
     LPolyline,
   },
-watch: { 
+  /**
+  * Watch if cityCenter changes 
+  * and move the map to the new center
+  *
+  */
+  watch: { 
     cityCenter: {
         deep: true,
         handler: function(newVal, oldVal){

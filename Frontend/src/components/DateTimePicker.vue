@@ -4,7 +4,6 @@
             ref="menu"
             v-model="open"
             :close-on-content-click="false"
-            lazy
             transition="scale-transition"
             offset-y
             class="datetime-modal testest"
@@ -67,6 +66,10 @@ export default {
     },
 
     computed: {
+        /**
+         * Display datetime selected in modal
+         *
+         */
         currentSelection() {
             let selectedTime = this.timeModel
             if (!this.dateModel) return ''
@@ -76,26 +79,39 @@ export default {
             return `${monthName} ${day}, ${year}` + ' ' + selectedTime
         },
     },
-
+    /**
+    * Watch for screen resize 
+    *
+    */
     mounted () {
       this.onResize()
-
       window.addEventListener('resize', this.onResize, { passive: true })
     },
 
     methods: {
+        /**
+         * Confirm selected datetime on click
+         *
+         */
         confirm() {
             this.onUpdateDate()
             this.open = false
             this.$emit('change');
         },
+        /**
+         * On datetime update, if both date and time are set, set datetime for display 
+         */
         onUpdateDate() {
             if (!this.dateModel || !this.timeModel) return false
             this.displayDate = this.dateModel + ' ' + this.timeModel
             this.$emit('input', this.displayDate)
         },
+        /**
+         * On screen resize set if mobile view 
+         * (this is used for conditional rendering of the datetime modal according to the screen size)
+         */
         onResize () {
-        this.isMobile = window.innerWidth < 540
+            this.isMobile = window.innerWidth < 540
       },
     },
 }
