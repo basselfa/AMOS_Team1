@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="map-container">
         <search @change="getSearchValue($event)" />
         <open-street-map :polylines="polylines" :cityCenter="cityCenter" />
     </div>
@@ -131,12 +131,13 @@ export default {
         executeQuery: async function(value) {
             this.polylines = []
             if (value.city !== null && value.timestamp !== null) {
-                await this.getCenter(value)
-                await this.getIncidents(value)
-                console.log("Incidents received: " + this.incidentsData.length)
-                await this.getComparison(value)
-                console.log("Comparison incidents received: " +this.comparisonData.length)
-                this.passCoordinates(this.incidentsData)
+                await this.getCenter(value).then( async () => {
+                  await this.getIncidents(value)
+                  console.log("Incidents received: " + this.incidentsData.length)
+                  await this.getComparison(value)
+                  console.log("Comparison incidents received: " + this.comparisonData.length)
+                  this.passCoordinates(this.incidentsData)
+                })
             }
         },
 
@@ -161,8 +162,14 @@ export default {
                             ? incidentsData[i].description.split('&')[1]
                             : incidentsData[i].description
                         : 'Description not available',
-                    length: incidentsData[i].lengthInMeter,
+                    length: incidentsData[i].lengthInMeter.toFixed(2),
                     type: incidentsData[i].type,
+                    provider: incidentsData[i].provider,
+                    city: incidentsData[i].city,
+                    startPositionStreet: incidentsData[i].startPositionStreet,
+                    endPositionStreet: incidentsData[i].endPositionStreet,
+                    entryTime: incidentsData[i].entryTime,
+                    endTime: incidentsData[i].endTime
                 })
             }
         },
@@ -195,7 +202,9 @@ export default {
          */
         compareIncidents(incident) {
             // check if overlapping by checking if the incident is contained in comparisonData
-            let overlapping =
+            let overlapping = false
+            if (this.comparisonData.length > 0) {
+             overlapping =
                 this.comparisonData.some(
                     comparisonIncident =>
                         comparisonIncident.tomTomIncidentId === incident.id
@@ -204,6 +213,7 @@ export default {
                     comparisonIncident =>
                         comparisonIncident.hereIncidentId === incident.id
                 )
+            } 
             // get incident provider
             let here = incident.provider == '0'
             let tomtom = incident.provider == '1'
@@ -230,4 +240,22 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.map-container {
+  padding-left: 15px;
+  padding-right: 15px;
+  overflow: hidden;
+}
+
+@media only screen and (min-width: 1270px) {
+  .map-container {
+    padding-left: 295px;
+  }
+}
+
+.map-container .v-text-field__details {
+    display:none;
+    height: 0px;
+    margin:0px !important;
+}
+</style>

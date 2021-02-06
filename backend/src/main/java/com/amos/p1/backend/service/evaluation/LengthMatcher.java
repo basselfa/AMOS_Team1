@@ -7,7 +7,7 @@ public class LengthMatcher extends Matcher {
     double lengthDifference;
 
     public LengthMatcher(Incident incident1, Incident incident2) {
-        super();
+        super( incident1,  incident2);
 
         lengthDifference = 100d * Math.abs(incident1.getLengthInMeter() - incident2.getLengthInMeter())
                 / (Math.abs(incident1.getLengthInMeter() + incident2.getLengthInMeter()) / 2);

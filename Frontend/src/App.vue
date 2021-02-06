@@ -2,7 +2,9 @@
   <div id="app">
     <v-app id="main">
         <navigation />
-        <router-view/>
+        <div class="page">
+          <router-view/>
+        </div>
     </v-app>
   </div>
 </template>
@@ -29,4 +31,8 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+
+.page {
+  padding-top: 75px;
+}  
 </style>

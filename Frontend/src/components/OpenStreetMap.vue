@@ -6,8 +6,23 @@
         v-for="(polyline,index) in polylines" :key="index"
         :lat-lngs="polyline.latlngs"
         :color="polyline.color"
-      ><l-tooltip sticky="true">{{polyline.description}} <br> <span style="font-weight:500">{{polyline.type}}</span>, <span style="color:rgb( 230, 70, 80);font-weight:500">Criticality: {{polyline.criticality}}</span> Length: {{polyline.length}}</l-tooltip></l-polyline>
-      <l-marker :lat-lng="markerLatLng">
+      ><l-tooltip sticky="true">
+        {{polyline.description}} 
+        <br> 
+        <span style="font-weight:500">{{polyline.type}}</span>, 
+        <span style="color:rgb( 230, 70, 80);font-weight:500">Criticality: {{polyline.criticality}}</span>,
+        Length: {{polyline.length}}m
+        <br>
+        <span v-if="polyline.startPositionStreet!=null&&polyline.startPositionStreet.length>3">{{polyline.startPositionStreet}},</span> 
+        <span v-else>No address provided</span> 
+        <span v-if="polyline.city!=null">{{polyline.city}}</span>
+        <br>
+        From: {{polyline.entryTime}} Until: {{polyline.endTime}} 
+        <br>
+        Provider: <span v-if="polyline.provider=='1'" style="font-weight:700" >TomTom</span><span v-if="polyline.provider=='0'" style="font-weight:700">Here</span>
+        </l-tooltip>
+        </l-polyline>
+      <l-marker :lat-lng="center">
         <l-tooltip>Center</l-tooltip>
       </l-marker>
     </l-map>
@@ -42,27 +57,32 @@ export default {
     LTooltip,
     LPolyline,
   },
-watch: { 
+  /**
+  * Watch if cityCenter changes 
+  * and move the map to the new center
+  *
+  */
+  watch: { 
     cityCenter: {
         deep: true,
         handler: function(newVal, oldVal){
+          this.center = latLng(this.cityCenter.latitude, this.cityCenter.longitude)
+          this.$refs.map.setCenter(this.center)
           this.$refs.map.setZoom(10)
-          this.$refs.map.setCenter([this.cityCenter.latitude, this.cityCenter.longitude])
         }
       }
     },
   data() {
     return {
-      zoom: 13,
-      center: latLng(52.515000, 13.3800575),
+      zoom: 10,
+      center: latLng(52.51830694705926, 13.325126085286316),
       url: "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",
       attribution:'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       showParagraph: false,
       mapOptions: {
-        zoomSnap: 0.5,
+        zoomSnap: 0.5
       },
       showMap: true,
-      markerLatLng: [52.509041, 13.330550],
     };
   },
 };
@@ -74,22 +94,37 @@ watch: {
 }
 
 #osm-map {
- height: calc(100% - 200px);
-  width: calc(100vw - 400px);
+  height: calc(100% - 300px);
+  width: calc(100vw - 45px);
   margin: 0;
   position: absolute;
-  top: 160px;
-  left: 300px;
+  top: 260px;
+  left: 15px;
   border-radius: 20px;
   -webkit-box-shadow: 4px 12px 31px -10px #cecece !important;
   box-shadow: 4px 12px 31px -10px #cecece !important;
   z-index: 0;
 }
 
+@media only screen and (min-width: 600px) {
+  #osm-map  {
+    top: 160px;
+    height: calc(100% - 200px);
+  }
+}
+
+@media only screen and (min-width: 1270px) {
+  #osm-map  {
+    top: 160px;
+    width: calc(100vw - 330px);
+    height: calc(100% - 200px);
+    left: 300px;
+  }
+}
+
 .legend{
   position: fixed;
   bottom:10px;
-  margin-left: 300px;
   padding-left:5px;
   float:left;
   display:flex;

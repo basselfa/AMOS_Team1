@@ -1,13 +1,11 @@
 import {
   mount,
-  shallowMount,
   createLocalVue
 } from '@vue/test-utils'
 import Configuration from '@/views/Configuration'
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import moxios from 'moxios'
-import flushPromises from 'flush-promises'
 
 Vue.use(Vuetify)
 const localVue = createLocalVue()
@@ -27,14 +25,14 @@ describe('Configuration', () => {
     })
   })
 
-  it('should contain card element', () => {
+  it('should contain card element', async () => {
+    await wrapper.setData({ cities: [{centreLatitude:"word", centreLongitude:15}] })
     expect(wrapper.find('.config-card').exists()).toBe(true)
   })
 
   it('should contain form elements', async () => {
     await  wrapper.setData({ cities: ["Berlin", "Hamburg"] })
-     
-    expect(wrapper.find('.v-chip__content').exists()).toBe(true)
+    expect(wrapper.find('div.form-chip').exists()).toBe(true)
   })
 
   it('should get city information from request', function (done) {
@@ -95,7 +93,6 @@ describe('Configuration', () => {
         status:500,
         response: error,
       })
-
 
     wrapper.vm.getRequestCityData()
 

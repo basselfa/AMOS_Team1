@@ -133,8 +133,8 @@ describe('Map', () => {
             "criticality": 1, 
             "description": "description", 
             "latlngs": [["52.51784", "13.28016"], ["52.51771", "13.28021"], ["52.51765", "13.28024"]], 
-            "length": 55, "type": 
-            "Accident"}])
+            "length": "55.00", 
+            "type":  "Accident"}])
 
     })
 

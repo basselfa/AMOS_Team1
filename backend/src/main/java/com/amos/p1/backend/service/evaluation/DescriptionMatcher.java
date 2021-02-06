@@ -8,7 +8,7 @@ public class DescriptionMatcher extends Matcher {
     String description = "";
 
     public DescriptionMatcher(Incident incident1, Incident incident2) {
-        super();
+        super( incident1,  incident2);
         String typeInc1 = incident1.getType();
         String typeInc2 = incident2.getType();
 
