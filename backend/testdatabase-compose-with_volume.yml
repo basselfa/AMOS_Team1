@@ -7,3 +7,9 @@ services:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_PASSWORD=root
       - MYSQL_DATABASE=testdb3
+    volumes:
+      - amos_p1_volume:/var/lib/mysql
+
+volumes:
+  amos_p1_volume:
+    external: false
