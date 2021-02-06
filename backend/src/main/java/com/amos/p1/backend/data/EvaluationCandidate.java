@@ -2,7 +2,6 @@ package com.amos.p1.backend.data;
 
 import com.amos.p1.backend.database.MyRepo;
 import com.amos.p1.backend.service.evaluation.Matcher;
-import com.amos.p1.backend.service.evaluation.SearchRadiusMatcher;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -155,10 +154,10 @@ public class EvaluationCandidate {
     }
 
     @JsonIgnore
-    public Matcher getMatcherByClass(Class matcherClass) {
+    public <T extends Matcher> T getMatcherByClass(Class<T> matcherClass) {
         Optional<Matcher> matcher = matcherList.stream().filter(m -> matcherClass.isInstance(m)).findFirst();
         if (matcher.isPresent())
-            return matcher.get();
+            return (T) matcher.get();
         return null;
     }
 
@@ -171,6 +170,24 @@ public class EvaluationCandidate {
 //            return null;
 //        }
 //    }
+
+    @JsonIgnore
+    public <T extends Matcher> boolean addMatcher(Class<T> c) {
+        try {
+            Matcher instance = c.getConstructor(Incident.class, Incident.class).newInstance(hereIncident, tomTomIncident);
+            matcherList.add(instance);
+            return true;
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     @Override
     public String toString() {
@@ -191,7 +208,7 @@ public class EvaluationCandidate {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EvaluationCandidate that = (EvaluationCandidate) o;
-        return score == that.score && dropped == that.dropped && Objects.equals(id, that.id) && Objects.equals(requestId, that.requestId) && Objects.equals(tomTomIncidentId, that.tomTomIncidentId) && Objects.equals(hereIncidentId, that.hereIncidentId) && Objects.equals(confidenceDescription, that.confidenceDescription) && Objects.equals(tomTomIncident, that.tomTomIncident) && Objects.equals(hereIncident, that.hereIncident) ;
+        return score == that.score && dropped == that.dropped && Objects.equals(id, that.id) && Objects.equals(requestId, that.requestId) && Objects.equals(tomTomIncidentId, that.tomTomIncidentId) && Objects.equals(hereIncidentId, that.hereIncidentId) && Objects.equals(confidenceDescription, that.confidenceDescription) && Objects.equals(tomTomIncident, that.tomTomIncident) && Objects.equals(hereIncident, that.hereIncident);
     }
 
     @Override

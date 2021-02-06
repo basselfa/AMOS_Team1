@@ -4,6 +4,8 @@ import com.amos.p1.backend.data.Incident;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -13,18 +15,21 @@ import static org.hamcrest.Matchers.*;
  */
 public class IncidentValuesTest {
 
+    private static final Logger log = LoggerFactory.getLogger(IncidentValuesTest.class);
+
+
     private final Incident incidentFromDb;
     @BeforeAll
     public static void init() {
 
-        System.out.println("setting Database properties");
+        log.info("setting Database properties");
         MyRepo.setUseTestDatabase(true);
     }
 
     @BeforeEach
     void setUp(){
 
-        System.out.println("reintialising Database");
+        log.info("reintialising Database");
         MyRepo.dropAll();
     }
 

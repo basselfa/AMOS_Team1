@@ -4,9 +4,9 @@ import com.amos.p1.backend.Helper;
 import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.data.Request;
-import com.amos.p1.backend.normalization.HereNormalization;
-import com.amos.p1.backend.normalization.JsonToIncident;
-import com.amos.p1.backend.normalization.TomTomNormalization;
+import com.amos.p1.backend.service.normalization.HereNormalization;
+import com.amos.p1.backend.service.normalization.JsonToIncident;
+import com.amos.p1.backend.service.normalization.TomTomNormalization;
 import com.amos.p1.backend.service.cityboundingbox.CityBoundingBoxesService;
 import com.amos.p1.backend.service.evaluation.Evaluation;
 
@@ -144,10 +144,8 @@ public abstract class RequestCreatorDummy implements RequestCreator {
         request.setIncidents(incidents);
         request.setRequestTime(timestamp);
 
-        Evaluation evaluation = new Evaluation();
-        List<EvaluationCandidate> evaluationCandidates = evaluation.calculateCandidates(request);
-        evaluationCandidates = evaluation.dropManifolds(evaluationCandidates);
-        request.setEvaluatedCandidates(evaluationCandidates);
+        List<EvaluationCandidate> evaluationCandidate = Evaluation.getEvaluationCandidates(request);
+        request.setEvaluatedCandidates(evaluationCandidate);
 
         return request;
     }

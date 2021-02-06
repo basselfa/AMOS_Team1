@@ -1,18 +1,22 @@
 package com.amos.p1.backend.service.requestcreator;
 
 import com.amos.p1.backend.data.*;
-import com.amos.p1.backend.normalization.HereNormalization;
-import com.amos.p1.backend.normalization.JsonToIncident;
-import com.amos.p1.backend.normalization.TomTomNormalization;
-import com.amos.p1.backend.provider.*;
+import com.amos.p1.backend.service.normalization.HereNormalization;
+import com.amos.p1.backend.service.normalization.JsonToIncident;
+import com.amos.p1.backend.service.normalization.TomTomNormalization;
+import com.amos.p1.backend.service.provider.*;
 import com.amos.p1.backend.service.cityboundingbox.CityBoundingBoxesService;
 import com.amos.p1.backend.service.evaluation.Evaluation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RequestCreatorImpl implements RequestCreator {
+
+    private static final Logger log = LoggerFactory.getLogger(RequestCreatorImpl.class);
 
     private final ProviderRequest tomtomRequest = new TomTomRequest();
     private final ProviderRequest hereRequest = new HereRequest();
@@ -26,14 +30,14 @@ public class RequestCreatorImpl implements RequestCreator {
         for (CityBoundingBox cityBoundingBox : cityBoundingBoxesService.getCityBoundingBoxes()) {
             List<Incident> incidents = new ArrayList<>();
 
-            System.out.println("Request data from city: " + cityBoundingBox.getCity());
+            log.info("Request data from city: " + cityBoundingBox.getCity());
 
-            System.out.println("Get data from here.com");
+            log.info("Get data from here.com");
             List<Incident> hereIncidents = getHereIncidents(cityBoundingBox);
-            System.out.println("Amount of here data: " + hereIncidents.size());
-            System.out.println("Get data from tomtom");
+            log.info("Amount of here data: " + hereIncidents.size());
+            log.info("Get data from tomtom");
             List<Incident> tomTomIncidents = getTomTomIncidents(cityBoundingBox);
-            System.out.println("Amount of tomtom data: " + tomTomIncidents.size());
+            log.info("Amount of tomtom data: " + tomTomIncidents.size());
 
             incidents.addAll(hereIncidents);
             incidents.addAll(tomTomIncidents);
@@ -43,13 +47,8 @@ public class RequestCreatorImpl implements RequestCreator {
             request.setIncidents(incidents);
             request.setRequestTime(timestamp);
 
-            System.out.println("Evaluate Data");
-            Evaluation evaluation = new Evaluation();
-            List<EvaluationCandidate> evaluationCandidates = evaluation.calculateCandidates(request);
-            System.out.println("Amount of evaluation before manifold drop: " + evaluationCandidates.size());
-            evaluationCandidates = evaluation.dropManifolds(evaluationCandidates);
-            System.out.println("Amount of evaluation after manifold drop: " + evaluationCandidates.size());
-            request.setEvaluatedCandidates(evaluationCandidates);
+            List<EvaluationCandidate> evaluationCandidate = Evaluation.getEvaluationCandidates(request);
+            request.setEvaluatedCandidates(evaluationCandidate);
 
             requests.add(request);
         }

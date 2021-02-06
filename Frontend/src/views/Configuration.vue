@@ -1,36 +1,41 @@
 <template>
 <div class="config-container">
-    <v-card class="mx-auto config-card" max-width="900">
+<v-row justify="space-around">
+<v-col justify="space-around">
+    <v-card class="config-card">
         <v-card-text>
             <div>This selection will appear for your map and historization data. <br> Select the cities to be investigated <br> by the AMOS traffic tracker.</div>
-            <div v-for="(city,index) in cities" :key="index">
-                <v-chip ref="form" x-large class="form-chip center">
-                    <v-row class="form-row">
-                        <v-col cols="4" md="3">
-                            <v-text-field ref="cityName" v-model="cities[index].cityName" label="City" required :value="city.cityName">
-                            </v-text-field>
+              <div v-for="(city,index) in cities" :key="index">
+                <div ref="form" x-large class="form-chip center">
+                
+                    <v-row class="form-row" justify="center" >
+                        <v-col cols="12" sm="3" md="3">
+                            <v-text-field ref="cityName" v-model="cities[index].cityName" label="City" required :value="city.cityName"/>
                         </v-col>
-                        <v-col cols="3" md="2">
-                            <v-text-field ref="centreLatitude" v-model="cities[index].centreLatitude" :rules="rules" label="Latitudinal value for center" required :value="city.centreLatitude"></v-text-field>
+                        <v-col cols="12" sm="2" md="2">
+                            <v-text-field ref="centreLatitude" v-model="cities[index].centreLatitude" :rules="rules" label="Latitudinal value for center" required :value="city.centreLatitude"/>
                         </v-col>
-                        <v-col cols="3" md="2">
-                            <v-text-field ref="centreLongitude" v-model="cities[index].centreLongitude" :rules="rules" label="Longitudinal value for center" required :value="city.centreLongitude"></v-text-field>
+                        <v-col cols="12" sm="2" md="2">
+                            <v-text-field ref="centreLongitude" v-model="cities[index].centreLongitude" :rules="rules" label="Longitudinal value for center" required :value="city.centreLongitude"/>
                         </v-col>
-                        <v-col cols="3" md="2">
-                            <v-text-field ref="searchRadiusInMeter" v-model="cities[index].searchRadiusInMeter" label="Radius in meter" required :value="city.searchRadiusInMeter"></v-text-field>
+                        
+
+                        <v-col cols="12" sm="2" md="2">
+                            <v-text-field ref="searchRadiusInMeter" v-model="cities[index].searchRadiusInMeter" label="Radius in meter" required :value="city.searchRadiusInMeter"/>
                         </v-col>
-                        <v-col cols="1" md="1">
-                            <v-btn :loading="loading" class="rm-btn" color="error" small @click="removeCity(city.id)">
-                                Delete
-                            </v-btn>
-                        </v-col>
-                        <v-col cols="1" md="2">
-                            <v-btn :loading="loading" class="rm-btn" color="submit" small @click="postRequestCityData(city,city.id)">
-                                Save
-                            </v-btn>
-                        </v-col>
+
+                        <v-row justify="end" style="padding-bottom:20px;">
+                            <v-col>
+                                <v-btn :loading="loading" class="rm-btn" color="submit" small @click="postRequestCityData(city,city.id)">
+                                    Save
+                                </v-btn>
+                                <v-btn :loading="loading" class="rm-btn" color="error" small @click="removeCity(city.id)">
+                                    Delete
+                                </v-btn>
+                            </v-col>
+                        </v-row>
                     </v-row>
-                </v-chip>
+                </div>
             </div>
         </v-card-text>
         <v-card-actions class="center">
@@ -39,6 +44,8 @@
             </v-btn>
         </v-card-actions>
     </v-card>
+    </v-col>
+    </v-row>
 </div>
 </template>
 
@@ -97,7 +104,7 @@ export default {
             this.loading = false;
             this.getRequestCityData();
         },
-        // TODO Set Timeout
+        // TODO Set Timeout // will this be done?
         async postRequestCityData(selectedCity, previouscityId) {
             console.log(selectedCity.cityName)
             this.loading = true
@@ -115,6 +122,7 @@ export default {
                     this.errorMessage = error.message
                     console.error('There was an error!', error)
                 })
+                // TODO? shouldnt the code below be in the then() block?
             this.removeCity(previouscityId);
             this.getRequestCityData();
             this.loading = false
@@ -133,31 +141,28 @@ export default {
 </script>
 
 <style>
-
 .config-container {
-    position: absolute;
-    top: 80px;
-    padding-bottom:30px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
-.config-card {
-  border-radius: 30px !important;
-  width: calc(100vw - 400px);
-  margin: 0;
 
-  left: 300px;
-  border-radius: 20px;
+@media only screen and (min-width: 1270px) {
+  .config-container {
+    padding-left: 295px;
+  }
+}
+
+.config-card {
+  border-radius: 20px !important;
+  padding: 10px;
 }
 
 .config-card .form-chip {
-    width: 1000px;
+    width: 100%;
     margin-top: 8px;
-    padding:50px 20px;
+    padding:0px 20px;
     background: rgb(243, 243, 243) !important;
     border-radius:10px;
-}
-
-.config-card .form-row {
-    /* width: 800px; */
 }
 
 .config-card .center {
@@ -167,7 +172,14 @@ export default {
 }
 
 .config-card .rm-btn {
-    margin-top: 40px !important
+    margin-top: -30px !important
+}
+
+@media only screen and (min-width: 690px) {
+  .config-card .rm-btn {
+    margin-top: 40px !important;
+    margin: 0px 10px 0px 10px;
+  }
 }
 
 .config-card .v-text-field__details {
@@ -180,4 +192,5 @@ export default {
 .config-card .v-text-field {
     margin-top:25px;
 }
+
 </style>

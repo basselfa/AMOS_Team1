@@ -1,11 +1,17 @@
 package com.amos.p1.backend.database;
 
+import com.amos.p1.backend.data.Request;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DatabaseHelper {
+
+    private static final Logger log = LoggerFactory.getLogger(DatabaseHelper.class);
 
     private final DatabaseConfig databaseConfig;
 
@@ -15,9 +21,9 @@ public class DatabaseHelper {
 
     public void waitForDatabase(int pollingTimeInMs){
         while(!isDatabaseUp()){
-            System.out.println("Database is with following information is not up: ");
-            System.out.println(databaseConfig);
-            System.out.println("Retry in " + pollingTimeInMs + " ms");
+            log.info("Database is with following information is not up: ");
+            log.info("" + databaseConfig);
+            log.info("Retry in " + pollingTimeInMs + " ms");
 
             try {
                 Thread.sleep(pollingTimeInMs);
@@ -26,8 +32,8 @@ public class DatabaseHelper {
             }
         }
 
-        System.out.println("Database is with following information is up: ");
-        System.out.println(databaseConfig);
+        log.info("Database is with following information is up: ");
+        log.info("" + databaseConfig);
     }
 
     public boolean isDatabaseUp(){

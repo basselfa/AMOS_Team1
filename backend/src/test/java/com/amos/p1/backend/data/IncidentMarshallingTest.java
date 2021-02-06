@@ -3,11 +3,9 @@ package com.amos.p1.backend.data;
 import com.amos.p1.backend.Helper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static com.jayway.jsonpath.matchers.JsonPathMatchers.hasJsonPath;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -38,6 +36,8 @@ import static org.hamcrest.Matchers.hasSize;
  * - https://github.com/json-path/JsonPath/tree/master/json-path-assert
  */
 public class IncidentMarshallingTest {
+
+    private static final Logger log = LoggerFactory.getLogger(IncidentMarshallingTest.class);
 
     private String json;
 
@@ -85,7 +85,7 @@ public class IncidentMarshallingTest {
     @Test
     void printJson() {
 
-        System.out.println(Helper.getPrettyJson(json));
+        log.info(Helper.getPrettyJson(json));
     }
 
     @Test

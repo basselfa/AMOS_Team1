@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="map-container">
         <search @change="getSearchValue($event)" />
         <open-street-map :polylines="polylines" :cityCenter="cityCenter" />
     </div>
@@ -164,6 +164,12 @@ export default {
                         : 'Description not available',
                     length: incidentsData[i].lengthInMeter.toFixed(2),
                     type: incidentsData[i].type,
+                    provider: incidentsData[i].provider,
+                    city: incidentsData[i].city,
+                    startPositionStreet: incidentsData[i].startPositionStreet,
+                    endPositionStreet: incidentsData[i].endPositionStreet,
+                    entryTime: incidentsData[i].entryTime,
+                    endTime: incidentsData[i].endTime
                 })
             }
         },
@@ -234,4 +240,22 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.map-container {
+  padding-left: 15px;
+  padding-right: 15px;
+  overflow: hidden;
+}
+
+@media only screen and (min-width: 1270px) {
+  .map-container {
+    padding-left: 295px;
+  }
+}
+
+.map-container .v-text-field__details {
+    display:none;
+    height: 0px;
+    margin:0px !important;
+}
+</style>

@@ -4,7 +4,7 @@ This project provides a user interface for the **Traffic Data Visualization and 
 
 ## Requirements
 
-For development, you will need `node` and `npm` installed. Since we are using the **VueJS Framework**, you will also need to install `Vue` and the design framework for `Vuetify`.
+For development, you will need `node` and `npm` installed. Since we are using the **VueJS Framework**, you will also need to install `Vue` and the design framework for Vue `Vuetify`.
 
 For the visualization of the traffic data on a map, we use `OpenStreetMap` and the JavaScript library `Leaflet`.
 
@@ -30,18 +30,18 @@ npm run build --report
 # run unit tests
 npm run unit
 
-# run e2e tests
+# run e2e tests 
 npm run e2e
 
 # run all tests
 npm test
 ```
 
-Coverage will be displayed in the console or you can find a full report under `test\unit\coverage\lcov-report\index.html`
+Coverage will be displayed in the console or you can find a full report under `test\unit\coverage\index.html`
 
 ## Usage
 
-(TODO)
+Please refer to our User Documentation in order to read more about how to use our service. 
 
 ## Authors
 

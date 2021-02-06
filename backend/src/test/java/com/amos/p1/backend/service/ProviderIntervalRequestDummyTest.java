@@ -8,6 +8,8 @@ import com.amos.p1.backend.service.requestcreator.RequestCreator;
 import com.amos.p1.backend.service.requestcreator.RequestCreatorDummyBerlinSmall;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -16,6 +18,8 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class ProviderIntervalRequestDummyTest {
+
+    private static final Logger log = LoggerFactory.getLogger(ProviderIntervalRequestDummyTest.class);
 
     private ProviderIntervalRequest providerIntervalRequest;
 
@@ -30,7 +34,7 @@ public class ProviderIntervalRequestDummyTest {
                 new CityBoundingBoxServiceConfigDevelopment()
         );
 
-        System.out.println("reintialising Database");
+        log.info("reintialising Database");
         MyRepo.dropAll();
 
         //Adding dummy data to database

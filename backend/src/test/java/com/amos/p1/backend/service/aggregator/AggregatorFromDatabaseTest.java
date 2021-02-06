@@ -12,6 +12,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.checkerframework.checker.nullness.Opt;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -25,6 +27,8 @@ import static org.hamcrest.Matchers.*;
 
 
 public class AggregatorFromDatabaseTest {
+
+    private static final Logger log = LoggerFactory.getLogger(AggregatorFromDatabaseTest.class);
 
     Aggregator aggregator = new AggregatorFromDatabase();
     Request berlinRequest;
@@ -47,7 +51,7 @@ public class AggregatorFromDatabaseTest {
     @Test
     void testGetIncidentsFromCity() {
         List<Incident> incidentList = aggregator.getIncidents("Berlin", Optional.empty(), Optional.empty());
-        System.out.println(berlinRequest.getIncidents());
+        log.info("" + berlinRequest.getIncidents());
         assertThat(incidentList, hasSize(greaterThan(0)));                               // List not empty
         assertThat(incidentList, hasSize(equalTo(berlinRequest.getIncidents().size())));       // as long as input List TODO: Kang -> stimmt das so?
 
@@ -92,7 +96,7 @@ public class AggregatorFromDatabaseTest {
                     List<Incident> resultIncidentList2 = aggregator.getIncidents("Berlin", Optional.ofNullable(berlinRequest.getRequestTime()), Optional.of(types2));
                     List<Incident> sourceIncidentList2 = berlinRequest.getIncidents().stream().filter(i -> type.equals(i.getType())).collect(Collectors.toList());
 
-                    System.out.println(type);
+                    log.info(type);
                     assertThat(resultIncidentList2, hasSize(equalTo(sourceIncidentList2.size())));   // correct amount ?
 
                     resultIncidentList2.forEach(
@@ -211,7 +215,7 @@ public class AggregatorFromDatabaseTest {
     @Test
     void testGetComparisonEvaluationOverTime() {
         List<ComparisonEvaluationDTO> comparisonEvaluationDTOs = aggregator.getComparisonEvaluationOverTime("Berlin");
-        System.out.println(comparisonEvaluationDTOs);
+        log.info("" + comparisonEvaluationDTOs);
 
         assertThat(comparisonEvaluationDTOs, hasSize(1));
 
