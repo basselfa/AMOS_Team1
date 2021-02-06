@@ -1,10 +1,10 @@
 package com.amos.p1.backend.service.requestcreator;
 
 import com.amos.p1.backend.data.*;
-import com.amos.p1.backend.normalization.HereNormalization;
-import com.amos.p1.backend.normalization.JsonToIncident;
-import com.amos.p1.backend.normalization.TomTomNormalization;
-import com.amos.p1.backend.provider.*;
+import com.amos.p1.backend.service.normalization.HereNormalization;
+import com.amos.p1.backend.service.normalization.JsonToIncident;
+import com.amos.p1.backend.service.normalization.TomTomNormalization;
+import com.amos.p1.backend.service.provider.*;
 import com.amos.p1.backend.service.cityboundingbox.CityBoundingBoxesService;
 import com.amos.p1.backend.service.evaluation.Evaluation;
 import org.slf4j.Logger;

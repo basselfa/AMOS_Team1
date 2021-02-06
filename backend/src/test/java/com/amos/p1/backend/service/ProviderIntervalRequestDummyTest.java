@@ -4,7 +4,6 @@ import com.amos.p1.backend.configuration.CityBoundingBoxServiceConfigDevelopment
 import com.amos.p1.backend.configuration.RequestCreatorConfigDevelopment;
 import com.amos.p1.backend.data.Request;
 import com.amos.p1.backend.database.MyRepo;
-import com.amos.p1.backend.provider.TomTomRequestTest;
 import com.amos.p1.backend.service.requestcreator.RequestCreator;
 import com.amos.p1.backend.service.requestcreator.RequestCreatorDummyBerlinSmall;
 import org.junit.jupiter.api.BeforeEach;
