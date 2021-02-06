@@ -82,30 +82,6 @@ public class ResourceWithDatabase {
         return timestampsAsStrings;
     }
 
-    @RequestMapping(
-            method = RequestMethod.GET,
-            value = "/cities",
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
-    @ResponseBody
-    public ResponseEntity<List<CityBoundingBox>> getAllCities() {
-
-        CityBoundingBoxesServiceImpl cityBoundingBoxesService = new CityBoundingBoxesServiceImpl();
-        List<CityBoundingBox> cities = cityBoundingBoxesService.getCityBoundingBoxes();
-
-        return ResponseEntity.ok(cities);
-
-    }
-
-    private List<String> parseCityList(List<CityBoundingBox> cityBoundingBoxes) {
-        //TODO: change to lambda
-        List<String> cities = new ArrayList<>();
-        for (CityBoundingBox cityBoundingBox : cityBoundingBoxes) {
-            cities.add(cityBoundingBox.getCity());
-        }
-
-        return cities;
-    }
 
     @RequestMapping(
             method = RequestMethod.GET,

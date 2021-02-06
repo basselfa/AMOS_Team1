@@ -143,33 +143,6 @@ public class ResourceWithDatabaseTest {
     }
 
     @Test
-    void testGetAllCitiesAndCheckBoundingBoxes() throws JSONException {
-        String s = given()
-                .param("city", "Berlin")
-                .when()
-                .get(base + "/cities")
-                .then().extract().asString();
-
-        JSONArray arr = new JSONArray(s);
-
-        for (int i = 0; i < arr.length(); i++) {  //for all cities
-            JSONObject cityObj = arr.getJSONObject(i);
-
-            double latMin = cityObj.getJSONObject("minCorner").getDouble("latitude");
-            double longMin = cityObj.getJSONObject("minCorner").getDouble("longitude");
-            double latMax = cityObj.getJSONObject("maxCorner").getDouble("latitude");
-            double longMax = cityObj.getJSONObject("maxCorner").getDouble("longitude");
-
-          /*  log.info("new");
-            log.info(Math.abs(cityObj.getJSONObject("centerPoint").getDouble("longitude")));
-            log.info((longMin + (longMax - longMin) / 2));*/
-
-            assert (Math.abs(cityObj.getJSONObject("centerPoint").getDouble("latitude") - (latMin + (latMax - latMin) / 2)) < 0.1);
-            assert (Math.abs(cityObj.getJSONObject("centerPoint").getDouble("longitude") - (longMin + (longMax - longMin) / 2)) < 0.1);
-        }
-    }
-
-    @Test
     void testComparisonEvaluationOverTime(){
         List<ComparisonEvaluationDTO> comparisonEvaluationDTOs =
                 given()

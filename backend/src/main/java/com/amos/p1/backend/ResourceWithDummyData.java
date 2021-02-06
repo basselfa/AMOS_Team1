@@ -52,24 +52,6 @@ public class ResourceWithDummyData {
         return ResponseEntity.ok(timestamps);
     }
 
-    @RequestMapping(
-            method = RequestMethod.GET,
-            value = "/cities",
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
-    @ResponseBody
-    public ResponseEntity<List<String>> getAllCities(){
-
-        List<String> cities = new ArrayList<>();
-        cities.add("Berlin");
-        cities.add("Frankfurt");
-        cities.add("Malchin");
-        cities.add("Hamburg");
-        cities.add("Munich");
-
-        return ResponseEntity.ok(cities);
-    }
-
 
     @RequestMapping(
             method = RequestMethod.GET,
