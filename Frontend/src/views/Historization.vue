@@ -44,7 +44,7 @@
               v-if="loading == true"
               indeterminate
               color="primary"
-              style="margin-top: 10%"
+              class="historization-loading-indicator"
             ></v-progress-circular>
             <div
               id="charts-container"
@@ -252,6 +252,12 @@ export default {
 
 .historization-card {
   padding: 10px; 
-  border-radius:20px;
+  border-radius:20px !important;
+}
+
+.historization-loading-indicator {
+  margin-top: 15%; 
+  position:relative; 
+  bottom:100px
 }
 </style>
