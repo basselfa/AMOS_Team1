@@ -1,18 +1,23 @@
 package com.amos.p1.backend;
 
+import com.amos.p1.backend.service.ProviderIntervalRequestDummyTest;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.*;
 import java.util.Enumeration;
 
 public class IpTest {
 
+    private static final Logger log = LoggerFactory.getLogger(IpTest.class);
+
     @Test
     void test(){
         try(final DatagramSocket socket = new DatagramSocket()){
             socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
             String hostAddress = socket.getLocalAddress().getHostAddress();
-            System.out.println(hostAddress);
+            log.info(hostAddress);
         } catch (SocketException | UnknownHostException e) {
             e.printStackTrace();
         }
@@ -28,7 +33,7 @@ public class IpTest {
             while (ee.hasMoreElements())
             {
                 InetAddress i = (InetAddress) ee.nextElement();
-                System.out.println(i.getHostAddress());
+                log.info(i.getHostAddress());
             }
         }
     }

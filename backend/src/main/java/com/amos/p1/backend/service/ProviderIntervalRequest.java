@@ -2,9 +2,13 @@ package com.amos.p1.backend.service;
 
 import com.amos.p1.backend.configuration.CityBoundingBoxServiceConfig;
 import com.amos.p1.backend.configuration.RequestCreatorConfig;
+import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.data.Request;
 import com.amos.p1.backend.database.MyRepo;
+import com.amos.p1.backend.service.evaluation.Evaluation;
 import com.amos.p1.backend.service.requestcreator.RequestCreator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -18,6 +22,8 @@ import java.util.List;
         value = "app.scheduling.enable", havingValue = "true", matchIfMissing = true
 )
 public class ProviderIntervalRequest {
+
+    private static final Logger log = LoggerFactory.getLogger(ProviderIntervalRequest.class);
 
     private final RequestCreatorConfig requestCreatorConfig;
     private final CityBoundingBoxServiceConfig cityBoundingBoxServiceConfig;
@@ -39,7 +45,7 @@ public class ProviderIntervalRequest {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime nowNoSeconds = LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), now.getHour(), now.getMinute());
 
-        System.out.println("The time is now " + nowNoSeconds);
+        log.info("The time is now " + nowNoSeconds);
 
         RequestCreator requestCreator = requestCreatorConfig.getRequestCreator();
         requestCreator.setTimeStamp(nowNoSeconds);
@@ -48,11 +54,11 @@ public class ProviderIntervalRequest {
         List<Request> requests = requestCreator.buildRequests();
 
         for (Request request : requests) {
-            System.out.println("Save incidents into db. City: " + request.getCityName() +" Amount: " + request.getIncidents().size());
+            log.info("Save incidents into db. City: " + request.getCityName() +" Amount: " + request.getIncidents().size());
             MyRepo.insertRequest(request);
-            System.out.println("Sucessfully saved");
+            log.info("Sucessfully saved");
         }
 
-        System.out.println("Sucessfully saved everything");
+        log.info("Sucessfully saved everything");
     }
 }

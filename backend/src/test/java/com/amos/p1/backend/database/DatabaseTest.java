@@ -3,9 +3,12 @@ package com.amos.p1.backend.database;
 import com.amos.p1.backend.data.CityInformation;
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.data.Request;
+import com.amos.p1.backend.data.RequestMarshallingTest;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -16,17 +19,19 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class DatabaseTest {
 
+    private static final Logger log = LoggerFactory.getLogger(DatabaseTest.class);
+
     @BeforeAll
     public static void init() {
 
-        System.out.println("setting Database properties");
+        log.info("setting Database properties");
     //    MyRepo.setUseTestDatabase(true);
     }
 
     @BeforeEach
     void setUp(){
 
-        System.out.println("reintialising Database");
+        log.info("reintialising Database");
         MyRepo.dropAll();
     }
 
@@ -77,7 +82,7 @@ public class DatabaseTest {
         MyRepo.insertRequest(request);
 
 
-        System.out.println(MyRepo.getRequest(LocalDateTime.of(
+        log.info("" + MyRepo.getRequest(LocalDateTime.of(
                 2020, 5, 1,
                 12, 30, 0)));
     }

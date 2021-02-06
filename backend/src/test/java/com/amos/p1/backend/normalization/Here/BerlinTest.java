@@ -22,6 +22,6 @@ public class BerlinTest {
     @Test
     void testPrint() {
         String incidentsJson = Helper.getIncidentListMarshalling(incidentList);
-        //System.out.println(incidentsJson);
+        //log.info(incidentsJson);
     }
 }

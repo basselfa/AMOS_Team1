@@ -1,11 +1,14 @@
 package com.amos.p1.backend.normalization.Here;
 
 import com.amos.p1.backend.Helper;
+import com.amos.p1.backend.ResourceWithDatabaseTest;
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.normalization.HereNormalization;
 import com.amos.p1.backend.normalization.JsonToIncident;
 import com.amos.p1.backend.normalization.TomTomNormalization;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 import java.util.LinkedList;
@@ -17,13 +20,15 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 public class OneIncidentTest {
     private final Incident incident;
 
+    private static final Logger log = LoggerFactory.getLogger(OneIncidentTest.class);
+
     public OneIncidentTest() {
 
         String json = Helper.getFileResourceAsString("normalization/HereData/OneIncident.json");
 
         JsonToIncident jsonNormalizer = new HereNormalization();
         incident = jsonNormalizer.normalizeOneIncident(json);
-        System.out.println(incident);
+        log.info("" + incident);
     }
 
     @Test

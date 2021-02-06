@@ -15,6 +15,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.TestPropertySource;
@@ -29,6 +31,8 @@ import static org.hamcrest.Matchers.*;
 @TestPropertySource(properties = "app.scheduling.enable=false")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ResourceWithDatabase5CitiesTest {
+
+    private static final Logger log = LoggerFactory.getLogger(ResourceWithDatabase5CitiesTest.class);
 
     @LocalServerPort
     private int port;
@@ -46,12 +50,12 @@ public class ResourceWithDatabase5CitiesTest {
         RequestCreatorDummy requestCreator = new RequestCreatorDummy5CitiesSameTimeStamp();
 
         List<Request> requests = requestCreator.buildRequests();
-        System.out.println("Request sucessfully builded");
+        log.info("Request sucessfully builded");
         for (Request request : requests) {
             MyRepo.insertRequest(request);
-            System.out.println("Request saved for: " + request.getCityName() + " " + request.getRequestTime());
+            log.info("Request saved for: " + request.getCityName() + " " + request.getRequestTime());
         }
-        System.out.println("Saved everything");
+        log.info("Saved everything");
 
         berlinRequest = requestCreator.getRequest("Berlin", LocalDateTime.of(2020, 1, 14, 10, 0, 0));
         assertThat(berlinRequest, not(nullValue()));
@@ -76,7 +80,7 @@ public class ResourceWithDatabase5CitiesTest {
                 .jsonPath()
                 .getList(".", Incident.class);
 
-        System.out.println(incidents);
+        log.info("" + incidents);
         assertThat(incidents, hasSize(49 + 58)); // Other number. Need to be evaluated
     }
 }

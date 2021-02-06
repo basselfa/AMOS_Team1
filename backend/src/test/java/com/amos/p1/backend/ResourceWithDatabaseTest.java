@@ -10,6 +10,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.TestPropertySource;
@@ -24,6 +26,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @TestPropertySource(properties = "app.scheduling.enable=false")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ResourceWithDatabaseTest {
+
+    private static final Logger log = LoggerFactory.getLogger(ResourceWithDatabaseTest.class);
 
     @LocalServerPort
     private int port;
@@ -61,8 +65,8 @@ public class ResourceWithDatabaseTest {
                 .jsonPath()
                 .getList(".", Incident.class);
 
-        System.out.println(incidents);
-        System.out.println(incidents.get(0));
+        log.info("" + incidents);
+        log.info("" + incidents.get(0));
         assertThat(incidents, hasSize(49 + 58)); // 49 Here incidents + 58 tomtom incicents
     }
 
@@ -156,9 +160,9 @@ public class ResourceWithDatabaseTest {
             double latMax = cityObj.getJSONObject("maxCorner").getDouble("latitude");
             double longMax = cityObj.getJSONObject("maxCorner").getDouble("longitude");
 
-          /*  System.out.println("new");
-            System.out.println(Math.abs(cityObj.getJSONObject("centerPoint").getDouble("longitude")));
-            System.out.println((longMin + (longMax - longMin) / 2));*/
+          /*  log.info("new");
+            log.info(Math.abs(cityObj.getJSONObject("centerPoint").getDouble("longitude")));
+            log.info((longMin + (longMax - longMin) / 2));*/
 
             assert (Math.abs(cityObj.getJSONObject("centerPoint").getDouble("latitude") - (latMin + (latMax - latMin) / 2)) < 0.1);
             assert (Math.abs(cityObj.getJSONObject("centerPoint").getDouble("longitude") - (longMin + (longMax - longMin) / 2)) < 0.1);
