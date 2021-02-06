@@ -6,7 +6,22 @@
         v-for="(polyline,index) in polylines" :key="index"
         :lat-lngs="polyline.latlngs"
         :color="polyline.color"
-      ><l-tooltip sticky="true">{{polyline.description}} <br> <span style="font-weight:500">{{polyline.type}}</span>, <span style="color:rgb( 230, 70, 80);font-weight:500">Criticality: {{polyline.criticality}}</span> Length: {{polyline.length}}m</l-tooltip></l-polyline>
+      ><l-tooltip sticky="true">
+        {{polyline.description}} 
+        <br> 
+        <span style="font-weight:500">{{polyline.type}}</span>, 
+        <span style="color:rgb( 230, 70, 80);font-weight:500">Criticality: {{polyline.criticality}}</span>,
+        Length: {{polyline.length}}m
+        <br>
+        <span v-if="polyline.startPositionStreet!=null&&polyline.startPositionStreet.length>3">{{polyline.startPositionStreet}},</span> 
+        <span v-else>No address provided</span> 
+        <span v-if="polyline.city!=null">{{polyline.city}}</span>
+        <br>
+        From: {{polyline.entryTime}} Until: {{polyline.endTime}} 
+        <br>
+        Provider: <span v-if="polyline.provider=='1'" style="font-weight:700" >TomTom</span><span v-if="polyline.provider=='0'" style="font-weight:700">Here</span>
+        </l-tooltip>
+        </l-polyline>
       <l-marker :lat-lng="center">
         <l-tooltip>Center</l-tooltip>
       </l-marker>

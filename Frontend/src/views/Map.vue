@@ -164,6 +164,12 @@ export default {
                         : 'Description not available',
                     length: incidentsData[i].lengthInMeter.toFixed(2),
                     type: incidentsData[i].type,
+                    provider: incidentsData[i].provider,
+                    city: incidentsData[i].city,
+                    startPositionStreet: incidentsData[i].startPositionStreet,
+                    endPositionStreet: incidentsData[i].endPositionStreet,
+                    entryTime: incidentsData[i].entryTime,
+                    endTime: incidentsData[i].endTime
                 })
             }
         },
