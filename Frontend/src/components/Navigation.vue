@@ -38,11 +38,6 @@ export default {
     selectedItem: 0,
     items: [
       {
-        text: "Home",
-        icon: "mdi-home",
-        link: "/",
-      },
-      {
         text: "Map",
         icon: "mdi-map",
         link: "/map",
@@ -78,7 +73,7 @@ a:visited,
 a:link,
 a:active {
   color: black;
-  text-decoration: none !important; 
+  text-decoration: none !important;
 }
 
 nav {
