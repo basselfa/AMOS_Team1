@@ -15,6 +15,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @Component
@@ -42,7 +44,7 @@ public class ProviderIntervalRequest {
     @Scheduled(fixedRate = 3600000)
     public void providerCronJob() {
 
-        LocalDateTime now = LocalDateTime.now();
+        ZonedDateTime now = ZonedDateTime.now(ZoneId.of("Europe/Berlin"));
         LocalDateTime nowNoSeconds = LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), now.getHour(), now.getMinute());
 
         log.info("The time is now " + nowNoSeconds);
