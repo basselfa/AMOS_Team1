@@ -96,13 +96,18 @@ export default {
                     }
                 )
                 .then(response => {
+                    console.log("Timestamps received for " + this.city + ": " + response.data.length)
                     this.timestamps = response.data
-                    this.timestamp = this.timestamps[this.timestamps.length - 1]
-                    this.$emit('change', {
-                        city: this.city,
-                        timestamp: this.timestamp,
-                        type: this.type.map(x => x.toUpperCase().replace(/ /g,"")),
-                    })
+                    if (this.timestamps.length < 1) {
+                        console.error("No timestamps received for this city")
+                    } else {
+                        this.timestamp = this.timestamps[this.timestamps.length - 1]
+                        this.$emit('change', {
+                            city: this.city,
+                            timestamp: this.timestamp,
+                            type: this.type.map(x => x.toUpperCase().replace(/ /g,"")),
+                        })
+                    }
                 })
                 .catch(error => {
                     this.errorMessage = error.message
