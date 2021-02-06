@@ -43,13 +43,8 @@ public class RequestCreatorImpl implements RequestCreator {
             request.setIncidents(incidents);
             request.setRequestTime(timestamp);
 
-            System.out.println("Evaluate Data");
-            Evaluation evaluation = new Evaluation();
-            List<EvaluationCandidate> evaluationCandidates = evaluation.calculateCandidates(request);
-            System.out.println("Amount of evaluation before manifold drop: " + evaluationCandidates.size());
-            evaluationCandidates = evaluation.dropManifolds(evaluationCandidates);
-            System.out.println("Amount of evaluation after manifold drop: " + evaluationCandidates.size());
-            request.setEvaluatedCandidates(evaluationCandidates);
+            List<EvaluationCandidate> evaluationCandidate = Evaluation.getEvaluationCandidates(request);
+            request.setEvaluatedCandidates(evaluationCandidate);
 
             requests.add(request);
         }
