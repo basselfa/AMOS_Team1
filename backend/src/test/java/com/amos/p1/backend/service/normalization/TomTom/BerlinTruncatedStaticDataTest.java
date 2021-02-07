@@ -26,4 +26,19 @@ public class BerlinTruncatedStaticDataTest {
         assertEquals(4, incidentList.size());
     }
 
+    @Test
+    void testFirstIncidentType(){
+        assertEquals("LANERESTRICTION", incidentList.get(0).getType());
+    }
+
+    @Test
+    void testFirstIncidentEdgesNotNull(){
+        assertEquals(17, incidentList.get(0).getEdgesAsLocations().getLocationsList().size());
+    }
+
+    @Test
+    void testFirstIncidentLength(){
+        assertEquals(618, incidentList.get(0).getLengthInMeter());
+    }
+
 }
