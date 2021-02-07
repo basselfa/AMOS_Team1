@@ -80,7 +80,7 @@ public class EvaluationTest {
         //todo: find good test case
     }
 
-    private Incident getBaseIncident(boolean here, long id) {
+    public static Incident getBaseIncident(boolean here, long id) {
         Incident incident = new Incident();
         incident.setStartPositionLatitude("52.0");
         incident.setStartPositionLongitude("13.0");

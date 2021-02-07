@@ -38,11 +38,6 @@ export default {
     selectedItem: 0,
     items: [
       {
-        text: "Home",
-        icon: "mdi-home",
-        link: "/",
-      },
-      {
         text: "Map",
         icon: "mdi-map",
         link: "/map",
@@ -78,27 +73,27 @@ a:visited,
 a:link,
 a:active {
   color: black;
-  text-decoration: none !important; 
+  text-decoration: none !important;
 }
 
 nav {
   border-radius: 30px;
-  -webkit-box-shadow: 4px 12px 31px -5px #cecece;
-  box-shadow: 4px 12px 31px -5px #cecece;
+  -webkit-box-shadow: 4px 6px 20px -10px #cecece !important;
+  box-shadow: 2px 6px 20px -5px #cecece !important;
   margin-left: 15px;
 }
 
 .header {
   left: 15px;
-  -webkit-box-shadow: 4px 12px 31px -10px #cecece !important;
-  box-shadow: 4px 12px 31px -10px #cecece !important;
+  -webkit-box-shadow: 4px 6px 20px -10px #cecece !important;
+  box-shadow: 2px 6px 20px -5px #cecece !important;
 }
 
 @media only screen and (min-width: 1270px) {
   .header {
     left: 295px !important;
-    -webkit-box-shadow: 4px 12px 31px -10px #cecece !important;
-    box-shadow: 4px 12px 31px -10px #cecece !important;
+  -webkit-box-shadow: 4px 6px 20px -10px #cecece !important;
+  box-shadow: 2px 6px 20px -5px #cecece !important;
   }
 }
 </style>

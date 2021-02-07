@@ -27,7 +27,7 @@ describe('Navigation', () => {
     expect(wrapper.find('#logo').exists()).toBe(true)
   })
   it('should contain 5 navigation items', () => {
-    expect(wrapper.findAll('v-list-item-stub').length).toEqual(5)
+    expect(wrapper.findAll('v-list-item-stub').length).toEqual(4)
   })
 
   afterEach(() => {

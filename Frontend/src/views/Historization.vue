@@ -136,7 +136,7 @@ export default {
     async fetchData() {
       await axios
         .get(
-          "http://" + window.location.hostname + ":8082/withDatabase/cities",
+          "http://" + window.location.hostname + ":8082/withDatabase/cityinformation",
           {
             headers: { "Access-Control-Allow-Origin": "*" },
           }
@@ -144,7 +144,7 @@ export default {
         .then((response) => {
           let cities = [];
           response.data.map(function (item) {
-            cities.push(item.city);
+            cities.push(item.cityName);
           });
           this.cities = cities;
         })
@@ -156,7 +156,7 @@ export default {
     },
     /**
     * Get the comparison evaluation data for the selected city if start and end times are also selected
-    * 
+    *
     */
     async fetchDataForCity() {
       // filters need to be set

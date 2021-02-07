@@ -86,7 +86,7 @@ describe('Historization', () => {
         flushPromises()
 
         moxios.stubRequest(
-            'http://localhost:8082/demo/comparisonEvaluationOverTime/?city=Berlin',
+            'http://localhost:8082/withDatabase/comparisonEvaluationOverTime/?city=Berlin',
             {
                 status: 200,
                 response: [
