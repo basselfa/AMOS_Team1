@@ -50,7 +50,7 @@ public class AggregatorFromDatabase5CitiesTest {
     @Test
     void testGetIncidentsFromCity() {
         Instant start = Instant.now();
-        List<Incident> incidentList = aggregator.getIncidents("Berlin", Optional.of(berlinTimeStamp), Optional.empty());
+        List<Incident> incidentList = aggregator.getIncidents("Berlin", Optional.of(berlinTimeStamp), Optional.empty(), Optional.empty());
         Instant end = Instant.now();
 
         Duration timeElapsed = Duration.between(start, end);

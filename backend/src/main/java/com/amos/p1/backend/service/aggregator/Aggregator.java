@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public interface Aggregator {
 
-    List<Incident> getIncidents(String city, Optional<LocalDateTime> timestamp, Optional<List<String>> types);
+    List<Incident> getIncidents(String city, Optional<LocalDateTime> timestamp, Optional<List<String>> types, Optional<String> provider);
 
     List<LocalDateTime> getTimestampsFromCity(String city);
 

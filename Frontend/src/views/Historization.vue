@@ -156,7 +156,7 @@ export default {
     },
     /**
     * Get the comparison evaluation data for the selected city if start and end times are also selected
-    * 
+    *
     */
     async fetchDataForCity() {
       // filters need to be set
