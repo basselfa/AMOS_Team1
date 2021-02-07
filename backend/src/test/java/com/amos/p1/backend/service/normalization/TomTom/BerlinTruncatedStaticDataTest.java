@@ -10,11 +10,11 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class BerlinTruncatedTest {
+public class BerlinTruncatedStaticDataTest {
 
     private final List<Incident> incidentList;
 
-    public BerlinTruncatedTest(){
+    public BerlinTruncatedStaticDataTest(){
         String json = Helper.getFileResourceAsString("normalization/TomTomData/BerlinTruncated.json");
 
         JsonToIncident jsonNormalizer = new TomTomNormalization();

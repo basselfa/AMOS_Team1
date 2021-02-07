@@ -12,13 +12,13 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class BerlinTest {
+public class BerlinStaticDataTest {
 
-    private static final Logger log = LoggerFactory.getLogger(BerlinTest.class);
+    private static final Logger log = LoggerFactory.getLogger(BerlinStaticDataTest.class);
 
     private List<Incident> incidentList;
 
-    public BerlinTest(){
+    public BerlinStaticDataTest(){
         String json = Helper.getFileResourceAsString("normalization/TomTomData/Berlin.json");
 
         JsonToIncident jsonNormalizer = new TomTomNormalization();
