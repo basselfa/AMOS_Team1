@@ -10,11 +10,11 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class BerlinTruncatedTest {
+public class BerlinTruncatedStaticDataTest {
 
     private final List<Incident> incidentList;
 
-    public BerlinTruncatedTest(){
+    public BerlinTruncatedStaticDataTest(){
         String json = Helper.getFileResourceAsString("normalization/TomTomData/BerlinTruncated.json");
 
         JsonToIncident jsonNormalizer = new TomTomNormalization();
@@ -24,6 +24,21 @@ public class BerlinTruncatedTest {
     @Test
     void testIncidentAmount(){
         assertEquals(4, incidentList.size());
+    }
+
+    @Test
+    void testFirstIncidentType(){
+        assertEquals("LANERESTRICTION", incidentList.get(0).getType());
+    }
+
+    @Test
+    void testFirstIncidentEdgesNotNull(){
+        assertEquals(17, incidentList.get(0).getEdgesAsLocations().getLocationsList().size());
+    }
+
+    @Test
+    void testFirstIncidentLength(){
+        assertEquals(618, incidentList.get(0).getLengthInMeter());
     }
 
 }
