@@ -5,6 +5,8 @@ import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.data.Request;
 import org.apache.ibatis.jdbc.ScriptRunner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 
 import javax.persistence.EntityManager;
@@ -24,6 +26,8 @@ import java.util.Map;
 
 public class MyRepo {
 
+    private static final Logger log = LoggerFactory.getLogger(MyRepo.class);
+
     private static final DatabaseConfig databaseConfig = new DatabaseConfig();
     private static final MyRepo instance = new MyRepo();
     private EntityManager em;
@@ -32,10 +36,10 @@ public class MyRepo {
     private String url;
 
     private MyRepo() {
-        System.out.println("My Repo start");
+        log.info("My Repo start");
 
         url = databaseConfig.getURL() + "/" + databaseConfig.getDatabaseName() + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin&createDatabaseIfNotExist=true";
-        System.out.println("Connect to db: " + url);
+        log.info("Connect to db: " + url);
 
         intialiseDB(url);
 
@@ -123,7 +127,7 @@ public class MyRepo {
                 .setParameter("id", id)
                 .getResultList();
 
-        System.out.println(cityInformations);
+        log.info("" + cityInformations);
 
         getEntityManager().remove(cityInformations.get(0));
         getEntityManager().getTransaction().commit();

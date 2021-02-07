@@ -5,12 +5,16 @@ import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.normalization.JsonToIncident;
 import com.amos.p1.backend.normalization.TomTomNormalization;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class OneIncidentTest {
+
+    private static final Logger log = LoggerFactory.getLogger(OneIncidentTest.class);
 
     private final Incident incident;
 
@@ -20,7 +24,7 @@ public class OneIncidentTest {
         JsonToIncident jsonNormalizer = new TomTomNormalization();
         incident = jsonNormalizer.normalizeOneIncident(json);
 
-        System.out.println(incident);
+        log.info("" + incident);
     }
 
     @Test

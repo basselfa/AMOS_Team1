@@ -3,6 +3,9 @@ package com.amos.p1.backend.service.evaluation;
 import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.data.Request;
+import com.amos.p1.backend.service.ProviderIntervalRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -11,6 +14,9 @@ import java.util.stream.Stream;
 import static org.codehaus.groovy.runtime.DefaultGroovyMethods.collect;
 
 public class Evaluation {
+
+    private static final Logger log = LoggerFactory.getLogger(Evaluation.class);
+
     public List<EvaluationCandidate> calculateCandidates(Request request) {
 
         List<Incident> herreIncidents = request.getIncidents().stream().filter(e -> e.getProvider().equals("0")).collect(Collectors.toList());
@@ -106,5 +112,19 @@ public class Evaluation {
                 finalCandidates.add(cacndidate.get());
         }
         return new ArrayList(finalCandidates);
+    }
+
+    public static List<EvaluationCandidate> getEvaluationCandidates(Request request){
+
+        log.info("Evaluate Data");
+        Evaluation evaluation = new Evaluation();
+
+        List<EvaluationCandidate> evaluationCandidates = evaluation.calculateCandidates(request);
+        log.info("Amount of evaluation before manifold drop: " + evaluationCandidates.size());
+
+        evaluationCandidates = evaluation.dropManifolds(evaluationCandidates);
+        log.info("Amount of evaluation after manifold drop: " + evaluationCandidates.size());
+
+        return evaluationCandidates;
     }
 }

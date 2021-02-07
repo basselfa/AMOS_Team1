@@ -144,10 +144,8 @@ public abstract class RequestCreatorDummy implements RequestCreator {
         request.setIncidents(incidents);
         request.setRequestTime(timestamp);
 
-        Evaluation evaluation = new Evaluation();
-        List<EvaluationCandidate> evaluationCandidates = evaluation.calculateCandidates(request);
-        evaluationCandidates = evaluation.dropManifolds(evaluationCandidates);
-        request.setEvaluatedCandidates(evaluationCandidates);
+        List<EvaluationCandidate> evaluationCandidate = Evaluation.getEvaluationCandidates(request);
+        request.setEvaluatedCandidates(evaluationCandidate);
 
         return request;
     }

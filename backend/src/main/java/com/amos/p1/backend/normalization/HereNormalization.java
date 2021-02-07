@@ -1,9 +1,12 @@
 package com.amos.p1.backend.normalization;
 
 import com.amos.p1.backend.data.Incident;
+import com.amos.p1.backend.database.MyRepo;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONArray;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -11,6 +14,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class HereNormalization implements JsonToIncident {
+
+    private static final Logger log = LoggerFactory.getLogger(HereNormalization.class);
+
     private static final String datePattern = "MM/dd/yyyy HH:mm:ss";
 
     enum HereIncidents {
@@ -219,7 +225,7 @@ public class HereNormalization implements JsonToIncident {
 
 
         } catch (JSONException jex) {
-//            System.out.println(incidentData.toString());
+//            log.info(incidentData.toString());
 //            jex.printStackTrace();
 //            throw new IllegalArgumentException(jex);
         }
