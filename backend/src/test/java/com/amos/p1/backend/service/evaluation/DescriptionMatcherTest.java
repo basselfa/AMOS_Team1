@@ -13,11 +13,11 @@ class DescriptionMatcherTest {
 
     @Test
     void testDescrContained() {
-        Incident incident1 = new Incident();
+        Incident incident1 = EvaluationTest.getBaseIncident(true,0);
         incident1.setDescription("road");
         incident1.setType(Incident.IncidentTypes.ACCIDENT.toString());
 
-        Incident incident2 = new Incident();
+        Incident incident2 = EvaluationTest.getBaseIncident(true,0);
         incident2.setDescription("Road closed");
 
         incident2.setType(Incident.IncidentTypes.ROADCLOSURE.toString());
@@ -29,11 +29,11 @@ class DescriptionMatcherTest {
 
     @Test
     void testTypeMatch() {
-        Incident incident1 = new Incident();
+        Incident incident1 = EvaluationTest.getBaseIncident(true,0);
         incident1.setDescription("ro333ad");
         incident1.setType(Incident.IncidentTypes.ACCIDENT.toString());
 
-        Incident incident2 = new Incident();
+        Incident incident2 = EvaluationTest.getBaseIncident(true,0);
         incident2.setDescription("Road closed");
 
         incident2.setType(Incident.IncidentTypes.ACCIDENT.toString());
@@ -45,24 +45,29 @@ class DescriptionMatcherTest {
 
     @Test
     void testEmptyStringNotMatch() {
-        Incident incident1 = new Incident();
+        Incident incident1 = EvaluationTest.getBaseIncident(true,0);
         incident1.setDescription("");
         incident1.setType(Incident.IncidentTypes.ACCIDENT.toString());
 
-        Incident incident2 = new Incident();
+        Incident incident2 = EvaluationTest.getBaseIncident(true,0);
         incident2.setDescription("Road closed");
+        incident2.setType(null);
 
         incident2.setType(Incident.IncidentTypes.ROADHAZARD.toString());
 
         descriptionMatcher = new DescriptionMatcher(incident1, incident2);
         assertThat(descriptionMatcher.getConfidence(), equalTo(0));
-        assertThat(descriptionMatcher.isDropped(), equalTo(true));
+        assertThat(descriptionMatcher.isDropped(), equalTo(false));
     }
 
     @Test
     void testNoNullException() {
-        Incident incident1 = new Incident();
-        Incident incident2 = new Incident();
+        Incident incident1 = EvaluationTest.getBaseIncident(true,0);
+        incident1.setDescription(null);
+        incident1.setType(null);
+        Incident incident2 = EvaluationTest.getBaseIncident(true,0);
+        incident2.setDescription(null);
+        incident2.setType(null);
         descriptionMatcher = new DescriptionMatcher(incident1, incident2);
     }
 
