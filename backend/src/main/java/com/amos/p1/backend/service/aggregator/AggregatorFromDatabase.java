@@ -16,7 +16,7 @@ import java.util.Optional;
 public class AggregatorFromDatabase implements Aggregator {
 
     @Override
-    public List<Incident> getIncidents(String cityName, Optional<LocalDateTime> timestamp, Optional<List<String>> types) {
+    public List<Incident> getIncidents(String cityName, Optional<LocalDateTime> timestamp, Optional<List<String>> types, Optional<String> provider) {
 
         List<Incident>  incidents = new ArrayList<Incident>();
 
