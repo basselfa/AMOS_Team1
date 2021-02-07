@@ -12,23 +12,42 @@
                     rounded
                     shadow
                     solo
+                    placeholder="Select a city"
                     v-model="city"
                     @change="getCity()"
                 ></v-autocomplete>
             </v-col>
-            <v-col cols="12" sm="6" md="8" class="search-col">
+            <v-col cols="12" sm="6" md="4" class="search-col">
                 <v-autocomplete
                     :disabled="this.timestamps.length > 0 ? false : true"
                     class="search-bar"
                     :items="this.types"
                     v-model="type"
-                    prepend-inner-icon="mdi-map-search-outline"
+                    prepend-inner-icon="mdi-car-info"
                     chips
                     deletable-chips
                     filled
                     rounded
                     shadow
                     multiple
+                    placeholder="Select incident types"
+                    @change="getCity()"
+                ></v-autocomplete>
+            </v-col>
+            <v-col cols="12" sm="6" md="4" class="search-col">
+                <v-autocomplete
+                    :disabled="this.timestamps.length > 0 ? false : true"
+                    class="search-bar"
+                    :items="this.providers"
+                    v-model="type"
+                    prepend-inner-icon="mdi-head-outline"
+                    chips
+                    deletable-chips
+                    filled
+                    rounded
+                    shadow
+                    multiple
+                    placeholder="Select a traffic data provider"
                     @change="getCity()"
                 ></v-autocomplete>
             </v-col>
@@ -48,7 +67,6 @@ export default {
         timestamp: null,
         timestamps: [],
         types: [
-            'Construction',
             'Accident',
             'Congestion',
             'Disabled vehicle',
@@ -60,6 +78,11 @@ export default {
             'Weather',
             'Lane closed',
             'Lane restriction',
+        ],
+        providers: [
+          'Here',
+          'TomTom',
+          'Overlapping',
         ],
         type: [],
     }),
