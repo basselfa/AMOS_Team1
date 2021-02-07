@@ -256,8 +256,8 @@ export default {
 }
 
 .historization-loading-indicator {
-  margin-top: 15%; 
+  margin-top: 15vw; 
   position:relative; 
-  bottom:100px
+  bottom:10vw;
 }
 </style>
