@@ -4,9 +4,9 @@ import com.amos.p1.backend.Helper;
 import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.data.Request;
-import com.amos.p1.backend.normalization.HereNormalization;
-import com.amos.p1.backend.normalization.JsonToIncident;
-import com.amos.p1.backend.normalization.TomTomNormalization;
+import com.amos.p1.backend.service.normalization.HereNormalization;
+import com.amos.p1.backend.service.normalization.JsonToIncident;
+import com.amos.p1.backend.service.normalization.TomTomNormalization;
 import com.amos.p1.backend.service.cityboundingbox.CityBoundingBoxesService;
 import com.amos.p1.backend.service.evaluation.Evaluation;
 

@@ -136,7 +136,7 @@ export default {
     async fetchData() {
       await axios
         .get(
-          "http://" + window.location.hostname + ":8082/withDatabase/cities",
+          "http://" + window.location.hostname + ":8082/withDatabase/cityinformation",
           {
             headers: { "Access-Control-Allow-Origin": "*" },
           }
@@ -144,7 +144,7 @@ export default {
         .then((response) => {
           let cities = [];
           response.data.map(function (item) {
-            cities.push(item.city);
+            cities.push(item.cityName);
           });
           this.cities = cities;
         })
@@ -256,8 +256,8 @@ export default {
 }
 
 .historization-loading-indicator {
-  margin-top: 15%; 
+  margin-top: 15vw; 
   position:relative; 
-  bottom:100px
+  bottom:10vw;
 }
 </style>

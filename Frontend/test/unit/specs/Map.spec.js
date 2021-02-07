@@ -123,7 +123,12 @@ describe('Map', () => {
             size:1,
             description:"description",
             lengthInMeter:55,
-            provider:"1"
+            provider:"1",
+            startPositionStreet: "address",
+            endPositionStreet: "address",
+            endTime: "time",
+            entryTime: "time",
+            city: "Berlin"
         }]
 
         wrapper.vm.passCoordinates(incidentDummyData);
@@ -134,7 +139,13 @@ describe('Map', () => {
             "description": "description", 
             "latlngs": [["52.51784", "13.28016"], ["52.51771", "13.28021"], ["52.51765", "13.28024"]], 
             "length": "55.00", 
-            "type":  "Accident"}])
+            "type":  "Accident",
+            "provider":"1",
+            "startPositionStreet": "address",
+            "endPositionStreet": "address",
+            "endTime": "time",
+            "entryTime": "time",
+            "city": "Berlin"}])
 
     })
 
