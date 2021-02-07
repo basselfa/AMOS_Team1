@@ -42,12 +42,27 @@ public class AggregatorFromDatabase implements Aggregator {
             }
         }
 
+        if(provider.isPresent()) {
+            incidents = filterIncidentsByProvider(incidents, provider.get());
+        }
 
         if(types.isPresent()){
             incidents = filterIncidentsByType(incidents, types.get());
         }
 
         return incidents;
+    }
+
+    private List<Incident> filterIncidentsByProvider(List<Incident> incidents, String provider){
+        List<Incident> filteredIncidents = new ArrayList<>();
+
+        for (Incident incident : incidents) {
+            if(incident.getProvider().equals(provider)){
+                filteredIncidents.add(incident);
+            }
+        }
+
+        return filteredIncidents;
     }
 
     private List<Incident> filterIncidentsByType(List<Incident> incidents, List<String> types) {
