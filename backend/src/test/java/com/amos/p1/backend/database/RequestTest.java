@@ -6,6 +6,8 @@ import com.amos.p1.backend.data.Request;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -17,18 +19,20 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class RequestTest {
 
+    private static final Logger log = LoggerFactory.getLogger(RequestTest.class);
+
     private final static LocalDateTime LOCAL_DATE_TIME_DUMMY = LocalDateTime.of(2020, 10, 30, 16, 30);
     @BeforeAll
     public static void init() {
 
-        System.out.println("setting Database properties");
+        log.info("setting Database properties");
         MyRepo.setUseTestDatabase(true);
     }
 
     @BeforeEach
     void setUp(){
 
-        System.out.println("reintialising Database");
+        log.info("reintialising Database");
         MyRepo.dropAll();
     }
 
@@ -131,7 +135,7 @@ public class RequestTest {
      MyRepo.insertRequest(request);
 
         List<EvaluationCandidate> actual = MyRepo.geEvaluationCandidateFromRequestId(request.getId());
-        System.out.println(actual);
+        log.info("" + actual);
 
         assertThat(actual, hasSize(greaterThan(0)));
     }

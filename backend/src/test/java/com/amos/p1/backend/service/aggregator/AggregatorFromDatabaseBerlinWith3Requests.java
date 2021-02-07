@@ -10,6 +10,8 @@ import com.amos.p1.backend.service.requestcreator.RequestCreatorDummyBerlinSmall
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -23,6 +25,8 @@ import static org.hamcrest.Matchers.*;
 
 
 public class AggregatorFromDatabaseBerlinWith3Requests {
+
+    private static final Logger log = LoggerFactory.getLogger(AggregatorFromDatabaseBerlinWith3Requests.class);
 
     Aggregator aggregator = new AggregatorFromDatabase();
 
@@ -173,7 +177,7 @@ public class AggregatorFromDatabaseBerlinWith3Requests {
     @Test
     void testGetComparisonEvaluationOverTime(){
         List<ComparisonEvaluationDTO> comparisonEvaluationDTOs = aggregator.getComparisonEvaluationOverTime("Berlin");
-        System.out.println(comparisonEvaluationDTOs);
+        log.info("" + comparisonEvaluationDTOs);
         assertThat(comparisonEvaluationDTOs, hasSize(3));
 
         // TODO change amount according to dummy data

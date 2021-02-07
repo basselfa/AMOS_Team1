@@ -1,5 +1,8 @@
 package com.amos.p1.backend.data;
+import com.amos.p1.backend.configuration.RequestCreatorConfigProduction;
 import com.amos.p1.backend.database.MyRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 import java.time.LocalDateTime ;
@@ -28,7 +31,7 @@ import java.util.stream.Stream;
 @Entity
 public class Request {
 
-
+    private static final Logger log = LoggerFactory.getLogger(Request.class);
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -64,7 +67,7 @@ public class Request {
                    .setParameter("requestId", getId())
                    .getResultList();
 
-           System.out.println(getId());
+           log.info(String.valueOf(getId()));
            // update if anything gets deleted from incidents
            setIncidents(incidentAsList);
            return incidentAsList;

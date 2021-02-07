@@ -89,13 +89,13 @@ export default {
     mounted: function() {
         // get list of all cities
         axios
-            .get('http://' + window.location.hostname + ':8082/withDatabase/cities/', {
+            .get('http://' + window.location.hostname + ':8082/withDatabase/cityinformation/', {
                 headers: { 'Access-Control-Allow-Origin': '*' },
             })
             .then(response => {
                 let cities = []
                 response.data.map(function(item) {
-                    cities.push(item.city);
+                    cities.push(item.cityName);
                 })
                 this.cities = cities
             })
