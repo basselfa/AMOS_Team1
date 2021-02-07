@@ -29,7 +29,7 @@ public class BerlinTest {
     }
 
     @Test
-    void testIncidentTypes(){
+    void testIncidentTypesMapping(){
         String json = Helper.getFileResourceAsString("normalization/TomTomData/Berlin.json");
 
         JsonToIncident jsonNormalizer = new TomTomNormalization();
