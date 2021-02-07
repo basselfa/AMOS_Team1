@@ -39,7 +39,7 @@
                     :disabled="this.timestamps.length > 0 ? false : true"
                     class="search-bar"
                     :items="this.providers"
-                    v-model="type"
+                    v-model="provider"
                     prepend-inner-icon="mdi-head-outline"
                     chips
                     deletable-chips
@@ -79,12 +79,12 @@ export default {
             'Lane closed',
             'Lane restriction',
         ],
+        type: [],
         providers: [
           'Here',
           'TomTom',
-          'Overlapping',
         ],
-        type: [],
+        provider: null,
     }),
     mounted: function() {
         // get list of all cities
@@ -129,6 +129,7 @@ export default {
                             city: this.city,
                             timestamp: this.timestamp,
                             type: this.type.map(x => x.toUpperCase().replace(/ /g,"")),
+                            provider: this.provider
                         })
                     }
                 })
