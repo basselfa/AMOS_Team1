@@ -1,11 +1,13 @@
 package com.amos.p1.backend.database;
 
 import com.amos.p1.backend.data.Incident;
+import com.amos.p1.backend.data.RequestMarshallingTest;
 import org.aspectj.lang.annotation.Before;
-import org.junit.BeforeClass;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -14,17 +16,21 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class IncidentTest {
+
+    private static final Logger log = LoggerFactory.getLogger(IncidentTest.class);
+
+
     @BeforeAll
     public static void init() {
 
-        System.out.println("setting Database properties");
+        log.info("setting Database properties");
         MyRepo.setUseTestDatabase(true);
     }
 
     @BeforeEach
     void setUp(){
 
-        System.out.println("reintialising Database");
+        log.info("reintialising Database");
         MyRepo.dropAll();
     }
 

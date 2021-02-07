@@ -13,10 +13,10 @@ class LengthMatcherTest {
 
     @Test
     void testSameLengthMatch() {
-        Incident incident1 = new Incident();
+        Incident incident1 = EvaluationTest.getBaseIncident(true,0);
         incident1.setLengthInMeter(100);
 
-        Incident incident2 = new Incident();
+        Incident incident2 = EvaluationTest.getBaseIncident(true,0);
         incident2.setLengthInMeter(100);
 
         lengthMatcher = new LengthMatcher(incident1, incident2);
@@ -27,10 +27,10 @@ class LengthMatcherTest {
 
     @Test
     void testSimilarLengthMatch() {
-        Incident incident1 = new Incident();
+        Incident incident1 = EvaluationTest.getBaseIncident(true,0);
         incident1.setLengthInMeter(100);
 
-        Incident incident2 = new Incident();
+        Incident incident2 = EvaluationTest.getBaseIncident(true,0);
         incident2.setLengthInMeter(90);
 
         lengthMatcher = new LengthMatcher(incident1, incident2);
@@ -41,10 +41,10 @@ class LengthMatcherTest {
 
     @Test
     void testexactly120Differnece() {
-        Incident incident1 = new Incident();
+        Incident incident1 = EvaluationTest.getBaseIncident(true,0);
         incident1.setLengthInMeter(50);
 
-        Incident incident2 = new Incident();
+        Incident incident2 = EvaluationTest.getBaseIncident(true,0);
         incident2.setLengthInMeter(200);
 
         lengthMatcher = new LengthMatcher(incident1, incident2);
@@ -54,10 +54,10 @@ class LengthMatcherTest {
     }
     @Test
     void testToLongLengthDiffernece() {
-        Incident incident1 = new Incident();
+        Incident incident1 = EvaluationTest.getBaseIncident(true,0);
         incident1.setLengthInMeter(50);
 
-        Incident incident2 = new Incident();
+        Incident incident2 = EvaluationTest.getBaseIncident(true,0);
         incident2.setLengthInMeter(201);
 
         lengthMatcher = new LengthMatcher(incident1, incident2);

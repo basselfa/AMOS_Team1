@@ -52,15 +52,15 @@ export default {
             let request_url =
                 'http://' +
                 window.location.hostname +
-                ':8082/withDatabase/cities'
+                ':8082/withDatabase/cityinformation'
             await axios
                 .get(request_url, {
                     headers: { 'Access-Control-Allow-Origin': '*' },
                 })
                 .then(response => {
                     for (let i = 0; i < response.data.length; i++) {
-                        if (response.data[i].city == value.city) {
-                            this.cityCenter = response.data[i].centerPoint
+                        if (response.data[i].cityName == value.city) {
+                            this.cityCenter = {latitude: response.data[i].centreLatitude, longitude: response.data[i].centreLongitude}
                         }
                     }
                 })

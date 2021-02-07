@@ -1,27 +1,23 @@
 package com.amos.p1.backend.database;
 
-import com.amos.p1.backend.Helper;
 import com.amos.p1.backend.data.CityInformation;
 import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.data.Request;
-import com.mysql.cj.jdbc.MysqlDataSource;
 import org.apache.ibatis.jdbc.ScriptRunner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.io.*;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.SocketException;
-import java.net.UnknownHostException;
-import java.sql.*;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +25,8 @@ import java.util.Map;
 
 
 public class MyRepo {
+
+    private static final Logger log = LoggerFactory.getLogger(MyRepo.class);
 
     private static final DatabaseConfig databaseConfig = new DatabaseConfig();
     private static final MyRepo instance = new MyRepo();
@@ -38,10 +36,10 @@ public class MyRepo {
     private String url;
 
     private MyRepo() {
-        System.out.println("My Repo start");
+        log.info("My Repo start");
 
         url = databaseConfig.getURL() + "/" + databaseConfig.getDatabaseName() + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin&createDatabaseIfNotExist=true";
-        System.out.println("Connect to db: " + url);
+        log.info("Connect to db: " + url);
 
         intialiseDB(url);
 
@@ -129,7 +127,7 @@ public class MyRepo {
                 .setParameter("id", id)
                 .getResultList();
 
-        System.out.println(cityInformations);
+        log.info("" + cityInformations);
 
         getEntityManager().remove(cityInformations.get(0));
         getEntityManager().getTransaction().commit();
