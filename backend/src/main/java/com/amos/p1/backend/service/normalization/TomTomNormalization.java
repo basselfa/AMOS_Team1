@@ -91,11 +91,17 @@ public class TomTomNormalization implements JsonToIncident {
 
             //   incJObj.setTrafficId(Long.valueOf(incJSONObj.getString("id").substring(0, 5), 16)); // ID is hex and way to big for a long therefore as workaround cut to 5 chars but has to be fixed appropriately
             incJObj.setDescription(incJSONObj.getString("d"));
-            incJObj.setType(String.valueOf(mapIncidentType(mapICNumberToString(incJSONObj.getInt("ic"))).toString()));
             incJObj.setStartPositionStreet(incJSONObj.getString("f"));
             incJObj.setEndPositionStreet(incJSONObj.getString("t"));
             incJObj.setLengthInMeter(incJSONObj.getInt("l"));
             incJObj.setEntryTime(parseDate(incJSONObj.getString("sd")));
+
+            // We extract the type of the "ic" (Icon Category) to determine type. "d" and "c" are sometimes ambigious relative to each other.
+            int iconCategory = incJSONObj.getInt("ic");
+            String tomTomTypeString = mapICNumberToString(iconCategory);
+            String normalizedTypeString = mapIncidentType(tomTomTypeString).toString();
+            incJObj.setType(String.valueOf(normalizedTypeString));
+
 
             if (!incJSONObj.isNull("ed"))
                 incJObj.setEndTime(parseDate(incJSONObj.getString("ed")));
