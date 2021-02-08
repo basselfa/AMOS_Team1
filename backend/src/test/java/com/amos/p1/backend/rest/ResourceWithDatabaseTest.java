@@ -68,6 +68,42 @@ public class ResourceWithDatabaseTest {
     }
 
     @Test
+    void testIncidentsByCityAndProvider(){
+        List<Incident> incidents =
+            given()
+                .param("city", "Berlin")
+                .param("provider", "0")
+            .when()
+                .get(base + "/incidents")
+            .then()
+                .extract()
+                .body()
+                .jsonPath()
+                .getList(".", Incident.class);
+
+        assertThat(incidents, hasSize(greaterThan(0)));
+    }
+
+
+    @Test
+    void testIncidentsByCityAndTimestampAndProvider(){
+        List<Incident> incidents =
+            given()
+                .param("city", "Berlin")
+                .param("timestamp", "2020-01-01 00:00")
+                .param("provider", "0")
+            .when()
+                .get(base + "/incidents")
+            .then()
+                .extract()
+                .body()
+                .jsonPath()
+                .getList(".", Incident.class);
+
+        assertThat(incidents, hasSize(greaterThan(0)));
+    }
+
+    @Test
     void testIncidentsByCityAndTimestampAndType(){
         List<Incident> incidents =
             given()
