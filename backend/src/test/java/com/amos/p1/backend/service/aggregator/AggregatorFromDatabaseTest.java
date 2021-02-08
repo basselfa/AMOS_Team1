@@ -65,6 +65,27 @@ public class AggregatorFromDatabaseTest {
     }
 
     @Test
+    void testGetIncidentsFilteredByProvider(){
+        List<Incident> incidentList = aggregator.getIncidents("Berlin", Optional.empty(), Optional.empty(), Optional.empty());
+
+        List<Incident> incidentsByProvider0 = aggregator.getIncidents("Berlin", Optional.empty(), Optional.empty(), Optional.of("0"));
+        List<Incident> incidentsByProvider1 = aggregator.getIncidents("Berlin", Optional.empty(), Optional.empty(), Optional.of("1"));
+
+
+        assertThat(incidentsByProvider0, hasSize(greaterThan(0)));
+        assertThat(incidentsByProvider1, hasSize(greaterThan(0)));
+        assertThat(incidentList, hasSize(incidentsByProvider0.size() + incidentsByProvider1.size()));
+
+        for (Incident incident : incidentsByProvider0) {
+            assertThat(incident.getProvider(), equalTo("0"));
+        }
+
+        for (Incident incident : incidentsByProvider1) {
+            assertThat(incident.getProvider(), equalTo("1"));
+        }
+    }
+
+    @Test
     void testGetIncidentsFromCityAndWithType() {
         // test for set of types
         List<String> types = new ArrayList<>();
