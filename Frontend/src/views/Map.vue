@@ -85,6 +85,9 @@ export default {
             if (value.type.length !== 0) {
                 request_url = request_url + '&types=' + value.type.join()
             }
+            if (value.provider !== null) {
+                request_url = request_url + '&provider=' + value.provider.join()
+            }
             await axios
                 .get(request_url, {
                     headers: { 'Access-Control-Allow-Origin': '*' },
@@ -110,7 +113,9 @@ export default {
                 value.city +
                 '&timestamp=' +
                 value.timestamp
-
+            if (value.provider !== null) {
+                request_url = request_url + '&provider=' + value.provider.join()
+            }
             await axios
                 .get(request_url, {
                     headers: { 'Access-Control-Allow-Origin': '*' },
@@ -213,7 +218,7 @@ export default {
                     comparisonIncident =>
                         comparisonIncident.hereIncidentId === incident.id
                 )
-            } 
+            }
             // get incident provider
             let here = incident.provider == '0'
             let tomtom = incident.provider == '1'
