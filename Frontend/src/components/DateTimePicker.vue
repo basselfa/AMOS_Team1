@@ -6,7 +6,7 @@
             :close-on-content-click="false"
             transition="scale-transition"
             offset-y
-            class="datetime-modal testest"
+            class="datetime-modal"
           :max-width="isMobile ? '380px' : '560px'" :min-width="isMobile ? '380px' : '560px'"
         >
         
@@ -20,7 +20,7 @@
                 ></v-text-field>
             </template>
 
-            <div class="v-date-time-widget-container">
+            <div class="date-time-container">
                 <v-layout row wrap>
                     <v-flex xs6 sm6>
                         <v-date-picker
@@ -118,24 +118,24 @@ export default {
 </script>
 
 <style>
-.v-date-time-widget-container {
+.date-time-container {
     background: white;
     padding: 0px 5px 10px 5px;
 }
 
-.v-time-picker-title {
+.date-time-container .v-time-picker-title {
     height: 56px !important;
 }
 
-.v-picker__title {
+.date-time-container .v-picker__title {
     border-radius: 0px !important;
 }
 
-.v-card {
+.date-time-container .v-card {
     box-shadow: none;
 }
 
-.v-time-picker-clock {
+.date-time-container .v-time-picker-clock {
     top:20px;
     margin-left: -10px;
     width: 90%;
@@ -144,30 +144,30 @@ export default {
 }
    
 @media only screen and (min-width: 540px) {
-.v-time-picker-clock {
-    margin-left: 10px;
-    width: 90%;
-    flex: 0.9 0 auto !important;
-    padding-top: 0 !important;
-}
+    .date-time-container .v-time-picker-clock {
+        margin-left: 10px;
+        width: 90%;
+        flex: 0.9 0 auto !important;
+        padding-top: 0 !important;
+    }
 }
 
-.v-picker--date .v-picker__body {
+.date-time-container .v-picker--date .v-picker__body {
     width:200px !important;
     height:280px !important;
 }
 
-.v-picker--time .v-picker__body {
+.date-time-container .v-picker--time .v-picker__body {
     width:220px !important;
     height:220px !important;
 }
 
 @media only screen and (min-width: 540px) {
-  .v-picker--time .v-picker__body {
+  .date-time-container .v-picker--time .v-picker__body {
     width:290px !important;  
     height:290px !important;
 }
-.v-picker--date .v-picker__body {
+.date-time-container .v-picker--date .v-picker__body {
     width:300px !important;
 }
 

@@ -68,15 +68,15 @@ export default {
         types: [
             'Accident',
             'Congestion',
-            'Disabled vehicle',
-            'Road hazard',
-            'Road Works',
-            'Planned event',
             'Detour',
-            'Misc',
-            'Weather',
+            'Disabled vehicle',
             'Lane closed',
             'Lane restriction',
+            'Misc',
+            'Planned event',
+            'Road hazard',
+            'Road Works',
+            'Weather'
         ],
         type: [],
         providers: [
