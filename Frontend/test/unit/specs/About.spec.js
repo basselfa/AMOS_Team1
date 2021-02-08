@@ -1,4 +1,4 @@
-import {shallowMount, createLocalVue } from '@vue/test-utils'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
 import About from '@/views/About'
 import Vue from 'vue';
 import Vuetify from 'vuetify'
@@ -19,8 +19,12 @@ describe('About', () => {
     })
   })
 
-  it('should contain app element', () => {
+  it('should contain about container', () => {
     expect(wrapper.find('.about-container').exists()).toBe(true)
+  })
+
+  it('should contain about card', () => {
+    expect(wrapper.find('.about-card').exists()).toBe(true)
   })
 
   afterEach(() => {
