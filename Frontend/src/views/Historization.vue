@@ -156,7 +156,7 @@ export default {
     },
     /**
     * Get the comparison evaluation data for the selected city if start and end times are also selected
-    * 
+    *
     */
     async fetchDataForCity() {
       // filters need to be set
@@ -241,7 +241,6 @@ export default {
 .historization-container {
   padding-left: 15px;
   padding-right: 15px;
-  overflow: hidden;
 }
 
 @media only screen and (min-width: 1270px) {
@@ -250,12 +249,12 @@ export default {
   }
 }
 
-.historization-card {
+.historization-container .historization-card {
   padding: 10px; 
   border-radius:20px !important;
 }
 
-.historization-loading-indicator {
+.historization-container .historization-loading-indicator {
   margin-top: 15vw; 
   position:relative; 
   bottom:10vw;

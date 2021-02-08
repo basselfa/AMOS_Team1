@@ -9,11 +9,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class OneIncidentNoPolyLineTest {
+public class OneIncidentNoPolyLineStaticDataTest {
 
     private final Incident incident;
 
-    public OneIncidentNoPolyLineTest(){
+    public OneIncidentNoPolyLineStaticDataTest(){
         String json = Helper.getFileResourceAsString("normalization/TomTomData/OneIncidentNoPolyLine.json");
 
         JsonToIncident jsonNormalizer = new TomTomNormalization();

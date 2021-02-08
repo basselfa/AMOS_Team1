@@ -30,7 +30,8 @@ public class ResourceWithDatabase {
     @ResponseBody
     public ResponseEntity<List<Incident>> getIncidents(@RequestParam("city") String city,
                                                        @RequestParam("timestamp") Optional<String> timestamp,
-                                                       @RequestParam("types") Optional<String> types){
+                                                       @RequestParam("types") Optional<String> types,
+                                                       @RequestParam("provider") Optional<String> provider){
 
         Optional<LocalDateTime> timestampParsed = Optional.empty();
         Optional<List<String>> typesParsed = Optional.empty();
@@ -43,7 +44,7 @@ public class ResourceWithDatabase {
             typesParsed = Optional.of(parseTypes(types.get()));
         }
 
-        List<Incident> incidents = aggregator.getIncidents(city, timestampParsed, typesParsed);
+        List<Incident> incidents = aggregator.getIncidents(city, timestampParsed, typesParsed, provider);
         return ResponseEntity.ok(incidents);
     }
 

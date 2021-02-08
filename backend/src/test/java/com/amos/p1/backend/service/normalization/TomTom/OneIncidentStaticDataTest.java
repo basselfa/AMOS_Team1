@@ -12,13 +12,13 @@ import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class OneIncidentTest {
+public class OneIncidentStaticDataTest {
 
-    private static final Logger log = LoggerFactory.getLogger(OneIncidentTest.class);
+    private static final Logger log = LoggerFactory.getLogger(OneIncidentStaticDataTest.class);
 
     private final Incident incident;
 
-    public OneIncidentTest() {
+    public OneIncidentStaticDataTest() {
         String json = Helper.getFileResourceAsString("normalization/TomTomData/OneIncident.json");
 
         JsonToIncident jsonNormalizer = new TomTomNormalization();
