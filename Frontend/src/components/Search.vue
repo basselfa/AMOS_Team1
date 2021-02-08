@@ -46,7 +46,6 @@
                     filled
                     rounded
                     shadow
-                    multiple
                     placeholder="Select a traffic data provider"
                     @change="getCity()"
                 ></v-autocomplete>
