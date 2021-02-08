@@ -20,8 +20,9 @@ function configRoutes() {
     return [
         {
             path: '/',
-            name: 'App',
-            component: App,
+            name: 'Map',
+            component: Map,
+            props: true,
         },
         {
             path: '/map',
