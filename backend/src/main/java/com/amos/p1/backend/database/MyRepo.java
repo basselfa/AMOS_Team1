@@ -95,9 +95,13 @@ public class MyRepo {
 
 
         for(Incident incident : incidents) {
-            getEntityManager().getTransaction().begin();
-            getEntityManager().persist(incident);
-            getEntityManager().getTransaction().commit();
+            try{
+                getEntityManager().getTransaction().begin();
+                getEntityManager().persist(incident);
+                getEntityManager().getTransaction().commit();
+            }catch (Exception e){
+                log.info("Error with incident: " + incident);
+            }
         }
 
 
@@ -158,33 +162,40 @@ public class MyRepo {
 
 
     public static void insertRequest(Request request){
-        //TODO implement it. Request is the main table. Also incidents saving
-        List<Incident> incidents =request.getIncidents();
 
-        getEntityManager().getTransaction().begin();
-        getEntityManager().persist(request);
-        getEntityManager().getTransaction().commit();
-        if(incidents==null)return ;
-        for (Incident incident:incidents ) { incident.setRequestId(request.getId());
-          //  incident.setEntryTime(request.getRequestTime());
-      //      incident.setCity(request.getCityName());
+        try{
+            //TODO implement it. Request is the main table. Also incidents saving
+            List<Incident> incidents =request.getIncidents();
+
+            getEntityManager().getTransaction().begin();
+            getEntityManager().persist(request);
+            getEntityManager().getTransaction().commit();
+            if(incidents==null)return ;
+            for (Incident incident:incidents ) { incident.setRequestId(request.getId());
+                //  incident.setEntryTime(request.getRequestTime());
+                //      incident.setCity(request.getCityName());
+            }
+
+
+            insertIncident(incidents);
+            request.setIncidentsSavedInDb(true);
+
+            List<EvaluationCandidate> evaluationCandidates =request.getEvaluationCandidate();
+            if(evaluationCandidates==null)return ;
+            for (EvaluationCandidate EvaluationCandidate :evaluationCandidates) {
+                EvaluationCandidate.setRequestId(request.getId());
+                EvaluationCandidate.setTomTomIncidentId(EvaluationCandidate.getTomTomIncident().getId());
+                EvaluationCandidate.setHereIncidentId(EvaluationCandidate.getHereIncident().getId());
+            }
+
+
+            MyRepo.insertEvaluationCandidate(evaluationCandidates);
+            request.setEvaluationCandidateSavedInDb(true);
+        }catch (Exception e){
+            log.info("Error while inserting into db: ");
+            e.printStackTrace();
         }
 
-
-        insertIncident(incidents);
-        request.setIncidentsSavedInDb(true);
-
-        List<EvaluationCandidate> evaluationCandidates =request.getEvaluationCandidate();
-        if(evaluationCandidates==null)return ;
-        for (EvaluationCandidate EvaluationCandidate :evaluationCandidates) {
-            EvaluationCandidate.setRequestId(request.getId());
-            EvaluationCandidate.setTomTomIncidentId(EvaluationCandidate.getTomTomIncident().getId());
-            EvaluationCandidate.setHereIncidentId(EvaluationCandidate.getHereIncident().getId());
-        }
-
-
-        MyRepo.insertEvaluationCandidate(evaluationCandidates);
-        request.setEvaluationCandidateSavedInDb(true);
     }
 
     public static Request getRequest(LocalDateTime requestTime){
