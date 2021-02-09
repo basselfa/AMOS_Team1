@@ -1,5 +1,7 @@
 package com.amos.p1.backend.service.provider;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
@@ -7,6 +9,8 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 public class TomTomRequest implements ProviderRequest {
+
+    private static final Logger log = LoggerFactory.getLogger(TomTomRequest.class);
 
     private final static String STYLE = "s3";
     private final static String ZOOM_LEVEL = "10";
@@ -19,6 +23,10 @@ public class TomTomRequest implements ProviderRequest {
 
         RestTemplate restTemplate = new RestTemplate();
         String url = getUrl(minLatitude, minLongitude, maxLatitude, maxLongitude);
+
+        log.info("TomTom Request url:" + url);
+
+
         ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
 
         if(response.getStatusCode() == HttpStatus.OK){

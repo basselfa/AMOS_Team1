@@ -143,11 +143,16 @@ public class MyRepo {
 
         for(EvaluationCandidate evaluationCandidate : evaluationCandidates) {
             evaluationCandidate.setEvaluationCandidateSavedInDb(true);
-            getEntityManager().getTransaction().begin();
+            try{
+                getEntityManager().getTransaction().begin();
 
-            getEntityManager().persist(evaluationCandidate);
+                getEntityManager().persist(evaluationCandidate);
 
-            getEntityManager().getTransaction().commit();
+                getEntityManager().getTransaction().commit();
+            }catch (Exception e){
+                log.info("Error inserting evaluation candidate: " +  evaluationCandidate);
+                e.printStackTrace();
+            }
         }
 
 
