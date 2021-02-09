@@ -39,9 +39,9 @@ public class ProviderIntervalRequest {
 
     /**
      *  Will be runned on startup
-     *  1000 ms * 60 * 60 = 1 hour
+     *  1000 ms * 60 * 60 = 1 hour = 3600000 seconds
      */
-    @Scheduled(fixedRate = 3600000)
+    @Scheduled(fixedRate = 1800000)
     public void providerCronJob() {
 
         ZonedDateTime now = ZonedDateTime.now(ZoneId.of("Europe/Berlin"));
