@@ -33,7 +33,8 @@ public class AggregatorFromDatabase implements Aggregator {
                 .setParameter("requestTime", timestamp.get())
                     .getResultList();
             for (Request request : requests ) {
-//                log.info("Request: " + request);
+                request.setEvaluationCandidateSavedInDb(true);
+                request.setIncidentsSavedInDb(true);
                 incidents.addAll(request.getIncidents()) ;
 
             }
@@ -44,6 +45,8 @@ public class AggregatorFromDatabase implements Aggregator {
                     .setParameter("cityName", cityName )
                     .getResultList();
             for (Request request : requests ) {
+                request.setEvaluationCandidateSavedInDb(true);
+                request.setIncidentsSavedInDb(true);
                 incidents.addAll(request.getIncidents());
             }
         }
@@ -135,20 +138,29 @@ public class AggregatorFromDatabase implements Aggregator {
         for (Request request : requests) {
             //TODO: split to here and tom tom incidents
 
-            List<Incident> tomTomIncidents =  MyRepo.getEntityManager().createNamedQuery("getFromTomTom")
-                    .setParameter("requestId",  request.getId())
-                    .getResultList();
-            List<Incident> hereIncidents =  MyRepo.getEntityManager().createNamedQuery("getFromHere")
-                    .setParameter("requestId",  request.getId())
-                    .getResultList();
+            request.setEvaluationCandidateSavedInDb(true);
+            request.setIncidentsSavedInDb(true);
+
+            List<Incident> hereIncidents = filterIncidentsByProvider(request.getIncidents(), "0");
+            List<Incident> tomTomIncidents = filterIncidentsByProvider(request.getIncidents(), "1");
+
+//            List<Incident> tomTomIncidents =  MyRepo.getEntityManager().createNamedQuery("getFromTomTom")
+//                    .setParameter("requestId",  request.getId())
+//                    .getResultList();
+//
+//
+//
+//            List<Incident> hereIncidents =  MyRepo.getEntityManager().createNamedQuery("getFromHere")
+//                    .setParameter("requestId",  request.getId())
+//                    .getResultList();
 
             // Add two one comparison evaluation dto
             ComparisonEvaluationDTO comparisonEvaluationDTO = new ComparisonEvaluationDTO();
             comparisonEvaluationDTO.setDate(java.sql.Timestamp.valueOf(request.getRequestTime())); ;
             comparisonEvaluationDTO.setTomTomIncidentsAmount(tomTomIncidents.size()); ;
             comparisonEvaluationDTO.setHereIncidentsAmount(hereIncidents.size()); ;
-            if(request.getEvaluationCandidate()!= null)
-                comparisonEvaluationDTO.setSameIncidentAmount(request.getEvaluationCandidate().size()); ;
+//            if(request.getEvaluationCandidate()!= null)
+            comparisonEvaluationDTO.setSameIncidentAmount(request.getEvaluationCandidate().size()); ;
 
             // Add ComparisonEvaluationDTO to a list
 
