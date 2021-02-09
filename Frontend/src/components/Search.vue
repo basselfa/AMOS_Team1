@@ -39,14 +39,13 @@
                     :disabled="this.timestamps.length > 0 ? false : true"
                     class="search-bar"
                     :items="this.providers"
-                    v-model="type"
+                    v-model="provider"
                     prepend-inner-icon="mdi-head-outline"
                     chips
                     deletable-chips
                     filled
                     rounded
                     shadow
-                    multiple
                     placeholder="Select a traffic data provider"
                     @change="getCity()"
                 ></v-autocomplete>
@@ -69,22 +68,22 @@ export default {
         types: [
             'Accident',
             'Congestion',
-            'Disabled vehicle',
-            'Road hazard',
-            'Road Works',
-            'Planned event',
             'Detour',
-            'Misc',
-            'Weather',
+            'Disabled vehicle',
             'Lane closed',
             'Lane restriction',
+            'Misc',
+            'Planned event',
+            'Road hazard',
+            'Road Works',
+            'Weather'
         ],
+        type: [],
         providers: [
           'Here',
           'TomTom',
-          'Overlapping',
         ],
-        type: [],
+        provider: null,
     }),
     mounted: function() {
         // get list of all cities
@@ -129,6 +128,7 @@ export default {
                             city: this.city,
                             timestamp: this.timestamp,
                             type: this.type.map(x => x.toUpperCase().replace(/ /g,"")),
+                            provider: this.provider
                         })
                     }
                 })
