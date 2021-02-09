@@ -5,6 +5,8 @@ import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.data.Request;
 import com.amos.p1.backend.database.MyRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -14,6 +16,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class AggregatorFromDatabase implements Aggregator {
+
+    private static final Logger log = LoggerFactory.getLogger(AggregatorFromDatabase.class);
+
 
     @Override
     public List<Incident> getIncidents(String cityName, Optional<LocalDateTime> timestamp, Optional<List<String>> types, Optional<String> provider) {
@@ -28,6 +33,7 @@ public class AggregatorFromDatabase implements Aggregator {
                 .setParameter("requestTime", timestamp.get())
                     .getResultList();
             for (Request request : requests ) {
+//                log.info("Request: " + request);
                 incidents.addAll(request.getIncidents()) ;
 
             }

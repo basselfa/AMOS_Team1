@@ -230,6 +230,8 @@ public class MyRepo {
 
         Request request =requests.get(0) ;
         request.setIncidentsSavedInDb(true);
+        request.setEvaluationCandidateSavedInDb(true);
+
         if (request.getEvaluationCandidate()==null||request.getEvaluationCandidate().size()==0)
             return requests.get(0);
         request.setIncidentsSavedInDb(true);
