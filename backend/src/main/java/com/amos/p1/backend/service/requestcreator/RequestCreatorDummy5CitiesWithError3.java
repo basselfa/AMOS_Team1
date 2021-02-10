@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
-public class RequestCreatorDummy5CitiesWithError2 extends RequestCreatorDummy {
+public class RequestCreatorDummy5CitiesWithError3 extends RequestCreatorDummy {
 
     protected static final String T2020_01_14_HERE_BERLIN = "provider-dummy-data/2021-02-09_19-00_error/here-berlin.json";
     protected static final String T2020_01_14_TOMTOM_BERLIN = "provider-dummy-data/2021-02-09_19-00_error/tomtom-berlin.json";
@@ -22,9 +22,9 @@ public class RequestCreatorDummy5CitiesWithError2 extends RequestCreatorDummy {
     protected static final String T2020_01_14_TOMTOM_NUERNBERG = "provider-dummy-data/2021-02-09_19-00_error/tomtom-nuernberg.json";
 
 
-    public RequestCreatorDummy5CitiesWithError2(){
+    public RequestCreatorDummy5CitiesWithError3(){
 
-        ZonedDateTime zoneTime = ZonedDateTime.of(2021, 2, 10, 17, 0, 0, 0, ZoneId.of("Europe/Berlin"));
+        ZonedDateTime zoneTime = ZonedDateTime.of(2021, 2, 10, 18, 0, 0, 0, ZoneId.of("Europe/Berlin"));
         LocalDateTime timestamp = LocalDateTime.of(zoneTime.getYear(), zoneTime.getMonth(), zoneTime.getDayOfMonth(), zoneTime.getHour(), zoneTime.getMinute());
 
         addRequestData("Berlin", timestamp, T2020_01_14_HERE_BERLIN, T2020_01_14_TOMTOM_BERLIN);

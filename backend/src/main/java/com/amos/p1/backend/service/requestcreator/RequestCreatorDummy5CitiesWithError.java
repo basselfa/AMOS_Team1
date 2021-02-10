@@ -1,6 +1,8 @@
 package com.amos.p1.backend.service.requestcreator;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 public class RequestCreatorDummy5CitiesWithError extends RequestCreatorDummy {
 
@@ -22,7 +24,8 @@ public class RequestCreatorDummy5CitiesWithError extends RequestCreatorDummy {
 
     public RequestCreatorDummy5CitiesWithError(){
 
-        LocalDateTime timestamp = LocalDateTime.of(2021, 2, 8, 10, 0, 0);
+        ZonedDateTime zoneTime = ZonedDateTime.of(2021, 2, 10, 16, 0, 0, 0, ZoneId.of("Europe/Berlin"));
+        LocalDateTime timestamp = LocalDateTime.of(zoneTime.getYear(), zoneTime.getMonth(), zoneTime.getDayOfMonth(), zoneTime.getHour(), zoneTime.getMinute());
 
         addRequestData("Berlin", timestamp, T2020_01_14_HERE_BERLIN, T2020_01_14_TOMTOM_BERLIN);
         addRequestData("Frankfurt am Main", timestamp, T2020_01_14_HERE_FRANKFURT, T2020_01_14_TOMTOM_FRANKFURT);
