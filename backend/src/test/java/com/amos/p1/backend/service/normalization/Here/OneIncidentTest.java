@@ -27,7 +27,7 @@ public class OneIncidentTest {
 
     @Test
     void testIncidentId() {
-        assertEquals(1141077209175289128L, incident.getId());
+        assertEquals(null, incident.getId());
     }
 
     @Test
@@ -37,7 +37,7 @@ public class OneIncidentTest {
 
     @Test
     void testIncidentSize() {
-        assertEquals("0.35349", incident.getSize());
+        assertEquals("12", incident.getSize());
     }
 
     @Test
