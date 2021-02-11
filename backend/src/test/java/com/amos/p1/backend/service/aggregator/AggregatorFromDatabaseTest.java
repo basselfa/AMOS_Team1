@@ -65,7 +65,7 @@ public class AggregatorFromDatabaseTest {
     }
 
     @Test
-    void testGetIncidentsFilteredByProvider(){
+    void testGetIncidentsFilteredByProvider() {
         List<Incident> incidentList = aggregator.getIncidents("Berlin", Optional.empty(), Optional.empty(), Optional.empty());
 
         List<Incident> incidentsByProvider0 = aggregator.getIncidents("Berlin", Optional.empty(), Optional.empty(), Optional.of("0"));
@@ -89,8 +89,8 @@ public class AggregatorFromDatabaseTest {
     void testGetIncidentsFromCityAndWithType() {
         // test for set of types
         List<String> types = new ArrayList<>();
-        types.add(Incident.IncidentTypes.CONGESTION.toString());
         types.add(Incident.IncidentTypes.ROADCLOSURE.toString());
+        types.add(Incident.IncidentTypes.CONGESTION.toString());
 
         List<Incident> resultIncidentList = aggregator.getIncidents("Berlin", Optional.ofNullable(berlinRequest.getRequestTime()), Optional.of(types), Optional.empty());
         List<Incident> sourceIncidentList = berlinRequest.getIncidents().stream().filter(i -> types.contains(i.getType())).collect(Collectors.toList());
@@ -98,13 +98,16 @@ public class AggregatorFromDatabaseTest {
         assertThat(resultIncidentList, hasSize(equalTo(sourceIncidentList.size())));   // correct amount ?
 
         resultIncidentList.forEach(
-                incident ->
-                        assertThat(types, contains(incident.getType()))     // only incidnets with correct type
+                incident -> {
+                    String matching = types.contains(incident.getType()) ? incident.getType() : null;
+                    assertThat(incident.getType(), equalTo(matching));     // only incidnets with correct type
+                }
         );
 
         sourceIncidentList.forEach(
                 incident -> {
-                    assertThat(resultIncidentList, contains(incident));     // no duplicates or corrupted data -> all fine!
+                    Incident matching = resultIncidentList.contains(incident) ? incident : null;
+                    assertThat(incident, equalTo(matching));     // no duplicates or corrupted data -> all fine!
                 }
         );
 
