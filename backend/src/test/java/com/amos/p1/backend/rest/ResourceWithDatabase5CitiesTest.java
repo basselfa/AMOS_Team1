@@ -74,6 +74,6 @@ public class ResourceWithDatabase5CitiesTest {
                 .getList(".", Incident.class);
 
         log.info("" + incidents);
-        assertThat(incidents, hasSize(49 + 58)); // Other number. Need to be evaluated
+        assertThat(incidents, hasSize(749));
     }
 }
