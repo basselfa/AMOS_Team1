@@ -109,7 +109,7 @@ public class ResourceWithDatabaseTest {
             given()
                 .param("city", "Berlin")
                 .param("timestamp", "2020-01-01 00:00")
-                .param("types", "CONSTRUCTION")
+                .param("types", "ROADWORKS")
             .when()
                 .get(base + "/incidents")
             .then()
@@ -119,7 +119,7 @@ public class ResourceWithDatabaseTest {
                 .getList(".", Incident.class);
 
 
-        assertThat(incidents, hasSize(41));
+        assertThat(incidents, hasSize(43));
     }
 
     @Test
