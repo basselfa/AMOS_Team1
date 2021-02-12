@@ -122,8 +122,7 @@ public class RequestTest {
         request.setCityName("Berlin");
         MyRepo.insertRequest(request);
 
-        List<Request> RequestAsList =new ArrayList<Request>();
-        RequestAsList.add( MyRepo.geRequestFromCityName("Berlin"));
+        List<Request> RequestAsList = MyRepo.geRequestFromCityName("Berlin");
 
 
         assertThat(RequestAsList, hasSize(greaterThan(0)));
