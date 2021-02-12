@@ -102,7 +102,7 @@ public class DatabaseTest {
     }
 
     @Test
-    void testDeleteCityInforamtion() {
+    void testDeleteCityInforamtionAndRequest() {
 
 
         CityInformation information = new CityInformation();
@@ -121,6 +121,7 @@ public class DatabaseTest {
         MyRepo.deleteCityInformation(information.getId());
 
         assertThat(MyRepo.getAllCityInformation().size(),equalTo(0));
+        assertThat(MyRepo.geRequestFromCityName("Hamburg").size(),equalTo(0));
 
     }
     Request createDummyRequest(){
