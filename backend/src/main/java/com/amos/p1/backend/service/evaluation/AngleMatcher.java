@@ -37,9 +37,10 @@ public class AngleMatcher extends Matcher {
             return;
         }
     }
+
     @Override
     public String getDescription() {
-        return "[SearchRadiusMatcher: score " + confidence + " |isDropped" + isDropped() + " |angle" + angle +"]";
+        return "[SearchRadiusMatcher: score " + confidence + " |isDropped" + isDropped() + " |angle" + angle + "]";
     }
 
     @Override

@@ -1,16 +1,24 @@
 <template>
-    <div>
-        <search @change="getSearchValue($event)" />
-        <open-street-map :polylines="polylines" :cityCenter="cityCenter" />
-    </div>
+<div class="map-container">
+    <search @change="getSearchValue($event)" />
+    <open-street-map :polylines="polylines" :cityCenter="cityCenter" />
+</div>
 </template>
 
 <script>
 import axios from 'axios'
 import OpenStreetMap from '../components/OpenStreetMap'
 import Search from '../components/Search.vue'
-import { latLng } from 'leaflet'
-import { LMap, LTileLayer, LMarker, LPopup, LTooltip } from 'vue2-leaflet'
+import {
+    latLng
+} from 'leaflet'
+import {
+    LMap,
+    LTileLayer,
+    LMarker,
+    LPopup,
+    LTooltip
+} from 'vue2-leaflet'
 
 export default {
     name: 'Map',
@@ -39,7 +47,7 @@ export default {
          *
          * @param searchValue Object that contains city, timestamp, and type
          */
-        getSearchValue: function(searchValue) {
+        getSearchValue: function (searchValue) {
             this.executeQuery(searchValue)
         },
 
@@ -52,15 +60,20 @@ export default {
             let request_url =
                 'http://' +
                 window.location.hostname +
-                ':8082/withDatabase/cities'
+                ':8082/withDatabase/cityinformation'
             await axios
                 .get(request_url, {
-                    headers: { 'Access-Control-Allow-Origin': '*' },
+                    headers: {
+                        'Access-Control-Allow-Origin': '*'
+                    },
                 })
                 .then(response => {
                     for (let i = 0; i < response.data.length; i++) {
-                        if (response.data[i].city == value.city) {
-                            this.cityCenter = response.data[i].centerPoint
+                        if (response.data[i].cityName == value.city) {
+                            this.cityCenter = {
+                                latitude: response.data[i].centreLatitude,
+                                longitude: response.data[i].centreLongitude
+                            }
                         }
                     }
                 })
@@ -72,7 +85,7 @@ export default {
         /**
          * Get incidents from backend
          *
-         * @param value Object that contains city, timestamp, and type
+         * @param value Object that contains city, timestamp, type, and provider
          */
         async getIncidents(value) {
             let request_url =
@@ -85,9 +98,18 @@ export default {
             if (value.type.length !== 0) {
                 request_url = request_url + '&types=' + value.type.join()
             }
+            if (value.provider !== null) {
+                if (value.provider == "Here") {
+                    request_url = request_url + '&provider=0';
+                } else if (value.provider == "TomTom") {
+                    request_url = request_url + '&provider=1';
+                }
+            }
             await axios
                 .get(request_url, {
-                    headers: { 'Access-Control-Allow-Origin': '*' },
+                    headers: {
+                        'Access-Control-Allow-Origin': '*'
+                    },
                 })
                 .then(response => {
                     this.incidentsData = response.data
@@ -111,9 +133,18 @@ export default {
                 '&timestamp=' +
                 value.timestamp
 
+            if (value.provider !== null) {
+                if (value.provider == "Here") {
+                    request_url = request_url + '&provider=0';
+                } else if (value.provider == "TomTom") {
+                    request_url = request_url + '&provider=1';
+                }
+            }
             await axios
                 .get(request_url, {
-                    headers: { 'Access-Control-Allow-Origin': '*' },
+                    headers: {
+                        'Access-Control-Allow-Origin': '*'
+                    },
                 })
                 .then(response => {
                     this.comparisonData = response.data
@@ -128,15 +159,15 @@ export default {
          *
          * @param value Object that contains city, timestamp, (and type)
          */
-        executeQuery: async function(value) {
+        executeQuery: async function (value) {
             this.polylines = []
             if (value.city !== null && value.timestamp !== null) {
-                await this.getCenter(value).then( async () => {
-                  await this.getIncidents(value)
-                  console.log("Incidents received: " + this.incidentsData.length)
-                  await this.getComparison(value)
-                  console.log("Comparison incidents received: " + this.comparisonData.length)
-                  this.passCoordinates(this.incidentsData)
+                await this.getCenter(value).then(async () => {
+                    await this.getIncidents(value)
+                    console.log("Incidents received: " + this.incidentsData.length)
+                    await this.getComparison(value)
+                    console.log("Comparison incidents received: " + this.comparisonData.length)
+                    this.passCoordinates(this.incidentsData)
                 })
             }
         },
@@ -157,13 +188,18 @@ export default {
                     latlngs: lineArray,
                     color: color,
                     criticality: incidentsData[i].size,
-                    description: incidentsData[i].description
-                        ? incidentsData[i].description.includes('&')
-                            ? incidentsData[i].description.split('&')[1]
-                            : incidentsData[i].description
-                        : 'Description not available',
+                    description: incidentsData[i].description ?
+                        incidentsData[i].description.includes('&') ?
+                        incidentsData[i].description.split('&')[1] :
+                        incidentsData[i].description : 'Description not available',
                     length: incidentsData[i].lengthInMeter.toFixed(2),
                     type: incidentsData[i].type,
+                    provider: incidentsData[i].provider,
+                    city: incidentsData[i].city,
+                    startPositionStreet: incidentsData[i].startPositionStreet,
+                    endPositionStreet: incidentsData[i].endPositionStreet,
+                    entryTime: incidentsData[i].entryTime,
+                    endTime: incidentsData[i].endTime
                 })
             }
         },
@@ -198,16 +234,16 @@ export default {
             // check if overlapping by checking if the incident is contained in comparisonData
             let overlapping = false
             if (this.comparisonData.length > 0) {
-             overlapping =
-                this.comparisonData.some(
-                    comparisonIncident =>
+                overlapping =
+                    this.comparisonData.some(
+                        comparisonIncident =>
                         comparisonIncident.tomTomIncidentId === incident.id
-                ) ||
-                this.comparisonData.some(
-                    comparisonIncident =>
+                    ) ||
+                    this.comparisonData.some(
+                        comparisonIncident =>
                         comparisonIncident.hereIncidentId === incident.id
-                )
-            } 
+                    )
+            }
             // get incident provider
             let here = incident.provider == '0'
             let tomtom = incident.provider == '1'
@@ -234,4 +270,22 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.map-container {
+    padding-left: 15px;
+    padding-right: 15px;
+    overflow: hidden;
+}
+
+@media only screen and (min-width: 1270px) {
+    .map-container {
+        padding-left: 295px;
+    }
+}
+
+.map-container .v-text-field__details {
+    display: none;
+    height: 0px;
+    margin: 0px !important;
+}
+</style>

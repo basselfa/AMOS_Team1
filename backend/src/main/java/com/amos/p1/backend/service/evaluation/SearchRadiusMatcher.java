@@ -15,8 +15,8 @@ public class SearchRadiusMatcher extends Matcher {
     private double distanceEndPoints;
 
     public SearchRadiusMatcher(Incident incident1, Incident incident2) {
-        super(incident1, incident2);
 
+        super( incident1,  incident2);
         // berechen Länge beider incidents
         distanceIncident1 = calculateDistance(
                 start1Lat,
@@ -77,7 +77,7 @@ public class SearchRadiusMatcher extends Matcher {
 
     @Override
     public String getDescription() {
-        return "[SearchRadiusMatcher: score " + confidence + " |isDropped" + isDropped() +" ] ";
+        return "[SearchRadiusMatcher: score " + confidence + " |isDropped" + isDropped() + " ] ";
     }
 
     @Override

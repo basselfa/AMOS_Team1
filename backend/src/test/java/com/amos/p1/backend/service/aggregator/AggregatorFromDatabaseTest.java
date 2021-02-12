@@ -12,6 +12,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.checkerframework.checker.nullness.Opt;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -25,6 +27,8 @@ import static org.hamcrest.Matchers.*;
 
 
 public class AggregatorFromDatabaseTest {
+
+    private static final Logger log = LoggerFactory.getLogger(AggregatorFromDatabaseTest.class);
 
     Aggregator aggregator = new AggregatorFromDatabase();
     Request berlinRequest;
@@ -46,8 +50,8 @@ public class AggregatorFromDatabaseTest {
 
     @Test
     void testGetIncidentsFromCity() {
-        List<Incident> incidentList = aggregator.getIncidents("Berlin", Optional.empty(), Optional.empty());
-        System.out.println(berlinRequest.getIncidents());
+        List<Incident> incidentList = aggregator.getIncidents("Berlin", Optional.empty(), Optional.empty(), Optional.empty());
+        log.info("" + berlinRequest.getIncidents());
         assertThat(incidentList, hasSize(greaterThan(0)));                               // List not empty
         assertThat(incidentList, hasSize(equalTo(berlinRequest.getIncidents().size())));       // as long as input List TODO: Kang -> stimmt das so?
 
@@ -61,25 +65,49 @@ public class AggregatorFromDatabaseTest {
     }
 
     @Test
+    void testGetIncidentsFilteredByProvider() {
+        List<Incident> incidentList = aggregator.getIncidents("Berlin", Optional.empty(), Optional.empty(), Optional.empty());
+
+        List<Incident> incidentsByProvider0 = aggregator.getIncidents("Berlin", Optional.empty(), Optional.empty(), Optional.of("0"));
+        List<Incident> incidentsByProvider1 = aggregator.getIncidents("Berlin", Optional.empty(), Optional.empty(), Optional.of("1"));
+
+
+        assertThat(incidentsByProvider0, hasSize(greaterThan(0)));
+        assertThat(incidentsByProvider1, hasSize(greaterThan(0)));
+        assertThat(incidentList, hasSize(incidentsByProvider0.size() + incidentsByProvider1.size()));
+
+        for (Incident incident : incidentsByProvider0) {
+            assertThat(incident.getProvider(), equalTo("0"));
+        }
+
+        for (Incident incident : incidentsByProvider1) {
+            assertThat(incident.getProvider(), equalTo("1"));
+        }
+    }
+
+    @Test
     void testGetIncidentsFromCityAndWithType() {
         // test for set of types
         List<String> types = new ArrayList<>();
-        types.add(Incident.IncidentTypes.CONGESTION.toString());
         types.add(Incident.IncidentTypes.ROADCLOSURE.toString());
+        types.add(Incident.IncidentTypes.CONGESTION.toString());
 
-        List<Incident> resultIncidentList = aggregator.getIncidents("Berlin", Optional.ofNullable(berlinRequest.getRequestTime()), Optional.of(types));
+        List<Incident> resultIncidentList = aggregator.getIncidents("Berlin", Optional.ofNullable(berlinRequest.getRequestTime()), Optional.of(types), Optional.empty());
         List<Incident> sourceIncidentList = berlinRequest.getIncidents().stream().filter(i -> types.contains(i.getType())).collect(Collectors.toList());
 
         assertThat(resultIncidentList, hasSize(equalTo(sourceIncidentList.size())));   // correct amount ?
 
         resultIncidentList.forEach(
-                incident ->
-                        assertThat(types, contains(incident.getType()))     // only incidnets with correct type
+                incident -> {
+                    String matching = types.contains(incident.getType()) ? incident.getType() : null;
+                    assertThat(incident.getType(), equalTo(matching));     // only incidnets with correct type
+                }
         );
 
         sourceIncidentList.forEach(
                 incident -> {
-                    assertThat(resultIncidentList, contains(incident));     // no duplicates or corrupted data -> all fine!
+                    Incident matching = resultIncidentList.contains(incident) ? incident : null;
+                    assertThat(incident, equalTo(matching));     // no duplicates or corrupted data -> all fine!
                 }
         );
 
@@ -89,10 +117,10 @@ public class AggregatorFromDatabaseTest {
                 {
                     List<String> types2 = new ArrayList<String>();
                     types2.add(type);
-                    List<Incident> resultIncidentList2 = aggregator.getIncidents("Berlin", Optional.ofNullable(berlinRequest.getRequestTime()), Optional.of(types2));
+                    List<Incident> resultIncidentList2 = aggregator.getIncidents("Berlin", Optional.ofNullable(berlinRequest.getRequestTime()), Optional.of(types2), Optional.empty());
                     List<Incident> sourceIncidentList2 = berlinRequest.getIncidents().stream().filter(i -> type.equals(i.getType())).collect(Collectors.toList());
 
-                    System.out.println(type);
+                    log.info(type);
                     assertThat(resultIncidentList2, hasSize(equalTo(sourceIncidentList2.size())));   // correct amount ?
 
                     resultIncidentList2.forEach(
@@ -123,7 +151,7 @@ public class AggregatorFromDatabaseTest {
 
     @Test
     void testGetIncidentsFromCityAndTimeStamp() {
-        List<Incident> incidentList = aggregator.getIncidents("Berlin", Optional.of(berlinRequest.getRequestTime()), Optional.empty());
+        List<Incident> incidentList = aggregator.getIncidents("Berlin", Optional.of(berlinRequest.getRequestTime()), Optional.empty(), Optional.empty());
 
         for (int i = 0; i < incidentList.size(); i++) {
             assertThat(incidentList.get(i), equalTo(berlinRequest.getIncidents().get(i)));
@@ -136,7 +164,7 @@ public class AggregatorFromDatabaseTest {
         LocalDateTime timestamp = LocalDateTime.of(
                 10, 1, 1,
                 12, 30, 0);
-        List<Incident> incidentList = aggregator.getIncidents("Berlin", Optional.of(timestamp), Optional.empty());
+        List<Incident> incidentList = aggregator.getIncidents("Berlin", Optional.of(timestamp), Optional.empty(), Optional.empty());
 
         assertThat(incidentList, is(empty()));
     }
@@ -159,7 +187,7 @@ public class AggregatorFromDatabaseTest {
         // TODO: Move to resource test
     void testMarshallingOneIncidentFromCity() throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
-        List<Incident> berlinIncidents = aggregator.getIncidents("Berlin", Optional.empty(), Optional.empty());
+        List<Incident> berlinIncidents = aggregator.getIncidents("Berlin", Optional.empty(), Optional.empty(), Optional.empty());
 
         String json = objectMapper.writeValueAsString(berlinIncidents.get(0));
         assertThat(json, notNullValue());
@@ -170,7 +198,7 @@ public class AggregatorFromDatabaseTest {
         // TODO: Move to resource test
     void testMarshallingAllIncidentFromCity() throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
-        List<Incident> berlinIncidents = aggregator.getIncidents("Berlin", Optional.empty(), Optional.empty());
+        List<Incident> berlinIncidents = aggregator.getIncidents("Berlin", Optional.empty(), Optional.empty(), Optional.empty());
 
         String json = objectMapper.writeValueAsString(berlinIncidents);
         assertThat(json, notNullValue());
@@ -211,7 +239,7 @@ public class AggregatorFromDatabaseTest {
     @Test
     void testGetComparisonEvaluationOverTime() {
         List<ComparisonEvaluationDTO> comparisonEvaluationDTOs = aggregator.getComparisonEvaluationOverTime("Berlin");
-        System.out.println(comparisonEvaluationDTOs);
+        log.info("" + comparisonEvaluationDTOs);
 
         assertThat(comparisonEvaluationDTOs, hasSize(1));
 

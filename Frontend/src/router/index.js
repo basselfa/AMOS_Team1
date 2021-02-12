@@ -4,8 +4,7 @@ import App from '@/App'
 import Historization from '@/views/Historization'
 import Map from '@/views/Map.vue'
 import Configuration from '@/views/Configuration.vue'
-
-// const Historization = () => import('@/views/Historization')
+import About from '@/views/About.vue'
 
 Vue.use(Router)
 
@@ -20,8 +19,9 @@ function configRoutes() {
     return [
         {
             path: '/',
-            name: 'App',
-            component: App,
+            name: 'Map',
+            component: Map,
+            props: true,
         },
         {
             path: '/map',
@@ -39,5 +39,10 @@ function configRoutes() {
           name: 'Configuration',
           component: Configuration,
       },
+      {
+        path: '/about',
+        name: 'About',
+        component: About,
+    },
     ]
 }

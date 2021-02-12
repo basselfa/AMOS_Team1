@@ -1,5 +1,8 @@
 package com.amos.p1.backend.data;
+import com.amos.p1.backend.configuration.RequestCreatorConfigProduction;
 import com.amos.p1.backend.database.MyRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 import java.time.LocalDateTime ;
@@ -28,7 +31,7 @@ import java.util.stream.Stream;
 @Entity
 public class Request {
 
-
+    private static final Logger log = LoggerFactory.getLogger(Request.class);
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,10 +42,6 @@ public class Request {
     List<Incident> incidents =null ;
     @Transient
     List<EvaluationCandidate> reEvaluatedCandidateList =null;
-    @Transient
-    Boolean incidentSavedInDb= false ;
-    @Transient
-    Boolean evaluationCandidateSavedInDb= false ;
 
 
     public Request() {
@@ -57,27 +56,28 @@ public class Request {
 
     // parses string ids of incidents to list of Incidents
     public List<Incident> getIncidents(){
-       if (incidentSavedInDb == true) {
 
-           List<Incident> incidentAsList;
-           incidentAsList = MyRepo.getEntityManager().createNamedQuery("getFromRequestId")
-                   .setParameter("requestId", getId())
-                   .getResultList();
 
-           System.out.println(getId());
-           // update if anything gets deleted from incidents
-           setIncidents(incidentAsList);
-           return incidentAsList;
-
-       }
            return incidents;
+
+
+    }
+    public void initializeIncidentsFromDb(){
+
+
+        List<Incident> incidentAsList;
+        incidentAsList = MyRepo.getEntityManager().createNamedQuery("getFromRequestId")
+                .setParameter("requestId", getId())
+                .getResultList();
+
+
+        // update if anything gets deleted from incidents
+        setIncidents(incidentAsList);
 
 
     }
 
 
-    public Boolean getIncidentsSavedInDb() {return incidentSavedInDb; }
-    public void setIncidentsSavedInDb(Boolean incidentSavedInDb) {this.incidentSavedInDb = incidentSavedInDb; }
 
     @Basic
     @Column(name = "id")
@@ -99,22 +99,28 @@ public class Request {
     }
 
 
+    public List<EvaluationCandidate> getEvaluationCandidate(){
+       return reEvaluatedCandidateList;
 
-    public void setEvaluationCandidateSavedInDb(Boolean evaluationCandidateSavedInDb) {
-        this.evaluationCandidateSavedInDb = evaluationCandidateSavedInDb;
+
     }
 
-    public List<EvaluationCandidate> getEvaluationCandidate(){
-        if (evaluationCandidateSavedInDb ==false) return reEvaluatedCandidateList;
+
+    public void  initializeEvaluationCandidatesFromDb(){
+
 
         List<EvaluationCandidate> evaluationCandidateAsList;
         evaluationCandidateAsList =(List<EvaluationCandidate>) MyRepo.getEntityManager().createNamedQuery("getEvaluationCandidateFromRequestId")
                 .setParameter("requestId", getId())
                 .getResultList();
+        for (EvaluationCandidate evaluationCandidate: evaluationCandidateAsList   ) {
+            evaluationCandidate.setEvaluationCandidateSavedInDb(true);
+
+        }
         setEvaluatedCandidates(evaluationCandidateAsList);
 
 
-        return evaluationCandidateAsList;
+
     }
 
     @Override
@@ -125,8 +131,6 @@ public class Request {
                 ", cityName='" + cityName + '\'' +
                 ", incidents=" + incidents +
                 ", reEvaluatedCandidateList=" + reEvaluatedCandidateList +
-                ", incidentSavedInDb=" + incidentSavedInDb +
-                ", evaluationCandidateSavedInDb=" + evaluationCandidateSavedInDb +
                 '}';
     }
 }

@@ -5,18 +5,25 @@ import com.amos.p1.backend.data.EvaluationCandidate;
 import com.amos.p1.backend.data.Incident;
 import com.amos.p1.backend.data.Request;
 import com.amos.p1.backend.database.MyRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 public class AggregatorFromDatabase implements Aggregator {
 
+    private static final Logger log = LoggerFactory.getLogger(AggregatorFromDatabase.class);
+
+
     @Override
-    public List<Incident> getIncidents(String cityName, Optional<LocalDateTime> timestamp, Optional<List<String>> types) {
+    public List<Incident> getIncidents(String cityName, Optional<LocalDateTime> timestamp, Optional<List<String>> types, Optional<String> provider) {
 
         List<Incident>  incidents = new ArrayList<Incident>();
 
@@ -28,6 +35,9 @@ public class AggregatorFromDatabase implements Aggregator {
                 .setParameter("requestTime", timestamp.get())
                     .getResultList();
             for (Request request : requests ) {
+
+                request.initializeIncidentsFromDb();
+                request.initializeEvaluationCandidatesFromDb();
                 incidents.addAll(request.getIncidents()) ;
 
             }
@@ -38,16 +48,34 @@ public class AggregatorFromDatabase implements Aggregator {
                     .setParameter("cityName", cityName )
                     .getResultList();
             for (Request request : requests ) {
+
+                request.initializeIncidentsFromDb();
+                request.initializeEvaluationCandidatesFromDb();
                 incidents.addAll(request.getIncidents());
             }
         }
 
+        if(provider.isPresent()) {
+            incidents = filterIncidentsByProvider(incidents, provider.get());
+        }
 
         if(types.isPresent()){
             incidents = filterIncidentsByType(incidents, types.get());
         }
 
         return incidents;
+    }
+
+    private List<Incident> filterIncidentsByProvider(List<Incident> incidents, String provider){
+        List<Incident> filteredIncidents = new ArrayList<>();
+
+        for (Incident incident : incidents) {
+            if(incident.getProvider().equals(provider)){
+                filteredIncidents.add(incident);
+            }
+        }
+
+        return filteredIncidents;
     }
 
     private List<Incident> filterIncidentsByType(List<Incident> incidents, List<String> types) {
@@ -114,20 +142,36 @@ public class AggregatorFromDatabase implements Aggregator {
         for (Request request : requests) {
             //TODO: split to here and tom tom incidents
 
-            List<Incident> tomTomIncidents =  MyRepo.getEntityManager().createNamedQuery("getFromTomTom")
-                    .setParameter("requestId",  request.getId())
-                    .getResultList();
-            List<Incident> hereIncidents =  MyRepo.getEntityManager().createNamedQuery("getFromHere")
-                    .setParameter("requestId",  request.getId())
-                    .getResultList();
+
+            request.initializeIncidentsFromDb();
+            request.initializeEvaluationCandidatesFromDb();
+
+            List<Incident> hereIncidents = filterIncidentsByProvider(request.getIncidents(), "0");
+            List<Incident> tomTomIncidents = filterIncidentsByProvider(request.getIncidents(), "1");
+
+//            List<Incident> tomTomIncidents =  MyRepo.getEntityManager().createNamedQuery("getFromTomTom")
+//                    .setParameter("requestId",  request.getId())
+//                    .getResultList();
+//
+//
+//
+//            List<Incident> hereIncidents =  MyRepo.getEntityManager().createNamedQuery("getFromHere")
+//                    .setParameter("requestId",  request.getId())
+//                    .getResultList();
 
             // Add two one comparison evaluation dto
             ComparisonEvaluationDTO comparisonEvaluationDTO = new ComparisonEvaluationDTO();
-            comparisonEvaluationDTO.setDate(java.sql.Timestamp.valueOf(request.getRequestTime())); ;
+
+            LocalDateTime requestTime = request.getRequestTime();
+            Date date = Date.from(requestTime.atZone(ZoneId.of("Europe/Berlin")).toInstant());
+            log.info("Request Time: (LocalDateTime)" + requestTime);
+            log.info("Request Time (Date): " + date);
+            comparisonEvaluationDTO.setDate(date);
+
             comparisonEvaluationDTO.setTomTomIncidentsAmount(tomTomIncidents.size()); ;
             comparisonEvaluationDTO.setHereIncidentsAmount(hereIncidents.size()); ;
-            if(request.getEvaluationCandidate()!= null)
-                comparisonEvaluationDTO.setSameIncidentAmount(request.getEvaluationCandidate().size()); ;
+//            if(request.getEvaluationCandidate()!= null)
+            comparisonEvaluationDTO.setSameIncidentAmount(request.getEvaluationCandidate().size()); ;
 
             // Add ComparisonEvaluationDTO to a list
 

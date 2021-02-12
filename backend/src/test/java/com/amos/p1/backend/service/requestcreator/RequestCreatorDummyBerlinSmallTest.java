@@ -47,11 +47,12 @@ class RequestCreatorDummyBerlinSmallTest {
         long typeConstructionAmount =
                 requests.get(0).getIncidents()
                         .stream()
-                        .filter(incident -> incident.getType().equals("CONSTRUCTION"))
+                        .filter(incident -> incident.getType().equals(Incident.IncidentTypes.ROADWORKS.toString()))
                         .count();
 
-        assertThat(typeConstructionAmount, is(41L));
+        assertThat(typeConstructionAmount, is(43L));
     }
+
 
     @Test
     void testDummyEvaluationCandidate(){

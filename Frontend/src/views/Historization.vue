@@ -1,9 +1,9 @@
 <template>
-  <div class="body-ctn" id="historization-table">
+  <div class="historization-container" id="historization-table">
     <v-row justify="space-around">
       <v-col justify="space-around">
-        <v-card>
-          <div style="padding: 10px">
+        <v-card class="historization-card">
+          <div>
             <v-card-title> Traffic Data </v-card-title>
 
             <v-row justify="center" style="padding: 0px 20px">
@@ -44,7 +44,7 @@
               v-if="loading == true"
               indeterminate
               color="primary"
-              style="margin-top: 10%"
+              class="historization-loading-indicator"
             ></v-progress-circular>
             <div
               id="charts-container"
@@ -65,7 +65,7 @@
             >
               <div id="chart-comparison-default">
                 <chart
-                  :city="Empty"
+                  :city="this.city"
                   :chartDataCollection="this.chartDataDefault"
                   :legend=false
                 />
@@ -129,10 +129,14 @@ export default {
     }
   },
   methods: {
+    /**
+    * Get all cities with request
+    * and save them in this.cities
+    */
     async fetchData() {
       await axios
         .get(
-          "http://" + window.location.hostname + ":8082/withDatabase/cities",
+          "http://" + window.location.hostname + ":8082/withDatabase/cityinformation",
           {
             headers: { "Access-Control-Allow-Origin": "*" },
           }
@@ -140,7 +144,7 @@ export default {
         .then((response) => {
           let cities = [];
           response.data.map(function (item) {
-            cities.push(item.city);
+            cities.push(item.cityName);
           });
           this.cities = cities;
         })
@@ -150,6 +154,10 @@ export default {
           this.loading = false;
         });
     },
+    /**
+    * Get the comparison evaluation data for the selected city if start and end times are also selected
+    *
+    */
     async fetchDataForCity() {
       // filters need to be set
       if (this.city && this.startTime && this.endTime) {
@@ -161,7 +169,7 @@ export default {
           comparison: [],
         };
         this.loading = true;
-        // get comparison data
+        // get comparison evaluation data
         await axios
           .get(
             "http://" +
@@ -173,14 +181,14 @@ export default {
             }
           )
           .then((response) => {
-            console.log(response.data);
+            console.log("Historization data received:" + response.data.length);
             for (let i = 0; i < response.data.length; i++) {
               // if timestamp between start and end times
               if (
                 response.data[i].date >= this.startTime &&
                 response.data[i].date <= this.endTime
               ) {
-                console.log(response);
+                console.log(response.data[i].date);
                 // get the necessary data for the chart
                 this.comparisonData.labels.push(response.data[i].date);
                 this.comparisonData.tomtom.push(
@@ -194,6 +202,7 @@ export default {
                 );
               }
             }
+            // datasets for the chart visialization
             this.chartDataCollection = {
               labels: this.comparisonData.labels,
 
@@ -214,7 +223,7 @@ export default {
                   data: this.comparisonData.comparison,
                 },
               ],
-            };
+            }
             this.loading = false;
           })
           .catch((error) => {
@@ -229,9 +238,25 @@ export default {
 </script>
 
 <style>
-.body-ctn {
-  overflow: hidden;
-  padding-left: 295px;
-  padding-top: 75px;
+.historization-container {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+@media only screen and (min-width: 1270px) {
+  .historization-container {
+    padding-left: 295px;
+  }
+}
+
+.historization-container .historization-card {
+  padding: 10px; 
+  border-radius:20px !important;
+}
+
+.historization-container .historization-loading-indicator {
+  margin-top: 15vw; 
+  position:relative; 
+  bottom:10vw;
 }
 </style>

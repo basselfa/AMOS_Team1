@@ -2,7 +2,7 @@ package com.amos.p1.backend.service.evaluation;
 
 import com.amos.p1.backend.data.Incident;
 
-public abstract class Matcher {
+abstract public class Matcher {
     double start1Lat;
     double start1Lng;
     double end1Lat;
@@ -11,10 +11,6 @@ public abstract class Matcher {
     double start2Lng;
     double end2Lat;
     double end2Lng;
-
-    public Matcher() {
-    }
-
 
 
     public Matcher(Incident incident1, Incident incident2) {
@@ -28,9 +24,9 @@ public abstract class Matcher {
         this.end2Lng = Double.parseDouble(incident2.getEndPositionLongitude());
     }
 
-    public abstract boolean isDropped();
+    abstract boolean isDropped();
 
-    public abstract int getConfidence();
+    abstract int getConfidence();
 
-    public abstract String getDescription();
+    abstract String getDescription();
 }

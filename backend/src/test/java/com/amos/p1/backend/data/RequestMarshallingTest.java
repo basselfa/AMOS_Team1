@@ -7,6 +7,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.builder.ToStringExclude;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDateTime;
@@ -19,6 +21,8 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 
 public class RequestMarshallingTest {
+
+    private static final Logger log = LoggerFactory.getLogger(RequestMarshallingTest.class);
 
     private String json;
 
@@ -47,7 +51,7 @@ public class RequestMarshallingTest {
 
     @Test
     void printJson() {
-        System.out.println(Helper.getPrettyJson(json));
+        log.info(Helper.getPrettyJson(json));
     }
 
     @Test

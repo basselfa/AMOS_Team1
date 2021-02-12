@@ -6,6 +6,8 @@ import com.amos.p1.backend.data.Request;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -17,18 +19,20 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class RequestTest {
 
+    private static final Logger log = LoggerFactory.getLogger(RequestTest.class);
+
     private final static LocalDateTime LOCAL_DATE_TIME_DUMMY = LocalDateTime.of(2020, 10, 30, 16, 30);
     @BeforeAll
     public static void init() {
 
-        System.out.println("setting Database properties");
+        log.info("setting Database properties");
         MyRepo.setUseTestDatabase(true);
     }
 
     @BeforeEach
     void setUp(){
 
-        System.out.println("reintialising Database");
+        log.info("reintialising Database");
         MyRepo.dropAll();
     }
 
@@ -70,31 +74,40 @@ public class RequestTest {
 
     @Test
     void testNoIncidentInDatabaseAfterDeletingInRequestObject(){
-        fail("Maybe not needed");
-
-        Request request = getDummyRequestWithOneDummyIncident();
+        Request request = createDummyRequest();
         MyRepo.insertRequest(request);
-        Incident incident = request.getIncidents().get(0);
-        long firstIncidentId = incident.getId();
+        Long id = request.getIncidents().get(0).getId();
 
-        Request requestFromDatabase = MyRepo.getRequest(LOCAL_DATE_TIME_DUMMY);
-        requestFromDatabase.getIncidents().clear();
-        requestFromDatabase.getIncidents().add(DummyIncident.createIncident());
-        MyRepo.insertRequest(requestFromDatabase);
+        //TODO: delete incident
 
-        List<Incident> incidentsFromDatabase = DatabaseTestHelper.getIncidentListById(firstIncidentId);
-        assertThat(incidentsFromDatabase, hasSize(0));
+
+        List<Request> requests1= new ArrayList<>();
+        requests1.add(request);
+        MyRepo.deleteRequests(requests1);
+        System.out.println(request);
+
+        assertThat(MyRepo.getIncidents(id).size(),equalTo(0));
+
+
     }
 
     @Test
     void TestDeleteRequest(){
-        Request request = getDummyRequestWithOneDummyIncident();
+        Request request = createDummyRequest();
         MyRepo.insertRequest(request);
-        Incident incident = request.getIncidents().get(0);
-        long dbId = incident.getId();
 
-        //TODO delete request
-        fail();
+
+        //TODO: delete incident
+
+
+        List<Request> requests1= new ArrayList<>();
+        requests1.add(request);
+        MyRepo.deleteRequests(requests1);
+        System.out.println(request);
+
+        assertThat(MyRepo.geRequestFromCityName(request.getCityName()).size(),equalTo(0));
+
+
     }
 
     private Request getDummyRequestWithIncidents(List<Incident> incidents) {
@@ -118,8 +131,7 @@ public class RequestTest {
         request.setCityName("Berlin");
         MyRepo.insertRequest(request);
 
-        List<Request> RequestAsList =new ArrayList<Request>();
-        RequestAsList.add( MyRepo.geRequestFromCityName("Berlin"));
+        List<Request> RequestAsList = MyRepo.geRequestFromCityName("Berlin");
 
 
         assertThat(RequestAsList, hasSize(greaterThan(0)));
@@ -131,7 +143,7 @@ public class RequestTest {
      MyRepo.insertRequest(request);
 
         List<EvaluationCandidate> actual = MyRepo.geEvaluationCandidateFromRequestId(request.getId());
-        System.out.println(actual);
+        log.info("" + actual);
 
         assertThat(actual, hasSize(greaterThan(0)));
     }
@@ -159,6 +171,7 @@ public class RequestTest {
         request.setRequestTime(LocalDateTime.of(
                 2020, 5, 1,
                 12, 30, 0));
+        request.setCityName("Berlin");
         request.setIncidents(incidents);
 
         List<EvaluationCandidate> evaluationCandidates = new ArrayList<EvaluationCandidate>();

@@ -1,35 +1,34 @@
 package com.amos.p1.backend.database;
 
-import com.amos.p1.backend.data.CityInformation;
-import com.amos.p1.backend.data.Request;
-import com.amos.p1.backend.data.Incident;
+import com.amos.p1.backend.data.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@DataJpaTest
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+
 public class DatabaseTest {
+
+    private static final Logger log = LoggerFactory.getLogger(DatabaseTest.class);
 
     @BeforeAll
     public static void init() {
 
-        System.out.println("setting Database properties");
+        log.info("setting Database properties");
     //    MyRepo.setUseTestDatabase(true);
     }
 
     @BeforeEach
     void setUp(){
 
-        System.out.println("reintialising Database");
+        log.info("reintialising Database");
         MyRepo.dropAll();
     }
 
@@ -80,7 +79,7 @@ public class DatabaseTest {
         MyRepo.insertRequest(request);
 
 
-        System.out.println(MyRepo.getRequest(LocalDateTime.of(
+        log.info("" + MyRepo.getRequest(LocalDateTime.of(
                 2020, 5, 1,
                 12, 30, 0)));
     }
@@ -103,7 +102,7 @@ public class DatabaseTest {
     }
 
     @Test
-    void testDeleteCityInforamtion() {
+    void testDeleteCityInforamtionAndRequest() {
 
 
         CityInformation information = new CityInformation();
@@ -117,10 +116,49 @@ public class DatabaseTest {
         MyRepo.insertCityInformation(information);
 
         assertThat(MyRepo.getAllCityInformation().get(0), equalTo(information));
+        MyRepo.insertRequest(createDummyRequest());
 
         MyRepo.deleteCityInformation(information.getId());
 
         assertThat(MyRepo.getAllCityInformation().size(),equalTo(0));
+        assertThat(MyRepo.geRequestFromCityName("Hamburg").size(),equalTo(0));
+
     }
+    Request createDummyRequest(){
+        List<Incident> incidents = new ArrayList<Incident>();
+        incidents.add(
+                new Incident("222","baustelle","major","Traffic jam in Bergmannstraße",
+                        "Hamburg", "Germany", "45.5", "67.4",
+                        "Bergmannstraße",  "46.5", "69.5",
+                        "Bergmannstraße",  1, "0",
+                        LocalDateTime.of( 2020, 5, 1, 12, 30, 0),
+                        LocalDateTime.of( 2020, 5, 1, 12, 30, 0),
+                        "670000:690000,681234:691234",6.0,new Long(1)));
+        incidents.add(
+                new Incident("222","baustelle","major","Traffic jam in Bergmannstraße",
+                        "Hamburg", "Germany", "45.5", "67.4",
+                        "Bergmannstraße",  "46.5", "69.5",
+                        "Bergmannstraße",  1, "1",
+                        LocalDateTime.of( 2020, 5, 1, 12, 30, 0),
+                        LocalDateTime.of( 2020, 5, 1, 12, 30, 0),
+                        "670000:690000,681234:691234",6.0,new Long(1)));
+
+        Request request = new Request();
+        request.setRequestTime(LocalDateTime.of(
+                2020, 5, 1,
+                12, 30, 0));
+        request.setIncidents(incidents);
+        request.setCityName("Hamburg");
+
+        List<EvaluationCandidate> evaluationCandidates = new ArrayList<EvaluationCandidate>();
+        EvaluationCandidate evaluationCandidate = new EvaluationCandidate ();
+        evaluationCandidate.setTomTomIncident(incidents.get(0));
+        evaluationCandidate.setHereIncident(incidents.get(1));
+        evaluationCandidates.add(evaluationCandidate);
+        request.setEvaluatedCandidates(evaluationCandidates);
+
+        return request;
+    }
+
 
 }

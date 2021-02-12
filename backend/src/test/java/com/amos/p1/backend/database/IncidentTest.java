@@ -1,12 +1,15 @@
 package com.amos.p1.backend.database;
 
 import com.amos.p1.backend.data.Incident;
+import com.amos.p1.backend.data.RequestMarshallingTest;
 import org.aspectj.lang.annotation.Before;
-import org.junit.BeforeClass;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -14,17 +17,21 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class IncidentTest {
+
+    private static final Logger log = LoggerFactory.getLogger(IncidentTest.class);
+
+
     @BeforeAll
     public static void init() {
 
-        System.out.println("setting Database properties");
+        log.info("setting Database properties");
         MyRepo.setUseTestDatabase(true);
     }
 
     @BeforeEach
     void setUp(){
 
-        System.out.println("reintialising Database");
+        log.info("reintialising Database");
         MyRepo.dropAll();
     }
 
@@ -83,13 +90,19 @@ public class IncidentTest {
     void testDeleteIncident(){
         Incident incident = DummyIncident.createIncident();
         DatabaseTestHelper.insertIncident(incident);
-        long dbId = incident.getId();
+
 
         //TODO: delete incident
-        fail();
 
-        List<Incident> incidents = DatabaseTestHelper.getIncidentListById(dbId);
-        assertThat(incidents, hasSize(0));
+
+        List<Incident> incidents= new ArrayList<>();
+        incidents.add(incident);
+        MyRepo.deleteIncidents(incidents);
+        System.out.println(incident);
+        assertThat(MyRepo.getIncidents(incident.getId()).size(),equalTo(0));
+
+
+
     }
 
 }

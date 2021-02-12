@@ -4,6 +4,8 @@ import com.amos.p1.backend.Helper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
 
@@ -15,6 +17,7 @@ import java.util.List;
 @JsonTest
 class EvaluationCandidateMarshallerTest {
 
+    private static final Logger log = LoggerFactory.getLogger(EvaluationCandidateMarshallerTest.class);
 
     @Autowired
     ObjectMapper objectMapper;
@@ -24,7 +27,7 @@ class EvaluationCandidateMarshallerTest {
         EvaluationCandidate evaluationCandidate = getEvaluationDummy1();
         String json = objectMapper.writeValueAsString(evaluationCandidate);
 
-        System.out.println(Helper.getPrettyJson(json));
+        log.info(Helper.getPrettyJson(json));
     }
 
     @Test
@@ -44,7 +47,7 @@ class EvaluationCandidateMarshallerTest {
 
         String json = objectMapper.writeValueAsString(evaluationCandidates);
 
-        System.out.println(Helper.getPrettyJsonList(json));
+        log.info(Helper.getPrettyJsonList(json));
     }
 
     @Test
