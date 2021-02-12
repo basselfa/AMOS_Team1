@@ -240,7 +240,7 @@ public class MyRepo {
 
 
             insertIncident(incidents);
-            request.setIncidentsSavedInDb(true);
+
 
             List<EvaluationCandidate> evaluationCandidates =request.getEvaluationCandidate();
             if(evaluationCandidates==null)return ;
@@ -252,7 +252,7 @@ public class MyRepo {
 
 
             MyRepo.insertEvaluationCandidate(evaluationCandidates);
-            request.setEvaluationCandidateSavedInDb(true);
+
         }catch (Exception e){
             log.info("Error while inserting into db: ");
             System.out.println("Error while request into db: ");
@@ -269,13 +269,15 @@ public class MyRepo {
                 .getResultList();
 
         Request request =requests.get(0) ;
-        request.setIncidentsSavedInDb(true);
+        request.initializeIncidentsFromDb();
+
+        request.initializeEvaluationCandidatesFromDb();
         if (request.getEvaluationCandidate()==null||request.getEvaluationCandidate().size()==0)
             return requests.get(0);
-        request.setIncidentsSavedInDb(true);
+
         for(EvaluationCandidate evaluationCandidate : request.getEvaluationCandidate()) {
             evaluationCandidate.setEvaluationCandidateSavedInDb(true);}
-        request.setEvaluationCandidateSavedInDb(true);
+
 
         return request;
     }
@@ -288,16 +290,17 @@ public class MyRepo {
                 .getResultList();
 
         Request request =requests.get(0) ;
-        request.setIncidentsSavedInDb(true);
-        request.setEvaluationCandidateSavedInDb(true);
+
+        request.initializeIncidentsFromDb();
+        request.initializeEvaluationCandidatesFromDb();
 
         if (request.getEvaluationCandidate()==null||request.getEvaluationCandidate().size()==0)
             return requests.get(0);
-        request.setIncidentsSavedInDb(true);
+
 
         for(EvaluationCandidate evaluationCandidate : request.getEvaluationCandidate()) {
             evaluationCandidate.setEvaluationCandidateSavedInDb(true);}
-        request.setEvaluationCandidateSavedInDb(true);
+
 
         return request;
     }
@@ -309,8 +312,9 @@ public class MyRepo {
                 .getResultList();
 
         for( Request request :requests) {
-            request.setIncidentsSavedInDb(true);
-            request.setEvaluationCandidateSavedInDb(true);
+
+            request.initializeIncidentsFromDb();
+            request.initializeEvaluationCandidatesFromDb();
 
 
             for (EvaluationCandidate evaluationCandidate : request.getEvaluationCandidate()) {
