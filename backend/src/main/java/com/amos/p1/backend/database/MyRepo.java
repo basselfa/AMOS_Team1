@@ -255,6 +255,8 @@ public class MyRepo {
             request.setEvaluationCandidateSavedInDb(true);
         }catch (Exception e){
             log.info("Error while inserting into db: ");
+            System.out.println("Error while request into db: ");
+
             e.printStackTrace();
         }
 
