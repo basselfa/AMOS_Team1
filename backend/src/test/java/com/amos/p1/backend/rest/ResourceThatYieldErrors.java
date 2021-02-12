@@ -82,8 +82,8 @@ public class ResourceThatYieldErrors {
 
 
         // Second get
-        assertThat(getIncidentsFromBerlin("2021-02-10 17:00"), hasSize(787));
-        assertThat(getEvaluationCandidatesFromBerlin("2021-02-10 17:00"), hasSize(97));
+        assertThat(getIncidentsFromBerlin("2021-02-10 16:00"), hasSize(787));
+        assertThat(getEvaluationCandidatesFromBerlin("2021-02-10 16:00"), hasSize(97));
     }
 
     private List<EvaluationCandidate> getEvaluationCandidatesFromBerlin(String timestamp) {
