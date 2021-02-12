@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -89,13 +90,19 @@ public class IncidentTest {
     void testDeleteIncident(){
         Incident incident = DummyIncident.createIncident();
         DatabaseTestHelper.insertIncident(incident);
-        long dbId = incident.getId();
+
 
         //TODO: delete incident
-        fail();
 
-        List<Incident> incidents = DatabaseTestHelper.getIncidentListById(dbId);
-        assertThat(incidents, hasSize(0));
+
+        List<Incident> incidents= new ArrayList<>();
+        incidents.add(incident);
+        MyRepo.deleteIncidents(incidents);
+        System.out.println(incident);
+        assertThat(MyRepo.getIncidents(incident.getId()).size(),equalTo(0));
+
+
+
     }
 
 }
