@@ -35,8 +35,9 @@ public class AggregatorFromDatabase implements Aggregator {
                 .setParameter("requestTime", timestamp.get())
                     .getResultList();
             for (Request request : requests ) {
-                request.setEvaluationCandidateSavedInDb(true);
-                request.setIncidentsSavedInDb(true);
+
+                request.initializeIncidentsFromDb();
+                request.initializeEvaluationCandidatesFromDb();
                 incidents.addAll(request.getIncidents()) ;
 
             }
@@ -47,8 +48,9 @@ public class AggregatorFromDatabase implements Aggregator {
                     .setParameter("cityName", cityName )
                     .getResultList();
             for (Request request : requests ) {
-                request.setEvaluationCandidateSavedInDb(true);
-                request.setIncidentsSavedInDb(true);
+
+                request.initializeIncidentsFromDb();
+                request.initializeEvaluationCandidatesFromDb();
                 incidents.addAll(request.getIncidents());
             }
         }
@@ -140,8 +142,9 @@ public class AggregatorFromDatabase implements Aggregator {
         for (Request request : requests) {
             //TODO: split to here and tom tom incidents
 
-            request.setEvaluationCandidateSavedInDb(true);
-            request.setIncidentsSavedInDb(true);
+
+            request.initializeIncidentsFromDb();
+            request.initializeEvaluationCandidatesFromDb();
 
             List<Incident> hereIncidents = filterIncidentsByProvider(request.getIncidents(), "0");
             List<Incident> tomTomIncidents = filterIncidentsByProvider(request.getIncidents(), "1");
