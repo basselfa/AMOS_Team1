@@ -29,7 +29,7 @@
 
 on:
   push:
-    branches: [ production ]
+    branches: [ testing ]
 
 name: Deploy to Amazon ECS
 
@@ -112,6 +112,6 @@ jobs:
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
         task-definition: ${{ steps.task-def-backend.outputs.task-definition }}
-        service: amos-service
+        service: amos-service-test
         cluster: AMOS2020-proj1
         wait-for-service-stability: true
