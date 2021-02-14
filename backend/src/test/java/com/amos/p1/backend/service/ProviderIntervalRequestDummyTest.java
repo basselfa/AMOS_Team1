@@ -67,11 +67,6 @@ public class ProviderIntervalRequestDummyTest {
         assertThat(amountOfIncidentsAfterCronJob - amountOfIncidentsBeforeCronjob, greaterThan(0L));
     }
 
-    @Test
-    void testExecutionOnInterval(){
-        throw new IllegalStateException("Need to be implemented. Use awaitility library ");
-    }
-
     private Long getAmountOfRequests() {
         return MyRepo.getEntityManager()
                 .createQuery("SELECT COUNT(r) FROM Request r", Long.class)
