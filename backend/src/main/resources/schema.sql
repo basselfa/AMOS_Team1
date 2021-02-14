@@ -25,7 +25,7 @@ CREATE TABLE Incident (
                           provider  VARCHAR(255)  ,
                           entryTime datetime  ,
                           endTime datetime  ,
-                          edges VARCHAR(11255),
+                          edges MEDIUMTEXT,
                           lengthInMeter DOUBLE,
                           requestId BIGINT UNSIGNED
 

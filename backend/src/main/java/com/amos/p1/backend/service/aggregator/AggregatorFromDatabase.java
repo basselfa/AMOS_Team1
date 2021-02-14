@@ -164,7 +164,7 @@ public class AggregatorFromDatabase implements Aggregator {
             ComparisonEvaluationDTO comparisonEvaluationDTO = new ComparisonEvaluationDTO();
 
             LocalDateTime requestTime = request.getRequestTime();
-            comparisonEvaluationDTO.setDate(Timestamp.valueOf(requestTime));
+            comparisonEvaluationDTO.setDate(requestTime);
 
             comparisonEvaluationDTO.setTomTomIncidentsAmount(tomTomIncidents.size()); ;
             comparisonEvaluationDTO.setHereIncidentsAmount(hereIncidents.size()); ;
