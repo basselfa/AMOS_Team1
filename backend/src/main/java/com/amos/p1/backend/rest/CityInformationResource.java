@@ -30,6 +30,7 @@ public class CityInformationResource {
         return ResponseEntity.ok(null);
     }
 
+    // in case of get request. Read every CityInformation object from database and send as JSON
     @RequestMapping(
             method = RequestMethod.GET,
             value = "/cityinformation",
@@ -41,6 +42,7 @@ public class CityInformationResource {
         return ResponseEntity.ok(allCityInformation);
     }
 
+    // Delete specific CityInformation object identified by id from the database
     @RequestMapping(
             method = RequestMethod.DELETE,
             value = "/cityinformation",
