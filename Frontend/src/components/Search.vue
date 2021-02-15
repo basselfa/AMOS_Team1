@@ -64,10 +64,22 @@
                     :disabled="refreshDisabled"
                     class="search-bar btn-refresh"
                     @click="refreshData()"
-                    ><v-icon color="blue lighten-1"
-                        >mdi-cloud-refresh</v-icon
-                    ></v-btn
                 >
+                    <v-icon
+                        v-if="!refreshDisabled && !error"
+                        color="blue lighten-1"
+                        >mdi-cloud-refresh</v-icon
+                    >
+                    <v-icon
+                        v-if="!refreshDisabled && error"
+                        color="red lighten-1"
+                        >mdi-cloud-refresh</v-icon
+                    >
+                    <div
+                        v-if="refreshDisabled && !error"
+                        class="loadingSpinner"
+                    ></div>
+                </v-btn>
             </v-col>
         </v-row>
     </div>
@@ -101,6 +113,7 @@ export default {
         provider: null,
         cityChange: false,
         refreshDisabled: false,
+        errorMessage: null,
     }),
     mounted: function () {
         // get list of all cities
@@ -121,7 +134,7 @@ export default {
                 this.cities = cities
             })
             .catch((error) => {
-                this.errorMessage = error.message
+                this.error = error.message
                 console.error('There was an error!', error)
             })
     },
@@ -180,6 +193,7 @@ export default {
                 })
         },
         async refreshData() {
+            this.error = null
             this.refreshDisabled = true
             await axios
                 .get(
@@ -199,6 +213,7 @@ export default {
                     }
                 })
                 .catch((error) => {
+                    this.refreshDisabled = false
                     this.errorMessage = error.message
                     console.error('There was an error!', error)
                 })
@@ -208,34 +223,61 @@ export default {
 </script>
 
 <style>
-.search-group .v-autocomplete.v-select.v-input--is-focused input {
+#search-bar-container
+    .search-group
+    .v-autocomplete.v-select.v-input--is-focused
+    input {
     min-width: 0px !important;
 }
 
-.search-group .search-col {
+#search-bar-container .search-group .search-col {
     padding: 0px;
 }
 
 @media only screen and (min-width: 600px) {
-    .search-group .search-col {
+    #search-bar-container .search-group .search-col {
         padding: 10px;
     }
 
-    .search-group .col-12 {
+    #search-bar-container .search-group .col-12 {
         flex: 0 0 100% !important;
     }
 }
 
-.search-group .btn-refresh {
+#search-bar-container .search-group .btn-refresh {
     border-radius: 50px !important;
     padding: 28px 0px !important;
 }
 
-.search-group .search-provider.col-12 {
+#search-bar-container .search-group .search-provider.col-12 {
     flex: 0 0 80% !important;
 }
 
-.search-group .search-refresh.col-12 {
+#search-bar-container .search-group .search-refresh.col-12 {
     flex: 0 0 20% !important;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(360deg);
+    }
+    100% {
+        transform: rotate(720deg);
+    }
+}
+
+#search-bar-container .loadingSpinner {
+    border: 4px solid transparent;
+    border-top: 4px solid rgb(27, 143, 209);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation-name: spin;
+    animation-duration: 2s;
+    animation-timing-function: ease;
+    animation-iteration-count: infinite;
 }
 </style>
