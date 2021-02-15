@@ -37,7 +37,7 @@
       "memoryReservation": null,
       "volumesFrom": [],
       "stopTimeout": null,
-      "image": "617363111108.dkr.ecr.eu-central-1.amazonaws.com/amos:frontend--3c9ac9f8b7be32bf5c8dc7079bb3e9e1991517fc",
+      "image": "617363111108.dkr.ecr.eu-central-1.amazonaws.com/amos:frontend--bccbb9632383bb031940d3e41b094b854ce8c0ee",
       "startTimeout": null,
       "firelensConfiguration": null,
       "dependsOn": null,
@@ -91,7 +91,7 @@
       "memoryReservation": null,
       "volumesFrom": [],
       "stopTimeout": null,
-      "image": "617363111108.dkr.ecr.eu-central-1.amazonaws.com/amos:backend--3c9ac9f8b7be32bf5c8dc7079bb3e9e1991517fc",
+      "image": "617363111108.dkr.ecr.eu-central-1.amazonaws.com/amos:backend--bccbb9632383bb031940d3e41b094b854ce8c0ee",
       "startTimeout": null,
       "firelensConfiguration": null,
       "dependsOn": null,
@@ -150,7 +150,13 @@
       "resourceRequirements": null,
       "ulimits": null,
       "dnsServers": null,
-      "mountPoints": [],
+      "mountPoints": [
+        {
+          "readOnly": null,
+          "containerPath": "/var/lib/mysql",
+          "sourceVolume": "vol-01f18481ee1852b8b"
+        }
+      ],
       "workingDirectory": null,
       "secrets": null,
       "dockerSecurityOptions": null,
@@ -185,8 +191,8 @@
     "EC2",
     "FARGATE"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:eu-central-1:617363111108:task-definition/full-deployment-v2:2",
-  "family": "full-deployment-v2",
+  "taskDefinitionArn": "arn:aws:ecs:eu-central-1:617363111108:task-definition/full-deployment-v3-volume:1",
+  "family": "full-deployment-v3-volume",
   "requiresAttributes": [
     {
       "targetId": null,
@@ -243,9 +249,19 @@
   ],
   "networkMode": "awsvpc",
   "cpu": "1024",
-  "revision": 2,
+  "revision": 1,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
   "proxyConfiguration": null,
-  "volumes": []
+  "volumes": [
+    {
+      "fsxWindowsFileServerVolumeConfiguration": null,
+      "efsVolumeConfiguration": null,
+      "name": "vol-01f18481ee1852b8b",
+      "host": {
+        "sourcePath": null
+      },
+      "dockerVolumeConfiguration": null
+    }
+  ]
 }
