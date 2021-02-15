@@ -1,60 +1,74 @@
 <template>
-  <div id="search-bar-container">
-    <v-row class="search-group">
-      <v-col cols="12" sm="6" md="4" class="search-col">
-        <v-autocomplete
-          class="search-bar"
-          :items="this.cities"
-          prepend-inner-icon="mdi-map-search-outline"
-          chips
-          deletable-chips
-          filled
-          rounded
-          shadow
-          solo
-          placeholder="Select a city"
-          v-model="city"
-          @change="
-            getCity()
-            setCityChange()
-          "
-        ></v-autocomplete>
-      </v-col>
-      <v-col cols="12" sm="6" md="4" class="search-col">
-        <v-autocomplete
-          :disabled="this.timestamps.length > 0 ? false : true"
-          class="search-bar"
-          :items="this.types"
-          v-model="type"
-          prepend-inner-icon="mdi-car-info"
-          chips
-          deletable-chips
-          filled
-          rounded
-          shadow
-          multiple
-          placeholder="Select incident types"
-          @change="getCity()"
-        ></v-autocomplete>
-      </v-col>
-      <v-col cols="12" sm="6" md="4" class="search-col">
-        <v-autocomplete
-          :disabled="this.timestamps.length > 0 ? false : true"
-          class="search-bar"
-          :items="this.providers"
-          v-model="provider"
-          prepend-inner-icon="mdi-head-outline"
-          chips
-          deletable-chips
-          filled
-          rounded
-          shadow
-          placeholder="Select a traffic data provider"
-          @change="getCity()"
-        ></v-autocomplete>
-      </v-col>
-    </v-row>
-  </div>
+    <div id="search-bar-container">
+        <v-row class="search-group">
+            <v-col cols="12" sm="6" md="4" class="search-col">
+                <v-autocomplete
+                    class="search-bar"
+                    :items="this.cities"
+                    prepend-inner-icon="mdi-map-search-outline"
+                    chips
+                    deletable-chips
+                    filled
+                    rounded
+                    shadow
+                    solo
+                    placeholder="Select a city"
+                    v-model="city"
+                    @change="
+                        getCity()
+                        setCityChange()
+                    "
+                ></v-autocomplete>
+            </v-col>
+            <v-col cols="12" sm="6" md="4" class="search-col">
+                <v-autocomplete
+                    :disabled="this.timestamps.length > 0 ? false : true"
+                    class="search-bar"
+                    :items="this.types"
+                    v-model="type"
+                    prepend-inner-icon="mdi-car-info"
+                    chips
+                    deletable-chips
+                    filled
+                    rounded
+                    shadow
+                    multiple
+                    placeholder="Select incident types"
+                    @change="getCity()"
+                ></v-autocomplete>
+            </v-col>
+            <v-col cols="12" sm="6" md="3" class="search-col search-provider">
+                <v-autocomplete
+                    :disabled="this.timestamps.length > 0 ? false : true"
+                    class="search-bar"
+                    :items="this.providers"
+                    v-model="provider"
+                    prepend-inner-icon="mdi-head-outline"
+                    chips
+                    deletable-chips
+                    filled
+                    rounded
+                    shadow
+                    placeholder="Select a traffic data provider"
+                    @change="getCity()"
+                ></v-autocomplete>
+            </v-col>
+            <v-col
+                cols="12"
+                sm="1"
+                md="1"
+                lg="1"
+                class="search-col search-refresh"
+            >
+                <v-btn
+                    :disabled="this.timestamps.length > 0 ? false : true"
+                    class="search-bar btn-refresh"
+                    @click="getCity()"
+                    ><v-icon>mdi-cloud-refresh</v-icon></v-btn
+                >
+            </v-col>
+        </v-row>
+    </div>
 </template>
 
 <script>
@@ -162,16 +176,33 @@ export default {
 
 <style>
 .search-group .v-autocomplete.v-select.v-input--is-focused input {
-  min-width: 0px !important;
+    min-width: 0px !important;
 }
 
 .search-group .search-col {
-  padding: 0px;
+    padding: 0px;
 }
 
 @media only screen and (min-width: 600px) {
-  .search-group .search-col {
-    padding: 10px;
-  }
+    .search-group .search-col {
+        padding: 10px;
+    }
+
+    .search-group .col-12 {
+        flex: 0 0 100% !important;
+    }
+}
+
+.search-group .btn-refresh {
+    border-radius: 50px !important;
+    padding: 28px 0px !important;
+}
+
+.search-group .search-provider.col-12 {
+    flex: 0 0 80% !important;
+}
+
+.search-group .search-refresh.col-12 {
+    flex: 0 0 20% !important;
 }
 </style>
