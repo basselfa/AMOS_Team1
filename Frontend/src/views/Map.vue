@@ -278,7 +278,7 @@ export default {
 .map-container {
   padding-left: 15px;
   padding-right: 15px;
-  overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 @media only screen and (min-width: 1270px) {
