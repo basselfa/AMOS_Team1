@@ -61,10 +61,12 @@
                 class="search-col search-refresh"
             >
                 <v-btn
-                    :disabled="this.timestamps.length > 0 ? false : true"
+                    :disabled="refreshDisabled"
                     class="search-bar btn-refresh"
-                    @click="getCity()"
-                    ><v-icon>mdi-cloud-refresh</v-icon></v-btn
+                    @click="refreshData()"
+                    ><v-icon color="blue lighten-1"
+                        >mdi-cloud-refresh</v-icon
+                    ></v-btn
                 >
             </v-col>
         </v-row>
@@ -73,104 +75,135 @@
 
 <script>
 import axios from 'axios'
-
 export default {
-  name: 'Search',
-  data: () => ({
-    search: null,
-    cities: [],
-    city: null,
-    timestamp: null,
-    timestamps: [],
-    types: [
-      'Accident',
-      'Congestion',
-      'Detour',
-      'Disabled vehicle',
-      'Lane closed',
-      'Lane restriction',
-      'Misc',
-      'Planned event',
-      'Road hazard',
-      'Road Works',
-      'Weather',
-    ],
-    type: [],
-    providers: ['Here', 'TomTom'],
-    provider: null,
-    cityChange: false,
-  }),
-  mounted: function () {
-    // get list of all cities
-    axios
-      .get(
-        'http://' +
-          window.location.hostname +
-          ':8082/withDatabase/cityinformation/',
-        {
-          headers: { 'Access-Control-Allow-Origin': '*' },
-        }
-      )
-      .then((response) => {
-        let cities = []
-        response.data.map(function (item) {
-          cities.push(item.cityName)
-        })
-        this.cities = cities
-      })
-      .catch((error) => {
-        this.errorMessage = error.message
-        console.error('There was an error!', error)
-      })
-  },
-  methods: {
-    /**
-    * Emits the event of city change to the parent component,
-      so that we know when to call the city center function
-    */
-    setCityChange: function () {
-      this.$emit('city-change')
-    },
-    /**
-     * Triggers REST Request to backend for..
-     *
-     * @param city .. a selected city.
-     * @param timestamp .. the latest time stamp.
-     */
-    getCity: function () {
-      axios
-        .get(
-          'http://' +
-            window.location.hostname +
-            ':8082/withDatabase/timestamps?city=' +
-            this.city,
-          {
-            headers: { 'Access-Control-Allow-Origin': '*' },
-          }
-        )
-        .then((response) => {
-          console.log(
-            'Timestamps received for ' + this.city + ': ' + response.data.length
-          )
-          this.timestamps = response.data
-          if (this.timestamps.length < 1) {
-            console.error('No timestamps received for this city')
-          } else {
-            this.timestamp = this.timestamps[this.timestamps.length - 1]
-            this.$emit('change', {
-              city: this.city,
-              timestamp: this.timestamp,
-              type: this.type.map((x) => x.toUpperCase().replace(/ /g, '')),
-              provider: this.provider,
+    name: 'Search',
+    data: () => ({
+        search: null,
+        cities: [],
+        city: null,
+        timestamp: null,
+        timestamps: [],
+        types: [
+            'Accident',
+            'Congestion',
+            'Detour',
+            'Disabled vehicle',
+            'Lane closed',
+            'Lane restriction',
+            'Misc',
+            'Planned event',
+            'Road hazard',
+            'Road Works',
+            'Weather',
+        ],
+        type: [],
+        providers: ['Here', 'TomTom'],
+        provider: null,
+        cityChange: false,
+        refreshDisabled: false,
+    }),
+    mounted: function () {
+        // get list of all cities
+        axios
+            .get(
+                'http://' +
+                    window.location.hostname +
+                    ':8082/withDatabase/cityinformation/',
+                {
+                    headers: { 'Access-Control-Allow-Origin': '*' },
+                }
+            )
+            .then((response) => {
+                let cities = []
+                response.data.map(function (item) {
+                    cities.push(item.cityName)
+                })
+                this.cities = cities
             })
-          }
-        })
-        .catch((error) => {
-          this.errorMessage = error.message
-          console.error('There was an error!', error)
-        })
+            .catch((error) => {
+                this.errorMessage = error.message
+                console.error('There was an error!', error)
+            })
     },
-  },
+    methods: {
+        /**
+        * Emits the event of city change to the parent component,
+          so that we know when to call the city center function
+        */
+        setCityChange: function () {
+            this.$emit('city-change')
+        },
+        /**
+         * Triggers REST Request to backend for..
+         *
+         * @param city .. a selected city.
+         * @param timestamp .. the latest time stamp.
+         */
+        getCity: function () {
+            axios
+                .get(
+                    'http://' +
+                        window.location.hostname +
+                        ':8082/withDatabase/timestamps?city=' +
+                        this.city,
+                    {
+                        headers: { 'Access-Control-Allow-Origin': '*' },
+                    }
+                )
+                .then((response) => {
+                    console.log(
+                        'Timestamps received for ' +
+                            this.city +
+                            ': ' +
+                            response.data.length
+                    )
+                    this.timestamps = response.data
+                    if (this.timestamps.length < 1) {
+                        console.error('No timestamps received for this city')
+                    } else {
+                        this.timestamp = this.timestamps[
+                            this.timestamps.length - 1
+                        ]
+                        this.$emit('change', {
+                            city: this.city,
+                            timestamp: this.timestamp,
+                            type: this.type.map((x) =>
+                                x.toUpperCase().replace(/ /g, '')
+                            ),
+                            provider: this.provider,
+                        })
+                    }
+                })
+                .catch((error) => {
+                    this.errorMessage = error.message
+                    console.error('There was an error!', error)
+                })
+        },
+        async refreshData() {
+            this.refreshDisabled = true
+            await axios
+                .get(
+                    'http://' +
+                        window.location.hostname +
+                        ':8082/withDatabase/refresh/',
+                    {
+                        headers: { 'Access-Control-Allow-Origin': '*' },
+                    }
+                )
+                .then((response) => {
+                    if (response.status == 200) {
+                        if (this.city != null) {
+                            this.getCity()
+                        }
+                        this.refreshDisabled = false
+                    }
+                })
+                .catch((error) => {
+                    this.errorMessage = error.message
+                    console.error('There was an error!', error)
+                })
+        },
+    },
 }
 </script>
 
