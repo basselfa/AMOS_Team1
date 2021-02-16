@@ -100,7 +100,7 @@ public class MyRepo {
                 getEntityManager().persist(incident);
                 getEntityManager().getTransaction().commit();
             }catch (Exception e){
-                log.info("Error with incident: " + incident);
+                log.info("Error with inserting incident: " + incident);
             }
         }
 
@@ -126,15 +126,72 @@ public class MyRepo {
 
     public static void deleteCityInformation(Long id ){
 
-        getEntityManager().getTransaction().begin();
+
         List<CityInformation> cityInformations = getEntityManager().createNamedQuery("getCityInformationFromId")
                 .setParameter("id", id)
                 .getResultList();
 
         log.info("" + cityInformations);
+        //getting requests from the data base that reponds tp the city name
+        List<Request> requests =geRequestFromCityName(
+                cityInformations.get(0).getCityName() );
 
+        deleteRequests(requests);
+
+        getEntityManager().getTransaction().begin();
         getEntityManager().remove(cityInformations.get(0));
         getEntityManager().getTransaction().commit();
+    }
+
+    public static void deleteRequests(List<Request> requests ){
+
+        for(Request request : requests) {
+            try{
+                deleteEvaluationCandidates(request.getEvaluationCandidate());
+                deleteIncidents(request.getIncidents());
+                getEntityManager().getTransaction().begin();
+                System.out.println("deleting the request "+ request);
+                getEntityManager().remove(request);
+                getEntityManager().getTransaction().commit();
+            }catch (Exception e){
+
+                log.info("Error with deleting  requests: " +e);
+            }
+        }
+    }
+
+
+    public static void deleteEvaluationCandidates(List<EvaluationCandidate> evaluationCandidates ){
+
+        for(EvaluationCandidate evaluationCandidate : evaluationCandidates) {
+            try{
+
+                getEntityManager().getTransaction().begin();
+                System.out.println("deleting the evaluationCandidate "+ evaluationCandidate);
+               // getEntityManager().find(EvaluationCandidate.class,)
+                getEntityManager().remove(evaluationCandidate);
+                getEntityManager().getTransaction().commit();
+            }catch (Exception e){
+                log.info("Error with deleting  evaluationCandidate: " + e);
+            }
+        }
+    }
+
+    public static void deleteIncidents(List<Incident> incidents ){
+
+        for(Incident incident : incidents) {
+            try{
+
+
+                getEntityManager().getTransaction().begin();
+                System.out.println("deleting the incident "+ incident);
+
+                getEntityManager().remove(incident);
+                getEntityManager().getTransaction().commit();
+            }catch (Exception e){
+                log.info("Error with deleting  incident: " +e);
+            }
+        }
     }
 
 
@@ -183,7 +240,7 @@ public class MyRepo {
 
 
             insertIncident(incidents);
-            request.setIncidentsSavedInDb(true);
+
 
             List<EvaluationCandidate> evaluationCandidates =request.getEvaluationCandidate();
             if(evaluationCandidates==null)return ;
@@ -195,9 +252,11 @@ public class MyRepo {
 
 
             MyRepo.insertEvaluationCandidate(evaluationCandidates);
-            request.setEvaluationCandidateSavedInDb(true);
+
         }catch (Exception e){
             log.info("Error while inserting into db: ");
+            System.out.println("Error while request into db: ");
+
             e.printStackTrace();
         }
 
@@ -210,13 +269,15 @@ public class MyRepo {
                 .getResultList();
 
         Request request =requests.get(0) ;
-        request.setIncidentsSavedInDb(true);
+        request.initializeIncidentsFromDb();
+
+        request.initializeEvaluationCandidatesFromDb();
         if (request.getEvaluationCandidate()==null||request.getEvaluationCandidate().size()==0)
             return requests.get(0);
-        request.setIncidentsSavedInDb(true);
+
         for(EvaluationCandidate evaluationCandidate : request.getEvaluationCandidate()) {
             evaluationCandidate.setEvaluationCandidateSavedInDb(true);}
-        request.setEvaluationCandidateSavedInDb(true);
+
 
         return request;
     }
@@ -229,37 +290,39 @@ public class MyRepo {
                 .getResultList();
 
         Request request =requests.get(0) ;
-        request.setIncidentsSavedInDb(true);
-        request.setEvaluationCandidateSavedInDb(true);
+
+        request.initializeIncidentsFromDb();
+        request.initializeEvaluationCandidatesFromDb();
 
         if (request.getEvaluationCandidate()==null||request.getEvaluationCandidate().size()==0)
             return requests.get(0);
-        request.setIncidentsSavedInDb(true);
+
 
         for(EvaluationCandidate evaluationCandidate : request.getEvaluationCandidate()) {
             evaluationCandidate.setEvaluationCandidateSavedInDb(true);}
-        request.setEvaluationCandidateSavedInDb(true);
+
 
         return request;
     }
 
-    public static Request geRequestFromCityName(String cityName){
+    public static List<Request> geRequestFromCityName(String cityName){
 
         List<Request> requests =  MyRepo.getEntityManager().createNamedQuery("geRequestFromCityName")
                 .setParameter("cityName",  cityName)
                 .getResultList();
 
-        Request request =requests.get(0) ;
-        request.setIncidentsSavedInDb(true);
-        if (request.getEvaluationCandidate()==null||request.getEvaluationCandidate().size()==0)
-            return requests.get(0);
-        request.setIncidentsSavedInDb(true);
+        for( Request request :requests) {
 
-        for(EvaluationCandidate evaluationCandidate : request.getEvaluationCandidate()) {
-            evaluationCandidate.setEvaluationCandidateSavedInDb(true);}
-        request.setEvaluationCandidateSavedInDb(true);
+            request.initializeIncidentsFromDb();
+            request.initializeEvaluationCandidatesFromDb();
 
-        return request;
+
+            for (EvaluationCandidate evaluationCandidate : request.getEvaluationCandidate()) {
+                evaluationCandidate.setEvaluationCandidateSavedInDb(true);
+            }
+
+        }
+        return requests;
     }
     public static List<EvaluationCandidate> geEvaluationCandidateFromRequestId(Long requestId){
 

@@ -27,8 +27,7 @@ public class BerlinStaticDataTest {
 
     @Test
     void testIncidentAmount(){
-        String incidentsJson = Helper.getIncidentListMarshalling(incidentList);
-        log.info(incidentsJson);
+        assertEquals(289, incidentList.size());
     }
 
     @Test
@@ -41,5 +40,29 @@ public class BerlinStaticDataTest {
         assertEquals("LANERESTRICTION", incidentList.get(0).getType());
     }
 
+    @Test
+    void testIncidentStartPositionStreet() {
+        assertEquals("Spandauer Damm - Fürstenbrunner Weg (Königin-Elisabeth-Straße/L1121)", incidentList.get(0).getStartPositionStreet());
+    }
+
+    @Test
+    void testStartPointLat() {
+        assertEquals("52.51831", incidentList.get(0).getStartPositionLatitude());
+    }
+
+    @Test
+    void testStartPointLong() {
+        assertEquals("13.28007", incidentList.get(0).getStartPositionLongitude());
+    }
+
+    @Test
+    void testEndPointLat() {
+        assertEquals("52.51282", incidentList.get(0).getEndPositionLatitude());
+    }
+
+    @Test
+    void testEndPointLong() {
+        assertEquals("13.28139", incidentList.get(0).getEndPositionLongitude());
+    }
 
 }

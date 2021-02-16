@@ -74,31 +74,40 @@ public class RequestTest {
 
     @Test
     void testNoIncidentInDatabaseAfterDeletingInRequestObject(){
-        fail("Maybe not needed");
-
-        Request request = getDummyRequestWithOneDummyIncident();
+        Request request = createDummyRequest();
         MyRepo.insertRequest(request);
-        Incident incident = request.getIncidents().get(0);
-        long firstIncidentId = incident.getId();
+        Long id = request.getIncidents().get(0).getId();
 
-        Request requestFromDatabase = MyRepo.getRequest(LOCAL_DATE_TIME_DUMMY);
-        requestFromDatabase.getIncidents().clear();
-        requestFromDatabase.getIncidents().add(DummyIncident.createIncident());
-        MyRepo.insertRequest(requestFromDatabase);
+        //TODO: delete incident
 
-        List<Incident> incidentsFromDatabase = DatabaseTestHelper.getIncidentListById(firstIncidentId);
-        assertThat(incidentsFromDatabase, hasSize(0));
+
+        List<Request> requests1= new ArrayList<>();
+        requests1.add(request);
+        MyRepo.deleteRequests(requests1);
+        System.out.println(request);
+
+        assertThat(MyRepo.getIncidents(id).size(),equalTo(0));
+
+
     }
 
     @Test
     void TestDeleteRequest(){
-        Request request = getDummyRequestWithOneDummyIncident();
+        Request request = createDummyRequest();
         MyRepo.insertRequest(request);
-        Incident incident = request.getIncidents().get(0);
-        long dbId = incident.getId();
 
-        //TODO delete request
-        fail();
+
+        //TODO: delete incident
+
+
+        List<Request> requests1= new ArrayList<>();
+        requests1.add(request);
+        MyRepo.deleteRequests(requests1);
+        System.out.println(request);
+
+        assertThat(MyRepo.geRequestFromCityName(request.getCityName()).size(),equalTo(0));
+
+
     }
 
     private Request getDummyRequestWithIncidents(List<Incident> incidents) {
@@ -122,8 +131,7 @@ public class RequestTest {
         request.setCityName("Berlin");
         MyRepo.insertRequest(request);
 
-        List<Request> RequestAsList =new ArrayList<Request>();
-        RequestAsList.add( MyRepo.geRequestFromCityName("Berlin"));
+        List<Request> RequestAsList = MyRepo.geRequestFromCityName("Berlin");
 
 
         assertThat(RequestAsList, hasSize(greaterThan(0)));
@@ -163,6 +171,7 @@ public class RequestTest {
         request.setRequestTime(LocalDateTime.of(
                 2020, 5, 1,
                 12, 30, 0));
+        request.setCityName("Berlin");
         request.setIncidents(incidents);
 
         List<EvaluationCandidate> evaluationCandidates = new ArrayList<EvaluationCandidate>();

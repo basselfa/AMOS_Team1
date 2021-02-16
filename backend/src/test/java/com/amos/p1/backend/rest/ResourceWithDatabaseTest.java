@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 
 import java.util.List;
@@ -22,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestPropertySource(properties = "app.scheduling.enable=false")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("dev")
 public class ResourceWithDatabaseTest {
 
     private static final Logger log = LoggerFactory.getLogger(ResourceWithDatabaseTest.class);
@@ -109,7 +111,7 @@ public class ResourceWithDatabaseTest {
             given()
                 .param("city", "Berlin")
                 .param("timestamp", "2020-01-01 00:00")
-                .param("types", "ROADWORKS")
+                .param("types", "LANERESTRICTION")
             .when()
                 .get(base + "/incidents")
             .then()
@@ -119,7 +121,7 @@ public class ResourceWithDatabaseTest {
                 .getList(".", Incident.class);
 
 
-        assertThat(incidents, hasSize(43));
+        assertThat(incidents, hasSize(30));
     }
 
     @Test
