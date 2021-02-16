@@ -203,6 +203,7 @@ export default {
          * if a 200 status code is received and city is chosen, update map with the new data
          */
         async refreshData() {
+            console.log('Refresh triggered')
             this.error = null
             this.refreshDisabled = true
             await axios
@@ -215,6 +216,7 @@ export default {
                     }
                 )
                 .then((response) => {
+                    console.log('Refresh response received')
                     if (response.status == 200) {
                         if (this.city != null) {
                             this.getCity()
@@ -224,8 +226,8 @@ export default {
                 })
                 .catch((error) => {
                     this.refreshDisabled = false
-                    this.errorMessage = error.message
-                    console.error('There was an error!', error)
+                    this.error = error.message
+                    console.error('Refresh error! ', error)
                 })
         },
     },
