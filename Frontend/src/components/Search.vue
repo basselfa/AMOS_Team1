@@ -114,6 +114,7 @@ export default {
         cityChange: false,
         refreshDisabled: false,
         errorMessage: null,
+        error: null,
     }),
     mounted: function () {
         // get list of all cities
