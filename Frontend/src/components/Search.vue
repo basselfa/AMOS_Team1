@@ -116,8 +116,11 @@ export default {
         errorMessage: null,
         error: null,
     }),
+
+    /**
+     * Get list of all cities on mount
+     */
     mounted: function () {
-        // get list of all cities
         axios
             .get(
                 'http://' +
@@ -147,11 +150,10 @@ export default {
         setCityChange: function () {
             this.$emit('city-change')
         },
+
         /**
-         * Triggers REST Request to backend for..
-         *
-         * @param city .. a selected city.
-         * @param timestamp .. the latest time stamp.
+         * Triggers REST Request to backend to get latest timestamp for selected city
+         * Emits the values for city, timestamp, types and provider to the Map
          */
         getCity: function () {
             axios
@@ -193,6 +195,13 @@ export default {
                     console.error('There was an error!', error)
                 })
         },
+
+        /**
+         * Triggers request to backend to refresh the data
+         * While waiting for the data update, which can take a while, the button becomes a loading indicator
+         * and if an error occurs, the icon turns red
+         * if a 200 status code is received and city is chosen, update map with the new data
+         */
         async refreshData() {
             this.error = null
             this.refreshDisabled = true
