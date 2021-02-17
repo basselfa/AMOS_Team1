@@ -7,7 +7,7 @@
             <div>This selection will appear for your map and historization data. <br> Select the cities to be investigated <br> by the AMOS traffic tracker.</div>
               <div v-for="(city,index) in cities" :key="index">
                 <div ref="form" x-large class="form-chip center">
-                
+
                     <v-row class="form-row" justify="center" >
                         <v-col cols="12" sm="3" md="3">
                             <v-text-field ref="cityName" v-model="cities[index].cityName" label="City" required :value="city.cityName"/>
@@ -18,7 +18,7 @@
                         <v-col cols="12" sm="2" md="2">
                             <v-text-field ref="centreLongitude" v-model="cities[index].centreLongitude" :rules="rules" label="Longitudinal value for center" required :value="city.centreLongitude"/>
                         </v-col>
-                        
+
 
                         <v-col cols="12" sm="2" md="2">
                             <v-text-field ref="searchRadiusInMeter" v-model="cities[index].searchRadiusInMeter" label="Radius in meter" required :value="city.searchRadiusInMeter"/>
@@ -69,6 +69,9 @@ export default {
     },
 
     methods: {
+        /** requests the selectable cities from the /withdataBase/cityinformatin API endpoint (see swagger ui)
+        * @var cities Array to save current city selection at state
+         */
         getRequestCityData: function () {
             axios
                 .get('http://' + window.location.hostname + ':8082/withDatabase/cityinformation', {
@@ -87,7 +90,10 @@ export default {
                     console.error('There was an error!', error)
                 })
         },
-
+        /** deletes the selected city from the configuration view asynchronously
+        * @var id the endpoint requires a city id which is part of the object
+        * @var loading boolean to indicate loading
+         */
         async removeCity(id) {
             this.loading = true
             const del = await axios.delete('http://' + window.location.hostname + ':8082/withDatabase/cityinformation?id=' + id, {
@@ -104,7 +110,10 @@ export default {
             this.loading = false;
             this.getRequestCityData();
         },
-        // TODO Set Timeout // will this be done?
+        /** saves the cities to the backend
+        * @var selectedCity cityobject with necessary information such as cityName, Latitudinal and Longitudinal values, zoomRadius and id (see swagger ui for documentation)
+        * @var previouscityId id of the item which was exchanged
+         */
         async postRequestCityData(selectedCity, previouscityId) {
             console.log(selectedCity.cityName)
             this.loading = true
@@ -127,6 +136,9 @@ export default {
             this.getRequestCityData();
             this.loading = false
         },
+        /** adds a new row to the form and creates and empty city object
+         * @var emtyRow empty city object
+         */
         addRow: function () {
             var emptyRow = {
                 cityName: "",

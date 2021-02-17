@@ -78,17 +78,12 @@ public class RequestTest {
         MyRepo.insertRequest(request);
         Long id = request.getIncidents().get(0).getId();
 
-        //TODO: delete incident
-
-
         List<Request> requests1= new ArrayList<>();
         requests1.add(request);
         MyRepo.deleteRequests(requests1);
         System.out.println(request);
 
         assertThat(MyRepo.getIncidents(id).size(),equalTo(0));
-
-
     }
 
     @Test
@@ -96,17 +91,16 @@ public class RequestTest {
         Request request = createDummyRequest();
         MyRepo.insertRequest(request);
 
-
-        //TODO: delete incident
-
-
-        List<Request> requests1= new ArrayList<>();
-        requests1.add(request);
-        MyRepo.deleteRequests(requests1);
+        List<Request> requestsList= new ArrayList<>();
+        requestsList.add(request);
+        MyRepo.deleteRequests(requestsList);
         System.out.println(request);
 
+        // no requests -> no incidents, no eval candidates
         assertThat(MyRepo.geRequestFromCityName(request.getCityName()).size(),equalTo(0));
 
+        // no city information
+        assertThat(MyRepo.getAllCityInformation().stream().filter(inf -> inf.getCityName().equals(request.getCityName())).findFirst().isPresent(),equalTo(false));
 
     }
 

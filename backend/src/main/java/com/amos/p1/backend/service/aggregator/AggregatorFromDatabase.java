@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -163,10 +164,7 @@ public class AggregatorFromDatabase implements Aggregator {
             ComparisonEvaluationDTO comparisonEvaluationDTO = new ComparisonEvaluationDTO();
 
             LocalDateTime requestTime = request.getRequestTime();
-            Date date = Date.from(requestTime.atZone(ZoneId.of("Europe/Berlin")).toInstant());
-            log.info("Request Time: (LocalDateTime)" + requestTime);
-            log.info("Request Time (Date): " + date);
-            comparisonEvaluationDTO.setDate(date);
+            comparisonEvaluationDTO.setDate(requestTime);
 
             comparisonEvaluationDTO.setTomTomIncidentsAmount(tomTomIncidents.size()); ;
             comparisonEvaluationDTO.setHereIncidentsAmount(hereIncidents.size()); ;

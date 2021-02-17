@@ -129,7 +129,6 @@ public class TomTomNormalization implements JsonToIncident {
                 Point startPoint = edges.remove(0);
                 Point endPoint = edges.remove(edges.size() - 1);
 
-                //incJObj.setEdges(edges.toString());   // todo maybe change name to shape
                 incJObj.setStartPositionLatitude(startPoint.toString().split(":")[0]);
                 incJObj.setStartPositionLongitude(startPoint.toString().split(":")[1]);
                 incJObj.setEndPositionLatitude(endPoint.toString().split(":")[0]);
@@ -151,6 +150,7 @@ public class TomTomNormalization implements JsonToIncident {
         return incJObj;
     }
 
+    // This method will try to determine wether we have one incident or more. Most of it is about handling nested IncidentData in JSON data from the Provider
     @Override
     public List<Incident> normalize(String json) {
         List<Incident> incidentList = new LinkedList<>();
@@ -223,6 +223,7 @@ public class TomTomNormalization implements JsonToIncident {
         return clusterArray;
     }
 
+    // Further handling of nested IncidentObject and IncidentObjectArrays in JSON Data from the Provider
     public List<JSONArray> getClusterPointArray(JSONArray clusterArray) {
         List<JSONArray> clusterPointArray = new LinkedList<>();
         try {

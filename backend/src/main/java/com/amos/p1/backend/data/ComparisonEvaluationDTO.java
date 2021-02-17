@@ -1,7 +1,12 @@
 package com.amos.p1.backend.data;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class ComparisonEvaluationDTO {
@@ -9,7 +14,11 @@ public class ComparisonEvaluationDTO {
     private int tomTomIncidentsAmount;
     private int hereIncidentsAmount;
     private int sameIncidentAmount;
-    private Date date;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    private LocalDateTime date;
 
     public void setTomTomIncidentsAmount(int tomTomIncidentsAmount) {
         this.tomTomIncidentsAmount = tomTomIncidentsAmount;
@@ -19,28 +28,16 @@ public class ComparisonEvaluationDTO {
         this.hereIncidentsAmount = hereIncidentsAmount;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
     public void setSameIncidentAmount(int sameIncidentAmount) {
         this.sameIncidentAmount = sameIncidentAmount;
     }
 
-    @Override
-    public String toString() {
-        return "ComparisonEvaluationDTO{" +
-                "tomTomIncidentsAmount=" + tomTomIncidentsAmount +
-                ", hereIncidentsAmount=" + hereIncidentsAmount +
-                ", sameIncidentAmount=" + sameIncidentAmount +
-                ", date=" + date +
-                '}';
+    public LocalDateTime getDate() {
+        return date;
     }
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-
-    public Date getDate(){
-        return this.date;
+    public void setDate(LocalDateTime date) {
+        this.date = date;
     }
 
     public int getTomTomIncidentsAmount(){
@@ -55,5 +52,13 @@ public class ComparisonEvaluationDTO {
         return this.sameIncidentAmount;
     }
 
-
+    @Override
+    public String toString() {
+        return "ComparisonEvaluationDTO{" +
+                "tomTomIncidentsAmount=" + tomTomIncidentsAmount +
+                ", hereIncidentsAmount=" + hereIncidentsAmount +
+                ", sameIncidentAmount=" + sameIncidentAmount +
+                ", date=" + date +
+                '}';
+    }
 }

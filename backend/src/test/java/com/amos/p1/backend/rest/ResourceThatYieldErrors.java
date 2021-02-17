@@ -77,12 +77,12 @@ public class ResourceThatYieldErrors {
     void testAfterRequestSaveAndComparisonAndIncidentCall(){
 
         // First get
-        assertThat(getIncidentsFromBerlin("2021-02-10 16:00"), hasSize(787));
+        assertThat(getIncidentsFromBerlin("2021-02-10 16:00"), hasSize(788));
         assertThat(getEvaluationCandidatesFromBerlin("2021-02-10 16:00"), hasSize(97));
 
 
         // Second get
-        assertThat(getIncidentsFromBerlin("2021-02-10 16:00"), hasSize(787));
+        assertThat(getIncidentsFromBerlin("2021-02-10 16:00"), hasSize(788));
         assertThat(getEvaluationCandidatesFromBerlin("2021-02-10 16:00"), hasSize(97));
     }
 
@@ -184,7 +184,7 @@ public class ResourceThatYieldErrors {
     void testAfterRequestSaveAndComparisonAndOtherRequestSaveAndIncidentCall(){
 
         assertThat(getTimestampsFromBerlin(), hasSize(1));
-        assertThat(getIncidentsFromBerlin("2021-02-10 16:00"), hasSize(787));
+        assertThat(getIncidentsFromBerlin("2021-02-10 16:00"), hasSize(788));
         assertThat(getIncidentsFromBerlinOnlyHere("2021-02-10 16:00").size(), greaterThan(0));
         assertThat(getEvaluationCandidatesFromBerlin("2021-02-10 16:00"), hasSize(97));
         checkComparisonEvaluationCandidateFromBerlin1Timestamp();
@@ -198,19 +198,19 @@ public class ResourceThatYieldErrors {
         }
 
         assertThat(getTimestampsFromBerlin(), hasSize(2));
-        assertThat(getIncidentsFromBerlin("2021-02-10 16:00"), hasSize(787));
+        assertThat(getIncidentsFromBerlin("2021-02-10 16:00"), hasSize(788));
         assertThat(getIncidentsFromBerlinOnlyHere("2021-02-10 16:00").size(), greaterThan(0));
         assertThat(getEvaluationCandidatesFromBerlin("2021-02-10 16:00"), hasSize(97));
         checkComparisonEvaluationCandidateFromBerlin2Timestamps();
 
         assertThat(getTimestampsFromBerlin(), hasSize(2));
-        assertThat(getIncidentsFromBerlin("2021-02-10 17:00"), hasSize(787));
+        assertThat(getIncidentsFromBerlin("2021-02-10 17:00"), hasSize(788));
         assertThat(getIncidentsFromBerlinOnlyHere("2021-02-10 17:00").size(), greaterThan(0));
         assertThat(getEvaluationCandidatesFromBerlin("2021-02-10 17:00"), hasSize(97));
         checkComparisonEvaluationCandidateFromBerlin2Timestamps();
 
         assertThat(getTimestampsFromBerlin(), hasSize(2));
-        assertThat(getIncidentsFromBerlin("2021-02-10 16:00"), hasSize(787));
+        assertThat(getIncidentsFromBerlin("2021-02-10 16:00"), hasSize(788));
         assertThat(getIncidentsFromBerlinOnlyHere("2021-02-10 16:00").size(), greaterThan(0));
         assertThat(getEvaluationCandidatesFromBerlin("2021-02-10 16:00"), hasSize(97));
         checkComparisonEvaluationCandidateFromBerlin2Timestamps();
@@ -224,19 +224,19 @@ public class ResourceThatYieldErrors {
         }
 
         assertThat(getTimestampsFromBerlin(), hasSize(3));
-        assertThat(getIncidentsFromBerlin("2021-02-10 16:00"), hasSize(787));
+        assertThat(getIncidentsFromBerlin("2021-02-10 16:00"), hasSize(788));
         assertThat(getIncidentsFromBerlinOnlyHere("2021-02-10 16:00").size(), greaterThan(0));
         assertThat(getEvaluationCandidatesFromBerlin("2021-02-10 16:00"), hasSize(97));
         checkComparisonEvaluationCandidateFromBerlin3Timestamps();
 
         assertThat(getTimestampsFromBerlin(), hasSize(3));
-        assertThat(getIncidentsFromBerlin("2021-02-10 17:00"), hasSize(787));
+        assertThat(getIncidentsFromBerlin("2021-02-10 17:00"), hasSize(788));
         assertThat(getIncidentsFromBerlinOnlyHere("2021-02-10 17:00").size(), greaterThan(0));
         assertThat(getEvaluationCandidatesFromBerlin("2021-02-10 17:00"), hasSize(97));
         checkComparisonEvaluationCandidateFromBerlin3Timestamps();
 
         assertThat(getTimestampsFromBerlin(), hasSize(3));
-        assertThat(getIncidentsFromBerlin("2021-02-10 18:00"), hasSize(787));
+        assertThat(getIncidentsFromBerlin("2021-02-10 18:00"), hasSize(788));
         assertThat(getIncidentsFromBerlinOnlyHere("2021-02-10 18:00").size(), greaterThan(0));
         assertThat(getEvaluationCandidatesFromBerlin("2021-02-10 18:00"), hasSize(97));
         checkComparisonEvaluationCandidateFromBerlin3Timestamps();
