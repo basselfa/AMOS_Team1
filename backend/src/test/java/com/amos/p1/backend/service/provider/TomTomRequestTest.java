@@ -23,7 +23,7 @@ public class TomTomRequestTest {
 
     @Test
     void testRequestStringNotNull(){
-        fail(); // Fail because we dont want to overuse the API
+//        fail(); // Fail because we dont want to overuse the API
 
         String json = providerRequest.request("52.5542", "13.2823", "52.4721",  "13.5422");
         assertThat(json, notNullValue());

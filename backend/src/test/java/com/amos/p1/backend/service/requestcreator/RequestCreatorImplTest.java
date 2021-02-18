@@ -16,15 +16,17 @@ class RequestCreatorImplTest {
 
     @Test
     void testNormalDataRequestAndIncidentSize(){
-        fail("Fail because we dont want to overuse the free tier of provider APIs");
+//        fail("Fail because we dont want to overuse the free tier of provider APIs");
         LocalDateTime now = LocalDateTime.now();
 
+        CityBoundingBoxesService cityBoundingBoxesService = new CityBoundingBoxesServiceImpl();
+
         RequestCreatorImpl requestCreator = new RequestCreatorImpl();
+        requestCreator.setCityBoundingBoxes(cityBoundingBoxesService);
         requestCreator.setTimeStamp(now);
 
         List<Request> requests = requestCreator.buildRequests();
 
-        CityBoundingBoxesService cityBoundingBoxesService = new CityBoundingBoxesServiceImpl();
         int cityAmount = cityBoundingBoxesService.getCityBoundingBoxes().size();
 
         assertThat(requests.size(), equalTo(cityAmount));
